@@ -1,0 +1,476 @@
+/* Tree Diagram Styling */
+
+.workform-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 1.5rem 0;
+    text-align: center;
+}
+
+.workform-title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.workform-subtitle {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    opacity: 0.9;
+}
+
+.instructions {
+    background: rgba(255,255,255,0.1);
+    padding: 1rem;
+    border-radius: 8px;
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: left;
+    font-size: 0.9rem;
+}
+
+.instructions h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+    text-align: center;
+}
+
+.instructions ol {
+    padding-left: 1.2rem;
+}
+
+.instructions li {
+    margin-bottom: 0.3rem;
+    line-height: 1.4;
+}
+
+/* Tree Diagram Section */
+.tree-diagram-section {
+    padding: 1.5rem 0;
+    background-color: #f8fafc;
+}
+
+.tree-diagram-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.level-labels {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+    padding: 0 1rem;
+}
+
+.level-label {
+    text-align: center;
+    font-weight: 600;
+    color: #4f46e5;
+    font-size: 0.9rem;
+    padding: 0.3rem;
+    background: white;
+    border-radius: 6px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+/* Tree Diagram */
+.tree-diagram {
+    background: white;
+    padding: 1rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+    margin-bottom: 1rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 1rem;
+    align-items: stretch;
+    min-height: 300px;
+}
+
+.tree-column {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.kernbegrip-column {
+    justify-content: center;
+}
+
+.kernbegrip-cell {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 1rem;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+    height: 100%;
+    min-height: 200px;
+}
+
+.dimensie-cell {
+    background: #e0e7ff;
+    border: 2px solid #c7d2fe;
+    padding: 0.8rem;
+    border-radius: 6px;
+    font-weight: 600;
+    color: #3730a3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0.5rem;
+    min-height: 40px;
+}
+
+.dimensie-cell[data-dimensie="Rijk"] {
+    min-height: 60px;
+}
+
+.dimensie-cell[data-dimensie="Provincie"] {
+    min-height: 120px;
+}
+
+.dimensie-cell[data-dimensie="Gemeente"] {
+    min-height: 60px;
+}
+
+.aspect-cell-group,
+.deelaspect-cell-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    margin-bottom: 0.5rem;
+}
+
+.aspect-cell,
+.deelaspect-cell {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    padding: 0.4rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 30px;
+    text-align: center;
+}
+
+.merged-cell {
+    background: #f1f5f9;
+    border: 2px solid #cbd5e1;
+    border-radius: 6px;
+    padding: 0.4rem;
+    font-weight: 600;
+    color: #475569;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 30px;
+    text-align: center;
+}
+
+.merged-cell.aspect-cell {
+    background: #dbeafe;
+    border-color: #93c5fd;
+    color: #1e40af;
+    min-height: 80px;
+}
+
+.dimensies {
+    /* 3 items verticaal */
+}
+
+.aspecten {
+    /* 3 items verticaal */
+}
+
+.deelaspecten {
+    /* 4 items verticaal */
+}
+
+.drop-zone {
+    background: #f1f5f9;
+    border: 2px dashed #cbd5e1;
+    border-radius: 6px;
+    padding: 0.3rem;
+    text-align: center;
+    transition: all 0.3s ease;
+    min-height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    width: 100%;
+    cursor: pointer;
+}
+
+.drop-zone.aspect-cell,
+.drop-zone.deelaspect-cell {
+    background: #fef3c7;
+    border-color: #f59e0b;
+    color: #92400e;
+}
+
+.drop-zone.drag-over {
+    border-color: #4f46e5;
+    background-color: #eef2ff;
+    transform: scale(1.05);
+}
+
+.drop-zone.correct {
+    border-color: #10b981;
+    background-color: #ecfdf5;
+    border-style: solid;
+}
+
+.drop-zone.incorrect {
+    border-color: #ef4444;
+    background-color: #fef2f2;
+    border-style: solid;
+}
+
+.node-content {
+    font-weight: 600;
+    color: #374151;
+    font-size: 1rem;
+}
+
+/* Drag Items */
+.drag-items-container {
+    background: white;
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    margin-bottom: 1rem;
+}
+
+.drag-items-container h3 {
+    text-align: center;
+    margin-bottom: 0.8rem;
+    color: #374151;
+    font-size: 1rem;
+}
+
+.drag-items {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 0.6rem;
+}
+
+.drag-item {
+    background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+    color: white;
+    padding: 0.6rem 0.8rem;
+    border-radius: 6px;
+    text-align: center;
+    font-weight: 600;
+    cursor: grab;
+    transition: all 0.3s ease;
+    user-select: none;
+    font-size: 0.85rem;
+    white-space: nowrap;
+    overflow: visible;
+    text-overflow: unset;
+    min-width: 140px;
+}
+
+.drag-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(79, 70, 229, 0.4);
+}
+
+.drag-item:active {
+    cursor: grabbing;
+    transform: scale(0.95);
+}
+
+.drag-item.dragging {
+    opacity: 0.5;
+    transform: rotate(5deg);
+}
+
+.drag-item.placed {
+    opacity: 0.3;
+    background: #9ca3af;
+    cursor: not-allowed;
+}
+
+/* Feedback */
+.feedback-container {
+    background: white;
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    text-align: center;
+}
+
+.feedback-message {
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 0.8rem;
+    min-height: 1.2rem;
+}
+
+.feedback-message.success {
+    color: #10b981;
+}
+
+.feedback-message.error {
+    color: #ef4444;
+}
+
+.feedback-message.info {
+    color: #4f46e5;
+}
+
+.progress-container {
+    margin-bottom: 0.8rem;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 8px;
+    background-color: #e2e8f0;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 0.3rem;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    transition: width 0.5s ease;
+    border-radius: 4px;
+}
+
+.progress-text {
+    font-weight: 600;
+    color: #374151;
+    font-size: 0.85rem;
+}
+
+/* Explanation Section */
+.explanation-section {
+    padding: 1.5rem 0;
+    background: white;
+}
+
+.explanation-section h2 {
+    text-align: center;
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    color: #1e293b;
+}
+
+.explanation-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+}
+
+.explanation-card {
+    background: #f8fafc;
+    padding: 1rem;
+    border-radius: 8px;
+    text-align: center;
+    border: 1px solid #e2e8f0;
+    transition: transform 0.3s ease;
+}
+
+.explanation-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.explanation-icon {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.explanation-card h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: #1e293b;
+}
+
+.explanation-card p {
+    color: #64748b;
+    line-height: 1.4;
+    font-size: 0.85rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .level-labels {
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+        font-size: 0.9rem;
+    }
+    
+    .tree-diagram {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        padding: 1rem;
+        min-height: auto;
+    }
+    
+    .tree-column {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.5rem;
+    }
+    
+    .aspect-group,
+    .deelaspect-group {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-bottom: 0.3rem;
+    }
+    
+    .drop-zone {
+        max-width: 80px;
+        margin: 0.1rem;
+        font-size: 0.7rem;
+        min-height: 25px;
+    }
+    
+    .drag-items {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .workform-title {
+        font-size: 1.8rem;
+    }
+    
+    .explanation-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .deelaspecten {
+        grid-template-columns: 1fr;
+    }
+    
+    .drag-items {
+        grid-template-columns: 1fr;
+    }
+    
+    .instructions {
+        padding: 1.5rem;
+    }
+    
+    .tree-diagram {
+        padding: 1.5rem 1rem;
+    }
+}

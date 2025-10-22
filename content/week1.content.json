@@ -1,0 +1,50 @@
+{
+  "intro": {
+    "title": "Week 1",
+    "subtitle": "Neuro-psycho-immunologie",
+    "description": "Welkom bij Week 1! Deze module behandelt neuro-psycho-immunologie.",
+    "info": "Deze module bevat verschillende secties met theorie, voorbeelden en opdrachten."
+  },
+  "leerdoelen": {
+    "title": "Leerdoelen",
+    "description": "Na het voltooien van deze module kun je:",
+    "items": [
+      "De basisprincipes van neuro-psycho-immunologie uitleggen",
+      "De interactie tussen zenuwstelsel, psyche en immuunsysteem beschrijven",
+      "Praktische toepassingen in de gezondheidszorg identificeren"
+    ]
+  },
+  "theorie": {
+    "title": "Theorie",
+    "paragraphs": [
+      "Neuro-psycho-immunologie (NPI) is een interdisciplinair vakgebied dat de complexe interacties tussen het zenuwstelsel, de psyche en het immuunsysteem bestudeert.",
+      "Het onderzoekt de psychologische factoren, zoals stress en emoties, invloed hebben op het immuunsysteem en vice versa."
+    ],
+    "image": {
+      "src": "assets/images/A3.jpg",
+      "alt": "Implementatie proces diagram"
+    }
+  },
+  "video-test": {
+    "title": "Video-test",
+    "description": "Introductie video over neuro-psycho-immunologie",
+    "placeholder": "Video content komt hier straks te staan",
+    "info": "Hier kunnen collega's video content toevoegen"
+  },
+  "quiz": {
+    "title": "Quiz",
+    "questions": [
+      {
+        "question": "Wat is neuro-psycho-immunologie?",
+        "options": [
+          "De studie van zenuwcellen alleen",
+          "De interactie tussen zenuwstelsel, psyche en immuunsysteem",
+          "Alleen de studie van het immuunsysteem"
+        ],
+        "correct": 1
+      }
+    ],
+    "info": "Hier kunnen collega's meerkeuzevragen toevoegen"
+  }
+}
+

@@ -1,0 +1,45 @@
+{
+  "intro": {
+    "title": "Week 2",
+    "subtitle": "Logistiek & Duurzaamheid",
+    "description": "Welkom bij Week 2! Deze module behandelt logistiek en duurzaamheid.",
+    "info": "Deze module bevat verschillende secties met theorie, voorbeelden en opdrachten."
+  },
+  "leerdoelen": {
+    "title": "Leerdoelen",
+    "description": "Na het voltooien van deze module kun je:",
+    "items": [
+      "De basisprincipes van duurzame logistiek uitleggen",
+      "De impact van logistiek op het milieu beschrijven",
+      "Duurzame logistieke oplossingen identificeren"
+    ]
+  },
+  "theorie": {
+    "title": "Theorie",
+    "paragraphs": [
+      "Duurzame logistiek richt zich op het minimaliseren van de milieu-impact van logistieke processen.",
+      "Dit omvat het optimaliseren van transportroutes, het gebruik van duurzame brandstoffen en het verminderen van afval."
+    ]
+  },
+  "video": {
+    "title": "Video",
+    "description": "Introductie video over duurzame logistiek",
+    "url": "https://www.youtube.com/embed/yhO5EQgtgto?si=gGMmyzn-5UoRWOcG",
+    "info": "Video over duurzame logistiek"
+  },
+  "quiz": {
+    "title": "Quiz",
+    "questions": [
+      {
+        "question": "Wat is duurzame logistiek?",
+        "options": [
+          "Logistiek met lage kosten",
+          "Logistiek met minimale milieu-impact",
+          "Snelle logistiek"
+        ],
+        "correct": 1
+      }
+    ],
+    "info": "Hier kunnen collega's meerkeuzevragen toevoegen"
+  }
+}

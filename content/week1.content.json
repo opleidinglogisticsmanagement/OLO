@@ -18,18 +18,20 @@
     "title": "Theorie",
     "paragraphs": [
       "Neuro-psycho-immunologie (NPI) is een interdisciplinair vakgebied dat de complexe interacties tussen het zenuwstelsel, de psyche en het immuunsysteem bestudeert.",
-      "Het onderzoekt de psychologische factoren, zoals stress en emoties, invloed hebben op het immuunsysteem en vice versa."
+      "Het onderzoekt de psychologische factoren, zoals stress en emoties, invloed hebben op het immuunsysteem en vice versa.",
+      "De hypothalamus-hypofyse-bijnier (HPA) as speelt een centrale rol in de stressrespons en immuunregulatie.", 
+      "Neuro-psycho-immunologie (NPI) is een interdisciplinair vakgebied dat de complexe interacties tussen het zenuwstelsel, de psyche en het immuunsysteem bestudeert."
     ],
     "image": {
       "src": "assets/images/A3.jpg",
       "alt": "Implementatie proces diagram"
     }
   },
-  "video-test": {
-    "title": "Video-test",
-    "description": "Introductie video over neuro-psycho-immunologie",
-    "placeholder": "Video content komt hier straks te staan",
-    "info": "Hier kunnen collega's video content toevoegen"
+  "video": {
+    "title": "Video",
+    "description": "Introductie-video NPI",
+    "placeholder": "Video content komt hier straks te staan", "url": "https://www.youtube.com/embed/yhO5EQgtgto?si=gGMmyzn-5UoRWOcG",
+    "info": "Video over neuro-psycho-immunologie"
   },
   "quiz": {
     "title": "Quiz",

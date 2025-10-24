@@ -305,7 +305,7 @@ class BaseLessonPage {
                 ` : `
                     <button class="flex items-center space-x-2 px-6 py-3 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 focus-ring transition-colors" onclick="window.location.href='index.html'">
                         <i class="fas fa-arrow-left"></i>
-                        <span>Terug naar Dashboard</span>
+                        <span>Terug naar Start</span>
                     </button>
                 `}
                 

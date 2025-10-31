@@ -75,7 +75,7 @@ class BaseLessonPage {
         const modules = [
             { id: 'start', title: 'Start', href: 'index.html' },
             { id: 'week-1', title: 'Week 1', href: 'week1.html' },
-            { id: 'week-2', title: 'Week 2 (Voorbeeld)', href: 'week2.html' },
+            { id: 'week-2', title: 'Week 2', href: 'week2.html' },
             { id: 'week-3', title: 'Week 3', href: 'week3.html' },
             { id: 'week-4', title: 'Week 4', href: 'week4.html' },
             { id: 'week-5', title: 'Week 5', href: 'week5.html' },

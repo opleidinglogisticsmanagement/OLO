@@ -1,45 +1,131 @@
 {
   "intro": {
-    "title": "Week 2",
-    "subtitle": "Logistiek & Duurzaamheid",
-    "description": "Welkom bij Week 2! Deze module behandelt logistiek en duurzaamheid.",
-    "info": "Deze module bevat verschillende secties met theorie, voorbeelden en opdrachten."
+  "title": "Week 2",
+  "subtitle": "Van probleem naar doelstelling",
+  "description": "In deze week leer je hoe je een praktijkgericht onderzoek voorbereidt. Je verkent het probleem, formuleert een duidelijke doelstelling en leert hoe je deze SMART maakt. Daarnaast ontdek je de rol van de opdrachtgever en hoe je als onderzoeker kritisch en professioneel kunt handelen binnen een logistieke context."
   },
   "leerdoelen": {
-    "title": "Leerdoelen",
-    "description": "Na het voltooien van deze module kun je:",
-    "items": [
-      "De basisprincipes van duurzame logistiek uitleggen",
-      "De impact van logistiek op het milieu beschrijven",
-      "Duurzame logistieke oplossingen identificeren"
-    ]
+  "title": "Leerdoelen",
+  "description": "Na het lezen van de theorie kun je:",
+  "items": [
+    "Uitleggen wat het belang is van een goed geformuleerde doelstelling binnen praktijkgericht onderzoek.",
+    "Een onderscheid maken tussen het probleem, de doelstelling en de hoofdvraag in een onderzoeksopzet.",
+    "Een doelstelling formuleren aan de hand van het a- en b-gedeelte.",
+    "Een doelstelling SMART formuleren en beoordelen.",
+    "De relatie tussen opdrachtgever en onderzoeker toelichten en kritisch reflecteren op je eigen rol hierin.",
+    "De verschillende vormen van praktijkgericht onderzoek herkennen en toepassen binnen een logistieke context."
+  ]
   },
   "theorie": {
-    "title": "Theorie",
-    "paragraphs": [
-      "Duurzame logistiek richt zich op het minimaliseren van de milieu-impact van logistieke processen.",
-      "Dit omvat het optimaliseren van transportroutes, het gebruik van duurzame brandstoffen en het verminderen van afval."
+    "title": "Onderzoek uitvoeren",
+    "content": [
+      {
+        "type": "paragraph",
+        "text": [
+          "Je gaat een onderzoek uitvoeren maar hoe weet je nu hoe je moet gaan starten? Je hebt je eerste gesprekken gehad en vraagt je nu af hoe je verder moet gaan. Je zou de eerste student niet zijn die aan de slag gaat met een onderzoek en er gedurende het project achter komt dat het onderzoek veel te ruim of groots is opgezet voor de hoeveelheid beschikbare tijd. Door middel van een doelstelling zorgen we ervoor dat je allereerst een probleem gaat verkennen om vervolgens een doelstelling te op te stellen. Belangrijk bij praktijkgericht onderzoek is dat je helder hebt wat je relatie is met de opdrachtgever en uiteindelijk ook de andere stakeholders. Wat vraagt dit van je houding en hoe verhoud jij je hiernaar.",
+          "In deze voorbereiding gaan we hierbij stil staan. We beginnen met een voorbeeld.",
+          "<div style='margin-left: 20px; margin-bottom: 1rem;'><em>Je studeert Logistics Management en bent op zoek naar een onderwerp voor je stage. Je hebt daarom het Logistics Lab benaderd met de vraag of het mogelijk is om binnen of vanuit deze organisatie een onderzoeksproject te doen. Het Logistics Lab ziet hier wel mogelijkheden in en wil je graag betrekken bij een lopen project bij een aantal van haar partners, Scania en Zehnder.</em></div>",
+          "<div style='margin-left: 20px; margin-bottom: 1rem;'><em>Zowel Scania als Zehnder zijn op zoek naar (innovatieve) oplossingen met betrekking tot horizontale verplaatsingen. In het verleden zijn binnen beide organisaties verschillende onderzoeken uitgevoerd naar met name verticale verplaatsingen waarmee met name de handling binnen de organisaties werd gereduceerd. Nu willen beide bedrijven graag (gezamenlijk) op zoek naar oplossingen op het vlak van horizontale verplaatsingen. Veel innovatieve systemen vragen om een bezettingsgraad van meer dan 20 uur, met als gevolg dat een 3 ploegenstructuur vaak wenselijk is. Tegelijkertijd kennen beide organisaties een 2-ploegen of zelfs een 1 ploegenstructuur. De onderzoeken naar verticale verplaatsingen zijn telkens vanuit cases opgepakt waarbij een specifieke technologie wordt opgepakt en onderzocht vanuit een specifiek (deel van een) proces. Deze aanpak is heel tijdrovend geweest en geresulteerd in vele onderzoeken waarbij relatief snel zichtbaar werd dat verder onderzoek niet nodig was. Echter was het al wel een (onderzoeks-) opdracht van een HBO student, maar waren de uitkomsten al snel niet meer bruikbaar.</em></div>",
+          "<div style='margin-left: 20px; margin-bottom: 1rem;'><em>Vanuit interne contacten vanuit beide organisaties is het Logistics Lab gevraagd hierin te faciliteren en samen met o.a. studenten deze ingewikkelde puzzel te gaan ontrafelen. Na onderling overleg is er een roadmap opgesteld waarin de organisaties willen toewerken naar een ingebedde (innovatieve) oplossing met betrekking tot horizontale verplaatsingen waarbij beide organisaties handvatten aangereikt krijgen waarmee zij zelf toekomstige beslissingen kunnen nemen met betrekking tot dit vraagstuk. Deze handreikingen hebben dan onder andere betrekking op:</em></div>",
+          "<div style='margin-left: 40px; margin-bottom: 1rem;'><em>- De keuze van (innovatieve) oplossing<br>- Welke voorwaarden worden er aan het proces gesteld<br>- Opleidingsbehoefte van (huidige en toekomstige) medewerkers<br>- Hoe om te gaan met het onderhoud en storingen.</em></div>",
+          "Nu word jij geconfronteerd met deze opdracht en de vraag op welke wijze jij jouw onderzoeksopdracht zou kunnen inpassen in deze aanpak. Kortom, de vraag is wat is de bijdrage van jouw onderzoeksopdracht aan het grotere geheel?",
+          "Binnen het HBO doen de meeste studenten een praktijkgericht onderzoek. Een theoretisch vraagstuk is ook mogelijk op het HBO, maar zien we minder vaak terug. Wij zullen ons in deze module met name focussen op het praktijkgericht onderzoek. Belangrijk te beseffen dat er een praktisch vraagstuk aan je onderzoek ten grondslag ligt. In een praktijkgericht onderzoek gaan we bestaande theorieën onderzoeken en vooral toepassen in verschillende situaties. Een onderdeel van een praktijkgericht onderzoek is het inzichtelijk maken van bestaande theorieën en inzichten. Hierover zullen we later meer toelichten.",
+          "Nu nemen we je mee in de reis om van een globaal vraagstuk toe te gaan werken naar een doordacht opgezet onderzoeksplan. Tijdens deze reis worden de volgende onderwerpen doorlopen. In het 'rode' kwadrant is weergegeven welk onderdeel in deze voorbereiding centraal staat."
+        ]
+      },
+      {
+        "type": "image",
+        "src": "assets/images/Stappenplannen 1.0.png",
+        "alt": "De vier fasen bij het opstellen van een logistiek onderzoek."
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "Nu heb je al wel wat gelezen, maar wat is dat nu het probleem verkennen en waarom doe je dat?",
+          "Bekijk de volgende kennisclip: <a href='https://media.windesheim.nl/Mediasite/Play/3a0b3b8a6527464fb5373e80bba221251d' target='_blank' class='text-blue-600 hover:text-blue-800 underline font-medium'>Bekijk de kennisclip</a>",
+          "In bovenstaande kennisclip heb je nu inzicht gekregen in een aantal onderwerpen waarbij je stil gaat staan bij het verkennen van je probleem. Hieronder worden deze nog even kort samengevat;"
+        ]
+      },
+      {
+        "type": "image",
+        "src": "assets/images/Praktijkprobleem.png",
+        "alt": "De zes onderdelen van een praktijkprobleem."
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "Wanneer je aan de hand van deze inzichten het probleem verder hebt omschreven kun je gaan nadenken over het formuleren van je doelstelling. Let er wel op dat je doelstelling anders is dan je hoofdvraag van je onderzoek. In de doelstelling stel je jezelf ten doel om het praktijkprobleem (voor een specifieke organisatie) op te lossen. De hoofdvraag is de invulling van de doelstelling in dit onderzoek. Logischerwijs zit er een relatie tussen beiden. Hierop zullen we later nadrukkelijker stilstaan.",
+          "Bij het opstellen van een doelstelling ga je aan de slag met een zogenoemd a- en b- gedeelte. Het a-gedeelte omschrijf je wat je wel en niet mag verwachten in het onderzoek en het b-gedeelte omschrijft globaal wat er gaat gebeuren.",
+          "Een goede doelstelling kent dan ook een bepaalde format:",
+          "<strong>'Het doel van dit onderzoek is ….(a)…. door ….. (b)…..</strong>'",
+          "<strong>A-gedeelte</strong>",
+          "Bij het opstellen van het a-gedeelte is het doel om inzicht te geven in het doel van het onderzoek. Er wordt ook wel gesproken over het externe gedeelte van het onderzoek, immers je geeft inzicht in de reden waarom je gaat onderzoeken en welke resultaten je gaat opleveren. Een mooie controle hierin is: 'zouden mijn beoordelaar en opdrachtgever begrijpen welke bijdrage mijn onderzoek kan geven?'",
+          "Voorbeelden van formuleren van het a-gedeelte kunnen zijn:",
+          "<div style='margin-left: 20px; margin-bottom: 1rem;'><em>…. Het helpen verbeteren van bestaand beleid X op het terrein van Z</em></div>",
+          "<div style='margin-left: 20px; margin-bottom: 1rem;'><em>…. Het leveren van een bijdrage aan de ontwikkeling van nieuw beleid X op het terrein van Z</em></div>",
+          "<div style='margin-left: 20px; margin-bottom: 1rem;'><em>…. Het doen van aanbevelingen aan de opdrachtgever Y voor het ontwerpen van een oplossing van probleem Z.</em></div>",
+          "<strong>B-gedeelte</strong>",
+          "Het b-gedeelte omschrijft de bijdrage die jij als onderzoek levert aan het onderzoek. Hierbij wordt ook wel gekeken naar het interne onderzoek, kortom hoe heb je het onderzoek opgezet of wat ga je hierin doen. Voorbeelden van formuleringen van het b-gedeelte kunnen zijn:",
+          "<div style='margin-left: 20px; margin-bottom: 1rem;'><em>…. door een overzicht te geven van de meningen van belanghebbenden….</em></div>",
+          "<div style='margin-left: 20px; margin-bottom: 1rem;'><em>…. door inzicht te geven in de knelpunten die optreden bij….</em></div>",
+          "<div style='margin-left: 20px; margin-bottom: 1rem;'><em>…. door te speuren naar de achtergronden en oorzaken van het probleem….</em></div>",
+          "<div style='margin-left: 20px; margin-bottom: 1rem;'><em>…. door een analyse te maken van het verschil tussen de gewenste en de aanwezige situatie….</em></div>",
+          "<div style='margin-left: 20px; margin-bottom: 1rem;'><em>…. door een vergelijking te maken tussen…</em></div>",
+          "<div style='margin-left: 20px; margin-bottom: 1rem;'><em>…. door een beoordeling te geven van….</em></div>"
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "<strong>SMART</strong>",
+          "Naast het formuleren van de doelstelling aan de hand van het a- en b-gedeelte, is het belangrijk om in je doelstelling ook SMART te herkennen.",
+          "Bekijk de volgende kennisclip: <a href='https://media.windesheim.nl/Mediasite/Play/931fa76ea3324e73869c8141946fa1e91d' target='_blank' class='text-blue-600 hover:text-blue-800 underline font-medium'>Bekijk de kennisclip</a>",
+          "Ben jij nu ook in staat om aan de hand van het gegeven voorbeeld een doelstelling op te stellen?",
+          "<div style='margin-left: 20px; margin-bottom: 1rem;'><em>Als Logistics management student wil jij een onderzoek uitvoeren bij een logistieke dienstverlener in de regio Zwolle. Binnen deze logistieke dienstverlener bestaan spanningen tussen het management enerzijds en de chauffeurs anderzijds. De transportmanager vraagt of jij deze problematiek wilt bestuderen. De bestaande situatie bij de logistieke dienstverlener vormt dan het projectkader. Uit een eerste gesprek met de transportmanager blijkt dat het management veel overzicht wil bewaren door dagelijks diverse dashboards te raadplegen en hierop te acteren. Echter zij merken door het gebruik dat veel informatie niet consistent en goed wordt ingevuld door de chauffeurs. De chauffeurs benoemen echter dat zij langzaamaan meer dan 25% van hun werktijd bezig zijn met administratie wat zij niet leuk vinden. Daarvoor zijn ze geen chauffeur geworden. Zij vragen zich, met de huidige stand van technologie af waarom dit proces niet verder geautomatiseerd kan worden waardoor minder administratie van de chauffeurs nodig is. Hierdoor is langzaamaan een cultuur ontstaan waarin zowel de chauffeurs als het management elkaar nog nauwelijks informeren waardoor de winst onder druk is komen te staan, chauffeurs ontevreden zijn en het management zich afvraagt hoe dit probleem aan te pakken.</em></div>",
+          "<div style='margin-left: 20px; margin-bottom: 1rem;'><em>Jouw onderzoek vindt binnen dit projectkader plaats en levert als het goed is een bijdrage aan een verbetering van de ontstane cultuur en mogelijke handvatten hoe deze uitdaging op te lossen.</em></div>",
+          "Schrijf een doelstelling op voor deze probleemstelling en neem deze mee naar het werkcollege."
+        ]
+      },
+      {
+        "type": "highlight",
+        "title": "GenAI Gebruik",
+        "content": [
+          "Je mag bij het opstellen van een doelstelling GenAI gebruiken. De gebruikte prompt in het voorbeeld hieronder mag je gebruiken bij het ontwikkelen van een doelstelling bij deze probleemstelling. Je mag het prompt ook gebruiken bij je eigen probleemstelling. Wees je er wel altijd van bewust dat je het mens machine mens principe toepast. Jij blijft verantwoordelijke voor je werk en de inhoud van je onderzoeksplan."
+        ],
+        "icon": "fa-info-circle"
+      },
+      {
+        "type": "document",
+        "src": "assets/Documents/ChatGPT inzetten voor een doelstelling.docx",
+        "text": "Download het voorbeelddocument met de prompt: ChatGPT inzetten voor een doelstelling.docx",
+        "icon": "fa-file-word",
+        "iconClass": "fas"
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "<strong>Wat is er zo bijzonder aan praktijkgericht onderzoek?</strong>",
+          "Kijken naar praktijkgericht onderzoek is één onderdeel zeer belangrijk. Dat is namelijk jouw relatie met de opdrachtgever, ook wel de opdrachtgever-onderzoeker relatie genoemd. De opdrachtgever verwacht van jou een goed, gedegen en kritisch onderzoek. Dit terwijl jij nog (deels) met je studie bezig bent en voor je gevoel relatief kort in de logistieke wereld komt kijken. Toch word je gevraagd om een organisatie te helpen om een probleem op te lossen. Dit zelfs door een eigen pro-actieve een kritische houding. De organisatie(s) waar jij bij aan de slag gaat, of dit nu vanuit een project binnen het onderwijs gaat of vanuit je stage- en/of afstuderen zien graag dat je kritisch bent op de organisatie en de processen. Zij willen graag jouw frisse inzichten gebruiken om hun organisatie te verbeteren.",
+          "Belangrijk is om tijdens het gehele onderzoek stil te blijven staan wie je opdrachtgever is. De opdrachtgever zou je begeleider kunnen zijn, maar dit is niet noodzakelijk. Betrek hem dus goed in de aanpak en het opstellen van je onderzoek.",
+          "Een tweede aandachtspunt is de 'tunnelvisie' die vanuit de opdrachtgever kan bestaan. De opdrachtgever werkt soms al meerdere jaren in de organisatie en denken ze te weten waar de oorzaak ligt, sterker nog soms noemen ze al direct de oplossing. Blijf kritisch als onderzoeker en zorg dat jij de onderzoek stappen doordacht doorloopt. Kom je daarmee alsnog op hetzelfde beeld, dan heb je het gevoel van de opdrachtgever goed kunnen onderbouwen. Je staat er versteld van hoevaak je nog nieuwe inzichten bovenwater weet te halen voor de organisatie.",
+          "Een laatste aandachtspunten in dit kader is het de focus op de doelstelling van de opdracht. De organisatie verwacht van jou een oplossing van het probleem. Echter ben je er wel van bewust dat jij met de doelstelling van het onderzoek het probleem van de organisatie hebt ingekaderd. Dat wil zeggen, dat je bijvoorbeeld minder invloedsfactoren hebt meegenomen of de scope van het proces of de omgeving versimpeld hebt waardoor de probleemstelling ook realistisch binnen de gestelde termijn is op te lossen. Blijf je beseffen dat de meeste onderzoeken die wij vanuit de opleiding oppakken bestaan uit advies opdrachten. Soms zit er direct al een implementatie deel aan vast waardoor het direct in de praktijk wordt toegepast. Deze opdrachten zijn echter beperkt onder andere doordat onderzoek vaak al een forse tijdsinvestering vraagt en jij als (student) onderzoeker beperkte de tijd hebt.",
+          "Nu benoemen we praktijkgericht onderzoek als één vorm van onderzoek. Enerzijds is dat ook zo, immers het onderzoek wordt uitgevoerd met betrekking tot een praktijkvraagstuk. Tegelijkertijd zijn er verschillende vormen van praktijkgericht onderzoek waarin ook verschillende taken en daarmee ook rollen van jouw als onderzoek gevraagd worden.",
+          "Bekijk de kennisclip over de verschillende vormen van praktijkgericht onderzoek: <a href='https://media.windesheim.nl/Mediasite/Play/91c2b4209bb8420181a7db38bd62d1cc1d' target='_blank' class='text-blue-600 hover:text-blue-800 underline font-medium'>Bekijk de kennisclip</a>",
+          "Belangrijk is natuurlijk wel om te blijven beseffen dat ondanks dat je een specifiek type praktijkonderzoek uitvoert de gehele onderzoekscyclus vaak wel herkenbaar en zichtbaar is in je onderzoek.",
+          "Samenvattend kunnen we stappenplan schetsen wat een handvat kan zijn aan de hand van de besproken modellen en handvatten."
+        ]
+      },
+      {
+        "type": "image",
+        "src": "assets/images/Samenvattingweek2.png",
+        "alt": "Samenvatting in vier stappen."
+      }
     ]
   },
   "video": {
     "title": "Video",
-    "description": "Introductie video over duurzame logistiek",
-    "url": "https://www.youtube.com/embed/yhO5EQgtgto?si=gGMmyzn-5UoRWOcG",
-    "info": "Video over duurzame logistiek"
-  },
-  "quiz": {
-    "title": "Quiz",
-    "questions": [
-      {
-        "question": "Wat is duurzame logistiek?",
-        "options": [
-          "Logistiek met lage kosten",
-          "Logistiek met minimale milieu-impact",
-          "Snelle logistiek"
-        ],
-        "correct": 1
-      }
-    ],
-    "info": "Hier kunnen collega's meerkeuzevragen toevoegen"
+    "description": "",
+    "url": "",
+    "info": ""
   }
 }

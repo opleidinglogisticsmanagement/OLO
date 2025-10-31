@@ -1,52 +1,23 @@
 {
   "intro": {
     "title": "Week 1",
-    "subtitle": "Neuro-psycho-immunologie",
-    "description": "Welkom bij Week 1! Deze module behandelt neuro-psycho-immunologie.",
-    "info": "Deze module bevat verschillende secties met theorie, voorbeelden en opdrachten."
+    "subtitle": "Geen onderwijs i.v.m. studiereis",
+    "description": "Deze week is er geen onderwijs i.v.m. de studiereis die de studenten maken."
+    
   },
   "leerdoelen": {
     "title": "Leerdoelen",
-    "description": "Na het voltooien van deze module kun je:",
-    "items": [
-      "De basisprincipes van neuro-psycho-immunologie uitleggen",
-      "De interactie tussen zenuwstelsel, psyche en immuunsysteem beschrijven",
-      "Praktische toepassingen in de gezondheidszorg identificeren"
-    ]
+    "description": "",
+    "items": []
   },
   "theorie": {
     "title": "Theorie",
-    "paragraphs": [
-      "Neuro-psycho-immunologie (NPI) is een interdisciplinair vakgebied dat de complexe interacties tussen het zenuwstelsel, de psyche en het immuunsysteem bestudeert.",
-      "Het onderzoekt de psychologische factoren, zoals stress en emoties, invloed hebben op het immuunsysteem en vice versa.",
-      "De hypothalamus-hypofyse-bijnier (HPA) as speelt een centrale rol in de stressrespons en immuunregulatie.", 
-      "Neuro-psycho-immunologie (NPI) is een interdisciplinair vakgebied dat de complexe interacties tussen het zenuwstelsel, de psyche en het immuunsysteem bestudeert."
-    ],
-    "image": {
-      "src": "assets/images/A3.jpg",
-      "alt": "Implementatie proces diagram"
-    }
+    "content": []
   },
   "video": {
-    "title": "Video",
-    "description": "Introductie-video NPI",
-    "placeholder": "Video content komt hier straks te staan", "url": "https://www.youtube.com/embed/yhO5EQgtgto?si=gGMmyzn-5UoRWOcG",
-    "info": "Video over neuro-psycho-immunologie"
-  },
-  "quiz": {
-    "title": "Quiz",
-    "questions": [
-      {
-        "question": "Wat is neuro-psycho-immunologie?",
-        "options": [
-          "De studie van zenuwcellen alleen",
-          "De interactie tussen zenuwstelsel, psyche en immuunsysteem",
-          "Alleen de studie van het immuunsysteem"
-        ],
-        "correct": 1
-      }
-    ],
-    "info": "Hier kunnen collega's meerkeuzevragen toevoegen"
+    "title": "I Loev logistics",
+    "description": "I Loev logistics video",
+    "url": "https://www.youtube.com/embed/yhO5EQgtgto?si=gGMmyzn-5UoRWOcG",
+    "info": "Bekijk de I love logistics video"
   }
 }
-

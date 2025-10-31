@@ -7,7 +7,7 @@
 
 class Week2LessonPage extends BaseLessonPage {
     constructor() {
-        super('week-2', 'Week 2', 'Logistiek & Duurzaamheid');
+        super('week-2', 'Week 2', 'Onderzoek uitvoeren');
         this.content = null;
         this.contentLoaded = false;
     }
@@ -36,46 +36,35 @@ class Week2LessonPage extends BaseLessonPage {
     getFallbackContent() {
         return {
             intro: {
-                title: "Week 2",
-                subtitle: "Logistiek & Duurzaamheid",
-                description: "Welkom bij Week 2! Deze module behandelt logistiek en duurzaamheid.",
-                info: "Content kon niet worden geladen. Controleer of week2.content.json bestaat."
+                title: "Week 2 (Voorbeeld)",
+                subtitle: "Van probleem naar doelstelling",
+                description: "De content voor deze module kon niet correct worden geladen. Controleer of het bestand week2.content.json bestaat en toegankelijk is."
             },
             leerdoelen: {
                 title: "Leerdoelen",
-                description: "Na het voltooien van deze module kun je:",
+                description: "Content kon niet worden geladen",
                 items: [
-                    "De basisprincipes van duurzame logistiek uitleggen",
-                    "De impact van logistiek op het milieu beschrijven",
-                    "Duurzame logistieke oplossingen identificeren"
+                    "Het bestand week2.content.json kon niet worden geladen",
+                    "Controleer of het bestand bestaat in de content folder",
+                    "Controleer of er geen fouten zijn in de JSON structuur"
                 ]
             },
             theorie: {
                 title: "Theorie",
-                paragraphs: [
-                    "Duurzame logistiek richt zich op het minimaliseren van de milieu-impact van logistieke processen."
+                content: [
+                    {
+                        type: "paragraph",
+                        text: [
+                            "Er is een probleem opgetreden bij het laden van de content. De pagina kon niet correct worden geladen."
+                        ]
+                    }
                 ]
             },
             video: {
                 title: "Video",
-                description: "Introductie video over duurzame logistiek",
-                url: "https://www.youtube.com/embed/yhO5EQgtgto?si=gGMmyzn-5UoRWOcG",
-                info: "Video over duurzame logistiek"
-            },
-            quiz: {
-                title: "Quiz",
-                questions: [
-                    {
-                        question: "Wat is duurzame logistiek?",
-                        options: [
-                            "Logistiek met lage kosten",
-                            "Logistiek met minimale milieu-impact",
-                            "Snelle logistiek"
-                        ],
-                        correct: 1
-                    }
-                ],
-                info: "Hier kunnen collega's meerkeuzevragen toevoegen"
+                description: "Video content kon niet worden geladen",
+                url: "",
+                info: "Content kon niet worden geladen. Controleer het JSON bestand."
             }
         };
     }
@@ -97,15 +86,6 @@ class Week2LessonPage extends BaseLessonPage {
                     <div class="flex-1">
                         <h1 class="text-2xl font-bold text-gray-900 mb-2">${this.content.intro.title}: ${this.content.intro.subtitle}</h1>
                         <p class="text-gray-600 mb-4">${this.content.intro.description}</p>
-                        <div class="bg-blue-50 border-l-4 border-blue-500 p-4 rounded-r-lg">
-                            <div class="flex items-start space-x-3">
-                                <i class="fas fa-info-circle text-blue-600 mt-1"></i>
-                                <div>
-                                    <h3 class="font-semibold text-blue-900 mb-1">Module Informatie</h3>
-                                    <p class="text-blue-800 text-sm">${this.content.intro.info}</p>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </section>
@@ -153,14 +133,18 @@ class Week2LessonPage extends BaseLessonPage {
                     <div class="flex-1">
                         <h2 class="text-xl font-semibold text-gray-900 mb-4">${this.content.theorie.title}</h2>
                         <div class="prose max-w-none">
-                            ${this.content.theorie.paragraphs.map(paragraph => `
-                                <p class="text-gray-700 mb-4">${paragraph}</p>
-                            `).join('')}
+                            ${this.content.theorie.content 
+                                ? ContentRenderer.renderContentItems(this.content.theorie.content, { enableModal: true })
+                                : (this.content.theorie.paragraphs ? this.content.theorie.paragraphs.map(paragraph => `
+                                    <p class="text-gray-700 mb-4">${paragraph}</p>
+                                `).join('') : '')
+                            }
                         </div>
                     </div>
                 </div>
             </section>
 
+            ${this.content.video.url ? `
             <!-- Video Sectie -->
             <section class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 hover-lift">
                 <div class="flex items-start space-x-4">
@@ -169,67 +153,30 @@ class Week2LessonPage extends BaseLessonPage {
                     </div>
                     <div class="flex-1">
                         <h2 class="text-xl font-semibold text-gray-900 mb-4">${this.content.video.title}</h2>
-                        ${this.content.video.url ? `
-                            <div class="rounded-lg overflow-hidden mb-4">
-                                <iframe 
-                                    width="100%" 
-                                    height="450" 
-                                    src="${this.content.video.url}" 
-                                    title="YouTube video player" 
-                                    frameborder="0" 
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                                    referrerpolicy="strict-origin-when-cross-origin"
-                                    allowfullscreen
-                                    class="w-full aspect-video">
-                                </iframe>
-                            </div>
-                        ` : `
-                            <div class="bg-gray-900 rounded-lg aspect-video flex items-center justify-center mb-4">
-                                <div class="text-center text-white">
-                                    <i class="fas fa-play-circle text-6xl mb-4 opacity-75"></i>
-                                    <p class="text-lg font-medium">Video Player</p>
-                                    <p class="text-sm opacity-75">Video content komt hier</p>
-                                </div>
-                            </div>
-                        `}
-                        <p class="text-sm text-gray-600">
-                            <i class="fas fa-info-circle mr-1"></i>
-                            ${this.content.video.info}
-                        </p>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Quiz Sectie -->
-            <section class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 hover-lift">
-                <div class="flex items-start space-x-4">
-                    <div class="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                        <i class="fas fa-question-circle text-orange-600 text-lg"></i>
-                    </div>
-                    <div class="flex-1">
-                        <h2 class="text-xl font-semibold text-gray-900 mb-4">${this.content.quiz.title}</h2>
-                        <div class="space-y-4">
-                            ${this.content.quiz.questions.map((question, index) => `
-                                <div class="border border-gray-200 rounded-lg p-4">
-                                    <h3 class="font-semibold text-gray-900 mb-3">${question.question}</h3>
-                                    <div class="space-y-2">
-                                        ${question.options.map((option, optionIndex) => `
-                                            <label class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-50 cursor-pointer">
-                                                <input type="radio" name="quiz-q${index}" value="${optionIndex}" class="text-blue-600 focus-ring">
-                                                <span class="text-gray-700">${String.fromCharCode(65 + optionIndex)}) ${option}</span>
-                                            </label>
-                                        `).join('')}
-                                    </div>
-                                </div>
-                            `).join('')}
+                        <div class="rounded-lg overflow-hidden mb-4">
+                            <iframe 
+                                width="100%" 
+                                height="450" 
+                                src="${this.content.video.url}" 
+                                title="YouTube video player" 
+                                frameborder="0" 
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                                referrerpolicy="strict-origin-when-cross-origin"
+                                allowfullscreen
+                                class="w-full aspect-video">
+                            </iframe>
+                        </div>
+                        ${this.content.video.info ? `
                             <p class="text-sm text-gray-600">
                                 <i class="fas fa-info-circle mr-1"></i>
-                                ${this.content.quiz.info}
+                                ${this.content.video.info}
                             </p>
-                        </div>
+                        ` : ''}
                     </div>
                 </div>
             </section>
+            ` : ''}
+
         `;
     }
 
@@ -250,6 +197,14 @@ class Week2LessonPage extends BaseLessonPage {
                 </div>
             </section>
         `;
+    }
+
+    /**
+     * Attach event listeners (override base class)
+     * Image modal functionality is now in BaseLessonPage
+     */
+    attachEventListeners() {
+        super.attachEventListeners();
     }
 
     /**

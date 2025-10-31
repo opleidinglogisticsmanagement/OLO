@@ -1,0 +1,34 @@
+{
+  "intro": {
+    "title": "Week 6",
+    "subtitle": "Onderzoeksstrategie + dataverzamelingsplan",
+    "description": "[Beschrijving komt hier]"
+  },
+  "leerdoelen": {
+    "title": "Leerdoelen",
+    "description": "Na het lezen van de theorie kun je:",
+    "items": [
+      "[Leerdoel 1]",
+      "[Leerdoel 2]",
+      "[Leerdoel 3]"
+    ]
+  },
+  "theorie": {
+    "title": "Theorie",
+    "content": [
+      {
+        "type": "paragraph",
+        "text": [
+          "[Theorie content komt hier]"
+        ]
+      }
+    ]
+  },
+  "video": {
+    "title": "Video",
+    "description": "[Video beschrijving]",
+    "url": "",
+    "info": "[Video informatie]"
+  }
+}
+

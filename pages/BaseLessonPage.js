@@ -61,7 +61,7 @@ class BaseLessonPage {
                     </div>
                     <div>
                         <h1 class="text-xl font-bold text-gray-900">E-Learning</h1>
-                        <p class="text-sm text-gray-500">HBO Platform</p>
+                        <p class="text-sm text-gray-500">Opzetten van Logistieke Onderzoeken (OLO)</p>
                     </div>
                 </div>
             </div>
@@ -75,7 +75,7 @@ class BaseLessonPage {
         const modules = [
             { id: 'start', title: 'Start', href: 'index.html' },
             { id: 'week-1', title: 'Week 1', href: 'week1.html' },
-            { id: 'week-2', title: 'Week 2', href: 'week2.html' },
+            { id: 'week-2', title: 'Week 2 (Voorbeeld)', href: 'week2.html' },
             { id: 'week-3', title: 'Week 3', href: 'week3.html' },
             { id: 'week-4', title: 'Week 4', href: 'week4.html' },
             { id: 'week-5', title: 'Week 5', href: 'week5.html' },
@@ -251,40 +251,6 @@ class BaseLessonPage {
                 </div>
             </section>
 
-            <!-- Quiz Sectie -->
-            <section class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 hover-lift">
-                <div class="flex items-start space-x-4">
-                    <div class="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                        <i class="fas fa-question-circle text-orange-600 text-lg"></i>
-                    </div>
-                    <div class="flex-1">
-                        <h2 class="text-xl font-semibold text-gray-900 mb-4">Quiz</h2>
-                        <div class="space-y-4">
-                            <div class="border border-gray-200 rounded-lg p-4">
-                                <h3 class="font-semibold text-gray-900 mb-3">Voorbeeld Vraag</h3>
-                                <div class="space-y-2">
-                                    <label class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-50 cursor-pointer">
-                                        <input type="radio" name="quiz-q1" value="a" class="text-blue-600 focus-ring">
-                                        <span class="text-gray-700">A) Antwoord optie 1</span>
-                                    </label>
-                                    <label class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-50 cursor-pointer">
-                                        <input type="radio" name="quiz-q1" value="b" class="text-blue-600 focus-ring">
-                                        <span class="text-gray-700">B) Antwoord optie 2</span>
-                                    </label>
-                                    <label class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-50 cursor-pointer">
-                                        <input type="radio" name="quiz-q1" value="c" class="text-blue-600 focus-ring">
-                                        <span class="text-gray-700">C) Antwoord optie 3</span>
-                                    </label>
-                                </div>
-                            </div>
-                            <p class="text-sm text-gray-600">
-                                <i class="fas fa-edit mr-2"></i>
-                                <strong>Voor collega's:</strong> Voeg hier meerkeuzevragen toe voor ${this.moduleSubtitle}.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </section>
         `;
     }
 
@@ -396,6 +362,49 @@ class BaseLessonPage {
                 overlay.classList.add('hidden');
             });
         }
+
+        // Setup image modal functionality (available for all pages)
+        this.setupImageModal();
+    }
+
+    /**
+     * Setup image modal functionality
+     */
+    setupImageModal() {
+        window.openImageModal = (src, alt) => {
+            const modal = document.createElement('div');
+            modal.id = 'image-modal';
+            modal.className = 'fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-75 p-4 cursor-pointer';
+            modal.innerHTML = `
+                <div class="relative max-w-7xl max-h-full">
+                    <button class="absolute -top-10 right-0 text-white hover:text-gray-300 text-3xl font-bold" onclick="window.closeImageModal()">&times;</button>
+                    <img src="${src}" alt="${alt}" class="max-w-full max-h-[90vh] object-contain rounded-lg">
+                    <p class="text-white text-center mt-2">${alt}</p>
+                </div>
+            `;
+            modal.onclick = (e) => {
+                if (e.target === modal) {
+                    window.closeImageModal();
+                }
+            };
+            document.body.appendChild(modal);
+            document.body.style.overflow = 'hidden';
+        };
+        
+        window.closeImageModal = () => {
+            const modal = document.getElementById('image-modal');
+            if (modal) {
+                modal.remove();
+                document.body.style.overflow = '';
+            }
+        };
+        
+        // ESC key to close modal
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                window.closeImageModal();
+            }
+        });
     }
 }
 

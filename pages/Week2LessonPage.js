@@ -36,7 +36,7 @@ class Week2LessonPage extends BaseLessonPage {
     getFallbackContent() {
         return {
             intro: {
-                title: "Week 2 (Voorbeeld)",
+                title: "Week 2",
                 subtitle: "Van probleem naar doelstelling",
                 description: "De content voor deze module kon niet correct worden geladen. Controleer of het bestand week2.content.json bestaat en toegankelijk is."
             },

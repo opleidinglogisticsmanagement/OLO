@@ -7,7 +7,7 @@
 
 class Week7LessonPage extends BaseLessonPage {
     constructor() {
-        super('week-7', 'Week 7', 'Rapportage 1');
+        super('week-7', 'Week 7', 'Rapportage');
         this.content = null;
         this.contentLoaded = false;
     }

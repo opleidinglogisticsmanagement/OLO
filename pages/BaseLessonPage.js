@@ -275,15 +275,6 @@ class BaseLessonPage {
                     </button>
                 `}
                 
-                <div class="flex items-center space-x-4">
-                    <button class="px-4 py-2 text-gray-600 hover:text-gray-900 focus-ring">
-                        <i class="fas fa-bookmark text-lg"></i>
-                    </button>
-                    <button class="px-4 py-2 text-gray-600 hover:text-gray-900 focus-ring">
-                        <i class="fas fa-share text-lg"></i>
-                    </button>
-                </div>
-                
                 ${nextModule ? `
                     <button class="flex items-center space-x-2 px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus-ring transition-colors" onclick="window.location.href='${nextModule.href}'">
                         <span>Volgende: ${nextModule.title}</span>

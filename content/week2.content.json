@@ -127,5 +127,11 @@
     "description": "",
     "url": "",
     "info": ""
+  },
+  "mcVragen": {
+    "title": "Test je kennis",
+    "description": "De onderstaande vragen zijn gegenereerd op basis van de theorie die je zojuist hebt gelezen. Beantwoord ze om te controleren of je de stof goed begrijpt.",
+    "generateFromTheory": true,
+    "numberOfQuestions": 3
   }
 }

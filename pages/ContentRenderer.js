@@ -2,7 +2,7 @@
  * ContentRenderer
  * 
  * Centrale utility voor het renderen van content items
- * Ondersteunt: paragraph, image, url, document, highlight
+ * Ondersteunt: paragraph, image, url, document, highlight, accordion
  */
 
 class ContentRenderer {
@@ -37,6 +37,16 @@ class ContentRenderer {
                     return this.renderHighlight(item);
                 case 'html':
                     return this.renderHtml(item);
+                case 'accordion':
+                    return this.renderAccordion(item);
+                case 'smartChecklist':
+                    return this.renderSMARTChecklist(item);
+                case 'learningObjectivesChecklist':
+                    return this.renderLearningObjectivesChecklist(item);
+                case 'matchingExercise':
+                    return this.renderMatchingExercise(item);
+                case 'trueFalseExercise':
+                    return this.renderTrueFalseExercise(item);
                 default:
                     console.warn(`Unknown content type: ${item.type}`);
                     return '';
@@ -191,6 +201,71 @@ class ContentRenderer {
             return '';
         }
         return item.html;
+    }
+
+    /**
+     * Render accordion component (delegates to InteractiveRenderer)
+     * @param {Object} item - Accordion item
+     * @returns {string} HTML string
+     */
+    static renderAccordion(item) {
+        if (typeof window.InteractiveRenderer !== 'undefined') {
+            return InteractiveRenderer.renderAccordion(item);
+        }
+        console.warn('InteractiveRenderer not loaded. Accordion will not render.');
+        return '';
+    }
+
+    /**
+     * Render SMART checklist component (delegates to InteractiveRenderer)
+     * @param {Object} item - SMART checklist item
+     * @returns {string} HTML string
+     */
+    static renderSMARTChecklist(item) {
+        if (typeof window.InteractiveRenderer !== 'undefined') {
+            return InteractiveRenderer.renderSMARTChecklist(item);
+        }
+        console.warn('InteractiveRenderer not loaded. SMART checklist will not render.');
+        return '';
+    }
+
+    /**
+     * Render learning objectives checklist component (delegates to InteractiveRenderer)
+     * @param {Object} item - Learning objectives checklist item
+     * @returns {string} HTML string
+     */
+    static renderLearningObjectivesChecklist(item) {
+        if (typeof window.InteractiveRenderer !== 'undefined') {
+            return InteractiveRenderer.renderLearningObjectivesChecklist(item);
+        }
+        console.warn('InteractiveRenderer not loaded. Learning objectives checklist will not render.');
+        return '';
+    }
+
+    /**
+     * Render matching exercise component (delegates to InteractiveRenderer)
+     * @param {Object} item - Matching exercise item
+     * @returns {string} HTML string
+     */
+    static renderMatchingExercise(item) {
+        if (typeof window.InteractiveRenderer !== 'undefined') {
+            return InteractiveRenderer.renderMatchingExercise(item);
+        }
+        console.warn('InteractiveRenderer not loaded. Matching exercise will not render.');
+        return '';
+    }
+
+    /**
+     * Render true/false exercise component (delegates to InteractiveRenderer)
+     * @param {Object} item - True/false exercise item
+     * @returns {string} HTML string
+     */
+    static renderTrueFalseExercise(item) {
+        if (typeof window.InteractiveRenderer !== 'undefined') {
+            return InteractiveRenderer.renderTrueFalseExercise(item);
+        }
+        console.warn('InteractiveRenderer not loaded. True/false exercise will not render.');
+        return '';
     }
 }
 

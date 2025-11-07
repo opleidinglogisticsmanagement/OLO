@@ -121,18 +121,28 @@ class Week2LessonPage extends BaseLessonPage {
                         <i class="fas fa-bullseye text-green-600 text-lg"></i>
                     </div>
                     <div class="flex-1">
-                        <h2 class="text-xl font-semibold text-gray-900 mb-4">${this.content.leerdoelen.title}</h2>
-                        <div class="prose max-w-none">
-                            <p class="text-gray-600 mb-4">${this.content.leerdoelen.description}</p>
-                            <ul class="space-y-2">
-                                ${this.content.leerdoelen.items.map(item => `
-                                    <li class="flex items-start space-x-3">
-                                        <i class="fas fa-check text-green-500 mt-1"></i>
-                                        <span class="text-gray-700">${item}</span>
-                                    </li>
-                                `).join('')}
-                            </ul>
-                        </div>
+                        ${this.content.leerdoelen.interactive 
+                            ? ContentRenderer.renderLearningObjectivesChecklist({
+                                title: this.content.leerdoelen.title,
+                                description: this.content.leerdoelen.description,
+                                items: this.content.leerdoelen.items,
+                                storageKey: 'week2-learning-objectives'
+                            })
+                            : `
+                                <h2 class="text-xl font-semibold text-gray-900 mb-4">${this.content.leerdoelen.title}</h2>
+                                <div class="prose max-w-none">
+                                    <p class="text-gray-600 mb-4">${this.content.leerdoelen.description}</p>
+                                    <ul class="space-y-2">
+                                        ${this.content.leerdoelen.items.map(item => `
+                                            <li class="flex items-start space-x-3">
+                                                <i class="fas fa-check text-green-500 mt-1"></i>
+                                                <span class="text-gray-700">${item}</span>
+                                            </li>
+                                        `).join('')}
+                                    </ul>
+                                </div>
+                            `
+                        }
                     </div>
                 </div>
             </section>

@@ -2,16 +2,19 @@
   "intro": {
     "title": "Week 3",
     "subtitle": "Onderzoeksmodel + Onderzoeksvragen",
-    "description": "[Beschrijving komt hier]"
+    "description": "In deze week leer je wat een onderzoeksmodel is en waarom je het nodig hebt. Je ontdekt hoe je een schematische weergave maakt van je onderzoek en welke stappen je moet zetten om je doelstelling te bereiken. Daarnaast leer je over de zes basishandelingen bij het maken van een onderzoeksmodel."
   },
   "leerdoelen": {
     "title": "Leerdoelen",
-    "description": "Na het lezen van de theorie kun je:",
     "items": [
-      "[Leerdoel 1]",
-      "[Leerdoel 2]",
-      "[Leerdoel 3]"
-    ]
+      "Je kunt uitleggen wat een onderzoeksmodel is en waarom je het nodig hebt bij het opzetten van een onderzoek.",
+      "Je kunt de zes basishandelingen bij het maken van een onderzoeksmodel toepassen: werken van achteren naar voren, bepalen van onderzoeksobjecten, bepalen van de onderzoeksoptiek, kiezen van bronnen, confronteren, en schematische weergave en verwoording.",
+      "Je kunt onderscheid maken tussen een normatief en feitelijk perspectief bij het bepalen van de onderzoeksoptiek.",
+      "Je kunt uitleggen wat confronteren betekent in het kader van een onderzoeksmodel en hoe je verschillende bronnen met elkaar confronteert.",
+      "Je kunt een onderzoeksmodel schematisch weergeven en verwoorden volgens de drie stappen: opstellen van onderzoeksoptiek, analyseresultaten en succesfactoren, en verbeteradviezen.",
+      "Je kunt een adequate centrale onderzoeksvraag formuleren die voldoet aan de eisen van afbakening, efficiëntie en sturend vermogen."
+    ],
+    "interactive": false
   },
   "theorie": {
     "title": "Theorie",
@@ -19,16 +22,295 @@
       {
         "type": "paragraph",
         "text": [
-          "[Theorie content komt hier]"
+          "Je bent inmiddels bezig geweest met het opstellen van een doelstelling vanuit een praktijk gestuurd vraagstuk. Nu je weet wat het doel gaat worden van je onderzoek, komt de vraag naar voren hoe je het onderzoek verder gaat aanpakken, kortom hoe ga je je geformuleerde doelstelling bereiken. Deze structuur ga je opbouwen aan de hand van onderzoeksvragen die je gaat stellen. Echter, hoe bepaal je nu wanneer onderzoeksvragen nuttig zijn, wanneer ze goed zijn en welke inhoud deze onderzoeksvragen moeten bevatten. Om over deze vragen na te denken sta je stil bij het onderzoeksmodel."
         ]
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "In het onderzoeksmodel maak je een schematische weergave van het onderzoek en de globale stappen die gezet moeten worden om het doel te bereiken. Deze stappen bestaan uit zowel procesmatige stappen (bijvoorbeeld bepalen in welke volgorde de vragen beantwoord worden) maar ook uit welke inhoud en/of theorieën geput kan worden ten einde een goed onderbouwd antwoord te formuleren."
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "Een onderzoeksmodel bestaat in essentie uit drie delen die in een kennisclip worden toegelicht."
+        ]
+      },
+      {
+        "type": "video",
+        "url": "https://media.windesheim.nl/Mediasite/Play/3a0b3b8a6527464fb5373e80bba221251d",
+        "title": "Componenten van een onderzoeksmodel",
+        "description": "Bekijk deze kennisclip voor uitleg over de drie delen van een onderzoeksmodel."
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "Een onderzoeksmodel neemt je dus schematisch mee in de opzet van je onderzoek. Welke stappen ga je nemen, welke theorieën ga je onderzoeken en toepassen in je onderzoek."
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "Bij het maken van een onderzoeksmodel is het van belang te denken vanuit een zestal basishandelingen:"
+        ]
+      },
+      {
+        "type": "clickableSteps",
+        "steps": [
+          {
+            "label": "1. Werken van achteren naar voren",
+            "content": [
+              "We hebben leren 'lezen' van links naar rechts. Belangrijkste bij het onderzoeksmodel is werken van rechts naar links. Aan de rechterkant staat namelijk het doel van het onderzoek. Zie figuur 1. Dit vormt het uitgangspunt en van hieruit kun je gaan nadenken over de vraag hoe je dat wilt bereiken. Daarom is het van belang dat je precies weet wat je onderzoeksobject of onderzoeksobjecten zijn.",
+              "<div class=\"float-right w-48 h-auto mb-4 ml-4\"><img src=\"assets/images/3.1.1.png\" alt=\"Figuur 1\" class=\"w-full h-auto mb-2\" /><p class=\"text-xs text-gray-600 italic text-center\">Figuur 1: Het doel komt rechts in het onderzoeksmodel te staan. Dit hoeft niet de complete doelstelling te zijn.</p></div>"
+            ]
+          },
+          {
+            "label": "2. Bepalen van de onderzoeksobjecten",
+            "content": [
+              "Het onderzoeksobject is een concreet verschijnsel wat je gaat onderzoeken. Dit kan een persoon zijn (wat is de impact van de leiderschapsstijl van persoon A op persoon B), maar in ons geval gaat het hier grotendeels om een (deel van) een proces of een fysieke locatie. Andere mogelijkheden zijn er uiteraard ook. Je kunt het onderzoeksobject vergelijken met het onderwerp van een zin. Dit is de essentie waar het onderzoek betrekking op heeft. Als helder is welk object er onderzocht gaat worden dan kun je vaststellen welke onderzoeksoptiek er gebruikt kan worden.",
+              "In het voorbeeld van het gebruik van pickrobots zijn de onderzoeksobjecten het pickproces en de werknemers waarvan je de werknemerstevredenheid wilt vaststellen. Zie ook figuur 2.",
+              "<div class=\"float-left w-48 h-auto mb-4 mr-4\"><img src=\"assets/images/3.1.2.png\" alt=\"Figuur 2\" class=\"w-full h-auto mb-2\" /><p class=\"text-xs text-gray-600 italic text-center\">Figuur 2: De onderzoeksobjecten</p></div>"
+            ]
+          },
+          {
+            "label": "3. Bepaald de aard van je onderzoeksoptiek",
+            "content": [
+              "In de onderzoeksoptiek kies je het perspectief waarmee je naar het onderzoeksobject gaat kijken. In andere woorden… Je kiest je eigen de bril (onderzoeksoptiek) waarmee je naar het onderwerp (onderzoeksobject) gaat kijken. De onderzoeksoptiek is een van de belangrijkste onderdelen van het onderzoeksmodel. Je kiest het perspectief dat het best past bij wat je zelf van het object afweet, je let op je eigen belangstelling en met welk perspectief je de meest zinvolle resultaten kunt verkrijgen. Er zijn hierbij verschillende perspectieven waarmee je kunt kijken:",
+              "<p class=\"text-gray-700 mb-4\"><strong>Normatief:</strong> je gaat kijken of de wereld in elkaar zit zoals deze in elkaar hoort te zitten. Veel logistieke verbeteropdrachten die jij als LM student gaat uitvoeren zitten in deze hoek. Je gaat immers kijken of je verbeteringen aan het huidige proces kunt signaleren en implementeren. Als je volgens een norm gaat kijken kun je criteria hanteren. Aan de hand van deze criteria moet het mogelijk zijn om te bepalen of het onderzoeksobject voldoet aan de norm.</p>",
+              "<p class=\"text-gray-700 mb-4\"><strong>Feitelijk:</strong> je gaat kijken of de wereld in elkaar zit zoals jij denkt dat deze in elkaar zit. Hierbij ga je verbanden onderzoeken die je vooraf nog niet weet. We spreken hierin dus een bepaalde verwachting uit. Dit wordt ook wel een hypothese stellen genoemd. In een hypothese worden dus verbanden gelegd.</p>",
+              {
+                "type": "matchingExercise",
+                "title": "Onderscheid tussen Normatief en Feitelijk perspectief",
+                "instruction": "Sleep de omschrijvingen naar de juiste categorie om te testen of je het onderscheid begrijpt:",
+                "categories": [
+                  {
+                    "name": "Normatief",
+                    "description": "Je gaat kijken of de wereld in elkaar zit zoals deze in elkaar hoort te zitten. Veel logistieke verbeteropdrachten zitten in deze hoek. Je gaat kijken of je verbeteringen aan het huidige proces kunt signaleren en implementeren."
+                  },
+                  {
+                    "name": "Feitelijk",
+                    "description": "Je gaat kijken of de wereld in elkaar zit zoals jij denkt dat deze in elkaar zit. Hierbij ga je verbanden onderzoeken die je vooraf nog niet weet. Je spreekt een bepaalde verwachting uit (hypothese)."
+                  }
+                ],
+                "items": [
+                  {
+                    "text": "Het pickproces voldoet aan de norm voor efficiëntie",
+                    "correctCategory": 0
+                  },
+                  {
+                    "text": "Het implementeren van pickrobots heeft een positief effect op de productiviteit van de medewerkers",
+                    "correctCategory": 1
+                  },
+                  {
+                    "text": "De doorlooptijd van orders moet worden teruggebracht tot maximaal 24 uur",
+                    "correctCategory": 0
+                  },
+                  {
+                    "text": "Er is een verband tussen werknemerstevredenheid en productiviteit",
+                    "correctCategory": 1
+                  },
+                  {
+                    "text": "Het magazijn moet voldoen aan de veiligheidsnormen",
+                    "correctCategory": 0
+                  },
+                  {
+                    "text": "Het gebruik van RFID-technologie verbetert de voorraadnauwkeurigheid",
+                    "correctCategory": 1
+                  }
+                ]
+              },
+              "Hieronder een paar voorbeelden van hypotheses bij het feitelijk perspectief:",
+              "<ul class=\"list-disc list-inside space-y-2 mb-4 ml-4\">",
+              "<li>Het implementeren van pickrobots heeft een positief effect op de productiviteit van de medewerkers (orderpickers).</li>",
+              "<li>Het implementeren van pickrobots leidt tot minder tevredenheid onder de medewerkers.</li>",
+              "<li>Tevreden medewerkers verhogen de productiviteit.</li>",
+              "</ul>",
+              "De relaties tussen deze begrippen kunnen schematisch worden vastgelegd zoals in figuur 3 is weergegeven. Deze schematische weergave wordt een conceptueel model genoemd.",
+              "<div class=\"mb-4 clear-both\" style=\"width: 300px;\"><img src=\"assets/images/3.1.3.png\" alt=\"Figuur 3\" class=\"w-full h-auto mb-2\" style=\"max-width: 300px; max-height: 250px;\" /><p class=\"text-xs text-gray-600 italic\" style=\"width: 300px;\">Figuur 3: Visualisatie van de hypothese in een conceptueel model met een direct en een indirect verband tussen de mate van robotisering en productiviteit.</p></div>",
+              "Zo is te zien dat de mate van robotisering zowel een direct (mate van robotisering in relatie tot productiviteit) als een indirect verband heeft (mate van robotisering in relatie tot tevredenheid medewerkers welke een effect heeft op de productiviteit).",
+              "Het nadenken, opstellen en visualiseren van een hypothese helpt om de onderzoeksoptiek vast te stellen. De vraag is nu wat je nodig hebt om deze hypothese te bevestigen dan wel te weerleggen. Kun jij die vraag beantwoorden?",
+              "Om te werken aan deze hypothese is het nodig om (1) een set van beoordelingscriteria te hebben waarmee je de productiviteit van het pickproces met en zonder robots kunt vaststellen en (2) een set van beoordelingscriteria te hebben waarmee de werknemerstevredenheid gemeten kan worden. Dit is ook in figuur 4 te zien.",
+              "<div class=\"mb-4 clear-both\" style=\"width: 200px; margin: 0 auto;\"><img src=\"assets/images/3.1.4.png\" alt=\"Figuur 4\" class=\"w-full h-auto mb-2\" style=\"max-width: 200px; max-height: 160px;\" /><p class=\"text-xs text-gray-600 italic\" style=\"width: 200px;\">Figuur 4: De onderzoeksoptiek (in het midden van het onderzoeksmodel) bestaat dus uit beoordelingscriteria voor het bepalen van de productiviteit van het pickproces en de werknemerstevredenheid.</p></div>"
+            ]
+          },
+          {
+            "label": "4. Kies de bronnen (of theorieën) die je nodig denkt te hebben",
+            "content": [
+              "Nu je hebt stilgestaan bij enkele relaties van het onderzoeksobject (onderwerp) en de onderzoeksoptiek (de bril) is het tijd om na te gaan denken over de bronnen die je moet gaan gebruiken. Hierbij kun je denken aan bestaande notities of (nieuws)artikelen en al uitgevoerde (interne) onderzoeken. Tegelijkertijd is het ook noodzakelijk bestaande literatuur te raadplegen. Hierbij kun je denken aan vakliteratuur, wetenschappelijke theorieën en schoolboeken (tip: pak bijvoorbeeld Werken met Logistiek er weer eens bij).",
+              "Om op een goede wijze de bronnen te gaan vaststellen zou je allereerst eigenlijk de kernbegrippen moeten definiëren. Het formuleren van een omschrijving bij elk kernbegrip is belangrijk omdat: (1) al je stakeholders dezelfde omschrijving lezen van de belangrijkste begrippen en (2) de kernbegrippen als trefwoorden kunt gaan gebruiken bij het zoeken naar bronnen/theorie/literatuur.",
+              "Voor het opstellen van het onderzoeksmodel gaan we nu niet verder in op het vinden van de juiste bronnen. Je zou misschien denken dat het heel makkelijk is, maar je zult gaan merken dat het vinden van de juiste bronnen, artikelen en theorieën best lastig kan zijn. Op een later moment staan we nadrukkelijk stil bij het vaststellen van kernbegrippen en het vinden van geschikte bronnen. Probeer nu wel alvast op grote lijnen vast te stellen waar jij in je onderzoek theorie of literatuur over moet vinden.",
+              "In het voorbeeld van het inzetten van robots bij het pickproces bestaat de onderzoeksopzet uit beoordelingscriteria voor de productiviteit van het pickproces en werknemerstevredenheid. Daarom is het van belang om theorie te vinden die gaat over de productiviteit van het pickproces zonder en met robots. Daarnaast is het van belang om theorie te vinden over de inzet van robots bij het pickproces en wat het effect kan zijn op werknemers. Bij dit laatste ga je heel gericht zoeken naar wat van belang is bij de implementatie van robots en welke succesfactoren een rol in het algemeen spelen. Dit geef je verkort weer aan de linkerkant van het onderzoeksmodel. Zie ook figuur 5.",
+              {
+                "type": "image",
+                "src": "assets/images/3.1.5.png",
+                "alt": "Figuur 5: De benodigde bronnen staan links in het onderzoeksmodel.",
+                "align": "left",
+                "showAltText": true,
+                "enableModal": false,
+                "size": "small"
+              },
+              "Je ziet ook dat er nog een blokje vooronderzoek in staat. Hierin ga onder andere je de 5W's + V + O vaststellen of alvast een belangrijk interview afnemen."
+            ]
+          },
+          {
+            "label": "5. Confronteer het onderzoeksobject, onderzoeksoptiek en bronnen met elkaar en trek hieruit je (eerste) conclusies",
+            "content": [
+              "Met het onderzoeksmodel ga je ook laten zien hoe je verschillende bronnen met elkaar gaat vergelijken en conclusies gaat trekken. Dit vergelijken van verschillende bronnen wordt confronteren genoemd.",
+              "Zo kun je bijvoorbeeld een gemaakte analyse van artikelen die op voorraad gehouden moeten worden vergelijken/confronteren met een gemaakte analyse van de kosten die dat met zich meebrengt. Zo kun je een onderbouwd advies geven over welke en hoeveel artikelen er op voorraad gehouden zouden moeten worden. Je kunt ook literatuur zoeken over de impact van robotisering op productiviteit en die uitkomsten confronteren met literatuur over de impact van robotisering op de tevredenheid van werknemers.",
+              "In de confrontatie ga je dus telkens conclusies trekken. Dit kan op verschillende momenten tijdens het onderzoek gebeuren. De inzichten die jij verkrijgt door verschillende aspecten van het onderzoek te confronteren zijn belangrijk. Hierdoor kun je onderbouwd het onderzoek steeds verder vormgeven en uitwerken. In het onderzoeksmodel geef je ook aan welke onderdelen met elkaar geconfronteerd worden. Dit gebeurt door middel van verticale en horizontale palen. De verticale pijl geeft aan welke onderdelen met elkaar geconfronteerd worden. De horizontale pijl geeft aan welke uitkomst het confronteren gaat geven.",
+              "In het voorbeeld van de pickrobots worden de onderzoeksobjecten en de bronnen met elkaar geconfronteerd. Dit leidt tot de onderzoeksoptiek. De confrontatie wordt zichtbaar gemaakt door de verticale en horizontale pijl die te zien zijn in figuur 6.",
+              {
+                "type": "image",
+                "src": "assets/images/3.1.6.png",
+                "alt": "Figuur 6: De resultaten van de vier blokken links worden met elkaar geconfronteerd en leiden tot een onderbouwde conclusie. De resultaten van de conclusie vormen de onderzoeksoptiek.",
+                "align": "left",
+                "showAltText": true,
+                "enableModal": false,
+                "size": "small"
+              },
+              "De onderzoeksoptiek wordt ingezet om verder te analyseren. Met de beoordelingscriteria voor de productiviteit van het pickproces kan de current state en de future state worden bepaald. Dat ziet eruit zoals in figuur 7a is te zien.",
+              {
+                "type": "image",
+                "src": "assets/images/3.1.7.1.png",
+                "alt": "Figuur 7a: Met de gevonden beoordelingscriteria is het mogelijk om de productiviteit zonder (current state) en met (future state) robots in kaar te brengen.",
+                "align": "center",
+                "showAltText": true,
+                "enableModal": false,
+                "size": "medium"
+              },
+              "Daarnaast worden de beoordelingscriteria ingezet om de werknemerstevredenheid te meten en eventueel te verhogen. Deze resultaten worden geconfronteerd met de door jou in kaart gebrachte belangen van werknemers. Dit leidt tot een onderbouwde conclusie van succesfactoren bij het werken met robots gericht op de organisatie waar het onderzoek plaatsvindt. Zie ook figuur 7b.",
+              {
+                "type": "image",
+                "src": "assets/images/3.1.7.2.png",
+                "alt": "Figuur 7b: de belangen van de werknemers worden geconfronteerd met de beoordelingscriteria t.a.v. de werknemerstevredenheid. Dit leidt tot specifieke succesfactoren bij het implementeren van en werken met pickrobots.",
+                "align": "center",
+                "showAltText": true,
+                "enableModal": false,
+                "size": "medium"
+              },
+              "Het schematisch weergeven van het onderzoeksmodel bied houvast en eenduidige structuur voor jezelf, maar ook voor je opdrachtgever en/of begeleiders die je tijdens het onderzoek ondersteunen. Het is van belang om het onderzoeksmodel te presenteren zodat elke stakeholder ook inzicht krijgen in de wijze waarop jij het onderzoek gaat vormgeven. De stakeholders kijken er op hun eigen manier naar en kunnen je nog waardevolle feedback geven. Tegelijkertijd is het ook een wijze waarin jij omschrijft op welke wijze jij het onderzoek hebt uitgevoerd, zodat ook anderen een vergelijkbaar onderzoek (op bijvoorbeeld een later moment in de tijd) zouden kunnen overdoen om effecten te meten."
+            ]
+          },
+          {
+            "label": "6. Beschrijf de stappen vanuit de schematische weergave in eigen woorden",
+            "content": [
+              "Alle delen van het onderzoeksmodel zijn nu aan bod gekomen. Als dit wordt samengevoegd ziet dat eruit zoals in figuur 8 is weergegeven. De analyseresultaten van de current en future state worden geconfronteerd met de in kaart gebrachte succesfactoren bij het werken met robots. Deze confrontatie moet genoeg opleveren om tot drie goed onderbouwde en gefundeerde verbeteradviezen te komen die van toepassing zijn op de organisatie.",
+              {
+                "type": "image",
+                "src": "assets/images/3.1.8.png",
+                "alt": "Figuur 8: Het complete onderzoeksmodel.",
+                "align": "left",
+                "showAltText": true,
+                "enableModal": true,
+                "size": "auto"
+              },
+              "Nu het gehele model in kaart is gebracht is het ook van belang om het model te gaan verwoorden. Dat is hierboven zo nu en dan al gebeurd omdat het model in stappen is uitgelegd. In het onderzoeksplan ga je een uitleg van de onderdelen van het onderzoeksmodel hooguit opnemen in de bijlage. In de hoofdtekst presenteer je het gehele onderzoeksmodel. Dit model moet ook voorzien worden van een verwoording of een toelichting. Om die verwoording wat structuur te geven kan het onderzoeksplan ook worden opgedeeld in drie stappen die te zien zijn in figuur 9.",
+              {
+                "type": "image",
+                "src": "assets/images/3.1.9.png",
+                "alt": "Figuur 9: Het onderzoeksmodel is opgedeeld in drie stappen. In stap 1 wordt het onderzoeksobject en de bronnen gebruikt om de onderzoeksoptiek op te stellen. Met de onderzoeksoptiek kun je komen tot analyseresultaten en succesfactoren (stap 2) en daarmee kun je uiteindelijk verbeteradviezen opstellen (stap 3).",
+                "align": "left",
+                "showAltText": true,
+                "enableModal": true,
+                "size": "auto"
+              },
+              "Naast de schematische weergave (het aan elkaar verbinden van de verschillende onderdelen) is het ook van belang om de verschillende stappen die in het onderzoeksmodel naar voren komen te benoemen en kort te omschrijven. De verwoording zou er bijvoorbeeld als volgt uit kunnen zien:",
+              {
+                "type": "steps",
+                "steps": [
+                  "<strong>Stap 1</strong> is het in kaart brengen van de kennis t.a.v. de productiviteit van het pickproces met en zonder robots. Daarnaast wordt de belangrijkste theorie bijeengezocht ten aanzien van beoordelingscriteria van werknemerstevredenheid en succesfactoren bij de implementatie van robots bij het pickproces. Samen met het vooronderzoek leiden deze vier onderdelen tot een belangrijkste set van beoordelingscriteria voor het bepalen van de productiviteit van het pickproces maar ook voor de werknemerstevredenheid. Want hoe ga je werknemerstevredenheid eigenlijk bepalen? De uitkomsten van stap 1 worden ook gebruikt bij stap 2.",
+                  "Bij <strong>stap 2</strong> worden de beoordelingscriteria ingezet. Ten eerste voor de confrontatie met de (mogelijke) productiviteit van het pickproces met en zonder robots. Dit leidt tot de analyseresultaten van de current en future state. Ten tweede voor de confrontatie van de beoordelingscriteria van de werknemerstevredenheid met de belangen van werknemers. Het resultaat hiervan zijn in kaart gebrachte succesfactoren voor de huidige werknemers voor het werken met robots.",
+                  "<strong>Stap 3</strong> leidt uiteindelijk tot drie verbeteradviezen door de analyseresultaten en succesfactoren van stap 2 met elkaar te confronteren. Je kunt namelijk op basis van de analyseresultaten en succesfactoren specifieke op de organisatie gerichte adviezen schrijven."
+                ]
+              },
+              "<em>NB: Dit voorbeeld is bewust eenvoudig gehouden. Je kunt bijvoorbeeld ook nog de kosten meenemen. Met de resultaten van een kostenanalyse kun je nog gerichter adviezen schrijven.</em>"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "<h3 class=\"text-lg font-semibold text-gray-900 mb-0\">Onderzoeksmodel – is dat nu nodig?</h3>",
+          "In het voorgaande heb je inzicht gekregen in de wijze waarop een onderzoeksmodel is opgezet en waar je rekening mee gaat houden. Je hebt daarbij inzicht gekregen dat het maken van een onderzoeksmodel erg handig kan zijn om verschillende redenen, zoals:"
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "<ol class=\"list-decimal list-outside space-y-2 mb-4 ml-6 pl-4\">",
+          "<li>Het geeft een helder beeld van de aard van het onderzoek en de te verwachten resultaten.</li>",
+          "<li>Alle betrokkenen kijken gezamenlijk naar een en dezelfde voorstelling van het onderzoek.</li>",
+          "<li>Het ondersteunt en vergemakkelijkt het proces van kiezen van relevante literatuur en maakt duidelijk vanuit welke optiek literatuur moet worden bestudeerd.</li>",
+          "<li>Het maakt het eenvoudiger en duidelijker op welke wijze je de doelstelling van je onderzoek wilt gaan behalen</li>",
+          "<li>Je kunt aan de hand van het onderzoeksmodel alvast een grove inhoudsopgave maken van je eindrapport.</li>",
+          "</ol>"
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "Nu je het onderzoeksmodel hebt kunnen vaststellen gaan we dit onderzoeksmodel gebruiken om de centrale vraag of hoofdvraag van dit onderzoek te verkennen. Deze vragen zullen uiteindelijk worden gebruikt om een verdere richting te geven aan de deelvragen én kernbegrippen welke in het volgende college centraal staan. In de theorie van deze week zullen we dus voornamelijk stil staan bij het formuleren van de centrale onderzoeksvraag."
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "<h3 class=\"text-lg font-semibold text-gray-900 mb-0\">Template Onderzoeksmodel</h3>",
+          "Om je op weg te helpen is er een template gemaakt voor het onderzoeksmodel dat voorzien is van een korte uitleg en enkele instructies. Zie ook Figuur 10. Je kunt dit template downloaden in Brightspace en uploaden in Microsoft Visio. Uiteraard mag je het template ook aanpassen en opslaan voor later gebruik bijvoorbeeld in je stage. Indien je zelf een onderzoeksmodel wilt maken in Draw.io dan is dat uiteraard goed. Daar is helaas geen template voor beschikbaar."
+        ]
+      },
+      {
+        "type": "image",
+        "src": "assets/images/3.1.10.png",
+        "alt": "Figuur 10: Template van het onderzoeksmodel. Het template is nog voorzien van toelichting en een handige werkwijze.",
+        "align": "left",
+        "showAltText": true,
+        "enableModal": true,
+        "size": "auto"
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "<h3 class=\"text-lg font-semibold text-gray-900 mb-0\">Onderzoeksvragen</h3>",
+          "Aan de hand van de onderzoeksvragen ga je verder de aanpak van je onderzoek opstellen en vaststellen. Deze onderzoeksvragen staan centraal voor het herleiden van kernbegrippen en daarmee dus ook welke theorieën en modellen voor houvast zorgen of input kunnen geven aan je onderzoek. We gaan in dit deel stil staan bij het begrip 'centrale vragen'. Aan de hand van deze centrale vragen kunnen vervolgens deelvragen uit herleid worden."
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "Nu denk jij natuurlijk… Vragen stellen dat is toch niet moeilijk, dat kan iedereen. Inderdaad een vraag stellen kan iedereen. De taak is nu aan jou om een adequate vraag te stellen. Hierbij worden voornamelijk 3 eisen gesteld:"
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "<ul class=\"list-disc list-inside space-y-2 mb-4 ml-4\">",
+          "<li>Afbakening</li>",
+          "<li>Efficiëntie</li>",
+          "<li>Sturend vermogen</li>",
+          "</ul>"
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "Deze 3 eisen worden hieronder in een kennisclip kort uiteengezet:"
+        ]
+      },
+      {
+        "type": "video",
+        "url": "https://media.windesheim.nl/Mediasite/Play/2b19c1b3a5664942917aab81d23887971d",
+        "title": "Functie- en vormeisen onderzoeksvragen",
+        "description": "Bekijk deze kennisclip voor uitleg over de eisen aan onderzoeksvragen: afbakening, efficiëntie en sturend vermogen."
       }
     ]
   },
-  "video": {
-    "title": "Video",
-    "description": "[Video beschrijving]",
-    "url": "",
-    "info": "[Video informatie]"
+  "mcVragen": {
+    "title": "Test je kennis",
+    "description": "De onderstaande vragen zijn gegenereerd op basis van de theorie die je zojuist hebt gelezen. Beantwoord ze om te controleren of je de stof goed begrijpt.",
+    "generateFromTheory": true,
+    "numberOfQuestions": 3
   }
 }
-

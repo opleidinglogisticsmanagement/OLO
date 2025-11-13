@@ -6,7 +6,8 @@
   },
   "leerdoelen": {
   "title": "Leerdoelen",
-  "description": "Na het lezen van de theorie kun je:",
+  "description": "Formuleer hier de leerdoelen voor deze week. Leerdoelen beschrijven wat studenten na het doorlopen van deze module kunnen doen. Wacht met het formuleren van leerdoelen totdat alle theoriecontent is toegevoegd, zodat je kunt controleren of de leerdoelen de complete theorie beslaan.",
+  "instruction": "Voeg hier leerdoelen toe die de complete theorie van deze week beslaan. Formuleer leerdoelen pas wanneer alle content is toegevoegd.",
   "items": [
     "Uitleggen wat het belang is van een goed geformuleerde doelstelling binnen praktijkgericht onderzoek.",
     "Een onderscheid maken tussen het probleem, de doelstelling en de hoofdvraag in een onderzoeksopzet.",

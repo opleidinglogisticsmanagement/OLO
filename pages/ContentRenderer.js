@@ -28,9 +28,14 @@ class ContentRenderer {
                 case 'image':
                     currentImageIndex++;
                     const isLastImage = currentImageIndex === lastImageIndex;
-                    return this.renderImage(item, { ...options, isLastImage });
+                    // Modal functionaliteit alleen als expliciet aangegeven in item zelf
+                    // Als item.enableModal undefined is, gebruik dan false (niet klikbaar)
+                    const enableModalForItem = item.enableModal === true;
+                    return this.renderImage(item, { ...options, isLastImage, enableModal: enableModalForItem });
                 case 'url':
                     return this.renderUrl(item);
+                case 'video':
+                    return this.renderVideo(item);
                 case 'document':
                     return this.renderDocument(item);
                 case 'highlight':
@@ -47,6 +52,10 @@ class ContentRenderer {
                     return this.renderMatchingExercise(item);
                 case 'trueFalseExercise':
                     return this.renderTrueFalseExercise(item);
+                case 'steps':
+                    return this.renderSteps(item);
+                case 'clickableSteps':
+                    return this.renderClickableSteps(item);
                 default:
                     console.warn(`Unknown content type: ${item.type}`);
                     return '';
@@ -85,12 +94,12 @@ class ContentRenderer {
 
     /**
      * Render een image item
-     * @param {Object} item - Image item met src en alt
+     * @param {Object} item - Image item met src, alt, en optioneel align, showAltText, enableModal en size
      * @param {Object} options - Opties zoals isLastImage en enableModal
      * @returns {string} HTML string
      */
     static renderImage(item, options = {}) {
-        const { isLastImage = false, enableModal = true } = options;
+        const { isLastImage = false, enableModal = false } = options;
 
         if (!item.src || !item.alt) {
             console.warn('Image item missing src or alt:', item);
@@ -99,20 +108,83 @@ class ContentRenderer {
 
         const escapedAlt = item.alt.replace(/'/g, "\\'");
         const escapedSrc = item.src.replace(/'/g, "\\'");
-
-        // Laatste image krijgt modal functionaliteit als enabled
-        if (isLastImage && enableModal) {
-            return `<div class="mb-4 relative overflow-hidden rounded-lg group cursor-pointer" onclick="window.openImageModal('${escapedSrc}', '${escapedAlt}')">
-                <img src="${item.src}" alt="${item.alt}" class="rounded-lg w-full h-auto max-h-[600px] object-contain transition-transform duration-300 group-hover:scale-110">
+        
+        // Support voor alignment (left, right, center)
+        const align = item.align || 'left';
+        const showAltText = item.showAltText !== false; // Default true, tenzij expliciet false
+        
+        // Size presets
+        const sizePresets = {
+            'tiny': { maxWidth: '150px', maxHeight: '120px' },
+            'xsmall': { maxWidth: '200px', maxHeight: '160px' },
+            'small': { maxWidth: '300px', maxHeight: '250px' },
+            'medium': { maxWidth: '500px', maxHeight: '400px' },
+            'large': { maxWidth: '700px', maxHeight: '600px' },
+            'xlarge': { maxWidth: '900px', maxHeight: '750px' },
+            'full': { maxWidth: '100%', maxHeight: '800px' },
+            'auto': { maxWidth: '100%', maxHeight: 'none' }
+        };
+        
+        // Bepaal size (default: medium)
+        const size = item.size || 'medium';
+        const sizeConfig = sizePresets[size] || sizePresets['medium'];
+        
+        // Custom maxWidth/maxHeight overschrijven presets als opgegeven
+        const maxWidth = item.maxWidth ? `${item.maxWidth}px` : sizeConfig.maxWidth;
+        const maxHeight = item.maxHeight ? `${item.maxHeight}px` : sizeConfig.maxHeight;
+        
+        // Maximale breedte voor rechts/centrum uitgelijnde afbeeldingen (alleen als size niet custom is)
+        const maxWidthClass = (align === 'right' || align === 'center' && !item.maxWidth && size === 'medium') ? 'max-w-md' : '';
+        
+        // Alignment classes
+        let alignClass = 'items-start';
+        let imageContainerClass = 'mb-4';
+        if (align === 'right') {
+            alignClass = 'items-end';
+            imageContainerClass += ' flex justify-end';
+        } else if (align === 'center') {
+            alignClass = 'items-center';
+            imageContainerClass += ' flex justify-center';
+        }
+        
+        // Container voor afbeelding en alt tekst
+        // Alleen klikbaar met vergrootglas als enableModal expliciet true is
+        const imageStyle = `max-width: ${maxWidth}; max-height: ${maxHeight};`;
+        const imageHtml = enableModal
+            ? `<div class="relative overflow-hidden rounded-lg group cursor-pointer" onclick="window.openImageModal('${escapedSrc}', '${escapedAlt}')">
+                <img src="${item.src}" alt="${item.alt}" class="rounded-lg h-auto object-contain transition-transform duration-300 group-hover:scale-110" style="${imageStyle}">
                 <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-10 transition-all duration-300 rounded-lg flex items-center justify-center">
                     <i class="fas fa-search-plus text-white text-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></i>
                 </div>
+            </div>`
+            : `<div class="overflow-hidden rounded-lg">
+                <img src="${item.src}" alt="${item.alt}" class="rounded-lg h-auto object-contain" style="${imageStyle}">
+            </div>`;
+        
+        // Alt tekst onder afbeelding (als showAltText true is)
+        // Voor kleinere afbeeldingen (niet full/auto), beperk alt-tekst tot afbeeldingbreedte
+        const constrainAltText = size !== 'full' && size !== 'auto';
+        const altTextHtml = showAltText 
+            ? constrainAltText
+                ? `<p class="text-sm text-gray-600 mt-2" style="max-width: ${maxWidth}; word-wrap: break-word; ${align === 'right' ? 'text-align: right; margin-left: auto;' : align === 'center' ? 'text-align: center; margin-left: auto; margin-right: auto;' : ''}">${item.alt}</p>`
+                : `<p class="text-sm text-gray-600 mt-2">${item.alt}</p>`
+            : '';
+        
+        // Combineer alles
+        if (align === 'right' || align === 'center') {
+            // Voor rechts/centrum: zet afbeelding en alt-tekst in een container met exacte max-width
+            return `<div class="${imageContainerClass}">
+                <div style="max-width: ${maxWidth}; ${align === 'right' ? 'margin-left: auto;' : 'margin-left: auto; margin-right: auto;'}">
+                    ${imageHtml}
+                    ${altTextHtml}
+                </div>
             </div>`;
         }
-
-        // Normale image met hover zoom
-        return `<div class="mb-4 overflow-hidden rounded-lg group">
-            <img src="${item.src}" alt="${item.alt}" class="rounded-lg w-full h-auto max-h-[600px] object-contain transition-transform duration-300 group-hover:scale-105">
+        
+        // Links uitgelijnd (default)
+        return `<div class="${imageContainerClass}">
+            ${imageHtml}
+            ${altTextHtml}
         </div>`;
     }
 
@@ -133,6 +205,47 @@ class ContentRenderer {
         return `<p class="mb-4">
             <a href="${item.url}" target="${target}" class="${classes}">${item.text}</a>
         </p>`;
+    }
+
+    /**
+     * Render een embedded video item
+     * @param {Object} item - Video item met url, title (optioneel), description (optioneel), en showLink (optioneel)
+     * @returns {string} HTML string
+     */
+    static renderVideo(item) {
+        if (!item.url) {
+            console.warn('Video item missing url:', item);
+            return '';
+        }
+
+        const title = item.title || 'Video';
+        const description = item.description || '';
+        const showLink = item.showLink !== false; // Default true, kan worden uitgeschakeld
+        
+        return `
+            <div class="mb-6">
+                ${title ? `<h4 class="text-lg font-semibold text-gray-900 mb-2">${title}</h4>` : ''}
+                <div class="rounded-lg overflow-hidden mb-2">
+                    <iframe 
+                        width="100%" 
+                        height="450" 
+                        src="${item.url}" 
+                        title="${title}" 
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                        referrerpolicy="strict-origin-when-cross-origin"
+                        allowfullscreen
+                        class="w-full aspect-video">
+                    </iframe>
+                </div>
+                ${description ? `<p class="text-sm text-gray-600 mb-2">${description}</p>` : ''}
+                ${showLink ? `<p class="text-sm mb-0">
+                    <a href="${item.url}" target="_blank" class="text-blue-600 hover:text-blue-800 underline font-medium">
+                        <i class="fas fa-external-link-alt mr-1"></i>Open video in nieuw tabblad
+                    </a>
+                </p>` : ''}
+            </div>
+        `;
     }
 
     /**
@@ -265,6 +378,39 @@ class ContentRenderer {
             return InteractiveRenderer.renderTrueFalseExercise(item);
         }
         console.warn('InteractiveRenderer not loaded. True/false exercise will not render.');
+        return '';
+    }
+
+    /**
+     * Render gestructureerde stappen (zonder bullets, met inspringing en spacing)
+     * @param {Object} item - Steps item met steps array
+     * @returns {string} HTML string
+     */
+    static renderSteps(item) {
+        if (!item.steps || !Array.isArray(item.steps) || item.steps.length === 0) {
+            return '';
+        }
+
+        const stepsHtml = item.steps.map(step => {
+            // Als step een string is, wrap in <p>
+            // Als step een object is met text property, gebruik die
+            const stepText = typeof step === 'string' ? step : (step.text || '');
+            return `<p class="mb-0">${stepText}</p>`;
+        }).join('');
+
+        return `<div class="ml-4 space-y-4 mb-4">${stepsHtml}</div>`;
+    }
+
+    /**
+     * Render klikbare stappen component (delegates to InteractiveRenderer)
+     * @param {Object} item - Clickable steps item met steps array
+     * @returns {string} HTML string
+     */
+    static renderClickableSteps(item) {
+        if (typeof window.InteractiveRenderer !== 'undefined') {
+            return InteractiveRenderer.renderClickableSteps(item);
+        }
+        console.warn('InteractiveRenderer not loaded. Clickable steps will not render.');
         return '';
     }
 }

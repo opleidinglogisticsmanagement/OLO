@@ -16,7 +16,6 @@ const PORT = process.env.PORT || 3000;
 // Middleware
 app.use(cors()); // Enable CORS for all routes
 app.use(express.json()); // Parse JSON bodies
-app.use(express.static('.')); // Serve static files (HTML, CSS, JS)
 
 // API Key validation
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
@@ -197,20 +196,56 @@ ${theoryContent.substring(0, 8000)}`; // Limit to 8000 chars
         
         // OPTIE 3: Use fastest model from cache (gemini-1.5-flash preferred)
         // Get cached available models (sorted with flash first)
-        const availableModels = await getAvailableModels();
+        let availableModels = await getAvailableModels();
         
-        // Try models - use cached available ones first (already sorted by speed)
-        // If cache is empty, try known working models
-        const models = availableModels.length > 0 
-            ? availableModels.slice(0, 3) // Use first 3 available models (flash will be first)
-            : [
+        // Filter out preview/experimental models that might not be stable
+        // But keep stable models like gemini-1.5-flash, gemini-flash-latest, etc.
+        const stableModels = availableModels.filter(m => {
+            // Exclude preview models (but allow -latest models)
+            if (m.includes('-preview-') || m.includes('-experimental-')) {
+                return false;
+            }
+            // Exclude specific problematic preview models
+            if (m.includes('lite-preview') || m.includes('2.5-flash-lite-preview')) {
+                return false;
+            }
+            // Prefer models with known stable names
+            if (m.includes('1.5-flash') || m.includes('1.5-pro') || m.includes('-latest') || m.includes('gemini-pro')) {
+                return true;
+            }
+            // Allow other models that don't have preview in the name
+            return !m.includes('preview') && !m.includes('experimental');
+        });
+        
+        // If no stable models in cache, try fallback models first
+        // Only fetch fresh if we really have no options
+        let models;
+        if (stableModels.length > 0) {
+            models = stableModels.slice(0, 3); // Use first 3 stable models (flash will be first)
+        } else if (availableModels.length > 0) {
+            // If no stable models but we have some models, try them anyway
+            // Filter out only the most problematic ones
+            const filteredModels = availableModels.filter(m => 
+                !m.includes('-preview-') && 
+                !m.includes('lite-preview')
+            );
+            models = filteredModels.length > 0 
+                ? filteredModels.slice(0, 3)
+                : availableModels.slice(0, 3); // Last resort: try any model
+        } else {
+            // No models in cache at all, use known working models
+            models = [
                 'gemini-1.5-flash',  // Fastest model - try first
                 'gemini-1.5-pro',    // Fallback if flash fails
                 'gemini-pro'          // Last resort
             ];
+        }
+        
+        console.log(`[Gemini Proxy] Will try models in order:`, models);
         
         let responseText;
         let lastError;
+        let modelCacheInvalid = false;
         
         for (const modelName of models) {
             try {
@@ -226,11 +261,58 @@ ${theoryContent.substring(0, 8000)}`; // Limit to 8000 chars
                 const errorMsg = error.message || error.toString();
                 console.error(`[Gemini Proxy] ❌ Model ${modelName} failed:`, errorMsg);
                 
+                // If model not found (404), mark cache as potentially invalid
+                if (errorMsg.includes('404') || errorMsg.includes('not found') || errorMsg.includes('not supported')) {
+                    console.warn(`[Gemini Proxy] Model ${modelName} not found - cache may be invalid`);
+                    modelCacheInvalid = true;
+                }
+                
                 lastError = {
                     model: modelName,
                     message: errorMsg,
                     error: error
                 };
+            }
+        }
+        
+        // If all models failed and cache might be invalid, clear cache and retry with fresh fetch
+        if (!responseText && modelCacheInvalid) {
+            console.log('[Gemini Proxy] Cache appears invalid, clearing and fetching fresh models...');
+            cachedAvailableModels = [];
+            modelCacheTimestamp = null;
+            const freshModels = await fetchAndCacheAvailableModels();
+            
+            // Try known working models first
+            const knownWorkingModels = [
+                'gemini-1.5-flash',
+                'gemini-1.5-pro',
+                'gemini-pro'
+            ];
+            
+            // Also try fresh models that look stable
+            const freshStableModels = freshModels.filter(m => {
+                if (m.includes('1.5-flash') || m.includes('1.5-pro') || m.includes('-latest')) {
+                    return true;
+                }
+                return !m.includes('-preview-') && !m.includes('lite-preview');
+            });
+            
+            // Combine known working with fresh stable models
+            const retryModels = [...knownWorkingModels, ...freshStableModels.slice(0, 3)];
+            
+            console.log(`[Gemini Proxy] Retrying with models:`, retryModels);
+            for (const modelName of retryModels) {
+                try {
+                    console.log(`[Gemini Proxy] Retrying with model: ${modelName}`);
+                    const model = genAI.getGenerativeModel({ model: modelName });
+                    const result = await model.generateContent(prompt);
+                    const response = await result.response;
+                    responseText = response.text();
+                    console.log(`[Gemini Proxy] ✅ Success with model: ${modelName}`);
+                    break;
+                } catch (retryError) {
+                    console.error(`[Gemini Proxy] ❌ Model ${modelName} also failed:`, retryError.message);
+                }
             }
         }
         
@@ -387,6 +469,10 @@ app.get('/api/test-gemini', async (req, res) => {
         });
     }
 });
+
+// Static files moeten NA API routes worden geladen
+// Anders worden API routes overschreven door static file serving
+app.use(express.static('.')); // Serve static files (HTML, CSS, JS)
 
 // Start server
 app.listen(PORT, async () => {

@@ -55,6 +55,36 @@
             outline: 2px solid var(--primary-blue);
             outline-offset: 2px;
         }
+        
+        /* Globale inspringing voor alle lijsten */
+        .prose ul,
+        .prose ol {
+            margin-left: 1rem;
+            padding-left: 0;
+        }
+        
+        /* Zorg dat lijsten in content ook inspringing hebben */
+        ul.list-disc,
+        ol.list-decimal {
+            margin-left: 1rem;
+        }
+        
+        /* Genummerde lijsten: nummer buiten, tekst uitgelijnd op volgende regel */
+        ol.list-decimal {
+            list-style-position: outside;
+            padding-left: 1.5rem;
+        }
+        
+        /* Lijstitems hebben dezelfde grijze kleur als paragrafen */
+        ol.list-decimal li,
+        ul.list-disc li {
+            color: rgb(55, 65, 81); /* text-gray-700 */
+        }
+        
+        /* Geen regelafstand tussen h3 kopjes en tekst eronder (standaard voor alle weken) */
+        .prose h3 {
+            margin-bottom: 0;
+        }
     </style>
 </head>
 <body class="bg-gray-50">

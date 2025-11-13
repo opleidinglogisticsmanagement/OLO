@@ -763,6 +763,164 @@ class InteractiveRenderer {
     }
 
     /**
+     * Render een klikbare stappen component
+     * Laat studenten klikken op stappen om content te zien (alleen eerste stap is uitklapbaar)
+     * @param {Object} item - Clickable steps item met steps array
+     * @returns {string} HTML string
+     */
+    static renderClickableSteps(item) {
+        if (!item.steps || !Array.isArray(item.steps) || item.steps.length === 0) {
+            console.warn('Clickable steps item missing steps array:', item);
+            return '';
+        }
+
+        const stepsId = `clickable-steps-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+        
+        // Render content for steps (expandable)
+        const renderStepContent = (stepContent) => {
+            if (!stepContent) return '';
+            
+            if (Array.isArray(stepContent)) {
+                return stepContent.map(item => {
+                    // If it's an object with a type, render it using ContentRenderer
+                    if (typeof item === 'object' && item !== null && item.type) {
+                        if (typeof window.ContentRenderer !== 'undefined') {
+                            return ContentRenderer.renderContentItems([item]);
+                        }
+                        return '';
+                    }
+                    // If it's a string starting with HTML, return as is
+                    if (typeof item === 'string' && item.trim().startsWith('<')) {
+                        return item;
+                    }
+                    // Otherwise wrap in paragraph
+                    return `<p class="text-gray-700 mb-3">${item}</p>`;
+                }).join('');
+            } else if (typeof stepContent === 'string') {
+                if (stepContent.trim().startsWith('<')) {
+                    return stepContent;
+                }
+                return `<p class="text-gray-700 mb-3">${stepContent}</p>`;
+            }
+            return '';
+        };
+
+        // Render clickable buttons for all steps, with content boxes after active steps
+        const stepButtons = item.steps.map((step, index) => {
+            const stepId = `${stepsId}-step-${index}`;
+            const hasContent = step.content && (
+                Array.isArray(step.content) ? step.content.length > 0 : 
+                typeof step.content === 'string' ? step.content.trim().length > 0 :
+                typeof step.content === 'object' ? true : false
+            );
+            const isActive = hasContent; // Step is active if it has content
+            
+            // Get content HTML for this step
+            let stepContentHtml = '';
+            if (hasContent) {
+                stepContentHtml = renderStepContent(step.content);
+            }
+            
+            const buttonHtml = `
+                <button
+                    class="clickable-step-button w-full px-4 py-3 text-left border-2 rounded-lg transition-all duration-200 ${
+                        isActive 
+                            ? 'border-blue-500 bg-blue-50 hover:bg-blue-100 cursor-pointer' 
+                            : 'border-gray-200 bg-gray-50 text-gray-500 cursor-not-allowed opacity-75'
+                    }"
+                    ${hasContent ? `onclick="InteractiveRenderer.toggleClickableStep('${stepsId}', ${index})"` : ''}
+                    ${!hasContent ? 'disabled' : ''}
+                    id="${stepId}-button"
+                    aria-expanded="${isActive && index === 0}"
+                    aria-controls="${stepId}-content"
+                >
+                    <div class="flex items-center justify-between">
+                        <span class="font-medium ${isActive ? 'text-gray-900' : 'text-gray-500'}">${step.label || `Stap ${index + 1}`}</span>
+                        ${hasContent ? `
+                            <i class="fas fa-chevron-down transform transition-transform duration-200 ${isActive && index === 0 ? 'rotate-180' : ''}" id="${stepId}-icon"></i>
+                        ` : `
+                            <span class="text-xs text-gray-400 italic">(Binnenkort beschikbaar)</span>
+                        `}
+                    </div>
+                </button>
+            `;
+
+            // Wrap button and content in a container for consistent spacing
+            if (hasContent) {
+                const isInitiallyOpen = index === 0;
+                return `
+                    <div class="clickable-step-wrapper">
+                        ${buttonHtml}
+                        <div
+                            id="${stepId}-content"
+                            class="clickable-step-content overflow-hidden transition-all duration-300 ease-in-out border-2 border-blue-200 rounded-lg bg-white ${isInitiallyOpen ? 'max-h-[5000px] opacity-100' : 'max-h-0 opacity-0'}"
+                            style="${isInitiallyOpen ? 'display: block;' : 'display: none;'}"
+                            aria-hidden="${!isInitiallyOpen}"
+                        >
+                            <div class="px-4 py-4">
+                                ${stepContentHtml}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            return `<div class="clickable-step-wrapper">${buttonHtml}</div>`;
+        }).join('');
+
+        return `
+            <div class="clickable-steps-container mb-6" id="${stepsId}">
+                <div class="space-y-2">
+                    ${stepButtons}
+                </div>
+            </div>
+        `;
+    }
+
+    /**
+     * Toggle clickable step open/closed
+     * @param {string} stepsId - ID of the steps container
+     * @param {number} stepIndex - Index of the step to toggle
+     */
+    static toggleClickableStep(stepsId, stepIndex) {
+        const stepsContainer = document.getElementById(stepsId);
+        if (!stepsContainer) return;
+
+        const stepId = `${stepsId}-step-${stepIndex}`;
+        const content = document.getElementById(`${stepId}-content`);
+        const button = document.getElementById(`${stepId}-button`);
+        const icon = document.getElementById(`${stepId}-icon`);
+        
+        if (!content || !button) return;
+
+        const isOpen = content.classList.contains('max-h-[5000px]');
+        
+        if (isOpen) {
+            // Close this step
+            content.classList.remove('max-h-[5000px]', 'opacity-100');
+            content.classList.add('max-h-0', 'opacity-0');
+            setTimeout(() => {
+                content.style.display = 'none';
+            }, 300);
+            button.setAttribute('aria-expanded', 'false');
+            button.classList.remove('border-blue-500', 'bg-blue-50');
+            button.classList.add('border-gray-200', 'bg-gray-50');
+            if (icon) icon.classList.remove('rotate-180');
+        } else {
+            // Open this step (without closing others)
+            content.style.display = 'block';
+            setTimeout(() => {
+                content.classList.remove('max-h-0', 'opacity-0');
+                content.classList.add('max-h-[5000px]', 'opacity-100');
+            }, 10);
+            button.setAttribute('aria-expanded', 'true');
+            button.classList.remove('border-gray-200', 'bg-gray-50');
+            button.classList.add('border-blue-500', 'bg-blue-50');
+            if (icon) icon.classList.add('rotate-180');
+        }
+    }
+
+    /**
      * Check true/false exercise answers
      */
     static checkTrueFalseExercise(exerciseId) {

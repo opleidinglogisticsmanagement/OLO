@@ -121,7 +121,7 @@ class Week2LessonPage extends BaseLessonPage {
                         <i class="fas fa-bullseye text-green-600 text-lg"></i>
                     </div>
                     <div class="flex-1">
-                        ${this.content.leerdoelen.interactive 
+                        ${this.content.leerdoelen.interactive && this.content.leerdoelen.items && this.content.leerdoelen.items.length > 0
                             ? ContentRenderer.renderLearningObjectivesChecklist({
                                 title: this.content.leerdoelen.title,
                                 description: this.content.leerdoelen.description,
@@ -132,14 +132,31 @@ class Week2LessonPage extends BaseLessonPage {
                                 <h2 class="text-xl font-semibold text-gray-900 mb-4">${this.content.leerdoelen.title}</h2>
                                 <div class="prose max-w-none">
                                     <p class="text-gray-600 mb-4">${this.content.leerdoelen.description}</p>
-                                    <ul class="space-y-2">
-                                        ${this.content.leerdoelen.items.map(item => `
-                                            <li class="flex items-start space-x-3">
-                                                <i class="fas fa-check text-green-500 mt-1"></i>
-                                                <span class="text-gray-700">${item}</span>
-                                            </li>
-                                        `).join('')}
-                                    </ul>
+                                    ${this.content.leerdoelen.instruction ? `
+                                        <div class="bg-blue-50 border-l-4 border-blue-500 p-4 rounded-r-lg mb-4">
+                                            <p class="text-sm text-blue-800">
+                                                <i class="fas fa-info-circle mr-2"></i>
+                                                <strong>Instructie voor docent:</strong> ${this.content.leerdoelen.instruction}
+                                            </p>
+                                        </div>
+                                    ` : ''}
+                                    ${this.content.leerdoelen.items && this.content.leerdoelen.items.length > 0 ? `
+                                        <ul class="space-y-2">
+                                            ${this.content.leerdoelen.items.map(item => `
+                                                <li class="flex items-start space-x-3">
+                                                    <i class="fas fa-check text-green-500 mt-1"></i>
+                                                    <span class="text-gray-700">${item}</span>
+                                                </li>
+                                            `).join('')}
+                                        </ul>
+                                    ` : `
+                                        <div class="bg-yellow-50 border-l-4 border-yellow-500 p-4 rounded-r-lg">
+                                            <p class="text-sm text-yellow-800">
+                                                <i class="fas fa-exclamation-triangle mr-2"></i>
+                                                <strong>Nog geen leerdoelen toegevoegd.</strong> Voeg leerdoelen toe wanneer alle theoriecontent compleet is, zodat je kunt controleren of de leerdoelen de complete theorie beslaan.
+                                            </p>
+                                        </div>
+                                    `}
                                 </div>
                             `
                         }

@@ -8,6 +8,7 @@
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
+const path = require('path');
 const { GoogleGenerativeAI } = require('@google/generative-ai');
 
 const app = express();
@@ -472,7 +473,13 @@ app.get('/api/test-gemini', async (req, res) => {
 
 // Static files moeten NA API routes worden geladen
 // Anders worden API routes overschreven door static file serving
-app.use(express.static('.')); // Serve static files (HTML, CSS, JS)
+// Op Vercel: __dirname in server.js is altijd de root directory
+app.use(express.static(__dirname)); // Serve static files (HTML, CSS, JS)
+
+// Fallback: serve index.html voor root route
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'index.html'));
+});
 
 // Export voor Vercel serverless
 module.exports = app;

@@ -78,7 +78,7 @@ class Week6LessonPage extends BaseLessonPage {
         }
 
         return `
-            <section class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 hover-lift">
+            <section class="bg-white rounded-xl shadow-sm border border-gray-200 pt-6 pb-6 pl-6 pr-[70px] hover-lift">
                 <div class="flex items-start space-x-4">
                     <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0">
                         <i class="fas fa-book text-blue-600 text-lg"></i>
@@ -102,7 +102,7 @@ class Week6LessonPage extends BaseLessonPage {
 
         return `
             <!-- Leerdoelen Sectie -->
-            <section class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 hover-lift">
+            <section class="bg-white rounded-xl shadow-sm border border-gray-200 pt-6 pb-6 pl-6 pr-[70px] hover-lift">
                 <div class="flex items-start space-x-4">
                     <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center flex-shrink-0">
                         <i class="fas fa-bullseye text-green-600 text-lg"></i>
@@ -142,7 +142,7 @@ class Week6LessonPage extends BaseLessonPage {
             </section>
 
             <!-- Theorie Sectie -->
-            <section class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 hover-lift">
+            <section class="bg-white rounded-xl shadow-sm border border-gray-200 pt-6 pb-6 pl-6 pr-[70px] hover-lift">
                 <div class="flex items-start space-x-4">
                     <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center flex-shrink-0">
                         <i class="fas fa-book text-purple-600 text-lg"></i>
@@ -162,7 +162,7 @@ class Week6LessonPage extends BaseLessonPage {
             </section>
 
             <!-- Video Sectie -->
-            <section class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 hover-lift">
+            <section class="bg-white rounded-xl shadow-sm border border-gray-200 pt-6 pb-6 pl-6 pr-[70px] hover-lift">
                 <div class="flex items-start space-x-4">
                     <div class="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center flex-shrink-0">
                         <i class="fas fa-play text-red-600 text-lg"></i>

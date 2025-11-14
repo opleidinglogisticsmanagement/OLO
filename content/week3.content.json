@@ -34,14 +34,13 @@
       {
         "type": "paragraph",
         "text": [
-          "Een onderzoeksmodel bestaat in essentie uit drie delen die in een kennisclip worden toegelicht."
+          "Een onderzoeksmodel bestaat in essentie uit drie delen die in een kennisclip worden toegelicht.",
+          "Bekijk deze kennisclip voor uitleg over de drie delen van een onderzoeksmodel."
         ]
       },
       {
         "type": "video",
-        "url": "https://media.windesheim.nl/Mediasite/Play/3a0b3b8a6527464fb5373e80bba221251d",
-        "title": "Componenten van een onderzoeksmodel",
-        "description": "Bekijk deze kennisclip voor uitleg over de drie delen van een onderzoeksmodel."
+        "url": "https://media.windesheim.nl/Mediasite/Play/3a0b3b8a6527464fb5373e80bba221251d"
       },
       {
         "type": "paragraph",
@@ -296,14 +295,12 @@
       {
         "type": "paragraph",
         "text": [
-          "Deze 3 eisen worden hieronder in een kennisclip kort uiteengezet:"
+          "Deze 3 eisen worden hieronder in een kennisclip kort uiteengezet. Bekijk deze kennisclip voor uitleg over de eisen aan onderzoeksvragen: afbakening, efficiëntie en sturend vermogen."
         ]
       },
       {
         "type": "video",
-        "url": "https://media.windesheim.nl/Mediasite/Play/2b19c1b3a5664942917aab81d23887971d",
-        "title": "Functie- en vormeisen onderzoeksvragen",
-        "description": "Bekijk deze kennisclip voor uitleg over de eisen aan onderzoeksvragen: afbakening, efficiëntie en sturend vermogen."
+        "url": "https://media.windesheim.nl/Mediasite/Play/2b19c1b3a5664942917aab81d23887971d"
       }
     ]
   },

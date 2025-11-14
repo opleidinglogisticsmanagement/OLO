@@ -18,36 +18,54 @@ class InteractiveRenderer {
         }
 
         const accordionId = `accordion-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+        const usePlusIcon = item.usePlusIcon === true; // Use plus icon if explicitly set to true
         
         const accordionItems = item.items.map((accordionItem, index) => {
             const itemId = `${accordionId}-item-${index}`;
             const contentId = `${accordionId}-content-${index}`;
-            const isOpen = index === 0 && item.defaultOpen !== false; // First item open by default
+            // Check if item should be open: use item defaultOpen, then accordionItem defaultOpen, then default behavior
+            const isOpen = accordionItem.defaultOpen === true || (!usePlusIcon && index === 0 && item.defaultOpen !== false);
             
-            // Render content - can be string or array
+            // Render content - can be string, array of strings, or array of content items
             let contentHtml = '';
             if (Array.isArray(accordionItem.content)) {
-                contentHtml = accordionItem.content.map(text => {
-                    if (typeof text === 'string' && text.trim().startsWith('<')) {
-                        return text; // Already HTML
-                    }
-                    return `<p class="text-gray-700 mb-3">${text}</p>`;
-                }).join('');
+                // Check if it's an array of content items (objects with type property) or strings
+                const isContentItems = accordionItem.content.length > 0 && 
+                    typeof accordionItem.content[0] === 'object' && 
+                    accordionItem.content[0].type !== undefined;
+                
+                if (isContentItems && typeof window.ContentRenderer !== 'undefined') {
+                    // Render as content items
+                    contentHtml = ContentRenderer.renderContentItems(accordionItem.content);
+                } else {
+                    // Render as strings
+                    contentHtml = accordionItem.content.map(text => {
+                        if (typeof text === 'string' && text.trim().startsWith('<')) {
+                            return text; // Already HTML
+                        }
+                        return `<p class="text-gray-700 mb-3">${text}</p>`;
+                    }).join('');
+                }
             } else if (typeof accordionItem.content === 'string') {
                 contentHtml = `<p class="text-gray-700 mb-3">${accordionItem.content}</p>`;
             }
+
+            // Choose icon based on usePlusIcon setting
+            const iconClass = usePlusIcon 
+                ? `fas fa-plus transform transition-transform duration-200 ${isOpen ? 'rotate-45' : ''} text-gray-600`
+                : `fas fa-chevron-down transform transition-transform duration-200 ${isOpen ? 'rotate-180' : ''} text-gray-600`;
 
             return `
                 <div class="border border-gray-200 rounded-lg mb-3 overflow-hidden">
                     <button
                         class="w-full px-6 py-4 bg-gray-50 hover:bg-gray-100 transition-colors duration-200 flex items-center justify-between text-left"
-                        onclick="InteractiveRenderer.toggleAccordion('${contentId}', '${itemId}')"
+                        onclick="InteractiveRenderer.toggleAccordion('${contentId}', '${itemId}', ${usePlusIcon})"
                         aria-expanded="${isOpen}"
                         aria-controls="${contentId}"
                         id="${itemId}"
                     >
                         <span class="font-semibold text-gray-900 text-lg">${accordionItem.title}</span>
-                        <i class="fas fa-chevron-down transform transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}" id="${itemId}-icon"></i>
+                        <i class="${iconClass}" id="${itemId}-icon"></i>
                     </button>
                     <div
                         id="${contentId}"
@@ -74,8 +92,9 @@ class InteractiveRenderer {
      * Toggle accordion item open/closed
      * @param {string} contentId - ID of the content div
      * @param {string} buttonId - ID of the button
+     * @param {boolean} usePlusIcon - Whether to use plus icon rotation
      */
-    static toggleAccordion(contentId, buttonId) {
+    static toggleAccordion(contentId, buttonId, usePlusIcon = false) {
         const content = document.getElementById(contentId);
         const button = document.getElementById(buttonId);
         const icon = document.getElementById(`${buttonId}-icon`);
@@ -92,7 +111,13 @@ class InteractiveRenderer {
                 content.style.display = 'none';
             }, 300);
             button.setAttribute('aria-expanded', 'false');
-            if (icon) icon.classList.remove('rotate-180');
+            if (icon) {
+                if (usePlusIcon) {
+                    icon.classList.remove('rotate-45');
+                } else {
+                    icon.classList.remove('rotate-180');
+                }
+            }
         } else {
             // Open
             content.style.display = 'block';
@@ -101,7 +126,13 @@ class InteractiveRenderer {
                 content.classList.add('max-h-[5000px]', 'opacity-100');
             }, 10);
             button.setAttribute('aria-expanded', 'true');
-            if (icon) icon.classList.add('rotate-180');
+            if (icon) {
+                if (usePlusIcon) {
+                    icon.classList.add('rotate-45');
+                } else {
+                    icon.classList.add('rotate-180');
+                }
+            }
         }
     }
 
@@ -813,7 +844,6 @@ class InteractiveRenderer {
                 typeof step.content === 'string' ? step.content.trim().length > 0 :
                 typeof step.content === 'object' ? true : false
             );
-            const isActive = hasContent; // Step is active if it has content
             
             // Get content HTML for this step
             let stepContentHtml = '';
@@ -821,23 +851,22 @@ class InteractiveRenderer {
                 stepContentHtml = renderStepContent(step.content);
             }
             
+            // Determine if step is open (first step open by default)
+            const isOpen = index === 0;
+            
             const buttonHtml = `
                 <button
-                    class="clickable-step-button w-full px-4 py-3 text-left border-2 rounded-lg transition-all duration-200 ${
-                        isActive 
-                            ? 'border-blue-500 bg-blue-50 hover:bg-blue-100 cursor-pointer' 
-                            : 'border-gray-200 bg-gray-50 text-gray-500 cursor-not-allowed opacity-75'
-                    }"
+                    class="w-full px-6 py-4 font-semibold text-lg transition-colors duration-200 ${isOpen ? 'bg-white text-green-600' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'} text-left"
                     ${hasContent ? `onclick="InteractiveRenderer.toggleClickableStep('${stepsId}', ${index})"` : ''}
                     ${!hasContent ? 'disabled' : ''}
                     id="${stepId}-button"
-                    aria-expanded="${isActive && index === 0}"
+                    aria-expanded="${isOpen}"
                     aria-controls="${stepId}-content"
                 >
                     <div class="flex items-center justify-between">
-                        <span class="font-medium ${isActive ? 'text-gray-900' : 'text-gray-500'}">${step.label || `Stap ${index + 1}`}</span>
+                        <span>${step.label || `Stap ${index + 1}`}</span>
                         ${hasContent ? `
-                            <i class="fas fa-chevron-down transform transition-transform duration-200 ${isActive && index === 0 ? 'rotate-180' : ''}" id="${stepId}-icon"></i>
+                            <i class="fas fa-chevron-down transform transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}" id="${stepId}-icon"></i>
                         ` : `
                             <span class="text-xs text-gray-400 italic">(Binnenkort beschikbaar)</span>
                         `}
@@ -847,17 +876,16 @@ class InteractiveRenderer {
 
             // Wrap button and content in a container for consistent spacing
             if (hasContent) {
-                const isInitiallyOpen = index === 0;
                 return `
                     <div class="clickable-step-wrapper">
                         ${buttonHtml}
                         <div
                             id="${stepId}-content"
-                            class="clickable-step-content overflow-hidden transition-all duration-300 ease-in-out border-2 border-blue-200 rounded-lg bg-white ${isInitiallyOpen ? 'max-h-[5000px] opacity-100' : 'max-h-0 opacity-0'}"
-                            style="${isInitiallyOpen ? 'display: block;' : 'display: none;'}"
-                            aria-hidden="${!isInitiallyOpen}"
+                            class="clickable-step-content overflow-hidden transition-all duration-300 ease-in-out bg-white ${isOpen ? 'max-h-[5000px] opacity-100' : 'max-h-0 opacity-0'}"
+                            style="${isOpen ? 'display: block;' : 'display: none;'}"
+                            aria-hidden="${!isOpen}"
                         >
-                            <div class="px-4 py-4">
+                            <div class="p-6">
                                 ${stepContentHtml}
                             </div>
                         </div>
@@ -869,8 +897,8 @@ class InteractiveRenderer {
         }).join('');
 
         return `
-            <div class="clickable-steps-container mb-6" id="${stepsId}">
-                <div class="space-y-2">
+            <div class="clickable-steps-container mb-6 border border-gray-200 rounded-lg overflow-hidden bg-white" id="${stepsId}">
+                <div class="space-y-0">
                     ${stepButtons}
                 </div>
             </div>
@@ -893,30 +921,75 @@ class InteractiveRenderer {
         
         if (!content || !button) return;
 
-        const isOpen = content.classList.contains('max-h-[5000px]');
+        const isOpen = content.style.display !== 'none' && content.classList.contains('opacity-100');
         
         if (isOpen) {
             // Close this step
+            content.style.display = 'none';
             content.classList.remove('max-h-[5000px]', 'opacity-100');
             content.classList.add('max-h-0', 'opacity-0');
-            setTimeout(() => {
-                content.style.display = 'none';
-            }, 300);
+            content.setAttribute('aria-hidden', 'true');
             button.setAttribute('aria-expanded', 'false');
-            button.classList.remove('border-blue-500', 'bg-blue-50');
-            button.classList.add('border-gray-200', 'bg-gray-50');
-            if (icon) icon.classList.remove('rotate-180');
+            
+            // Update button styling
+            button.classList.remove('bg-white', 'text-green-600');
+            button.classList.add('bg-gray-100', 'text-gray-600');
+            
+            // Rotate icon
+            if (icon) {
+                icon.classList.remove('rotate-180');
+            }
         } else {
-            // Open this step (without closing others)
+            // Close all other steps first
+            const allSteps = stepsContainer.querySelectorAll('.clickable-step-content');
+            
+            allSteps.forEach((stepContent) => {
+                // Extract index from the content ID
+                const contentId = stepContent.id;
+                const match = contentId.match(/-step-(\d+)-content/);
+                if (!match) return;
+                
+                const currentIndex = parseInt(match[1], 10);
+                
+                // Skip the step we're about to open
+                if (currentIndex === stepIndex) return;
+                
+                const stepButtonId = stepContent.id.replace('-content', '-button');
+                const stepButton = document.getElementById(stepButtonId);
+                const stepIconId = stepContent.id.replace('-content', '-icon');
+                const stepIcon = document.getElementById(stepIconId);
+                
+                stepContent.style.display = 'none';
+                stepContent.classList.remove('max-h-[5000px]', 'opacity-100');
+                stepContent.classList.add('max-h-0', 'opacity-0');
+                stepContent.setAttribute('aria-hidden', 'true');
+                
+                if (stepButton) {
+                    stepButton.setAttribute('aria-expanded', 'false');
+                    stepButton.classList.remove('bg-white', 'text-green-600');
+                    stepButton.classList.add('bg-gray-100', 'text-gray-600');
+                }
+                
+                if (stepIcon) {
+                    stepIcon.classList.remove('rotate-180');
+                }
+            });
+            
+            // Open this step
             content.style.display = 'block';
-            setTimeout(() => {
-                content.classList.remove('max-h-0', 'opacity-0');
-                content.classList.add('max-h-[5000px]', 'opacity-100');
-            }, 10);
+            content.classList.remove('max-h-0', 'opacity-0');
+            content.classList.add('max-h-[5000px]', 'opacity-100');
+            content.setAttribute('aria-hidden', 'false');
             button.setAttribute('aria-expanded', 'true');
-            button.classList.remove('border-gray-200', 'bg-gray-50');
-            button.classList.add('border-blue-500', 'bg-blue-50');
-            if (icon) icon.classList.add('rotate-180');
+            
+            // Update button styling
+            button.classList.remove('bg-gray-100', 'text-gray-600');
+            button.classList.add('bg-white', 'text-green-600');
+            
+            // Rotate icon
+            if (icon) {
+                icon.classList.add('rotate-180');
+            }
         }
     }
 
@@ -1003,6 +1076,118 @@ class InteractiveRenderer {
                 <p class="text-xs text-blue-800">Bekijk de feedback bij elke stelling en probeer het opnieuw.</p>
             `;
         }
+    }
+
+    /**
+     * Render een tabs component
+     * @param {Object} item - Tabs item met tabs array
+     * @returns {string} HTML string
+     */
+    static renderTabs(item) {
+        if (!item.tabs || !Array.isArray(item.tabs) || item.tabs.length === 0) {
+            console.warn('Tabs item missing tabs array:', item);
+            return '';
+        }
+
+        const tabsId = `tabs-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+        const defaultTab = item.defaultTab || 0;
+        
+        const tabsButtons = item.tabs.map((tab, index) => {
+            const tabId = `${tabsId}-tab-${index}`;
+            const contentId = `${tabsId}-content-${index}`;
+            const isActive = index === defaultTab;
+            
+            return `
+                <button
+                    class="flex-1 px-6 py-4 font-semibold text-lg transition-colors duration-200 ${isActive ? 'bg-white text-green-600' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'} text-left"
+                    onclick="InteractiveRenderer.switchTab('${tabsId}', ${index})"
+                    aria-selected="${isActive}"
+                    aria-controls="${contentId}"
+                    id="${tabId}"
+                    role="tab"
+                >
+                    ${tab.title}
+                </button>
+            `;
+        }).join('');
+
+        const tabsContent = item.tabs.map((tab, index) => {
+            const contentId = `${tabsId}-content-${index}`;
+            const isActive = index === defaultTab;
+            
+            // Render content - can be string or array
+            let contentHtml = '';
+            if (Array.isArray(tab.content)) {
+                contentHtml = tab.content.map(text => {
+                    if (typeof text === 'string' && text.trim().startsWith('<')) {
+                        return text; // Already HTML
+                    }
+                    return `<p class="text-gray-700 mb-3">${text}</p>`;
+                }).join('');
+            } else if (typeof tab.content === 'string') {
+                contentHtml = `<p class="text-gray-700 mb-3">${tab.content}</p>`;
+            }
+
+            return `
+                <div
+                    id="${contentId}"
+                    class="tab-content ${isActive ? '' : 'hidden'}"
+                    role="tabpanel"
+                    aria-labelledby="${tabsId}-tab-${index}"
+                >
+                    <div class="p-6">
+                        ${contentHtml}
+                    </div>
+                </div>
+            `;
+        }).join('');
+
+        return `
+            <div class="tabs-container mb-6 border border-gray-200 rounded-lg overflow-hidden bg-white" id="${tabsId}">
+                <div class="flex" role="tablist">
+                    ${tabsButtons}
+                </div>
+                <div class="tab-content-container bg-white">
+                    ${tabsContent}
+                </div>
+            </div>
+        `;
+    }
+
+    /**
+     * Switch between tabs
+     * @param {string} tabsId - ID of the tabs container
+     * @param {number} tabIndex - Index of the tab to switch to
+     */
+    static switchTab(tabsId, tabIndex) {
+        const tabsContainer = document.getElementById(tabsId);
+        if (!tabsContainer) return;
+
+        const tabs = tabsContainer.querySelectorAll('[role="tab"]');
+        const contents = tabsContainer.querySelectorAll('[role="tabpanel"]');
+
+        // Update all tabs
+        tabs.forEach((tab, index) => {
+            const isActive = index === tabIndex;
+            tab.setAttribute('aria-selected', isActive);
+            
+            if (isActive) {
+                tab.classList.remove('bg-gray-100', 'text-gray-600', 'hover:bg-gray-200');
+                tab.classList.add('bg-white', 'text-green-600');
+            } else {
+                tab.classList.remove('bg-white', 'text-green-600');
+                tab.classList.add('bg-gray-100', 'text-gray-600', 'hover:bg-gray-200');
+            }
+        });
+
+        // Update all content panels
+        contents.forEach((content, index) => {
+            if (index === tabIndex) {
+                content.classList.remove('hidden');
+            } else {
+                content.classList.add('hidden');
+            }
+        });
     }
 }
 

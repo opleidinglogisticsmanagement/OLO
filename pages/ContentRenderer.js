@@ -56,6 +56,8 @@ class ContentRenderer {
                     return this.renderSteps(item);
                 case 'clickableSteps':
                     return this.renderClickableSteps(item);
+                case 'tabs':
+                    return this.renderTabs(item);
                 default:
                     console.warn(`Unknown content type: ${item.type}`);
                     return '';
@@ -218,7 +220,7 @@ class ContentRenderer {
             return '';
         }
 
-        const title = item.title || 'Video';
+        const title = item.title || '';
         const description = item.description || '';
         const showLink = item.showLink !== false; // Default true, kan worden uitgeschakeld
         
@@ -230,8 +232,8 @@ class ContentRenderer {
                         width="100%" 
                         height="450" 
                         src="${item.url}" 
-                        title="${title}" 
-                        frameborder="0" 
+                        title="${title || 'Video'}"
+                        frameborder="0"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
                         referrerpolicy="strict-origin-when-cross-origin"
                         allowfullscreen
@@ -411,6 +413,19 @@ class ContentRenderer {
             return InteractiveRenderer.renderClickableSteps(item);
         }
         console.warn('InteractiveRenderer not loaded. Clickable steps will not render.');
+        return '';
+    }
+
+    /**
+     * Render tabs component (delegates to InteractiveRenderer)
+     * @param {Object} item - Tabs item met tabs array
+     * @returns {string} HTML string
+     */
+    static renderTabs(item) {
+        if (typeof window.InteractiveRenderer !== 'undefined') {
+            return InteractiveRenderer.renderTabs(item);
+        }
+        console.warn('InteractiveRenderer not loaded. Tabs will not render.');
         return '';
     }
 }

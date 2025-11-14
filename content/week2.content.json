@@ -2,12 +2,12 @@
   "intro": {
   "title": "Week 2",
   "subtitle": "Van probleem naar doelstelling",
-  "description": "In deze week leer je hoe je een praktijkgericht onderzoek voorbereidt. Je verkent het probleem, formuleert een duidelijke doelstelling en leert hoe je deze SMART maakt. Daarnaast ontdek je de rol van de opdrachtgever en hoe je als onderzoeker kritisch en professioneel kunt handelen binnen een logistieke context."
+  "description": "In deze week leer je hoe je een praktijkgericht onderzoek voorbereidt. Je verkent het probleem, formuleert een duidelijke doelstelling en leert hoe je deze SMART maakt. Daarnaast ontdek je de rol van de opdrachtgever en hoe je als onderzoeker kritisch en professioneel kunt handelen binnen een logistieke context.\n\nDoor: \n\nVoor het werkcollege van week 2 ga jij je verdiepen in de manier waarop de probleemverkenning op een gestructureerde wijze wordt opgesteld. Jij bent onderzoeker en aan jou de taak om de vraag van de opdrachtgever te vertalen naar jouw onderzoek. Hiervoor is het belangrijk om helder te hebben welke onderwerpen er in een probleemverkenning worden besproken en hoe van daaruit een eerste doelstelling is te formuleren. Bestudeer voor aanvang van het college de theorie."
   },
   "leerdoelen": {
   "title": "Leerdoelen",
-  "description": "Formuleer hier de leerdoelen voor deze week. Leerdoelen beschrijven wat studenten na het doorlopen van deze module kunnen doen. Wacht met het formuleren van leerdoelen totdat alle theoriecontent is toegevoegd, zodat je kunt controleren of de leerdoelen de complete theorie beslaan.",
-  "instruction": "Voeg hier leerdoelen toe die de complete theorie van deze week beslaan. Formuleer leerdoelen pas wanneer alle content is toegevoegd.",
+  "description": "",
+  "instruction": "",
   "items": [
     "Uitleggen wat het belang is van een goed geformuleerde doelstelling binnen praktijkgericht onderzoek.",
     "Een onderscheid maken tussen het probleem, de doelstelling en de hoofdvraag in een onderzoeksopzet.",
@@ -25,12 +25,30 @@
         "type": "paragraph",
         "text": [
           "Je gaat een onderzoek uitvoeren maar hoe weet je nu hoe je moet gaan starten? Je hebt je eerste gesprekken gehad en vraagt je nu af hoe je verder moet gaan. Je zou de eerste student niet zijn die aan de slag gaat met een onderzoek en er gedurende het project achter komt dat het onderzoek veel te ruim of groots is opgezet voor de hoeveelheid beschikbare tijd. Door middel van een doelstelling zorgen we ervoor dat je allereerst een probleem gaat verkennen om vervolgens een doelstelling te op te stellen. Belangrijk bij praktijkgericht onderzoek is dat je helder hebt wat je relatie is met de opdrachtgever en uiteindelijk ook de andere stakeholders. Wat vraagt dit van je houding en hoe verhoud jij je hiernaar.",
-          "In deze voorbereiding gaan we hierbij stil staan. We beginnen met een voorbeeld.",
-          "<div style='margin-left: 20px; margin-bottom: 1rem;'><em>Je studeert Logistics Management en bent op zoek naar een onderwerp voor je stage. Je hebt daarom het Logistics Lab benaderd met de vraag of het mogelijk is om binnen of vanuit deze organisatie een onderzoeksproject te doen. Het Logistics Lab ziet hier wel mogelijkheden in en wil je graag betrekken bij een lopen project bij een aantal van haar partners, Scania en Zehnder.</em></div>",
-          "<div style='margin-left: 20px; margin-bottom: 1rem;'><em>Zowel Scania als Zehnder zijn op zoek naar (innovatieve) oplossingen met betrekking tot horizontale verplaatsingen. In het verleden zijn binnen beide organisaties verschillende onderzoeken uitgevoerd naar met name verticale verplaatsingen waarmee met name de handling binnen de organisaties werd gereduceerd. Nu willen beide bedrijven graag (gezamenlijk) op zoek naar oplossingen op het vlak van horizontale verplaatsingen. Veel innovatieve systemen vragen om een bezettingsgraad van meer dan 20 uur, met als gevolg dat een 3 ploegenstructuur vaak wenselijk is. Tegelijkertijd kennen beide organisaties een 2-ploegen of zelfs een 1 ploegenstructuur. De onderzoeken naar verticale verplaatsingen zijn telkens vanuit cases opgepakt waarbij een specifieke technologie wordt opgepakt en onderzocht vanuit een specifiek (deel van een) proces. Deze aanpak is heel tijdrovend geweest en geresulteerd in vele onderzoeken waarbij relatief snel zichtbaar werd dat verder onderzoek niet nodig was. Echter was het al wel een (onderzoeks-) opdracht van een HBO student, maar waren de uitkomsten al snel niet meer bruikbaar.</em></div>",
-          "<div style='margin-left: 20px; margin-bottom: 1rem;'><em>Vanuit interne contacten vanuit beide organisaties is het Logistics Lab gevraagd hierin te faciliteren en samen met o.a. studenten deze ingewikkelde puzzel te gaan ontrafelen. Na onderling overleg is er een roadmap opgesteld waarin de organisaties willen toewerken naar een ingebedde (innovatieve) oplossing met betrekking tot horizontale verplaatsingen waarbij beide organisaties handvatten aangereikt krijgen waarmee zij zelf toekomstige beslissingen kunnen nemen met betrekking tot dit vraagstuk. Deze handreikingen hebben dan onder andere betrekking op:</em></div>",
-          "<div style='margin-left: 40px; margin-bottom: 1rem;'><em>- De keuze van (innovatieve) oplossing<br>- Welke voorwaarden worden er aan het proces gesteld<br>- Opleidingsbehoefte van (huidige en toekomstige) medewerkers<br>- Hoe om te gaan met het onderhoud en storingen.</em></div>",
-          "Nu word jij geconfronteerd met deze opdracht en de vraag op welke wijze jij jouw onderzoeksopdracht zou kunnen inpassen in deze aanpak. Kortom, de vraag is wat is de bijdrage van jouw onderzoeksopdracht aan het grotere geheel?",
+          "In deze voorbereiding gaan we hierbij stil staan. We beginnen met een voorbeeld."
+        ]
+      },
+      {
+        "type": "accordion",
+        "usePlusIcon": true,
+        "defaultOpen": false,
+        "items": [
+          {
+            "title": "Voorbeeld",
+            "defaultOpen": false,
+            "content": [
+              "<div style='margin-left: 20px; margin-bottom: 1rem;'><em>Je studeert Logistics Management en bent op zoek naar een onderwerp voor je stage. Je hebt daarom het Logistics Lab benaderd met de vraag of het mogelijk is om binnen of vanuit deze organisatie een onderzoeksproject te doen. Het Logistics Lab ziet hier wel mogelijkheden in en wil je graag betrekken bij een lopen project bij een aantal van haar partners, Scania en Zehnder.</em></div>",
+              "<div style='margin-left: 20px; margin-bottom: 1rem;'><em>Zowel Scania als Zehnder zijn op zoek naar (innovatieve) oplossingen met betrekking tot horizontale verplaatsingen. In het verleden zijn binnen beide organisaties verschillende onderzoeken uitgevoerd naar met name verticale verplaatsingen waarmee met name de handling binnen de organisaties werd gereduceerd. Nu willen beide bedrijven graag (gezamenlijk) op zoek naar oplossingen op het vlak van horizontale verplaatsingen. Veel innovatieve systemen vragen om een bezettingsgraad van meer dan 20 uur, met als gevolg dat een 3 ploegenstructuur vaak wenselijk is. Tegelijkertijd kennen beide organisaties een 2-ploegen of zelfs een 1 ploegenstructuur. De onderzoeken naar verticale verplaatsingen zijn telkens vanuit cases opgepakt waarbij een specifieke technologie wordt opgepakt en onderzocht vanuit een specifiek (deel van een) proces. Deze aanpak is heel tijdrovend geweest en geresulteerd in vele onderzoeken waarbij relatief snel zichtbaar werd dat verder onderzoek niet nodig was. Echter was het al wel een (onderzoeks-) opdracht van een HBO student, maar waren de uitkomsten al snel niet meer bruikbaar.</em></div>",
+              "<div style='margin-left: 20px; margin-bottom: 1rem;'><em>Vanuit interne contacten vanuit beide organisaties is het Logistics Lab gevraagd hierin te faciliteren en samen met o.a. studenten deze ingewikkelde puzzel te gaan ontrafelen. Na onderling overleg is er een roadmap opgesteld waarin de organisaties willen toewerken naar een ingebedde (innovatieve) oplossing met betrekking tot horizontale verplaatsingen waarbij beide organisaties handvatten aangereikt krijgen waarmee zij zelf toekomstige beslissingen kunnen nemen met betrekking tot dit vraagstuk. Deze handreikingen hebben dan onder andere betrekking op:</em></div>",
+              "<div style='margin-left: 40px; margin-bottom: 1rem;'><em>- De keuze van (innovatieve) oplossing<br>- Welke voorwaarden worden er aan het proces gesteld<br>- Opleidingsbehoefte van (huidige en toekomstige) medewerkers<br>- Hoe om te gaan met het onderhoud en storingen.</em></div>",
+              "<p class='text-gray-700 mb-3'>Nu word jij geconfronteerd met deze opdracht en de vraag op welke wijze jij jouw onderzoeksopdracht zou kunnen inpassen in deze aanpak. Kortom, de vraag is wat is de bijdrage van jouw onderzoeksopdracht aan het grotere geheel?</p>"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": [
           "Binnen het HBO doen de meeste studenten een praktijkgericht onderzoek. Een theoretisch vraagstuk is ook mogelijk op het HBO, maar zien we minder vaak terug. Wij zullen ons in deze module met name focussen op het praktijkgericht onderzoek. Belangrijk te beseffen dat er een praktisch vraagstuk aan je onderzoek ten grondslag ligt. In een praktijkgericht onderzoek gaan we bestaande theorieën onderzoeken en vooral toepassen in verschillende situaties. Een onderdeel van een praktijkgericht onderzoek is het inzichtelijk maken van bestaande theorieën en inzichten. Hierover zullen we later meer toelichten.",
           "Nu nemen we je mee in de reis om van een globaal vraagstuk toe te gaan werken naar een doordacht opgezet onderzoeksplan. Tijdens deze reis worden de volgende onderwerpen doorlopen. In het 'rode' kwadrant is weergegeven welk onderdeel in deze voorbereiding centraal staat."
         ]
@@ -38,13 +56,23 @@
       {
         "type": "image",
         "src": "assets/images/Stappenplannen 1.0.png",
-        "alt": "De vier fasen bij het opstellen van een logistiek onderzoek."
+        "alt": "De vier fasen bij het opstellen van een logistiek onderzoek.",
+        "enableModal": true
       },
       {
         "type": "paragraph",
         "text": [
           "Nu heb je al wel wat gelezen, maar wat is dat nu het probleem verkennen en waarom doe je dat?",
-          "Bekijk de volgende kennisclip: <a href='https://media.windesheim.nl/Mediasite/Play/3a0b3b8a6527464fb5373e80bba221251d' target='_blank' class='text-blue-600 hover:text-blue-800 underline font-medium'>Bekijk de kennisclip</a>",
+          "Bekijk deze kennisclip voor uitleg over het verkennen van een probleem."
+        ]
+      },
+      {
+        "type": "video",
+        "url": "https://media.windesheim.nl/Mediasite/Play/3a0b3b8a6527464fb5373e80bba221251d"
+      },
+      {
+        "type": "paragraph",
+        "text": [
           "In bovenstaande kennisclip heb je nu inzicht gekregen in een aantal onderwerpen waarbij je stil gaat staan bij het verkennen van je probleem. Hieronder worden deze nog even kort samengevat;"
         ]
       },
@@ -64,129 +92,156 @@
         "text": [
           "Bij het opstellen van een doelstelling ga je aan de slag met een zogenoemd a- en b- gedeelte. Het a-gedeelte omschrijf je wat je wel en niet mag verwachten in het onderzoek en het b-gedeelte omschrijft globaal wat er gaat gebeuren.",
           "Een goede doelstelling kent dan ook een bepaalde format:",
-          "<strong>'Het doel van dit onderzoek is ….(a)…. door ….. (b)…..</strong>'"
+          "<p class='text-xl font-semibold text-gray-900 mb-4'><strong>'Het doel van dit onderzoek is ….(a)…. door ….. (b)…..</strong>'</p>",
+          "Hieronder worden beide onderdelen nader toegelicht:"
         ]
       },
       {
-        "type": "paragraph",
-        "text": [
-          "<strong>Het A-gedeelte (extern gedeelte)</strong>",
-          "Bij het opstellen van het a-gedeelte is het doel om inzicht te geven in het doel van het onderzoek. Er wordt ook wel gesproken over het externe gedeelte van het onderzoek, immers je geeft inzicht in de reden waarom je gaat onderzoeken en welke resultaten je gaat opleveren. Een mooie controle hierin is: 'zouden mijn beoordelaar en opdrachtgever begrijpen welke bijdrage mijn onderzoek kan geven?'",
-          "<strong>Voorbeelden van formuleren van het a-gedeelte kunnen zijn:</strong>",
-          "<div style='margin-left: 20px; margin-bottom: 1rem;'><em>…. Het helpen verbeteren van bestaand beleid X op het terrein van Z</em></div>",
-          "<div style='margin-left: 20px; margin-bottom: 1rem;'><em>…. Het leveren van een bijdrage aan de ontwikkeling van nieuw beleid X op het terrein van Z</em></div>",
-          "<div style='margin-left: 20px; margin-bottom: 1rem;'><em>…. Het doen van aanbevelingen aan de opdrachtgever Y voor het ontwerpen van een oplossing van probleem Z.</em></div>"
-        ]
-      },
-      {
-        "type": "paragraph",
-        "text": [
-          "<strong>Het B-gedeelte (intern gedeelte)</strong>",
-          "Het b-gedeelte omschrijft de bijdrage die jij als onderzoek levert aan het onderzoek. Hierbij wordt ook wel gekeken naar het interne onderzoek, kortom hoe heb je het onderzoek opgezet of wat ga je hierin doen.",
-          "<strong>Voorbeelden van formuleringen van het b-gedeelte kunnen zijn:</strong>",
-          "<div style='margin-left: 20px; margin-bottom: 1rem;'><em>…. door een overzicht te geven van de meningen van belanghebbenden….</em></div>",
-          "<div style='margin-left: 20px; margin-bottom: 1rem;'><em>…. door inzicht te geven in de knelpunten die optreden bij….</em></div>",
-          "<div style='margin-left: 20px; margin-bottom: 1rem;'><em>…. door te speuren naar de achtergronden en oorzaken van het probleem….</em></div>",
-          "<div style='margin-left: 20px; margin-bottom: 1rem;'><em>…. door een analyse te maken van het verschil tussen de gewenste en de aanwezige situatie….</em></div>",
-          "<div style='margin-left: 20px; margin-bottom: 1rem;'><em>…. door een vergelijking te maken tussen…</em></div>",
-          "<div style='margin-left: 20px; margin-bottom: 1rem;'><em>…. door een beoordeling te geven van….</em></div>"
-        ]
-      },
-      {
-        "type": "trueFalseExercise",
-        "title": "Test je kennis: Het A-gedeelte en B-gedeelte",
-        "instruction": "Bepaal of de volgende stellingen waar of onwaar zijn:",
-        "statements": [
+        "type": "tabs",
+        "defaultTab": 0,
+        "tabs": [
           {
-            "text": "In de doelstelling 'Het doel is het verbeteren van communicatie tussen management en chauffeurs door interviews af te nemen' hoort 'het verbeteren van communicatie' bij het A-gedeelte.",
-            "correctAnswer": true,
-            "explanation": "Correct! 'Het verbeteren van communicatie' beschrijft wat je onderzoek oplevert voor de organisatie - dit is het externe gedeelte (A). Het A-gedeelte gaat over de bijdrage aan het oplossen van het praktijkprobleem."
+            "title": "A-gedeelte van een doelstelling",
+            "content": [
+              "<strong>Het A-gedeelte (extern gedeelte)</strong>",
+              "<p class='text-gray-700 mb-3'>Bij het opstellen van het a-gedeelte is het doel om inzicht te geven in het doel van het onderzoek. Er wordt ook wel gesproken over het externe gedeelte van het onderzoek, immers je geeft inzicht in de reden waarom je gaat onderzoeken en welke resultaten je gaat opleveren. Een mooie controle hierin is: 'zouden mijn beoordelaar en opdrachtgever begrijpen welke bijdrage mijn onderzoek kan geven?'</p>",
+              "<strong>Voorbeelden van formuleren van het a-gedeelte kunnen zijn:</strong>",
+              "<div style='margin-left: 20px; margin-bottom: 1rem;'><em>…. Het helpen verbeteren van bestaand beleid X op het terrein van Z</em></div>",
+              "<div style='margin-left: 20px; margin-bottom: 1rem;'><em>…. Het leveren van een bijdrage aan de ontwikkeling van nieuw beleid X op het terrein van Z</em></div>",
+              "<div style='margin-left: 20px; margin-bottom: 1rem;'><em>…. Het doen van aanbevelingen aan de opdrachtgever Y voor het ontwerpen van een oplossing van probleem Z.</em></div>"
+            ]
           },
           {
-            "text": "Het A-gedeelte beschrijft welke onderzoeksmethode je gebruikt, zoals 'door data te analyseren'.",
-            "correctAnswer": false,
-            "explanation": "Onjuist. Dat is het B-gedeelte. Het A-gedeelte beschrijft wat je oplevert. Voorbeeld: 'Het doel is het ontwikkelen van aanbevelingen (A-gedeelte: wat je oplevert) door data te analyseren (B-gedeelte: hoe je het doet)'. Het A-gedeelte beantwoordt: wat levert dit op voor de organisatie?"
-          },
-          {
-            "text": "Het A-gedeelte geeft inzicht in de bijdrage die je onderzoek kan geven aan de organisatie.",
-            "correctAnswer": true,
-            "explanation": "Correct! Het A-gedeelte gaat over het externe gedeelte: welke bijdrage je onderzoek levert aan het oplossen van het praktijkprobleem. Een goede controle: 'zouden mijn beoordelaar en opdrachtgever begrijpen welke bijdrage mijn onderzoek kan geven?'"
-          },
-          {
-            "text": "Het A-gedeelte beschrijft hoe je het onderzoek gaat opzetten of wat je gaat doen.",
-            "correctAnswer": false,
-            "explanation": "Onjuist. Dat is het B-gedeelte. Het A-gedeelte beschrijft wat je wel en niet mag verwachten in het onderzoek en welke resultaten je oplevert voor de opdrachtgever. Het B-gedeelte beschrijft de onderzoeksmethode."
-          },
-          {
-            "text": "In de doelstelling 'Het doel is het verbeteren van communicatie door interviews af te nemen' hoort 'door interviews af te nemen' bij het B-gedeelte.",
-            "correctAnswer": true,
-            "explanation": "Correct! 'Door interviews af te nemen' beschrijft de onderzoeksmethode die je gebruikt - dit is typisch voor het B-gedeelte. Het B-gedeelte gaat over hoe je het onderzoek uitvoert (interne aanpak), niet over wat je oplevert (dat is A-gedeelte)."
-          },
-          {
-            "text": "Het B-gedeelte beschrijft welke concrete resultaten de opdrachtgever krijgt, zoals 'aanbevelingen voor procesverbetering'.",
-            "correctAnswer": false,
-            "explanation": "Onjuist. Dat beschrijft het A-gedeelte (extern). Het B-gedeelte beschrijft de onderzoeksmethode. Voorbeeld: 'Het doel is het ontwikkelen van aanbevelingen (A-gedeelte) door interviews af te nemen en data te analyseren (B-gedeelte)'. Het B-gedeelte vertelt hoe je tot die aanbevelingen komt."
-          },
-          {
-            "text": "Het B-gedeelte kan formuleringen bevatten zoals 'door een overzicht te geven van meningen' of 'door knelpunten in kaart te brengen'.",
-            "correctAnswer": true,
-            "explanation": "Correct! Deze formuleringen beschrijven allemaal de onderzoeksactiviteiten die je uitvoert. Ze beginnen met 'door...' en vertellen welke stappen je neemt in je onderzoek. Dit is precies wat het B-gedeelte doet: het beschrijft je onderzoeksaanpak."
-          },
-          {
-            "text": "Het B-gedeelte beantwoordt de vraag 'Wat levert mijn onderzoek op voor de organisatie?'",
-            "correctAnswer": false,
-            "explanation": "Onjuist. Die vraag hoort bij het A-gedeelte (extern). Het B-gedeelte beantwoordt de vraag 'Hoe ga ik het onderzoek uitvoeren?' of 'Welke methoden gebruik ik?'. Denk aan het verschil: A = wat je oplevert (extern), B = hoe je het doet (intern)."
+            "title": "B-gedeelte van een doelstelling",
+            "content": [
+              "<strong>Het B-gedeelte (intern gedeelte)</strong>",
+              "<p class='text-gray-700 mb-3'>Het b-gedeelte omschrijft de bijdrage die jij als onderzoek levert aan het onderzoek. Hierbij wordt ook wel gekeken naar het interne onderzoek, kortom hoe heb je het onderzoek opgezet of wat ga je hierin doen.</p>",
+              "<strong>Voorbeelden van formuleringen van het b-gedeelte kunnen zijn:</strong>",
+              "<div style='margin-left: 20px; margin-bottom: 1rem;'><em>…. door een overzicht te geven van de meningen van belanghebbenden….</em></div>",
+              "<div style='margin-left: 20px; margin-bottom: 1rem;'><em>…. door inzicht te geven in de knelpunten die optreden bij….</em></div>",
+              "<div style='margin-left: 20px; margin-bottom: 1rem;'><em>…. door te speuren naar de achtergronden en oorzaken van het probleem….</em></div>",
+              "<div style='margin-left: 20px; margin-bottom: 1rem;'><em>…. door een analyse te maken van het verschil tussen de gewenste en de aanwezige situatie….</em></div>",
+              "<div style='margin-left: 20px; margin-bottom: 1rem;'><em>…. door een vergelijking te maken tussen…</em></div>",
+              "<div style='margin-left: 20px; margin-bottom: 1rem;'><em>…. door een beoordeling te geven van….</em></div>"
+            ]
           }
         ]
       },
       {
-        "type": "paragraph",
-        "text": [
-          "Test je begrip door de onderstaande matching oefening te maken:"
-        ]
-      },
-      {
-        "type": "matchingExercise",
-        "title": "Onderscheid maken tussen Probleem, Doelstelling en Hoofdvraag",
-        "instruction": "Sleep de omschrijvingen naar de juiste categorie om te testen of je het onderscheid begrijpt:",
-        "categories": [
-          {
-            "name": "Probleem",
-            "description": "Het praktijkvraagstuk dat opgelost moet worden"
-          },
-          {
-            "name": "Doelstelling",
-            "description": "Wat je jezelf ten doel stelt om te bereiken"
-          },
-          {
-            "name": "Hoofdvraag",
-            "description": "De invulling van de doelstelling in het onderzoek"
-          }
-        ],
+        "type": "accordion",
+        "usePlusIcon": true,
+        "defaultOpen": false,
         "items": [
           {
-            "text": "Spanningen tussen management en chauffeurs bij een logistieke dienstverlener",
-            "correctCategory": 0
-          },
+            "title": "Oefening 1",
+            "defaultOpen": false,
+            "content": [
+              {
+                "type": "trueFalseExercise",
+                "title": "Test je kennis: Het A-gedeelte en B-gedeelte",
+                "instruction": "Bepaal of de volgende stellingen waar of onwaar zijn:",
+                "statements": [
+                  {
+                    "text": "In de doelstelling 'Het doel is het verbeteren van communicatie tussen management en chauffeurs door interviews af te nemen' hoort 'het verbeteren van communicatie' bij het A-gedeelte.",
+                    "correctAnswer": true,
+                    "explanation": "Correct! 'Het verbeteren van communicatie' beschrijft wat je onderzoek oplevert voor de organisatie - dit is het externe gedeelte (A). Het A-gedeelte gaat over de bijdrage aan het oplossen van het praktijkprobleem."
+                  },
+                  {
+                    "text": "Het A-gedeelte beschrijft welke onderzoeksmethode je gebruikt, zoals 'door data te analyseren'.",
+                    "correctAnswer": false,
+                    "explanation": "Onjuist. Dat is het B-gedeelte. Het A-gedeelte beschrijft wat je oplevert. Voorbeeld: 'Het doel is het ontwikkelen van aanbevelingen (A-gedeelte: wat je oplevert) door data te analyseren (B-gedeelte: hoe je het doet)'. Het A-gedeelte beantwoordt: wat levert dit op voor de organisatie?"
+                  },
+                  {
+                    "text": "Het A-gedeelte geeft inzicht in de bijdrage die je onderzoek kan geven aan de organisatie.",
+                    "correctAnswer": true,
+                    "explanation": "Correct! Het A-gedeelte gaat over het externe gedeelte: welke bijdrage je onderzoek levert aan het oplossen van het praktijkprobleem. Een goede controle: 'zouden mijn beoordelaar en opdrachtgever begrijpen welke bijdrage mijn onderzoek kan geven?'"
+                  },
+                  {
+                    "text": "Het A-gedeelte beschrijft hoe je het onderzoek gaat opzetten of wat je gaat doen.",
+                    "correctAnswer": false,
+                    "explanation": "Onjuist. Dat is het B-gedeelte. Het A-gedeelte beschrijft wat je wel en niet mag verwachten in het onderzoek en welke resultaten je oplevert voor de opdrachtgever. Het B-gedeelte beschrijft de onderzoeksmethode."
+                  },
+                  {
+                    "text": "In de doelstelling 'Het doel is het verbeteren van communicatie door interviews af te nemen' hoort 'door interviews af te nemen' bij het B-gedeelte.",
+                    "correctAnswer": true,
+                    "explanation": "Correct! 'Door interviews af te nemen' beschrijft de onderzoeksmethode die je gebruikt - dit is typisch voor het B-gedeelte. Het B-gedeelte gaat over hoe je het onderzoek uitvoert (interne aanpak), niet over wat je oplevert (dat is A-gedeelte)."
+                  },
+                  {
+                    "text": "Het B-gedeelte beschrijft welke concrete resultaten de opdrachtgever krijgt, zoals 'aanbevelingen voor procesverbetering'.",
+                    "correctAnswer": false,
+                    "explanation": "Onjuist. Dat beschrijft het A-gedeelte (extern). Het B-gedeelte beschrijft de onderzoeksmethode. Voorbeeld: 'Het doel is het ontwikkelen van aanbevelingen (A-gedeelte) door interviews af te nemen en data te analyseren (B-gedeelte)'. Het B-gedeelte vertelt hoe je tot die aanbevelingen komt."
+                  },
+                  {
+                    "text": "Het B-gedeelte kan formuleringen bevatten zoals 'door een overzicht te geven van meningen' of 'door knelpunten in kaart te brengen'.",
+                    "correctAnswer": true,
+                    "explanation": "Correct! Deze formuleringen beschrijven allemaal de onderzoeksactiviteiten die je uitvoert. Ze beginnen met 'door...' en vertellen welke stappen je neemt in je onderzoek. Dit is precies wat het B-gedeelte doet: het beschrijft je onderzoeksaanpak."
+                  },
+                  {
+                    "text": "Het B-gedeelte beantwoordt de vraag 'Wat levert mijn onderzoek op voor de organisatie?'",
+                    "correctAnswer": false,
+                    "explanation": "Onjuist. Die vraag hoort bij het A-gedeelte (extern). Het B-gedeelte beantwoordt de vraag 'Hoe ga ik het onderzoek uitvoeren?' of 'Welke methoden gebruik ik?'. Denk aan het verschil: A = wat je oplevert (extern), B = hoe je het doet (intern)."
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "accordion",
+        "usePlusIcon": true,
+        "defaultOpen": false,
+        "items": [
           {
-            "text": "Het verbeteren van de communicatie tussen management en chauffeurs",
-            "correctCategory": 1
-          },
-          {
-            "text": "Welke administratieve processen kunnen geautomatiseerd worden om communicatieproblemen te verminderen?",
-            "correctCategory": 2
-          },
-          {
-            "text": "Onvoldoende informatie-uitwisseling tussen verschillende afdelingen",
-            "correctCategory": 0
-          },
-          {
-            "text": "Het ontwikkelen van aanbevelingen voor procesverbetering binnen de organisatie",
-            "correctCategory": 1
-          },
-          {
-            "text": "Welke factoren beïnvloeden de effectiviteit van de huidige communicatiestructuren?",
-            "correctCategory": 2
+            "title": "Oefening 2",
+            "defaultOpen": false,
+            "content": [
+              {
+                "type": "matchingExercise",
+                "title": "Onderscheid maken tussen Probleem, Doelstelling en Hoofdvraag",
+                "instruction": "Sleep de omschrijvingen naar de juiste categorie om te testen of je het onderscheid begrijpt:",
+                "categories": [
+                  {
+                    "name": "Probleem",
+                    "description": "Het praktijkvraagstuk dat opgelost moet worden"
+                  },
+                  {
+                    "name": "Doelstelling",
+                    "description": "Wat je jezelf ten doel stelt om te bereiken"
+                  },
+                  {
+                    "name": "Hoofdvraag",
+                    "description": "De invulling van de doelstelling in het onderzoek"
+                  }
+                ],
+                "items": [
+                  {
+                    "text": "Spanningen tussen management en chauffeurs bij een logistieke dienstverlener",
+                    "correctCategory": 0
+                  },
+                  {
+                    "text": "Het verbeteren van de communicatie tussen management en chauffeurs",
+                    "correctCategory": 1
+                  },
+                  {
+                    "text": "Welke administratieve processen kunnen geautomatiseerd worden om communicatieproblemen te verminderen?",
+                    "correctCategory": 2
+                  },
+                  {
+                    "text": "Onvoldoende informatie-uitwisseling tussen verschillende afdelingen",
+                    "correctCategory": 0
+                  },
+                  {
+                    "text": "Het ontwikkelen van aanbevelingen voor procesverbetering binnen de organisatie",
+                    "correctCategory": 1
+                  },
+                  {
+                    "text": "Welke factoren beïnvloeden de effectiviteit van de huidige communicatiestructuren?",
+                    "correctCategory": 2
+                  }
+                ]
+              }
+            ]
           }
         ]
       },
@@ -194,70 +249,104 @@
         "type": "paragraph",
         "text": [
           "<strong>SMART</strong>",
-          "Naast het formuleren van de doelstelling aan de hand van het a- en b-gedeelte, is het belangrijk om in je doelstelling ook SMART te herkennen.",
-          "Bekijk de volgende kennisclip: <a href='https://media.windesheim.nl/Mediasite/Play/931fa76ea3324e73869c8141946fa1e91d' target='_blank' class='text-blue-600 hover:text-blue-800 underline font-medium'>Bekijk de kennisclip</a>",
-          "Hieronder kun je een voorbeelddoelstelling analyseren op SMART-criteria:"
+          "Naast het formuleren van de doelstelling aan de hand van het a- en b-gedeelte, is het belangrijk om in je doelstelling ook SMART te herkennen. Bekijk deze kennisclip voor uitleg over het SMART principe bij het formuleren van doelstellingen."
         ]
       },
       {
-        "type": "smartChecklist",
-        "doelstelling": "Het doel van dit onderzoek is het verbeteren van de communicatie tussen management en chauffeurs bij een logistieke dienstverlener door middel van het analyseren van de huidige administratieve processen en het ontwikkelen van aanbevelingen voor automatisering binnen een periode van 3 maanden.",
-        "criteria": [
-          {
-            "letter": "S",
-            "name": "Specifiek",
-            "description": "De doelstelling is duidelijk en concreet geformuleerd",
-            "question": "Wat precies wil je bereiken?"
-          },
-          {
-            "letter": "M",
-            "name": "Meetbaar",
-            "description": "Je kunt vaststellen of de doelstelling is behaald",
-            "question": "Hoe meet je succes?"
-          },
-          {
-            "letter": "A",
-            "name": "Acceptabel/Haalbaar",
-            "description": "De doelstelling is realistisch en uitvoerbaar",
-            "question": "Is dit haalbaar binnen de tijd en middelen?"
-          },
-          {
-            "letter": "R",
-            "name": "Relevant",
-            "description": "De doelstelling draagt bij aan het oplossen van het probleem",
-            "question": "Helpt dit het praktijkprobleem op te lossen?"
-          },
-          {
-            "letter": "T",
-            "name": "Tijdgebonden",
-            "description": "Er is een duidelijk tijdsbestek voor de doelstelling",
-            "question": "Wanneer moet dit zijn afgerond?"
-          }
-        ]
+        "type": "video",
+        "url": "https://media.windesheim.nl/Mediasite/Play/931fa76ea3324e73869c8141946fa1e91d"
       },
       {
         "type": "paragraph",
         "text": [
-          "Ben jij nu ook in staat om aan de hand van het gegeven voorbeeld een doelstelling op te stellen?",
-          "<div style='margin-left: 20px; margin-bottom: 1rem;'><em>Als Logistics management student wil jij een onderzoek uitvoeren bij een logistieke dienstverlener in de regio Zwolle. Binnen deze logistieke dienstverlener bestaan spanningen tussen het management enerzijds en de chauffeurs anderzijds. De transportmanager vraagt of jij deze problematiek wilt bestuderen. De bestaande situatie bij de logistieke dienstverlener vormt dan het projectkader. Uit een eerste gesprek met de transportmanager blijkt dat het management veel overzicht wil bewaren door dagelijks diverse dashboards te raadplegen en hierop te acteren. Echter zij merken door het gebruik dat veel informatie niet consistent en goed wordt ingevuld door de chauffeurs. De chauffeurs benoemen echter dat zij langzaamaan meer dan 25% van hun werktijd bezig zijn met administratie wat zij niet leuk vinden. Daarvoor zijn ze geen chauffeur geworden. Zij vragen zich, met de huidige stand van technologie af waarom dit proces niet verder geautomatiseerd kan worden waardoor minder administratie van de chauffeurs nodig is. Hierdoor is langzaamaan een cultuur ontstaan waarin zowel de chauffeurs als het management elkaar nog nauwelijks informeren waardoor de winst onder druk is komen te staan, chauffeurs ontevreden zijn en het management zich afvraagt hoe dit probleem aan te pakken.</em></div>",
-          "<div style='margin-left: 20px; margin-bottom: 1rem;'><em>Jouw onderzoek vindt binnen dit projectkader plaats en levert als het goed is een bijdrage aan een verbetering van de ontstane cultuur en mogelijke handvatten hoe deze uitdaging op te lossen.</em></div>",
-          "Schrijf een doelstelling op voor deze probleemstelling en neem deze mee naar het werkcollege."
+          "Test je kennis door de onderstaande oefeningen te maken om te controleren of je de stof goed begrijpt en kunt toepassen."
         ]
       },
       {
-        "type": "highlight",
-        "title": "GenAI Gebruik",
-        "content": [
-          "Je mag bij het opstellen van een doelstelling GenAI gebruiken. De gebruikte prompt in het voorbeeld hieronder mag je gebruiken bij het ontwikkelen van een doelstelling bij deze probleemstelling. Je mag het prompt ook gebruiken bij je eigen probleemstelling. Wees je er wel altijd van bewust dat je het mens machine mens principe toepast. Jij blijft verantwoordelijke voor je werk en de inhoud van je onderzoeksplan."
-        ],
-        "icon": "fa-info-circle"
+        "type": "accordion",
+        "usePlusIcon": true,
+        "defaultOpen": false,
+        "items": [
+          {
+            "title": "Oefening 3",
+            "defaultOpen": false,
+            "content": [
+              {
+                "type": "smartChecklist",
+                "doelstelling": "Het doel van dit onderzoek is het verbeteren van de communicatie tussen management en chauffeurs bij een logistieke dienstverlener door middel van het analyseren van de huidige administratieve processen en het ontwikkelen van aanbevelingen voor automatisering binnen een periode van 3 maanden.",
+                "criteria": [
+                  {
+                    "letter": "S",
+                    "name": "Specifiek",
+                    "description": "De doelstelling is duidelijk en concreet geformuleerd",
+                    "question": "Wat precies wil je bereiken?"
+                  },
+                  {
+                    "letter": "M",
+                    "name": "Meetbaar",
+                    "description": "Je kunt vaststellen of de doelstelling is behaald",
+                    "question": "Hoe meet je succes?"
+                  },
+                  {
+                    "letter": "A",
+                    "name": "Acceptabel/Haalbaar",
+                    "description": "De doelstelling is realistisch en uitvoerbaar",
+                    "question": "Is dit haalbaar binnen de tijd en middelen?"
+                  },
+                  {
+                    "letter": "R",
+                    "name": "Relevant",
+                    "description": "De doelstelling draagt bij aan het oplossen van het probleem",
+                    "question": "Helpt dit het praktijkprobleem op te lossen?"
+                  },
+                  {
+                    "letter": "T",
+                    "name": "Tijdgebonden",
+                    "description": "Er is een duidelijk tijdsbestek voor de doelstelling",
+                    "question": "Wanneer moet dit zijn afgerond?"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
       },
       {
-        "type": "document",
-        "src": "assets/Documents/ChatGPT inzetten voor een doelstelling.docx",
-        "text": "Download het voorbeelddocument met de prompt: ChatGPT inzetten voor een doelstelling.docx",
-        "icon": "fa-file-word",
-        "iconClass": "fas"
+        "type": "accordion",
+        "usePlusIcon": true,
+        "defaultOpen": false,
+        "items": [
+          {
+            "title": "Oefening 4",
+            "defaultOpen": false,
+            "content": [
+              {
+                "type": "paragraph",
+                "text": [
+                  "Ben jij nu ook in staat om aan de hand van het gegeven voorbeeld een doelstelling op te stellen?",
+                  "<div style='margin-left: 20px; margin-bottom: 1rem;'><em>Als Logistics management student wil jij een onderzoek uitvoeren bij een logistieke dienstverlener in de regio Zwolle. Binnen deze logistieke dienstverlener bestaan spanningen tussen het management enerzijds en de chauffeurs anderzijds. De transportmanager vraagt of jij deze problematiek wilt bestuderen. De bestaande situatie bij de logistieke dienstverlener vormt dan het projectkader. Uit een eerste gesprek met de transportmanager blijkt dat het management veel overzicht wil bewaren door dagelijks diverse dashboards te raadplegen en hierop te acteren. Echter zij merken door het gebruik dat veel informatie niet consistent en goed wordt ingevuld door de chauffeurs. De chauffeurs benoemen echter dat zij langzaamaan meer dan 25% van hun werktijd bezig zijn met administratie wat zij niet leuk vinden. Daarvoor zijn ze geen chauffeur geworden. Zij vragen zich, met de huidige stand van technologie af waarom dit proces niet verder geautomatiseerd kan worden waardoor minder administratie van de chauffeurs nodig is. Hierdoor is langzaamaan een cultuur ontstaan waarin zowel de chauffeurs als het management elkaar nog nauwelijks informeren waardoor de winst onder druk is komen te staan, chauffeurs ontevreden zijn en het management zich afvraagt hoe dit probleem aan te pakken.</em></div>",
+                  "<div style='margin-left: 20px; margin-bottom: 1rem;'><em>Jouw onderzoek vindt binnen dit projectkader plaats en levert als het goed is een bijdrage aan een verbetering van de ontstane cultuur en mogelijke handvatten hoe deze uitdaging op te lossen.</em></div>",
+                  "Schrijf een doelstelling op voor deze probleemstelling en neem deze mee naar het werkcollege."
+                ]
+              },
+              {
+                "type": "highlight",
+                "title": "GenAI Gebruik",
+                "content": [
+                  "Je mag bij het opstellen van een doelstelling GenAI gebruiken. De gebruikte prompt in het voorbeeld hieronder mag je gebruiken bij het ontwikkelen van een doelstelling bij deze probleemstelling. Je mag het prompt ook gebruiken bij je eigen probleemstelling. Wees je er wel altijd van bewust dat je het mens machine mens principe toepast. Jij blijft verantwoordelijke voor je werk en de inhoud van je onderzoeksplan."
+                ],
+                "icon": "fa-info-circle"
+              },
+              {
+                "type": "document",
+                "src": "assets/Documents/ChatGPT inzetten voor een doelstelling.docx",
+                "text": "Download het voorbeelddocument met de prompt: ChatGPT inzetten voor een doelstelling.docx",
+                "icon": "fa-file-word",
+                "iconClass": "fas"
+              }
+            ]
+          }
+        ]
       },
       {
         "type": "paragraph",
@@ -268,15 +357,30 @@
           "Een tweede aandachtspunt is de 'tunnelvisie' die vanuit de opdrachtgever kan bestaan. De opdrachtgever werkt soms al meerdere jaren in de organisatie en denken ze te weten waar de oorzaak ligt, sterker nog soms noemen ze al direct de oplossing. Blijf kritisch als onderzoeker en zorg dat jij de onderzoek stappen doordacht doorloopt. Kom je daarmee alsnog op hetzelfde beeld, dan heb je het gevoel van de opdrachtgever goed kunnen onderbouwen. Je staat er versteld van hoevaak je nog nieuwe inzichten bovenwater weet te halen voor de organisatie.",
           "Een laatste aandachtspunten in dit kader is het de focus op de doelstelling van de opdracht. De organisatie verwacht van jou een oplossing van het probleem. Echter ben je er wel van bewust dat jij met de doelstelling van het onderzoek het probleem van de organisatie hebt ingekaderd. Dat wil zeggen, dat je bijvoorbeeld minder invloedsfactoren hebt meegenomen of de scope van het proces of de omgeving versimpeld hebt waardoor de probleemstelling ook realistisch binnen de gestelde termijn is op te lossen. Blijf je beseffen dat de meeste onderzoeken die wij vanuit de opleiding oppakken bestaan uit advies opdrachten. Soms zit er direct al een implementatie deel aan vast waardoor het direct in de praktijk wordt toegepast. Deze opdrachten zijn echter beperkt onder andere doordat onderzoek vaak al een forse tijdsinvestering vraagt en jij als (student) onderzoeker beperkte de tijd hebt.",
           "Nu benoemen we praktijkgericht onderzoek als één vorm van onderzoek. Enerzijds is dat ook zo, immers het onderzoek wordt uitgevoerd met betrekking tot een praktijkvraagstuk. Tegelijkertijd zijn er verschillende vormen van praktijkgericht onderzoek waarin ook verschillende taken en daarmee ook rollen van jouw als onderzoek gevraagd worden.",
-          "Bekijk de kennisclip over de verschillende vormen van praktijkgericht onderzoek: <a href='https://media.windesheim.nl/Mediasite/Play/91c2b4209bb8420181a7db38bd62d1cc1d' target='_blank' class='text-blue-600 hover:text-blue-800 underline font-medium'>Bekijk de kennisclip</a>",
-          "Belangrijk is natuurlijk wel om te blijven beseffen dat ondanks dat je een specifiek type praktijkonderzoek uitvoert de gehele onderzoekscyclus vaak wel herkenbaar en zichtbaar is in je onderzoek.",
+          "Bekijk deze kennisclip voor uitleg over de verschillende vormen van praktijkgericht onderzoek."
+        ]
+      },
+      {
+        "type": "video",
+        "url": "https://media.windesheim.nl/Mediasite/Play/91c2b4209bb8420181a7db38bd62d1cc1d"
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "Belangrijk is natuurlijk wel om te blijven beseffen dat ondanks dat je een specifiek type praktijkonderzoek uitvoert de gehele onderzoekscyclus vaak wel herkenbaar en zichtbaar is in je onderzoek."
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": [
           "Samenvattend kunnen we stappenplan schetsen wat een handvat kan zijn aan de hand van de besproken modellen en handvatten."
         ]
       },
       {
         "type": "image",
         "src": "assets/images/Samenvattingweek2.png",
-        "alt": "Samenvatting in vier stappen."
+        "alt": "Samenvatting in vier stappen.",
+        "enableModal": true
       }
     ]
   },

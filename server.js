@@ -608,7 +608,17 @@ app.get(/\.js$/, (req, res, next) => {
     }
 });
 
-// Expliciete route voor JSON bestanden (content files)
+// Serve static files (CSS, JS, images, JSON, etc.) - maar NIET HTML (die handlen we hierboven)
+// Belangrijk: JavaScript bestanden moeten beschikbaar zijn voor de HTML pagina's
+app.use(express.static(rootDir, { 
+    index: false, // We handlen index.html expliciet
+    dotfiles: 'ignore',
+    etag: true,
+    lastModified: true,
+    maxAge: '1y' // Cache static files for 1 year
+}));
+
+// Expliciete route voor JSON bestanden (content files) - NA static middleware als fallback
 app.get(/\.json$/, (req, res, next) => {
     const fileName = req.path.replace(/^\//, ''); // bijv. content/week2.content.json
     const filePath = path.join(rootDir, fileName);
@@ -640,6 +650,59 @@ app.get(/\.json$/, (req, res, next) => {
     } else {
         console.error(`❌ JSON file not found: ${fileName}`);
         res.status(404).json({ error: `File not found: ${fileName}` });
+    }
+});
+
+// Expliciete route voor afbeeldingen en andere assets - NA static middleware als fallback
+app.get(/\.(png|jpg|jpeg|gif|svg|ico|woff|woff2|ttf|eot|docx)$/i, (req, res, next) => {
+    const fileName = req.path.replace(/^\//, ''); // bijv. assets/images/Praktijkprobleem.png
+    const filePath = path.join(rootDir, fileName);
+    
+    // Probeer verschillende paden
+    const possiblePaths = [
+        filePath,
+        path.join('/var/task', fileName),
+        path.join(process.cwd(), fileName),
+        path.join(__dirname, fileName),
+    ];
+    
+    let foundPath = null;
+    for (const possiblePath of possiblePaths) {
+        if (fs.existsSync(possiblePath)) {
+            foundPath = possiblePath;
+            break;
+        }
+    }
+    
+    if (foundPath) {
+        // Bepaal content type op basis van extensie
+        const ext = path.extname(fileName).toLowerCase();
+        const contentTypes = {
+            '.png': 'image/png',
+            '.jpg': 'image/jpeg',
+            '.jpeg': 'image/jpeg',
+            '.gif': 'image/gif',
+            '.svg': 'image/svg+xml',
+            '.ico': 'image/x-icon',
+            '.woff': 'font/woff',
+            '.woff2': 'font/woff2',
+            '.ttf': 'font/ttf',
+            '.eot': 'application/vnd.ms-fontobject',
+            '.docx': 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+        };
+        const contentType = contentTypes[ext] || 'application/octet-stream';
+        
+        res.setHeader('Content-Type', contentType);
+        res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
+        res.sendFile(foundPath, (err) => {
+            if (err) {
+                console.error(`Error serving asset ${fileName}:`, err);
+                next(err);
+            }
+        });
+    } else {
+        console.error(`❌ Asset not found: ${fileName}`);
+        res.status(404).send(`Asset not found: ${fileName}`);
     }
 });
 

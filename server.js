@@ -498,6 +498,14 @@ if (process.env.VERCEL && process.env.VERCEL_ROOT_DIR) {
 
 // Serveer index.html voor root route
 app.get('/', (req, res, next) => {
+    // Eerst proberen: gebruik in-memory cache (voor Vercel serverless)
+    if (global.htmlFilesCache && global.htmlFilesCache['index.html']) {
+        console.log(`✅ Serving index.html from memory cache`);
+        res.setHeader('Content-Type', 'text/html; charset=utf-8');
+        return res.send(global.htmlFilesCache['index.html']);
+    }
+    
+    // Fallback: probeer bestand van disk te lezen
     const indexPath = path.join(rootDir, 'index.html');
     res.sendFile(indexPath, (err) => {
         if (err) {
@@ -510,15 +518,19 @@ app.get('/', (req, res, next) => {
 // Serveer alle HTML bestanden expliciet (week1.html, week2.html, instructies.html, etc.)
 // Deze route moet VOOR de static middleware komen om zeker te zijn dat HTML files worden geserveerd
 app.get(/\.html$/, (req, res, next) => {
-    const fileName = req.path; // bijv. /week1.html, /instructies.html
-    const filePath = path.join(rootDir, fileName);
+    const fileName = req.path.replace(/^\//, ''); // bijv. week1.html (zonder leading slash)
     
-    // Debug: log alle mogelijke paden
-    console.log(`Attempting to serve: ${fileName}`);
-    console.log(`rootDir: ${rootDir}`);
+    // Eerst proberen: gebruik in-memory cache (voor Vercel serverless)
+    if (global.htmlFilesCache && global.htmlFilesCache[fileName]) {
+        console.log(`✅ Serving ${fileName} from memory cache`);
+        res.setHeader('Content-Type', 'text/html; charset=utf-8');
+        return res.send(global.htmlFilesCache[fileName]);
+    }
+    
+    // Fallback: probeer bestand van disk te lezen
+    const filePath = path.join(rootDir, fileName);
+    console.log(`Attempting to serve from disk: ${fileName}`);
     console.log(`filePath: ${filePath}`);
-    console.log(`__dirname: ${__dirname}`);
-    console.log(`process.cwd(): ${process.cwd()}`);
     
     // Probeer verschillende paden
     const possiblePaths = [
@@ -547,13 +559,6 @@ app.get(/\.html$/, (req, res, next) => {
     } else {
         console.error(`❌ File not found: ${fileName}`);
         console.error(`Tried paths:`, possiblePaths);
-        // List files in rootDir for debugging
-        try {
-            const files = fs.readdirSync(rootDir);
-            console.error(`Files in ${rootDir}:`, files.slice(0, 20));
-        } catch (e) {
-            console.error(`Cannot read directory ${rootDir}:`, e.message);
-        }
         res.status(404).send(`File not found: ${fileName}`);
     }
 });

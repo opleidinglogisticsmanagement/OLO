@@ -66,6 +66,29 @@ try {
     console.log(`Cannot read /var/task:`, e.message);
 }
 
+// Pre-load HTML files into memory so they're available in serverless environment
+const htmlFiles = {};
+const htmlFileNames = ['index.html', 'week1.html', 'week2.html', 'week3.html', 'week4.html', 'week5.html', 'week6.html', 'week7.html', 'instructies.html', 'afsluiting.html'];
+
+console.log('=== Pre-loading HTML files ===');
+for (const fileName of htmlFileNames) {
+    const filePath = path.join(rootDir, fileName);
+    try {
+        if (fs.existsSync(filePath)) {
+            htmlFiles[fileName] = fs.readFileSync(filePath, 'utf8');
+            console.log(`✅ Loaded: ${fileName}`);
+        } else {
+            console.log(`⚠️  Not found: ${filePath}`);
+        }
+    } catch (e) {
+        console.error(`❌ Error loading ${fileName}:`, e.message);
+    }
+}
+
+// Make HTML files available to server.js
+process.env.HTML_FILES_LOADED = Object.keys(htmlFiles).length.toString();
+global.htmlFilesCache = htmlFiles;
+
 const app = require('../server.js');
 
 module.exports = app;

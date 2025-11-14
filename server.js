@@ -474,20 +474,25 @@ app.get('/api/test-gemini', async (req, res) => {
 // Anders worden API routes overschreven door static file serving
 app.use(express.static('.')); // Serve static files (HTML, CSS, JS)
 
-// Start server
-app.listen(PORT, async () => {
-    console.log(`🚀 Server running on http://localhost:${PORT}`);
-    console.log(`📝 API Key configured: ${!!GEMINI_API_KEY ? '✅ Yes' : '❌ No'}`);
-    if (!GEMINI_API_KEY) {
-        console.log(`⚠️  Please set GEMINI_API_KEY in .env file`);
-    }
-    console.log(`\n📚 E-Learning template is available at: http://localhost:${PORT}`);
-    console.log(`🔧 API endpoint: http://localhost:${PORT}/api/generate-questions`);
-    
-    // Pre-load available models cache on server start
-    if (GEMINI_API_KEY) {
-        console.log('[Gemini Proxy] Pre-loading available models cache...');
-        await fetchAndCacheAvailableModels();
-    }
-});
+// Export voor Vercel serverless
+module.exports = app;
+
+// Start server alleen lokaal (niet op Vercel)
+if (require.main === module) {
+    app.listen(PORT, async () => {
+        console.log(`🚀 Server running on http://localhost:${PORT}`);
+        console.log(`📝 API Key configured: ${!!GEMINI_API_KEY ? '✅ Yes' : '❌ No'}`);
+        if (!GEMINI_API_KEY) {
+            console.log(`⚠️  Please set GEMINI_API_KEY in .env file`);
+        }
+        console.log(`\n📚 E-Learning template is available at: http://localhost:${PORT}`);
+        console.log(`🔧 API endpoint: http://localhost:${PORT}/api/generate-questions`);
+        
+        // Pre-load available models cache on server start
+        if (GEMINI_API_KEY) {
+            console.log('[Gemini Proxy] Pre-loading available models cache...');
+            await fetchAndCacheAvailableModels();
+        }
+    });
+}
 

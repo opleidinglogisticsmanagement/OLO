@@ -473,12 +473,28 @@ app.get('/api/test-gemini', async (req, res) => {
 
 // Static files moeten NA API routes worden geladen
 // Anders worden API routes overschreven door static file serving
-// Op Vercel: __dirname in server.js is altijd de root directory
-app.use(express.static(__dirname)); // Serve static files (HTML, CSS, JS)
+// Op Vercel: __dirname in server.js is altijd de root directory waar server.js staat
+// Dit werkt omdat server.js in de root staat, niet in api/
+const rootDir = __dirname;
+app.use(express.static(rootDir, { 
+    index: 'index.html',
+    extensions: ['html', 'htm']
+})); // Serve static files (HTML, CSS, JS)
 
 // Fallback: serve index.html voor root route
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'index.html'));
+    res.sendFile(path.join(rootDir, 'index.html'));
+});
+
+// Serveer andere HTML bestanden expliciet (fallback voor als static middleware faalt)
+app.get(/\.html$/, (req, res, next) => {
+    const filePath = path.join(rootDir, req.path);
+    res.sendFile(filePath, (err) => {
+        if (err) {
+            console.error('Error serving file:', err);
+            next(err);
+        }
+    });
 });
 
 // Export voor Vercel serverless

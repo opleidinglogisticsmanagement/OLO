@@ -9,6 +9,7 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
+const fs = require('fs');
 const { GoogleGenerativeAI } = require('@google/generative-ai');
 
 const app = express();
@@ -474,28 +475,67 @@ app.get('/api/test-gemini', async (req, res) => {
 // Static files moeten NA API routes worden geladen
 // Anders worden API routes overschreven door static file serving
 // Op Vercel: __dirname in server.js is altijd de root directory waar server.js staat
-// Dit werkt omdat server.js in de root staat, niet in api/
-const rootDir = __dirname;
-app.use(express.static(rootDir, { 
-    index: 'index.html',
-    extensions: ['html', 'htm']
-})); // Serve static files (HTML, CSS, JS)
+// Maar op Vercel serverless kunnen bestanden op een andere locatie staan
+let rootDir = __dirname;
 
-// Fallback: serve index.html voor root route
-app.get('/', (req, res) => {
-    res.sendFile(path.join(rootDir, 'index.html'));
-});
+// Als we op Vercel draaien en er is een VERCEL_ROOT_DIR environment variable, gebruik die
+if (process.env.VERCEL && process.env.VERCEL_ROOT_DIR) {
+    rootDir = process.env.VERCEL_ROOT_DIR;
+    console.log(`Using Vercel root directory: ${rootDir}`);
+} else if (process.env.VERCEL) {
+    // Op Vercel serverless is __dirname /var/task/, maar bestanden staan in de root
+    // Probeer parent directory
+    const parentDir = path.join(__dirname, '..');
+    if (fs.existsSync(path.join(parentDir, 'index.html'))) {
+        rootDir = parentDir;
+        console.log(`Found root directory on Vercel: ${rootDir}`);
+    } else {
+        // Laatste redmiddel: gebruik __dirname en log voor debugging
+        console.log(`Warning: Could not find root directory. Using __dirname: ${__dirname}`);
+        rootDir = __dirname;
+    }
+}
 
-// Serveer andere HTML bestanden expliciet (fallback voor als static middleware faalt)
-app.get(/\.html$/, (req, res, next) => {
-    const filePath = path.join(rootDir, req.path);
-    res.sendFile(filePath, (err) => {
+// Serveer index.html voor root route
+app.get('/', (req, res, next) => {
+    const indexPath = path.join(rootDir, 'index.html');
+    res.sendFile(indexPath, (err) => {
         if (err) {
-            console.error('Error serving file:', err);
+            console.error('Error serving index.html:', err);
             next(err);
         }
     });
 });
+
+// Serveer alle HTML bestanden expliciet (week1.html, week2.html, instructies.html, etc.)
+// Deze route moet VOOR de static middleware komen om zeker te zijn dat HTML files worden geserveerd
+app.get(/\.html$/, (req, res, next) => {
+    const fileName = req.path; // bijv. /week1.html, /instructies.html
+    const filePath = path.join(rootDir, fileName);
+    
+    // Check of bestand bestaat
+    if (fs.existsSync(filePath)) {
+        res.sendFile(filePath, {
+            root: rootDir
+        }, (err) => {
+            if (err) {
+                console.error(`Error serving ${fileName}:`, err);
+                next(err);
+            }
+        });
+    } else {
+        console.error(`File not found: ${filePath} (rootDir: ${rootDir}, requested: ${req.path})`);
+        res.status(404).send(`File not found: ${fileName}`);
+    }
+});
+
+// Serve static files (CSS, JS, images, etc.) - maar NIET HTML (die handlen we hierboven)
+app.use(express.static(rootDir, { 
+    index: false, // We handlen index.html expliciet
+    dotfiles: 'ignore',
+    etag: true,
+    lastModified: true
+}));
 
 // Export voor Vercel serverless
 module.exports = app;

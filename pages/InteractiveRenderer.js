@@ -851,8 +851,8 @@ class InteractiveRenderer {
                 stepContentHtml = renderStepContent(step.content);
             }
             
-            // Determine if step is open (first step open by default)
-            const isOpen = index === 0;
+            // Determine if step is open (all steps closed by default)
+            const isOpen = false;
             
             const buttonHtml = `
                 <button

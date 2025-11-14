@@ -2,7 +2,7 @@
   "intro": {
     "title": "Week 4",
     "subtitle": "Begripsbepaling + Voorbereiding literatuuronderzoek",
-    "description": "[Beschrijving komt hier]"
+    "description": "In deze week leer je hoe je begrippen definieert voor je onderzoek. Je ontdekt waarom het belangrijk is om begrippen helder te hebben en hoe je dit systematisch aanpakt. Daarnaast leer je hoe je begrippen uiteenrafelt en selecteert om de scope van je onderzoek vorm te geven."
   },
   "leerdoelen": {
     "title": "Leerdoelen",
@@ -12,21 +12,313 @@
     "interactive": false
   },
   "theorie": {
-    "title": "Theorie",
+    "title": "Definiëren van begrippen",
     "content": [
       {
         "type": "paragraph",
         "text": [
-          "[Theorie content komt hier]"
+          "Als onderzoeker wil je precies helder hebben wat je onderzoekt. Om precies te gaan bepalen wat er nu onderzocht moet worden is het van belang om begrippen te definiëren. Eerst wordt toegelicht waarom dit belangrijk is. Daarna wordt toegelicht hoe je dit kunt aanpakken."
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "<h3 class=\"text-xl font-semibold text-gray-900 mb-4\">Waarom?</h3>",
+          "De definiëring van een begrip leidt vaak tot het inzicht dat het begrip veel meer inhoudt dan vooraf werd gedacht. Je ontdekt dus dat niet alles onderzocht kan worden of dat niet alle details die horen bij een begrip onderzocht kunnen worden. Daarom moeten er prioriteiten gesteld worden en zal er een selectie gemaakt moeten worden van datgene wat er onderzocht moet worden. Zo krijgt ook de scope van het onderzoek vorm. Het vaststellen van de scope is erg belangrijk want hiermee wordt de haalbaarheid van het onderzoek aangetoond en daarmee ook de kwaliteit van de te behalen resultaten.",
+          "Als uiteindelijk de definities zijn vastgesteld in samenwerking en in overleg met de stakeholders geeft het ook meer zekerheid dat elke stakeholder over hetzelfde praat. Maar dat kan alleen als het lukt om begrippen te omschrijven in een taal die voor iedereen begrijpelijk is. Het zal niet voor het eerst zijn dat twee stakeholders hetzelfde begrip gebruiken, maar een totaal andere definitie hanteren."
+        ]
+      },
+      {
+        "type": "accordion",
+        "usePlusIcon": true,
+        "defaultOpen": false,
+        "items": [
+          {
+            "title": "Voorbeeld",
+            "defaultOpen": false,
+            "content": [
+              "<p class=\"text-gray-700 mb-3\">Stel dat jij je in je stage bezighoudt met vrachtvervoer en dat je onderzoek verricht naar de mogelijkheden van een intermodaal transport. In je eigen familie- en vriendenkring vertel je enthousiast dat je in je werk kijkt naar de mogelijkheden voor intermodaal transport voor vrachtvervoer. Je legt hierbij uit dat een vracht vervoerd kan worden via de weg, spoor of het water.</p>",
+              "<p class=\"text-gray-700 mb-3\">Op stage besluit je om een aantal stakeholders te bellen om te inventariseren wat de mogelijkheden zijn. Een van de eerste vragen die je van de stakeholders terugkrijgt is om welk type vracht het gaat. Dan kom je als onderzoeker op het cruciale punt dat je beseft dat er op één traject alleen al verschillende soorten vervoer plaats vindt: vervoer in bulk en vervoer met containers. Bij het containervervoer kan nog eens onderscheid worden gemaakt in drie verschillende typen containers: een hard top container (2 TEU), een reguliere container (2 TEU) en een geconditioneerde container (1 TEU).</p>",
+              "<p class=\"text-gray-700 mb-3\"><strong>Conclusie:</strong> het begrip vrachtvoer had eerst gedefinieerd moeten worden en kan niet uitgesteld worden tot de uitvoeringsfase.</p>"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "<h3 class=\"text-xl font-semibold text-gray-900 mb-4\">Hoe pak je dit aan?</h3>",
+          "Het definiëren van begrippen gebeurt in een aantal stappen. Ten eerste wordt vastgesteld welke begrippen gedefinieerd moeten worden. Ten tweede worden die begrippen uiteengerafeld. Ten derde moet er een selectie komen van de uiteenrafeling om uiteindelijk het begrip te definiëren. Uiteindelijk gaan we als laatste in op factoren die de kwaliteit van een begrip bepalen."
+        ]
+      },
+      {
+        "type": "clickableSteps",
+        "steps": [
+          {
+            "label": "1. Vaststellen",
+            "content": [
+              "<p class=\"text-gray-700 mb-4\">Ten eerste moet er vastgesteld worden van welke begrippen er een definitie vastgesteld moet worden. Daarbij wordt er gebruik gemaakt van de opgestelde doelstelling en de hoofdvraag. De doelstelling bestaat uit een a-gedeelte (externe doel) en een b-gedeelte (interne doel). In het b-gedeelte wordt een indicatie gegeven van het soort kennis, informatie en/of inzichten die nodig zijn om het a-gedeelte van de doelstelling te behalen. De begrippen die gedefinieerd dienen te worden komen dus voor in het b-gedeelte van de doelstelling. Dus er dient een selectie gemaakt te worden van woorden uit de hoofdvraag en het b-gedeelte van de doelstelling waarvan het wenselijk is dat er voor het onderzoek een definitie opgesteld gaat worden.</p>",
+              {
+                "type": "accordion",
+                "usePlusIcon": true,
+                "defaultOpen": false,
+                "items": [
+                  {
+                    "title": "Voorbeeld",
+                    "defaultOpen": false,
+                    "content": [
+                      "<p class=\"text-gray-700 mb-3\">Je doet onderzoek voor logistiek dienstverlener HML dat transport verzorgt voor verschillende bedrijven. HML heeft een afdeling expeditie, een warehouse en een crossdock. Je onderzoekt de mogelijkheden voor optimalisatie van het interne transport op het crossdock want de transportmanager denkt dat er veel tijd wordt verspild aan intern transport en dat het crossdock efficiënter ingezet kan worden. De doelstelling is:</p>",
+                      "<div class=\"bg-blue-50 border-l-4 border-blue-500 p-4 mb-4\">",
+                      "<p class=\"text-gray-700 mb-2\"><strong>Het opstellen van aanbevelingen voor de transportmanager van HML voor de mogelijkheden van het optimaliseren van het intern transport van de goederen op het crossdock.</strong></p>",
+                      "<p class=\"text-gray-700 mb-0\"><strong>door</strong></p>",
+                      "<p class=\"text-gray-700 mb-0\"><strong>inzicht te geven in oorzaken van inefficiënte transportstromen en de mogelijkheden die er zijn om het interne transport te optimaliseren.</strong></p>",
+                      "</div>",
+                      "<p class=\"text-gray-700 mb-3\">De hoofdvraag bij deze doelstelling is:</p>",
+                      "<div class=\"bg-green-50 border-l-4 border-green-500 p-4 mb-4\">",
+                      "<p class=\"text-gray-700 mb-0\"><strong>Welke mogelijkheden heeft HML om de interne transportstromen van het crossdock te optimaliseren?</strong></p>",
+                      "</div>",
+                      "<p class=\"text-gray-700 mb-3\">Je stelt vast dat het begrip <strong>transportstromen</strong> gedefinieerd moet worden zodat:</p>",
+                      "<ul class=\"list-disc list-inside space-y-2 mb-4 ml-4\">",
+                      "<li>Je bij aanvang van ieder gesprek en/of interview kunt toelichten wat het onderzoeksobject is.</li>",
+                      "<li>Je bij ieder gesprek en/of interview terug kunt vallen op de definitie en je doelgericht vragen kunt stellen.</li>",
+                      "<li>De geïnterviewde ook gericht antwoorden kan geven in relatie tot de probleemstelling.</li>",
+                      "</ul>"
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "label": "2. Uiteenrafelen",
+            "content": [
+              "<p class=\"text-gray-700 mb-4\">Voordat er een definitie wordt opgesteld is het belangrijk om het liefst alle mogelijke onderdelen van een begrip te vinden. Daarvoor is het noodzakelijk om het begrip helemaal uiteen te rafelen en dat kan door het lezen van relevante literatuur. Die relevante literatuur is geschreven door deskundigen of experts in een bepaald gebied. Hoe je literatuuronderzoek moet gaan uitvoeren ga je verderop lezen. De methode die daar wordt aangereikt kun je nu natuurlijk al inzetten.</p>",
+              "<p class=\"text-gray-700 mb-4\">Deskundigen of experts kunnen ook de opdrachtgever zijn of collega's van de opdrachtgever. Die kun je dus interviewen. De informatie van experts en de literatuur helpt om allerlei onderdelen af te leiden voor het begrip.</p>",
+              "<p class=\"text-gray-700 mb-4\">Bij het vaststellen van alle mogelijke onderdelen van een begrip kun je een opsomming maken van alle mogelijke onderdelen van een begrip, maar is het verstandiger om dit gestructureerd aan te pakken. Een goed hulpmiddel bij het uiteenrafelen van begrippen is een boomdiagram. Een boomdiagram helpt om de verschillende onderdelen van een begrip te structureren.</p>",
+              {
+                "type": "video",
+                "url": "https://media.windesheim.nl/Mediasite/Play/4599a393a4ff42388faf49ba25476fc71d"
+              },
+              "<p class=\"text-gray-700 mb-4\">Het begrip dat een omschrijving moet krijgen bestaat uit verschillende onderdelen. Ten eerste bestaat een begrip uit dimensies. De dimensies van het begrip bestaan uit verschillende aspecten. En de aspecten kunnen weer uit deelaspecten bestaan. Zo ontstaan er verschillende vertakkingen.</p>",
+              "<p class=\"text-gray-700 mb-4\">Een andere manier om van een onderwerp alle mogelijke onderdelen te vinden is door gebruik te maken van GenAI. Zie door middel van dit voorbeeld (Scroll naar beneden voor de laatste prompt) hoe dat mogelijk is bij het begrip \"Werknemerstevredenheid van chauffeurs\". Met deze output kun je een eind komen bij het definiëren van het begrip. Je kunt het ook omdraaien en ChatGPT vragen om drie specifieke begripsomschrijvingen te geven van een begrip. Deze omschrijvingen kun je vervolgens als inspiratie gebruiken.</p>"
+            ]
+          },
+          {
+            "label": "3. Selectie",
+            "content": [
+              "<p class=\"text-gray-700 mb-4\">Als je alle dimensies, aspecten en deelaspecten in kaart hebt gebracht kun je het begrip definiëren. Je kiest dus één of meerdere dimensies, aspecten en deelaspecten uit die binnen de scope van het onderzoek vallen. Je maakt dat visueel door die boxen een kleur te geven.</p>",
+              "<p class=\"text-gray-700 mb-4\">De volgende factoren kunnen een rol spelen bij de selectie van de dimensies, aspecten en deelaspecten voor het definiëren van een begrip:</p>",
+              "<ol class=\"list-decimal list-inside space-y-2 mb-4 ml-4\">",
+              "<li class=\"text-gray-700 mb-2\">De doelstelling en de hoofdvraag bepalen deels al de prioriteit</li>",
+              "<li class=\"text-gray-700 mb-2\">De deskundigheid van de onderzoeker</li>",
+              "<li class=\"text-gray-700 mb-2\">De belangstelling van de onderzoeker</li>",
+              "<li class=\"text-gray-700 mb-2\">De klantwens</li>",
+              "<li class=\"text-gray-700 mb-2\">Beschikbaarheid van het benodigde onderzoeksmateriaal</li>",
+              "<li class=\"text-gray-700 mb-2\">Toegankelijkheid van het benodigde onderzoeksmateriaal</li>",
+              "</ol>",
+              "<p class=\"text-gray-700 mb-4\">Op basis van deze factoren maak je een selectie van de onderdelen waarin het begrip uiteengerafeld is. Dit proces is feitelijk je afbakening van het onderzoek en hiermee bepaal je dus wat er binnen en buiten je scope ligt.</p>",
+              "<p class=\"text-gray-700 mb-4\">Je kunt nu dus je begrippen gaan definiëren en daarmee vrij precies je scope gaan omschrijven. Met de dimensies, aspecten en deelaspecten die je niet hebt geselecteerd kun je ook weer aangeven wat er buiten je scope ligt.</p>"
+            ]
+          },
+          {
+            "label": "4. Kwaliteit",
+            "content": [
+              "<p class=\"text-gray-700 mb-4\">Op basis van drie criteria kun je de kwaliteit van het begrip bewaken en afmaken:</p>",
+              "<p class=\"text-gray-700 mb-4\"><strong>1. Afbakening</strong></p>",
+              "<p class=\"text-gray-700 mb-4\">Het begrip moet nog afbakening krijgen binnen het onderzoek door eventueel tijd en plaats toe te voegen. In het voorbeeld uit de kennisclip zou het begrip containervervoer als volgt afgemaakt kunnen worden:</p>",
+              "<div class=\"bg-blue-50 border-l-4 border-blue-500 p-4 mb-4 rounded-r-lg\">",
+              "<p class=\"text-gray-700 mb-0\"><strong>Binnen het onderzoek wordt onder containertransport het transport verstaan van de hard top container van Rotterdam naar Dublin vanaf januari 2019 tot en met december 2023 met daarin alleen machine type A dat in een 2 TEU container getransporteerd wordt</strong></p>",
+              "</div>",
+              "<p class=\"text-gray-700 mb-4\"><strong>2. Operationalisatie</strong></p>",
+              "<p class=\"text-gray-700 mb-4\">Het begrip moet nu ook een operationalisatie kennen. Er moeten waarneembare indicatoren geformuleerd zijn waar naar gemeten kan worden. Bij het begrip containervervoer zijn de indicatoren een 2 TEU container met daarin machine type A. Deze indicator is goed waarneembeer en daarmee is het begrip ook geoperationaliseerd. Als er geen waarneembare indicatoren in het begrip zitten dan is het begrip nog niet goed omschreven.</p>",
+              "<p class=\"text-gray-700 mb-4\">Bij kwalitatief onderzoek kun je de waarneembaarheid ook in kwalitatieve indicatoren gaan omschrijven. Bij die indicatoren kun je dan ook een waarde vaststellen waarmee je kunt vaststellen wanneer een dagstart wel of geen zin heeft.</p>",
+              "<p class=\"text-gray-700 mb-4\"><strong>3. Aansluiting bij doelstelling en hoofdvraag</strong></p>",
+              "<p class=\"text-gray-700 mb-4\">Het begrip moet ook aansluiten bij de doelstelling en hoofdvraag van het onderzoek. Dit is een belangrijkste stap na de afbakening en operationalisatie van de begrippen. Sluiten de begrippen nog aan bij de doelstelling en de hoofdvraag? Zo niet, dan moet of de begrippen worden aangepast of de doelstelling en hoofdvraag of beide.</p>"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "<p class=\"text-gray-700 mb-4\">Als je in overleg met je stakeholders een begrip hebt vastgesteld is het de bedoeling dat hieruit de benodigde deelvragen worden afgeleid. Het vaststellen van deelvragen zul je echter (deels) al hebben gedaan. Maar het definiëren van begrippen kan ook leiden tot een herziening van deelvragen of het onderzoeksmodel of doelstelling en/of hoofdvraag. Dit is een belangrijk en essentieel onderdeel van het maken van een onderzoeksopzet.</p>"
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "<h3 class=\"text-xl font-semibold text-gray-900 mb-4\">Het uitvoeren van literatuuronderzoek</h3>",
+          "<p class=\"text-gray-700 mb-4\">Literatuuronderzoek is van groot belang voor het opstellen van je onderzoeksopzet. Literatuuronderzoek heeft veel voordelen:</p>",
+          "<ol class=\"list-decimal list-inside space-y-2 mb-4 ml-4\">",
+          "<li class=\"text-gray-700 mb-2\">Je vergaart meer kennis over een onderwerp.</li>",
+          "<li class=\"text-gray-700 mb-2\">De verzamelde kennis is waarschijnlijk een aanvulling op de kennis die binnen de organisatie aanwezig is.</li>",
+          "<li class=\"text-gray-700 mb-2\">Het maakt het mogelijk om het probleem in een breder kader neer te zetten.</li>",
+          "<li class=\"text-gray-700 mb-2\">Het helpt om te bepalen waar de knowledge gap zit en zo vanuit de literatuur aan te sluiten bij het probleem van de opdrachtgever.</li>",
+          "<li class=\"text-gray-700 mb-2\">Literatuuronderzoek voorkomt dat je het wiel opnieuw gaat uitvinden.</li>",
+          "</ol>",
+          "<p class=\"text-gray-700 mb-4\">Bij het laatste punt geldt namelijk dat je niet onderzoek wilt gaan doen naar wat andere onderzoekers al hebben gedaan. Dat heeft geen zin.</p>",
+          "<p class=\"text-gray-700 mb-4\">Het uitvoeren van literatuuronderzoek wordt gestructureerd uitgevoerd en aan de hand van de kennisclips van het mediacentrum ga je zelf aan de slag. De kennis en vaardigheden die je hierna gaat opdoen zijn namelijk in alle fasen van het onderzoek van belang. We gaan ervanuit dat je de opgedane kennis ook straks kunt inzetten bij stage en bij afstuderen.</p>",
+          "<p class=\"text-gray-700 mb-4\">We starten bij het begin en veronderstellen dat we niet weten of je in een oriënterende of verdiepende fase zit. Je vraagt je af hoe en waar je kunt zoeken. Bekijk deze video die dit onderwerp goed introduceert.</p>"
+        ]
+      },
+      {
+        "type": "video",
+        "url": "https://www.youtube.com/embed/eLavUYuM_ec"
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "<p class=\"text-gray-700 mb-4 font-semibold\">Wat is Windesearch?</p>"
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "<p class=\"text-gray-700 mb-4\">In de vorige kennisclip zag je al een aantal mogelijkheden hoe je literatuur kunt vinden. De volgende kennisclip introduceert welke bronnen het mediacentrum heeft en hoe je deze bronnen kunt vinden.</p>"
+        ]
+      },
+      {
+        "type": "video",
+        "url": "https://www.youtube.com/embed/JQr6F_eMC-s"
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "<p class=\"text-gray-700 mb-4 font-semibold\">Welke bronnen biedt het Mediacentrum aan?</p>",
+          "<p class=\"text-gray-700 mb-4 font-semibold\">Wat is het voordeel van Windesearch?</p>",
+          "<p class=\"text-gray-700 mb-4 font-semibold\">Welke databank lijkt je nu nuttig en welke niet? Waarom?</p>"
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "<p class=\"text-gray-700 mb-4\">Voor je onderzoek gebruik je het liefst (semi)wetenschappelijke informatie. Deze (semi) wetenschappelijke informatie is namelijk meer betrouwbaar dan een nieuwsartikel of website die je via Google hebt gevonden. In de volgende kennisclip worden er drie manieren besproken om aan wetenschappelijke informatie te komen. Afsluitend wordt er in de kennisclip een koppeling tussen Windesearch en Google Scholar. Deze koppeling is essentieel voor je literatuuronderzoek.</p>"
+        ]
+      },
+      {
+        "type": "video",
+        "url": "https://www.youtube.com/embed/oCnqZRah4_0"
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "<p class=\"text-gray-700 mb-4 font-semibold\">Wat betekent precies Open Access in de context van wetenschappelijke literatuur?</p>"
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "<p class=\"text-gray-700 mb-4\">Inmiddels weet je waar je wetenschappelijke informatie kunt vinden maar kopieer je nu gewoon de belangrijkste begrippen uit de doelstelling of hoofdvraag in de zoekbalk? Hoe kun je nou gericht zoeken naar literatuur. In de vorige kennisclips zag je al veel mogelijkheden om gericht te zoeken naar type bestand of binnen een onderwerp. Deze selecties kunnen je al heel veel tijd besparen, maar er zijn nog meer mogelijkheden bijvoorbeeld door gebruik te maken van de juiste zoektermen. Goede zoektermen = goede zoekresultaten. Bekijk maar eens de volgende kennisclip.</p>"
+        ]
+      },
+      {
+        "type": "video",
+        "url": "https://www.youtube.com/embed/4P3jZuUZnkc"
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "<p class=\"text-gray-700 mb-4\">Zoals de vorige kennisclip al aangeeft kun je zoektermen combineren of uitsluiten met AND, OR en NOT. Dit zijn zogenoemde Booleaanse operatoren. Het gebruik van deze Booleaanse operatoren is van belang om het aantal zoekresultaten te beperken.</p>"
+        ]
+      },
+      {
+        "type": "video",
+        "url": "https://www.youtube.com/embed/bXR4dmm4m4A"
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "<p class=\"text-gray-700 mb-4\">Nu zou je kunnen starten met zoeken, maar dat pakken we nog wel met iets meer structuur aan door middel van de bouwsteenmethode. De volgende kennisclip helpt je daarbij. Daarna kun je voor je eigen onderzoek de tabel hieronder gebruiken.</p>"
+        ]
+      },
+      {
+        "type": "video",
+        "url": "https://www.youtube.com/embed/U-QMd92R1dk"
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "<p class=\"text-gray-700 mb-4\">Gebruik onderstaande tabel om de belangrijkste begrippen/elementen te analyseren voordat je gaat starten met zoeken. De tabel is een combinatie van de kennisclip over Zoektermen en de Bouwsteenmethode. De uitgewerkte tabel verwerk je in een aparte bijlage van je onderzoeksopzet.</p>"
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "<div class=\"overflow-x-auto mb-6\">",
+          "<table class=\"min-w-full border border-gray-300 rounded-lg\">",
+          "<thead class=\"bg-gray-100\">",
+          "<tr>",
+          "<th class=\"border border-gray-300 px-4 py-3 text-left text-sm font-semibold text-gray-900\">Zoekterm/Begrip/element</th>",
+          "<th class=\"border border-gray-300 px-4 py-3 text-left text-sm font-semibold text-gray-900\">Element 1</th>",
+          "<th class=\"border border-gray-300 px-4 py-3 text-left text-sm font-semibold text-gray-900\">Element ..</th>",
+          "<th class=\"border border-gray-300 px-4 py-3 text-left text-sm font-semibold text-gray-900\">Element n</th>",
+          "</tr>",
+          "</thead>",
+          "<tbody>",
+          "<tr>",
+          "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700\">Synoniemen</td>",
+          "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700\"></td>",
+          "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700\"></td>",
+          "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700\"></td>",
+          "</tr>",
+          "<tr>",
+          "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700\">Vertalingen</td>",
+          "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700\"></td>",
+          "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700\"></td>",
+          "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700\"></td>",
+          "</tr>",
+          "<tr>",
+          "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700\">Afkortingen</td>",
+          "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700\"></td>",
+          "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700\"></td>",
+          "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700\"></td>",
+          "</tr>",
+          "<tr>",
+          "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700\">Spellingsvormen</td>",
+          "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700\"></td>",
+          "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700\"></td>",
+          "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700\"></td>",
+          "</tr>",
+          "<tr>",
+          "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700\">Vaktermen</td>",
+          "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700\"></td>",
+          "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700\"></td>",
+          "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700\"></td>",
+          "</tr>",
+          "<tr>",
+          "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700\">Bredere termen</td>",
+          "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700\"></td>",
+          "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700\"></td>",
+          "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700\"></td>",
+          "</tr>",
+          "<tr>",
+          "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700\">Nauwere termen</td>",
+          "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700\"></td>",
+          "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700\"></td>",
+          "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700\"></td>",
+          "</tr>",
+          "</tbody>",
+          "</table>",
+          "</div>"
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "<div class=\"bg-blue-50 border-l-4 border-blue-500 p-4 rounded-r-lg mb-4\">",
+          "<h4 class=\"font-semibold text-blue-900 mb-2\">Opdracht ter voorbereiding op het college</h4>",
+          "<p class=\"text-blue-800 mb-2\">Bij de Oefenasus komt het begrip magazijnoptimalisatie naar voren. Ga voor dit begrip alvast een start maken met de bouwsteenmethode.</p>",
+          "<p class=\"text-blue-800 mb-0\"><strong>Neem een schaar mee naar het college.</strong></p>",
+          "</div>"
         ]
       }
     ]
   },
-  "video": {
-    "title": "Video",
-    "description": "[Video beschrijving]",
-    "url": "",
-    "info": "[Video informatie]"
+  "mcVragen": {
+    "title": "Test je kennis",
+    "description": "De onderstaande vragen zijn gegenereerd op basis van de theorie die je zojuist hebt gelezen. Beantwoord ze om te controleren of je de stof goed begrijpt.",
+    "generateFromTheory": true,
+    "numberOfQuestions": 3
   }
 }
 

@@ -42,6 +42,30 @@ if (!rootDir) {
 // Zet environment variable zodat server.js het kan gebruiken
 process.env.VERCEL_ROOT_DIR = rootDir;
 
+// Debug: log welke bestanden beschikbaar zijn
+console.log('=== Vercel Environment Debug ===');
+console.log(`__dirname: ${__dirname}`);
+console.log(`process.cwd(): ${process.cwd()}`);
+console.log(`rootDir: ${rootDir}`);
+
+// Probeer te zien welke bestanden beschikbaar zijn
+try {
+    const files = fs.readdirSync(rootDir);
+    console.log(`Files in rootDir (first 30):`, files.slice(0, 30));
+    const htmlFiles = files.filter(f => f.endsWith('.html'));
+    console.log(`HTML files found:`, htmlFiles);
+} catch (e) {
+    console.error(`Cannot read rootDir:`, e.message);
+}
+
+// Probeer ook /var/task
+try {
+    const varTaskFiles = fs.readdirSync('/var/task');
+    console.log(`Files in /var/task (first 30):`, varTaskFiles.slice(0, 30));
+} catch (e) {
+    console.log(`Cannot read /var/task:`, e.message);
+}
+
 const app = require('../server.js');
 
 module.exports = app;

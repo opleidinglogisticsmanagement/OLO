@@ -513,18 +513,47 @@ app.get(/\.html$/, (req, res, next) => {
     const fileName = req.path; // bijv. /week1.html, /instructies.html
     const filePath = path.join(rootDir, fileName);
     
-    // Check of bestand bestaat
-    if (fs.existsSync(filePath)) {
-        res.sendFile(filePath, {
-            root: rootDir
-        }, (err) => {
+    // Debug: log alle mogelijke paden
+    console.log(`Attempting to serve: ${fileName}`);
+    console.log(`rootDir: ${rootDir}`);
+    console.log(`filePath: ${filePath}`);
+    console.log(`__dirname: ${__dirname}`);
+    console.log(`process.cwd(): ${process.cwd()}`);
+    
+    // Probeer verschillende paden
+    const possiblePaths = [
+        filePath,
+        path.join('/var/task', fileName),
+        path.join(process.cwd(), fileName),
+        path.join(__dirname, fileName),
+    ];
+    
+    let foundPath = null;
+    for (const possiblePath of possiblePaths) {
+        if (fs.existsSync(possiblePath)) {
+            foundPath = possiblePath;
+            console.log(`✅ Found file at: ${foundPath}`);
+            break;
+        }
+    }
+    
+    if (foundPath) {
+        res.sendFile(foundPath, (err) => {
             if (err) {
                 console.error(`Error serving ${fileName}:`, err);
                 next(err);
             }
         });
     } else {
-        console.error(`File not found: ${filePath} (rootDir: ${rootDir}, requested: ${req.path})`);
+        console.error(`❌ File not found: ${fileName}`);
+        console.error(`Tried paths:`, possiblePaths);
+        // List files in rootDir for debugging
+        try {
+            const files = fs.readdirSync(rootDir);
+            console.error(`Files in ${rootDir}:`, files.slice(0, 20));
+        } catch (e) {
+            console.error(`Cannot read directory ${rootDir}:`, e.message);
+        }
         res.status(404).send(`File not found: ${fileName}`);
     }
 });

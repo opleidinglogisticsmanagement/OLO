@@ -563,13 +563,118 @@ app.get(/\.html$/, (req, res, next) => {
     }
 });
 
-// Serve static files (CSS, JS, images, etc.) - maar NIET HTML (die handlen we hierboven)
+// Serve static files (CSS, JS, images, JSON, etc.) - maar NIET HTML (die handlen we hierboven)
+// Belangrijk: JavaScript bestanden moeten beschikbaar zijn voor de HTML pagina's
 app.use(express.static(rootDir, { 
     index: false, // We handlen index.html expliciet
     dotfiles: 'ignore',
     etag: true,
-    lastModified: true
+    lastModified: true,
+    maxAge: '1y' // Cache static files for 1 year
 }));
+
+// Expliciete route voor JavaScript bestanden (fallback als static middleware faalt)
+app.get(/\.js$/, (req, res, next) => {
+    const fileName = req.path.replace(/^\//, ''); // bijv. pages/Week2LessonPage.js
+    const filePath = path.join(rootDir, fileName);
+    
+    // Probeer verschillende paden
+    const possiblePaths = [
+        filePath,
+        path.join('/var/task', fileName),
+        path.join(process.cwd(), fileName),
+        path.join(__dirname, fileName),
+    ];
+    
+    let foundPath = null;
+    for (const possiblePath of possiblePaths) {
+        if (fs.existsSync(possiblePath)) {
+            foundPath = possiblePath;
+            break;
+        }
+    }
+    
+    if (foundPath) {
+        res.setHeader('Content-Type', 'application/javascript; charset=utf-8');
+        res.sendFile(foundPath, (err) => {
+            if (err) {
+                console.error(`Error serving JS file ${fileName}:`, err);
+                next(err);
+            }
+        });
+    } else {
+        console.error(`❌ JS file not found: ${fileName}`);
+        res.status(404).send(`// File not found: ${fileName}`);
+    }
+});
+
+// Expliciete route voor JSON bestanden (content files)
+app.get(/\.json$/, (req, res, next) => {
+    const fileName = req.path.replace(/^\//, ''); // bijv. content/week2.content.json
+    const filePath = path.join(rootDir, fileName);
+    
+    // Probeer verschillende paden
+    const possiblePaths = [
+        filePath,
+        path.join('/var/task', fileName),
+        path.join(process.cwd(), fileName),
+        path.join(__dirname, fileName),
+    ];
+    
+    let foundPath = null;
+    for (const possiblePath of possiblePaths) {
+        if (fs.existsSync(possiblePath)) {
+            foundPath = possiblePath;
+            break;
+        }
+    }
+    
+    if (foundPath) {
+        res.setHeader('Content-Type', 'application/json; charset=utf-8');
+        res.sendFile(foundPath, (err) => {
+            if (err) {
+                console.error(`Error serving JSON file ${fileName}:`, err);
+                next(err);
+            }
+        });
+    } else {
+        console.error(`❌ JSON file not found: ${fileName}`);
+        res.status(404).json({ error: `File not found: ${fileName}` });
+    }
+});
+
+// Expliciete route voor config.js (kan in .gitignore staan)
+app.get('/config.js', (req, res, next) => {
+    const possiblePaths = [
+        path.join(rootDir, 'config.js'),
+        path.join('/var/task', 'config.js'),
+        path.join(process.cwd(), 'config.js'),
+    ];
+    
+    let foundPath = null;
+    for (const possiblePath of possiblePaths) {
+        if (fs.existsSync(possiblePath)) {
+            foundPath = possiblePath;
+            break;
+        }
+    }
+    
+    if (foundPath) {
+        res.setHeader('Content-Type', 'application/javascript; charset=utf-8');
+        res.sendFile(foundPath, (err) => {
+            if (err) {
+                console.error('Error serving config.js:', err);
+                // Als config.js niet bestaat, stuur een lege config
+                res.setHeader('Content-Type', 'application/javascript; charset=utf-8');
+                res.send('// Config file not found');
+            }
+        });
+    } else {
+        // Stuur een lege config als fallback
+        res.setHeader('Content-Type', 'application/javascript; charset=utf-8');
+        res.send('// Config file not found');
+    }
+});
 
 // Export voor Vercel serverless
 module.exports = app;

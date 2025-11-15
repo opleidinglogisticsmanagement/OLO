@@ -58,6 +58,8 @@ class ContentRenderer {
                     return this.renderClickableSteps(item);
                 case 'tabs':
                     return this.renderTabs(item);
+                case 'conceptQualityChecklist':
+                    return this.renderConceptQualityChecklist(item);
                 default:
                     console.warn(`Unknown content type: ${item.type}`);
                     return '';
@@ -321,11 +323,12 @@ class ContentRenderer {
     /**
      * Render accordion component (delegates to InteractiveRenderer)
      * @param {Object} item - Accordion item
+     * @param {boolean} isNested - Whether this accordion is nested (passed through from parent)
      * @returns {string} HTML string
      */
-    static renderAccordion(item) {
+    static renderAccordion(item, isNested = false) {
         if (typeof window.InteractiveRenderer !== 'undefined') {
-            return InteractiveRenderer.renderAccordion(item);
+            return InteractiveRenderer.renderAccordion(item, isNested);
         }
         console.warn('InteractiveRenderer not loaded. Accordion will not render.');
         return '';
@@ -426,6 +429,19 @@ class ContentRenderer {
             return InteractiveRenderer.renderTabs(item);
         }
         console.warn('InteractiveRenderer not loaded. Tabs will not render.');
+        return '';
+    }
+
+    /**
+     * Render concept quality checklist component (delegates to InteractiveRenderer)
+     * @param {Object} item - Concept quality checklist item
+     * @returns {string} HTML string
+     */
+    static renderConceptQualityChecklist(item) {
+        if (typeof window.InteractiveRenderer !== 'undefined') {
+            return InteractiveRenderer.renderConceptQualityChecklist(item);
+        }
+        console.warn('InteractiveRenderer not loaded. Concept quality checklist will not render.');
         return '';
     }
 }

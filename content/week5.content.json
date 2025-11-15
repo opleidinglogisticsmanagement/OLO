@@ -2,7 +2,7 @@
   "intro": {
     "title": "Week 5",
     "subtitle": "Uitvoeren literatuuronderzoek + Theoretisch kader",
-    "description": "[Beschrijving komt hier]"
+    "description": "In deze week leer je hoe je literatuuronderzoek daadwerkelijk uitvoert en hoe je de gevonden kennis structureert in een theoretisch kader. Je ontdekt hoe je relevante bronnen selecteert, analyseert en hoe je verschillende theorieën met elkaar confronteert om tot een onderbouwd theoretisch kader te komen.<br><br>Vanuit het vorige college heb je begripsbepalingen inclusief visualisaties opgeleverd en een zoekplan voor je literatuuronderzoek opgesteld (gebaseerd op het zoekplan literatuuronderzoek van het MMC).<br><br>Op basis van die output gaan we in week 5 verder met het daadwerkelijk uitvoeren van het literatuuronderzoek, het analyseren van de resultaten, en het vaststellen van je theoretisch kader volgens het principe van breed naar smal.<br><br>Het doel van deze week is dat je in staat bent om je theoretisch kader te gaan schrijven. In het theoretisch kader leer je verschillende theorieën of theoretische concepten met elkaar te confronteren, waardoor je een onderbouwde basis legt voor je onderzoek.<br><br>Voor het werkcollege van week 5 ga jij je verdiepen in de manier waarop je literatuuronderzoek systematisch uitvoert en hoe je de gevonden kennis structureert in een theoretisch kader. Je leert hoe je bronnen kritisch beoordeelt en analyseert, en hoe je deze kennis gebruikt om je onderzoeksmodel te onderbouwen. Bestudeer voor aanvang van het college de theorie."
   },
   "leerdoelen": {
     "title": "Leerdoelen",
@@ -12,12 +12,201 @@
     "interactive": false
   },
   "theorie": {
-    "title": "Theorie",
+    "title": "Onderzoek uitvoeren",
     "content": [
       {
         "type": "paragraph",
         "text": [
-          "[Theorie content komt hier]"
+          "Met de theorie van week 4 ben je in staat om heel gericht te zoeken naar (semi)wetenschappelijke informatie. Maar niet alles is relevant en niet alles is belangrijk. Het is voor jou als onderzoeker van belang om daar onderscheid in te maken.",
+          "De volgende kennisclip geeft een aantal handvatten hoe je dit onderscheid kunt maken. Je leert over een 1e check en een 2e check. Daarnaast komt er nog een CRAP test voorbij voor internetbronnen. Schrijf voor jezelf de belangrijkste punten op van de 1e en 2e check."
+        ]
+      },
+      {
+        "type": "video",
+        "url": "https://www.youtube.com/embed/DprvcWYcIyQ"
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "<strong>LET OP:</strong> In de video gaat het over de 3e versie van de herziene American Psychological Association (APA)-richtlijnen. Die richtlijnen vind je op <a href=\"https://auteursrechten.nl/bronvermelding/handleiding-de-apa-richtlijnen-uitgelegd/\" target=\"_blank\" class=\"text-blue-600 hover:text-blue-800 underline\">deze website</a>. Als je de digitale richtlijnen gebruikt kun je heel eenvoudig zoeken (gebruik de knoppen CTRL + F) als je bijvoorbeeld wilt weten hoe je nou een interview moet verwerken als referentie in de tekst EN in de literatuurlijst."
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "De kennisclip eindigt met het zoekplan literatuuronderzoek. Daar ben je feitelijk al mee begonnen door zoektermen te zoeken en de tabel in te vullen. Nu ga je ook daadwerkelijk op zoek naar literatuur.",
+          "Noteer de gegevens van de informatie waarvan je denkt dat die bruikbaar zijn voor je onderzoek. Bronnen die interessant zijn en de 1e check doorkomen ga je beoordelen aan de hand van de 2e check. Als bronnen ook de tweede check doorkomen ga je de bron opslaan. Hieronder kun je meer lezen over het opslaan van bronnen en hoe je dat supersimpel kunt organiseren. Van alle (semi)wetenschappelijke bronnen die de 1e en 2e check doorkomen en voor internetbronnen die de CRAP test doorkomen maak je een overzicht. Gebruik daarvoor onderstaande tabellen."
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "<h3 class=\"text-xl font-semibold text-gray-900 mb-4\">(Semi)wetenschappelijke literatuur</h3>",
+          "<div class=\"overflow-x-auto mb-6\">",
+          "<table class=\"min-w-full border border-gray-300 rounded-lg\">",
+          "<thead class=\"bg-gray-100\">",
+          "<tr>",
+          "<th class=\"border border-gray-300 px-4 py-3 text-left text-sm font-semibold text-gray-900\">Criteria</th>",
+          "<th class=\"border border-gray-300 px-4 py-3 text-left text-sm font-semibold text-gray-900\">Autoriteit</th>",
+          "<th class=\"border border-gray-300 px-4 py-3 text-left text-sm font-semibold text-gray-900\">Actualiteit</th>",
+          "<th class=\"border border-gray-300 px-4 py-3 text-left text-sm font-semibold text-gray-900\">Objectiviteit</th>",
+          "<th class=\"border border-gray-300 px-4 py-3 text-left text-sm font-semibold text-gray-900\">Nauwkeurigheid</th>",
+          "</tr>",
+          "</thead>",
+          "<tbody>",
+          "<tr>",
+          "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700 font-medium\">Titel + bron</td>",
+          "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700\">Wat kun je zeggen over de auteur?</td>",
+          "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700\">Is het actueel genoeg?</td>",
+          "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700\">Is de informatie objectief?</td>",
+          "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700\">Hoe nauwkeurig is de informatie?</td>",
+          "</tr>",
+          "<tr>",
+          "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700\">Nr 1.</td>",
+          "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700\"></td>",
+          "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700\"></td>",
+          "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700\"></td>",
+          "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700\"></td>",
+          "</tr>",
+          "<tr>",
+          "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700\">Nr …</td>",
+          "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700\"></td>",
+          "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700\"></td>",
+          "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700\"></td>",
+          "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700\"></td>",
+          "</tr>",
+          "<tr>",
+          "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700\">Nr n</td>",
+          "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700\"></td>",
+          "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700\"></td>",
+          "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700\"></td>",
+          "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700\"></td>",
+          "</tr>",
+          "</tbody>",
+          "</table>",
+          "</div>"
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "<h3 class=\"text-xl font-semibold text-gray-900 mb-4\">Internetbronnen</h3>",
+          "<div class=\"overflow-x-auto mb-6\">",
+          "<table class=\"min-w-full border border-gray-300 rounded-lg\">",
+          "<thead class=\"bg-gray-100\">",
+          "<tr>",
+          "<th class=\"border border-gray-300 px-4 py-3 text-left text-sm font-semibold text-gray-900\">Criteria</th>",
+          "<th class=\"border border-gray-300 px-4 py-3 text-left text-sm font-semibold text-gray-900\">Currency</th>",
+          "<th class=\"border border-gray-300 px-4 py-3 text-left text-sm font-semibold text-gray-900\">Reliability</th>",
+          "<th class=\"border border-gray-300 px-4 py-3 text-left text-sm font-semibold text-gray-900\">Authority</th>",
+          "<th class=\"border border-gray-300 px-4 py-3 text-left text-sm font-semibold text-gray-900\">Purpose</th>",
+          "</tr>",
+          "</thead>",
+          "<tbody>",
+          "<tr>",
+          "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700 font-medium\">Titel + bron</td>",
+          "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700\">Wanneer is de pagina geschreven? Is de informatie nog actueel voor het onderzoek?</td>",
+          "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700\">Wordt er een specifieke mening verkondigd? Worden er ook referenties gebruikt?</td>",
+          "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700\">Wie heeft het geschreven? Waaruit blijkt deskundigheid?<br>Klopt de URL? Kun je contact opnemen?</td>",
+          "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700\">Wat is het doel van de auteur/organisatie?<br>Waarvoor is de informatie bedoeld? Hoe objectief is het?</td>",
+          "</tr>",
+          "<tr>",
+          "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700\">Nr 1.</td>",
+          "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700\"></td>",
+          "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700\"></td>",
+          "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700\"></td>",
+          "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700\"></td>",
+          "</tr>",
+          "<tr>",
+          "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700\">Nr …</td>",
+          "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700\"></td>",
+          "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700\"></td>",
+          "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700\"></td>",
+          "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700\"></td>",
+          "</tr>",
+          "<tr>",
+          "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700\">Nr n</td>",
+          "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700\"></td>",
+          "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700\"></td>",
+          "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700\"></td>",
+          "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700\"></td>",
+          "</tr>",
+          "</tbody>",
+          "</table>",
+          "</div>"
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "<h3 class=\"text-xl font-semibold text-gray-900 mb-4\">Bronnen opslaan met behulp van een reference organizer</h3>",
+          "Er bestaat software om georganiseerd je bronnen bij te houden. Met een simpele klik kun je van websites en van (semi)wetenschappelijke literatuur alle benodigde informatie voor een referentie opslaan. Voorbeelden van software die dat kunnen zijn bijvoorbeeld Mendeley en Zotero. Maar er zijn veel meer voorbeelden. Bekijk voor de aardigheid maar eens gewoon <a href=\"https://en.wikipedia.org/wiki/Comparison_of_reference_management_software\" target=\"_blank\" class=\"text-blue-600 hover:text-blue-800 underline\">Wikipedia</a>, waarin je mooi overzichtelijk kunt welke verschillende typen software er zijn en welke mogelijkheden ze bieden.",
+          "We focussen ons in dit vak op Zotero omdat het gratis software is en werkt op verschillende Browsers. Uiteraard mag je ook andere software gebruiken. Voor nu wijzen we op deze instructievideo van Zotero voor de installatie. In een van de colleges kunnen we dan vervolgens aan jullie demonstreren hoe het werkt en wat de verdere voordelen zijn. De investering die je nu maakt in reference organizer gaat zich dubbel en dwars uitbetalen."
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "<div class=\"max-w-2xl mx-auto mb-6\">",
+          "<div class=\"rounded-lg overflow-hidden\">",
+          "<iframe width=\"100%\" height=\"315\" src=\"https://www.youtube.com/embed/JG7Uq_JFDzE\" title=\"Zotero installatie instructie\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen class=\"w-full aspect-video\"></iframe>",
+          "</div>",
+          "</div>"
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "<h3 class=\"text-xl font-semibold text-gray-900 mb-4\">Schrijven van het theoretisch kader</h3>",
+          "Als onderzoeker heb je net de begripsbepaling van de kernbegrippen afgerond en heb je literatuuronderzoek verricht. Als het literatuuronderzoek goed is uitgevoerd kun je het theoretisch kader gaan schrijven. De vraag is alleen wanneer weet je nu of het literatuuronderzoek goed is uitgevoerd? Je kunt namelijk altijd op zoek gaan naar meer bronnen en meer informatie alleen is dat niet realistisch.",
+          "Je zult dus een afweging gaan maken of je voldoende bronnen hebt gevonden en of die in voldoende mate de beweringen, die je gaat maken in het theoretisch kader, kunnen aantonen. Dat betekent dat je tijdens het schrijven van het theoretisch kader ook tot het inzicht kunt komen dat er meer literatuur nodig is. Tijdens het schrijven van het theoretisch kader kun je daarom een aantal aspecten monitoren waarmee je de kwaliteit van het theoretisch kader kunt borgen."
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "<ol class=\"list-decimal list-outside space-y-3 mb-4 ml-6 pl-4\">",
+          "<li class=\"text-gray-700 mb-2\">Per bewering die je maakt voeg je het liefst twee of meer bronnen toe die de bewering ondersteunen. Deze bronnen zijn allemaal uniek en refereren niet naar elkaar.</li>",
+          "<li class=\"text-gray-700 mb-2\">Kun je aantoonbaar maken dat je de meest relevante literatuur hebt gevonden en dat je dus niet het wiel opnieuw aan het uitvinden bent?</li>",
+          "<li class=\"text-gray-700 mb-2\">Heb je zelf het idee dat je door het schrijven boven het onderzoek bent komen te staan? Dat kun je bepalen door naar:<br>",
+          "<span class=\"ml-4\">a. Het onderzoeksmodel. Is het nodig om het model nog aan te passen naar aanleiding van het literatuuronderzoek?</span><br>",
+          "<span class=\"ml-4\">b. Het conceptueel model. Als je bijvoorbeeld beoordelingscriteria nodig hebt voor het beoordelen van een proces, dan zul je in het theoretisch kader al een duidelijk beeld geschetst moeten hebben van die beoordelingscriteria.</span>",
+          "</li>",
+          "<li class=\"text-gray-700 mb-2\">Uit het theoretisch kader moet blijken dat je de juiste literatuur hebt gevonden en geen aspecten over het hoofd hebt gezien. Dus is het misschien ook nodig om te schrijven over het ontbreken van bronnen.</li>",
+          "<li class=\"text-gray-700 mb-2\">Werkt het theoretisch kader uiteindelijk naar een knowledge gap toe waarmee het belang van het onderzoek wordt aangetoond?</li>",
+          "</ol>",
+          "Dit zijn de aspecten waar je op kunt letten tijdens het schrijven van een theoretisch kader. Als het theoretisch kader straks af is, dan is het goed om de aspecten nog eens bij langs te gaan en te beantwoorden voor jezelf."
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "Nu weet je waar je bij het schrijven van het theoretisch kader op moet letten, maar hoe kan het schrijven van een theoretisch kader praktisch worden aangepakt? Hoe kan er een begin gemaakt worden? Hoe kan het theoretisch kader ingedeeld worden? Etc. Deze vragen worden hieronder beantwoord."
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "<h4 class=\"text-lg font-semibold text-gray-900 mb-2\">Kennisclip: Hoe schrijf je een theoretisch kader?</h4>"
+        ]
+      },
+      {
+        "type": "video",
+        "url": "https://media.windesheim.nl/Mediasite/Play/83ccdecfba694c0c829fa787df3bc1dd1d"
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "In de kennisclip heb je gezien hoe je het schrijven van een theoretisch kader kunt aanpakken.",
+          "Er wordt in de kennisclip ook aangegeven om je niet in details te verliezen. Jezelf verliezen in details zou kunnen door een opsomming van gegevens uit databanken te geven. Hoewel de gegevens van belang kunnen zijn voor het onderzoek horen ze niet thuis in een theoretisch kader. Gegevens uit databanken kunnen beter gepresenteerd worden in het dataverzamelingsplan. Je kunt dan ook gelijk laten zien hoe je de databank denkt in te zetten binnen het onderzoek.",
+          "Een andere manier om de kostbare tijd te verdoen en jezelf te verliezen in details kan door het uitleggen van theoretische modellen. Een uitleg van de werking van de Pareto analyse is namelijk niet nodig. Het is veel interessanter om toe te lichten hoe de Pareto analyse gaat bijdragen aan het beantwoorden van een specifieke deelvraag. Let erop dat het theoretisch kader in ieder geval geen opsomming is van de technieken en instrumenten uit de Leantheorie wordt. Dat is geen theoretisch kader.",
+          "De inzichten die je hebt opgedaan bij het schrijven van het theoretisch kader kun je ook samenvatten in een schema. Een schema kan helpen om jou zelf en/of deze lezer beter inzicht te verschaffen in het onderzoek. Je kunt ook naar aanleiding van je theoretisch kader het onderzoeksmodel aanpassen."
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "Tot zover de theorie ter voorbereiding op het werkcollege van week 5."
         ]
       }
     ]

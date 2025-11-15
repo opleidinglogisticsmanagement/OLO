@@ -6,9 +6,11 @@
   },
   "leerdoelen": {
     "title": "Leerdoelen",
-    "description": "Formuleer hier de leerdoelen voor deze week. Leerdoelen beschrijven wat studenten na het doorlopen van deze module kunnen doen. Wacht met het formuleren van leerdoelen totdat alle theoriecontent is toegevoegd, zodat je kunt controleren of de leerdoelen de complete theorie beslaan.",
-    "instruction": "Voeg hier leerdoelen toe die de complete theorie van deze week beslaan. Formuleer leerdoelen pas wanneer alle content is toegevoegd.",
-    "items": [],
+    "items": [
+      "Je kunt begrippen definiëren door ze vast te stellen, uiteen te rafelen in dimensies/aspecten/deelaspecten, een selectie te maken en de kwaliteit te beoordelen aan de hand van afbakening, operationalisatie en aansluiting.",
+      "Je kunt Windesearch gebruiken om wetenschappelijke literatuur te vinden en effectieve zoektermen formuleren met behulp van de bouwsteenmethode.",
+      "Je kunt Booleaanse operatoren (AND, OR, NOT) en haakjes gebruiken om gerichte zoekopdrachten te formuleren."
+    ],
     "interactive": false
   },
   "theorie": {
@@ -100,7 +102,108 @@
                 "url": "https://media.windesheim.nl/Mediasite/Play/4599a393a4ff42388faf49ba25476fc71d"
               },
               "<p class=\"text-gray-700 mb-4\">Het begrip dat een omschrijving moet krijgen bestaat uit verschillende onderdelen. Ten eerste bestaat een begrip uit dimensies. De dimensies van het begrip bestaan uit verschillende aspecten. En de aspecten kunnen weer uit deelaspecten bestaan. Zo ontstaan er verschillende vertakkingen.</p>",
-              "<p class=\"text-gray-700 mb-4\">Een andere manier om van een onderwerp alle mogelijke onderdelen te vinden is door gebruik te maken van GenAI. Zie door middel van dit voorbeeld (Scroll naar beneden voor de laatste prompt) hoe dat mogelijk is bij het begrip \"Werknemerstevredenheid van chauffeurs\". Met deze output kun je een eind komen bij het definiëren van het begrip. Je kunt het ook omdraaien en ChatGPT vragen om drie specifieke begripsomschrijvingen te geven van een begrip. Deze omschrijvingen kun je vervolgens als inspiratie gebruiken.</p>"
+              {
+                "type": "accordion",
+                "usePlusIcon": true,
+                "defaultOpen": false,
+                "items": [
+                  {
+                    "title": "Oefening: GenAI gebruiken om een begrip uiteen te rafelen",
+                    "defaultOpen": false,
+                    "content": [
+                      "<p class=\"text-gray-700 mb-4\">Een andere manier om van een onderwerp alle mogelijke onderdelen te vinden is door gebruik te maken van GenAI. In deze oefening ga je zelf een prompt schrijven waarmee je GenAI kunt gebruiken om een begrip uiteen te rafelen in dimensies, aspecten en deelaspecten.</p>",
+                      "<p class=\"text-gray-700 mb-4\"><strong>Opdracht:</strong> Kies een begrip uit je eigen onderzoek of gebruik een voorbeeldbegrip zoals \"Werknemerstevredenheid van chauffeurs\". Schrijf een prompt voor GenAI (bijvoorbeeld ChatGPT) waarmee je dit begrip kunt uiteenrafelen in dimensies, aspecten en deelaspecten.</p>",
+                      "<p class=\"text-gray-700 mb-4\">Probeer eerst zelf een prompt te formuleren. Denk na over wat je GenAI precies moet vragen en hoe je de output wilt structureren.</p>",
+                      {
+                        "type": "accordion",
+                        "usePlusIcon": true,
+                        "defaultOpen": false,
+                        "items": [
+                          {
+                            "title": "💡 Hint: Hoe stel je een goede prompt op?",
+                            "defaultOpen": false,
+                            "content": [
+                              "<p class=\"text-gray-700 mb-4\">Als je het moeilijk vindt om een prompt te formuleren, kun je de prompt opstellen in verschillende delen:</p>",
+                              "<ol class=\"list-decimal list-inside space-y-3 mb-4 ml-4\">",
+                              "<li class=\"text-gray-700 mb-2\"><strong>Taak:</strong> Wat moet GenAI doen? Beschrijf duidelijk wat je van GenAI verwacht (bijvoorbeeld: \"Rafel het begrip X uiteen in dimensies, aspecten en deelaspecten\").</li>",
+                              "<li class=\"text-gray-700 mb-2\"><strong>Context:</strong> Geef relevante achtergrondinformatie zoals je probleemstelling en doelstelling. Dit helpt GenAI om het begrip in de juiste context te plaatsen.</li>",
+                              "<li class=\"text-gray-700 mb-2\"><strong>Structuur van de output:</strong> Beschrijf hoe je wilt dat de output eruitziet. Bijvoorbeeld: \"Geef de output in een boomstructuur met dimensies, aspecten en deelaspecten duidelijk onderscheiden\".</li>",
+                              "<li class=\"text-gray-700 mb-2\"><strong>Voorbeeld:</strong> (optioneel, misschien nu nog niet beschikbaar) Geef een voorbeeld van hoe de output eruit zou moeten zien.</li>",
+                              "<li class=\"text-gray-700 mb-2\"><strong>Rol en toon:</strong> Beschrijf welke rol GenAI moet aannemen (bijvoorbeeld: \"Je bent een expert in logistiek onderzoek\") en welke toon gebruikt moet worden.</li>",
+                              "</ol>",
+                              "<p class=\"text-gray-700 mb-4\">Door je prompt op te delen in deze onderdelen, maak je het voor GenAI duidelijker wat je precies nodig hebt en krijg je betere resultaten.</p>"
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "type": "accordion",
+                        "usePlusIcon": true,
+                        "defaultOpen": false,
+                        "items": [
+                          {
+                            "title": "📋 Bekijk een voorbeelduitwerking",
+                            "defaultOpen": false,
+                            "content": [
+                              "<p class=\"text-gray-700 mb-4\">Hieronder zie je een voorbeeld van hoe een prompt en de bijbehorende output eruit kunnen zien. Gebruik dit als inspiratie voor je eigen prompt.</p>",
+                              "<div class=\"mb-4\">",
+                              "<h4 class=\"text-lg font-semibold text-gray-900 mb-4\">Voorbeeld prompt:</h4>",
+                              "<div class=\"space-y-4 italic text-gray-700\">",
+                              "<div class=\"mb-4\">",
+                              "<h5 class=\"font-semibold text-gray-900 mb-2 not-italic\">Taak</h5>",
+                              "<p class=\"mb-2\">Raf het begrip werknemerstevredenheid van chauffeurs uiteen in dimensies, aspecten en deelaspecten.</p>",
+                              "<p class=\"mb-2\">Een dimensie is een hoofdcategorie waaruit het begrip bestaat (bijvoorbeeld werkdruk, communicatie, beloning).</p>",
+                              "<p class=\"mb-2\">Een aspect is een onderdeel binnen zo'n dimensie.</p>",
+                              "<p class=\"mb-2\">Een deelaspect is een concreet, waarneembaar element binnen een aspect (bijvoorbeeld \"frequentie van feedbackgesprekken\").</p>",
+                              "<p class=\"mb-0\">Gebruik hiervoor literatuur en/of logische redenering. Het doel is om de inhoud van het begrip zichtbaar te maken, zodat later een definitie en meetbare indicatoren gekozen kunnen worden.</p>",
+                              "</div>",
+                              "<div class=\"mb-4\">",
+                              "<h5 class=\"font-semibold text-gray-900 mb-2 not-italic\">Context</h5>",
+                              "<p class=\"mb-0\">Bij een logistieke dienstverlener ontstaan spanningen tussen management en chauffeurs. Het management werkt met dashboards om processen te sturen, maar merkt dat chauffeurs data onvolledig invullen. Chauffeurs ervaren dat zij te veel tijd kwijt zijn aan administratie (ongeveer 25% van hun werktijd) en vragen zich af waarom dit niet verder geautomatiseerd wordt. Hierdoor is een kloof ontstaan: minder communicatie, lagere winstgevendheid en ontevreden chauffeurs.</p>",
+                              "</div>",
+                              "<div class=\"mb-4\">",
+                              "<h5 class=\"font-semibold text-gray-900 mb-2 not-italic\">Doelstelling</h5>",
+                              "<p class=\"mb-0\">Het doel van het onderzoek is om drie aanbevelingen te doen waarmee de werknemerstevredenheid met 20 % kan worden verhoogd (t.o.v. een nulmeting) en verspillingen in de informatiestroom tussen management en chauffeurs worden geëlimineerd, door vóór 31 januari 2025 de huidige administratieve processen en het gebruik van technologie te analyseren en minstens vier automatiseringsopties te beoordelen met stakeholders via een gewogen factorscore-methode.</p>",
+                              "</div>",
+                              "<div class=\"mb-4\">",
+                              "<h5 class=\"font-semibold text-gray-900 mb-2 not-italic\">Structuur van de output</h5>",
+                              "<p class=\"mb-2\">Lever de output aan in een tabel met vier kolommen:</p>",
+                              "<div class=\"overflow-x-auto mb-2 not-italic\">",
+                              "<table class=\"min-w-full border border-gray-300 rounded-lg\">",
+                              "<thead class=\"bg-gray-100\">",
+                              "<tr>",
+                              "<th class=\"border border-gray-300 px-4 py-2 text-left text-sm font-semibold text-gray-900\">Begrip</th>",
+                              "<th class=\"border border-gray-300 px-4 py-2 text-left text-sm font-semibold text-gray-900\">Dimensies</th>",
+                              "<th class=\"border border-gray-300 px-4 py-2 text-left text-sm font-semibold text-gray-900\">Aspecten</th>",
+                              "<th class=\"border border-gray-300 px-4 py-2 text-left text-sm font-semibold text-gray-900\">Deelaspecten</th>",
+                              "</tr>",
+                              "</thead>",
+                              "</table>",
+                              "</div>",
+                              "</div>",
+                              "<div class=\"mb-4\">",
+                              "<h5 class=\"font-semibold text-gray-900 mb-2 not-italic\">Tips</h5>",
+                              "<ul class=\"list-disc list-inside space-y-2 ml-4\">",
+                              "<li>Denk vanuit het perspectief van chauffeurs: wat beïnvloedt hun tevredenheid in hun werk?</li>",
+                              "<li>Beperk je tot onderdelen die relevant zijn voor het probleem (administratieve lasten, communicatie, gebruik van technologie).</li>",
+                              "<li>Benoem enkel concrete, observeerbare deelaspecten die later meetbaar kunnen zijn.</li>",
+                              "</ul>",
+                              "</div>",
+                              "<div class=\"mb-0\">",
+                              "<h5 class=\"font-semibold text-gray-900 mb-2 not-italic\">Rol en toon</h5>",
+                              "<p class=\"mb-0\">Je schrijft vanuit de rol van een hbo-student Logistiek Management.</p>",
+                              "<p class=\"mb-0\">Gebruik een nuchtere, praktische toon die past bij een onderzoeksopzet: helder, logisch en zonder vakjargon of academische formuleringen.</p>",
+                              "</div>",
+                              "</div>",
+                              "</div>"
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
             ]
           },
           {

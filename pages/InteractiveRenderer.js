@@ -9,9 +9,10 @@ class InteractiveRenderer {
     /**
      * Render een accordion component
      * @param {Object} item - Accordion item met items array
+     * @param {boolean} isNested - Whether this accordion is nested inside another accordion
      * @returns {string} HTML string
      */
-    static renderAccordion(item) {
+    static renderAccordion(item, isNested = false) {
         if (!item.items || !Array.isArray(item.items) || item.items.length === 0) {
             console.warn('Accordion item missing items array:', item);
             return '';
@@ -29,14 +30,32 @@ class InteractiveRenderer {
             // Render content - can be string, array of strings, or array of content items
             let contentHtml = '';
             if (Array.isArray(accordionItem.content)) {
-                // Check if it's an array of content items (objects with type property) or strings
-                const isContentItems = accordionItem.content.length > 0 && 
-                    typeof accordionItem.content[0] === 'object' && 
-                    accordionItem.content[0].type !== undefined;
+                // Check if it contains any content items (objects with type property)
+                const hasContentItems = accordionItem.content.some(item => 
+                    typeof item === 'object' && 
+                    item !== null && 
+                    item.type !== undefined
+                );
                 
-                if (isContentItems && typeof window.ContentRenderer !== 'undefined') {
-                    // Render as content items
-                    contentHtml = ContentRenderer.renderContentItems(accordionItem.content);
+                if (hasContentItems && typeof window.ContentRenderer !== 'undefined') {
+                    // Render as content items (can be mixed with strings)
+                    contentHtml = accordionItem.content.map(item => {
+                        if (typeof item === 'object' && item !== null && item.type !== undefined) {
+                            // It's a content item, render it
+                            // If it's an accordion, mark it as nested
+                            if (item.type === 'accordion') {
+                                return InteractiveRenderer.renderAccordion(item, true);
+                            }
+                            return ContentRenderer.renderContentItems([item]);
+                        } else if (typeof item === 'string') {
+                            // It's a string, render as HTML if it starts with <, otherwise as paragraph
+                            if (item.trim().startsWith('<')) {
+                                return item; // Already HTML
+                            }
+                            return `<p class="text-gray-700 mb-3">${item}</p>`;
+                        }
+                        return '';
+                    }).join('');
                 } else {
                     // Render as strings
                     contentHtml = accordionItem.content.map(text => {
@@ -55,25 +74,36 @@ class InteractiveRenderer {
                 ? `fas fa-plus transform transition-transform duration-200 ${isOpen ? 'rotate-45' : ''} text-gray-600`
                 : `fas fa-chevron-down transform transition-transform duration-200 ${isOpen ? 'rotate-180' : ''} text-gray-600`;
 
+            // Different styling for nested accordions (like clickable steps - no border, seamless)
+            const containerClass = isNested 
+                ? `mb-3 overflow-hidden` 
+                : `border border-gray-200 rounded-lg mb-3 overflow-hidden`;
+            const buttonClass = isNested
+                ? `w-full px-6 py-4 bg-gray-100 hover:bg-gray-200 transition-colors duration-200 flex items-center justify-between text-left font-semibold text-lg text-gray-600`
+                : `w-full px-6 py-4 bg-gray-50 hover:bg-gray-100 transition-colors duration-200 flex items-center justify-between text-left`;
+            const contentBgClass = isNested
+                ? `bg-white`
+                : `bg-white`;
+
             return `
-                <div class="border border-gray-200 rounded-lg mb-3 overflow-hidden">
+                <div class="${containerClass}">
                     <button
-                        class="w-full px-6 py-4 bg-gray-50 hover:bg-gray-100 transition-colors duration-200 flex items-center justify-between text-left"
+                        class="${buttonClass}"
                         onclick="InteractiveRenderer.toggleAccordion('${contentId}', '${itemId}', ${usePlusIcon})"
                         aria-expanded="${isOpen}"
                         aria-controls="${contentId}"
                         id="${itemId}"
                     >
-                        <span class="font-semibold text-gray-900 text-lg">${accordionItem.title}</span>
+                        ${isNested ? `<span>${accordionItem.title}</span>` : `<span class="font-semibold text-gray-900 text-lg">${accordionItem.title}</span>`}
                         <i class="${iconClass}" id="${itemId}-icon"></i>
                     </button>
                     <div
                         id="${contentId}"
-                        class="accordion-content overflow-hidden transition-all duration-300 ease-in-out ${isOpen ? 'max-h-[5000px] opacity-100' : 'max-h-0 opacity-0'}"
+                        class="accordion-content overflow-hidden transition-all duration-300 ease-in-out ${isOpen ? 'max-h-[5000px] opacity-100' : 'max-h-0 opacity-0'} ${contentBgClass}"
                         aria-hidden="${!isOpen}"
                         style="${isOpen ? '' : 'display: none;'}"
                     >
-                        <div class="px-6 py-4 bg-white">
+                        <div class="px-6 py-4">
                             ${contentHtml}
                         </div>
                     </div>
@@ -807,11 +837,41 @@ class InteractiveRenderer {
 
         const stepsId = `clickable-steps-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
         
+        // Debug: log that we're rendering clickable steps
+        console.log('Rendering clickable steps:', item.steps.length, 'steps');
+        
         // Render content for steps (expandable)
         const renderStepContent = (stepContent) => {
             if (!stepContent) return '';
             
             if (Array.isArray(stepContent)) {
+                // Always check if any item contains HTML tags (like <table>, <div>, etc.)
+                const hasHtmlTags = stepContent.some(item => {
+                    if (typeof item === 'string') {
+                        return /<[a-z][\s\S]*>/i.test(item);
+                    }
+                    return false;
+                });
+                
+                // If HTML tags are found, render all content as raw HTML
+                if (hasHtmlTags) {
+                    return stepContent.map(item => {
+                        // If it's an object with a type, render it using ContentRenderer
+                        if (typeof item === 'object' && item !== null && item.type) {
+                            if (typeof window.ContentRenderer !== 'undefined') {
+                                return ContentRenderer.renderContentItems([item]);
+                            }
+                            return '';
+                        }
+                        // If it's a string, return as is (HTML will be preserved)
+                        if (typeof item === 'string') {
+                            return item;
+                        }
+                        return '';
+                    }).join('');
+                }
+                
+                // Otherwise, render normally (for text content)
                 return stepContent.map(item => {
                     // If it's an object with a type, render it using ContentRenderer
                     if (typeof item === 'object' && item !== null && item.type) {
@@ -828,6 +888,10 @@ class InteractiveRenderer {
                     return `<p class="text-gray-700 mb-3">${item}</p>`;
                 }).join('');
             } else if (typeof stepContent === 'string') {
+                // Check if string contains HTML tags
+                if (/<[a-z][\s\S]*>/i.test(stepContent)) {
+                    return stepContent;
+                }
                 if (stepContent.trim().startsWith('<')) {
                     return stepContent;
                 }
@@ -1188,6 +1252,396 @@ class InteractiveRenderer {
                 content.classList.add('hidden');
             }
         });
+    }
+
+    /**
+     * Render een interactieve checklist voor kwaliteitscriteria begrip
+     * @param {Object} item - Concept quality checklist item
+     * @returns {string} HTML string
+     */
+    static renderConceptQualityChecklist(item) {
+        if (!item.concept || !item.definition) {
+            console.warn('Concept quality checklist missing concept or definition:', item);
+            return '';
+        }
+
+        const checklistId = `concept-quality-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+        
+        // Default criteria with letters
+        const criteria = item.criteria || [
+            {
+                letter: 'A',
+                name: "Afbakening",
+                description: "Is tijd en plaats toegevoegd?",
+                question: "Welke locatie en periode worden bedoeld?"
+            },
+            {
+                letter: 'O',
+                name: "Operationalisatie",
+                description: "Zijn er waarneembare indicatoren?",
+                question: "Kun je het begrip meten of observeren?"
+            },
+            {
+                letter: 'S',
+                name: "Aansluiting",
+                description: "Sluit het aan bij doelstelling en hoofdvraag?",
+                question: "Helpt deze definitie om de doelstelling te bereiken?"
+            }
+        ];
+
+        const criteriaHtml = criteria.map((criterion, index) => {
+            const criterionId = `${checklistId}-${criterion.letter.toLowerCase()}`;
+            return `
+                <div class="border border-gray-200 rounded p-2 mb-1.5 bg-white hover:bg-gray-50 transition-colors">
+                    <div class="flex items-center justify-between gap-2">
+                        <div class="flex items-center space-x-2 flex-1 min-w-0">
+                            <div class="flex-shrink-0">
+                                <div class="w-7 h-7 rounded-full bg-blue-100 flex items-center justify-center">
+                                    <span class="font-bold text-blue-700 text-xs">${criterion.letter}</span>
+                                </div>
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <h4 class="font-semibold text-gray-900 text-xs leading-tight">${criterion.name}</h4>
+                                <p class="text-xs text-gray-600 leading-tight mt-0.5">${criterion.description}</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3 ml-2 flex-shrink-0">
+                            <label class="flex items-center cursor-pointer">
+                                <input 
+                                    type="radio" 
+                                    name="${criterionId}-status"
+                                    value="aanwezig"
+                                    id="${criterionId}-aanwezig"
+                                    class="concept-quality-radio w-4 h-4 text-blue-600 border-gray-300 focus:ring-blue-500"
+                                    data-criterion="${criterion.letter}"
+                                    onchange="InteractiveRenderer.updateConceptQualityStatus('${checklistId}', '${criterion.letter}')"
+                                />
+                                <span class="ml-1.5 text-xs text-gray-600 whitespace-nowrap">Aanwezig</span>
+                            </label>
+                            <label class="flex items-center cursor-pointer">
+                                <input 
+                                    type="radio" 
+                                    name="${criterionId}-status"
+                                    value="afwezig"
+                                    id="${criterionId}-afwezig"
+                                    class="concept-quality-radio w-4 h-4 text-blue-600 border-gray-300 focus:ring-blue-500"
+                                    data-criterion="${criterion.letter}"
+                                    onchange="InteractiveRenderer.updateConceptQualityStatus('${checklistId}', '${criterion.letter}')"
+                                />
+                                <span class="ml-1.5 text-xs text-gray-600 whitespace-nowrap">Afwezig</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div id="${criterionId}-feedback" class="mt-1.5 hidden">
+                        <div class="text-xs p-1.5 rounded" id="${criterionId}-feedback-content"></div>
+                    </div>
+                </div>
+            `;
+        }).join('');
+
+        const resultHtml = `
+            <div id="${checklistId}-result" class="hidden mt-2.5 p-2.5 rounded-lg border-2">
+                <h4 class="font-semibold mb-1.5 text-sm" id="${checklistId}-result-title"></h4>
+                <p class="text-xs" id="${checklistId}-result-text"></p>
+                <ul class="mt-1.5 space-y-0.5 text-xs" id="${checklistId}-result-list"></ul>
+            </div>
+        `;
+
+        // Escape definition for data attribute
+        const definitionEscaped = item.definition.replace(/"/g, '&quot;');
+        
+        return `
+            <div class="concept-quality-checklist-container mb-6 bg-gray-50 rounded-lg p-3" id="${checklistId}" data-definition="${definitionEscaped}">
+                <h3 class="text-base font-semibold text-gray-900 mb-2">${item.title || 'Analyseer deze begripsdefinitie op kwaliteitscriteria:'}</h3>
+                <div class="bg-white border-l-4 border-blue-500 p-2.5 mb-2.5 rounded-r-lg">
+                    <p class="text-xs text-gray-600 mb-1"><strong>Begrip:</strong> ${item.concept}</p>
+                    <p class="text-gray-800 text-sm font-medium leading-snug">${item.definition}</p>
+                </div>
+                <div class="space-y-1">
+                    ${criteriaHtml}
+                </div>
+                ${resultHtml}
+                <button 
+                    onclick="InteractiveRenderer.showConceptQualityResult('${checklistId}')"
+                    class="mt-2.5 px-4 py-1.5 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium text-sm"
+                >
+                    Bekijk analyse
+                </button>
+            </div>
+        `;
+    }
+
+    /**
+     * Check if definition contains time and place
+     */
+    static checkAfbakening(definition) {
+        const definitionLower = definition.toLowerCase();
+        
+        // Check for place indicators - must be specific location, not just generic words
+        // Look for patterns like "binnen het crossdock", "van organisatie X", "op locatie Y"
+        const placePatterns = [
+            /binnen\s+(het|de|een)\s+[\w]+/i,  // "binnen het crossdock"
+            /op\s+(het|de|een)\s+[\w]+/i,      // "op het magazijn"
+            /van\s+[\w]+\s+[\w]+/i,           // "van logistiek dienstverlener HML"
+            /bij\s+[\w]+\s+[\w]+/i,           // "bij organisatie X"
+            /locatie\s+[\w]+/i,                // "locatie Rotterdam"
+            /vestiging\s+[\w]+/i,              // "vestiging Amsterdam"
+            /afdeling\s+[\w]+/i,              // "afdeling logistiek"
+            /\b(crossdock|warehouse|magazijn|depot|terminal)\b/i
+        ];
+        const hasPlace = placePatterns.some(pattern => pattern.test(definition));
+        
+        // Check for time indicators - must be specific time period, not just "per dag" (which is a measurement)
+        const timePatterns = [
+            /periode\s+[\w]+/i,                // "periode 2024"
+            /van\s+\w+\s+tot\s+\w+/i,          // "van januari tot december"
+            /tussen\s+[\w]+\s+en\s+[\w]+/i,    // "tussen 2020 en 2024"
+            /gedurende\s+[\w]+/i,              // "gedurende 2024"
+            /\b(20\d{2})\b/,                   // years like 2024, 2023
+            /\b(januari|februari|maart|april|mei|juni|juli|augustus|september|oktober|november|december)\b/i,
+            /\b(q1|q2|q3|q4)\s+20\d{2}/i,     // "q1 2024"
+            /vanaf\s+[\w]+/i,                  // "vanaf januari"
+            /tot\s+en\s+met\s+[\w]+/i          // "tot en met december"
+        ];
+        const hasTime = timePatterns.some(pattern => pattern.test(definition));
+        
+        return { hasPlace, hasTime, bothPresent: hasPlace && hasTime };
+    }
+
+    /**
+     * Check if definition contains observable/measurable indicators
+     */
+    static checkOperationalisatie(definition) {
+        const definitionLower = definition.toLowerCase();
+        
+        // Check for measurable indicators (quantitative)
+        const measurablePatterns = [
+            /gemeten\s+in/i,                    // "gemeten in"
+            /aantal\s+[\w]+/i,                 // "aantal verplaatsingen"
+            /percentage/i,                      // "percentage"
+            /\d+\s*(per|op|in)/i,              // "10 per dag", "5 op 10"
+            /score/i,                          // "score"
+            /schaal/i,                         // "schaal"
+            /frequentie/i,                     // "frequentie"
+            /hoeveelheid/i,                    // "hoeveelheid"
+            /volume/i,                         // "volume"
+            /capaciteit/i                      // "capaciteit"
+        ];
+        const hasMeasurable = measurablePatterns.some(pattern => pattern.test(definition));
+        
+        // Check for observable indicators (qualitative)
+        const observablePatterns = [
+            /met\s+behulp\s+van/i,             // "met behulp van"
+            /door\s+middel\s+van/i,            // "door middel van"
+            /gebruik\s+van/i,                  // "gebruik van"
+            /(forklift|conveyor|robot|systeem|machine|apparaat)/i,  // specific tools/systems
+            /(zone|gebied|locatie|plek|ruimte)/i,  // specific locations
+            /(proces|stap|fase|handeling)/i,   // specific processes
+            /waarneembaar/i,                   // "waarneembaar"
+            /observeerbaar/i,                  // "observeerbaar"
+            /zichtbaar/i,                      // "zichtbaar"
+            /concreet/i                        // "concreet"
+        ];
+        const hasObservable = observablePatterns.some(pattern => pattern.test(definition));
+        
+        return { hasMeasurable, hasObservable, hasIndicators: hasMeasurable || hasObservable };
+    }
+
+    /**
+     * Update concept quality status and show feedback
+     */
+    static updateConceptQualityStatus(checklistId, criterionLetter) {
+        const criterionId = `${checklistId}-${criterionLetter.toLowerCase()}`;
+        const aanwezigRadio = document.getElementById(`${criterionId}-aanwezig`);
+        const afwezigRadio = document.getElementById(`${criterionId}-afwezig`);
+        const feedbackDiv = document.getElementById(`${criterionId}-feedback`);
+        const feedbackContent = document.getElementById(`${criterionId}-feedback-content`);
+        
+        if (!feedbackDiv || !feedbackContent) return;
+        
+        // Get the definition text from data attribute
+        const checklist = document.getElementById(checklistId);
+        const definition = checklist ? (checklist.getAttribute('data-definition') || '').replace(/&quot;/g, '"') : '';
+        
+        feedbackDiv.classList.remove('hidden');
+        
+        if (aanwezigRadio && aanwezigRadio.checked) {
+            // Criterium is aanwezig
+            if (criterionLetter === 'A') {
+                // Check if both time and place are present
+                const afbakeningCheck = this.checkAfbakening(definition);
+                if (afbakeningCheck.bothPresent) {
+                    feedbackContent.className = 'text-xs p-1.5 rounded bg-green-50 text-green-800 border border-green-200';
+                    feedbackContent.textContent = '✓ Correct! De definitie bevat zowel tijd als plaats. De afbakening is compleet.';
+                } else {
+                    feedbackContent.className = 'text-xs p-1.5 rounded bg-orange-50 text-orange-800 border border-orange-200';
+                    let missingParts = [];
+                    let explanation = '';
+                    
+                    if (!afbakeningCheck.hasPlace) missingParts.push('plaats');
+                    if (!afbakeningCheck.hasTime) {
+                        missingParts.push('tijdsperiode');
+                        explanation = ' Let op: "per dag" is een meeteenheid (frequentie), niet een tijdsperiode voor afbakening. Voor afbakening heb je een specifieke periode nodig zoals "in 2024" of "van januari tot december".';
+                    }
+                    
+                    feedbackContent.textContent = `⚠ Controleer opnieuw: De definitie bevat niet zowel tijd als plaats. Er ontbreekt: ${missingParts.join(' en ')}.${explanation} Voor een goede afbakening moeten beide aanwezig zijn.`;
+                }
+            } else if (criterionLetter === 'O') {
+                // Check if definition has observable/measurable indicators
+                const operationalisatieCheck = this.checkOperationalisatie(definition);
+                if (operationalisatieCheck.hasIndicators) {
+                    feedbackContent.className = 'text-xs p-1.5 rounded bg-green-50 text-green-800 border border-green-200';
+                    let indicatorTypes = [];
+                    if (operationalisatieCheck.hasMeasurable) indicatorTypes.push('meetbare');
+                    if (operationalisatieCheck.hasObservable) indicatorTypes.push('observeerbare');
+                    feedbackContent.textContent = `✓ Correct! De definitie bevat ${indicatorTypes.join(' en/of ')} indicatoren. Controleer of deze expliciet en duidelijk geformuleerd zijn.`;
+                } else {
+                    feedbackContent.className = 'text-xs p-1.5 rounded bg-orange-50 text-orange-800 border border-orange-200';
+                    feedbackContent.textContent = '⚠ Controleer opnieuw: De definitie bevat geen waarneembare indicatoren. Voor operationalisatie heb je meetbare elementen (zoals "aantal", "percentage", "gemeten in") of observeerbare elementen (zoals specifieke systemen, processen of locaties) nodig.';
+                }
+            } else if (criterionLetter === 'S') {
+                feedbackContent.className = 'text-xs p-1.5 rounded bg-green-50 text-green-800 border border-green-200';
+                feedbackContent.innerHTML = '✓ Correct! De definitie sluit aan bij de doelstelling en hoofdvraag. <strong>Let op:</strong> Het is nu lastig te beoordelen of de aansluiting er daadwerkelijk is omdat de doelstelling en hoofdvraag niet gegeven zijn. <strong>Hoe kun je de aansluiting controleren?</strong> Vergelijk de begrippen in je definitie met de begrippen in je doelstelling en hoofdvraag. Zijn dezelfde kernbegrippen gebruikt? Sluit de scope van je definitie aan bij wat je in je doelstelling wilt bereiken? Controleer of de scope niet te breed of te smal is.';
+            }
+        } else if (afwezigRadio && afwezigRadio.checked) {
+            // Criterium is afwezig
+            if (criterionLetter === 'A') {
+                // Check if both time and place are missing
+                const afbakeningCheck = this.checkAfbakening(definition);
+                if (!afbakeningCheck.bothPresent) {
+                    feedbackContent.className = 'text-xs p-1.5 rounded bg-green-50 text-green-800 border border-green-200';
+                    let missingParts = [];
+                    let explanation = '';
+                    
+                    if (!afbakeningCheck.hasPlace) missingParts.push('plaats');
+                    if (!afbakeningCheck.hasTime) {
+                        missingParts.push('tijdsperiode');
+                        explanation = ' Let op: "per dag" is een meeteenheid (frequentie), niet een tijdsperiode voor afbakening. Voor afbakening heb je een specifieke periode nodig zoals "in 2024" of "van januari tot december".';
+                    }
+                    
+                    feedbackContent.textContent = `✓ Goed gezien! Je hebt correct geïdentificeerd dat de definitie mist: ${missingParts.join(' en ')}.${explanation} Voeg tijd en plaats toe als dit relevant is voor je onderzoek om de scope duidelijk te maken.`;
+                } else {
+                    feedbackContent.className = 'text-xs p-1.5 rounded bg-yellow-50 text-yellow-800 border border-yellow-200';
+                    feedbackContent.textContent = '⚠ Controleer opnieuw: De definitie bevat wel tijd en/of plaats. Bekijk de definitie nogmaals aandachtig.';
+                }
+            } else if (criterionLetter === 'O') {
+                // Check if definition has observable/measurable indicators
+                const operationalisatieCheck = this.checkOperationalisatie(definition);
+                if (!operationalisatieCheck.hasIndicators) {
+                    feedbackContent.className = 'text-xs p-1.5 rounded bg-green-50 text-green-800 border border-green-200';
+                    feedbackContent.textContent = '✓ Goed gezien! Je hebt correct geïdentificeerd dat de definitie mist: waarneembare indicatoren. Voeg meetbare elementen (zoals "aantal", "percentage", "gemeten in") of observeerbare elementen (zoals specifieke systemen, processen of locaties) toe om het begrip te operationaliseren.';
+                } else {
+                    feedbackContent.className = 'text-xs p-1.5 rounded bg-yellow-50 text-yellow-800 border border-yellow-200';
+                    let indicatorTypes = [];
+                    if (operationalisatieCheck.hasMeasurable) indicatorTypes.push('meetbare');
+                    if (operationalisatieCheck.hasObservable) indicatorTypes.push('observeerbare');
+                    feedbackContent.textContent = `⚠ Controleer opnieuw: De definitie bevat wel ${indicatorTypes.join(' en/of ')} indicatoren. Bekijk de definitie nogmaals aandachtig.`;
+                }
+            } else if (criterionLetter === 'S') {
+                feedbackContent.className = 'text-xs p-1.5 rounded bg-yellow-50 text-yellow-800 border border-yellow-200';
+                feedbackContent.innerHTML = '⚠ Let op: De definitie sluit mogelijk niet goed aan bij de doelstelling en hoofdvraag. Het is nu lastig te beoordelen of de aansluiting er is omdat de doelstelling en hoofdvraag niet gegeven zijn. <strong>Hoe kun je de aansluiting controleren?</strong> Vergelijk de begrippen in je definitie met de begrippen in je doelstelling en hoofdvraag. Zijn dezelfde kernbegrippen gebruikt? Sluit de scope van je definitie aan bij wat je in je doelstelling wilt bereiken? Pas de definitie aan of herzie je doelstelling/hoofdvraag als ze niet op elkaar aansluiten.';
+            }
+        }
+    }
+
+    /**
+     * Show concept quality checklist result
+     * Based on actual analysis of the definition
+     */
+    static showConceptQualityResult(checklistId) {
+        const radios = document.querySelectorAll(`#${checklistId} .concept-quality-radio`);
+        const resultDiv = document.getElementById(`${checklistId}-result`);
+        const resultTitle = document.getElementById(`${checklistId}-result-title`);
+        const resultText = document.getElementById(`${checklistId}-result-text`);
+        const resultList = document.getElementById(`${checklistId}-result-list`);
+
+        if (!resultDiv || !resultTitle || !resultText || !resultList) return;
+
+        // Initialize variables
+        let aanwezigCount = 0;
+        let afwezigCount = 0;
+        let nietBeoordeeldCount = 0;
+        const aanwezigCriteria = [];
+        const afwezigCriteria = [];
+        const nietBeoordeeldCriteria = [];
+
+        // Clear result div first
+        resultDiv.classList.add('hidden');
+        resultDiv.className = 'hidden mt-2.5 p-2.5 rounded-lg border-2';
+        resultList.innerHTML = '';
+
+        // Group radios by criterion
+        const criterionGroups = {};
+        radios.forEach(radio => {
+            const criterion = radio.getAttribute('data-criterion');
+            if (!criterionGroups[criterion]) {
+                criterionGroups[criterion] = { aanwezig: null, afwezig: null, name: '' };
+            }
+            if (radio.value === 'aanwezig') {
+                criterionGroups[criterion].aanwezig = radio;
+            } else {
+                criterionGroups[criterion].afwezig = radio;
+            }
+            if (!criterionGroups[criterion].name) {
+                const criterionElement = radio.closest('.border');
+                criterionGroups[criterion].name = criterionElement.querySelector('h4').textContent;
+            }
+        });
+
+        // Count criteria
+        Object.keys(criterionGroups).forEach(letter => {
+            const group = criterionGroups[letter];
+            if (group.aanwezig && group.aanwezig.checked) {
+                aanwezigCount++;
+                aanwezigCriteria.push({ letter, name: group.name });
+            } else if (group.afwezig && group.afwezig.checked) {
+                afwezigCount++;
+                afwezigCriteria.push({ letter, name: group.name });
+            } else {
+                nietBeoordeeldCount++;
+                nietBeoordeeldCriteria.push({ letter, name: group.name });
+            }
+        });
+
+        // Show overall result
+        resultDiv.classList.remove('hidden');
+
+        if (nietBeoordeeldCount > 0) {
+            resultDiv.className = 'mt-2.5 p-2.5 rounded-lg border-2 border-blue-500 bg-blue-50';
+            resultTitle.textContent = '💡 Beoordeel alle criteria';
+            resultTitle.className = 'font-semibold mb-1.5 text-blue-800 text-sm';
+            resultText.textContent = `Je hebt nog ${nietBeoordeeldCount} criterium/criteria niet beoordeeld. Beoordeel alle criteria om een volledige analyse te krijgen.`;
+            resultText.className = 'text-xs text-blue-800';
+            resultList.className = 'mt-1.5 space-y-0.5 text-xs text-blue-800';
+            resultList.innerHTML = nietBeoordeeldCriteria.map(c => `<li>• ${c.letter}: ${c.name} (nog niet beoordeeld)</li>`).join('');
+        } else if (aanwezigCount === 3) {
+            resultDiv.className = 'mt-2.5 p-2.5 rounded-lg border-2 border-green-500 bg-green-50';
+            resultTitle.textContent = '✓ Uitstekend!';
+            resultTitle.className = 'font-semibold mb-1.5 text-green-800 text-sm';
+            resultText.textContent = 'Je hebt geïdentificeerd dat alle kwaliteitscriteria aanwezig zijn. De definitie voldoet aan alle eisen. Controleer de feedback bij elk criterium hierboven voor meer details.';
+            resultText.className = 'text-xs text-green-800';
+            resultList.innerHTML = '';
+        } else if (aanwezigCount >= 2) {
+            resultDiv.className = 'mt-2.5 p-2.5 rounded-lg border-2 border-yellow-500 bg-yellow-50';
+            resultTitle.textContent = '⚠ Goed bezig';
+            resultTitle.className = 'font-semibold mb-1.5 text-yellow-800 text-sm';
+            resultText.textContent = `Je hebt ${aanwezigCount} van de 3 kwaliteitscriteria als aanwezig geïdentificeerd. ${afwezigCount > 0 ? `Er ${afwezigCount === 1 ? 'is' : 'zijn'} ${afwezigCount} criterium/criteria afwezig.` : ''} Bekijk de feedback bij elk criterium hierboven voor verbeterpunten.`;
+            resultText.className = 'text-xs text-yellow-800';
+            resultList.className = 'mt-1.5 space-y-0.5 text-xs text-yellow-800';
+            const listItems = [];
+            if (afwezigCriteria.length > 0) {
+                listItems.push(...afwezigCriteria.map(c => `<li>• ${c.letter}: ${c.name} (afwezig)</li>`));
+            }
+            resultList.innerHTML = listItems.join('');
+        } else {
+            resultDiv.className = 'mt-2.5 p-2.5 rounded-lg border-2 border-red-500 bg-red-50';
+            resultTitle.textContent = '⚠ Aandacht vereist';
+            resultTitle.className = 'font-semibold mb-1.5 text-red-800 text-sm';
+            resultText.textContent = `Je hebt ${aanwezigCount} van de 3 kwaliteitscriteria als aanwezig geïdentificeerd. Er ${afwezigCount === 1 ? 'is' : 'zijn'} ${afwezigCount} criterium/criteria afwezig. Werk de definitie bij om aan alle kwaliteitscriteria te voldoen.`;
+            resultText.className = 'text-xs text-red-800';
+            resultList.className = 'mt-1.5 space-y-0.5 text-xs text-red-800';
+            resultList.innerHTML = afwezigCriteria.map(c => `<li>• ${c.letter}: ${c.name} (afwezig)</li>`).join('');
+        }
     }
 }
 

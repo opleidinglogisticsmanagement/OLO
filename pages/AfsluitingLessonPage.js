@@ -125,14 +125,6 @@ class AfsluitingLessonPage extends BaseLessonPage {
                                 <h2 class="text-xl font-semibold text-gray-900 mb-4">${this.content.leerdoelen.title}</h2>
                                 <div class="prose max-w-none">
                                     ${this.content.leerdoelen.description ? `<p class="text-gray-600 mb-4">${this.content.leerdoelen.description}</p>` : ''}
-                                    ${this.content.leerdoelen.instruction ? `
-                                        <div class="bg-blue-50 border-l-4 border-blue-500 p-4 rounded-r-lg mb-4">
-                                            <p class="text-sm text-blue-800">
-                                                <i class="fas fa-info-circle mr-2"></i>
-                                                <strong>Instructie voor docent:</strong> ${this.content.leerdoelen.instruction}
-                                            </p>
-                                        </div>
-                                    ` : ''}
                                     ${this.content.leerdoelen.items && this.content.leerdoelen.items.length > 0 ? `
                                         <ul class="space-y-2">
                                             ${this.content.leerdoelen.items.map(item => `

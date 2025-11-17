@@ -60,6 +60,10 @@ class ContentRenderer {
                     return this.renderTabs(item);
                 case 'conceptQualityChecklist':
                     return this.renderConceptQualityChecklist(item);
+                case 'booleanOperatorExercise':
+                    return this.renderBooleanOperatorExercise(item);
+                case 'aiQueryExercise':
+                    return this.renderAIQueryExercise(item);
                 default:
                     console.warn(`Unknown content type: ${item.type}`);
                     return '';
@@ -442,6 +446,35 @@ class ContentRenderer {
             return InteractiveRenderer.renderConceptQualityChecklist(item);
         }
         console.warn('InteractiveRenderer not loaded. Concept quality checklist will not render.');
+        return '';
+    }
+
+    /**
+     * Render boolean operator exercise component (delegates to InteractiveRenderer)
+     * @param {Object} item - Boolean operator exercise item
+     * @returns {string} HTML string
+     */
+    static renderBooleanOperatorExercise(item) {
+        console.log('[ContentRenderer] renderBooleanOperatorExercise called', item);
+        if (typeof window.InteractiveRenderer !== 'undefined') {
+            const result = InteractiveRenderer.renderBooleanOperatorExercise(item);
+            console.log('[ContentRenderer] renderBooleanOperatorExercise result length:', result ? result.length : 0);
+            return result;
+        }
+        console.warn('InteractiveRenderer not loaded. Boolean operator exercise will not render.');
+        return '';
+    }
+
+    /**
+     * Render AI query exercise component (delegates to InteractiveRenderer)
+     * @param {Object} item - AI query exercise item
+     * @returns {string} HTML string
+     */
+    static renderAIQueryExercise(item) {
+        if (typeof window.InteractiveRenderer !== 'undefined') {
+            return InteractiveRenderer.renderAIQueryExercise(item);
+        }
+        console.warn('InteractiveRenderer not loaded. AI query exercise will not render.');
         return '';
     }
 }

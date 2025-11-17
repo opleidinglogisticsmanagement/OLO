@@ -6,9 +6,14 @@
   },
   "leerdoelen": {
     "title": "Leerdoelen",
-    "description": "Formuleer hier de leerdoelen voor deze week. Leerdoelen beschrijven wat studenten na het doorlopen van deze module kunnen doen. Wacht met het formuleren van leerdoelen totdat alle theoriecontent is toegevoegd, zodat je kunt controleren of de leerdoelen de complete theorie beslaan.",
+    "description": "",
     "instruction": "Voeg hier leerdoelen toe die de complete theorie van deze week beslaan. Formuleer leerdoelen pas wanneer alle content is toegevoegd.",
-    "items": [],
+    "items": [
+      "Je kunt systematisch literatuuronderzoek uitvoeren door gevonden bronnen kritisch te beoordelen aan de hand van de 1e check, 2e check (voor (semi)wetenschappelijke literatuur) en de CRAP test (voor internetbronnen), en relevante bronnen te selecteren en organiseren.",
+      "Je weet dat er reference organizers (zoals Zotero en Mendeley) beschikbaar zijn om bronnen georganiseerd op te slaan en te beheren, en kent de voordelen van het gebruik hiervan.",
+      "Je kunt een theoretisch kader schrijven waarin je verschillende theorieën en theoretische concepten met elkaar confronteert, waarbij je per bewering minimaal twee unieke bronnen gebruikt die elkaar niet refereren.",
+      "Je kunt de kwaliteit van je theoretisch kader borgen door te monitoren of je de meest relevante literatuur hebt gevonden, of je boven het onderzoek bent komen te staan, en of het theoretisch kader naar een knowledge gap toewerkt die het belang van je onderzoek aantoont."
+    ],
     "interactive": false
   },
   "theorie": {
@@ -28,7 +33,7 @@
       {
         "type": "paragraph",
         "text": [
-          "<strong>LET OP:</strong> In de video gaat het over de 3e versie van de herziene American Psychological Association (APA)-richtlijnen. Die richtlijnen vind je op <a href=\"https://auteursrechten.nl/bronvermelding/handleiding-de-apa-richtlijnen-uitgelegd/\" target=\"_blank\" class=\"text-blue-600 hover:text-blue-800 underline\">deze website</a>. Als je de digitale richtlijnen gebruikt kun je heel eenvoudig zoeken (gebruik de knoppen CTRL + F) als je bijvoorbeeld wilt weten hoe je nou een interview moet verwerken als referentie in de tekst EN in de literatuurlijst."
+          "<strong>LET OP:</strong> In de video gaat het over de 3e versie van de herziene American Psychological Association (APA)-richtlijnen. Die richtlijnen vind je op <a href=\"https://auteursrechten.nl/bronvermelding/handleiding-de-apa-richtlijnen-uitgelegd/\" target=\"_blank\" class=\"text-blue-600 hover:text-blue-800 underline\">deze website</a>. Als je de digitale richtlijnen gebruikt kun je heel eenvoudig zoeken (gebruik de knoppen CTRL + F op Windows of CMD + F op Mac) als je bijvoorbeeld wilt weten hoe je nou een interview moet verwerken als referentie in de tekst EN in de literatuurlijst."
         ]
       },
       {

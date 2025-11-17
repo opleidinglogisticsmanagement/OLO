@@ -401,6 +401,381 @@ ${theoryContent.substring(0, 8000)}`; // Limit to 8000 chars
 });
 
 /**
+ * Generate a new query scenario based on theory
+ * POST /api/generate-query-scenario
+ */
+app.post('/api/generate-query-scenario', async (req, res) => {
+    try {
+        const { theoryContent, availableTerms } = req.body;
+
+        console.log('[generate-query-scenario] Received request');
+        console.log('[generate-query-scenario] theoryContent length:', theoryContent?.length || 0);
+        console.log('[generate-query-scenario] availableTerms:', availableTerms);
+
+        if (!theoryContent || !availableTerms) {
+            console.error('[generate-query-scenario] Missing required fields');
+            return res.status(400).json({
+                error: 'Missing required fields',
+                message: 'theoryContent and availableTerms are required'
+            });
+        }
+
+        // If theory content is empty or too short, use a default prompt about Boolean operators
+        const actualTheoryContent = theoryContent.trim().length > 0 
+            ? theoryContent 
+            : `Booleaanse operatoren zijn logische operatoren die gebruikt worden in zoekmachines om zoektermen te combineren:
+- AND: Beide termen moeten voorkomen in de resultaten
+- OR: Minstens één van de termen moet voorkomen
+- NOT: De term mag niet voorkomen in de resultaten
+- Haakjes: Gebruikt om de volgorde van operaties te bepalen, bijvoorbeeld (term1 OR term2) AND term3`;
+
+        if (actualTheoryContent !== theoryContent) {
+            console.warn('[generate-query-scenario] Using default theory content as fallback');
+        }
+
+        if (!GEMINI_API_KEY) {
+            console.error('[generate-query-scenario] API key not configured');
+            return res.status(500).json({
+                error: 'API key not configured',
+                message: 'GEMINI_API_KEY is not set in environment variables'
+            });
+        }
+
+        // Determine difficulty based on scenario count (progressive difficulty)
+        // MAXIMUM 4 TERMS TOTAL across all scenarios
+        const scenarioCount = parseInt(req.body.scenarioCount || '0');
+        let difficultyLevel = 'easy';
+        let difficultyInstructions = '';
+        let maxTerms = 2;
+        
+        // Select a random subset of available terms for this scenario (4-6 terms)
+        // This ensures variety - each scenario uses different terms
+        const shuffledTerms = [...availableTerms].sort(() => Math.random() - 0.5);
+        const termsForScenario = shuffledTerms.slice(0, Math.min(6, availableTerms.length));
+        
+        if (scenarioCount === 0) {
+            difficultyLevel = 'easy';
+            maxTerms = 2;
+            difficultyInstructions = 'Maak een EENVOUDIG scenario met alleen de AND-operator. Gebruik PRECIES 2 zoektermen uit de beschikbare termen. Voorbeeld: "Je zoekt naar artikelen die zowel over [term1] als over [term2] gaan."';
+        } else if (scenarioCount === 1) {
+            difficultyLevel = 'easy-medium';
+            maxTerms = 2;
+            difficultyInstructions = 'Maak een scenario met de OR-operator. Gebruik PRECIES 2 zoektermen uit de beschikbare termen. Voorbeeld: "Je zoekt naar artikelen die over [term1] of [term2] gaan."';
+        } else if (scenarioCount === 2) {
+            difficultyLevel = 'medium';
+            maxTerms = 3;
+            difficultyInstructions = 'Maak een scenario met AND en OR operatoren. Gebruik PRECIES 3 zoektermen uit de beschikbare termen. Voorbeeld: "Je zoekt naar artikelen over [term1] die ([term2] of [term3]) bevatten."';
+        } else if (scenarioCount === 3) {
+            difficultyLevel = 'medium-hard';
+            maxTerms = 3;
+            difficultyInstructions = 'Maak een scenario met AND en NOT operatoren. Gebruik PRECIES 3 zoektermen uit de beschikbare termen. Voorbeeld: "Je zoekt naar artikelen over [term1] en [term2], maar niet over [term3]."';
+        } else {
+            difficultyLevel = 'hard';
+            maxTerms = 4;
+            difficultyInstructions = 'Maak een COMPLEX scenario met AND, OR, NOT operatoren EN haakjes voor groepering. Gebruik MAXIMAAL 4 zoektermen uit de beschikbare termen. Voorbeeld: "Je zoekt naar artikelen over ([term1] of [term2]) en [term3], maar niet over [term4]."';
+        }
+
+        const prompt = `Je bent een expert in informatievaardigheden en Booleaanse zoekoperatoren.
+
+Op basis van de volgende theorie tekst over Booleaanse operatoren en zoektermen:
+${actualTheoryContent.substring(0, 4000)}
+
+Beschikbare zoektermen voor DIT scenario: ${termsForScenario.join(', ')}
+
+BELANGRIJK - Moeilijkheidsniveau: ${difficultyLevel}
+${difficultyInstructions}
+
+KRITIEK: 
+- Gebruik MAXIMAAL ${maxTerms} zoektermen in totaal. NIET meer!
+- Gebruik ALLEEN de zoektermen uit de lijst hierboven (${termsForScenario.join(', ')})
+- Maak een UNIEK scenario met een andere context dan eerdere scenario's
+
+Genereer een oefening scenario waarbij een student een zoekquery moet schrijven. Het scenario moet:
+1. Een duidelijke, beknopte beschrijving bevatten van wat de student moet zoeken (maximaal 2 zinnen)
+2. Passen bij het moeilijkheidsniveau (${difficultyLevel})
+3. Gebruik maken van PRECIES ${maxTerms} zoektermen uit de beschikbare lijst hierboven
+4. Een correcte query hebben die de student moet schrijven
+5. Een UNIEKE context hebben (andere situatie/onderwerp dan standaard voorbeelden)
+
+Geef je antwoord terug in JSON format:
+{
+  "description": "Beknopte beschrijving van wat de student moet zoeken (maximaal 2 zinnen)",
+  "correctQuery": "De correcte query (bijvoorbeeld: 'transport AND optimalisatie')",
+  "difficulty": "${difficultyLevel}",
+  "explanation": "Korte uitleg waarom deze query correct is"
+}
+
+Antwoord alleen met de JSON, geen extra tekst.`;
+
+        const genAI = new GoogleGenerativeAI(GEMINI_API_KEY);
+        
+        let availableModels = [];
+        try {
+            availableModels = await getAvailableModels();
+            console.log('[generate-query-scenario] Available models count:', availableModels.length);
+            console.log('[generate-query-scenario] Available models:', availableModels.slice(0, 10));
+        } catch (modelError) {
+            console.warn('[generate-query-scenario] Error getting models, using defaults:', modelError.message);
+        }
+        
+        // Use models from the available models list (they're already filtered to support generateContent)
+        // Prefer flash models (faster), then pro models
+        let models = [];
+        
+        if (availableModels.length > 0) {
+            // Filter to prefer stable models, exclude preview/experimental
+            const preferred = availableModels.filter(m => {
+                if (m.includes('-preview-') || m.includes('-experimental-')) return false;
+                if (m.includes('lite-preview')) return false;
+                // Exclude models that might not work with v1 API
+                if (m.includes('-latest') && !m.includes('flash-latest') && !m.includes('pro-latest')) return false;
+                return true;
+            });
+            
+            // Sort: flash first, then pro, then others
+            preferred.sort((a, b) => {
+                if (a.includes('flash') && !b.includes('flash')) return -1;
+                if (b.includes('flash') && !a.includes('flash')) return 1;
+                if (a.includes('pro') && !b.includes('pro')) return -1;
+                if (b.includes('pro') && !a.includes('pro')) return 1;
+                return 0;
+            });
+            
+            models = preferred.length > 0 ? preferred.slice(0, 3) : availableModels.slice(0, 3);
+            console.log('[generate-query-scenario] Filtered preferred models:', preferred.slice(0, 5));
+        } else {
+            // Fallback: use only gemini-1.5-flash (most reliable)
+            models = ['gemini-1.5-flash'];
+            console.log('[generate-query-scenario] No available models, using fallback');
+        }
+        
+        console.log('[generate-query-scenario] Will try models in order:', models);
+        
+        let lastError = null;
+        for (const modelName of models) {
+            try {
+                console.log(`[generate-query-scenario] Trying model: ${modelName}`);
+                const model = genAI.getGenerativeModel({ model: modelName });
+                const result = await model.generateContent(prompt);
+                const response = await result.response;
+                const text = response.text();
+                
+                console.log(`[generate-query-scenario] Response from ${modelName} (first 500 chars):`, text.substring(0, 500));
+                
+                // Try to extract JSON from response
+                // First, try to find JSON object (most common case)
+                let jsonMatch = text.match(/\{[\s\S]*\}/);
+                
+                // If no match, try to find JSON wrapped in markdown code blocks
+                if (!jsonMatch) {
+                    const codeBlockMatch = text.match(/```(?:json)?\s*(\{[\s\S]*?\})\s*```/);
+                    if (codeBlockMatch) {
+                        jsonMatch = codeBlockMatch;
+                    }
+                }
+                
+                if (jsonMatch) {
+                    try {
+                        const jsonStr = jsonMatch[0].replace(/```json\s*/g, '').replace(/```/g, '').trim();
+                        const parsed = JSON.parse(jsonStr);
+                        console.log('[generate-query-scenario] Successfully parsed JSON');
+                        // Always use the selected subset of terms for this scenario
+                        // This ensures each scenario has different available terms (variety)
+                        const scenarioTerms = termsForScenario;
+                        
+                        return res.json({
+                            success: true,
+                            description: parsed.description || 'Geen beschrijving beschikbaar',
+                            correctQuery: parsed.correctQuery || '',
+                            difficulty: parsed.difficulty || 'medium',
+                            explanation: parsed.explanation || 'Geen uitleg beschikbaar',
+                            availableTerms: scenarioTerms // Terms to display for this scenario
+                        });
+                    } catch (parseError) {
+                        console.error('[generate-query-scenario] JSON parse error:', parseError.message);
+                        console.error('[generate-query-scenario] JSON string:', jsonMatch[0].substring(0, 200));
+                        throw new Error(`Failed to parse JSON: ${parseError.message}`);
+                    }
+                } else {
+                    console.error('[generate-query-scenario] No JSON found in response');
+                    console.error('[generate-query-scenario] Full response:', text);
+                    throw new Error('No JSON found in AI response');
+                }
+            } catch (error) {
+                console.error(`[generate-query-scenario] Error with model ${modelName}:`, error.message);
+                console.error(`[generate-query-scenario] Error stack:`, error.stack);
+                lastError = error;
+                continue;
+            }
+        }
+
+        console.error('[generate-query-scenario] All models failed');
+        throw lastError || new Error('All models failed');
+
+    } catch (error) {
+        console.error('[Gemini Proxy] Error generating scenario:', error);
+        console.error('[Gemini Proxy] Error stack:', error.stack);
+        console.error('[Gemini Proxy] Error details:', {
+            message: error.message,
+            name: error.name,
+            code: error.code
+        });
+        return res.status(500).json({
+            error: 'Internal server error',
+            message: error.message,
+            details: process.env.NODE_ENV === 'development' ? error.stack : undefined
+        });
+    }
+});
+
+/**
+ * Validate boolean query with AI feedback
+ * POST /api/validate-query
+ */
+app.post('/api/validate-query', async (req, res) => {
+    try {
+        const { description, userQuery, availableTerms, correctQuery } = req.body;
+
+        if (!description || !userQuery || !availableTerms) {
+            return res.status(400).json({
+                error: 'Missing required fields',
+                message: 'description, userQuery, and availableTerms are required'
+            });
+        }
+
+        if (!GEMINI_API_KEY) {
+            return res.status(500).json({
+                error: 'API key not configured',
+                message: 'GEMINI_API_KEY is not set in environment variables'
+            });
+        }
+
+        // Build prompt with correct query if available
+        const correctQueryInfo = correctQuery 
+            ? `\nDe correcte query voor dit scenario is: "${correctQuery}"\nGebruik deze exacte query als suggestedQuery als de student query niet correct is.`
+            : '';
+
+        const prompt = `Je bent een expert in informatievaardigheden en Booleaanse zoekoperatoren.
+
+Een student heeft de volgende zoekopdracht beschrijving gekregen:
+"${description}"
+
+Beschikbare zoektermen: ${availableTerms.join(', ')}${correctQueryInfo}
+
+De student heeft de volgende query ingevoerd:
+"${userQuery}"
+
+Geef beknopte, bemoedigende feedback op de query (MAXIMAAL 4-5 zinnen). Beoordeel:
+1. Of de query correct is voor de beschrijving
+2. Of de juiste operatoren (AND, OR, NOT) zijn gebruikt
+3. Of haakjes correct zijn gebruikt waar nodig
+4. Of alle benodigde termen zijn gebruikt (NIET alle beschikbare termen, alleen de benodigde!)
+5. Geef één constructieve suggestie voor verbetering als de query nog niet volledig correct is
+
+BELANGRIJK: 
+- Feedback moet MAXIMAAL 4-5 zinnen zijn. Wees beknopt!
+- Gebruik bemoedigende taal en spreek de student direct aan met "je/jouw"
+- Als de query niet correct is en er is een correcte query gegeven, gebruik die EXACT als suggestedQuery
+- De suggestedQuery moet alleen de benodigde termen bevatten voor het scenario, NIET alle beschikbare termen
+- Focus op het belangrijkste punt - niet alle details uitleggen
+- Voorbeelden van beknopte feedback:
+  * "Goed begin! Je hebt de juiste termen gekozen. Voor deze opdracht heb je echter de AND-operator nodig in plaats van OR."
+  * "Je query is correct! Je hebt perfect begrepen hoe de AND-operator werkt."
+  * "Bijna goed! Je mist nog één term. Probeer ook [term] toe te voegen met de AND-operator."
+
+Geef je antwoord terug in JSON format:
+{
+  "isCorrect": true/false,
+  "feedback": "Beknopte bemoedigende feedback in het Nederlands (MAXIMAAL 4-5 zinnen, gebruik 'je/jouw')",
+  "suggestedQuery": "${correctQuery || 'De correcte query (alleen als isCorrect false is, gebruik alleen benodigde termen)'}",
+  "explanation": "Korte uitleg waarom de query wel/niet correct is (maximaal 1-2 zinnen)"
+}
+
+Antwoord alleen met de JSON, geen extra tekst.`;
+
+        const genAI = new GoogleGenerativeAI(GEMINI_API_KEY);
+        let availableModels = await getAvailableModels();
+        
+        // Use models from the available models list (they're already filtered to support generateContent)
+        // Prefer flash models (faster), then pro models
+        let models = [];
+        
+        if (availableModels.length > 0) {
+            // Filter to prefer stable models, exclude preview/experimental
+            const preferred = availableModels.filter(m => {
+                if (m.includes('-preview-') || m.includes('-experimental-')) return false;
+                if (m.includes('lite-preview')) return false;
+                return true;
+            });
+            
+            // Sort: flash first, then pro, then others
+            preferred.sort((a, b) => {
+                if (a.includes('flash') && !b.includes('flash')) return -1;
+                if (b.includes('flash') && !a.includes('flash')) return 1;
+                if (a.includes('pro') && !b.includes('pro')) return -1;
+                if (b.includes('pro') && !a.includes('pro')) return 1;
+                return 0;
+            });
+            
+            models = preferred.length > 0 ? preferred.slice(0, 3) : availableModels.slice(0, 3);
+        } else {
+            // Fallback: use only gemini-1.5-flash (most reliable)
+            models = ['gemini-1.5-flash'];
+        }
+        
+        let lastError = null;
+        for (const modelName of models) {
+            try {
+                const model = genAI.getGenerativeModel({ model: modelName });
+                const result = await model.generateContent(prompt);
+                const response = await result.response;
+                const text = response.text();
+                
+                const jsonMatch = text.match(/\{[\s\S]*\}/);
+                if (jsonMatch) {
+                    try {
+                        const jsonStr = jsonMatch[0].replace(/```json\s*/g, '').replace(/```/g, '').trim();
+                        const parsed = JSON.parse(jsonStr);
+                        
+                        // Use correct query as suggested query if provided and query is incorrect
+                        let suggestedQuery = parsed.suggestedQuery || null;
+                        if (!parsed.isCorrect && correctQuery) {
+                            suggestedQuery = correctQuery;
+                        }
+                        
+                        return res.json({
+                            success: true,
+                            isCorrect: parsed.isCorrect === true,
+                            feedback: parsed.feedback || 'Geen feedback beschikbaar',
+                            suggestedQuery: suggestedQuery,
+                            explanation: parsed.explanation || parsed.feedback
+                        });
+                    } catch (parseError) {
+                        console.error('[validate-query] JSON parse error:', parseError.message);
+                        throw new Error(`Failed to parse JSON: ${parseError.message}`);
+                    }
+                } else {
+                    throw new Error('No JSON found in response');
+                }
+            } catch (error) {
+                console.error(`[Gemini Proxy] Error with model ${modelName}:`, error.message);
+                lastError = error;
+                continue;
+            }
+        }
+
+        throw lastError || new Error('All models failed');
+
+    } catch (error) {
+        console.error('[Gemini Proxy] Error validating query:', error);
+        return res.status(500).json({
+            error: 'Internal server error',
+            message: error.message
+        });
+    }
+});
+
+/**
  * Health check endpoint
  * GET /api/health
  */

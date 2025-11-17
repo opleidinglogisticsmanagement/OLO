@@ -42,11 +42,14 @@ class InteractiveRenderer {
                     contentHtml = accordionItem.content.map(item => {
                         if (typeof item === 'object' && item !== null && item.type !== undefined) {
                             // It's a content item, render it
+                            console.log('[InteractiveRenderer] Rendering content item in accordion:', item.type);
                             // If it's an accordion, mark it as nested
                             if (item.type === 'accordion') {
                                 return InteractiveRenderer.renderAccordion(item, true);
                             }
-                            return ContentRenderer.renderContentItems([item]);
+                            const rendered = ContentRenderer.renderContentItems([item]);
+                            console.log('[InteractiveRenderer] Rendered content item, length:', rendered ? rendered.length : 0);
+                            return rendered;
                         } else if (typeof item === 'string') {
                             // It's a string, render as HTML if it starts with <, otherwise as paragraph
                             if (item.trim().startsWith('<')) {
@@ -1642,6 +1645,839 @@ class InteractiveRenderer {
             resultList.className = 'mt-1.5 space-y-0.5 text-xs text-red-800';
             resultList.innerHTML = afwezigCriteria.map(c => `<li>• ${c.letter}: ${c.name} (afwezig)</li>`).join('');
         }
+    }
+
+    /**
+     * Render een boolean operator oefening
+     * Laat studenten queries bouwen met AND, OR, NOT operatoren en haakjes
+     * @param {Object} item - Boolean operator exercise item met scenarios array
+     * @returns {string} HTML string
+     */
+    static renderBooleanOperatorExercise(item) {
+        console.log('[InteractiveRenderer] Rendering booleanOperatorExercise', item);
+        
+        if (!item.scenarios || !Array.isArray(item.scenarios) || item.scenarios.length === 0) {
+            console.warn('Boolean operator exercise missing scenarios array:', item);
+            return '';
+        }
+
+        const exerciseId = `boolean-operator-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+        
+        const title = item.title || 'Booleaanse operatoroefeningen';
+        const instruction = item.instruction || 'Bouw de juiste zoekquery voor elk scenario.';
+        
+        console.log('[InteractiveRenderer] Exercise ID:', exerciseId, 'Scenarios:', item.scenarios.length);
+
+        const scenariosHtml = item.scenarios.map((scenario, index) => {
+            const scenarioId = `${exerciseId}-scenario-${index}`;
+            const queryBuilderId = `${scenarioId}-query-builder`;
+            const queryDisplayId = `${scenarioId}-query-display`;
+            const feedbackId = `${scenarioId}-feedback`;
+            
+            // Helper function to escape for HTML attribute (single quotes)
+            const escapeForAttr = (str) => {
+                return String(str).replace(/'/g, "&#39;").replace(/"/g, "&quot;");
+            };
+            
+            // Create clickable buttons for terms
+            const termsHtml = scenario.availableTerms.map(term => {
+                const escapedTerm = escapeForAttr(term);
+                return `<button 
+                    type="button"
+                    class="px-3 py-1.5 bg-blue-100 hover:bg-blue-200 text-blue-800 rounded-md text-sm font-medium transition-colors mb-2 mr-2"
+                    onclick="InteractiveRenderer.addToQuery('${scenarioId}', '${escapedTerm}')"
+                >
+                    ${term}
+                </button>`;
+            }).join('');
+
+            // Create clickable buttons for operators
+            const operatorsHtml = scenario.availableOperators.map(op => {
+                const escapedOp = escapeForAttr(op);
+                return `<button 
+                    type="button"
+                    class="px-3 py-1.5 bg-purple-100 hover:bg-purple-200 text-purple-800 rounded-md text-sm font-bold transition-colors mb-2 mr-2"
+                    onclick="InteractiveRenderer.addToQuery('${scenarioId}', '${escapedOp}')"
+                >
+                    ${op}
+                </button>`;
+            }).join('');
+
+            // Parentheses buttons
+            const parenthesesHtml = `
+                <button 
+                    type="button"
+                    class="px-3 py-1.5 bg-gray-200 hover:bg-gray-300 text-gray-800 rounded-md text-sm font-bold transition-colors mb-2 mr-2"
+                    onclick="InteractiveRenderer.addToQuery('${scenarioId}', '(')"
+                >
+                    (
+                </button>
+                <button 
+                    type="button"
+                    class="px-3 py-1.5 bg-gray-200 hover:bg-gray-300 text-gray-800 rounded-md text-sm font-bold transition-colors mb-2 mr-2"
+                    onclick="InteractiveRenderer.addToQuery('${scenarioId}', ')')"
+                >
+                    )
+                </button>
+            `;
+
+            // Escape HTML attributes properly
+            const escapedCorrectQuery = scenario.correctQuery.replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+            const escapedExplanation = scenario.explanation.replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+            
+            return `
+                <div class="border-l-2 border-gray-200 rounded p-4 mb-4 bg-white" data-scenario-id="${scenarioId}" data-correct-query="${escapedCorrectQuery}" data-explanation="${escapedExplanation}">
+                    <h4 class="text-sm font-semibold text-gray-600 mb-2">Scenario ${index + 1}</h4>
+                    <p class="text-sm text-gray-700 mb-3">${scenario.description}</p>
+                    
+                    <div class="mb-3">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Jouw query:</label>
+                        <div id="${queryDisplayId}" class="min-h-[40px] p-3 bg-gray-50 border border-gray-300 rounded-md mb-2 flex flex-wrap items-center gap-2">
+                            <span class="text-sm text-gray-500 italic">Klik op termen en operatoren hieronder om je query te bouwen</span>
+                        </div>
+                        <input type="hidden" id="${queryBuilderId}" value="" />
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Zoektermen:</label>
+                        <div class="flex flex-wrap">
+                            ${termsHtml}
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Operatoren:</label>
+                        <div class="flex flex-wrap">
+                            ${operatorsHtml}
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Haakjes:</label>
+                        <div class="flex flex-wrap">
+                            ${parenthesesHtml}
+                        </div>
+                    </div>
+
+                    <div class="flex gap-2 mb-3">
+                        <button 
+                            type="button"
+                            onclick="InteractiveRenderer.clearQuery('${scenarioId}')"
+                            class="px-4 py-2 bg-gray-500 hover:bg-gray-600 text-white rounded-md text-sm font-medium transition-colors"
+                        >
+                            Wissen
+                        </button>
+                        <button 
+                            type="button"
+                            onclick="InteractiveRenderer.validateQuery('${scenarioId}')"
+                            class="px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-md text-sm font-medium transition-colors"
+                        >
+                            Valideer query
+                        </button>
+                    </div>
+
+                    <div id="${feedbackId}" class="hidden"></div>
+                </div>
+            `;
+        }).join('');
+
+        return `
+            <div class="boolean-operator-exercise mb-6 bg-white rounded-lg p-4" id="${exerciseId}">
+                <h3 class="text-lg font-semibold text-gray-900 mb-2">${title}</h3>
+                <p class="text-sm text-gray-600 mb-4">${instruction}</p>
+                <div class="space-y-4">
+                    ${scenariosHtml}
+                </div>
+            </div>
+        `;
+    }
+
+    /**
+     * Add term or operator to query builder
+     */
+    static addToQuery(scenarioId, item) {
+        console.log('[InteractiveRenderer] addToQuery called', scenarioId, item);
+        
+        // Decode HTML entities if present (browser should do this automatically, but just in case)
+        if (typeof item === 'string') {
+            item = item.replace(/&#39;/g, "'").replace(/&quot;/g, '"');
+        }
+        
+        const queryBuilder = document.getElementById(`${scenarioId}-query-builder`);
+        const queryDisplay = document.getElementById(`${scenarioId}-query-display`);
+        
+        if (!queryBuilder || !queryDisplay) {
+            console.warn('[InteractiveRenderer] Query builder or display not found', scenarioId);
+            return;
+        }
+
+        let currentQuery = queryBuilder.value.trim();
+        
+        // If query is empty and item is an operator, don't add it
+        if (!currentQuery && (item === 'AND' || item === 'OR' || item === 'NOT')) {
+            return;
+        }
+
+        // If last character is an operator and new item is also an operator, replace it
+        const lastChar = currentQuery.slice(-1);
+        if ((lastChar === ' ' || lastChar === '(') && (item === 'AND' || item === 'OR' || item === 'NOT')) {
+            // Can add operator after space or opening parenthesis
+        } else if (currentQuery && !currentQuery.endsWith(' ') && !currentQuery.endsWith('(') && (item === 'AND' || item === 'OR' || item === 'NOT')) {
+            // Add space before operator if needed
+            currentQuery += ' ';
+        }
+
+        // Add the item
+        if (item === 'AND' || item === 'OR' || item === 'NOT') {
+            currentQuery += item;
+        } else if (item === '(' || item === ')') {
+            currentQuery += item;
+        } else {
+            // It's a term - add space before if needed (unless it's the first item or after opening parenthesis)
+            if (currentQuery && !currentQuery.endsWith(' ') && !currentQuery.endsWith('(')) {
+                currentQuery += ' ';
+            }
+            currentQuery += item;
+        }
+
+        queryBuilder.value = currentQuery;
+        this.updateQueryDisplay(scenarioId);
+    }
+
+    /**
+     * Update visual display of query
+     */
+    static updateQueryDisplay(scenarioId) {
+        const queryBuilder = document.getElementById(`${scenarioId}-query-builder`);
+        const queryDisplay = document.getElementById(`${scenarioId}-query-display`);
+        
+        if (!queryBuilder || !queryDisplay) return;
+
+        const query = queryBuilder.value.trim();
+        
+        if (!query) {
+            queryDisplay.innerHTML = '<span class="text-sm text-gray-500 italic">Klik op termen en operatoren hieronder om je query te bouwen</span>';
+            return;
+        }
+
+        // Parse query and create visual representation
+        // Split by operators and parentheses, but preserve them
+        const parts = query.split(/(\s+AND\s+|\s+OR\s+|\s+NOT\s+|\(|\))/g);
+        
+        const displayHtml = parts.map(part => {
+            const trimmed = part.trim();
+            if (!trimmed) return '';
+            
+            // Check for operators (with spaces)
+            if (trimmed === 'AND' || trimmed.match(/^\s*AND\s*$/)) {
+                return `<span class="px-2 py-1 bg-purple-200 text-purple-900 rounded font-bold text-sm">AND</span>`;
+            } else if (trimmed === 'OR' || trimmed.match(/^\s*OR\s*$/)) {
+                return `<span class="px-2 py-1 bg-purple-200 text-purple-900 rounded font-bold text-sm">OR</span>`;
+            } else if (trimmed === 'NOT' || trimmed.match(/^\s*NOT\s*$/)) {
+                return `<span class="px-2 py-1 bg-purple-200 text-purple-900 rounded font-bold text-sm">NOT</span>`;
+            } else if (trimmed === '(') {
+                return `<span class="px-1 text-gray-600 font-bold text-lg">(</span>`;
+            } else if (trimmed === ')') {
+                return `<span class="px-1 text-gray-600 font-bold text-lg">)</span>`;
+            } else if (trimmed) {
+                // It's a term (could be multi-word like "supply chain")
+                return `<span class="px-2 py-1 bg-blue-200 text-blue-900 rounded font-medium text-sm">${trimmed}</span>`;
+            }
+            return '';
+        }).filter(h => h).join('');
+
+        queryDisplay.innerHTML = displayHtml || '<span class="text-sm text-gray-500 italic">Klik op termen en operatoren hieronder om je query te bouwen</span>';
+    }
+
+    /**
+     * Clear query builder
+     */
+    static clearQuery(scenarioId) {
+        console.log('[InteractiveRenderer] clearQuery called', scenarioId);
+        const queryBuilder = document.getElementById(`${scenarioId}-query-builder`);
+        const feedback = document.getElementById(`${scenarioId}-feedback`);
+        
+        if (queryBuilder) {
+            queryBuilder.value = '';
+        }
+        
+        this.updateQueryDisplay(scenarioId);
+        
+        if (feedback) {
+            feedback.classList.add('hidden');
+            feedback.innerHTML = '';
+        }
+    }
+
+    /**
+     * Validate query against correct answer
+     */
+    static validateQuery(scenarioId) {
+        console.log('[InteractiveRenderer] validateQuery called', scenarioId);
+        const queryBuilder = document.getElementById(`${scenarioId}-query-builder`);
+        const feedback = document.getElementById(`${scenarioId}-feedback`);
+        const scenarioElement = document.querySelector(`[data-scenario-id="${scenarioId}"]`);
+        
+        if (!queryBuilder || !feedback || !scenarioElement) {
+            console.warn('[InteractiveRenderer] Missing elements for validation', { queryBuilder: !!queryBuilder, feedback: !!feedback, scenarioElement: !!scenarioElement });
+            return;
+        }
+
+        const userQuery = queryBuilder.value.trim();
+        const correctQuery = scenarioElement.getAttribute('data-correct-query');
+        const explanation = scenarioElement.getAttribute('data-explanation');
+
+        // Normalize queries for comparison (remove extra spaces, case insensitive)
+        const normalizeQuery = (q) => {
+            return q.replace(/\s+/g, ' ').trim().toUpperCase();
+        };
+
+        const normalizedUser = normalizeQuery(userQuery);
+        const normalizedCorrect = normalizeQuery(correctQuery);
+
+        feedback.classList.remove('hidden');
+
+        if (normalizedUser === normalizedCorrect) {
+            feedback.className = 'p-3 rounded-lg bg-green-50 border border-green-200';
+            feedback.innerHTML = `
+                <div class="flex items-start">
+                    <i class="fas fa-check-circle text-green-600 text-lg mr-2 mt-0.5"></i>
+                    <div>
+                        <p class="text-sm font-semibold text-green-900 mb-1">✓ Correct!</p>
+                        <p class="text-sm text-green-800">${explanation}</p>
+                    </div>
+                </div>
+            `;
+        } else {
+            feedback.className = 'p-3 rounded-lg bg-red-50 border border-red-200';
+            feedback.innerHTML = `
+                <div class="flex items-start">
+                    <i class="fas fa-times-circle text-red-600 text-lg mr-2 mt-0.5"></i>
+                    <div>
+                        <p class="text-sm font-semibold text-red-900 mb-1">Niet correct</p>
+                        <p class="text-sm text-red-800 mb-2">Je query: <code class="bg-red-100 px-1 py-0.5 rounded">${userQuery || '(leeg)'}</code></p>
+                        <p class="text-sm text-red-800 mb-2">Correcte query: <code class="bg-green-100 px-1 py-0.5 rounded">${correctQuery}</code></p>
+                        <p class="text-sm text-red-800">${explanation}</p>
+                    </div>
+                </div>
+            `;
+        }
+    }
+
+    /**
+     * Render een AI query oefening
+     * Laat studenten queries schrijven en krijgt AI feedback
+     */
+    static renderAIQueryExercise(item) {
+        const exerciseId = `ai-query-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+        const title = item.title || 'Schrijf je eigen zoekquery';
+        const instruction = item.instruction || 'Klik op "Nieuw scenario" om te beginnen.';
+        const availableTerms = item.availableTerms || [];
+        const generateFromTheory = item.generateFromTheory === true;
+
+        const availableTermsStr = JSON.stringify(availableTerms);
+
+        return `
+            <div class="ai-query-exercise mb-6 bg-white rounded-lg p-4" id="${exerciseId}" data-generate-from-theory="${generateFromTheory}" data-available-terms='${availableTermsStr}' data-scenario-count="0">
+                <h3 class="text-lg font-semibold text-gray-900 mb-2">${title}</h3>
+                <p class="text-sm text-gray-600 mb-4">${instruction}</p>
+                
+                <div id="${exerciseId}-scenario-container" class="hidden">
+                    <div class="rounded mb-4 bg-white">
+                        <div id="${exerciseId}-scenario-number" class="text-sm font-semibold text-gray-600 mb-2"></div>
+                        <p id="${exerciseId}-description" class="text-sm text-gray-700 mb-3"></p>
+                        
+                        <div class="mb-3">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Beschikbare zoektermen:</label>
+                            <div id="${exerciseId}-terms-container" class="flex flex-wrap gap-2 mb-3">
+                                ${availableTerms.map(term => {
+                                    const escapedTerm = term.replace(/'/g, "&#39;").replace(/"/g, "&quot;");
+                                    return `<button 
+                                        type="button"
+                                        onclick="InteractiveRenderer.addToAIQuery('${exerciseId}', '${escapedTerm}')"
+                                        class="px-2 py-1 bg-blue-50 hover:bg-blue-100 text-blue-700 rounded text-xs transition-colors cursor-pointer"
+                                    >${term}</button>`;
+                                }).join('')}
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Operatoren:</label>
+                            <div class="flex flex-wrap gap-2 mb-3">
+                                <button 
+                                    type="button"
+                                    onclick="InteractiveRenderer.addToAIQuery('${exerciseId}', 'AND')"
+                                    class="px-3 py-1 bg-purple-50 hover:bg-purple-100 text-purple-700 rounded text-xs font-semibold transition-colors cursor-pointer"
+                                >AND</button>
+                                <button 
+                                    type="button"
+                                    onclick="InteractiveRenderer.addToAIQuery('${exerciseId}', 'OR')"
+                                    class="px-3 py-1 bg-purple-50 hover:bg-purple-100 text-purple-700 rounded text-xs font-semibold transition-colors cursor-pointer"
+                                >OR</button>
+                                <button 
+                                    type="button"
+                                    onclick="InteractiveRenderer.addToAIQuery('${exerciseId}', 'NOT')"
+                                    class="px-3 py-1 bg-purple-50 hover:bg-purple-100 text-purple-700 rounded text-xs font-semibold transition-colors cursor-pointer"
+                                >NOT</button>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Haakjes:</label>
+                            <div class="flex flex-wrap gap-2 mb-3">
+                                <button 
+                                    type="button"
+                                    onclick="InteractiveRenderer.addToAIQuery('${exerciseId}', '(')"
+                                    class="px-3 py-1 bg-gray-50 hover:bg-gray-100 text-gray-700 rounded text-sm font-bold transition-colors cursor-pointer"
+                                >(</button>
+                                <button 
+                                    type="button"
+                                    onclick="InteractiveRenderer.addToAIQuery('${exerciseId}', ')')"
+                                    class="px-3 py-1 bg-gray-50 hover:bg-gray-100 text-gray-700 rounded text-sm font-bold transition-colors cursor-pointer"
+                                >)</button>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Jouw query:</label>
+                            <input 
+                                type="text" 
+                                id="${exerciseId}-input"
+                                class="w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                                placeholder="Bijvoorbeeld: transport AND optimalisatie"
+                            />
+                        </div>
+
+                        <div class="flex gap-2 mb-3">
+                            <button 
+                                type="button"
+                                onclick="InteractiveRenderer.validateAIQuery('${exerciseId}')"
+                                class="px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-md text-sm font-medium transition-colors"
+                            >
+                                Valideer met AI
+                            </button>
+                            <button 
+                                type="button"
+                                onclick="InteractiveRenderer.clearAIQuery('${exerciseId}')"
+                                class="px-4 py-2 bg-gray-500 hover:bg-gray-600 text-white rounded-md text-sm font-medium transition-colors"
+                            >
+                                Wissen
+                            </button>
+                        </div>
+
+                        <div id="${exerciseId}-loading" class="hidden mb-3">
+                            <div class="flex items-center text-sm text-gray-600">
+                                <i class="fas fa-spinner fa-spin mr-2"></i>
+                                <span>AI analyseert je query...</span>
+                            </div>
+                        </div>
+
+                        <div id="${exerciseId}-feedback" class="hidden"></div>
+                    </div>
+                </div>
+
+                <div class="flex gap-2">
+                    <button 
+                        type="button"
+                        onclick="InteractiveRenderer.loadNewAIQueryScenario('${exerciseId}')"
+                        class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md text-sm font-medium transition-colors"
+                        id="${exerciseId}-new-scenario-btn"
+                    >
+                        <i class="fas fa-plus mr-2"></i>Nieuw scenario
+                    </button>
+                </div>
+            </div>
+        `;
+    }
+
+    /**
+     * Load a new AI-generated query scenario
+     */
+    static async loadNewAIQueryScenario(exerciseId) {
+        const exerciseElement = document.getElementById(exerciseId);
+        const container = document.getElementById(`${exerciseId}-scenario-container`);
+        const newBtn = document.getElementById(`${exerciseId}-new-scenario-btn`);
+        const descriptionEl = document.getElementById(`${exerciseId}-description`);
+        const scenarioNumberEl = document.getElementById(`${exerciseId}-scenario-number`);
+        const input = document.getElementById(`${exerciseId}-input`);
+        const feedback = document.getElementById(`${exerciseId}-feedback`);
+        const loading = document.getElementById(`${exerciseId}-loading`);
+
+        if (!exerciseElement || !container) {
+            console.warn('[InteractiveRenderer] AI query exercise elements not found', exerciseId);
+            return;
+        }
+
+        const generateFromTheory = exerciseElement.getAttribute('data-generate-from-theory') === 'true';
+        const availableTerms = JSON.parse(exerciseElement.getAttribute('data-available-terms') || '[]');
+
+        // Disable button and show loading
+        if (newBtn) {
+            newBtn.disabled = true;
+            newBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Genereert scenario...';
+        }
+
+        try {
+            let scenarioData;
+
+            if (generateFromTheory) {
+                // Get theory content from page
+                const theoryContent = this.extractTheoryContent();
+                console.log('[InteractiveRenderer] Extracted theory content length:', theoryContent?.length || 0);
+                console.log('[InteractiveRenderer] Extracted theory content preview:', theoryContent?.substring(0, 200) || 'empty');
+                
+                if (!theoryContent || theoryContent.trim().length === 0) {
+                    console.error('[InteractiveRenderer] No theory content found');
+                    throw new Error('Geen theorie content gevonden op de pagina');
+                }
+
+                // Get current scenario count
+                const currentCount = parseInt(exerciseElement.getAttribute('data-scenario-count') || '0');
+                
+                // Limit to 5 scenarios
+                if (currentCount >= 5) {
+                    alert('Je hebt al 5 scenario\'s geoefend! Probeer de oefening opnieuw te laden voor meer scenario\'s.');
+                    if (newBtn) {
+                        newBtn.disabled = false;
+                        newBtn.innerHTML = '<i class="fas fa-plus mr-2"></i>Nieuw scenario';
+                    }
+                    return;
+                }
+                
+                console.log('[InteractiveRenderer] Sending request to /api/generate-query-scenario (scenario:', currentCount + 1, ')');
+                const response = await fetch('/api/generate-query-scenario', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        theoryContent,
+                        availableTerms,
+                        scenarioCount: currentCount
+                    })
+                });
+                
+                console.log('[InteractiveRenderer] Response status:', response.status);
+
+                // Check if response is ok before parsing JSON
+                if (!response.ok) {
+                    let errorMessage = 'Server error';
+                    try {
+                        const errorData = await response.json();
+                        errorMessage = errorData.message || errorData.error || 'Server error';
+                    } catch (parseError) {
+                        // If response is not JSON, try to get text
+                        try {
+                            const errorText = await response.text();
+                            errorMessage = errorText || 'Server error';
+                        } catch (textError) {
+                            errorMessage = `Server returned status ${response.status}`;
+                        }
+                    }
+                    throw new Error(errorMessage);
+                }
+
+                const data = await response.json();
+                scenarioData = data;
+            } else {
+                // Fallback: use predefined scenarios
+                const scenarios = [
+                    { description: "Je zoekt naar artikelen die zowel over transport als over optimalisatie gaan.", correctQuery: "transport AND optimalisatie", explanation: "De AND-operator zorgt ervoor dat beide termen in de resultaten moeten voorkomen." },
+                    { description: "Je zoekt naar artikelen die over logistiek of warehouse gaan.", correctQuery: "logistiek OR warehouse", explanation: "De OR-operator zorgt ervoor dat minstens één van de termen in de resultaten voorkomt." },
+                    { description: "Je zoekt naar artikelen over transport, maar niet over luchtvaart.", correctQuery: "transport NOT luchtvaart", explanation: "De NOT-operator sluit artikelen uit die de term 'luchtvaart' bevatten." }
+                ];
+                scenarioData = scenarios[Math.floor(Math.random() * scenarios.length)];
+            }
+
+            // Update scenario number
+            const scenarioCount = parseInt(exerciseElement.getAttribute('data-scenario-count') || '0') + 1;
+            exerciseElement.setAttribute('data-scenario-count', scenarioCount);
+            exerciseElement.setAttribute('data-current-description', scenarioData.description);
+            exerciseElement.setAttribute('data-current-correct-query', scenarioData.correctQuery || '');
+
+            // Update UI
+            if (scenarioNumberEl) scenarioNumberEl.textContent = `Scenario ${scenarioCount}`;
+            if (descriptionEl) descriptionEl.textContent = scenarioData.description;
+            if (input) input.value = '';
+            if (feedback) {
+                feedback.classList.add('hidden');
+                feedback.innerHTML = '';
+            }
+            if (loading) loading.classList.add('hidden');
+            
+            // Update available terms display - only show terms used in this scenario
+            const scenarioTerms = scenarioData.availableTerms || availableTerms;
+            const termsContainer = document.getElementById(`${exerciseId}-terms-container`);
+            if (termsContainer && scenarioTerms.length > 0) {
+                termsContainer.innerHTML = scenarioTerms.map(term => {
+                    const escapedTerm = term.replace(/'/g, "&#39;").replace(/"/g, "&quot;");
+                    return `<button 
+                        type="button"
+                        onclick="InteractiveRenderer.addToAIQuery('${exerciseId}', '${escapedTerm}')"
+                        class="px-2 py-1 bg-blue-50 hover:bg-blue-100 text-blue-700 rounded text-xs transition-colors cursor-pointer"
+                    >${term}</button>`;
+                }).join('');
+            }
+            
+            container.classList.remove('hidden');
+
+        } catch (error) {
+            console.error('[InteractiveRenderer] Error loading scenario:', error);
+            alert('Er is een fout opgetreden bij het genereren van een nieuw scenario. Probeer het opnieuw.');
+        } finally {
+            if (newBtn) {
+                newBtn.disabled = false;
+                newBtn.innerHTML = '<i class="fas fa-plus mr-2"></i>Nieuw scenario';
+            }
+        }
+    }
+
+    /**
+     * Extract theory content from the page
+     */
+    static extractTheoryContent() {
+        console.log('[extractTheoryContent] Starting extraction...');
+        
+        // Strategy 1: Find section with "Theorie" heading and get .prose content
+        const sections = document.querySelectorAll('section');
+        console.log('[extractTheoryContent] Found', sections.length, 'sections');
+        
+        for (const section of sections) {
+            const heading = section.querySelector('h2');
+            if (heading) {
+                const headingText = heading.textContent.trim();
+                console.log('[extractTheoryContent] Checking section with heading:', headingText.substring(0, 50));
+                
+                if (headingText.toLowerCase().includes('theorie')) {
+                    console.log('[extractTheoryContent] Found Theorie section!');
+                    const prose = section.querySelector('.prose');
+                    if (prose) {
+                        const content = prose.innerText || prose.textContent || '';
+                        console.log('[extractTheoryContent] Found prose content, length:', content.length);
+                        if (content.trim().length > 0) {
+                            return content;
+                        }
+                    }
+                    // If no prose, get all text from section (but exclude heading)
+                    const sectionContent = section.innerText || section.textContent || '';
+                    console.log('[extractTheoryContent] Using full section content, length:', sectionContent.length);
+                    if (sectionContent.trim().length > 0) {
+                        return sectionContent;
+                    }
+                }
+            }
+        }
+        
+        // Strategy 2: Try to find by class or data attribute
+        const theorySection = document.querySelector('.theorie-content, [data-theory-content]');
+        if (theorySection) {
+            const content = theorySection.innerText || theorySection.textContent || '';
+            console.log('[extractTheoryContent] Found by class/data-attr, length:', content.length);
+            return content;
+        }
+        
+        // Strategy 3: Get all text from main content area
+        const mainContent = document.querySelector('main, .content, .lesson-content');
+        if (mainContent) {
+            const clone = mainContent.cloneNode(true);
+            clone.querySelectorAll('button, nav, .sidebar, header, footer, script, style').forEach(el => el.remove());
+            const content = clone.innerText || clone.textContent || '';
+            console.log('[extractTheoryContent] Using main content, length:', content.length);
+            if (content.trim().length > 0) {
+                return content;
+            }
+        }
+        
+        // Strategy 4: Get all visible text from body (last resort)
+        const bodyClone = document.body.cloneNode(true);
+        bodyClone.querySelectorAll('button, nav, .sidebar, header, footer, script, style, .navbar, .menu').forEach(el => el.remove());
+        const bodyContent = bodyClone.innerText || bodyClone.textContent || '';
+        console.log('[extractTheoryContent] Using body content as last resort, length:', bodyContent.length);
+        
+        return bodyContent || '';
+    }
+
+    /**
+     * Validate query with AI feedback
+     */
+    static async validateAIQuery(exerciseId) {
+        const exerciseElement = document.getElementById(exerciseId);
+        const input = document.getElementById(`${exerciseId}-input`);
+        const feedback = document.getElementById(`${exerciseId}-feedback`);
+        const loading = document.getElementById(`${exerciseId}-loading`);
+
+        if (!exerciseElement || !input || !feedback) {
+            console.warn('[InteractiveRenderer] AI query elements not found', exerciseId);
+            return;
+        }
+
+        const userQuery = input.value.trim();
+        if (!userQuery) {
+            alert('Voer eerst een query in voordat je valideert.');
+            return;
+        }
+
+        const description = exerciseElement.getAttribute('data-current-description');
+        const correctQuery = exerciseElement.getAttribute('data-current-correct-query');
+        const availableTerms = JSON.parse(exerciseElement.getAttribute('data-available-terms') || '[]');
+
+        if (!description) {
+            alert('Er is geen actief scenario. Klik eerst op "Nieuw scenario".');
+            return;
+        }
+
+        // Show loading
+        loading.classList.remove('hidden');
+        feedback.classList.add('hidden');
+        input.disabled = true;
+
+        try {
+            const response = await fetch('/api/validate-query', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ 
+                    description, 
+                    userQuery, 
+                    availableTerms,
+                    correctQuery: correctQuery || null
+                })
+            });
+
+            // Check if response is ok before parsing JSON
+            if (!response.ok) {
+                let errorMessage = 'Server error';
+                try {
+                    const errorData = await response.json();
+                    errorMessage = errorData.message || errorData.error || 'Server error';
+                } catch (parseError) {
+                    // If response is not JSON, try to get text
+                    try {
+                        const errorText = await response.text();
+                        errorMessage = errorText || 'Server error';
+                    } catch (textError) {
+                        errorMessage = `Server returned status ${response.status}`;
+                    }
+                }
+                throw new Error(errorMessage);
+            }
+
+            const data = await response.json();
+
+            loading.classList.add('hidden');
+            input.disabled = false;
+            feedback.classList.remove('hidden');
+
+            if (data.isCorrect) {
+                feedback.className = 'p-3 rounded-lg bg-green-50 border border-green-200';
+                feedback.innerHTML = `
+                    <div class="flex items-start">
+                        <i class="fas fa-check-circle text-green-600 text-lg mr-2 mt-0.5"></i>
+                        <div>
+                            <p class="text-sm font-semibold text-green-900 mb-1">✓ Correct!</p>
+                            <p class="text-sm text-green-800">${data.feedback || data.explanation}</p>
+                        </div>
+                    </div>
+                `;
+            } else {
+                feedback.className = 'p-3 rounded-lg bg-yellow-50 border border-yellow-200';
+                feedback.innerHTML = `
+                    <div class="flex items-start">
+                        <i class="fas fa-exclamation-circle text-yellow-600 text-lg mr-2 mt-0.5"></i>
+                        <div>
+                            <p class="text-sm font-semibold text-yellow-900 mb-1">Feedback</p>
+                            <p class="text-sm text-yellow-800 mb-2">${data.feedback || data.explanation}</p>
+                            ${data.suggestedQuery ? `
+                                <p class="text-sm text-yellow-800">
+                                    <strong>Suggestie:</strong> <code class="bg-yellow-100 px-1 py-0.5 rounded">${data.suggestedQuery}</code>
+                                </p>
+                            ` : ''}
+                        </div>
+                    </div>
+                `;
+            }
+        } catch (error) {
+            console.error('[InteractiveRenderer] Error validating AI query:', error);
+            loading.classList.add('hidden');
+            input.disabled = false;
+            feedback.classList.remove('hidden');
+            feedback.className = 'p-3 rounded-lg bg-red-50 border border-red-200';
+            feedback.innerHTML = `
+                <div class="flex items-start">
+                    <i class="fas fa-times-circle text-red-600 text-lg mr-2 mt-0.5"></i>
+                    <div>
+                        <p class="text-sm font-semibold text-red-900 mb-1">Fout</p>
+                        <p class="text-sm text-red-800">Er is een fout opgetreden bij het valideren van je query. Probeer het opnieuw.</p>
+                    </div>
+                </div>
+            `;
+        }
+    }
+
+    /**
+     * Add term or operator to AI query input field
+     */
+    static addToAIQuery(exerciseId, item) {
+        console.log('[InteractiveRenderer] addToAIQuery called', exerciseId, item);
+        
+        // Decode HTML entities if present
+        if (typeof item === 'string') {
+            item = item.replace(/&#39;/g, "'").replace(/&quot;/g, '"');
+        }
+        
+        const input = document.getElementById(`${exerciseId}-input`);
+        
+        if (!input) {
+            console.warn('[InteractiveRenderer] Input field not found', exerciseId);
+            return;
+        }
+
+        let currentQuery = input.value.trim();
+        
+        // If query is empty and item is an operator, don't add it
+        if (!currentQuery && (item === 'AND' || item === 'OR' || item === 'NOT')) {
+            return;
+        }
+
+        // If last character is an operator and new item is also an operator, replace it
+        const lastChar = currentQuery.slice(-1);
+        if ((lastChar === ' ' || lastChar === '(') && (item === 'AND' || item === 'OR' || item === 'NOT')) {
+            // Can add operator after space or opening parenthesis
+        } else if (currentQuery && !currentQuery.endsWith(' ') && !currentQuery.endsWith('(') && (item === 'AND' || item === 'OR' || item === 'NOT')) {
+            // Add space before operator if needed
+            currentQuery += ' ';
+        }
+
+        // Add the item
+        if (item === 'AND' || item === 'OR' || item === 'NOT') {
+            currentQuery += item;
+        } else if (item === '(' || item === ')') {
+            currentQuery += item;
+        } else {
+            // It's a term - add space before if needed (unless it's the first item or after opening parenthesis)
+            if (currentQuery && !currentQuery.endsWith(' ') && !currentQuery.endsWith('(')) {
+                currentQuery += ' ';
+            }
+            currentQuery += item;
+        }
+
+        input.value = currentQuery;
+        
+        // Focus the input field so user can continue typing
+        input.focus();
+    }
+
+    /**
+     * Clear AI query input
+     */
+    static clearAIQuery(exerciseId) {
+        const input = document.getElementById(`${exerciseId}-input`);
+        const feedback = document.getElementById(`${exerciseId}-feedback`);
+        const loading = document.getElementById(`${exerciseId}-loading`);
+
+        if (input) input.value = '';
+        if (feedback) {
+            feedback.classList.add('hidden');
+            feedback.innerHTML = '';
+        }
+        if (loading) loading.classList.add('hidden');
     }
 }
 

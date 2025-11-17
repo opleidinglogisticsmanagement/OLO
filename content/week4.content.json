@@ -331,6 +331,97 @@
       {
         "type": "paragraph",
         "text": [
+          "<p class=\"text-gray-700 mb-4\">Test je kennis van Booleaanse operatoren door de onderstaande oefening te maken. Je leert hoe je zoektermen effectief combineert met AND, OR en NOT, en hoe je haakjes gebruikt voor complexe queries.</p>"
+        ]
+      },
+      {
+        "type": "accordion",
+        "usePlusIcon": true,
+        "defaultOpen": false,
+        "items": [
+          {
+            "title": "Oefening 3: Vijf Booleaanse operatoroefeningen",
+            "defaultOpen": false,
+            "content": [
+              {
+                "type": "booleanOperatorExercise",
+                "title": "Vijf Booleaanse operatoroefeningen",
+                "instruction": "Bouw de juiste zoekquery voor elk scenario door de zoektermen en operatoren te selecteren. Gebruik haakjes waar nodig voor complexe queries.",
+                "scenarios": [
+                  {
+                    "id": "scenario1",
+                    "title": "Scenario 1: AND-operator",
+                    "description": "Je zoekt naar artikelen die zowel over transport als over optimalisatie gaan.",
+                    "availableTerms": ["transport", "optimalisatie", "logistiek", "warehouse", "supply chain", "luchtvaart", "magazijnbeheer", "automatisering", "robotica", "e-commerce"],
+                    "availableOperators": ["AND", "OR", "NOT"],
+                    "correctQuery": "transport AND optimalisatie",
+                    "explanation": "De AND-operator zorgt ervoor dat beide termen (transport én optimalisatie) in de resultaten moeten voorkomen. Dit beperkt het aantal resultaten tot artikelen die beide onderwerpen behandelen."
+                  },
+                  {
+                    "id": "scenario2",
+                    "title": "Scenario 2: OR-operator",
+                    "description": "Je zoekt naar artikelen die over logistiek of warehouse gaan (of beide).",
+                    "availableTerms": ["transport", "optimalisatie", "logistiek", "warehouse", "supply chain", "luchtvaart", "magazijnbeheer", "automatisering", "robotica", "e-commerce"],
+                    "availableOperators": ["AND", "OR", "NOT"],
+                    "correctQuery": "logistiek OR warehouse",
+                    "explanation": "De OR-operator zorgt ervoor dat minstens één van de termen (logistiek óf warehouse) in de resultaten voorkomt. Dit breidt het aantal resultaten uit tot artikelen die over een van beide onderwerpen gaan."
+                  },
+                  {
+                    "id": "scenario3",
+                    "title": "Scenario 3: NOT-operator",
+                    "description": "Je zoekt naar artikelen over transport, maar niet over luchtvaart.",
+                    "availableTerms": ["transport", "optimalisatie", "logistiek", "warehouse", "supply chain", "luchtvaart", "magazijnbeheer", "automatisering", "robotica", "e-commerce"],
+                    "availableOperators": ["AND", "OR", "NOT"],
+                    "correctQuery": "transport NOT luchtvaart",
+                    "explanation": "De NOT-operator sluit artikelen uit die de term 'luchtvaart' bevatten. Je krijgt dus alle artikelen over transport, behalve die over luchtvaart."
+                  },
+                  {
+                    "id": "scenario4",
+                    "title": "Scenario 4: Gecombineerde operatoren met haakjes",
+                    "description": "Je zoekt naar artikelen die over optimalisatie gaan EN (logistiek of supply chain) bevatten.",
+                    "availableTerms": ["transport", "optimalisatie", "logistiek", "warehouse", "supply chain", "luchtvaart", "magazijnbeheer", "automatisering", "robotica", "e-commerce"],
+                    "availableOperators": ["AND", "OR", "NOT"],
+                    "correctQuery": "(logistiek OR supply chain) AND optimalisatie",
+                    "explanation": "Haakjes bepalen de volgorde van bewerkingen. Eerst wordt (logistiek OR supply chain) geëvalueerd, daarna wordt het resultaat gecombineerd met optimalisatie via AND. Dit geeft artikelen die over optimalisatie gaan én over logistiek of supply chain."
+                  },
+                  {
+                    "id": "scenario5",
+                    "title": "Scenario 5: Complexe query",
+                    "description": "Je zoekt naar artikelen over magazijnbeheer die (automatisering of robotica) bevatten, maar niet over e-commerce gaan.",
+                    "availableTerms": ["transport", "optimalisatie", "logistiek", "warehouse", "supply chain", "luchtvaart", "magazijnbeheer", "automatisering", "robotica", "e-commerce"],
+                    "availableOperators": ["AND", "OR", "NOT"],
+                    "correctQuery": "magazijnbeheer AND (automatisering OR robotica) NOT e-commerce",
+                    "explanation": "Dit is een complexe query met meerdere operatoren. Eerst wordt (automatisering OR robotica) geëvalueerd, daarna wordt dit gecombineerd met magazijnbeheer via AND, en ten slotte worden artikelen over e-commerce uitgesloten met NOT."
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "accordion",
+        "usePlusIcon": true,
+        "defaultOpen": false,
+        "items": [
+          {
+            "title": "Oefening 4: Schrijf je eigen zoekquery met AI-feedback",
+            "defaultOpen": false,
+            "content": [
+              {
+                "type": "aiQueryExercise",
+                "title": "Schrijf je eigen zoekquery",
+                "instruction": "Klik op 'Nieuw scenario' om een nieuwe oefening te krijgen. Schrijf de zoekquery die je denkt dat correct is en krijg AI-feedback.",
+                "generateFromTheory": true,
+                "availableTerms": ["transport", "optimalisatie", "logistiek", "warehouse", "supply chain", "luchtvaart", "magazijnbeheer", "automatisering", "robotica", "e-commerce"]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": [
           "<p class=\"text-gray-700 mb-4\">Nu zou je kunnen starten met zoeken, maar dat pakken we nog wel met iets meer structuur aan door middel van de bouwsteenmethode. De volgende kennisclip helpt je daarbij. Daarna kun je voor je eigen onderzoek de tabel hieronder gebruiken.</p>"
         ]
       },

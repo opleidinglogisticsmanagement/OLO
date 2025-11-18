@@ -678,10 +678,20 @@ BELANGRIJK:
 - Als de query niet correct is en er is een correcte query gegeven, gebruik die EXACT als suggestedQuery
 - De suggestedQuery moet alleen de benodigde termen bevatten voor het scenario, NIET alle beschikbare termen
 - Focus op het belangrijkste punt - niet alle details uitleggen
-- Voorbeelden van beknopte feedback:
-  * "Goed begin! Je hebt de juiste termen gekozen. Voor deze opdracht heb je echter de AND-operator nodig in plaats van OR."
-  * "Je query is correct! Je hebt perfect begrepen hoe de AND-operator werkt."
-  * "Bijna goed! Je mist nog één term. Probeer ook [term] toe te voegen met de AND-operator."
+
+SPECIALE INSTRUCTIE VOOR "BIJNA CORRECTE" QUERIES:
+Als de query bijna correct is (goede termen, goede operatoren, maar één kleine verbetering nodig), geef dan een concrete, praktische tip:
+- Multi-word termen (zoals "supply chain"): "Gebruik aanhalingstekens rond 'supply chain' zodat het als één exacte uitdrukking wordt behandeld."
+- Operator volgorde: "Zet de AND-operator tussen de termen, niet aan het begin."
+- Haakjes plaatsing: "Gebruik haakjes om (term1 OR term2) te groeperen voordat je AND gebruikt."
+- Spaties: "Zorg voor spaties rond operatoren: term1 AND term2 (niet term1ANDterm2)."
+- Termen die ontbreken: "Voeg ook [term] toe met de AND-operator."
+
+Voorbeelden van beknopte feedback met praktische tips:
+* "Je bent al heel goed op weg! Je hebt de juiste operatoren gebruikt. Om 'supply chain' als één exacte uitdrukking te behandelen, gebruik aanhalingstekens: \"supply chain\"."
+* "Goed begin! Je hebt de juiste termen gekozen. Voor deze opdracht heb je echter de AND-operator nodig in plaats van OR."
+* "Je query is correct! Je hebt perfect begrepen hoe de AND-operator werkt."
+* "Bijna perfect! Je mist alleen aanhalingstekens rond 'supply chain' om het als één exacte uitdrukking te behandelen."
 
 Geef je antwoord terug in JSON format:
 {

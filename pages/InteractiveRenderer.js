@@ -1225,7 +1225,7 @@ class InteractiveRenderer {
             
             return `
                 <button
-                    class="flex-1 px-6 py-4 font-semibold text-lg transition-colors duration-200 ${isActive ? 'bg-white text-green-600' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'} text-left cursor-pointer touch-manipulation active:bg-gray-200"
+                    class="flex-none sm:flex-1 px-4 sm:px-6 py-3 sm:py-4 font-semibold text-sm sm:text-lg transition-colors duration-200 ${isActive ? 'bg-white text-green-600' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'} text-left cursor-pointer touch-manipulation active:bg-gray-200 whitespace-nowrap"
                     onclick="InteractiveRenderer.switchTab('${tabsId}', ${index})"
                     aria-selected="${isActive}"
                     aria-controls="${contentId}"
@@ -1270,13 +1270,37 @@ class InteractiveRenderer {
 
         return `
             <div class="tabs-container mb-6 border border-gray-200 rounded-lg overflow-hidden bg-white" id="${tabsId}">
-                <div class="flex" role="tablist">
+                <div class="flex overflow-x-auto scrollbar-hide -mb-px" role="tablist" style="scrollbar-width: none; -ms-overflow-style: none;">
                     ${tabsButtons}
                 </div>
                 <div class="tab-content-container bg-white">
                     ${tabsContent}
                 </div>
             </div>
+            <style>
+                /* Hide scrollbar for tablist but keep scrolling functionality */
+                .tabs-container [role="tablist"]::-webkit-scrollbar {
+                    display: none;
+                }
+                
+                /* Mobile responsive tabs */
+                @media (max-width: 640px) {
+                    .tabs-container [role="tablist"] {
+                        display: flex;
+                        flex-wrap: nowrap;
+                        overflow-x: auto;
+                        -webkit-overflow-scrolling: touch;
+                        scrollbar-width: none;
+                        -ms-overflow-style: none;
+                    }
+                    
+                    .tabs-container [role="tab"] {
+                        flex: 0 0 auto;
+                        min-width: max-content;
+                        white-space: nowrap;
+                    }
+                }
+            </style>
         `;
     }
 

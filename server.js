@@ -45,13 +45,30 @@ const allowedOrigins = process.env.ALLOWED_ORIGINS
 
 app.use(cors({
     origin: function (origin, callback) {
-        // Allow requests with no origin (like mobile apps, Postman, or curl requests)
+        // Allow requests with no origin (like mobile apps, Postman, curl, or same-origin requests)
         if (!origin) return callback(null, true);
+        
+        // On Vercel, allow requests from vercel.app domains (for production and preview deployments)
+        if (process.env.VERCEL) {
+            // Allow all vercel.app domains (includes production and preview deployments)
+            if (origin.includes('.vercel.app') || origin.includes('vercel.app')) {
+                return callback(null, true);
+            }
+            // Allow the specific Vercel deployment URL if set
+            if (process.env.VERCEL_URL) {
+                const vercelUrl = `https://${process.env.VERCEL_URL}`;
+                if (origin === vercelUrl) {
+                    return callback(null, true);
+                }
+            }
+        }
+        
+        // Check against allowed origins list (for local development)
         if (allowedOrigins.indexOf(origin) !== -1) {
             callback(null, true);
         } else {
             console.warn(`[Security] CORS blocked origin: ${origin}`);
-            callback(new Error('Not allowed by CORS'));
+            callback(new Error('Deze origin is niet toegestaan'));
         }
     },
     credentials: true

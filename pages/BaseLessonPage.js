@@ -438,8 +438,12 @@ class BaseLessonPage {
             const clickedButton = e.target.closest('button');
             if (!clickedButton) return; // Not a button click, let event continue
             
-            const onclickAttr = clickedButton.getAttribute('onclick');
-            if (!onclickAttr) return; // No onclick attribute, let event continue
+            // Check both onclick attribute (if still present) and data-onclick (if stored)
+            let onclickAttr = clickedButton.getAttribute('onclick');
+            if (!onclickAttr) {
+                onclickAttr = clickedButton.getAttribute('data-onclick');
+            }
+            if (!onclickAttr) return; // No onclick data, let event continue
             
             // Early return for buttons we don't handle - let their inline onclick work normally
             // Only handle: toggleAccordion, toggleClickableStep, switchTab
@@ -456,8 +460,13 @@ class BaseLessonPage {
             if (isAccordionButton && typeof window.InteractiveRenderer !== 'undefined' && window.InteractiveRenderer.toggleAccordion) {
                 const match = onclickAttr.match(/toggleAccordion\('([^']+)',\s*'([^']+)',\s*([^)]+)\)/);
                 if (match) {
+                    // CRITICAL: Remove inline onclick FIRST to prevent it from executing
+                    // This must happen in capture phase before the inline onclick runs
+                    clickedButton.removeAttribute('onclick');
+                    
                     e.preventDefault();
                     e.stopPropagation();
+                    e.stopImmediatePropagation();
                     
                     const contentId = match[1];
                     const buttonId = match[2];
@@ -468,7 +477,7 @@ class BaseLessonPage {
                     } catch (err) {
                         console.error('Error toggling accordion:', err);
                     }
-                    return;
+                    return false;
                 }
             }
             
@@ -476,8 +485,12 @@ class BaseLessonPage {
             if (isClickableStepButton && typeof window.InteractiveRenderer !== 'undefined' && window.InteractiveRenderer.toggleClickableStep) {
                 const match = onclickAttr.match(/toggleClickableStep\('([^']+)',\s*(\d+)\)/);
                 if (match) {
+                    // CRITICAL: Remove inline onclick FIRST to prevent it from executing
+                    clickedButton.removeAttribute('onclick');
+                    
                     e.preventDefault();
                     e.stopPropagation();
+                    e.stopImmediatePropagation();
                     
                     const stepsId = match[1];
                     const stepIndex = parseInt(match[2]);
@@ -487,7 +500,7 @@ class BaseLessonPage {
                     } catch (err) {
                         console.error('Error toggling clickable step:', err);
                     }
-                    return;
+                    return false;
                 }
             }
             
@@ -495,8 +508,12 @@ class BaseLessonPage {
             if (isTabButton && typeof window.InteractiveRenderer !== 'undefined' && window.InteractiveRenderer.switchTab) {
                 const match = onclickAttr.match(/switchTab\('([^']+)',\s*(\d+)\)/);
                 if (match) {
+                    // CRITICAL: Remove inline onclick FIRST to prevent it from executing
+                    clickedButton.removeAttribute('onclick');
+                    
                     e.preventDefault();
                     e.stopPropagation();
+                    e.stopImmediatePropagation();
                     
                     const tabsId = match[1];
                     const tabIndex = parseInt(match[2]);
@@ -506,13 +523,44 @@ class BaseLessonPage {
                     } catch (err) {
                         console.error('Error switching tab:', err);
                     }
-                    return;
+                    return false;
                 }
             }
         };
         
-        // Add event listener immediately - it will work once InteractiveRenderer is available
-        document.addEventListener('click', handleInteractiveClick, false);
+        // Remove all inline onclick handlers from accordion/step/tab buttons immediately
+        // This prevents double execution when both inline onclick and delegated handler fire
+        // Store the onclick data in data attributes so the delegated handler can still use it
+        const removeInlineOnclicks = () => {
+            const buttons = document.querySelectorAll('button[onclick*="toggleAccordion"], button[onclick*="toggleClickableStep"], button[onclick*="switchTab"]');
+            buttons.forEach(button => {
+                const onclick = button.getAttribute('onclick');
+                if (onclick && !button.hasAttribute('data-onclick-stored')) {
+                    // Store onclick data before removing it
+                    button.setAttribute('data-onclick', onclick);
+                    button.setAttribute('data-onclick-stored', 'true');
+                    button.removeAttribute('onclick');
+                }
+            });
+        };
+        
+        // Remove onclicks immediately and whenever DOM changes
+        removeInlineOnclicks();
+        
+        // Use MutationObserver to catch dynamically added buttons
+        if (typeof MutationObserver !== 'undefined') {
+            const observer = new MutationObserver(() => {
+                removeInlineOnclicks();
+            });
+            observer.observe(document.body, {
+                childList: true,
+                subtree: true
+            });
+        }
+        
+        // Add event listener in capture phase to execute BEFORE any remaining inline onclick handlers
+        // This provides an additional safety net
+        document.addEventListener('click', handleInteractiveClick, true);
         
         // Verify InteractiveRenderer is available
         const checkInteractiveRenderer = () => {
@@ -1093,3 +1141,4 @@ if (typeof module !== 'undefined' && module.exports) {
 } else {
     window.BaseLessonPage = BaseLessonPage;
 }
+

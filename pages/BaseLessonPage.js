@@ -36,7 +36,7 @@ class BaseLessonPage {
             <!-- Scroll to top button -->
             <button 
                 id="scroll-to-top-btn" 
-                class="fixed bottom-8 right-8 bg-blue-600 text-white p-4 rounded-full shadow-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all duration-300 z-50 opacity-0 pointer-events-none"
+                class="fixed bottom-8 right-8 bg-blue-600 text-white p-4 rounded-full shadow-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all duration-300 z-50 opacity-0 pointer-events-none flex items-center justify-center"
                 aria-label="Naar boven scrollen"
                 title="Naar boven">
                 <i class="fas fa-arrow-up text-xl"></i>
@@ -64,14 +64,14 @@ class BaseLessonPage {
     renderSidebarHeader() {
         return `
             <div class="p-4 sm:p-6 border-b border-gray-200">
-                <div class="flex items-center justify-between overflow-hidden">
-                    <div class="flex items-center space-x-3 flex-1 min-w-0 overflow-hidden">
+                <div class="flex items-start justify-between">
+                    <div class="flex items-start space-x-3 flex-1 min-w-0">
                         <div class="w-10 h-10 bg-gradient-to-r from-blue-600 to-blue-700 rounded-lg flex items-center justify-center flex-shrink-0" aria-hidden="true">
                             <i class="fas fa-graduation-cap text-white text-lg"></i>
                         </div>
-                        <div class="min-w-0 flex-1 overflow-hidden">
-                            <h1 class="text-lg sm:text-xl font-bold text-gray-900 truncate">E-Learning</h1>
-                            <p class="text-xs sm:text-sm text-gray-500 truncate">Opzetten van Logistieke Onderzoeken (OLO)</p>
+                        <div class="min-w-0 flex-1">
+                            <h1 class="text-lg sm:text-xl font-bold text-gray-900">E-Learning</h1>
+                            <p class="text-xs sm:text-sm text-gray-500 break-words">Opzetten van Logistieke Onderzoeken (OLO)</p>
                         </div>
                     </div>
                     <!-- Close button for mobile -->
@@ -283,19 +283,19 @@ class BaseLessonPage {
         return `
             <div class="mt-12 flex flex-col sm:flex-row justify-between items-stretch sm:items-center gap-4">
                 ${prevModule ? `
-                    <button class="flex items-center justify-center space-x-2 px-4 sm:px-6 py-3 w-full sm:w-auto bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 focus-ring transition-colors" onclick="window.location.href='${prevModule.href}'">
+                    <button class="nav-button flex items-center justify-center space-x-2 px-4 sm:px-6 py-3 w-full sm:w-auto bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 focus-ring transition-colors" data-nav-href="${prevModule.href}">
                         <i class="fas fa-arrow-left"></i>
                         <span>Vorige: ${prevModule.title}</span>
                     </button>
                 ` : `
-                    <button class="flex items-center justify-center space-x-2 px-4 sm:px-6 py-3 w-full sm:w-auto bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 focus-ring transition-colors" onclick="window.location.href='index.html'">
+                    <button class="nav-button flex items-center justify-center space-x-2 px-4 sm:px-6 py-3 w-full sm:w-auto bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 focus-ring transition-colors" data-nav-href="index.html">
                         <i class="fas fa-arrow-left"></i>
                         <span>Terug naar Start</span>
                     </button>
                 `}
                 
                 ${nextModule ? `
-                    <button class="flex items-center justify-center space-x-2 px-4 sm:px-6 py-3 w-full sm:w-auto bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus-ring transition-colors" onclick="window.location.href='${nextModule.href}'">
+                    <button class="nav-button flex items-center justify-center space-x-2 px-4 sm:px-6 py-3 w-full sm:w-auto bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus-ring transition-colors" data-nav-href="${nextModule.href}">
                         <span>Volgende: ${nextModule.title}</span>
                         <i class="fas fa-arrow-right"></i>
                     </button>
@@ -406,6 +406,15 @@ class BaseLessonPage {
         
         // Setup image click handlers (desktop only, mobile uses native pinch-to-zoom)
         this.setupImageClickHandlers();
+        
+        // Setup event delegation for MC questions and navigation buttons
+        this.setupMCQuestionAndNavigationHandlers();
+        
+        // Setup drag-and-drop handlers for matching exercises
+        this.setupDragAndDropHandlers();
+        
+        // Setup video error detection
+        this.setupVideoErrorDetection();
     }
     
     /**
@@ -682,6 +691,399 @@ class BaseLessonPage {
         
         // Also setup after content is loaded (for dynamically loaded content)
         setTimeout(setupImageClicks, 500);
+    }
+    
+    /**
+     * Setup event delegation for MC question answers and navigation buttons
+     * This ensures they work even when HTML is dynamically inserted via innerHTML
+     */
+    setupMCQuestionAndNavigationHandlers() {
+        // Use a global flag to prevent multiple event listeners
+        if (window._mcAndNavHandlersSetup) {
+            return; // Already setup globally
+        }
+        window._mcAndNavHandlersSetup = true;
+        
+        // Handle MC question answer selection (change events)
+        document.addEventListener('change', (e) => {
+            // Check if this is a radio button for MC questions
+            const radio = e.target;
+            if (radio.type === 'radio' && radio.name && radio.closest('.mc-question')) {
+                // Get vraagId and answerId from data attributes (preferred method)
+                const vraagId = radio.getAttribute('data-question-id') || radio.name;
+                const answerId = radio.getAttribute('data-answer-id') || radio.value;
+                
+                if (vraagId && answerId && typeof window.MCQuestionRenderer !== 'undefined' && window.MCQuestionRenderer.handleAnswer) {
+                    try {
+                        window.MCQuestionRenderer.handleAnswer(vraagId, answerId);
+                    } catch (err) {
+                        console.error('Error handling MC answer:', err);
+                    }
+                }
+            }
+        }, true); // Use capture phase to catch events early
+        
+        // Handle navigation button clicks (using data-nav-href attribute)
+        document.addEventListener('click', (e) => {
+            const target = e.target.closest('.nav-button');
+            if (target) {
+                const href = target.getAttribute('data-nav-href');
+                if (href) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    window.location.href = href;
+                    return;
+                }
+            }
+            
+            // Fallback: Handle navigation buttons with onclick attribute (for backward compatibility)
+            const button = e.target.closest('button');
+            if (button) {
+                const onclickAttr = button.getAttribute('onclick');
+                if (onclickAttr && onclickAttr.includes('window.location.href')) {
+                    // Extract URL from onclick attribute
+                    const match = onclickAttr.match(/window\.location\.href\s*=\s*['"]([^'"]+)['"]/);
+                    if (match) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        const url = match[1];
+                        window.location.href = url;
+                    }
+                }
+            }
+        }, false);
+        
+        // Handle "Volgende vraag" button clicks (using class selector)
+        document.addEventListener('click', (e) => {
+            const target = e.target.closest('.next-mc-question-btn');
+            if (target) {
+                e.preventDefault();
+                e.stopPropagation();
+                if (typeof window.MCQuestionRenderer !== 'undefined' && window.MCQuestionRenderer.loadNextQuestion) {
+                    try {
+                        window.MCQuestionRenderer.loadNextQuestion();
+                    } catch (err) {
+                        console.error('Error loading next question:', err);
+                    }
+                }
+                return;
+            }
+            
+            // Fallback: Handle buttons with onclick attribute (for backward compatibility)
+            const button = e.target.closest('button');
+            if (button) {
+                const onclickAttr = button.getAttribute('onclick');
+                if (onclickAttr && onclickAttr.includes('MCQuestionRenderer.loadNextQuestion')) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    if (typeof window.MCQuestionRenderer !== 'undefined' && window.MCQuestionRenderer.loadNextQuestion) {
+                        try {
+                            window.MCQuestionRenderer.loadNextQuestion();
+                        } catch (err) {
+                            console.error('Error loading next question:', err);
+                        }
+                    }
+                }
+            }
+        }, false);
+        
+        // Handle exercise check buttons (true/false and matching exercises)
+        // This ensures buttons work even when content is dynamically rendered (e.g., in accordions)
+        document.addEventListener('click', (e) => {
+            const button = e.target.closest('button');
+            if (!button) return;
+            
+            const onclickAttr = button.getAttribute('onclick');
+            if (!onclickAttr) return;
+            
+            // Check for true/false exercise check button
+            if (onclickAttr.includes('checkTrueFalseExercise')) {
+                const match = onclickAttr.match(/checkTrueFalseExercise\(['"]([^'"]+)['"]\)/);
+                if (match && typeof window.InteractiveRenderer !== 'undefined' && window.InteractiveRenderer.checkTrueFalseExercise) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    try {
+                        const exerciseId = match[1];
+                        window.InteractiveRenderer.checkTrueFalseExercise(exerciseId);
+                    } catch (err) {
+                        console.error('Error checking true/false exercise:', err);
+                    }
+                    return;
+                }
+            }
+            
+            // Check for matching exercise check button
+            if (onclickAttr.includes('checkMatchingExercise')) {
+                const match = onclickAttr.match(/checkMatchingExercise\(['"]([^'"]+)['"]\)/);
+                if (match && typeof window.InteractiveRenderer !== 'undefined' && window.InteractiveRenderer.checkMatchingExercise) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    try {
+                        const exerciseId = match[1];
+                        window.InteractiveRenderer.checkMatchingExercise(exerciseId);
+                    } catch (err) {
+                        console.error('Error checking matching exercise:', err);
+                    }
+                    return;
+                }
+            }
+            
+            // Check for SMART checklist "Bekijk analyse" button
+            if (onclickAttr.includes('showSMARTResult')) {
+                const match = onclickAttr.match(/showSMARTResult\(['"]([^'"]+)['"]\)/);
+                if (match && typeof window.InteractiveRenderer !== 'undefined' && window.InteractiveRenderer.showSMARTResult) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    try {
+                        const checklistId = match[1];
+                        window.InteractiveRenderer.showSMARTResult(checklistId);
+                    } catch (err) {
+                        console.error('Error showing SMART result:', err);
+                    }
+                    return;
+                }
+            }
+            
+            // Check for Concept Quality checklist "Bekijk analyse" button
+            if (onclickAttr.includes('showConceptQualityResult')) {
+                const match = onclickAttr.match(/showConceptQualityResult\(['"]([^'"]+)['"]\)/);
+                if (match && typeof window.InteractiveRenderer !== 'undefined' && window.InteractiveRenderer.showConceptQualityResult) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    try {
+                        const checklistId = match[1];
+                        window.InteractiveRenderer.showConceptQualityResult(checklistId);
+                    } catch (err) {
+                        console.error('Error showing concept quality result:', err);
+                    }
+                    return;
+                }
+            }
+        }, false);
+    }
+    
+    /**
+     * Setup event delegation for drag-and-drop in matching exercises
+     * This ensures drag-and-drop works even when content is dynamically rendered (e.g., in accordions)
+     */
+    setupDragAndDropHandlers() {
+        // Use a global flag to prevent multiple event listeners
+        if (window._dragAndDropHandlersSetup) {
+            return; // Already setup globally
+        }
+        window._dragAndDropHandlersSetup = true;
+        
+        // Handle dragstart events for matching exercise items
+        // Use capture phase to ensure we catch events before inline handlers
+        document.addEventListener('dragstart', (e) => {
+            const target = e.target;
+            // Check if this is a draggable matching item
+            if (target.draggable === true && target.classList.contains('matching-item')) {
+                const ondragstartAttr = target.getAttribute('ondragstart');
+                if (ondragstartAttr && ondragstartAttr.includes('handleDragStart')) {
+                    // Extract exerciseId and itemIndex from the ondragstart attribute
+                    const match = ondragstartAttr.match(/handleDragStart\(event,\s*['"]([^'"]+)['"],\s*(\d+)\)/);
+                    if (match && typeof window.InteractiveRenderer !== 'undefined' && window.InteractiveRenderer.handleDragStart) {
+                        // Remove the inline handler to prevent double execution
+                        target.removeAttribute('ondragstart');
+                        try {
+                            const exerciseId = match[1];
+                            const itemIndex = parseInt(match[2]);
+                            window.InteractiveRenderer.handleDragStart(e, exerciseId, itemIndex);
+                        } catch (err) {
+                            console.error('Error handling drag start:', err);
+                        }
+                    }
+                }
+            }
+        }, true); // Use capture phase
+        
+        // Handle dragover events for drop zones (categories)
+        // Use capture phase to ensure we catch events before inline handlers
+        document.addEventListener('dragover', (e) => {
+            // Find drop zone - could be the target itself or a parent
+            const dropZone = e.target.closest('[ondragover]') || e.target.closest('[id$="-category-0"]') || 
+                            e.target.closest('[id$="-category-1"]') || e.target.closest('[id$="-category-2"]') ||
+                            e.target.closest('[id$="-category-3"]') || e.target.closest('[id$="-category-4"]');
+            
+            if (dropZone) {
+                const ondragoverAttr = dropZone.getAttribute('ondragover');
+                if (ondragoverAttr && ondragoverAttr.includes('allowDrop')) {
+                    // Extract exerciseId from the parent exercise container
+                    const exerciseContainer = dropZone.closest('.matching-exercise');
+                    if (exerciseContainer && typeof window.InteractiveRenderer !== 'undefined' && window.InteractiveRenderer.allowDrop) {
+                        // Remove the inline handler to prevent double execution (only once)
+                        if (!dropZone.hasAttribute('data-dragover-handled')) {
+                            dropZone.removeAttribute('ondragover');
+                            dropZone.setAttribute('data-dragover-handled', 'true');
+                        }
+                        try {
+                            e.preventDefault(); // Always prevent default to allow drop
+                            window.InteractiveRenderer.allowDrop(e);
+                        } catch (err) {
+                            console.error('Error handling dragover:', err);
+                        }
+                    }
+                } else {
+                    // If no ondragover attribute but it's a category container, still allow drop
+                    const exerciseContainer = dropZone.closest('.matching-exercise');
+                    if (exerciseContainer && dropZone.id && dropZone.id.includes('-category-')) {
+                        e.preventDefault();
+                        e.dataTransfer.dropEffect = 'move';
+                    }
+                }
+            }
+        }, true); // Use capture phase
+        
+        // Handle drop events for drop zones (categories)
+        // Use capture phase to ensure we catch events before inline handlers
+        document.addEventListener('drop', (e) => {
+            // Find drop zone - could be the target itself or a parent
+            // Try multiple strategies to find the drop zone
+            let dropZone = e.target.closest('[ondrop]');
+            if (!dropZone) {
+                // Try finding by ID pattern (category containers)
+                dropZone = e.target.closest('[id$="-category-0"]') || 
+                          e.target.closest('[id$="-category-1"]') || 
+                          e.target.closest('[id$="-category-2"]') ||
+                          e.target.closest('[id$="-category-3"]') || 
+                          e.target.closest('[id$="-category-4"]');
+            }
+            
+            if (dropZone) {
+                const ondropAttr = dropZone.getAttribute('ondrop');
+                if (ondropAttr && ondropAttr.includes('handleDrop')) {
+                    // Extract exerciseId and categoryIndex from the ondrop attribute
+                    const match = ondropAttr.match(/handleDrop\(event,\s*['"]([^'"]+)['"],\s*(\d+)\)/);
+                    if (match && typeof window.InteractiveRenderer !== 'undefined' && window.InteractiveRenderer.handleDrop) {
+                        // Remove the inline handler to prevent double execution (only once)
+                        if (!dropZone.hasAttribute('data-drop-handled')) {
+                            dropZone.removeAttribute('ondrop');
+                            dropZone.setAttribute('data-drop-handled', 'true');
+                        }
+                        e.preventDefault();
+                        e.stopPropagation();
+                        try {
+                            const exerciseId = match[1];
+                            const categoryIndex = parseInt(match[2]);
+                            window.InteractiveRenderer.handleDrop(e, exerciseId, categoryIndex);
+                        } catch (err) {
+                            console.error('Error handling drop:', err);
+                        }
+                        return false;
+                    }
+                } else if (dropZone.id && dropZone.id.includes('-category-')) {
+                    // Fallback: extract exerciseId and categoryIndex from ID if ondrop attribute was removed
+                    const idMatch = dropZone.id.match(/^(.+)-category-(\d+)$/);
+                    if (idMatch && typeof window.InteractiveRenderer !== 'undefined' && window.InteractiveRenderer.handleDrop) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        try {
+                            const exerciseId = idMatch[1];
+                            const categoryIndex = parseInt(idMatch[2]);
+                            window.InteractiveRenderer.handleDrop(e, exerciseId, categoryIndex);
+                        } catch (err) {
+                            console.error('Error handling drop (fallback):', err);
+                        }
+                        return false;
+                    }
+                }
+            }
+        }, true); // Use capture phase
+    }
+    
+    /**
+     * Setup video error detection for blocked or failed video embeds
+     * This detects when videos (especially Mediasite) cannot be embedded
+     */
+    setupVideoErrorDetection() {
+        // Use a global flag to prevent multiple event listeners
+        if (window._videoErrorDetectionSetup) {
+            return;
+        }
+        window._videoErrorDetectionSetup = true;
+        
+        // Function to check if a video iframe failed to load
+        const checkVideoLoad = (iframe) => {
+            const container = iframe.closest('[id$="-container"]');
+            if (!container) return;
+            
+            const fallback = container.querySelector('[id$="-fallback"]');
+            if (!fallback) return;
+            
+            // Check after a delay if the iframe loaded successfully
+            setTimeout(() => {
+                try {
+                    // Try to access iframe content - if blocked, this will throw an error
+                    const iframeDoc = iframe.contentDocument || iframe.contentWindow?.document;
+                    if (!iframeDoc) {
+                        // If we can't access the document, it might be blocked
+                        // Check if fallback is still hidden (meaning video might have loaded)
+                        // If fallback is visible, don't do anything
+                        if (fallback.classList.contains('hidden')) {
+                            // Try one more time after a longer delay
+                            setTimeout(() => {
+                                try {
+                                    const checkDoc = iframe.contentDocument || iframe.contentWindow?.document;
+                                    if (!checkDoc && fallback.classList.contains('hidden')) {
+                                        // Still can't access, likely blocked - show fallback
+                                        iframe.classList.add('hidden');
+                                        fallback.classList.remove('hidden');
+                                    }
+                                } catch (e) {
+                                    // Cross-origin or blocked - show fallback
+                                    iframe.classList.add('hidden');
+                                    fallback.classList.remove('hidden');
+                                }
+                            }, 3000);
+                        }
+                    }
+                } catch (e) {
+                    // Cross-origin restriction or blocked - this is expected for some video platforms
+                    // Don't show fallback immediately, wait a bit more
+                    setTimeout(() => {
+                        // Check if iframe has any visible content by checking its dimensions
+                        // If iframe is still there but we can't access it, it might be working
+                        // Only show fallback if we're certain it failed
+                        const rect = iframe.getBoundingClientRect();
+                        if (rect.height < 50 && fallback.classList.contains('hidden')) {
+                            // Iframe is very small, likely failed
+                            iframe.classList.add('hidden');
+                            fallback.classList.remove('hidden');
+                        }
+                    }, 4000);
+                }
+            }, 2000);
+        };
+        
+        // Use MutationObserver to detect when new video iframes are added to the DOM
+        const observer = new MutationObserver((mutations) => {
+            mutations.forEach((mutation) => {
+                mutation.addedNodes.forEach((node) => {
+                    if (node.nodeType === 1) { // Element node
+                        // Check if the added node is a video iframe or contains one
+                        const iframes = node.querySelectorAll ? node.querySelectorAll('iframe[data-video-url]') : [];
+                        if (node.tagName === 'IFRAME' && node.hasAttribute('data-video-url')) {
+                            checkVideoLoad(node);
+                        }
+                        iframes.forEach(iframe => checkVideoLoad(iframe));
+                    }
+                });
+            });
+        });
+        
+        // Start observing
+        observer.observe(document.body, {
+            childList: true,
+            subtree: true
+        });
+        
+        // Also check existing iframes on page load
+        setTimeout(() => {
+            document.querySelectorAll('iframe[data-video-url]').forEach(iframe => {
+                checkVideoLoad(iframe);
+            });
+        }, 1000);
     }
 }
 

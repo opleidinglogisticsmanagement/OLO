@@ -32,7 +32,7 @@ app.use(helmet({
             fontSrc: ["'self'", "https://fonts.gstatic.com", "https://cdnjs.cloudflare.com"],
             imgSrc: ["'self'", "data:", "https:"],
             connectSrc: ["'self'"],
-            frameSrc: ["'self'", "https://www.youtube.com"]
+            frameSrc: ["'self'", "https://www.youtube.com", "https://media.windesheim.nl", "https://sts.windesheim.nl"]
         }
     },
     crossOriginEmbedderPolicy: false // Voor externe CDN's

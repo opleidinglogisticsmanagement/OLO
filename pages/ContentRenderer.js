@@ -237,22 +237,36 @@ class ContentRenderer {
         const title = item.title || '';
         const description = item.description || '';
         const showLink = item.showLink !== false; // Default true, kan worden uitgeschakeld
+        const videoId = `video-${Math.random().toString(36).substr(2, 9)}`;
         
         return `
             <div class="mb-6">
                 ${title ? `<h4 class="text-lg font-semibold text-gray-900 mb-2">${title}</h4>` : ''}
-                <div class="rounded-lg overflow-hidden mb-2">
+                <div class="rounded-lg overflow-hidden mb-2 relative bg-gray-100" id="${videoId}-container">
                     <iframe 
+                        id="${videoId}"
                         width="100%" 
-                        height="450" 
+                        height="350" 
                         src="${item.url}" 
                         title="${title || 'Video'}"
                         frameborder="0"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
                         referrerpolicy="strict-origin-when-cross-origin"
                         allowfullscreen
-                        class="w-full aspect-video">
+                        class="w-full"
+                        style="aspect-ratio: 16/9; min-height: 300px;"
+                        data-video-url="${item.url}">
                     </iframe>
+                    <div id="${videoId}-fallback" class="hidden absolute inset-0 bg-gray-200 rounded-lg flex flex-col items-center justify-center p-6 z-10">
+                        <div class="text-center">
+                            <i class="fas fa-exclamation-triangle text-yellow-600 text-4xl mb-4"></i>
+                            <p class="text-gray-700 font-semibold mb-2">Video kan niet worden geladen</p>
+                            <p class="text-sm text-gray-600 mb-4">De video kan mogelijk niet worden ingesloten. Probeer de video te openen in een nieuw tabblad.</p>
+                            <a href="${item.url}" target="_blank" class="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium">
+                                <i class="fas fa-external-link-alt mr-2"></i>Open video in nieuw tabblad
+                            </a>
+                        </div>
+                    </div>
                 </div>
                 ${description ? `<p class="text-sm text-gray-600 mb-2">${description}</p>` : ''}
                 ${showLink ? `<p class="text-sm mb-0">

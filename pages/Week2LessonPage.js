@@ -121,17 +121,9 @@ class Week2LessonPage extends BaseLessonPage {
                         <i class="fas fa-bullseye text-green-600 text-lg"></i>
                     </div>
                     <div class="flex-1 min-w-0 w-full sm:w-auto">
-                        ${this.content.leerdoelen.interactive && this.content.leerdoelen.items && this.content.leerdoelen.items.length > 0
-                            ? ContentRenderer.renderLearningObjectivesChecklist({
-                                title: this.content.leerdoelen.title,
-                                description: this.content.leerdoelen.description,
-                                items: this.content.leerdoelen.items,
-                                storageKey: 'week2-learning-objectives'
-                            })
-                            : `
-                                <h2 class="text-lg sm:text-xl font-semibold text-gray-900 mb-4">${this.content.leerdoelen.title}</h2>
-                                <div class="prose max-w-none">
-                                    ${this.content.leerdoelen.description ? `<p class="text-gray-600 mb-4">${this.content.leerdoelen.description}</p>` : ''}
+                        <h2 class="text-lg sm:text-xl font-semibold text-gray-900 mb-4">${this.content.leerdoelen.title}</h2>
+                        <div class="prose max-w-none">
+                            ${this.content.leerdoelen.description ? `<p class="text-gray-600 mb-4">${this.content.leerdoelen.description}</p>` : ''}
                                     ${this.content.leerdoelen.items && this.content.leerdoelen.items.length > 0 ? `
                                         <ul class="space-y-2">
                                             ${this.content.leerdoelen.items.map(item => `
@@ -142,9 +134,7 @@ class Week2LessonPage extends BaseLessonPage {
                                             `).join('')}
                                         </ul>
                                     ` : ''}
-                                </div>
-                            `
-                        }
+                        </div>
                     </div>
                 </div>
             </section>
@@ -180,17 +170,18 @@ class Week2LessonPage extends BaseLessonPage {
                     </div>
                     <div class="flex-1 min-w-0 w-full sm:w-auto">
                         <h2 class="text-lg sm:text-xl font-semibold text-gray-900 mb-4">${this.content.video.title}</h2>
-                        <div class="rounded-lg overflow-hidden mb-4">
+                        <div class="rounded-lg overflow-hidden mb-4 relative bg-gray-100">
                             <iframe 
                                 width="100%" 
-                                height="450" 
+                                height="350" 
                                 src="${this.content.video.url}" 
-                                title="YouTube video player" 
+                                title="Video player" 
                                 frameborder="0" 
                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
                                 referrerpolicy="strict-origin-when-cross-origin"
                                 allowfullscreen
-                                class="w-full aspect-video">
+                                class="w-full"
+                                style="aspect-ratio: 16/9; min-height: 300px;">
                             </iframe>
                         </div>
                         ${this.content.video.info ? `

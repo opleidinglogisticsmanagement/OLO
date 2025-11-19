@@ -110,17 +110,18 @@ class Week1LessonPage extends BaseLessonPage {
                     <div class="flex-1 min-w-0 w-full sm:w-auto">
                         <h2 class="text-lg sm:text-xl font-semibold text-gray-900 mb-4">${this.content.video.title}</h2>
                         ${this.content.video.url ? `
-                            <div class="rounded-lg overflow-hidden mb-4">
+                            <div class="rounded-lg overflow-hidden mb-4 relative bg-gray-100">
                                 <iframe 
                                     width="100%" 
-                                    height="450" 
+                                    height="350" 
                                     src="${this.content.video.url}" 
-                                    title="YouTube video player" 
+                                    title="Video player" 
                                     frameborder="0" 
                                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
                                     referrerpolicy="strict-origin-when-cross-origin"
                                     allowfullscreen
-                                    class="w-full aspect-video">
+                                    class="w-full"
+                                    style="aspect-ratio: 16/9; min-height: 300px;">
                                 </iframe>
                             </div>
                         ` : `

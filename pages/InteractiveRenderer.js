@@ -570,12 +570,13 @@ class InteractiveRenderer {
         const categoriesHtml = item.categories.map((category, catIndex) => {
             const categoryId = `${exerciseId}-category-${catIndex}`;
             return `
-                <div class="border-2 border-dashed border-gray-300 rounded-lg p-4 min-h-[120px] bg-gray-50" id="${categoryId}" 
+                <div class="border-2 border-dashed border-gray-300 rounded-lg p-4 min-h-[120px] bg-gray-50 overflow-hidden" id="${categoryId}" 
                      ondrop="InteractiveRenderer.handleDrop(event, '${exerciseId}', ${catIndex})" 
-                     ondragover="InteractiveRenderer.allowDrop(event)">
-                    <h4 class="font-semibold text-gray-900 mb-2 text-sm">${category.name}</h4>
-                    <p class="text-xs text-gray-600 mb-2">${category.description || ''}</p>
-                    <div class="dropped-items space-y-2" id="${categoryId}-items"></div>
+                     ondragover="InteractiveRenderer.allowDrop(event)"
+                     style="word-wrap: break-word; overflow-wrap: break-word;">
+                    <h4 class="font-semibold text-gray-900 mb-2 text-sm break-words">${category.name}</h4>
+                    <p class="text-xs text-gray-600 mb-2 break-words">${category.description || ''}</p>
+                    <div class="dropped-items space-y-2 break-words" id="${categoryId}-items" style="word-wrap: break-word; overflow-wrap: break-word;"></div>
                 </div>
             `;
         }).join('');
@@ -590,14 +591,36 @@ class InteractiveRenderer {
                     ondragstart="InteractiveRenderer.handleDragStart(event, '${exerciseId}', ${itemObj.originalIndex})"
                     data-item-index="${itemObj.originalIndex}"
                     data-correct-category="${itemObj.correctCategory}"
+                    style="word-wrap: break-word; overflow-wrap: break-word; max-width: 100%;"
                 >
-                    <p class="text-sm text-gray-800">${itemObj.text}</p>
+                    <p class="text-sm text-gray-800 break-words" style="word-wrap: break-word; overflow-wrap: break-word; hyphens: auto;">${itemObj.text}</p>
                 </div>
             `;
         }).join('');
 
         // Responsive grid: 1 column on mobile, dynamic on desktop
         const gridStyle = `
+            #${exerciseId} .matching-item {
+                word-wrap: break-word;
+                overflow-wrap: break-word;
+                max-width: 100%;
+                box-sizing: border-box;
+            }
+            #${exerciseId} .matching-item p {
+                word-wrap: break-word;
+                overflow-wrap: break-word;
+                hyphens: auto;
+                margin: 0;
+            }
+            #${exerciseId} .dropped-items {
+                word-wrap: break-word;
+                overflow-wrap: break-word;
+                max-width: 100%;
+            }
+            #${exerciseId} .dropped-items .matching-item {
+                max-width: 100%;
+                box-sizing: border-box;
+            }
             @media (min-width: 768px) {
                 #${exerciseId} .categories-grid {
                     grid-template-columns: repeat(${item.categories.length}, minmax(0, 1fr)) !important;
@@ -617,7 +640,7 @@ class InteractiveRenderer {
                 
                 <div class="border-t-2 border-gray-200 pt-4">
                     <h4 class="font-semibold text-gray-900 mb-3 text-sm">Sleep deze items naar de juiste categorie:</h4>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3" id="${exerciseId}-items-container">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3" id="${exerciseId}-items-container" style="word-wrap: break-word; overflow-wrap: break-word;">
                         ${itemsHtml}
                     </div>
                 </div>
@@ -656,19 +679,50 @@ class InteractiveRenderer {
      */
     static handleDrop(event, exerciseId, categoryIndex) {
         event.preventDefault();
-        const data = JSON.parse(event.dataTransfer.getData('text/plain'));
         
-        if (data.exerciseId !== exerciseId) return;
+        // Get data from dataTransfer
+        let data;
+        try {
+            const dataString = event.dataTransfer.getData('text/plain');
+            if (!dataString) {
+                console.warn('No data in dataTransfer');
+                return;
+            }
+            data = JSON.parse(dataString);
+        } catch (err) {
+            console.error('Error parsing drop data:', err);
+            return;
+        }
+        
+        if (!data || data.exerciseId !== exerciseId) {
+            console.warn('Drop data mismatch:', { data, exerciseId });
+            return;
+        }
         
         const itemElement = document.getElementById(`${exerciseId}-item-${data.itemIndex}`);
         const categoryItemsContainer = document.getElementById(`${exerciseId}-category-${categoryIndex}-items`);
         
-        if (!itemElement || !categoryItemsContainer) return;
+        if (!itemElement) {
+            console.warn('Item element not found:', `${exerciseId}-item-${data.itemIndex}`);
+            return;
+        }
+        
+        if (!categoryItemsContainer) {
+            console.warn('Category container not found:', `${exerciseId}-category-${categoryIndex}-items`);
+            return;
+        }
+        
+        // If item is already in a category container, remove it first
+        const currentParent = itemElement.parentElement;
+        if (currentParent && currentParent.id && currentParent.id.includes('-items')) {
+            // Item is already in a category, remove it
+            currentParent.removeChild(itemElement);
+        }
         
         // Reset opacity
         itemElement.style.opacity = '1';
         
-        // Move item to category
+        // Move item to new category
         categoryItemsContainer.appendChild(itemElement);
         
         // Update item styling
@@ -809,6 +863,7 @@ class InteractiveRenderer {
             <div class="true-false-exercise mb-4 bg-white rounded-lg p-3 border border-gray-200" id="${exerciseId}">
                 <h3 class="text-base font-semibold text-gray-900 mb-1.5">${item.title || 'Waar of Onwaar?'}</h3>
                 <p class="text-xs text-gray-600 mb-2.5">${item.instruction || 'Bepaal of de volgende stellingen waar of onwaar zijn:'}</p>
+                
                 <div class="space-y-1.5">
                     ${statementsHtml}
                 </div>
@@ -1801,6 +1856,7 @@ class InteractiveRenderer {
             <div class="boolean-operator-exercise mb-6 bg-white rounded-lg p-4" id="${exerciseId}">
                 <h3 class="text-lg font-semibold text-gray-900 mb-2">${title}</h3>
                 <p class="text-sm text-gray-600 mb-4">${instruction}</p>
+                
                 <div class="space-y-4">
                     ${scenariosHtml}
                 </div>

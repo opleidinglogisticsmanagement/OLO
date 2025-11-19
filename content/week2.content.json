@@ -7,7 +7,6 @@
   "leerdoelen": {
   "title": "Leerdoelen",
   "description": "",
-  "instruction": "",
   "items": [
     "Uitleggen wat het belang is van een goed geformuleerde doelstelling binnen praktijkgericht onderzoek.",
     "Een onderscheid maken tussen het probleem, de doelstelling en de hoofdvraag in een onderzoeksopzet.",
@@ -16,7 +15,7 @@
     "De relatie tussen opdrachtgever en onderzoeker toelichten en kritisch reflecteren op je eigen rol hierin.",
     "De verschillende vormen van praktijkgericht onderzoek herkennen en toepassen binnen een logistieke context."
   ],
-  "interactive": true
+  "interactive": false
   },
   "theorie": {
     "title": "Onderzoek uitvoeren",
@@ -259,7 +258,7 @@
       {
         "type": "paragraph",
         "text": [
-          "Test je kennis door de onderstaande oefeningen te maken om te controleren of je de stof goed begrijpt en kunt toepassen."
+          "Test je kennis door de onderstaande oefeningen te maken om te controleren of je de stof goed begrijpt en kunt toepassen. Let op: deze oefeningen werken mogelijk niet goed op mobiele apparaten. Gebruik bij voorkeur een desktop of tablet voor de beste ervaring."
         ]
       },
       {

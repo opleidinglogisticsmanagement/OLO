@@ -128,8 +128,7 @@ class MCQuestionRenderer {
                     
                     ${oneAtATime ? `
                         <div id="next-question-btn-${vraagId}" class="hidden mt-4">
-                            <button onclick="MCQuestionRenderer.loadNextQuestion()" 
-                                    class="w-full px-6 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 focus-ring transition-colors flex items-center justify-center space-x-2">
+                            <button class="next-mc-question-btn w-full px-6 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 focus-ring transition-colors flex items-center justify-center space-x-2">
                                 <i class="fas fa-arrow-right"></i>
                                 <span>Volgende AI-gegenereerde vraag</span>
                             </button>
@@ -162,7 +161,8 @@ class MCQuestionRenderer {
                        value="${antwoord.id}"
                        class="mt-1 w-4 h-4 text-blue-600 focus:ring-blue-500 focus-ring"
                        data-is-correct="${antwoord.correct === true}"
-                       onchange="MCQuestionRenderer.handleAnswer('${vraagId}', '${antwoord.id}')">
+                       data-question-id="${vraagId}"
+                       data-answer-id="${antwoord.id}">
                 <span class="flex-1">
                     <span class="font-medium text-gray-900">${optionLetter}.</span>
                     <span class="ml-2 text-gray-700">${this.escapeHtml(antwoord.tekst)}</span>

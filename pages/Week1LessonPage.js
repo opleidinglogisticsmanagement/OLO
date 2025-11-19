@@ -78,8 +78,8 @@ class Week1LessonPage extends BaseLessonPage {
         }
 
         return `
-            <section class="bg-white rounded-xl shadow-sm border border-gray-200 pt-6 pb-6 pl-6 pr-[70px] hover-lift">
-                <div class="flex items-start space-x-4">
+            <section class="bg-white rounded-xl shadow-sm border border-gray-200 p-4 sm:p-6 sm:pr-[70px] hover-lift">
+                <div class="flex flex-col sm:flex-row items-start space-y-4 sm:space-y-0 sm:space-x-4">
                     <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0">
                         <i class="fas fa-book text-blue-600 text-lg"></i>
                     </div>
@@ -102,13 +102,13 @@ class Week1LessonPage extends BaseLessonPage {
 
         return `
             <!-- Video Sectie -->
-            <section class="bg-white rounded-xl shadow-sm border border-gray-200 pt-6 pb-6 pl-6 pr-[70px] hover-lift">
-                <div class="flex items-start space-x-4">
+            <section class="bg-white rounded-xl shadow-sm border border-gray-200 p-4 sm:p-6 sm:pr-[70px] hover-lift">
+                <div class="flex flex-col sm:flex-row items-start space-y-4 sm:space-y-0 sm:space-x-4">
                     <div class="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center flex-shrink-0">
                         <i class="fas fa-play text-red-600 text-lg"></i>
                     </div>
                     <div class="flex-1">
-                        <h2 class="text-xl font-semibold text-gray-900 mb-4">${this.content.video.title}</h2>
+                        <h2 class="text-lg sm:text-xl font-semibold text-gray-900 mb-4">${this.content.video.title}</h2>
                         ${this.content.video.url ? `
                             <div class="rounded-lg overflow-hidden mb-4">
                                 <iframe 

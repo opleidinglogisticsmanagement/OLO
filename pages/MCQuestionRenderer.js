@@ -54,7 +54,7 @@ class MCQuestionRenderer {
             const shuffledQuestion = this.shuffleAnswers(currentQuestion);
             return `
                 <!-- MC Vragen Sectie -->
-                <section class="bg-white rounded-xl shadow-sm border border-gray-200 pt-6 pb-6 pl-6 pr-[70px] hover-lift mt-8">
+                <section class="bg-white rounded-xl shadow-sm border border-gray-200 p-4 sm:p-6 sm:pr-[70px] hover-lift mt-8">
                     <div class="flex items-start space-x-4">
                         <div class="w-12 h-12 bg-indigo-100 rounded-lg flex items-center justify-center flex-shrink-0">
                             <i class="fas fa-question-circle text-indigo-600 text-lg"></i>
@@ -79,7 +79,7 @@ class MCQuestionRenderer {
 
         return `
             <!-- MC Vragen Sectie -->
-            <section class="bg-white rounded-xl shadow-sm border border-gray-200 pt-6 pb-6 pl-6 pr-[70px] hover-lift mt-8">
+            <section class="bg-white rounded-xl shadow-sm border border-gray-200 p-4 sm:p-6 sm:pr-[70px] hover-lift mt-8">
                 <div class="flex items-start space-x-4">
                     <div class="w-12 h-12 bg-indigo-100 rounded-lg flex items-center justify-center flex-shrink-0">
                         <i class="fas fa-question-circle text-indigo-600 text-lg"></i>

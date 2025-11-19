@@ -85,8 +85,8 @@ class Week6LessonPage extends BaseLessonPage {
         }
 
         return `
-            <section class="bg-white rounded-xl shadow-sm border border-gray-200 pt-6 pb-6 pl-6 pr-[70px] hover-lift">
-                <div class="flex items-start space-x-4">
+            <section class="bg-white rounded-xl shadow-sm border border-gray-200 p-4 sm:p-6 sm:pr-[70px] hover-lift">
+                <div class="flex flex-col sm:flex-row items-start space-y-4 sm:space-y-0 sm:space-x-4">
                     <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0">
                         <i class="fas fa-book text-blue-600 text-lg"></i>
                     </div>
@@ -109,8 +109,8 @@ class Week6LessonPage extends BaseLessonPage {
 
         return `
             <!-- Leerdoelen Sectie -->
-            <section class="bg-white rounded-xl shadow-sm border border-gray-200 pt-6 pb-6 pl-6 pr-[70px] hover-lift">
-                <div class="flex items-start space-x-4">
+            <section class="bg-white rounded-xl shadow-sm border border-gray-200 p-4 sm:p-6 sm:pr-[70px] hover-lift">
+                <div class="flex flex-col sm:flex-row items-start space-y-4 sm:space-y-0 sm:space-x-4">
                     <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center flex-shrink-0">
                         <i class="fas fa-bullseye text-green-600 text-lg"></i>
                     </div>
@@ -123,7 +123,7 @@ class Week6LessonPage extends BaseLessonPage {
                                 storageKey: 'week6-learning-objectives'
                             })
                             : `
-                                <h2 class="text-xl font-semibold text-gray-900 mb-4">${this.content.leerdoelen.title}</h2>
+                                <h2 class="text-lg sm:text-xl font-semibold text-gray-900 mb-4">${this.content.leerdoelen.title}</h2>
                                 <div class="prose max-w-none">
                                     ${this.content.leerdoelen.description ? `<p class="text-gray-600 mb-4">${this.content.leerdoelen.description}</p>` : ''}
                                     ${this.content.leerdoelen.items && this.content.leerdoelen.items.length > 0 ? `
@@ -144,13 +144,13 @@ class Week6LessonPage extends BaseLessonPage {
             </section>
 
             <!-- Theorie Sectie -->
-            <section class="bg-white rounded-xl shadow-sm border border-gray-200 pt-6 pb-6 pl-6 pr-[70px] hover-lift">
-                <div class="flex items-start space-x-4">
+            <section class="bg-white rounded-xl shadow-sm border border-gray-200 p-4 sm:p-6 sm:pr-[70px] hover-lift">
+                <div class="flex flex-col sm:flex-row items-start space-y-4 sm:space-y-0 sm:space-x-4">
                     <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center flex-shrink-0">
                         <i class="fas fa-book text-purple-600 text-lg"></i>
                     </div>
                     <div class="flex-1">
-                        <h2 class="text-xl font-semibold text-gray-900 mb-4">${this.content.theorie.title}</h2>
+                        <h2 class="text-lg sm:text-xl font-semibold text-gray-900 mb-4">${this.content.theorie.title}</h2>
                         <div class="prose max-w-none">
                             ${this.content.theorie.content 
                                 ? ContentRenderer.renderContentItems(this.content.theorie.content, { enableModal: true })
@@ -202,13 +202,13 @@ class Week6LessonPage extends BaseLessonPage {
         
         // Anders toon loading state - binnen een sectie
         return `
-            <section class="bg-white rounded-xl shadow-sm border border-gray-200 pt-6 pb-6 pl-6 pr-[70px] hover-lift mt-8">
-                <div class="flex items-start space-x-4">
+            <section class="bg-white rounded-xl shadow-sm border border-gray-200 p-4 sm:p-6 sm:pr-[70px] hover-lift mt-8">
+                <div class="flex flex-col sm:flex-row items-start space-y-4 sm:space-y-0 sm:space-x-4">
                     <div class="w-12 h-12 bg-indigo-100 rounded-lg flex items-center justify-center flex-shrink-0">
                         <i class="fas fa-question-circle text-indigo-600 text-lg"></i>
                     </div>
                     <div class="flex-1">
-                        <h2 class="text-xl font-semibold text-gray-900 mb-4">${mcConfig.title || 'Test je kennis'}</h2>
+                        <h2 class="text-lg sm:text-xl font-semibold text-gray-900 mb-4">${mcConfig.title || 'Test je kennis'}</h2>
                         <div id="mc-questions-container" class="space-y-6">
                             <div class="border border-gray-200 rounded-lg p-5 bg-gray-50">
                                 <div class="flex items-center justify-center space-x-3 py-8">

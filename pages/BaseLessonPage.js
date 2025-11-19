@@ -49,7 +49,7 @@ class BaseLessonPage {
      */
     renderSidebar() {
         return `
-            <aside id="sidebar" class="w-80 bg-white shadow-lg transform -translate-x-full lg:translate-x-0 transition-transform duration-300 ease-in-out lg:static fixed inset-y-0 z-40" aria-label="Navigatie menu">
+            <aside id="sidebar" class="w-full sm:w-80 bg-white shadow-lg transform -translate-x-full lg:translate-x-0 transition-transform duration-300 ease-in-out lg:static fixed inset-y-0 z-40" aria-label="Navigatie menu">
                 <div class="h-full flex flex-col">
                     ${this.renderSidebarHeader()}
                     ${this.renderModuleNavigation()}
@@ -63,14 +63,14 @@ class BaseLessonPage {
      */
     renderSidebarHeader() {
         return `
-            <div class="p-6 border-b border-gray-200">
+            <div class="p-4 sm:p-6 border-b border-gray-200">
                 <div class="flex items-center space-x-3">
                     <div class="w-10 h-10 bg-gradient-to-r from-blue-600 to-blue-700 rounded-lg flex items-center justify-center" aria-hidden="true">
                         <i class="fas fa-graduation-cap text-white text-lg"></i>
                     </div>
                     <div>
-                        <h1 class="text-xl font-bold text-gray-900">E-Learning</h1>
-                        <p class="text-sm text-gray-500">Opzetten van Logistieke Onderzoeken (OLO)</p>
+                        <h1 class="text-lg sm:text-xl font-bold text-gray-900">E-Learning</h1>
+                        <p class="text-xs sm:text-sm text-gray-500">Opzetten van Logistieke Onderzoeken (OLO)</p>
                     </div>
                 </div>
             </div>
@@ -106,7 +106,7 @@ class BaseLessonPage {
         }).join('');
 
         return `
-            <nav class="flex-1 overflow-y-auto custom-scrollbar p-6" aria-label="Module navigatie">
+            <nav class="flex-1 overflow-y-auto custom-scrollbar p-4 sm:p-6" aria-label="Module navigatie">
                 <div class="space-y-2">
                     ${moduleItems}
                 </div>
@@ -121,7 +121,7 @@ class BaseLessonPage {
      */
     renderHeader() {
         return `
-            <header class="bg-white shadow-sm border-b border-gray-200 px-6 py-4">
+            <header class="bg-white shadow-sm border-b border-gray-200 px-4 sm:px-6 py-3 sm:py-4">
                 <div class="flex items-center justify-between">
                     <!-- Mobile menu button -->
                     <button id="mobile-menu-button" class="lg:hidden p-2 rounded-md text-gray-600 hover:text-gray-900 hover:bg-gray-100 focus-ring" aria-label="Open navigatie menu">
@@ -129,7 +129,7 @@ class BaseLessonPage {
                     </button>
 
                     <!-- Breadcrumbs -->
-                    <nav class="flex items-center space-x-2 text-sm" aria-label="Breadcrumb">
+                    <nav class="hidden sm:flex items-center space-x-2 text-sm" aria-label="Breadcrumb">
                         <a href="index.html" class="text-gray-500 hover:text-gray-700 focus-ring">Start</a>
                         <i class="fas fa-chevron-right text-gray-400 text-xs"></i>
                         <span class="text-gray-900 font-medium">${this.moduleTitle}</span>
@@ -145,7 +145,7 @@ class BaseLessonPage {
     renderMainContent() {
         return `
             <main id="main-content" class="flex-1 overflow-y-auto custom-scrollbar">
-                <div class="max-w-4xl mx-auto px-6 py-8">
+                <div class="max-w-4xl mx-auto px-4 sm:px-6 py-4 sm:py-8">
                     <article class="space-y-8 fade-in">
                         ${this.renderModuleIntro()}
                         ${this.renderContentSections()}
@@ -162,13 +162,13 @@ class BaseLessonPage {
      */
     renderModuleIntro() {
         return `
-            <section class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 hover-lift">
-                <div class="flex items-start space-x-4">
+            <section class="bg-white rounded-xl shadow-sm border border-gray-200 p-4 sm:p-6 hover-lift">
+                <div class="flex flex-col sm:flex-row items-start space-y-4 sm:space-y-0 sm:space-x-4">
                     <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0">
                         <i class="fas fa-book text-blue-600 text-lg"></i>
                     </div>
                     <div class="flex-1">
-                        <h1 class="text-2xl font-bold text-gray-900 mb-2">${this.moduleTitle}: ${this.moduleSubtitle}</h1>
+                        <h1 class="text-xl sm:text-2xl font-bold text-gray-900 mb-2">${this.moduleTitle}: ${this.moduleSubtitle}</h1>
                         <p class="text-gray-600 mb-4">
                             Welkom bij ${this.moduleTitle}! Deze module behandelt ${this.moduleSubtitle.toLowerCase()}.
                         </p>
@@ -196,13 +196,13 @@ class BaseLessonPage {
     renderContentSections() {
         return `
             <!-- Leerdoelen Sectie -->
-            <section class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 hover-lift">
-                <div class="flex items-start space-x-4">
+            <section class="bg-white rounded-xl shadow-sm border border-gray-200 p-4 sm:p-6 hover-lift">
+                <div class="flex flex-col sm:flex-row items-start space-y-4 sm:space-y-0 sm:space-x-4">
                     <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center flex-shrink-0">
                         <i class="fas fa-bullseye text-green-600 text-lg"></i>
                     </div>
                     <div class="flex-1">
-                        <h2 class="text-xl font-semibold text-gray-900 mb-4">Leerdoelen</h2>
+                        <h2 class="text-lg sm:text-xl font-semibold text-gray-900 mb-4">Leerdoelen</h2>
                         <div class="prose max-w-none">
                             <p class="text-gray-600 mb-4">Na het voltooien van deze module kun je:</p>
                             <div class="bg-gray-50 rounded-lg p-4">
@@ -217,13 +217,13 @@ class BaseLessonPage {
             </section>
 
             <!-- Theorie Sectie -->
-            <section class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 hover-lift">
-                <div class="flex items-start space-x-4">
+            <section class="bg-white rounded-xl shadow-sm border border-gray-200 p-4 sm:p-6 hover-lift">
+                <div class="flex flex-col sm:flex-row items-start space-y-4 sm:space-y-0 sm:space-x-4">
                     <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center flex-shrink-0">
                         <i class="fas fa-book text-purple-600 text-lg"></i>
                     </div>
                     <div class="flex-1">
-                        <h2 class="text-xl font-semibold text-gray-900 mb-4">Theorie</h2>
+                        <h2 class="text-lg sm:text-xl font-semibold text-gray-900 mb-4">Theorie</h2>
                         <div class="prose max-w-none">
                             <div class="bg-gray-50 rounded-lg p-4 mb-4">
                                 <h3 class="font-semibold text-gray-900 mb-2">Theorie Content</h3>
@@ -238,14 +238,14 @@ class BaseLessonPage {
             </section>
 
             <!-- Video Sectie -->
-            <section class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 hover-lift">
-                <div class="flex items-start space-x-4">
+            <section class="bg-white rounded-xl shadow-sm border border-gray-200 p-4 sm:p-6 hover-lift">
+                <div class="flex flex-col sm:flex-row items-start space-y-4 sm:space-y-0 sm:space-x-4">
                     <div class="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center flex-shrink-0">
                         <i class="fas fa-play text-red-600 text-lg"></i>
                     </div>
                     <div class="flex-1">
-                        <h2 class="text-xl font-semibold text-gray-900 mb-4">Video</h2>
-                        <div class="bg-gray-900 rounded-lg aspect-video flex items-center justify-center mb-4">
+                        <h2 class="text-lg sm:text-xl font-semibold text-gray-900 mb-4">Video</h2>
+                        <div class="bg-gray-900 rounded-lg aspect-video flex items-center justify-center mb-4 w-full">
                             <div class="text-center text-white">
                                 <i class="fas fa-play-circle text-6xl mb-4 opacity-75"></i>
                                 <p class="text-lg font-medium">Video Player</p>
@@ -271,21 +271,21 @@ class BaseLessonPage {
         const nextModule = this.getNextModule();
 
         return `
-            <div class="mt-12 flex justify-between items-center">
+            <div class="mt-12 flex flex-col sm:flex-row justify-between items-stretch sm:items-center gap-4">
                 ${prevModule ? `
-                    <button class="flex items-center space-x-2 px-6 py-3 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 focus-ring transition-colors" onclick="window.location.href='${prevModule.href}'">
+                    <button class="flex items-center justify-center space-x-2 px-4 sm:px-6 py-3 w-full sm:w-auto bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 focus-ring transition-colors" onclick="window.location.href='${prevModule.href}'">
                         <i class="fas fa-arrow-left"></i>
                         <span>Vorige: ${prevModule.title}</span>
                     </button>
                 ` : `
-                    <button class="flex items-center space-x-2 px-6 py-3 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 focus-ring transition-colors" onclick="window.location.href='index.html'">
+                    <button class="flex items-center justify-center space-x-2 px-4 sm:px-6 py-3 w-full sm:w-auto bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 focus-ring transition-colors" onclick="window.location.href='index.html'">
                         <i class="fas fa-arrow-left"></i>
                         <span>Terug naar Start</span>
                     </button>
                 `}
                 
                 ${nextModule ? `
-                    <button class="flex items-center space-x-2 px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus-ring transition-colors" onclick="window.location.href='${nextModule.href}'">
+                    <button class="flex items-center justify-center space-x-2 px-4 sm:px-6 py-3 w-full sm:w-auto bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus-ring transition-colors" onclick="window.location.href='${nextModule.href}'">
                         <span>Volgende: ${nextModule.title}</span>
                         <i class="fas fa-arrow-right"></i>
                     </button>

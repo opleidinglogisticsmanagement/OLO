@@ -95,6 +95,54 @@
         .prose h3 {
             margin-bottom: 0;
         }
+
+        /* Mobile-specific improvements */
+        @media (max-width: 640px) {
+            /* Ensure content doesn't overflow */
+            body {
+                overflow-x: hidden;
+            }
+            
+            /* Better touch targets */
+            button, a {
+                min-height: 44px;
+                min-width: 44px;
+            }
+            
+            /* Sidebar should take full width on mobile */
+            #sidebar {
+                width: 100%;
+                max-width: 100%;
+            }
+            
+            /* Reduce icon sizes on mobile */
+            .text-6xl {
+                font-size: 3rem;
+            }
+            
+            /* Better spacing for lists */
+            .prose ul, .prose ol {
+                margin-left: 0.75rem;
+                padding-left: 0.5rem;
+            }
+            
+            /* Scroll to top button */
+            #scroll-to-top-btn {
+                bottom: 1.5rem;
+                right: 1.5rem;
+                padding: 0.875rem;
+            }
+            
+            /* Prevent text from being too small */
+            .text-sm {
+                font-size: 0.875rem;
+            }
+            
+            /* Better spacing for sections */
+            .space-y-8 > * + * {
+                margin-top: 1.5rem;
+            }
+        }
     </style>
 </head>
 <body class="bg-gray-50">

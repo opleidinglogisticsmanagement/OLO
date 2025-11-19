@@ -64,14 +64,20 @@ class BaseLessonPage {
     renderSidebarHeader() {
         return `
             <div class="p-4 sm:p-6 border-b border-gray-200">
-                <div class="flex items-center space-x-3">
-                    <div class="w-10 h-10 bg-gradient-to-r from-blue-600 to-blue-700 rounded-lg flex items-center justify-center" aria-hidden="true">
-                        <i class="fas fa-graduation-cap text-white text-lg"></i>
+                <div class="flex items-center justify-between overflow-hidden">
+                    <div class="flex items-center space-x-3 flex-1 min-w-0 overflow-hidden">
+                        <div class="w-10 h-10 bg-gradient-to-r from-blue-600 to-blue-700 rounded-lg flex items-center justify-center flex-shrink-0" aria-hidden="true">
+                            <i class="fas fa-graduation-cap text-white text-lg"></i>
+                        </div>
+                        <div class="min-w-0 flex-1 overflow-hidden">
+                            <h1 class="text-lg sm:text-xl font-bold text-gray-900 truncate">E-Learning</h1>
+                            <p class="text-xs sm:text-sm text-gray-500 truncate">Opzetten van Logistieke Onderzoeken (OLO)</p>
+                        </div>
                     </div>
-                    <div>
-                        <h1 class="text-lg sm:text-xl font-bold text-gray-900">E-Learning</h1>
-                        <p class="text-xs sm:text-sm text-gray-500">Opzetten van Logistieke Onderzoeken (OLO)</p>
-                    </div>
+                    <!-- Close button for mobile -->
+                    <button id="sidebar-close-button" class="lg:hidden p-2 rounded-md text-gray-600 hover:text-gray-900 hover:bg-gray-100 focus-ring ml-2 flex-shrink-0" aria-label="Sluit navigatie menu">
+                        <i class="fas fa-times text-xl"></i>
+                    </button>
                 </div>
             </div>
         `;
@@ -121,19 +127,22 @@ class BaseLessonPage {
      */
     renderHeader() {
         return `
-            <header class="bg-white shadow-sm border-b border-gray-200 px-4 sm:px-6 py-3 sm:py-4">
+            <header class="bg-white shadow-sm border-b border-gray-200 px-4 sm:px-6 py-3 sm:py-4 sticky top-0 z-30">
                 <div class="flex items-center justify-between">
                     <!-- Mobile menu button -->
                     <button id="mobile-menu-button" class="lg:hidden p-2 rounded-md text-gray-600 hover:text-gray-900 hover:bg-gray-100 focus-ring" aria-label="Open navigatie menu">
                         <i class="fas fa-bars text-xl"></i>
                     </button>
 
-                    <!-- Breadcrumbs -->
-                    <nav class="hidden sm:flex items-center space-x-2 text-sm" aria-label="Breadcrumb">
+                    <!-- Breadcrumbs - hidden on mobile, visible on tablet+ -->
+                    <nav class="hidden sm:flex items-center space-x-2 text-sm flex-1 ml-4" aria-label="Breadcrumb">
                         <a href="index.html" class="text-gray-500 hover:text-gray-700 focus-ring">Start</a>
                         <i class="fas fa-chevron-right text-gray-400 text-xs"></i>
                         <span class="text-gray-900 font-medium">${this.moduleTitle}</span>
                     </nav>
+                    
+                    <!-- Mobile title - only visible on mobile -->
+                    <h1 class="lg:hidden text-base font-semibold text-gray-900 flex-1 ml-2 truncate">${this.moduleTitle}</h1>
                 </div>
             </header>
         `;
@@ -145,8 +154,8 @@ class BaseLessonPage {
     renderMainContent() {
         return `
             <main id="main-content" class="flex-1 overflow-y-auto custom-scrollbar">
-                <div class="max-w-4xl mx-auto px-4 sm:px-6 py-4 sm:py-8">
-                    <article class="space-y-8 fade-in">
+                <div class="max-w-4xl mx-auto px-4 sm:px-6 py-4 sm:py-6 lg:py-8">
+                    <article class="space-y-6 sm:space-y-8 fade-in">
                         ${this.renderModuleIntro()}
                         ${this.renderContentSections()}
                     </article>
@@ -163,21 +172,22 @@ class BaseLessonPage {
     renderModuleIntro() {
         return `
             <section class="bg-white rounded-xl shadow-sm border border-gray-200 p-4 sm:p-6 hover-lift">
-                <div class="flex flex-col sm:flex-row items-start space-y-4 sm:space-y-0 sm:space-x-4">
-                    <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                        <i class="fas fa-book text-blue-600 text-lg"></i>
+                <div class="flex flex-col sm:flex-row items-start">
+                    <!-- Icon above title on mobile, beside on desktop -->
+                    <div class="w-10 h-10 sm:w-12 sm:h-12 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0 mb-3 sm:mb-0 sm:mr-4">
+                        <i class="fas fa-book text-blue-600 text-base sm:text-lg"></i>
                     </div>
-                    <div class="flex-1">
-                        <h1 class="text-xl sm:text-2xl font-bold text-gray-900 mb-2">${this.moduleTitle}: ${this.moduleSubtitle}</h1>
-                        <p class="text-gray-600 mb-4">
+                    <div class="flex-1 min-w-0 w-full sm:w-auto">
+                        <h1 class="text-lg sm:text-xl lg:text-2xl font-bold text-gray-900 mb-2">${this.moduleTitle}: ${this.moduleSubtitle}</h1>
+                        <p class="text-sm sm:text-base text-gray-600 mb-3 sm:mb-4">
                             Welkom bij ${this.moduleTitle}! Deze module behandelt ${this.moduleSubtitle.toLowerCase()}.
                         </p>
-                        <div class="bg-blue-50 border-l-4 border-blue-500 p-4 rounded-r-lg">
-                            <div class="flex items-start space-x-3">
-                                <i class="fas fa-info-circle text-blue-600 mt-1"></i>
-                                <div>
-                                    <h3 class="font-semibold text-blue-900 mb-1">Module Informatie</h3>
-                                    <p class="text-blue-800 text-sm">
+                        <div class="bg-blue-50 border-l-4 border-blue-500 p-3 sm:p-4 rounded-r-lg">
+                            <div class="flex items-start space-x-2 sm:space-x-3">
+                                <i class="fas fa-info-circle text-blue-600 mt-0.5 sm:mt-1 flex-shrink-0"></i>
+                                <div class="min-w-0">
+                                    <h3 class="text-sm sm:text-base font-semibold text-blue-900 mb-1">Module Informatie</h3>
+                                    <p class="text-xs sm:text-sm text-blue-800">
                                         Deze module bevat verschillende secties met theorie, voorbeelden en opdrachten.
                                     </p>
                                 </div>
@@ -197,11 +207,11 @@ class BaseLessonPage {
         return `
             <!-- Leerdoelen Sectie -->
             <section class="bg-white rounded-xl shadow-sm border border-gray-200 p-4 sm:p-6 hover-lift">
-                <div class="flex flex-col sm:flex-row items-start space-y-4 sm:space-y-0 sm:space-x-4">
-                    <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                        <i class="fas fa-bullseye text-green-600 text-lg"></i>
+                <div class="flex flex-col sm:flex-row items-start">
+                    <div class="w-10 h-10 sm:w-12 sm:h-12 bg-green-100 rounded-lg flex items-center justify-center flex-shrink-0 mb-3 sm:mb-0 sm:mr-4">
+                        <i class="fas fa-bullseye text-green-600 text-base sm:text-lg"></i>
                     </div>
-                    <div class="flex-1">
+                    <div class="flex-1 min-w-0 w-full sm:w-auto">
                         <h2 class="text-lg sm:text-xl font-semibold text-gray-900 mb-4">Leerdoelen</h2>
                         <div class="prose max-w-none">
                             <p class="text-gray-600 mb-4">Na het voltooien van deze module kun je:</p>
@@ -218,11 +228,11 @@ class BaseLessonPage {
 
             <!-- Theorie Sectie -->
             <section class="bg-white rounded-xl shadow-sm border border-gray-200 p-4 sm:p-6 hover-lift">
-                <div class="flex flex-col sm:flex-row items-start space-y-4 sm:space-y-0 sm:space-x-4">
-                    <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                        <i class="fas fa-book text-purple-600 text-lg"></i>
+                <div class="flex flex-col sm:flex-row items-start">
+                    <div class="w-10 h-10 sm:w-12 sm:h-12 bg-purple-100 rounded-lg flex items-center justify-center flex-shrink-0 mb-3 sm:mb-0 sm:mr-4">
+                        <i class="fas fa-book text-purple-600 text-base sm:text-lg"></i>
                     </div>
-                    <div class="flex-1">
+                    <div class="flex-1 min-w-0 w-full sm:w-auto">
                         <h2 class="text-lg sm:text-xl font-semibold text-gray-900 mb-4">Theorie</h2>
                         <div class="prose max-w-none">
                             <div class="bg-gray-50 rounded-lg p-4 mb-4">
@@ -239,11 +249,11 @@ class BaseLessonPage {
 
             <!-- Video Sectie -->
             <section class="bg-white rounded-xl shadow-sm border border-gray-200 p-4 sm:p-6 hover-lift">
-                <div class="flex flex-col sm:flex-row items-start space-y-4 sm:space-y-0 sm:space-x-4">
-                    <div class="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                        <i class="fas fa-play text-red-600 text-lg"></i>
+                <div class="flex flex-col sm:flex-row items-start">
+                    <div class="w-10 h-10 sm:w-12 sm:h-12 bg-red-100 rounded-lg flex items-center justify-center flex-shrink-0 mb-3 sm:mb-0 sm:mr-4">
+                        <i class="fas fa-play text-red-600 text-base sm:text-lg"></i>
                     </div>
-                    <div class="flex-1">
+                    <div class="flex-1 min-w-0 w-full sm:w-auto">
                         <h2 class="text-lg sm:text-xl font-semibold text-gray-900 mb-4">Video</h2>
                         <div class="bg-gray-900 rounded-lg aspect-video flex items-center justify-center mb-4 w-full">
                             <div class="text-center text-white">
@@ -352,14 +362,36 @@ class BaseLessonPage {
         const overlay = document.getElementById('overlay');
 
         if (mobileMenuButton && sidebar && overlay) {
-            mobileMenuButton.addEventListener('click', () => {
-                sidebar.classList.toggle('-translate-x-full');
-                overlay.classList.toggle('hidden');
-            });
+            const openSidebar = () => {
+                sidebar.classList.remove('-translate-x-full');
+                overlay.classList.remove('hidden');
+                document.body.style.overflow = 'hidden'; // Prevent body scroll when sidebar is open
+            };
 
-            overlay.addEventListener('click', () => {
+            const closeSidebar = () => {
                 sidebar.classList.add('-translate-x-full');
                 overlay.classList.add('hidden');
+                document.body.style.overflow = ''; // Restore body scroll
+            };
+
+            mobileMenuButton.addEventListener('click', openSidebar);
+            overlay.addEventListener('click', closeSidebar);
+
+            // Close button in sidebar
+            const sidebarCloseButton = document.getElementById('sidebar-close-button');
+            if (sidebarCloseButton) {
+                sidebarCloseButton.addEventListener('click', closeSidebar);
+            }
+
+            // Close sidebar when clicking a navigation link on mobile
+            const navLinks = sidebar.querySelectorAll('a');
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    // Only close on mobile (when sidebar is overlay)
+                    if (window.innerWidth < 1024) {
+                        closeSidebar();
+                    }
+                });
             });
         }
 
@@ -368,6 +400,122 @@ class BaseLessonPage {
 
         // Setup image modal functionality (available for all pages)
         this.setupImageModal();
+        
+        // Setup accordion and tabs event delegation (for dynamically rendered content)
+        this.setupInteractiveComponents();
+        
+        // Setup image click handlers (desktop only, mobile uses native pinch-to-zoom)
+        this.setupImageClickHandlers();
+    }
+    
+    /**
+     * Setup event delegation for accordions and tabs
+     * This ensures they work even when content is dynamically rendered
+     */
+    setupInteractiveComponents() {
+        // Use a global flag to prevent multiple event listeners across all instances
+        if (window._interactiveComponentsSetup) {
+            return; // Already setup globally
+        }
+        window._interactiveComponentsSetup = true;
+        
+        // Setup event delegation that works reliably for both desktop and mobile
+        // Use a single event listener on document that handles all accordions, tabs, and clickable steps
+        // IMPORTANT: Only handle specific interactive components - let other buttons with inline onclick work normally
+        const handleInteractiveClick = (e) => {
+            // Only handle buttons that match our specific patterns
+            // Don't interfere with other buttons that use inline onclick (like exercise buttons)
+            
+            const clickedButton = e.target.closest('button');
+            if (!clickedButton) return; // Not a button click, let event continue
+            
+            const onclickAttr = clickedButton.getAttribute('onclick');
+            if (!onclickAttr) return; // No onclick attribute, let event continue
+            
+            // Early return for buttons we don't handle - let their inline onclick work normally
+            // Only handle: toggleAccordion, toggleClickableStep, switchTab
+            const isAccordionButton = onclickAttr.includes('toggleAccordion');
+            const isClickableStepButton = onclickAttr.includes('toggleClickableStep');
+            const isTabButton = onclickAttr.includes('switchTab');
+            
+            if (!isAccordionButton && !isClickableStepButton && !isTabButton) {
+                // This is not one of our buttons (e.g., exercise buttons), let inline onclick work
+                return;
+            }
+            
+            // Check for accordion buttons
+            if (isAccordionButton && typeof window.InteractiveRenderer !== 'undefined' && window.InteractiveRenderer.toggleAccordion) {
+                const match = onclickAttr.match(/toggleAccordion\('([^']+)',\s*'([^']+)',\s*([^)]+)\)/);
+                if (match) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    
+                    const contentId = match[1];
+                    const buttonId = match[2];
+                    const usePlusIcon = match[3] === 'true';
+                    
+                    try {
+                        window.InteractiveRenderer.toggleAccordion(contentId, buttonId, usePlusIcon);
+                    } catch (err) {
+                        console.error('Error toggling accordion:', err);
+                    }
+                    return;
+                }
+            }
+            
+            // Check for clickable step buttons (used in week4)
+            if (isClickableStepButton && typeof window.InteractiveRenderer !== 'undefined' && window.InteractiveRenderer.toggleClickableStep) {
+                const match = onclickAttr.match(/toggleClickableStep\('([^']+)',\s*(\d+)\)/);
+                if (match) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    
+                    const stepsId = match[1];
+                    const stepIndex = parseInt(match[2]);
+                    
+                    try {
+                        window.InteractiveRenderer.toggleClickableStep(stepsId, stepIndex);
+                    } catch (err) {
+                        console.error('Error toggling clickable step:', err);
+                    }
+                    return;
+                }
+            }
+            
+            // Check for tab buttons
+            if (isTabButton && typeof window.InteractiveRenderer !== 'undefined' && window.InteractiveRenderer.switchTab) {
+                const match = onclickAttr.match(/switchTab\('([^']+)',\s*(\d+)\)/);
+                if (match) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    
+                    const tabsId = match[1];
+                    const tabIndex = parseInt(match[2]);
+                    
+                    try {
+                        window.InteractiveRenderer.switchTab(tabsId, tabIndex);
+                    } catch (err) {
+                        console.error('Error switching tab:', err);
+                    }
+                    return;
+                }
+            }
+        };
+        
+        // Add event listener immediately - it will work once InteractiveRenderer is available
+        document.addEventListener('click', handleInteractiveClick, false);
+        
+        // Verify InteractiveRenderer is available
+        const checkInteractiveRenderer = () => {
+            if (typeof window.InteractiveRenderer !== 'undefined') {
+                console.log('InteractiveRenderer is available - accordions and tabs should work');
+            } else {
+                console.warn('InteractiveRenderer not yet available - retrying...');
+                setTimeout(checkInteractiveRenderer, 100);
+            }
+        };
+        
+        checkInteractiveRenderer();
     }
 
     /**
@@ -476,6 +624,64 @@ class BaseLessonPage {
                 window.closeImageModal();
             }
         });
+    }
+    
+    /**
+     * Setup image click handlers (desktop only)
+     * On mobile, images are not clickable - users can use native pinch-to-zoom
+     */
+    setupImageClickHandlers() {
+        // Function to check if device is mobile
+        const isMobileDevice = () => {
+            // Check viewport width (mobile = < 768px)
+            if (window.innerWidth < 768) {
+                return true;
+            }
+            // Check for touch capability (but not all touch devices are mobile)
+            // Only consider it mobile if it's a small screen AND touch capable
+            if ('ontouchstart' in window && window.innerWidth < 1024) {
+                return true;
+            }
+            return false;
+        };
+        
+        // Setup click handlers for images with modal containers
+        const setupImageClicks = () => {
+            const imageContainers = document.querySelectorAll('.image-modal-container');
+            imageContainers.forEach(container => {
+                // Remove any existing listeners by cloning
+                const newContainer = container.cloneNode(true);
+                container.parentNode.replaceChild(newContainer, container);
+                
+                // Only add click handler on desktop/tablet (not mobile)
+                if (!isMobileDevice()) {
+                    newContainer.style.cursor = 'pointer';
+                    newContainer.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        const src = newContainer.getAttribute('data-image-src');
+                        const alt = newContainer.getAttribute('data-image-alt');
+                        if (src && window.openImageModal) {
+                            window.openImageModal(src, alt);
+                        }
+                    });
+                } else {
+                    // On mobile: remove cursor pointer and hover effects
+                    newContainer.style.cursor = 'default';
+                }
+            });
+        };
+        
+        // Setup immediately and on resize (in case user rotates device)
+        setupImageClicks();
+        let resizeTimeout;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(setupImageClicks, 250);
+        });
+        
+        // Also setup after content is loaded (for dynamically loaded content)
+        setTimeout(setupImageClicks, 500);
     }
 }
 

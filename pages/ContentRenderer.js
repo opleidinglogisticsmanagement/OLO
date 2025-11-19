@@ -155,18 +155,25 @@ class ContentRenderer {
             imageContainerClass += ' flex justify-center';
         }
         
+        // Bepaal of modal functionaliteit moet worden gebruikt
+        // Op mobiel (< 768px): gebruik native pinch-to-zoom in plaats van modal
+        // Op desktop/tablet: gebruik modal voor betere UX
+        // Dit wordt gedaan met CSS media queries en JavaScript check
+        const shouldUseModal = enableModal; // Will be filtered by CSS/JS for mobile
+        
         // Container voor afbeelding en alt tekst
-        // Alleen klikbaar met vergrootglas als enableModal expliciet true is
-        const imageStyle = `max-width: ${maxWidth}; max-height: ${maxHeight};`;
-        const imageHtml = enableModal
-            ? `<div class="relative overflow-hidden rounded-lg group cursor-pointer" onclick="window.openImageModal('${escapedSrc}', '${escapedAlt}')">
-                <img src="${item.src}" alt="${item.alt}" class="rounded-lg h-auto object-contain transition-transform duration-300 group-hover:scale-110" style="${imageStyle}">
-                <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-10 transition-all duration-300 rounded-lg flex items-center justify-center">
+        // Alleen klikbaar met vergrootglas als enableModal expliciet true is EN niet op mobiel
+        // Responsive: width 100% zodat afbeelding zich aanpast aan container, max-width als constraint
+        const imageStyle = `width: 100%; max-width: ${maxWidth}; max-height: ${maxHeight}; height: auto;`;
+        const imageHtml = shouldUseModal
+            ? `<div class="relative overflow-hidden rounded-lg group image-modal-container" data-image-src="${escapedSrc}" data-image-alt="${escapedAlt}">
+                <img src="${item.src}" alt="${item.alt}" class="rounded-lg h-auto w-full object-contain transition-transform duration-300 group-hover:scale-110 desktop-only-hover" style="${imageStyle}">
+                <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-10 transition-all duration-300 rounded-lg flex items-center justify-center desktop-only-hover">
                     <i class="fas fa-search-plus text-white text-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></i>
                 </div>
             </div>`
             : `<div class="overflow-hidden rounded-lg">
-                <img src="${item.src}" alt="${item.alt}" class="rounded-lg h-auto object-contain" style="${imageStyle}">
+                <img src="${item.src}" alt="${item.alt}" class="rounded-lg h-auto w-full object-contain" style="${imageStyle}">
             </div>`;
         
         // Alt tekst onder afbeelding (als showAltText true is)
@@ -180,9 +187,10 @@ class ContentRenderer {
         
         // Combineer alles
         if (align === 'right' || align === 'center') {
-            // Voor rechts/centrum: zet afbeelding en alt-tekst in een container met exacte max-width
+            // Voor rechts/centrum: zet afbeelding en alt-tekst in een container met responsive max-width
+            // Container past zich aan aan schermgrootte, maar respecteert max-width constraint
             return `<div class="${imageContainerClass}">
-                <div style="max-width: ${maxWidth}; ${align === 'right' ? 'margin-left: auto;' : 'margin-left: auto; margin-right: auto;'}">
+                <div class="responsive-image-container" style="max-width: ${maxWidth}; width: 100%; ${align === 'right' ? 'margin-left: auto;' : 'margin-left: auto; margin-right: auto;'}">
                     ${imageHtml}
                     ${altTextHtml}
                 </div>

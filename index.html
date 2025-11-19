@@ -95,11 +95,54 @@
             color: rgb(55, 65, 81); /* text-gray-700 */
         }
 
+        /* Prevent horizontal scrolling globally */
+        html, body {
+            overflow-x: hidden;
+            max-width: 100%;
+        }
+        
+        #app {
+            overflow-x: hidden;
+            max-width: 100%;
+        }
+        
         /* Mobile-specific improvements */
         @media (max-width: 640px) {
             /* Ensure content doesn't overflow */
             body {
                 overflow-x: hidden;
+            }
+            
+            /* Prevent any element from causing horizontal scroll */
+            * {
+                max-width: 100%;
+            }
+            
+            /* Specific fixes for common offenders */
+            img, video, iframe {
+                max-width: 100% !important;
+                width: 100% !important;
+                height: auto !important;
+            }
+            
+            /* Ensure all images are responsive */
+            .image-modal-container img,
+            img[style*="max-width"] {
+                max-width: 100% !important;
+                width: 100% !important;
+                height: auto !important;
+            }
+            
+            /* Responsive image containers */
+            .responsive-image-container {
+                max-width: 100% !important;
+                width: 100% !important;
+            }
+            
+            table {
+                display: block;
+                overflow-x: auto;
+                width: 100%;
             }
             
             /* Better touch targets */
@@ -127,9 +170,11 @@
             
             /* Scroll to top button */
             #scroll-to-top-btn {
-                bottom: 1.5rem;
-                right: 1.5rem;
-                padding: 0.875rem;
+                bottom: 1rem;
+                right: 1rem;
+                padding: 0.75rem;
+                width: 44px;
+                height: 44px;
             }
             
             /* Prevent text from being too small */
@@ -138,7 +183,96 @@
             }
             
             /* Better spacing for sections */
+            .space-y-6 > * + * {
+                margin-top: 1.25rem;
+            }
+            
             .space-y-8 > * + * {
+                margin-top: 1.5rem;
+            }
+            
+            /* Better padding for sections */
+            section {
+                margin-bottom: 1rem;
+            }
+            
+            /* Ensure text wraps properly */
+            h1, h2, h3 {
+                word-wrap: break-word;
+                overflow-wrap: break-word;
+            }
+            
+            /* Better spacing for flex containers */
+            .flex.flex-col {
+                gap: 0.75rem;
+            }
+            
+            /* Ensure interactive elements are clickable on mobile */
+            button, [onclick], [role="tab"], [role="button"] {
+                cursor: pointer;
+                touch-action: manipulation;
+                -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
+            }
+            
+            /* Prevent text selection on buttons */
+            button {
+                -webkit-user-select: none;
+                user-select: none;
+            }
+            
+            /* Disable image modal clicks on mobile - use native pinch-to-zoom */
+            .image-modal-container {
+                cursor: default !important;
+                pointer-events: none;
+            }
+            
+            .image-modal-container img {
+                pointer-events: auto;
+            }
+            
+            /* Disable hover effects on mobile */
+            .desktop-only-hover {
+                transition: none !important;
+            }
+            
+            .image-modal-container .group-hover\:scale-110 {
+                transform: none !important;
+            }
+            
+            .image-modal-container .group-hover\:bg-opacity-10 {
+                background-color: transparent !important;
+            }
+            
+            .image-modal-container .group-hover\:opacity-100 {
+                opacity: 0 !important;
+            }
+        }
+        
+        /* Desktop: enable hover effects and clickable images */
+        @media (min-width: 768px) {
+            .desktop-only-hover {
+                transition: transform 0.3s ease, opacity 0.3s ease, background-color 0.3s ease;
+            }
+            
+            .image-modal-container {
+                cursor: pointer;
+                pointer-events: auto;
+            }
+        }
+        
+        /* Global: Ensure all images are responsive on all screen sizes */
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+        
+        .responsive-image-container {
+            max-width: 100%;
+        }
+        
+        /* Tablet improvements */
+        @media (min-width: 641px) and (max-width: 1023px) {
+            .space-y-6 > * + * {
                 margin-top: 1.5rem;
             }
         }
@@ -156,13 +290,13 @@
             <div class="h-full flex flex-col">
                 <!-- Sidebar Header -->
                 <div class="p-6 border-b border-gray-200">
-                    <div class="flex items-center space-x-3">
-                        <div class="w-10 h-10 bg-gradient-to-r from-blue-600 to-blue-700 rounded-lg flex items-center justify-center">
+                    <div class="flex items-center space-x-3 overflow-hidden">
+                        <div class="w-10 h-10 bg-gradient-to-r from-blue-600 to-blue-700 rounded-lg flex items-center justify-center flex-shrink-0">
                             <i class="fas fa-graduation-cap text-white text-lg"></i>
                         </div>
-                        <div>
-                            <h1 class="text-xl font-bold text-gray-900">E-Learning</h1>
-                            <p class="text-sm text-gray-500">Opzetten van Logistieke Onderzoeken (OLO)</p>
+                        <div class="min-w-0 flex-1 overflow-hidden">
+                            <h1 class="text-xl font-bold text-gray-900 truncate">E-Learning</h1>
+                            <p class="text-sm text-gray-500 truncate">Opzetten van Logistieke Onderzoeken (OLO)</p>
                         </div>
                     </div>
                 </div>
@@ -292,11 +426,11 @@
 
                         <!-- General Information Section -->
                         <section class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 hover-lift">
-                            <div class="flex items-start space-x-4">
-                                <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                            <div class="flex flex-col sm:flex-row items-start">
+                                <div class="w-10 h-10 sm:w-12 sm:h-12 bg-green-100 rounded-lg flex items-center justify-center flex-shrink-0 mb-3 sm:mb-0 sm:mr-4">
                                     <i class="fas fa-info-circle text-green-600 text-lg"></i>
                                 </div>
-                                <div class="flex-1">
+                                <div class="flex-1 min-w-0 w-full sm:w-auto">
                                     <h3 class="text-xl font-semibold text-gray-900 mb-3">Over dit vak</h3>
                                     <div class="prose max-w-none">
                                         <p class="text-gray-700 mb-4">
@@ -323,11 +457,11 @@
 
                         <!-- Learning Outcome -->
                         <section class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 hover-lift">
-                            <div class="flex items-start space-x-4">
-                                <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                            <div class="flex flex-col sm:flex-row items-start">
+                                <div class="w-10 h-10 sm:w-12 sm:h-12 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0 mb-3 sm:mb-0 sm:mr-4">
                                     <i class="fas fa-bullseye text-blue-600 text-lg"></i>
                                 </div>
-                                <div class="flex-1">
+                                <div class="flex-1 min-w-0 w-full sm:w-auto">
                                     <h3 class="text-xl font-semibold text-gray-900 mb-3">Leeruitkomst</h3>
                                     <p class="text-gray-700 mb-4 leading-relaxed">
                                         De student is als individu of onderdeel van een duo in staat om een gefundeerd onderzoeksplan op te stellen 
@@ -340,11 +474,11 @@
 
                         <!-- Module Structure Section -->
                         <section class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 hover-lift">
-                            <div class="flex items-start space-x-4">
-                                <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                            <div class="flex flex-col sm:flex-row items-start">
+                                <div class="w-10 h-10 sm:w-12 sm:h-12 bg-green-100 rounded-lg flex items-center justify-center flex-shrink-0 mb-3 sm:mb-0 sm:mr-4">
                                     <i class="fas fa-book text-green-600 text-lg"></i>
                                 </div>
-                                <div class="flex-1">
+                                <div class="flex-1 min-w-0 w-full sm:w-auto">
                                     <h3 class="text-xl font-semibold text-gray-900 mb-4">Module Structuur</h3>
                                     
                                     <div class="prose max-w-none">
@@ -424,15 +558,15 @@
 
                     <!-- Action Buttons -->
                     <div class="mt-12 flex justify-center items-center space-x-6">
-                        <button class="flex items-center space-x-2 px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus-ring transition-colors" onclick="window.location.href='week1.html'">
+                        <a href="week1.html" class="flex items-center space-x-2 px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus-ring transition-colors">
                             <i class="fas fa-play"></i>
                             <span>Start Module</span>
-                        </button>
+                        </a>
                         
-                        <button class="flex items-center space-x-2 px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 focus-ring transition-colors" onclick="window.location.href='afsluiting.html'">
+                        <a href="afsluiting.html" class="flex items-center space-x-2 px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 focus-ring transition-colors">
                             <i class="fas fa-graduation-cap"></i>
                             <span>Naar Afsluiting</span>
-                        </button>
+                        </a>
                     </div>
                 </div>
             </main>

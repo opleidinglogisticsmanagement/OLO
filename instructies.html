@@ -56,6 +56,188 @@
             outline: 2px solid var(--primary-blue);
             outline-offset: 2px;
         }
+
+        /* Prevent horizontal scrolling globally */
+        html, body {
+            overflow-x: hidden;
+            max-width: 100%;
+        }
+        
+        #app {
+            overflow-x: hidden;
+            max-width: 100%;
+        }
+        
+        /* Mobile-specific improvements */
+        @media (max-width: 640px) {
+            /* Ensure content doesn't overflow */
+            body {
+                overflow-x: hidden;
+            }
+            
+            /* Prevent any element from causing horizontal scroll */
+            * {
+                max-width: 100%;
+            }
+            
+            /* Specific fixes for common offenders */
+            img, video, iframe {
+                max-width: 100% !important;
+                width: 100% !important;
+                height: auto !important;
+            }
+            
+            /* Ensure all images are responsive */
+            .image-modal-container img,
+            img[style*="max-width"] {
+                max-width: 100% !important;
+                width: 100% !important;
+                height: auto !important;
+            }
+            
+            /* Responsive image containers */
+            .responsive-image-container {
+                max-width: 100% !important;
+                width: 100% !important;
+            }
+            
+            table {
+                display: block;
+                overflow-x: auto;
+                width: 100%;
+            }
+            
+            /* Better touch targets */
+            button, a {
+                min-height: 44px;
+                min-width: 44px;
+            }
+            
+            /* Sidebar should take full width on mobile */
+            #sidebar {
+                width: 100%;
+                max-width: 100%;
+            }
+            
+            /* Reduce icon sizes on mobile */
+            .text-6xl {
+                font-size: 3rem;
+            }
+            
+            /* Better spacing for lists */
+            .prose ul, .prose ol {
+                margin-left: 0.75rem;
+                padding-left: 0.5rem;
+            }
+            
+            /* Scroll to top button */
+            #scroll-to-top-btn {
+                bottom: 1rem;
+                right: 1rem;
+                padding: 0.75rem;
+                width: 44px;
+                height: 44px;
+            }
+            
+            /* Prevent text from being too small */
+            .text-sm {
+                font-size: 0.875rem;
+            }
+            
+            /* Better spacing for sections */
+            .space-y-6 > * + * {
+                margin-top: 1.25rem;
+            }
+            
+            .space-y-8 > * + * {
+                margin-top: 1.5rem;
+            }
+            
+            /* Better padding for sections */
+            section {
+                margin-bottom: 1rem;
+            }
+            
+            /* Ensure text wraps properly */
+            h1, h2, h3 {
+                word-wrap: break-word;
+                overflow-wrap: break-word;
+            }
+            
+            /* Better spacing for flex containers */
+            .flex.flex-col {
+                gap: 0.75rem;
+            }
+            
+            /* Ensure interactive elements are clickable on mobile */
+            button, [onclick], [role="tab"], [role="button"] {
+                cursor: pointer;
+                touch-action: manipulation;
+                -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
+            }
+            
+            /* Prevent text selection on buttons */
+            button {
+                -webkit-user-select: none;
+                user-select: none;
+            }
+            
+            /* Disable image modal clicks on mobile - use native pinch-to-zoom */
+            .image-modal-container {
+                cursor: default !important;
+                pointer-events: none;
+            }
+            
+            .image-modal-container img {
+                pointer-events: auto;
+            }
+            
+            /* Disable hover effects on mobile */
+            .desktop-only-hover {
+                transition: none !important;
+            }
+            
+            .image-modal-container .group-hover\:scale-110 {
+                transform: none !important;
+            }
+            
+            .image-modal-container .group-hover\:bg-opacity-10 {
+                background-color: transparent !important;
+            }
+            
+            .image-modal-container .group-hover\:opacity-100 {
+                opacity: 0 !important;
+            }
+        }
+        
+        /* Desktop: enable hover effects and clickable images */
+        @media (min-width: 768px) {
+            .desktop-only-hover {
+                transition: transform 0.3s ease, opacity 0.3s ease, background-color 0.3s ease;
+            }
+            
+            .image-modal-container {
+                cursor: pointer;
+                pointer-events: auto;
+            }
+        }
+        
+        /* Global: Ensure all images are responsive on all screen sizes */
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+        
+        .responsive-image-container {
+            max-width: 100%;
+        }
+        
+        /* Tablet improvements */
+        @media (min-width: 641px) and (max-width: 1023px) {
+            .space-y-6 > * + * {
+                margin-top: 1.5rem;
+            }
+        }
     </style>
 </head>
 <body class="bg-gray-50">
@@ -66,23 +248,29 @@
 
     <div id="app" class="min-h-screen flex">
         <!-- Sidebar -->
-        <aside id="sidebar" class="w-80 bg-white shadow-lg transform -translate-x-full lg:translate-x-0 transition-transform duration-300 ease-in-out lg:static fixed inset-y-0 z-40" aria-label="Navigatie menu">
+        <aside id="sidebar" class="w-full sm:w-80 bg-white shadow-lg transform -translate-x-full lg:translate-x-0 transition-transform duration-300 ease-in-out lg:static fixed inset-y-0 z-40" aria-label="Navigatie menu">
             <div class="h-full flex flex-col">
                 <!-- Sidebar Header -->
-                <div class="p-6 border-b border-gray-200">
-                    <div class="flex items-center space-x-3">
-                        <div class="w-10 h-10 bg-gradient-to-r from-blue-600 to-blue-700 rounded-lg flex items-center justify-center">
-                            <i class="fas fa-graduation-cap text-white text-lg"></i>
+                <div class="p-4 sm:p-6 border-b border-gray-200">
+                    <div class="flex items-center justify-between overflow-hidden">
+                        <div class="flex items-center space-x-3 flex-1 min-w-0 overflow-hidden">
+                            <div class="w-10 h-10 bg-gradient-to-r from-blue-600 to-blue-700 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-graduation-cap text-white text-lg"></i>
+                            </div>
+                            <div class="min-w-0 flex-1 overflow-hidden">
+                                <h1 class="text-xl font-bold text-gray-900 truncate">E-Learning</h1>
+                                <p class="text-sm text-gray-500 truncate">Opzetten van Logistieke Onderzoeken (OLO)</p>
+                            </div>
                         </div>
-                        <div>
-                            <h1 class="text-xl font-bold text-gray-900">E-Learning</h1>
-                            <p class="text-sm text-gray-500">Opzetten van Logistieke Onderzoeken (OLO)</p>
-                        </div>
+                        <!-- Close button for mobile -->
+                        <button id="sidebar-close-button" class="lg:hidden p-2 rounded-md text-gray-600 hover:text-gray-900 hover:bg-gray-100 focus-ring ml-2 flex-shrink-0" aria-label="Sluit navigatie menu">
+                            <i class="fas fa-times text-xl"></i>
+                        </button>
                     </div>
                 </div>
 
                 <!-- Module Navigation -->
-                <nav class="flex-1 overflow-y-auto custom-scrollbar p-6" aria-label="Module navigatie">
+                <nav class="flex-1 overflow-y-auto custom-scrollbar p-4 sm:p-6" aria-label="Module navigatie">
                     <div class="space-y-2">
                         <a href="index.html" class="block p-3 rounded-lg hover:bg-gray-50 focus-ring transition-colors">
                             <div class="flex items-center space-x-3">
@@ -172,15 +360,18 @@
         <!-- Main Content Area -->
         <div class="flex-1 flex flex-col lg:ml-0">
             <!-- Header -->
-            <header class="bg-white shadow-sm border-b border-gray-200 px-6 py-4">
+            <header class="bg-white shadow-sm border-b border-gray-200 px-4 sm:px-6 py-3 sm:py-4 sticky top-0 z-30">
                 <div class="flex items-center justify-between">
                     <!-- Mobile menu button -->
                     <button id="mobile-menu-button" class="lg:hidden p-2 rounded-md text-gray-600 hover:text-gray-900 hover:bg-gray-100 focus-ring" aria-label="Open navigatie menu">
                         <i class="fas fa-bars text-xl"></i>
                     </button>
 
+                    <!-- Mobile title -->
+                    <h1 class="lg:hidden text-base font-semibold text-gray-900 flex-1 ml-2 truncate">Instructies</h1>
+
                     <!-- Breadcrumbs -->
-                    <nav class="flex items-center space-x-2 text-sm" aria-label="Breadcrumb">
+                    <nav class="hidden sm:flex items-center space-x-2 text-sm" aria-label="Breadcrumb">
                         <a href="index.html" class="text-gray-500 hover:text-gray-700 focus-ring">Start</a>
                         <i class="fas fa-chevron-right text-gray-400 text-xs"></i>
                         <span class="text-gray-900 font-medium">Instructies voor Docenten</span>
@@ -190,27 +381,26 @@
 
             <!-- Main Content -->
             <main id="main-content" class="flex-1 overflow-y-auto custom-scrollbar">
-                <div class="max-w-4xl mx-auto px-6 py-8">
+                <div class="max-w-4xl mx-auto px-4 sm:px-6 py-4 sm:py-8">
                     <!-- Instructions Content -->
                     <article class="space-y-8 fade-in">
                         <!-- Page Title Section -->
-                        <section class="bg-gradient-to-r from-blue-600 to-blue-700 rounded-xl shadow-lg p-8 text-white mb-8">
-                            <h1 class="text-4xl font-bold mb-4">Instructies voor Docenten</h1>
-                            <p class="text-blue-100 text-lg">Handleiding voor het gebruik van het E-Learning Template</p>
+                        <section class="bg-gradient-to-r from-blue-600 to-blue-700 rounded-xl shadow-lg p-4 sm:p-8 text-white mb-6 sm:mb-8">
+                            <h1 class="text-2xl sm:text-4xl font-bold mb-2 sm:mb-4">Instructies voor Docenten</h1>
+                            <p class="text-blue-100 text-base sm:text-lg">Handleiding voor het gebruik van het E-Learning Template</p>
                         </section>
 
                         <!-- Important Note about Cursor -->
-                        <section class="bg-blue-50 border-l-4 border-blue-600 rounded-r-lg p-6 mb-8 shadow-sm">
-                            <div class="flex items-start space-x-4">
-                                <div class="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center flex-shrink-0">
-                                    <i class="fas fa-info-circle text-white text-lg"></i>
+                        <section class="bg-blue-50 border-l-4 border-blue-600 rounded-r-lg p-4 sm:p-6 mb-6 sm:mb-8 shadow-sm">
+                            <div class="flex flex-col sm:flex-row items-start">
+                                <div class="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center flex-shrink-0 mb-3 sm:mb-0 sm:mr-4">
+                                    <i class="fas fa-info-circle text-white text-base sm:text-lg"></i>
                                 </div>
-                                <div class="flex-1">
-                                    <h2 class="text-xl font-semibold text-gray-900 mb-3">Belangrijke informatie over dit template</h2>
+                                <div class="flex-1 min-w-0 w-full sm:w-auto">
+                                    <h2 class="text-lg sm:text-xl font-semibold text-gray-900 mb-3">Belangrijke informatie over dit template</h2>
                                     <div class="prose max-w-none text-gray-700">
                                         <p class="mb-3">
-                                            <strong>Dit template is gemaakt met Cursor</strong> en vermoedelijk werkt dit het beste met Cursor. 
-                                            <strong>Bolt.new</strong> is ook een optie, maar dit is niet getest.
+                                            <strong>Dit template is gemaakt met Cursor</strong> en werkt het beste met Cursor.
                                         </p>
                                         <p class="text-sm text-gray-600 italic">
                                             Wij raden aan om Cursor te gebruiken voor het beste resultaat bij het aanpassen van dit template.
@@ -221,12 +411,12 @@
                         </section>
 
                         <!-- Step 1: Required Software -->
-                        <section class="bg-white rounded-xl shadow-sm border border-gray-200 pt-6 pb-6 pl-6 pr-[70px] hover-lift">
-                            <div class="flex items-start space-x-4">
-                                <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                                    <i class="fas fa-laptop-code text-blue-600 text-lg"></i>
+                        <section class="bg-white rounded-xl shadow-sm border border-gray-200 p-4 sm:p-6 sm:pr-[70px] hover-lift">
+                            <div class="flex flex-col sm:flex-row items-start">
+                                <div class="w-10 h-10 sm:w-12 sm:h-12 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0 mb-3 sm:mb-0 sm:mr-4">
+                                    <i class="fas fa-laptop-code text-blue-600 text-base sm:text-lg"></i>
                                 </div>
-                                <div class="flex-1">
+                                <div class="flex-1 min-w-0 w-full sm:w-auto">
                                     <h2 class="text-2xl font-semibold text-gray-900 mb-4">Stap 1: Benodigde Software</h2>
                                     <div class="prose max-w-none">
                                         <p class="text-gray-700 mb-4">
@@ -296,7 +486,6 @@
                                             </p>
                                             <ul class="list-disc list-inside space-y-1 text-gray-700 mb-3">
                                                 <li><strong>Cursor AI</strong> (aanbevolen) - AI-powered editor met geavanceerde functies</li>
-                                                <li><strong>Bolt.new</strong> - Alternatieve AI-powered editor optie</li>
                                             </ul>
                                         </div>
 
@@ -320,17 +509,17 @@
                         </section>
 
                         <!-- Step 2: Basic Information and Subject Selection -->
-                        <section class="bg-white rounded-xl shadow-sm border border-gray-200 pt-6 pb-6 pl-6 pr-[70px] hover-lift">
-                            <div class="flex items-start space-x-4">
-                                <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                                    <i class="fas fa-info-circle text-green-600 text-lg"></i>
+                        <section class="bg-white rounded-xl shadow-sm border border-gray-200 p-4 sm:p-6 sm:pr-[70px] hover-lift">
+                            <div class="flex flex-col sm:flex-row items-start">
+                                <div class="w-10 h-10 sm:w-12 sm:h-12 bg-green-100 rounded-lg flex items-center justify-center flex-shrink-0 mb-3 sm:mb-0 sm:mr-4">
+                                    <i class="fas fa-info-circle text-green-600 text-base sm:text-lg"></i>
                                 </div>
-                                <div class="flex-1">
+                                <div class="flex-1 min-w-0 w-full sm:w-auto">
                                     <h2 class="text-2xl font-semibold text-gray-900 mb-4">Stap 2: Basisinformatie van het Vak</h2>
                                     <div class="prose max-w-none">
                                         <p class="text-gray-700 mb-4">
                                             Om dit template aan te passen naar uw vak, heeft u de volgende basisinformatie nodig. 
-                                            U kunt deze informatie aan Cursor AI of Bolt.new geven om het template automatisch aan te passen.
+                                            U kunt deze informatie aan Cursor AI geven om het template automatisch aan te passen.
                                         </p>
 
                                         <!-- Two Approaches -->
@@ -348,7 +537,7 @@
                                                     </h4>
                                                     <p class="text-gray-700 text-sm mb-2">
                                                         <strong>Exact en compleet:</strong> Vul alle onderstaande stappen (1-8) gedetailleerd in. 
-                                                        Deze informatie moet exact worden doorgegeven aan Cursor AI of Bolt.new.
+                                                        Deze informatie moet exact worden doorgegeven aan Cursor AI.
                                                     </p>
                                                     <p class="text-gray-600 text-xs italic">
                                                         Ideaal als u alle details precies wilt controleren en specificeren.
@@ -358,7 +547,7 @@
                                                 <!-- Approach 2: Simple -->
                                                 <div class="bg-white rounded-lg p-4 border-2 border-green-200">
                                                     <h4 class="font-semibold text-gray-900 mb-2 flex items-center">
-                                                        <i class="fas fa-bolt text-green-600 mr-2"></i>
+                                                        <i class="fas fa-lightbulb text-green-600 mr-2"></i>
                                                         Aanpak 2: Eenvoudige Overzicht
                                                     </h4>
                                                     <p class="text-gray-700 text-sm mb-2">
@@ -366,7 +555,7 @@
                                                         en een overzicht van wat er per week wordt gedaan.
                                                     </p>
                                                     <p class="text-gray-600 text-xs italic">
-                                                        Bolt of Cursor kan de rest zelf invullen en de basisstructuur aanpassen.
+                                                        Cursor kan de rest zelf invullen en de basisstructuur aanpassen.
                                                     </p>
                                                 </div>
                                             </div>
@@ -380,7 +569,7 @@
                                             </h3>
                                             <p class="text-gray-700 mb-3">
                                                 Als u <strong>alleen een overzicht</strong> geeft van wat er per week wordt gedaan in uw vak, 
-                                                kan Cursor AI of Bolt.new de hele basisstructuur van de hoofdpagina en andere pagina's automatisch aanpassen.
+                                                kan Cursor AI de hele basisstructuur van de hoofdpagina en andere pagina's automatisch aanpassen.
                                             </p>
                                             <div class="bg-white rounded p-4 border border-gray-200 mb-3">
                                                 <h4 class="font-semibold text-gray-900 mb-2">Minimale informatie die nodig is:</h4>
@@ -405,7 +594,7 @@
                                             <p class="text-gray-600 text-xs italic mt-3">
                                                 <i class="fas fa-info-circle text-green-600 mr-1"></i>
                                                 <strong>Tip:</strong> U hoeft niet alle gedetailleerde sub-stappen hieronder uit te werken. 
-                                                Een overzicht per week is voldoende voor Cursor AI of Bolt.new om de basisstructuur aan te passen.
+                                                Een overzicht per week is voldoende voor Cursor AI om de basisstructuur aan te passen.
                                             </p>
                                         </div>
 
@@ -417,7 +606,7 @@
                                             </h3>
                                             <p class="text-gray-700 mb-3">
                                                 Als u alle details precies wilt specificeren, gebruik dan onderstaande stap-voor-stap lijst. 
-                                                Deze informatie moet <strong>exact</strong> worden doorgegeven aan Cursor AI of Bolt.new.
+                                                Deze informatie moet <strong>exact</strong> worden doorgegeven aan Cursor AI.
                                             </p>
                                             <p class="text-gray-600 text-sm italic">
                                                 <i class="fas fa-exclamation-triangle text-blue-600 mr-1"></i>
@@ -550,7 +739,7 @@
                                         <div class="bg-green-50 border-l-4 border-green-500 p-4 rounded-r-lg mt-6">
                                             <h3 class="text-lg font-semibold text-gray-900 mb-3">
                                                 <i class="fas fa-robot text-green-600 mr-2"></i>
-                                                Hoe gebruikt u deze informatie met Cursor AI of Bolt.new?
+                                                Hoe gebruikt u deze informatie met Cursor AI?
                                             </h3>
                                             <p class="text-gray-700 mb-3">
                                                 Geef alle bovenstaande informatie in een duidelijk geformatteerde prompt aan de AI:
@@ -589,12 +778,12 @@
                         </section>
 
                         <!-- Step 3: Working with Content per Week -->
-                        <section class="bg-white rounded-xl shadow-sm border border-gray-200 pt-6 pb-6 pl-6 pr-[70px] hover-lift">
-                            <div class="flex items-start space-x-4">
-                                <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                                    <i class="fas fa-calendar-week text-purple-600 text-lg"></i>
+                        <section class="bg-white rounded-xl shadow-sm border border-gray-200 p-4 sm:p-6 sm:pr-[70px] hover-lift">
+                            <div class="flex flex-col sm:flex-row items-start">
+                                <div class="w-10 h-10 sm:w-12 sm:h-12 bg-purple-100 rounded-lg flex items-center justify-center flex-shrink-0 mb-3 sm:mb-0 sm:mr-4">
+                                    <i class="fas fa-calendar-week text-purple-600 text-base sm:text-lg"></i>
                                 </div>
-                                <div class="flex-1">
+                                <div class="flex-1 min-w-0 w-full sm:w-auto">
                                     <h2 class="text-2xl font-semibold text-gray-900 mb-4">Stap 3: Content per Week Leveren</h2>
                                     <div class="prose max-w-none">
                                         <p class="text-gray-700 mb-4">
@@ -685,8 +874,8 @@
                                                 Voorbeelden: hoe levert u uw content?
                                             </h3>
                                             <p class="text-gray-700 mb-4 text-sm">
-                                                Hieronder vindt u voorbeelden van hoe u elk content type kunt leveren aan Cursor AI of Bolt.new. 
-                                                De AI kan deze informatie automatisch omzetten naar de juiste JSON structuur.
+                                                Hieronder vindt u voorbeelden van hoe u elk content type kunt leveren aan Cursor AI. 
+                                                Cursor AI kan deze informatie automatisch omzetten naar de juiste JSON structuur.
                                             </p>
 
                                             <!-- Example 1: Paragraphs -->
@@ -764,7 +953,7 @@
                                                 <div class="bg-green-50 rounded p-2 border border-green-200 text-xs text-gray-700 mb-2">
                                                     <strong>Stappen:</strong><br>
                                                     1. Plaats uw afbeelding (PNG, JPG, etc.) in de map <code>assets/images/</code><br>
-                                                    2. Geef aan Cursor AI of Bolt.new het pad naar de afbeelding (bijv. <code>assets/images/voorbeeld.png</code>)<br>
+                                                    2. Geef aan Cursor AI het pad naar de afbeelding (bijv. <code>assets/images/voorbeeld.png</code>)<br>
                                                     3. Geef een beschrijvende alt tekst voor toegankelijkheid
                                                 </div>
                                                 <div class="bg-green-50 rounded p-2 border border-green-200 text-xs text-gray-700 italic">
@@ -805,7 +994,7 @@
                                                 <div class="bg-red-50 rounded p-2 border border-red-200 text-xs text-gray-700 mb-2">
                                                     <strong>Stappen:</strong><br>
                                                     1. Plaats uw document (PDF, DOCX, etc.) in de map <code>assets/Documents/</code><br>
-                                                    2. Geef aan Cursor AI of Bolt.new het pad naar het document (bijv. <code>assets/Documents/voorbeeld.pdf</code>)<br>
+                                                    2. Geef aan Cursor AI het pad naar het document (bijv. <code>assets/Documents/voorbeeld.pdf</code>)<br>
                                                     3. Geef een beschrijvende link tekst voor de download knop
                                                 </div>
                                                 <div class="bg-red-50 rounded p-2 border border-red-200 text-xs text-gray-700 italic">
@@ -863,7 +1052,7 @@
                                         <div class="bg-green-50 border-l-4 border-green-500 p-4 rounded-r-lg mt-6">
                                             <h3 class="text-lg font-semibold text-gray-900 mb-3">
                                                 <i class="fas fa-robot text-green-600 mr-2"></i>
-                                                Hoe levert u content aan Cursor AI of Bolt.new?
+                                                Hoe levert u content aan Cursor AI?
                                             </h3>
                                             <p class="text-gray-700 mb-3">
                                                 U kunt uw content op een natuurlijke manier beschrijven aan de AI. Bijvoorbeeld:
@@ -885,7 +1074,7 @@
                                             <p class="text-gray-600 text-xs italic">
                                                 <i class="fas fa-info-circle text-green-600 mr-1"></i>
                                                 <strong>Tip:</strong> U hoeft niet de exacte JSON structuur te kennen. Beschrijf gewoon wat u wilt toevoegen, 
-                                                en Cursor AI of Bolt.new zorgt voor de juiste structuur.
+                                                en Cursor AI zorgt voor de juiste structuur.
                                             </p>
                                         </div>
                                     </div>
@@ -926,14 +1115,36 @@
         const overlay = document.getElementById('overlay');
 
         if (mobileMenuButton && sidebar && overlay) {
-            mobileMenuButton.addEventListener('click', () => {
-                sidebar.classList.toggle('-translate-x-full');
-                overlay.classList.toggle('hidden');
-            });
+            const openSidebar = () => {
+                sidebar.classList.remove('-translate-x-full');
+                overlay.classList.remove('hidden');
+                document.body.style.overflow = 'hidden'; // Prevent body scroll when sidebar is open
+            };
 
-            overlay.addEventListener('click', () => {
+            const closeSidebar = () => {
                 sidebar.classList.add('-translate-x-full');
                 overlay.classList.add('hidden');
+                document.body.style.overflow = ''; // Restore body scroll
+            };
+
+            mobileMenuButton.addEventListener('click', openSidebar);
+            overlay.addEventListener('click', closeSidebar);
+
+            // Close button in sidebar
+            const sidebarCloseButton = document.getElementById('sidebar-close-button');
+            if (sidebarCloseButton) {
+                sidebarCloseButton.addEventListener('click', closeSidebar);
+            }
+
+            // Close sidebar when clicking a navigation link on mobile
+            const navLinks = sidebar.querySelectorAll('a');
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    // Only close on mobile (when sidebar is overlay)
+                    if (window.innerWidth < 1024) {
+                        closeSidebar();
+                    }
+                });
             });
         }
 

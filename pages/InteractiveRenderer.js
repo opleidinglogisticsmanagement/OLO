@@ -82,8 +82,8 @@ class InteractiveRenderer {
                 ? `mb-3 overflow-hidden` 
                 : `border border-gray-200 rounded-lg mb-3 overflow-hidden`;
             const buttonClass = isNested
-                ? `w-full px-6 py-4 bg-gray-100 hover:bg-gray-200 transition-colors duration-200 flex items-center justify-between text-left font-semibold text-lg text-gray-600`
-                : `w-full px-6 py-4 bg-gray-50 hover:bg-gray-100 transition-colors duration-200 flex items-center justify-between text-left`;
+                ? `w-full px-6 py-4 bg-gray-100 hover:bg-gray-200 active:bg-gray-300 transition-colors duration-200 flex items-center justify-between text-left font-semibold text-lg text-gray-600 cursor-pointer touch-manipulation`
+                : `w-full px-6 py-4 bg-gray-50 hover:bg-gray-100 active:bg-gray-200 transition-colors duration-200 flex items-center justify-between text-left cursor-pointer touch-manipulation`;
             const contentBgClass = isNested
                 ? `bg-white`
                 : `bg-white`;
@@ -132,17 +132,17 @@ class InteractiveRenderer {
         const button = document.getElementById(buttonId);
         const icon = document.getElementById(`${buttonId}-icon`);
         
-        if (!content || !button) return;
+        if (!content || !button) {
+            console.warn('Accordion elements not found:', { contentId, buttonId, content: !!content, button: !!button });
+            return;
+        }
 
-        const isOpen = content.classList.contains('max-h-[5000px]');
+        const isOpen = content.classList.contains('max-h-[5000px]') || content.style.display === 'block';
         
         if (isOpen) {
             // Close
             content.classList.remove('max-h-[5000px]', 'opacity-100');
             content.classList.add('max-h-0', 'opacity-0');
-            setTimeout(() => {
-                content.style.display = 'none';
-            }, 300);
             button.setAttribute('aria-expanded', 'false');
             if (icon) {
                 if (usePlusIcon) {
@@ -151,13 +151,12 @@ class InteractiveRenderer {
                     icon.classList.remove('rotate-180');
                 }
             }
+            setTimeout(() => {
+                content.style.display = 'none';
+            }, 300);
         } else {
             // Open
             content.style.display = 'block';
-            setTimeout(() => {
-                content.classList.remove('max-h-0', 'opacity-0');
-                content.classList.add('max-h-[5000px]', 'opacity-100');
-            }, 10);
             button.setAttribute('aria-expanded', 'true');
             if (icon) {
                 if (usePlusIcon) {
@@ -166,6 +165,11 @@ class InteractiveRenderer {
                     icon.classList.add('rotate-180');
                 }
             }
+            // Use requestAnimationFrame for smoother animation
+            requestAnimationFrame(() => {
+                content.classList.remove('max-h-0', 'opacity-0');
+                content.classList.add('max-h-[5000px]', 'opacity-100');
+            });
         }
     }
 
@@ -1166,7 +1170,7 @@ class InteractiveRenderer {
             
             return `
                 <button
-                    class="flex-1 px-6 py-4 font-semibold text-lg transition-colors duration-200 ${isActive ? 'bg-white text-green-600' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'} text-left"
+                    class="flex-1 px-6 py-4 font-semibold text-lg transition-colors duration-200 ${isActive ? 'bg-white text-green-600' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'} text-left cursor-pointer touch-manipulation active:bg-gray-200"
                     onclick="InteractiveRenderer.switchTab('${tabsId}', ${index})"
                     aria-selected="${isActive}"
                     aria-controls="${contentId}"
@@ -1228,10 +1232,18 @@ class InteractiveRenderer {
      */
     static switchTab(tabsId, tabIndex) {
         const tabsContainer = document.getElementById(tabsId);
-        if (!tabsContainer) return;
+        if (!tabsContainer) {
+            console.warn('Tabs container not found:', tabsId);
+            return;
+        }
 
         const tabs = tabsContainer.querySelectorAll('[role="tab"]');
         const contents = tabsContainer.querySelectorAll('[role="tabpanel"]');
+        
+        if (tabs.length === 0 || contents.length === 0) {
+            console.warn('Tabs or content panels not found:', { tabsId, tabsCount: tabs.length, contentsCount: contents.length });
+            return;
+        }
 
         // Update all tabs
         tabs.forEach((tab, index) => {
@@ -1679,43 +1691,47 @@ class InteractiveRenderer {
                 return String(str).replace(/'/g, "&#39;").replace(/"/g, "&quot;");
             };
             
-            // Create clickable buttons for terms
+            // Create clickable buttons for terms (without onclick - will be added via event listeners)
             const termsHtml = scenario.availableTerms.map(term => {
                 const escapedTerm = escapeForAttr(term);
                 return `<button 
                     type="button"
-                    class="px-3 py-1.5 bg-blue-100 hover:bg-blue-200 text-blue-800 rounded-md text-sm font-medium transition-colors mb-2 mr-2"
-                    onclick="InteractiveRenderer.addToQuery('${scenarioId}', '${escapedTerm}')"
+                    class="px-3 py-1.5 bg-blue-100 hover:bg-blue-200 text-blue-800 rounded-md text-sm font-medium transition-colors mb-2 mr-2 boolean-exercise-btn"
+                    data-scenario-id="${scenarioId}"
+                    data-item="${escapedTerm}"
                 >
                     ${term}
                 </button>`;
             }).join('');
 
-            // Create clickable buttons for operators
+            // Create clickable buttons for operators (without onclick - will be added via event listeners)
             const operatorsHtml = scenario.availableOperators.map(op => {
                 const escapedOp = escapeForAttr(op);
                 return `<button 
                     type="button"
-                    class="px-3 py-1.5 bg-purple-100 hover:bg-purple-200 text-purple-800 rounded-md text-sm font-bold transition-colors mb-2 mr-2"
-                    onclick="InteractiveRenderer.addToQuery('${scenarioId}', '${escapedOp}')"
+                    class="px-3 py-1.5 bg-purple-100 hover:bg-purple-200 text-purple-800 rounded-md text-sm font-bold transition-colors mb-2 mr-2 boolean-exercise-btn"
+                    data-scenario-id="${scenarioId}"
+                    data-item="${escapedOp}"
                 >
                     ${op}
                 </button>`;
             }).join('');
 
-            // Parentheses buttons
+            // Parentheses buttons (without onclick - will be added via event listeners)
             const parenthesesHtml = `
                 <button 
                     type="button"
-                    class="px-3 py-1.5 bg-gray-200 hover:bg-gray-300 text-gray-800 rounded-md text-sm font-bold transition-colors mb-2 mr-2"
-                    onclick="InteractiveRenderer.addToQuery('${scenarioId}', '(')"
+                    class="px-3 py-1.5 bg-gray-200 hover:bg-gray-300 text-gray-800 rounded-md text-sm font-bold transition-colors mb-2 mr-2 boolean-exercise-btn"
+                    data-scenario-id="${scenarioId}"
+                    data-item="("
                 >
                     (
                 </button>
                 <button 
                     type="button"
-                    class="px-3 py-1.5 bg-gray-200 hover:bg-gray-300 text-gray-800 rounded-md text-sm font-bold transition-colors mb-2 mr-2"
-                    onclick="InteractiveRenderer.addToQuery('${scenarioId}', ')')"
+                    class="px-3 py-1.5 bg-gray-200 hover:bg-gray-300 text-gray-800 rounded-md text-sm font-bold transition-colors mb-2 mr-2 boolean-exercise-btn"
+                    data-scenario-id="${scenarioId}"
+                    data-item=")"
                 >
                     )
                 </button>
@@ -1762,15 +1778,15 @@ class InteractiveRenderer {
                     <div class="flex gap-2 mb-3">
                         <button 
                             type="button"
-                            onclick="InteractiveRenderer.clearQuery('${scenarioId}')"
-                            class="px-4 py-2 bg-gray-500 hover:bg-gray-600 text-white rounded-md text-sm font-medium transition-colors"
+                            class="px-4 py-2 bg-gray-500 hover:bg-gray-600 text-white rounded-md text-sm font-medium transition-colors boolean-exercise-clear-btn"
+                            data-scenario-id="${scenarioId}"
                         >
                             Wissen
                         </button>
                         <button 
                             type="button"
-                            onclick="InteractiveRenderer.validateQuery('${scenarioId}')"
-                            class="px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-md text-sm font-medium transition-colors"
+                            class="px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-md text-sm font-medium transition-colors boolean-exercise-validate-btn"
+                            data-scenario-id="${scenarioId}"
                         >
                             Valideer query
                         </button>
@@ -1781,7 +1797,7 @@ class InteractiveRenderer {
             `;
         }).join('');
 
-        return `
+        const html = `
             <div class="boolean-operator-exercise mb-6 bg-white rounded-lg p-4" id="${exerciseId}">
                 <h3 class="text-lg font-semibold text-gray-900 mb-2">${title}</h3>
                 <p class="text-sm text-gray-600 mb-4">${instruction}</p>
@@ -1790,6 +1806,61 @@ class InteractiveRenderer {
                 </div>
             </div>
         `;
+        
+        // Setup event listeners after DOM is ready (CSP blocks inline onclick)
+        setTimeout(() => {
+            InteractiveRenderer.setupBooleanExerciseListeners(exerciseId);
+        }, 100);
+        
+        return html;
+    }
+    
+    /**
+     * Setup event listeners for boolean operator exercise buttons
+     * This is needed because CSP blocks inline onclick handlers
+     */
+    static setupBooleanExerciseListeners(exerciseId) {
+        const exerciseContainer = document.getElementById(exerciseId);
+        if (!exerciseContainer) {
+            console.warn('[InteractiveRenderer] Exercise container not found:', exerciseId);
+            return;
+        }
+        
+        // Setup buttons for adding terms/operators/parentheses
+        const buttons = exerciseContainer.querySelectorAll('.boolean-exercise-btn');
+        buttons.forEach(button => {
+            button.addEventListener('click', (e) => {
+                const scenarioId = button.getAttribute('data-scenario-id');
+                const item = button.getAttribute('data-item');
+                if (scenarioId && item) {
+                    // Decode HTML entities
+                    const decodedItem = item.replace(/&#39;/g, "'").replace(/&quot;/g, '"');
+                    InteractiveRenderer.addToQuery(scenarioId, decodedItem);
+                }
+            });
+        });
+        
+        // Setup clear button
+        const clearButtons = exerciseContainer.querySelectorAll('.boolean-exercise-clear-btn');
+        clearButtons.forEach(button => {
+            button.addEventListener('click', (e) => {
+                const scenarioId = button.getAttribute('data-scenario-id');
+                if (scenarioId) {
+                    InteractiveRenderer.clearQuery(scenarioId);
+                }
+            });
+        });
+        
+        // Setup validate button
+        const validateButtons = exerciseContainer.querySelectorAll('.boolean-exercise-validate-btn');
+        validateButtons.forEach(button => {
+            button.addEventListener('click', (e) => {
+                const scenarioId = button.getAttribute('data-scenario-id');
+                if (scenarioId) {
+                    InteractiveRenderer.validateQuery(scenarioId);
+                }
+            });
+        });
     }
 
     /**
@@ -1977,7 +2048,7 @@ class InteractiveRenderer {
 
         const availableTermsStr = JSON.stringify(availableTerms);
 
-        return `
+        const html = `
             <div class="ai-query-exercise mb-6 bg-white rounded-lg p-4" id="${exerciseId}" data-generate-from-theory="${generateFromTheory}" data-available-terms='${availableTermsStr}' data-scenario-count="0">
                 <h3 class="text-lg font-semibold text-gray-900 mb-2">${title}</h3>
                 <p class="text-sm text-gray-600 mb-4">${instruction}</p>
@@ -1994,8 +2065,9 @@ class InteractiveRenderer {
                                     const escapedTerm = term.replace(/'/g, "&#39;").replace(/"/g, "&quot;");
                                     return `<button 
                                         type="button"
-                                        onclick="InteractiveRenderer.addToAIQuery('${exerciseId}', '${escapedTerm}')"
-                                        class="px-2 py-1 bg-blue-50 hover:bg-blue-100 text-blue-700 rounded text-xs transition-colors cursor-pointer"
+                                        class="px-2 py-1 bg-blue-50 hover:bg-blue-100 text-blue-700 rounded text-xs transition-colors cursor-pointer ai-query-btn"
+                                        data-exercise-id="${exerciseId}"
+                                        data-item="${escapedTerm}"
                                     >${term}</button>`;
                                 }).join('')}
                             </div>
@@ -2006,18 +2078,21 @@ class InteractiveRenderer {
                             <div class="flex flex-wrap gap-2 mb-3">
                                 <button 
                                     type="button"
-                                    onclick="InteractiveRenderer.addToAIQuery('${exerciseId}', 'AND')"
-                                    class="px-3 py-1 bg-purple-50 hover:bg-purple-100 text-purple-700 rounded text-xs font-semibold transition-colors cursor-pointer"
+                                    class="px-3 py-1 bg-purple-50 hover:bg-purple-100 text-purple-700 rounded text-xs font-semibold transition-colors cursor-pointer ai-query-btn"
+                                    data-exercise-id="${exerciseId}"
+                                    data-item="AND"
                                 >AND</button>
                                 <button 
                                     type="button"
-                                    onclick="InteractiveRenderer.addToAIQuery('${exerciseId}', 'OR')"
-                                    class="px-3 py-1 bg-purple-50 hover:bg-purple-100 text-purple-700 rounded text-xs font-semibold transition-colors cursor-pointer"
+                                    class="px-3 py-1 bg-purple-50 hover:bg-purple-100 text-purple-700 rounded text-xs font-semibold transition-colors cursor-pointer ai-query-btn"
+                                    data-exercise-id="${exerciseId}"
+                                    data-item="OR"
                                 >OR</button>
                                 <button 
                                     type="button"
-                                    onclick="InteractiveRenderer.addToAIQuery('${exerciseId}', 'NOT')"
-                                    class="px-3 py-1 bg-purple-50 hover:bg-purple-100 text-purple-700 rounded text-xs font-semibold transition-colors cursor-pointer"
+                                    class="px-3 py-1 bg-purple-50 hover:bg-purple-100 text-purple-700 rounded text-xs font-semibold transition-colors cursor-pointer ai-query-btn"
+                                    data-exercise-id="${exerciseId}"
+                                    data-item="NOT"
                                 >NOT</button>
                             </div>
                         </div>
@@ -2027,13 +2102,15 @@ class InteractiveRenderer {
                             <div class="flex flex-wrap gap-2 mb-3">
                                 <button 
                                     type="button"
-                                    onclick="InteractiveRenderer.addToAIQuery('${exerciseId}', '(')"
-                                    class="px-3 py-1 bg-gray-50 hover:bg-gray-100 text-gray-700 rounded text-sm font-bold transition-colors cursor-pointer"
+                                    class="px-3 py-1 bg-gray-50 hover:bg-gray-100 text-gray-700 rounded text-sm font-bold transition-colors cursor-pointer ai-query-btn"
+                                    data-exercise-id="${exerciseId}"
+                                    data-item="("
                                 >(</button>
                                 <button 
                                     type="button"
-                                    onclick="InteractiveRenderer.addToAIQuery('${exerciseId}', ')')"
-                                    class="px-3 py-1 bg-gray-50 hover:bg-gray-100 text-gray-700 rounded text-sm font-bold transition-colors cursor-pointer"
+                                    class="px-3 py-1 bg-gray-50 hover:bg-gray-100 text-gray-700 rounded text-sm font-bold transition-colors cursor-pointer ai-query-btn"
+                                    data-exercise-id="${exerciseId}"
+                                    data-item=")"
                                 >)</button>
                             </div>
                         </div>
@@ -2051,15 +2128,15 @@ class InteractiveRenderer {
                         <div class="flex gap-2 mb-3">
                             <button 
                                 type="button"
-                                onclick="InteractiveRenderer.validateAIQuery('${exerciseId}')"
-                                class="px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-md text-sm font-medium transition-colors"
+                                class="px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-md text-sm font-medium transition-colors ai-query-validate-btn"
+                                data-exercise-id="${exerciseId}"
                             >
                                 Valideer met AI
                             </button>
                             <button 
                                 type="button"
-                                onclick="InteractiveRenderer.clearAIQuery('${exerciseId}')"
-                                class="px-4 py-2 bg-gray-500 hover:bg-gray-600 text-white rounded-md text-sm font-medium transition-colors"
+                                class="px-4 py-2 bg-gray-500 hover:bg-gray-600 text-white rounded-md text-sm font-medium transition-colors ai-query-clear-btn"
+                                data-exercise-id="${exerciseId}"
                             >
                                 Wissen
                             </button>
@@ -2079,8 +2156,8 @@ class InteractiveRenderer {
                 <div class="flex gap-2">
                     <button 
                         type="button"
-                        onclick="InteractiveRenderer.loadNewAIQueryScenario('${exerciseId}')"
-                        class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md text-sm font-medium transition-colors"
+                        class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md text-sm font-medium transition-colors ai-query-new-scenario-btn"
+                        data-exercise-id="${exerciseId}"
                         id="${exerciseId}-new-scenario-btn"
                     >
                         <i class="fas fa-plus mr-2"></i>Nieuw scenario
@@ -2088,6 +2165,66 @@ class InteractiveRenderer {
                 </div>
             </div>
         `;
+        
+        // Setup event listeners after DOM is ready (CSP blocks inline onclick)
+        setTimeout(() => {
+            InteractiveRenderer.setupAIQueryExerciseListeners(exerciseId);
+        }, 100);
+        
+        return html;
+    }
+    
+    /**
+     * Setup event listeners for AI query exercise buttons
+     * This is needed because CSP blocks inline onclick handlers
+     */
+    static setupAIQueryExerciseListeners(exerciseId) {
+        const exerciseContainer = document.getElementById(exerciseId);
+        if (!exerciseContainer) {
+            console.warn('[InteractiveRenderer] AI query exercise container not found:', exerciseId);
+            return;
+        }
+        
+        // Setup buttons for adding terms/operators/parentheses (using event delegation)
+        exerciseContainer.addEventListener('click', (e) => {
+            const button = e.target.closest('.ai-query-btn');
+            if (button) {
+                const exerciseIdFromBtn = button.getAttribute('data-exercise-id');
+                const item = button.getAttribute('data-item');
+                if (exerciseIdFromBtn === exerciseId && item) {
+                    // Decode HTML entities
+                    const decodedItem = item.replace(/&#39;/g, "'").replace(/&quot;/g, '"');
+                    InteractiveRenderer.addToAIQuery(exerciseId, decodedItem);
+                }
+            }
+            
+            // Handle validate button
+            const validateBtn = e.target.closest('.ai-query-validate-btn');
+            if (validateBtn) {
+                const exerciseIdFromBtn = validateBtn.getAttribute('data-exercise-id');
+                if (exerciseIdFromBtn === exerciseId) {
+                    InteractiveRenderer.validateAIQuery(exerciseId);
+                }
+            }
+            
+            // Handle clear button
+            const clearBtn = e.target.closest('.ai-query-clear-btn');
+            if (clearBtn) {
+                const exerciseIdFromBtn = clearBtn.getAttribute('data-exercise-id');
+                if (exerciseIdFromBtn === exerciseId) {
+                    InteractiveRenderer.clearAIQuery(exerciseId);
+                }
+            }
+            
+            // Handle new scenario button
+            const newScenarioBtn = e.target.closest('.ai-query-new-scenario-btn');
+            if (newScenarioBtn) {
+                const exerciseIdFromBtn = newScenarioBtn.getAttribute('data-exercise-id');
+                if (exerciseIdFromBtn === exerciseId) {
+                    InteractiveRenderer.loadNewAIQueryScenario(exerciseId);
+                }
+            }
+        });
     }
 
     /**
@@ -2122,13 +2259,30 @@ class InteractiveRenderer {
 
             if (generateFromTheory) {
                 // Get theory content from page
-                const theoryContent = this.extractTheoryContent();
+                let theoryContent = this.extractTheoryContent();
                 console.log('[InteractiveRenderer] Extracted theory content length:', theoryContent?.length || 0);
                 console.log('[InteractiveRenderer] Extracted theory content preview:', theoryContent?.substring(0, 200) || 'empty');
                 
                 if (!theoryContent || theoryContent.trim().length === 0) {
                     console.error('[InteractiveRenderer] No theory content found');
                     throw new Error('Geen theorie content gevonden op de pagina');
+                }
+
+                // Truncate theory content to max 5000 characters (API limit)
+                // Try to truncate at a sentence boundary if possible
+                if (theoryContent.length > 5000) {
+                    console.log('[InteractiveRenderer] Truncating theory content from', theoryContent.length, 'to 5000 characters');
+                    let truncated = theoryContent.substring(0, 5000);
+                    // Try to find the last sentence boundary
+                    const lastPeriod = truncated.lastIndexOf('.');
+                    const lastExclamation = truncated.lastIndexOf('!');
+                    const lastQuestion = truncated.lastIndexOf('?');
+                    const lastSentenceEnd = Math.max(lastPeriod, lastExclamation, lastQuestion);
+                    if (lastSentenceEnd > 4000) { // Only truncate at sentence if it's not too short
+                        truncated = truncated.substring(0, lastSentenceEnd + 1);
+                    }
+                    theoryContent = truncated;
+                    console.log('[InteractiveRenderer] Truncated theory content length:', theoryContent.length);
                 }
 
                 // Get current scenario count
@@ -2160,17 +2314,28 @@ class InteractiveRenderer {
                 // Check if response is ok before parsing JSON
                 if (!response.ok) {
                     let errorMessage = 'Server error';
+                    let errorDetails = null;
                     try {
                         const errorData = await response.json();
                         errorMessage = errorData.message || errorData.error || 'Server error';
+                        errorDetails = errorData.errors || errorData.details;
+                        console.error('[InteractiveRenderer] API error response:', errorData);
                     } catch (parseError) {
                         // If response is not JSON, try to get text
                         try {
                             const errorText = await response.text();
                             errorMessage = errorText || 'Server error';
+                            console.error('[InteractiveRenderer] API error text:', errorText);
                         } catch (textError) {
                             errorMessage = `Server returned status ${response.status}`;
+                            console.error('[InteractiveRenderer] Failed to parse error response');
                         }
+                    }
+                    
+                    // Show more detailed error message if available
+                    if (errorDetails && Array.isArray(errorDetails) && errorDetails.length > 0) {
+                        const validationErrors = errorDetails.map(e => e.msg || e.message).join(', ');
+                        throw new Error(`Validatiefout: ${validationErrors}`);
                     }
                     throw new Error(errorMessage);
                 }
@@ -2211,8 +2376,9 @@ class InteractiveRenderer {
                     const escapedTerm = term.replace(/'/g, "&#39;").replace(/"/g, "&quot;");
                     return `<button 
                         type="button"
-                        onclick="InteractiveRenderer.addToAIQuery('${exerciseId}', '${escapedTerm}')"
-                        class="px-2 py-1 bg-blue-50 hover:bg-blue-100 text-blue-700 rounded text-xs transition-colors cursor-pointer"
+                        class="px-2 py-1 bg-blue-50 hover:bg-blue-100 text-blue-700 rounded text-xs transition-colors cursor-pointer ai-query-btn"
+                        data-exercise-id="${exerciseId}"
+                        data-item="${escapedTerm}"
                     >${term}</button>`;
                 }).join('');
             }

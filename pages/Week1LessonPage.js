@@ -79,11 +79,11 @@ class Week1LessonPage extends BaseLessonPage {
 
         return `
             <section class="bg-white rounded-xl shadow-sm border border-gray-200 p-4 sm:p-6 sm:pr-[70px] hover-lift">
-                <div class="flex flex-col sm:flex-row items-start space-y-4 sm:space-y-0 sm:space-x-4">
-                    <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                <div class="flex flex-col sm:flex-row items-start">
+                    <div class="w-10 h-10 sm:w-12 sm:h-12 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0 mb-3 sm:mb-0 sm:mr-4">
                         <i class="fas fa-book text-blue-600 text-lg"></i>
                     </div>
-                    <div class="flex-1">
+                    <div class="flex-1 min-w-0 w-full sm:w-auto">
                         <h1 class="text-2xl font-bold text-gray-900 mb-2">${this.content.intro.title}: ${this.content.intro.subtitle}</h1>
                         <p class="text-gray-600 mb-4">${this.content.intro.description}</p>
                     </div>
@@ -103,11 +103,11 @@ class Week1LessonPage extends BaseLessonPage {
         return `
             <!-- Video Sectie -->
             <section class="bg-white rounded-xl shadow-sm border border-gray-200 p-4 sm:p-6 sm:pr-[70px] hover-lift">
-                <div class="flex flex-col sm:flex-row items-start space-y-4 sm:space-y-0 sm:space-x-4">
-                    <div class="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                <div class="flex flex-col sm:flex-row items-start">
+                    <div class="w-10 h-10 sm:w-12 sm:h-12 bg-red-100 rounded-lg flex items-center justify-center flex-shrink-0 mb-3 sm:mb-0 sm:mr-4">
                         <i class="fas fa-play text-red-600 text-lg"></i>
                     </div>
-                    <div class="flex-1">
+                    <div class="flex-1 min-w-0 w-full sm:w-auto">
                         <h2 class="text-lg sm:text-xl font-semibold text-gray-900 mb-4">${this.content.video.title}</h2>
                         ${this.content.video.url ? `
                             <div class="rounded-lg overflow-hidden mb-4">

@@ -96,11 +96,54 @@
             margin-bottom: 0;
         }
 
+        /* Prevent horizontal scrolling globally */
+        html, body {
+            overflow-x: hidden;
+            max-width: 100%;
+        }
+        
+        #app {
+            overflow-x: hidden;
+            max-width: 100%;
+        }
+        
         /* Mobile-specific improvements */
         @media (max-width: 640px) {
             /* Ensure content doesn't overflow */
             body {
                 overflow-x: hidden;
+            }
+            
+            /* Prevent any element from causing horizontal scroll */
+            * {
+                max-width: 100%;
+            }
+            
+            /* Specific fixes for common offenders */
+            img, video, iframe {
+                max-width: 100% !important;
+                width: 100% !important;
+                height: auto !important;
+            }
+            
+            /* Ensure all images are responsive */
+            .image-modal-container img,
+            img[style*="max-width"] {
+                max-width: 100% !important;
+                width: 100% !important;
+                height: auto !important;
+            }
+            
+            /* Responsive image containers */
+            .responsive-image-container {
+                max-width: 100% !important;
+                width: 100% !important;
+            }
+            
+            table {
+                display: block;
+                overflow-x: auto;
+                width: 100%;
             }
             
             /* Better touch targets */
@@ -128,9 +171,11 @@
             
             /* Scroll to top button */
             #scroll-to-top-btn {
-                bottom: 1.5rem;
-                right: 1.5rem;
-                padding: 0.875rem;
+                bottom: 1rem;
+                right: 1rem;
+                padding: 0.75rem;
+                width: 44px;
+                height: 44px;
             }
             
             /* Prevent text from being too small */
@@ -139,7 +184,96 @@
             }
             
             /* Better spacing for sections */
+            .space-y-6 > * + * {
+                margin-top: 1.25rem;
+            }
+            
             .space-y-8 > * + * {
+                margin-top: 1.5rem;
+            }
+            
+            /* Better padding for sections */
+            section {
+                margin-bottom: 1rem;
+            }
+            
+            /* Ensure text wraps properly */
+            h1, h2, h3 {
+                word-wrap: break-word;
+                overflow-wrap: break-word;
+            }
+            
+            /* Better spacing for flex containers */
+            .flex.flex-col {
+                gap: 0.75rem;
+            }
+            
+            /* Ensure interactive elements are clickable on mobile */
+            button, [onclick], [role="tab"], [role="button"] {
+                cursor: pointer;
+                touch-action: manipulation;
+                -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
+            }
+            
+            /* Prevent text selection on buttons */
+            button {
+                -webkit-user-select: none;
+                user-select: none;
+            }
+            
+            /* Disable image modal clicks on mobile - use native pinch-to-zoom */
+            .image-modal-container {
+                cursor: default !important;
+                pointer-events: none;
+            }
+            
+            .image-modal-container img {
+                pointer-events: auto;
+            }
+            
+            /* Disable hover effects on mobile */
+            .desktop-only-hover {
+                transition: none !important;
+            }
+            
+            .image-modal-container .group-hover\:scale-110 {
+                transform: none !important;
+            }
+            
+            .image-modal-container .group-hover\:bg-opacity-10 {
+                background-color: transparent !important;
+            }
+            
+            .image-modal-container .group-hover\:opacity-100 {
+                opacity: 0 !important;
+            }
+        }
+        
+        /* Desktop: enable hover effects and clickable images */
+        @media (min-width: 768px) {
+            .desktop-only-hover {
+                transition: transform 0.3s ease, opacity 0.3s ease, background-color 0.3s ease;
+            }
+            
+            .image-modal-container {
+                cursor: pointer;
+                pointer-events: auto;
+            }
+        }
+        
+        /* Global: Ensure all images are responsive on all screen sizes */
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+        
+        .responsive-image-container {
+            max-width: 100%;
+        }
+        
+        /* Tablet improvements */
+        @media (min-width: 641px) and (max-width: 1023px) {
+            .space-y-6 > * + * {
                 margin-top: 1.5rem;
             }
         }

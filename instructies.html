@@ -910,6 +910,15 @@
     <!-- Overlay for mobile menu -->
     <div id="overlay" class="fixed inset-0 bg-black bg-opacity-50 z-30 hidden lg:hidden"></div>
 
+    <!-- Scroll to top button -->
+    <button 
+        id="scroll-to-top-btn" 
+        class="fixed bottom-8 right-8 bg-blue-600 text-white p-4 rounded-full shadow-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all duration-300 z-50 opacity-0 pointer-events-none"
+        aria-label="Naar boven scrollen"
+        title="Naar boven">
+        <i class="fas fa-arrow-up text-xl"></i>
+    </button>
+
     <script>
         // Mobile menu functionality
         const mobileMenuButton = document.getElementById('mobile-menu-button');
@@ -946,6 +955,69 @@
                     mainContent.focus();
                 }
             });
+        }
+
+        // Scroll to top button functionality
+        const scrollToTopBtn = document.getElementById('scroll-to-top-btn');
+        const mainContent = document.getElementById('main-content');
+
+        if (scrollToTopBtn) {
+            scrollToTopBtn.addEventListener('click', () => {
+                // Try scrolling main-content container first
+                if (mainContent) {
+                    mainContent.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                }
+                
+                // Also scroll window/document to top (handles case where page itself scrolls)
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+                
+                // Fallback for older browsers
+                document.documentElement.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+
+            // Show/hide button based on scroll position
+            const handleScroll = () => {
+                // Check both main-content scroll and window scroll, use the maximum
+                let mainContentScroll = 0;
+                let windowScroll = window.pageYOffset || document.documentElement.scrollTop || 0;
+                
+                if (mainContent) {
+                    mainContentScroll = mainContent.scrollTop || 0;
+                }
+                
+                // Use the maximum scroll position (in case both are scrolling)
+                const scrollTop = Math.max(mainContentScroll, windowScroll);
+                
+                if (scrollTop > 300) {
+                    // Show button when scrolled down more than 300px
+                    scrollToTopBtn.classList.remove('opacity-0', 'pointer-events-none');
+                    scrollToTopBtn.classList.add('opacity-100');
+                } else {
+                    // Hide button when near the top
+                    scrollToTopBtn.classList.add('opacity-0', 'pointer-events-none');
+                    scrollToTopBtn.classList.remove('opacity-100');
+                }
+            };
+
+            // Listen to both main-content scroll and window scroll
+            if (mainContent) {
+                mainContent.addEventListener('scroll', handleScroll, { passive: true });
+            }
+            window.addEventListener('scroll', handleScroll, { passive: true });
+            
+            // Check initial scroll position on page load (with small delay to ensure DOM is ready)
+            setTimeout(() => {
+                handleScroll();
+            }, 100);
         }
     </script>
 </body>

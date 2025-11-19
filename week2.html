@@ -95,6 +95,28 @@
         .prose h3 {
             margin-bottom: 0;
         }
+
+        /* Scroll to top button styling */
+        #scroll-to-top-btn {
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+        #scroll-to-top-btn:hover {
+            transform: translateY(-3px);
+        }
+
+        #scroll-to-top-btn:active {
+            transform: translateY(0);
+        }
+
+        /* Ensure button is visible on mobile */
+        @media (max-width: 640px) {
+            #scroll-to-top-btn {
+                bottom: 1.5rem;
+                right: 1.5rem;
+                padding: 0.875rem;
+            }
+        }
     </style>
 </head>
 <body class="bg-gray-50">

@@ -8,6 +8,9 @@
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
+const helmet = require('helmet');
+const rateLimit = require('express-rate-limit');
+const { body, validationResult } = require('express-validator');
 const path = require('path');
 const fs = require('fs');
 const { GoogleGenerativeAI } = require('@google/generative-ai');
@@ -15,9 +18,62 @@ const { GoogleGenerativeAI } = require('@google/generative-ai');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Middleware
-app.use(cors()); // Enable CORS for all routes
-app.use(express.json()); // Parse JSON bodies
+// ============================================
+// SECURITY MIDDLEWARE
+// ============================================
+
+// 1. Security headers met Helmet
+app.use(helmet({
+    contentSecurityPolicy: {
+        directives: {
+            defaultSrc: ["'self'"],
+            scriptSrc: ["'self'", "'unsafe-inline'", "https://cdn.tailwindcss.com", "https://cdnjs.cloudflare.com"],
+            styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com", "https://cdnjs.cloudflare.com"],
+            fontSrc: ["'self'", "https://fonts.gstatic.com", "https://cdnjs.cloudflare.com"],
+            imgSrc: ["'self'", "data:", "https:"],
+            connectSrc: ["'self'"],
+            frameSrc: ["'self'", "https://www.youtube.com"]
+        }
+    },
+    crossOriginEmbedderPolicy: false // Voor externe CDN's
+}));
+
+// 2. CORS beperken tot specifieke origins
+const allowedOrigins = process.env.ALLOWED_ORIGINS 
+    ? process.env.ALLOWED_ORIGINS.split(',').map(origin => origin.trim())
+    : ['http://localhost:3000', 'http://localhost:5500'];
+
+app.use(cors({
+    origin: function (origin, callback) {
+        // Allow requests with no origin (like mobile apps, Postman, or curl requests)
+        if (!origin) return callback(null, true);
+        if (allowedOrigins.indexOf(origin) !== -1) {
+            callback(null, true);
+        } else {
+            console.warn(`[Security] CORS blocked origin: ${origin}`);
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
+    credentials: true
+}));
+
+// 3. Request size limits (prevent DoS)
+app.use(express.json({ limit: '1mb' })); // Max 1MB voor JSON bodies
+app.use(express.urlencoded({ extended: true, limit: '1mb' }));
+
+// 4. Rate limiting voor API endpoints
+const apiLimiter = rateLimit({
+    windowMs: 15 * 60 * 1000, // 15 minuten
+    max: 100, // Max 100 requests per IP per window
+    message: {
+        error: 'Rate limit exceeded',
+        message: 'Te veel requests van dit IP-adres, probeer het later opnieuw.'
+    },
+    standardHeaders: true,
+    legacyHeaders: false,
+});
+
+app.use('/api/', apiLimiter);
 
 // API Key validation
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
@@ -122,12 +178,41 @@ async function getAvailableModels() {
 }
 
 /**
+ * Input validatie middleware voor generate-questions
+ */
+const validateGenerateQuestions = [
+    body('theoryContent')
+        .isString()
+        .trim()
+        .isLength({ min: 10, max: 10000 })
+        .withMessage('theoryContent must be between 10 and 10000 characters'),
+    body('numberOfQuestions')
+        .optional()
+        .isInt({ min: 1, max: 10 })
+        .withMessage('numberOfQuestions must be between 1 and 10'),
+    body('segmentIndex')
+        .optional()
+        .isInt({ min: 0 })
+        .withMessage('segmentIndex must be a non-negative integer')
+];
+
+/**
  * Proxy endpoint voor Gemini API generateContent
  * POST /api/generate-questions
  * Body: { theoryContent: string, numberOfQuestions: number }
  */
-app.post('/api/generate-questions', async (req, res) => {
+app.post('/api/generate-questions', validateGenerateQuestions, async (req, res) => {
     try {
+        // Check voor validatie errors
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(400).json({ 
+                error: 'Invalid input', 
+                message: 'Input validation failed',
+                errors: errors.array()
+            });
+        }
+
         // Check if API key is set
         if (!GEMINI_API_KEY) {
             return res.status(500).json({
@@ -136,23 +221,8 @@ app.post('/api/generate-questions', async (req, res) => {
             });
         }
 
-        // Get request body
+        // Get request body (already validated and sanitized)
         const { theoryContent, numberOfQuestions = 3, segmentIndex = 0 } = req.body;
-
-        // Validate input
-        if (!theoryContent || typeof theoryContent !== 'string') {
-            return res.status(400).json({
-                error: 'Invalid request',
-                message: 'theoryContent is required and must be a string'
-            });
-        }
-
-        if (theoryContent.trim().length === 0) {
-            return res.status(400).json({
-                error: 'Invalid request',
-                message: 'theoryContent cannot be empty'
-            });
-        }
 
         // Build prompt for Gemini
         // Use segment-based approach for variety (no hardcoded topics)
@@ -401,22 +471,55 @@ ${theoryContent.substring(0, 8000)}`; // Limit to 8000 chars
 });
 
 /**
+ * Input validatie middleware voor generate-query-scenario
+ */
+const validateGenerateQueryScenario = [
+    body('theoryContent')
+        .optional()
+        .isString()
+        .trim()
+        .isLength({ max: 5000 })
+        .withMessage('theoryContent must be max 5000 characters'),
+    body('availableTerms')
+        .isArray({ min: 1 })
+        .withMessage('availableTerms must be a non-empty array'),
+    body('availableTerms.*')
+        .isString()
+        .trim()
+        .isLength({ min: 1, max: 100 }),
+    body('scenarioCount')
+        .optional()
+        .isInt({ min: 0, max: 10 })
+        .withMessage('scenarioCount must be between 0 and 10')
+];
+
+/**
  * Generate a new query scenario based on theory
  * POST /api/generate-query-scenario
  */
-app.post('/api/generate-query-scenario', async (req, res) => {
+app.post('/api/generate-query-scenario', validateGenerateQueryScenario, async (req, res) => {
     try {
+        // Check voor validatie errors
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(400).json({ 
+                error: 'Invalid input', 
+                message: 'Input validation failed',
+                errors: errors.array()
+            });
+        }
+
         const { theoryContent, availableTerms } = req.body;
 
         console.log('[generate-query-scenario] Received request');
         console.log('[generate-query-scenario] theoryContent length:', theoryContent?.length || 0);
         console.log('[generate-query-scenario] availableTerms:', availableTerms);
 
-        if (!theoryContent || !availableTerms) {
-            console.error('[generate-query-scenario] Missing required fields');
+        if (!availableTerms || !Array.isArray(availableTerms) || availableTerms.length === 0) {
+            console.error('[generate-query-scenario] Missing or invalid availableTerms');
             return res.status(400).json({
                 error: 'Missing required fields',
-                message: 'theoryContent and availableTerms are required'
+                message: 'availableTerms is required and must be a non-empty array'
             });
         }
 
@@ -629,19 +732,50 @@ Antwoord alleen met de JSON, geen extra tekst.`;
 });
 
 /**
+ * Input validatie middleware voor validate-query
+ */
+const validateQuery = [
+    body('description')
+        .isString()
+        .trim()
+        .isLength({ min: 10, max: 500 })
+        .withMessage('description must be between 10 and 500 characters'),
+    body('userQuery')
+        .isString()
+        .trim()
+        .isLength({ min: 1, max: 500 })
+        .withMessage('userQuery must be between 1 and 500 characters'),
+    body('availableTerms')
+        .isArray({ min: 1 })
+        .withMessage('availableTerms must be a non-empty array'),
+    body('availableTerms.*')
+        .isString()
+        .trim()
+        .isLength({ min: 1, max: 100 }),
+    body('correctQuery')
+        .optional()
+        .isString()
+        .trim()
+        .isLength({ max: 500 })
+];
+
+/**
  * Validate boolean query with AI feedback
  * POST /api/validate-query
  */
-app.post('/api/validate-query', async (req, res) => {
+app.post('/api/validate-query', validateQuery, async (req, res) => {
     try {
-        const { description, userQuery, availableTerms, correctQuery } = req.body;
-
-        if (!description || !userQuery || !availableTerms) {
-            return res.status(400).json({
-                error: 'Missing required fields',
-                message: 'description, userQuery, and availableTerms are required'
+        // Check voor validatie errors
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(400).json({ 
+                error: 'Invalid input', 
+                message: 'Input validation failed',
+                errors: errors.array()
             });
         }
+
+        const { description, userQuery, availableTerms, correctQuery } = req.body;
 
         if (!GEMINI_API_KEY) {
             return res.status(500).json({
@@ -1124,6 +1258,48 @@ app.get('/config.js', (req, res, next) => {
     }
 });
 
+// ============================================
+// ERROR HANDLING MIDDLEWARE
+// ============================================
+
+// Global error handler (moet als laatste middleware komen)
+app.use((err, req, res, next) => {
+    console.error('[Server Error]', err);
+    
+    // CORS errors
+    if (err.message === 'Not allowed by CORS') {
+        return res.status(403).json({
+            error: 'CORS error',
+            message: 'Deze origin is niet toegestaan'
+        });
+    }
+    
+    // Rate limit errors
+    if (err.status === 429) {
+        return res.status(429).json({
+            error: 'Rate limit exceeded',
+            message: 'Te veel requests, probeer het later opnieuw'
+        });
+    }
+    
+    // Default error response
+    res.status(err.status || 500).json({
+        error: 'Internal server error',
+        message: process.env.NODE_ENV === 'production' 
+            ? 'Er is een fout opgetreden' 
+            : err.message,
+        stack: process.env.NODE_ENV === 'development' ? err.stack : undefined
+    });
+});
+
+// 404 handler voor onbekende routes
+app.use((req, res) => {
+    res.status(404).json({
+        error: 'Not found',
+        message: `Route ${req.method} ${req.path} niet gevonden`
+    });
+});
+
 // Export voor Vercel serverless
 module.exports = app;
 
@@ -1132,6 +1308,8 @@ if (require.main === module) {
     app.listen(PORT, async () => {
         console.log(`🚀 Server running on http://localhost:${PORT}`);
         console.log(`📝 API Key configured: ${!!GEMINI_API_KEY ? '✅ Yes' : '❌ No'}`);
+        console.log(`🔒 Security: Helmet, Rate Limiting, CORS, Input Validation enabled`);
+        console.log(`🌐 Allowed origins: ${allowedOrigins.join(', ')}`);
         if (!GEMINI_API_KEY) {
             console.log(`⚠️  Please set GEMINI_API_KEY in .env file`);
         }

@@ -483,7 +483,8 @@ class BaseLessonPage {
             
             // Check for clickable step buttons (used in week4)
             if (isClickableStepButton && typeof window.InteractiveRenderer !== 'undefined' && window.InteractiveRenderer.toggleClickableStep) {
-                const match = onclickAttr.match(/toggleClickableStep\('([^']+)',\s*(\d+)\)/);
+                // Match with or without allowMultiple parameter
+                const match = onclickAttr.match(/toggleClickableStep\('([^']+)',\s*(\d+)(?:,\s*(true|false))?\)/);
                 if (match) {
                     // CRITICAL: Remove inline onclick FIRST to prevent it from executing
                     clickedButton.removeAttribute('onclick');
@@ -494,9 +495,11 @@ class BaseLessonPage {
                     
                     const stepsId = match[1];
                     const stepIndex = parseInt(match[2]);
+                    // Default to true (allow multiple) if not specified
+                    const allowMultiple = match[3] === undefined ? true : match[3] === 'true';
                     
                     try {
-                        window.InteractiveRenderer.toggleClickableStep(stepsId, stepIndex);
+                        window.InteractiveRenderer.toggleClickableStep(stepsId, stepIndex, allowMultiple);
                     } catch (err) {
                         console.error('Error toggling clickable step:', err);
                     }

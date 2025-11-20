@@ -898,9 +898,11 @@ class InteractiveRenderer {
         }
 
         const stepsId = `clickable-steps-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+        // Allow multiple steps to be open at the same time (default: true for clickableSteps)
+        const allowMultiple = item.allowMultiple !== false; // Default to true
         
         // Debug: log that we're rendering clickable steps
-        console.log('Rendering clickable steps:', item.steps.length, 'steps');
+        console.log('Rendering clickable steps:', item.steps.length, 'steps', 'allowMultiple:', allowMultiple);
         
         // Render content for steps (expandable)
         const renderStepContent = (stepContent) => {
@@ -983,7 +985,7 @@ class InteractiveRenderer {
             const buttonHtml = `
                 <button
                     class="w-full px-6 py-4 font-semibold text-lg transition-colors duration-200 ${isOpen ? 'bg-white text-green-600' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'} text-left"
-                    ${hasContent ? `onclick="InteractiveRenderer.toggleClickableStep('${stepsId}', ${index})"` : ''}
+                    ${hasContent ? `onclick="InteractiveRenderer.toggleClickableStep('${stepsId}', ${index}, ${allowMultiple})"` : ''}
                     ${!hasContent ? 'disabled' : ''}
                     id="${stepId}-button"
                     aria-expanded="${isOpen}"
@@ -1035,8 +1037,9 @@ class InteractiveRenderer {
      * Toggle clickable step open/closed
      * @param {string} stepsId - ID of the steps container
      * @param {number} stepIndex - Index of the step to toggle
+     * @param {boolean} allowMultiple - Whether multiple steps can be open at the same time
      */
-    static toggleClickableStep(stepsId, stepIndex) {
+    static toggleClickableStep(stepsId, stepIndex, allowMultiple = true) {
         const stepsContainer = document.getElementById(stepsId);
         if (!stepsContainer) return;
 
@@ -1066,40 +1069,42 @@ class InteractiveRenderer {
                 icon.classList.remove('rotate-180');
             }
         } else {
-            // Close all other steps first
-            const allSteps = stepsContainer.querySelectorAll('.clickable-step-content');
-            
-            allSteps.forEach((stepContent) => {
-                // Extract index from the content ID
-                const contentId = stepContent.id;
-                const match = contentId.match(/-step-(\d+)-content/);
-                if (!match) return;
+            // Only close all other steps if allowMultiple is false
+            if (!allowMultiple) {
+                const allSteps = stepsContainer.querySelectorAll('.clickable-step-content');
                 
-                const currentIndex = parseInt(match[1], 10);
-                
-                // Skip the step we're about to open
-                if (currentIndex === stepIndex) return;
-                
-                const stepButtonId = stepContent.id.replace('-content', '-button');
-                const stepButton = document.getElementById(stepButtonId);
-                const stepIconId = stepContent.id.replace('-content', '-icon');
-                const stepIcon = document.getElementById(stepIconId);
-                
-                stepContent.style.display = 'none';
-                stepContent.classList.remove('max-h-[5000px]', 'opacity-100');
-                stepContent.classList.add('max-h-0', 'opacity-0');
-                stepContent.setAttribute('aria-hidden', 'true');
-                
-                if (stepButton) {
-                    stepButton.setAttribute('aria-expanded', 'false');
-                    stepButton.classList.remove('bg-white', 'text-green-600');
-                    stepButton.classList.add('bg-gray-100', 'text-gray-600');
-                }
-                
-                if (stepIcon) {
-                    stepIcon.classList.remove('rotate-180');
-                }
-            });
+                allSteps.forEach((stepContent) => {
+                    // Extract index from the content ID
+                    const contentId = stepContent.id;
+                    const match = contentId.match(/-step-(\d+)-content/);
+                    if (!match) return;
+                    
+                    const currentIndex = parseInt(match[1], 10);
+                    
+                    // Skip the step we're about to open
+                    if (currentIndex === stepIndex) return;
+                    
+                    const stepButtonId = stepContent.id.replace('-content', '-button');
+                    const stepButton = document.getElementById(stepButtonId);
+                    const stepIconId = stepContent.id.replace('-content', '-icon');
+                    const stepIcon = document.getElementById(stepIconId);
+                    
+                    stepContent.style.display = 'none';
+                    stepContent.classList.remove('max-h-[5000px]', 'opacity-100');
+                    stepContent.classList.add('max-h-0', 'opacity-0');
+                    stepContent.setAttribute('aria-hidden', 'true');
+                    
+                    if (stepButton) {
+                        stepButton.setAttribute('aria-expanded', 'false');
+                        stepButton.classList.remove('bg-white', 'text-green-600');
+                        stepButton.classList.add('bg-gray-100', 'text-gray-600');
+                    }
+                    
+                    if (stepIcon) {
+                        stepIcon.classList.remove('rotate-180');
+                    }
+                });
+            }
             
             // Open this step
             content.style.display = 'block';

@@ -242,21 +242,21 @@ class ContentRenderer {
         return `
             <div class="mb-6">
                 ${title ? `<h4 class="text-lg font-semibold text-gray-900 mb-2">${title}</h4>` : ''}
-                <div class="rounded-lg overflow-hidden mb-2 relative bg-gray-100" id="${videoId}-container">
-                    <iframe 
-                        id="${videoId}"
-                        width="100%" 
-                        height="350" 
-                        src="${item.url}" 
-                        title="${title || 'Video'}"
-                        frameborder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                        referrerpolicy="strict-origin-when-cross-origin"
-                        allowfullscreen
-                        class="w-full"
-                        style="aspect-ratio: 16/9; min-height: 300px;"
-                        data-video-url="${item.url}">
-                    </iframe>
+                <div class="rounded-lg overflow-hidden mb-2 relative bg-gray-100 w-full video-responsive-container" id="${videoId}-container" style="max-width: 100%;">
+                    <div class="video-responsive-wrapper" style="position: relative; width: 100%; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+                        <iframe 
+                            id="${videoId}"
+                            src="${item.url}" 
+                            title="${title || 'Video'}"
+                            frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                            referrerpolicy="strict-origin-when-cross-origin"
+                            allowfullscreen
+                            class="video-responsive-iframe"
+                            style="position: absolute !important; top: 0 !important; left: 0 !important; width: 100% !important; height: 100% !important; border: 0 !important; margin: 0 !important; padding: 0 !important;"
+                            data-video-url="${item.url}">
+                        </iframe>
+                    </div>
                     <div id="${videoId}-fallback" class="hidden absolute inset-0 bg-gray-200 rounded-lg flex flex-col items-center justify-center p-6 z-10">
                         <div class="text-center">
                             <i class="fas fa-exclamation-triangle text-yellow-600 text-4xl mb-4"></i>
@@ -275,6 +275,27 @@ class ContentRenderer {
                     </a>
                 </p>` : ''}
             </div>
+            <style>
+                /* Override global iframe styles for video containers */
+                .video-responsive-container iframe.video-responsive-iframe {
+                    position: absolute !important;
+                    top: 0 !important;
+                    left: 0 !important;
+                    width: 100% !important;
+                    height: 100% !important;
+                    border: 0 !important;
+                    margin: 0 !important;
+                    padding: 0 !important;
+                }
+                
+                .video-responsive-wrapper {
+                    position: relative !important;
+                    width: 100% !important;
+                    padding-bottom: 56.25% !important;
+                    height: 0 !important;
+                    overflow: hidden !important;
+                }
+            </style>
         `;
     }
 

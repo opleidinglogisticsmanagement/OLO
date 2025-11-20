@@ -117,6 +117,14 @@
                 height: auto !important;
             }
             
+            /* Exception for responsive video containers */
+            .video-responsive-container iframe,
+            .video-responsive-wrapper iframe {
+                height: 100% !important;
+                width: 100% !important;
+                position: absolute !important;
+            }
+            
             /* Ensure all images are responsive */
             .image-modal-container img,
             img[style*="max-width"] {

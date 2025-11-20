@@ -110,20 +110,39 @@ class Week1LessonPage extends BaseLessonPage {
                     <div class="flex-1 min-w-0 w-full sm:w-auto">
                         <h2 class="text-lg sm:text-xl font-semibold text-gray-900 mb-4">${this.content.video.title}</h2>
                         ${this.content.video.url ? `
-                            <div class="rounded-lg overflow-hidden mb-4 relative bg-gray-100">
-                                <iframe 
-                                    width="100%" 
-                                    height="350" 
-                                    src="${this.content.video.url}" 
-                                    title="Video player" 
-                                    frameborder="0" 
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                                    referrerpolicy="strict-origin-when-cross-origin"
-                                    allowfullscreen
-                                    class="w-full"
-                                    style="aspect-ratio: 16/9; min-height: 300px;">
-                                </iframe>
+                            <div class="rounded-lg overflow-hidden mb-4 relative bg-gray-100 w-full video-responsive-container" style="max-width: 100%;">
+                                <div class="video-responsive-wrapper" style="position: relative; width: 100%; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+                                    <iframe 
+                                        src="${this.content.video.url}" 
+                                        title="Video player" 
+                                        frameborder="0" 
+                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                                        referrerpolicy="strict-origin-when-cross-origin"
+                                        allowfullscreen
+                                        class="video-responsive-iframe"
+                                        style="position: absolute !important; top: 0 !important; left: 0 !important; width: 100% !important; height: 100% !important; border: 0 !important; margin: 0 !important; padding: 0 !important;">
+                                    </iframe>
+                                </div>
                             </div>
+                            <style>
+                                .video-responsive-container iframe.video-responsive-iframe {
+                                    position: absolute !important;
+                                    top: 0 !important;
+                                    left: 0 !important;
+                                    width: 100% !important;
+                                    height: 100% !important;
+                                    border: 0 !important;
+                                    margin: 0 !important;
+                                    padding: 0 !important;
+                                }
+                                .video-responsive-wrapper {
+                                    position: relative !important;
+                                    width: 100% !important;
+                                    padding-bottom: 56.25% !important;
+                                    height: 0 !important;
+                                    overflow: hidden !important;
+                                }
+                            </style>
                         ` : `
                             <div class="bg-gray-900 rounded-lg aspect-video flex items-center justify-center mb-4">
                                 <div class="text-center text-white">

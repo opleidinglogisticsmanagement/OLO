@@ -241,9 +241,21 @@ app.post('/api/generate-questions', validateGenerateQuestions, async (req, res) 
         // Get request body (already validated and sanitized)
         const { theoryContent, numberOfQuestions = 3, segmentIndex = 0 } = req.body;
 
+        // Bloom's taxonomie niveaus voor variatie in vraagtypen
+        const bloomLevels = ['kennen', 'begrijpen', 'analyseren', 'evalueren'];
+        // Willekeurig selecteren van een Bloom niveau voor deze vraag
+        const randomBloomLevel = bloomLevels[Math.floor(Math.random() * bloomLevels.length)];
+        
         // Build prompt for Gemini
         // Use segment-based approach for variety (no hardcoded topics)
         const segmentInfo = segmentIndex !== undefined ? ` (Dit is segment ${segmentIndex + 1} van de theorie tekst)` : '';
+        
+        const bloomInstructions = {
+            'kennen': 'Test kennis van feiten, begrippen en definities. Vraag naar wat de student weet of kan herkennen.',
+            'begrijpen': 'Test begrip van concepten en relaties. Vraag naar uitleg, interpretatie of samenvatting van informatie.',
+            'analyseren': 'Test analytisch vermogen. Vraag naar het onderscheiden van onderdelen, het identificeren van patronen, oorzaken of gevolgen.',
+            'evalueren': 'Test beoordelingsvermogen. Vraag naar het beoordelen, vergelijken, of het maken van keuzes op basis van criteria.'
+        };
         
         const prompt = `Genereer ${numberOfQuestions} multiple choice vraag${numberOfQuestions > 1 ? 'en' : ''} in het Nederlands op basis van de volgende theorie tekst.${segmentInfo}
 
@@ -251,9 +263,15 @@ BELANGRIJK:
 - Zorg ervoor dat de vraag over een specifiek aspect/concept uit DEZE DEEL van de theorie gaat.
 - Gebruik informatie uit dit specifieke deel van de theorie tekst voor je vraag.
 - Als je meerdere vragen genereert, zorg dat ze over verschillende aspecten/concepten uit dit deel gaan.
+- Varieer in vraagtype: gebruik willekeurig verschillende cognitieve niveaus (kennen, begrijpen, analyseren, evalueren).
+
+BLOOM'S TAXONOMIE:
+Voor deze vraag gebruik je het niveau: **${randomBloomLevel}**
+${bloomInstructions[randomBloomLevel]}
 
 Elke vraag moet:
 - Een duidelijke vraag bevatten over een specifiek aspect/concept uit deze deel van de theorie
+- Het juiste cognitieve niveau gebruiken (${randomBloomLevel})
 - 4 antwoordopties hebben (a, b, c, d)
 - Een correct antwoord hebben (aangegeven met "correct": true)
 - Feedback bevatten bij het juiste antwoord (feedbackGoed)

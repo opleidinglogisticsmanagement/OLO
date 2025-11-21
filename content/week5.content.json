@@ -221,6 +221,12 @@
     "description": "[Video beschrijving]",
     "url": "",
     "info": "[Video informatie]"
+  },
+  "mcVragen": {
+    "title": "Test je kennis",
+    "description": "Je kunt hier oneindig veel vragen genereren op basis van de theorie die je zojuist hebt gelezen. Beantwoord de vragen om te oefenen en bepaal zelf wanneer je de stof voldoende beheerst.",
+    "generateFromTheory": true,
+    "numberOfQuestions": 3
   }
 }
 

@@ -40,7 +40,7 @@
               "<div style='margin-left: 20px; margin-bottom: 1rem;'><em>Zowel Scania als Zehnder zijn op zoek naar (innovatieve) oplossingen met betrekking tot horizontale verplaatsingen. In het verleden zijn binnen beide organisaties verschillende onderzoeken uitgevoerd naar met name verticale verplaatsingen waarmee met name de handling binnen de organisaties werd gereduceerd. Nu willen beide bedrijven graag (gezamenlijk) op zoek naar oplossingen op het vlak van horizontale verplaatsingen. Veel innovatieve systemen vragen om een bezettingsgraad van meer dan 20 uur, met als gevolg dat een 3 ploegenstructuur vaak wenselijk is. Tegelijkertijd kennen beide organisaties een 2-ploegen of zelfs een 1 ploegenstructuur. De onderzoeken naar verticale verplaatsingen zijn telkens vanuit cases opgepakt waarbij een specifieke technologie wordt opgepakt en onderzocht vanuit een specifiek (deel van een) proces. Deze aanpak is heel tijdrovend geweest en geresulteerd in vele onderzoeken waarbij relatief snel zichtbaar werd dat verder onderzoek niet nodig was. Echter was het al wel een (onderzoeks-) opdracht van een HBO student, maar waren de uitkomsten al snel niet meer bruikbaar.</em></div>",
               "<div style='margin-left: 20px; margin-bottom: 1rem;'><em>Vanuit interne contacten vanuit beide organisaties is het Logistics Lab gevraagd hierin te faciliteren en samen met o.a. studenten deze ingewikkelde puzzel te gaan ontrafelen. Na onderling overleg is er een roadmap opgesteld waarin de organisaties willen toewerken naar een ingebedde (innovatieve) oplossing met betrekking tot horizontale verplaatsingen waarbij beide organisaties handvatten aangereikt krijgen waarmee zij zelf toekomstige beslissingen kunnen nemen met betrekking tot dit vraagstuk. Deze handreikingen hebben dan onder andere betrekking op:</em></div>",
               "<div style='margin-left: 40px; margin-bottom: 1rem;'><em>- De keuze van (innovatieve) oplossing<br>- Welke voorwaarden worden er aan het proces gesteld<br>- Opleidingsbehoefte van (huidige en toekomstige) medewerkers<br>- Hoe om te gaan met het onderhoud en storingen.</em></div>",
-              "<p class='text-gray-700 mb-3'>Nu word jij geconfronteerd met deze opdracht en de vraag op welke wijze jij jouw onderzoeksopdracht zou kunnen inpassen in deze aanpak. Kortom, de vraag is wat is de bijdrage van jouw onderzoeksopdracht aan het grotere geheel?</p>"
+              "<p class='text-gray-700 dark:text-gray-300 mb-3'>Nu word jij geconfronteerd met deze opdracht en de vraag op welke wijze jij jouw onderzoeksopdracht zou kunnen inpassen in deze aanpak. Kortom, de vraag is wat is de bijdrage van jouw onderzoeksopdracht aan het grotere geheel?</p>"
             ]
           }
         ]
@@ -91,7 +91,7 @@
         "text": [
           "Bij het opstellen van een doelstelling ga je aan de slag met een zogenoemd a- en b- gedeelte. Het a-gedeelte omschrijf je wat je wel en niet mag verwachten in het onderzoek en het b-gedeelte omschrijft globaal wat er gaat gebeuren.",
           "Een goede doelstelling kent dan ook een bepaalde format:",
-          "<p class='text-xl font-semibold text-gray-900 mb-4'><strong>'Het doel van dit onderzoek is ….(a)…. door ….. (b)…..</strong>'</p>",
+          "<p class='text-xl font-semibold text-gray-900 dark:text-white mb-4'><strong>'Het doel van dit onderzoek is ….(a)…. door ….. (b)…..</strong>'</p>",
           "Hieronder worden beide onderdelen nader toegelicht:"
         ]
       },
@@ -103,7 +103,7 @@
             "title": "A-gedeelte van een doelstelling",
             "content": [
               "<strong>Het A-gedeelte (extern gedeelte)</strong>",
-              "<p class='text-gray-700 mb-3'>Bij het opstellen van het a-gedeelte is het doel om inzicht te geven in het doel van het onderzoek. Er wordt ook wel gesproken over het externe gedeelte van het onderzoek, immers je geeft inzicht in de reden waarom je gaat onderzoeken en welke resultaten je gaat opleveren. Een mooie controle hierin is: 'zouden mijn beoordelaar en opdrachtgever begrijpen welke bijdrage mijn onderzoek kan geven?'</p>",
+              "<p class='text-gray-700 dark:text-gray-200 mb-3'>Bij het opstellen van het a-gedeelte is het doel om inzicht te geven in het doel van het onderzoek. Er wordt ook wel gesproken over het externe gedeelte van het onderzoek, immers je geeft inzicht in de reden waarom je gaat onderzoeken en welke resultaten je gaat opleveren. Een mooie controle hierin is: 'zouden mijn beoordelaar en opdrachtgever begrijpen welke bijdrage mijn onderzoek kan geven?'</p>",
               "<strong>Voorbeelden van formuleren van het a-gedeelte kunnen zijn:</strong>",
               "<div style='margin-left: 20px; margin-bottom: 1rem;'><em>…. Het helpen verbeteren van bestaand beleid X op het terrein van Z</em></div>",
               "<div style='margin-left: 20px; margin-bottom: 1rem;'><em>…. Het leveren van een bijdrage aan de ontwikkeling van nieuw beleid X op het terrein van Z</em></div>",
@@ -114,7 +114,7 @@
             "title": "B-gedeelte van een doelstelling",
             "content": [
               "<strong>Het B-gedeelte (intern gedeelte)</strong>",
-              "<p class='text-gray-700 mb-3'>Het b-gedeelte omschrijft de bijdrage die jij als onderzoek levert aan het onderzoek. Hierbij wordt ook wel gekeken naar het interne onderzoek, kortom hoe heb je het onderzoek opgezet of wat ga je hierin doen.</p>",
+              "<p class='text-gray-700 dark:text-gray-300 mb-3'>Het b-gedeelte omschrijft de bijdrage die jij als onderzoek levert aan het onderzoek. Hierbij wordt ook wel gekeken naar het interne onderzoek, kortom hoe heb je het onderzoek opgezet of wat ga je hierin doen.</p>",
               "<strong>Voorbeelden van formuleringen van het b-gedeelte kunnen zijn:</strong>",
               "<div style='margin-left: 20px; margin-bottom: 1rem;'><em>…. door een overzicht te geven van de meningen van belanghebbenden….</em></div>",
               "<div style='margin-left: 20px; margin-bottom: 1rem;'><em>…. door inzicht te geven in de knelpunten die optreden bij….</em></div>",

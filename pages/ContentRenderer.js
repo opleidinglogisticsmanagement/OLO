@@ -89,14 +89,14 @@ class ContentRenderer {
                     return trimmedText;
                 }
                 // Anders wrap in <p> tag
-                return `<p class="text-gray-700 mb-4">${textItem}</p>`;
+                return `<p class="text-gray-700 dark:text-gray-300 mb-4">${textItem}</p>`;
             }).join('');
         } else {
             const trimmedText = String(item.text).trim();
             if (trimmedText.startsWith('<')) {
                 return trimmedText;
             }
-            return `<p class="text-gray-700 mb-4">${item.text}</p>`;
+            return `<p class="text-gray-700 dark:text-gray-300 mb-4">${item.text}</p>`;
         }
     }
 
@@ -181,8 +181,8 @@ class ContentRenderer {
         const constrainAltText = size !== 'full' && size !== 'auto';
         const altTextHtml = showAltText 
             ? constrainAltText
-                ? `<p class="text-sm text-gray-600 mt-2" style="max-width: ${maxWidth}; word-wrap: break-word; ${align === 'right' ? 'text-align: right; margin-left: auto;' : align === 'center' ? 'text-align: center; margin-left: auto; margin-right: auto;' : ''}">${item.alt}</p>`
-                : `<p class="text-sm text-gray-600 mt-2">${item.alt}</p>`
+                ? `<p class="text-sm text-gray-600 dark:text-gray-400 mt-2" style="max-width: ${maxWidth}; word-wrap: break-word; ${align === 'right' ? 'text-align: right; margin-left: auto;' : align === 'center' ? 'text-align: center; margin-left: auto; margin-right: auto;' : ''}">${item.alt}</p>`
+                : `<p class="text-sm text-gray-600 dark:text-gray-400 mt-2">${item.alt}</p>`
             : '';
         
         // Combineer alles
@@ -239,36 +239,49 @@ class ContentRenderer {
         const showLink = item.showLink !== false; // Default true, kan worden uitgeschakeld
         const videoId = `video-${Math.random().toString(36).substr(2, 9)}`;
         
+        // Handle Mediasite URLs - convert to embed format if needed
+        let embedUrl = item.url;
+        if (item.url.includes('media.windesheim.nl/Mediasite/Play/')) {
+            // Mediasite URLs can be used directly, but ensure they work in iframes
+            // If URL doesn't have embed path, try adding embed parameter
+            if (!item.url.includes('/embed/') && !item.url.includes('?embed')) {
+                // Try adding embed=true parameter for better compatibility
+                const separator = item.url.includes('?') ? '&' : '?';
+                embedUrl = `${item.url}${separator}embed=true`;
+            }
+        }
+        
         return `
             <div class="mb-6">
-                ${title ? `<h4 class="text-lg font-semibold text-gray-900 mb-2">${title}</h4>` : ''}
-                <div class="rounded-lg overflow-hidden mb-2 relative bg-gray-100 w-full video-responsive-container" id="${videoId}-container" style="max-width: 100%;">
-                    <div class="video-responsive-wrapper" style="position: relative; width: 100%; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+                ${title ? `<h4 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">${title}</h4>` : ''}
+                <div class="rounded-lg overflow-hidden mb-2 relative bg-black dark:bg-black w-full video-responsive-container" id="${videoId}-container" style="max-width: 100%;">
+                    <div class="video-responsive-wrapper" style="position: relative; width: 100%; padding-bottom: 56.25%; height: 0; overflow: hidden; background-color: #000;">
                         <iframe 
                             id="${videoId}"
-                            src="${item.url}" 
+                            src="${embedUrl}" 
                             title="${title || 'Video'}"
                             frameborder="0"
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
                             referrerpolicy="strict-origin-when-cross-origin"
                             allowfullscreen
                             class="video-responsive-iframe"
-                            style="position: absolute !important; top: 0 !important; left: 0 !important; width: 100% !important; height: 100% !important; border: 0 !important; margin: 0 !important; padding: 0 !important;"
-                            data-video-url="${item.url}">
+                            style="position: absolute !important; top: 0 !important; left: 0 !important; width: 100% !important; height: 100% !important; border: 0 !important; margin: 0 !important; padding: 0 !important; background-color: #000;"
+                            data-video-url="${item.url}"
+                            loading="lazy">
                         </iframe>
                     </div>
-                    <div id="${videoId}-fallback" class="hidden absolute inset-0 bg-gray-200 rounded-lg flex flex-col items-center justify-center p-6 z-10">
+                    <div id="${videoId}-fallback" class="hidden absolute inset-0 bg-gray-200 dark:bg-gray-700 rounded-lg flex flex-col items-center justify-center p-6 z-10">
                         <div class="text-center">
-                            <i class="fas fa-exclamation-triangle text-yellow-600 text-4xl mb-4"></i>
-                            <p class="text-gray-700 font-semibold mb-2">Video kan niet worden geladen</p>
-                            <p class="text-sm text-gray-600 mb-4">De video kan mogelijk niet worden ingesloten. Probeer de video te openen in een nieuw tabblad.</p>
-                            <a href="${item.url}" target="_blank" class="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium">
+                            <i class="fas fa-exclamation-triangle text-yellow-600 dark:text-yellow-400 text-4xl mb-4"></i>
+                            <p class="text-gray-700 dark:text-gray-200 font-semibold mb-2">Video kan niet worden geladen</p>
+                            <p class="text-sm text-gray-600 dark:text-gray-300 mb-4">De video kan mogelijk niet worden ingesloten. Probeer de video te openen in een nieuw tabblad.</p>
+                            <a href="${item.url}" target="_blank" class="inline-flex items-center px-4 py-2 bg-blue-600 dark:bg-blue-700 text-white rounded-lg hover:bg-blue-700 dark:hover:bg-blue-600 transition-colors font-medium">
                                 <i class="fas fa-external-link-alt mr-2"></i>Open video in nieuw tabblad
                             </a>
                         </div>
                     </div>
                 </div>
-                ${description ? `<p class="text-sm text-gray-600 mb-2">${description}</p>` : ''}
+                ${description ? `<p class="text-sm text-gray-600 dark:text-gray-300 mb-2">${description}</p>` : ''}
                 ${showLink ? `<p class="text-sm mb-0">
                     <a href="${item.url}" target="_blank" class="text-blue-600 hover:text-blue-800 underline font-medium">
                         <i class="fas fa-external-link-alt mr-1"></i>Open video in nieuw tabblad
@@ -334,14 +347,23 @@ class ContentRenderer {
         const title = item.title || '';
         const icon = item.icon || 'fa-info-circle';
         const iconClass = item.iconClass || 'fas';
-        const bgColor = item.bgColor || 'bg-blue-50';
-        const borderColor = item.borderColor || 'border-blue-500';
-        const titleColor = item.titleColor || 'text-blue-900';
-        const contentColor = item.contentColor || 'text-blue-800';
+        // Default colors with dark mode support - always add dark mode classes
+        const bgColor = item.bgColor ? 
+            (item.bgColor.includes('dark:') ? item.bgColor : `${item.bgColor} dark:bg-gray-800`) : 
+            'bg-blue-50 dark:bg-blue-900/20';
+        const borderColor = item.borderColor ? 
+            (item.borderColor.includes('dark:') ? item.borderColor : `${item.borderColor} dark:border-gray-600`) : 
+            'border-blue-500 dark:border-blue-400';
+        const titleColor = item.titleColor ? 
+            (item.titleColor.includes('dark:') ? item.titleColor : `${item.titleColor} dark:text-white`) : 
+            'text-blue-900 dark:text-blue-200';
+        const contentColor = item.contentColor ? 
+            (item.contentColor.includes('dark:') ? item.contentColor : `${item.contentColor} dark:text-gray-300`) : 
+            'text-blue-800 dark:text-blue-300';
 
-        return `<div class="${bgColor} border-l-4 ${borderColor} p-4 rounded-r-lg mt-4 mb-4">
+        return `<div class="${bgColor} border-l-4 ${borderColor} p-4 rounded-r-lg mt-4 mb-4 transition-colors duration-200">
             <div class="flex items-start space-x-3">
-                <i class="${iconClass} ${icon} text-blue-600 mt-1"></i>
+                <i class="${iconClass} ${icon} text-blue-600 dark:text-blue-400 mt-1"></i>
                 <div>
                     ${title ? `<h3 class="font-semibold ${titleColor} mb-1">${title}</h3>` : ''}
                     <div class="${contentColor} text-sm">

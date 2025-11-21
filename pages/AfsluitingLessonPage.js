@@ -83,14 +83,14 @@ class AfsluitingLessonPage extends BaseLessonPage {
         }
 
         return `
-            <section class="bg-white rounded-xl shadow-sm border border-gray-200 p-4 sm:p-6 sm:pr-[70px] hover-lift">
+            <section class="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-4 sm:p-6 sm:pr-[70px] hover-lift transition-colors duration-200">
                 <div class="flex flex-col sm:flex-row items-start">
-                    <div class="w-10 h-10 sm:w-12 sm:h-12 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0 mb-3 sm:mb-0 sm:mr-4">
-                        <i class="fas fa-book text-blue-600 text-lg"></i>
+                    <div class="w-10 h-10 sm:w-12 sm:h-12 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center flex-shrink-0 mb-3 sm:mb-0 sm:mr-4">
+                        <i class="fas fa-book text-blue-600 dark:text-blue-400 text-lg"></i>
                     </div>
                     <div class="flex-1 min-w-0 w-full sm:w-auto">
-                        <h1 class="text-2xl font-bold text-gray-900 mb-2">${this.content.intro.title}: ${this.content.intro.subtitle}</h1>
-                        ${this.content.intro.description ? `<p class="text-gray-600 mb-4">${this.content.intro.description}</p>` : ''}
+                        <h1 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">${this.content.intro.title}: ${this.content.intro.subtitle}</h1>
+                        ${this.content.intro.description ? `<p class="text-gray-600 dark:text-gray-300 mb-4">${this.content.intro.description}</p>` : ''}
                     </div>
                 </div>
             </section>
@@ -108,10 +108,10 @@ class AfsluitingLessonPage extends BaseLessonPage {
         return `
             ${this.content.leerdoelen ? `
             <!-- Leerdoelen Sectie -->
-            <section class="bg-white rounded-xl shadow-sm border border-gray-200 p-4 sm:p-6 sm:pr-[70px] hover-lift">
+            <section class="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-4 sm:p-6 sm:pr-[70px] hover-lift transition-colors duration-200">
                 <div class="flex flex-col sm:flex-row items-start">
-                    <div class="w-10 h-10 sm:w-12 sm:h-12 bg-green-100 rounded-lg flex items-center justify-center flex-shrink-0 mb-3 sm:mb-0 sm:mr-4">
-                        <i class="fas fa-bullseye text-green-600 text-lg"></i>
+                    <div class="w-10 h-10 sm:w-12 sm:h-12 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center flex-shrink-0 mb-3 sm:mb-0 sm:mr-4">
+                        <i class="fas fa-bullseye text-green-600 dark:text-green-400 text-lg"></i>
                     </div>
                     <div class="flex-1 min-w-0 w-full sm:w-auto">
                         ${this.content.leerdoelen.interactive && this.content.leerdoelen.items && this.content.leerdoelen.items.length > 0
@@ -122,15 +122,15 @@ class AfsluitingLessonPage extends BaseLessonPage {
                                 storageKey: 'afsluiting-learning-objectives'
                             })
                             : `
-                                <h2 class="text-lg sm:text-xl font-semibold text-gray-900 mb-4">${this.content.leerdoelen.title}</h2>
+                                <h2 class="text-lg sm:text-xl font-semibold text-gray-900 dark:text-white mb-4">${this.content.leerdoelen.title}</h2>
                                 <div class="prose max-w-none">
-                                    ${this.content.leerdoelen.description ? `<p class="text-gray-600 mb-4">${this.content.leerdoelen.description}</p>` : ''}
+                                    ${this.content.leerdoelen.description ? `<p class="text-gray-600 dark:text-gray-300 mb-4">${this.content.leerdoelen.description}</p>` : ''}
                                     ${this.content.leerdoelen.items && this.content.leerdoelen.items.length > 0 ? `
                                         <ul class="space-y-2">
                                             ${this.content.leerdoelen.items.map(item => `
                                                 <li class="flex items-start space-x-3">
-                                                    <i class="fas fa-check text-green-500 mt-1"></i>
-                                                    <span class="text-gray-700">${item}</span>
+                                                    <i class="fas fa-check text-green-500 dark:text-green-400 mt-1"></i>
+                                                    <span class="text-gray-700 dark:text-gray-300">${item}</span>
                                                 </li>
                                             `).join('')}
                                         </ul>
@@ -145,18 +145,18 @@ class AfsluitingLessonPage extends BaseLessonPage {
 
             ${this.content.theorie ? `
             <!-- Theorie Sectie -->
-            <section class="bg-white rounded-xl shadow-sm border border-gray-200 p-4 sm:p-6 sm:pr-[70px] hover-lift">
+            <section class="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-4 sm:p-6 sm:pr-[70px] hover-lift transition-colors duration-200">
                 <div class="flex flex-col sm:flex-row items-start">
-                    <div class="w-10 h-10 sm:w-12 sm:h-12 bg-purple-100 rounded-lg flex items-center justify-center flex-shrink-0 mb-3 sm:mb-0 sm:mr-4">
-                        <i class="fas fa-book text-purple-600 text-lg"></i>
+                    <div class="w-10 h-10 sm:w-12 sm:h-12 bg-purple-100 dark:bg-purple-900/30 rounded-lg flex items-center justify-center flex-shrink-0 mb-3 sm:mb-0 sm:mr-4">
+                        <i class="fas fa-book text-purple-600 dark:text-purple-400 text-lg"></i>
                     </div>
                     <div class="flex-1 min-w-0 w-full sm:w-auto">
-                        <h2 class="text-lg sm:text-xl font-semibold text-gray-900 mb-4">${this.content.theorie.title}</h2>
+                        <h2 class="text-lg sm:text-xl font-semibold text-gray-900 dark:text-white mb-4">${this.content.theorie.title}</h2>
                         <div class="prose max-w-none">
                             ${this.content.theorie.content 
                                 ? ContentRenderer.renderContentItems(this.content.theorie.content, { enableModal: true })
                                 : (this.content.theorie.paragraphs ? this.content.theorie.paragraphs.map(paragraph => `
-                                    <p class="text-gray-700 mb-4">${paragraph}</p>
+                                    <p class="text-gray-700 dark:text-gray-300 mb-4">${paragraph}</p>
                                 `).join('') : '')
                             }
                         </div>
@@ -175,12 +175,12 @@ class AfsluitingLessonPage extends BaseLessonPage {
      */
     renderErrorState() {
         return `
-            <section class="bg-red-50 border-l-4 border-red-500 p-6 rounded-r-lg">
+            <section class="bg-red-50 dark:bg-red-900/20 border-l-4 border-red-500 dark:border-red-400 p-6 rounded-r-lg">
                 <div class="flex items-start space-x-3">
-                    <i class="fas fa-exclamation-triangle text-red-600 mt-1"></i>
+                    <i class="fas fa-exclamation-triangle text-red-600 dark:text-red-400 mt-1"></i>
                     <div>
-                        <h3 class="font-semibold text-red-900 mb-1">Content Kon Niet Worden Geladen</h3>
-                        <p class="text-red-800 text-sm">
+                        <h3 class="font-semibold text-red-900 dark:text-red-200 mb-1">Content Kon Niet Worden Geladen</h3>
+                        <p class="text-red-800 dark:text-red-300 text-sm">
                             Er is een probleem opgetreden bij het laden van de content.
                         </p>
                     </div>
@@ -204,18 +204,18 @@ class AfsluitingLessonPage extends BaseLessonPage {
         
         // Anders toon loading state - binnen een sectie
         return `
-            <section class="bg-white rounded-xl shadow-sm border border-gray-200 p-4 sm:p-6 sm:pr-[70px] hover-lift mt-8">
+            <section class="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-4 sm:p-6 sm:pr-[70px] hover-lift mt-8 transition-colors duration-200">
                 <div class="flex flex-col sm:flex-row items-start">
-                    <div class="w-10 h-10 sm:w-12 sm:h-12 bg-indigo-100 rounded-lg flex items-center justify-center flex-shrink-0 mb-3 sm:mb-0 sm:mr-4">
-                        <i class="fas fa-question-circle text-indigo-600 text-lg"></i>
+                    <div class="w-10 h-10 sm:w-12 sm:h-12 bg-indigo-100 dark:bg-indigo-900/30 rounded-lg flex items-center justify-center flex-shrink-0 mb-3 sm:mb-0 sm:mr-4">
+                        <i class="fas fa-question-circle text-indigo-600 dark:text-indigo-400 text-lg"></i>
                     </div>
                     <div class="flex-1 min-w-0 w-full sm:w-auto">
-                        <h2 class="text-lg sm:text-xl font-semibold text-gray-900 mb-4">${mcConfig.title || 'Test je kennis'}</h2>
+                        <h2 class="text-lg sm:text-xl font-semibold text-gray-900 dark:text-white mb-4">${mcConfig.title || 'Test je kennis'}</h2>
                         <div id="mc-questions-container" class="space-y-6">
-                            <div class="border border-gray-200 rounded-lg p-5 bg-gray-50">
+                            <div class="border border-gray-200 dark:border-gray-700 rounded-lg p-5 bg-gray-50 dark:bg-gray-900/50">
                                 <div class="flex items-center justify-center space-x-3 py-8">
-                                    <div class="animate-spin rounded-full h-6 w-6 border-b-2 border-indigo-600"></div>
-                                    <p class="text-gray-600">AI-generatie vraag...</p>
+                                    <div class="animate-spin rounded-full h-6 w-6 border-b-2 border-indigo-600 dark:border-indigo-400"></div>
+                                    <p class="text-gray-600 dark:text-gray-300">AI-generatie vraag...</p>
                                 </div>
                             </div>
                         </div>
@@ -479,10 +479,10 @@ class AfsluitingLessonPage extends BaseLessonPage {
             const container = document.getElementById('mc-questions-container');
             if (container) {
                 container.innerHTML = `
-                    <div class="border border-gray-200 rounded-lg p-5 bg-gray-50">
+                    <div class="border border-gray-200 dark:border-gray-700 rounded-lg p-5 bg-gray-50 dark:bg-gray-900/50">
                         <div class="flex items-center justify-center space-x-3 py-8">
-                            <div class="animate-spin rounded-full h-6 w-6 border-b-2 border-indigo-600"></div>
-                            <p class="text-gray-600">AI-generatie nieuwe vraag...</p>
+                            <div class="animate-spin rounded-full h-6 w-6 border-b-2 border-indigo-600 dark:border-indigo-400"></div>
+                            <p class="text-gray-600 dark:text-gray-300">AI-generatie nieuwe vraag...</p>
                         </div>
                     </div>
                 `;
@@ -612,13 +612,13 @@ class AfsluitingLessonPage extends BaseLessonPage {
         const container = document.getElementById('mc-questions-container');
         if (container) {
             container.innerHTML = `
-                <div class="border border-red-200 rounded-lg p-5 bg-red-50">
+                <div class="border border-red-200 dark:border-red-800 rounded-lg p-5 bg-red-50 dark:bg-red-900/20">
                     <div class="flex items-start space-x-3">
-                        <i class="fas fa-exclamation-triangle text-red-600 mt-1"></i>
+                        <i class="fas fa-exclamation-triangle text-red-600 dark:text-red-400 mt-1"></i>
                         <div>
-                            <h3 class="font-semibold text-red-900 mb-1">Fout bij genereren</h3>
-                            <p class="text-red-800 text-sm">${message}</p>
-                            <button onclick="location.reload()" class="mt-3 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors text-sm">
+                            <h3 class="font-semibold text-red-900 dark:text-red-200 mb-1">Fout bij genereren</h3>
+                            <p class="text-red-800 dark:text-red-300 text-sm">${message}</p>
+                            <button onclick="location.reload()" class="mt-3 px-4 py-2 bg-red-600 dark:bg-red-700 text-white rounded-lg hover:bg-red-700 dark:hover:bg-red-600 transition-colors text-sm">
                                 Pagina verversen
                             </button>
                         </div>

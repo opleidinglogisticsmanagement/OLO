@@ -55,7 +55,7 @@ class InteractiveRenderer {
                             if (item.trim().startsWith('<')) {
                                 return item; // Already HTML
                             }
-                            return `<p class="text-gray-700 mb-3">${item}</p>`;
+                            return `<p class="text-gray-700 dark:text-gray-300 mb-3">${item}</p>`;
                         }
                         return '';
                     }).join('');
@@ -65,28 +65,28 @@ class InteractiveRenderer {
                         if (typeof text === 'string' && text.trim().startsWith('<')) {
                             return text; // Already HTML
                         }
-                        return `<p class="text-gray-700 mb-3">${text}</p>`;
+                        return `<p class="text-gray-700 dark:text-gray-300 mb-3">${text}</p>`;
                     }).join('');
                 }
             } else if (typeof accordionItem.content === 'string') {
-                contentHtml = `<p class="text-gray-700 mb-3">${accordionItem.content}</p>`;
+                contentHtml = `<p class="text-gray-700 dark:text-gray-300 mb-3">${accordionItem.content}</p>`;
             }
 
             // Choose icon based on usePlusIcon setting
             const iconClass = usePlusIcon 
-                ? `fas fa-plus transform transition-transform duration-200 ${isOpen ? 'rotate-45' : ''} text-gray-600`
-                : `fas fa-chevron-down transform transition-transform duration-200 ${isOpen ? 'rotate-180' : ''} text-gray-600`;
+                ? `fas fa-plus transform transition-transform duration-200 ${isOpen ? 'rotate-45' : ''} text-gray-600 dark:text-gray-300`
+                : `fas fa-chevron-down transform transition-transform duration-200 ${isOpen ? 'rotate-180' : ''} text-gray-600 dark:text-gray-300`;
 
             // Different styling for nested accordions (like clickable steps - no border, seamless)
             const containerClass = isNested 
                 ? `mb-3 overflow-hidden` 
-                : `border border-gray-200 rounded-lg mb-3 overflow-hidden`;
+                : `border border-gray-200 dark:border-gray-700 rounded-lg mb-3 overflow-hidden transition-colors duration-200`;
             const buttonClass = isNested
-                ? `w-full px-6 py-4 bg-gray-100 hover:bg-gray-200 active:bg-gray-300 transition-colors duration-200 flex items-center justify-between text-left font-semibold text-lg text-gray-600 cursor-pointer touch-manipulation`
-                : `w-full px-6 py-4 bg-gray-50 hover:bg-gray-100 active:bg-gray-200 transition-colors duration-200 flex items-center justify-between text-left cursor-pointer touch-manipulation`;
+                ? `w-full px-6 py-4 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 active:bg-gray-300 dark:active:bg-gray-600 transition-colors duration-200 flex items-center justify-between text-left font-semibold text-lg text-gray-600 dark:text-gray-300 cursor-pointer touch-manipulation`
+                : `w-full px-6 py-4 bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 active:bg-gray-200 dark:active:bg-gray-600 transition-colors duration-200 flex items-center justify-between text-left cursor-pointer touch-manipulation`;
             const contentBgClass = isNested
-                ? `bg-white`
-                : `bg-white`;
+                ? `bg-white dark:bg-gray-800`
+                : `bg-white dark:bg-gray-800`;
 
             return `
                 <div class="${containerClass}">
@@ -97,7 +97,7 @@ class InteractiveRenderer {
                         aria-controls="${contentId}"
                         id="${itemId}"
                     >
-                        ${isNested ? `<span>${accordionItem.title}</span>` : `<span class="font-semibold text-gray-900 text-lg">${accordionItem.title}</span>`}
+                        ${isNested ? `<span class="dark:text-gray-200">${accordionItem.title}</span>` : `<span class="font-semibold text-gray-900 dark:text-white text-lg">${accordionItem.title}</span>`}
                         <i class="${iconClass}" id="${itemId}-icon"></i>
                     </button>
                     <div
@@ -197,27 +197,27 @@ class InteractiveRenderer {
         const criteriaHtml = criteria.map((criterion, index) => {
             const criterionId = `${checklistId}-${criterion.letter.toLowerCase()}`;
             return `
-                <div class="border border-gray-200 rounded p-2 mb-1.5 bg-white hover:bg-gray-50 transition-colors">
+                <div class="border border-gray-200 dark:border-gray-700 rounded p-2 mb-1.5 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
                     <div class="flex items-center justify-between gap-2">
                         <div class="flex items-center space-x-2 flex-1 min-w-0">
                             <div class="flex-shrink-0">
-                                <div class="w-7 h-7 rounded-full bg-blue-100 flex items-center justify-center">
-                                    <span class="font-bold text-blue-700 text-xs">${criterion.letter}</span>
+                                <div class="w-7 h-7 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center">
+                                    <span class="font-bold text-blue-700 dark:text-blue-300 text-xs">${criterion.letter}</span>
                                 </div>
                             </div>
                             <div class="flex-1 min-w-0">
-                                <h4 class="font-semibold text-gray-900 text-xs leading-tight">${criterion.name}</h4>
-                                <p class="text-xs text-gray-600 leading-tight mt-0.5">${criterion.description}</p>
+                                <h4 class="font-semibold text-gray-900 dark:text-white text-xs leading-tight">${criterion.name}</h4>
+                                <p class="text-xs text-gray-600 dark:text-gray-400 leading-tight mt-0.5">${criterion.description}</p>
                             </div>
                         </div>
                         <label class="flex items-center cursor-pointer ml-2 flex-shrink-0">
                             <input 
                                 type="checkbox" 
                                 id="${criterionId}"
-                                class="smart-checkbox w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                                class="smart-checkbox w-4 h-4 text-blue-600 dark:text-blue-400 border-gray-300 dark:border-gray-600 rounded focus:ring-blue-500"
                                 data-criterion="${criterion.letter}"
                             />
-                            <span class="ml-1.5 text-xs text-gray-600 whitespace-nowrap">Aanwezig</span>
+                            <span class="ml-1.5 text-xs text-gray-600 dark:text-gray-400 whitespace-nowrap">Aanwezig</span>
                         </label>
                     </div>
                     <div id="${criterionId}-feedback" class="mt-1.5 hidden">
@@ -236,10 +236,10 @@ class InteractiveRenderer {
         `;
 
         return `
-            <div class="smart-checklist-container mb-6 bg-gray-50 rounded-lg p-3" id="${checklistId}">
-                <h3 class="text-base font-semibold text-gray-900 mb-2">Analyseer deze doelstelling op SMART-criteria:</h3>
-                <div class="bg-white border-l-4 border-blue-500 p-2.5 mb-2.5 rounded-r-lg">
-                    <p class="text-gray-800 text-sm font-medium leading-snug">${item.doelstelling}</p>
+            <div class="smart-checklist-container mb-6 bg-gray-50 dark:bg-gray-800 rounded-lg p-3 border border-gray-200 dark:border-gray-700" id="${checklistId}">
+                <h3 class="text-base font-semibold text-gray-900 dark:text-white mb-2">Analyseer deze doelstelling op SMART-criteria:</h3>
+                <div class="bg-white dark:bg-gray-800 border-l-4 border-blue-500 dark:border-blue-400 p-2.5 mb-2.5 rounded-r-lg">
+                    <p class="text-gray-800 dark:text-gray-200 text-sm font-medium leading-snug">${item.doelstelling}</p>
                 </div>
                 <div class="space-y-1">
                     ${criteriaHtml}
@@ -297,23 +297,23 @@ class InteractiveRenderer {
                     
                     if (criterion === 'S') {
                         // Specifiek - is aanwezig
-                        feedbackContent.className = 'text-xs p-1.5 rounded bg-green-50 text-green-800 border border-green-200';
+                        feedbackContent.className = 'text-xs p-1.5 rounded bg-green-50 dark:bg-green-900/20 text-green-800 dark:text-green-200 border border-green-200 dark:border-green-800';
                         feedbackContent.textContent = '✓ Correct! De doelstelling is specifiek: duidelijk wat (communicatie verbeteren), waar (logistieke dienstverlener), en hoe (analyseren processen, ontwikkelen aanbevelingen).';
                     } else if (criterion === 'M') {
                         // Meetbaar - is NIET aanwezig volgens analyse
-                        feedbackContent.className = 'text-xs p-1.5 rounded bg-yellow-50 text-yellow-800 border border-yellow-200';
+                        feedbackContent.className = 'text-xs p-1.5 rounded bg-yellow-50 dark:bg-yellow-900/20 text-yellow-800 dark:text-yellow-200 border border-yellow-200 dark:border-yellow-800';
                         feedbackContent.textContent = '⚠ Let op: Dit criterium is eigenlijk niet volledig aanwezig. "Verbeteren" is vaag - hoe meet je verbetering? Voeg concrete indicatoren toe (bijv. reductie conflicten, tevredenheidsscore).';
                     } else if (criterion === 'A') {
                         // Acceptabel/Haalbaar - is aanwezig
-                        feedbackContent.className = 'text-xs p-1.5 rounded bg-green-50 text-green-800 border border-green-200';
+                        feedbackContent.className = 'text-xs p-1.5 rounded bg-green-50 dark:bg-green-900/20 text-green-800 dark:text-green-200 border border-green-200 dark:border-green-800';
                         feedbackContent.textContent = '✓ Correct! De doelstelling is haalbaar binnen de beschikbare tijd en middelen voor een studentenonderzoek.';
                     } else if (criterion === 'R') {
                         // Relevant - is aanwezig
-                        feedbackContent.className = 'text-xs p-1.5 rounded bg-green-50 text-green-800 border border-green-200';
+                        feedbackContent.className = 'text-xs p-1.5 rounded bg-green-50 dark:bg-green-900/20 text-green-800 dark:text-green-200 border border-green-200 dark:border-green-800';
                         feedbackContent.textContent = '✓ Correct! De doelstelling draagt direct bij aan het oplossen van het praktijkprobleem (communicatieproblemen).';
                     } else if (criterion === 'T') {
                         // Tijdgebonden - is aanwezig
-                        feedbackContent.className = 'text-xs p-1.5 rounded bg-green-50 text-green-800 border border-green-200';
+                        feedbackContent.className = 'text-xs p-1.5 rounded bg-green-50 dark:bg-green-900/20 text-green-800 dark:text-green-200 border border-green-200 dark:border-green-800';
                         feedbackContent.textContent = '✓ Correct! Er is een duidelijk tijdsbestek: "binnen een periode van 3 maanden".';
                     }
                 }
@@ -326,7 +326,7 @@ class InteractiveRenderer {
                     
                     if (criterion === 'M') {
                         // Meetbaar - ontbreekt inderdaad
-                        feedbackContent.className = 'text-xs p-1.5 rounded bg-yellow-50 text-yellow-800 border border-yellow-200';
+                        feedbackContent.className = 'text-xs p-1.5 rounded bg-yellow-50 dark:bg-yellow-900/20 text-yellow-800 dark:text-yellow-200 border border-yellow-200 dark:border-yellow-800';
                         feedbackContent.textContent = '⚠ Goed opgemerkt! Dit criterium ontbreekt inderdaad. "Verbeteren" is niet meetbaar - voeg concrete indicatoren toe (bijv. reductie conflicten met 30%, verhoging tevredenheidsscore met minimaal 1 punt).';
                     } else {
                         // Andere criteria zijn wel aanwezig
@@ -349,19 +349,19 @@ class InteractiveRenderer {
         resultDiv.classList.remove('hidden');
 
         if (checkedCount === 5) {
-            resultDiv.className = 'mt-2.5 p-2.5 rounded-lg border-2 border-green-500 bg-green-50';
+            resultDiv.className = 'mt-2.5 p-2.5 rounded-lg border-2 border-green-500 dark:border-green-400 bg-green-50 dark:bg-green-900/20';
             resultTitle.textContent = '✓ Uitstekend!';
             resultTitle.className = 'font-semibold mb-1.5 text-green-800 text-sm';
             resultText.textContent = 'Je hebt geïdentificeerd dat alle SMART-criteria aanwezig zijn. Let wel op: het criterium "Meetbaar" is eigenlijk niet volledig aanwezig - overweeg dit te verbeteren.';
             resultText.className = 'text-xs text-green-800';
             resultList.innerHTML = '';
         } else if (checkedCount >= 3) {
-            resultDiv.className = 'mt-2.5 p-2.5 rounded-lg border-2 border-yellow-500 bg-yellow-50';
+            resultDiv.className = 'mt-2.5 p-2.5 rounded-lg border-2 border-yellow-500 dark:border-yellow-400 bg-yellow-50 dark:bg-yellow-900/20';
             resultTitle.textContent = '⚠ Goed bezig';
-            resultTitle.className = 'font-semibold mb-1.5 text-yellow-800 text-sm';
+            resultTitle.className = 'font-semibold mb-1.5 text-yellow-800 dark:text-yellow-200 text-sm';
             resultText.textContent = `Je hebt ${checkedCount} van de 5 SMART-criteria geïdentificeerd. Bekijk de feedback bij elk criterium hierboven voor meer details.`;
-            resultText.className = 'text-xs text-yellow-800';
-            resultList.className = 'mt-1.5 space-y-0.5 text-xs text-yellow-800';
+            resultText.className = 'text-xs text-yellow-800 dark:text-yellow-200';
+            resultList.className = 'mt-1.5 space-y-0.5 text-xs text-yellow-800 dark:text-yellow-200';
             resultList.innerHTML = uncheckedCriteria.map(c => `<li>• ${c.letter}: ${c.name}</li>`).join('');
         } else {
             resultDiv.className = 'mt-2.5 p-2.5 rounded-lg border-2 border-blue-500 bg-blue-50';
@@ -407,7 +407,7 @@ class InteractiveRenderer {
                             ${isChecked ? 'checked' : ''}
                             onchange="InteractiveRenderer.updateLearningObjective('${checklistId}', '${storageKey}', ${index})"
                         />
-                        <span class="flex-1 text-sm text-gray-700 leading-relaxed ${isChecked ? 'text-green-700 font-medium' : ''}" style="word-break: break-word; hyphens: auto;">
+                        <span class="flex-1 text-sm text-gray-700 dark:text-gray-300 leading-relaxed ${isChecked ? 'text-green-700 dark:text-green-400 font-medium' : ''}" style="word-break: break-word; hyphens: auto;">
                             ${objective}
                         </span>
                     </label>
@@ -443,18 +443,18 @@ class InteractiveRenderer {
                                 />
                             </svg>
                             <div class="absolute inset-0 flex items-center justify-center">
-                                <span class="text-xs font-bold text-gray-700">${percentage}%</span>
+                                <span class="text-xs font-bold text-gray-700 dark:text-gray-300">${percentage}%</span>
                             </div>
                         </div>
                     </div>
                 </div>
-                <p class="text-xs text-gray-600 mb-2.5">${item.description || 'Vink de leerdoelen af die je hebt behaald:'}</p>
+                <p class="text-xs text-gray-600 dark:text-gray-400 mb-2.5">${item.description || 'Vink de leerdoelen af die je hebt behaald:'}</p>
                 <div class="space-y-1">
                     ${itemsHtml}
                 </div>
                 ${percentage === 100 ? `
-                    <div class="mt-2.5 p-2 bg-green-100 border border-green-300 rounded-lg">
-                        <p class="text-xs text-green-800 font-medium text-center">
+                    <div class="mt-2.5 p-2 bg-green-100 dark:bg-green-900/20 border border-green-300 dark:border-green-800 rounded-lg">
+                        <p class="text-xs text-green-800 dark:text-green-200 font-medium text-center">
                             🎉 Gefeliciteerd! Je hebt alle leerdoelen behaald!
                         </p>
                     </div>
@@ -488,11 +488,11 @@ class InteractiveRenderer {
         
         // Update visual state
         if (checkbox.checked) {
-            objectiveText.classList.remove('text-gray-700', 'line-through', 'text-gray-500');
-            objectiveText.classList.add('text-green-700', 'font-medium');
+            objectiveText.classList.remove('text-gray-700', 'dark:text-gray-300', 'line-through', 'text-gray-500', 'dark:text-gray-500');
+            objectiveText.classList.add('text-green-700', 'dark:text-green-400', 'font-medium');
         } else {
-            objectiveText.classList.remove('text-green-700', 'font-medium');
-            objectiveText.classList.add('text-gray-700');
+            objectiveText.classList.remove('text-green-700', 'dark:text-green-400', 'font-medium');
+            objectiveText.classList.add('text-gray-700', 'dark:text-gray-300');
         }
         
         // Update progress indicator
@@ -537,8 +537,8 @@ class InteractiveRenderer {
         if (percentage === 100) {
             if (!completionMsg) {
                 const msgDiv = document.createElement('div');
-                msgDiv.className = 'mt-3 p-2.5 bg-green-100 border border-green-300 rounded-lg';
-                msgDiv.innerHTML = '<p class="text-sm text-green-800 font-medium text-center">🎉 Gefeliciteerd! Je hebt alle leerdoelen behaald!</p>';
+                msgDiv.className = 'mt-3 p-2.5 bg-green-100 dark:bg-green-900/20 border border-green-300 dark:border-green-800 rounded-lg';
+                msgDiv.innerHTML = '<p class="text-sm text-green-800 dark:text-green-200 font-medium text-center">🎉 Gefeliciteerd! Je hebt alle leerdoelen behaald!</p>';
                 checklist.appendChild(msgDiv);
             }
         } else if (completionMsg) {
@@ -570,12 +570,12 @@ class InteractiveRenderer {
         const categoriesHtml = item.categories.map((category, catIndex) => {
             const categoryId = `${exerciseId}-category-${catIndex}`;
             return `
-                <div class="border-2 border-dashed border-gray-300 rounded-lg p-4 min-h-[120px] bg-gray-50 overflow-hidden" id="${categoryId}" 
+                <div class="border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-lg p-4 min-h-[120px] bg-gray-50 dark:bg-gray-800 overflow-hidden" id="${categoryId}" 
                      ondrop="InteractiveRenderer.handleDrop(event, '${exerciseId}', ${catIndex})" 
                      ondragover="InteractiveRenderer.allowDrop(event)"
                      style="word-wrap: break-word; overflow-wrap: break-word;">
-                    <h4 class="font-semibold text-gray-900 mb-2 text-sm break-words">${category.name}</h4>
-                    <p class="text-xs text-gray-600 mb-2 break-words">${category.description || ''}</p>
+                    <h4 class="font-semibold text-gray-900 dark:text-white mb-2 text-sm break-words">${category.name}</h4>
+                    <p class="text-xs text-gray-600 dark:text-gray-400 mb-2 break-words">${category.description || ''}</p>
                     <div class="dropped-items space-y-2 break-words" id="${categoryId}-items" style="word-wrap: break-word; overflow-wrap: break-word;"></div>
                 </div>
             `;
@@ -585,7 +585,7 @@ class InteractiveRenderer {
             const itemId = `${exerciseId}-item-${itemObj.originalIndex}`;
             return `
                 <div 
-                    class="matching-item bg-white border-2 border-blue-300 rounded-lg p-3 cursor-move hover:bg-blue-50 transition-colors"
+                    class="matching-item bg-white dark:bg-gray-800 border-2 border-blue-300 dark:border-blue-600 rounded-lg p-3 cursor-move hover:bg-blue-50 dark:hover:bg-gray-700 transition-colors"
                     id="${itemId}"
                     draggable="true"
                     ondragstart="InteractiveRenderer.handleDragStart(event, '${exerciseId}', ${itemObj.originalIndex})"
@@ -593,7 +593,7 @@ class InteractiveRenderer {
                     data-correct-category="${itemObj.correctCategory}"
                     style="word-wrap: break-word; overflow-wrap: break-word; max-width: 100%;"
                 >
-                    <p class="text-sm text-gray-800 break-words" style="word-wrap: break-word; overflow-wrap: break-word; hyphens: auto;">${itemObj.text}</p>
+                    <p class="text-sm text-gray-800 dark:text-gray-200 break-words" style="word-wrap: break-word; overflow-wrap: break-word; hyphens: auto;">${itemObj.text}</p>
                 </div>
             `;
         }).join('');
@@ -629,17 +629,17 @@ class InteractiveRenderer {
         `;
         
         return `
-            <div class="matching-exercise mb-6 bg-white rounded-lg p-4 border border-gray-200" id="${exerciseId}">
+            <div class="matching-exercise mb-6 bg-white dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700" id="${exerciseId}">
                 <style>${gridStyle}</style>
-                <h3 class="text-lg font-semibold text-gray-900 mb-2">${item.title || 'Matching Oefening'}</h3>
-                <p class="text-sm text-gray-600 mb-4">${item.instruction || 'Sleep de omschrijvingen naar de juiste categorie:'}</p>
+                <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">${item.title || 'Matching Oefening'}</h3>
+                <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">${item.instruction || 'Sleep de omschrijvingen naar de juiste categorie:'}</p>
                 
                 <div class="grid gap-4 mb-4 grid-cols-1 categories-grid">
                     ${categoriesHtml}
                 </div>
                 
-                <div class="border-t-2 border-gray-200 pt-4">
-                    <h4 class="font-semibold text-gray-900 mb-3 text-sm">Sleep deze items naar de juiste categorie:</h4>
+                <div class="border-t-2 border-gray-200 dark:border-gray-700 pt-4">
+                    <h4 class="font-semibold text-gray-900 dark:text-white mb-3 text-sm">Sleep deze items naar de juiste categorie:</h4>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-3" id="${exerciseId}-items-container" style="word-wrap: break-word; overflow-wrap: break-word;">
                         ${itemsHtml}
                     </div>
@@ -768,11 +768,11 @@ class InteractiveRenderer {
                 
                 if (correctCategory === catIndex) {
                     correctCount++;
-                    item.classList.remove('border-blue-300', 'bg-white', 'border-red-500', 'bg-red-50');
-                    item.classList.add('border-green-500', 'bg-green-50');
+                    item.classList.remove('border-blue-300', 'dark:border-blue-600', 'bg-white', 'dark:bg-gray-800', 'border-red-500', 'dark:border-red-400', 'bg-red-50', 'dark:bg-red-900/20');
+                    item.classList.add('border-green-500', 'dark:border-green-400', 'bg-green-50', 'dark:bg-green-900/20');
                 } else {
-                    item.classList.remove('border-blue-300', 'bg-white', 'border-green-500', 'bg-green-50');
-                    item.classList.add('border-red-500', 'bg-red-50');
+                    item.classList.remove('border-blue-300', 'dark:border-blue-600', 'bg-white', 'dark:bg-gray-800', 'border-green-500', 'dark:border-green-400', 'bg-green-50', 'dark:bg-green-900/20');
+                    item.classList.add('border-red-500', 'dark:border-red-400', 'bg-red-50', 'dark:bg-red-900/20');
                     const itemText = item.textContent.trim();
                     
                     const currentCategoryName = categoryNames[catIndex] || `Categorie ${catIndex}`;
@@ -786,10 +786,10 @@ class InteractiveRenderer {
         resultDiv.classList.remove('hidden');
         
         if (correctCount === totalCount && totalCount > 0) {
-            resultDiv.className = 'mt-4 p-3 rounded-lg border-2 border-green-500 bg-green-50';
+            resultDiv.className = 'mt-4 p-3 rounded-lg border-2 border-green-500 dark:border-green-400 bg-green-50 dark:bg-green-900/20';
             resultDiv.innerHTML = `
-                <h4 class="font-semibold mb-2 text-green-800 text-sm">✓ Uitstekend!</h4>
-                <p class="text-sm text-green-800">Je hebt alle items correct gematcht!</p>
+                <h4 class="font-semibold mb-2 text-green-800 dark:text-green-200 text-sm">✓ Uitstekend!</h4>
+                <p class="text-sm text-green-800 dark:text-green-200">Je hebt alle items correct gematcht!</p>
             `;
         } else if (correctCount > 0) {
             resultDiv.className = 'mt-4 p-3 rounded-lg border-2 border-yellow-500 bg-yellow-50';
@@ -828,8 +828,8 @@ class InteractiveRenderer {
             const correctAnswer = statement.correctAnswer === true || statement.correctAnswer === 'true';
             
             return `
-                <div class="border border-gray-200 rounded p-2 mb-1.5 bg-white hover:bg-gray-50 transition-colors" data-correct-answer="${correctAnswer}" data-explanation="${statement.explanation || ''}">
-                    <p class="text-xs text-gray-800 mb-1.5 font-medium leading-relaxed">${statement.text}</p>
+                <div class="border border-gray-200 dark:border-gray-700 rounded p-2 mb-1.5 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors" data-correct-answer="${correctAnswer}" data-explanation="${statement.explanation || ''}">
+                    <p class="text-xs text-gray-800 dark:text-gray-200 mb-1.5 font-medium leading-relaxed">${statement.text}</p>
                     <div class="flex items-center space-x-3">
                         <label class="flex items-center space-x-1.5 cursor-pointer">
                             <input 
@@ -840,7 +840,7 @@ class InteractiveRenderer {
                                 class="w-3.5 h-3.5 text-green-600 border-gray-300 focus:ring-green-500"
                                 onchange="InteractiveRenderer.updateTrueFalseAnswer('${exerciseId}', ${index}, true)"
                             />
-                            <span class="text-xs text-gray-700">Waar</span>
+                            <span class="text-xs text-gray-700 dark:text-gray-300">Waar</span>
                         </label>
                         <label class="flex items-center space-x-1.5 cursor-pointer">
                             <input 
@@ -851,7 +851,7 @@ class InteractiveRenderer {
                                 class="w-3.5 h-3.5 text-red-600 border-gray-300 focus:ring-red-500"
                                 onchange="InteractiveRenderer.updateTrueFalseAnswer('${exerciseId}', ${index}, false)"
                             />
-                            <span class="text-xs text-gray-700">Onwaar</span>
+                            <span class="text-xs text-gray-700 dark:text-gray-300">Onwaar</span>
                         </label>
                     </div>
                     <div id="${statementId}-feedback" class="hidden mt-1.5"></div>
@@ -860,9 +860,9 @@ class InteractiveRenderer {
         }).join('');
 
         return `
-            <div class="true-false-exercise mb-4 bg-white rounded-lg p-3 border border-gray-200" id="${exerciseId}">
-                <h3 class="text-base font-semibold text-gray-900 mb-1.5">${item.title || 'Waar of Onwaar?'}</h3>
-                <p class="text-xs text-gray-600 mb-2.5">${item.instruction || 'Bepaal of de volgende stellingen waar of onwaar zijn:'}</p>
+            <div class="true-false-exercise mb-4 bg-white dark:bg-gray-800 rounded-lg p-3 border border-gray-200 dark:border-gray-700" id="${exerciseId}">
+                <h3 class="text-base font-semibold text-gray-900 dark:text-white mb-1.5">${item.title || 'Waar of Onwaar?'}</h3>
+                <p class="text-xs text-gray-600 dark:text-gray-400 mb-2.5">${item.instruction || 'Bepaal of de volgende stellingen waar of onwaar zijn:'}</p>
                 
                 <div class="space-y-1.5">
                     ${statementsHtml}
@@ -949,7 +949,7 @@ class InteractiveRenderer {
                         return item;
                     }
                     // Otherwise wrap in paragraph
-                    return `<p class="text-gray-700 mb-3">${item}</p>`;
+                    return `<p class="text-gray-700 dark:text-gray-300 mb-3">${item}</p>`;
                 }).join('');
             } else if (typeof stepContent === 'string') {
                 // Check if string contains HTML tags
@@ -959,7 +959,7 @@ class InteractiveRenderer {
                 if (stepContent.trim().startsWith('<')) {
                     return stepContent;
                 }
-                return `<p class="text-gray-700 mb-3">${stepContent}</p>`;
+                return `<p class="text-gray-700 dark:text-gray-300 mb-3">${stepContent}</p>`;
             }
             return '';
         };
@@ -984,7 +984,7 @@ class InteractiveRenderer {
             
             const buttonHtml = `
                 <button
-                    class="w-full px-6 py-4 font-semibold text-lg transition-colors duration-200 ${isOpen ? 'bg-white text-green-600' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'} text-left"
+                    class="w-full px-6 py-4 font-semibold text-lg transition-colors duration-200 ${isOpen ? 'bg-white dark:bg-gray-800 text-green-600 dark:text-green-400' : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'} text-left"
                     ${hasContent ? `onclick="InteractiveRenderer.toggleClickableStep('${stepsId}', ${index}, ${allowMultiple})"` : ''}
                     ${!hasContent ? 'disabled' : ''}
                     id="${stepId}-button"
@@ -996,7 +996,7 @@ class InteractiveRenderer {
                         ${hasContent ? `
                             <i class="fas fa-chevron-down transform transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}" id="${stepId}-icon"></i>
                         ` : `
-                            <span class="text-xs text-gray-400 italic">(Binnenkort beschikbaar)</span>
+                            <span class="text-xs text-gray-400 dark:text-gray-500 italic">(Binnenkort beschikbaar)</span>
                         `}
                     </div>
                 </button>
@@ -1009,7 +1009,7 @@ class InteractiveRenderer {
                         ${buttonHtml}
                         <div
                             id="${stepId}-content"
-                            class="clickable-step-content overflow-hidden transition-all duration-300 ease-in-out bg-white ${isOpen ? 'max-h-[5000px] opacity-100' : 'max-h-0 opacity-0'}"
+                            class="clickable-step-content overflow-hidden transition-all duration-300 ease-in-out bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 ${isOpen ? 'max-h-[5000px] opacity-100' : 'max-h-0 opacity-0'}"
                             style="${isOpen ? 'display: block;' : 'display: none;'}"
                             aria-hidden="${!isOpen}"
                         >
@@ -1025,7 +1025,7 @@ class InteractiveRenderer {
         }).join('');
 
         return `
-            <div class="clickable-steps-container mb-6 border border-gray-200 rounded-lg overflow-hidden bg-white" id="${stepsId}">
+            <div class="clickable-steps-container mb-6 border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden bg-white dark:bg-gray-800 transition-colors duration-200" id="${stepsId}">
                 <div class="space-y-0">
                     ${stepButtons}
                 </div>
@@ -1061,8 +1061,8 @@ class InteractiveRenderer {
             button.setAttribute('aria-expanded', 'false');
             
             // Update button styling
-            button.classList.remove('bg-white', 'text-green-600');
-            button.classList.add('bg-gray-100', 'text-gray-600');
+            button.classList.remove('bg-white', 'dark:bg-gray-800', 'text-green-600', 'dark:text-green-400');
+            button.classList.add('bg-gray-100', 'dark:bg-gray-700', 'text-gray-600', 'dark:text-gray-300');
             
             // Rotate icon
             if (icon) {
@@ -1096,8 +1096,8 @@ class InteractiveRenderer {
                     
                     if (stepButton) {
                         stepButton.setAttribute('aria-expanded', 'false');
-                        stepButton.classList.remove('bg-white', 'text-green-600');
-                        stepButton.classList.add('bg-gray-100', 'text-gray-600');
+                        stepButton.classList.remove('bg-white', 'dark:bg-gray-800', 'text-green-600', 'dark:text-green-400');
+                        stepButton.classList.add('bg-gray-100', 'dark:bg-gray-700', 'text-gray-600', 'dark:text-gray-300');
                     }
                     
                     if (stepIcon) {
@@ -1114,8 +1114,8 @@ class InteractiveRenderer {
             button.setAttribute('aria-expanded', 'true');
             
             // Update button styling
-            button.classList.remove('bg-gray-100', 'text-gray-600');
-            button.classList.add('bg-white', 'text-green-600');
+            button.classList.remove('bg-gray-100', 'dark:bg-gray-700', 'text-gray-600', 'dark:text-gray-300');
+            button.classList.add('bg-white', 'dark:bg-gray-800', 'text-green-600', 'dark:text-green-400');
             
             // Rotate icon
             if (icon) {
@@ -1166,7 +1166,7 @@ class InteractiveRenderer {
                 
                 if (userAnswer === correctAnswer) {
                     correctCount++;
-                    feedbackDiv.className = 'mt-1.5 p-2 rounded border-2 border-green-500 bg-green-50';
+                    feedbackDiv.className = 'mt-1.5 p-2 rounded border-2 border-green-500 dark:border-green-400 bg-green-50 dark:bg-green-900/20';
                     feedbackDiv.innerHTML = `
                         <p class="text-xs text-green-800 font-medium">✓ Correct!</p>
                         ${explanation ? `<p class="text-xs text-green-700 mt-1 leading-relaxed">${explanation}</p>` : ''}
@@ -1174,11 +1174,11 @@ class InteractiveRenderer {
                     trueRadio.disabled = true;
                     falseRadio.disabled = true;
                 } else {
-                    feedbackDiv.className = 'mt-1.5 p-2 rounded border-2 border-red-500 bg-red-50';
+                    feedbackDiv.className = 'mt-1.5 p-2 rounded border-2 border-red-500 dark:border-red-400 bg-red-50 dark:bg-red-900/20';
                     const correctText = correctAnswer ? 'Waar' : 'Onwaar';
                     feedbackDiv.innerHTML = `
-                        <p class="text-xs text-red-800 font-medium">✗ Onjuist. Het juiste antwoord is: <strong>${correctText}</strong></p>
-                        ${explanation ? `<p class="text-xs text-red-700 mt-1 leading-relaxed">${explanation}</p>` : ''}
+                        <p class="text-xs text-red-800 dark:text-red-200 font-medium">✗ Onjuist. Het juiste antwoord is: <strong>${correctText}</strong></p>
+                        ${explanation ? `<p class="text-xs text-red-700 dark:text-red-300 mt-1 leading-relaxed">${explanation}</p>` : ''}
                     `;
                     trueRadio.disabled = true;
                     falseRadio.disabled = true;
@@ -1189,7 +1189,7 @@ class InteractiveRenderer {
         resultDiv.classList.remove('hidden');
         
         if (correctCount === totalCount && totalCount > 0) {
-            resultDiv.className = 'mt-3 p-2.5 rounded-lg border-2 border-green-500 bg-green-50';
+            resultDiv.className = 'mt-3 p-2.5 rounded-lg border-2 border-green-500 dark:border-green-400 bg-green-50 dark:bg-green-900/20';
             resultDiv.innerHTML = `
                 <h4 class="font-semibold mb-1.5 text-green-800 text-xs">✓ Uitstekend!</h4>
                 <p class="text-xs text-green-800">Je hebt alle stellingen correct beantwoord!</p>
@@ -1230,7 +1230,7 @@ class InteractiveRenderer {
             
             return `
                 <button
-                    class="flex-none md:flex-1 px-4 md:px-6 py-3 md:py-4 font-semibold text-sm md:text-lg transition-colors duration-200 ${isActive ? 'bg-white text-green-600' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'} text-left cursor-pointer touch-manipulation active:bg-gray-200 whitespace-normal md:whitespace-nowrap"
+                    class="flex-none md:flex-1 px-4 md:px-6 py-3 md:py-4 font-semibold text-sm md:text-lg transition-colors duration-200 ${isActive ? 'bg-white dark:bg-gray-800 text-green-600 dark:text-green-400' : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'} text-left cursor-pointer touch-manipulation active:bg-gray-200 dark:active:bg-gray-600 whitespace-normal md:whitespace-nowrap"
                     onclick="InteractiveRenderer.switchTab('${tabsId}', ${index})"
                     aria-selected="${isActive}"
                     aria-controls="${contentId}"
@@ -1253,10 +1253,10 @@ class InteractiveRenderer {
                     if (typeof text === 'string' && text.trim().startsWith('<')) {
                         return text; // Already HTML
                     }
-                    return `<p class="text-gray-700 mb-3">${text}</p>`;
+                    return `<p class="text-gray-700 dark:text-gray-300 mb-3">${text}</p>`;
                 }).join('');
             } else if (typeof tab.content === 'string') {
-                contentHtml = `<p class="text-gray-700 mb-3">${tab.content}</p>`;
+                contentHtml = `<p class="text-gray-700 dark:text-gray-300 mb-3">${tab.content}</p>`;
             }
 
             return `
@@ -1274,11 +1274,11 @@ class InteractiveRenderer {
         }).join('');
 
         return `
-            <div class="tabs-container mb-6 border border-gray-200 rounded-lg overflow-hidden bg-white" id="${tabsId}">
+            <div class="tabs-container mb-6 border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden bg-white dark:bg-gray-800 transition-colors duration-200" id="${tabsId}">
                 <div class="flex overflow-x-auto scrollbar-hide -mb-px" role="tablist" style="scrollbar-width: none; -ms-overflow-style: none;">
                     ${tabsButtons}
                 </div>
-                <div class="tab-content-container bg-white">
+                <div class="tab-content-container bg-white dark:bg-gray-800 transition-colors duration-200">
                     ${tabsContent}
                 </div>
             </div>
@@ -1340,11 +1340,11 @@ class InteractiveRenderer {
             tab.setAttribute('aria-selected', isActive);
             
             if (isActive) {
-                tab.classList.remove('bg-gray-100', 'text-gray-600', 'hover:bg-gray-200');
-                tab.classList.add('bg-white', 'text-green-600');
+                tab.classList.remove('bg-gray-100', 'dark:bg-gray-700', 'text-gray-600', 'dark:text-gray-300', 'hover:bg-gray-200', 'dark:hover:bg-gray-600');
+                tab.classList.add('bg-white', 'dark:bg-gray-800', 'text-green-600', 'dark:text-green-400');
             } else {
-                tab.classList.remove('bg-white', 'text-green-600');
-                tab.classList.add('bg-gray-100', 'text-gray-600', 'hover:bg-gray-200');
+                tab.classList.remove('bg-white', 'dark:bg-gray-800', 'text-green-600', 'dark:text-green-400');
+                tab.classList.add('bg-gray-100', 'dark:bg-gray-700', 'text-gray-600', 'dark:text-gray-300', 'hover:bg-gray-200', 'dark:hover:bg-gray-600');
             }
         });
 
@@ -1406,7 +1406,7 @@ class InteractiveRenderer {
                             </div>
                             <div class="flex-1 min-w-0">
                                 <h4 class="font-semibold text-gray-900 text-xs leading-tight">${criterion.name}</h4>
-                                <p class="text-xs text-gray-600 leading-tight mt-0.5">${criterion.description}</p>
+                                <p class="text-xs text-gray-600 dark:text-gray-400 leading-tight mt-0.5">${criterion.description}</p>
                             </div>
                         </div>
                         <div class="flex items-center gap-3 ml-2 flex-shrink-0">
@@ -1420,7 +1420,7 @@ class InteractiveRenderer {
                                     data-criterion="${criterion.letter}"
                                     onchange="InteractiveRenderer.updateConceptQualityStatus('${checklistId}', '${criterion.letter}')"
                                 />
-                                <span class="ml-1.5 text-xs text-gray-600 whitespace-nowrap">Aanwezig</span>
+                                <span class="ml-1.5 text-xs text-gray-600 dark:text-gray-400 whitespace-nowrap">Aanwezig</span>
                             </label>
                             <label class="flex items-center cursor-pointer">
                                 <input 
@@ -1432,7 +1432,7 @@ class InteractiveRenderer {
                                     data-criterion="${criterion.letter}"
                                     onchange="InteractiveRenderer.updateConceptQualityStatus('${checklistId}', '${criterion.letter}')"
                                 />
-                                <span class="ml-1.5 text-xs text-gray-600 whitespace-nowrap">Afwezig</span>
+                                <span class="ml-1.5 text-xs text-gray-600 dark:text-gray-400 whitespace-nowrap">Afwezig</span>
                             </label>
                         </div>
                     </div>
@@ -1458,7 +1458,7 @@ class InteractiveRenderer {
             <div class="concept-quality-checklist-container mb-6 bg-gray-50 rounded-lg p-3" id="${checklistId}" data-definition="${definitionEscaped}">
                 <h3 class="text-base font-semibold text-gray-900 mb-2">${item.title || 'Analyseer deze begripsdefinitie op kwaliteitscriteria:'}</h3>
                 <div class="bg-white border-l-4 border-blue-500 p-2.5 mb-2.5 rounded-r-lg">
-                    <p class="text-xs text-gray-600 mb-1"><strong>Begrip:</strong> ${item.concept}</p>
+                    <p class="text-xs text-gray-600 dark:text-gray-400 mb-1"><strong>Begrip:</strong> ${item.concept}</p>
                     <p class="text-gray-800 text-sm font-medium leading-snug">${item.definition}</p>
                 </div>
                 <div class="space-y-1">
@@ -1719,14 +1719,14 @@ class InteractiveRenderer {
             resultList.className = 'mt-1.5 space-y-0.5 text-xs text-blue-800';
             resultList.innerHTML = nietBeoordeeldCriteria.map(c => `<li>• ${c.letter}: ${c.name} (nog niet beoordeeld)</li>`).join('');
         } else if (aanwezigCount === 3) {
-            resultDiv.className = 'mt-2.5 p-2.5 rounded-lg border-2 border-green-500 bg-green-50';
+            resultDiv.className = 'mt-2.5 p-2.5 rounded-lg border-2 border-green-500 dark:border-green-400 bg-green-50 dark:bg-green-900/20';
             resultTitle.textContent = '✓ Uitstekend!';
             resultTitle.className = 'font-semibold mb-1.5 text-green-800 text-sm';
             resultText.textContent = 'Je hebt geïdentificeerd dat alle kwaliteitscriteria aanwezig zijn. De definitie voldoet aan alle eisen. Controleer de feedback bij elk criterium hierboven voor meer details.';
             resultText.className = 'text-xs text-green-800';
             resultList.innerHTML = '';
         } else if (aanwezigCount >= 2) {
-            resultDiv.className = 'mt-2.5 p-2.5 rounded-lg border-2 border-yellow-500 bg-yellow-50';
+            resultDiv.className = 'mt-2.5 p-2.5 rounded-lg border-2 border-yellow-500 dark:border-yellow-400 bg-yellow-50 dark:bg-yellow-900/20';
             resultTitle.textContent = '⚠ Goed bezig';
             resultTitle.className = 'font-semibold mb-1.5 text-yellow-800 text-sm';
             resultText.textContent = `Je hebt ${aanwezigCount} van de 3 kwaliteitscriteria als aanwezig geïdentificeerd. ${afwezigCount > 0 ? `Er ${afwezigCount === 1 ? 'is' : 'zijn'} ${afwezigCount} criterium/criteria afwezig.` : ''} Bekijk de feedback bij elk criterium hierboven voor verbeterpunten.`;
@@ -1738,7 +1738,7 @@ class InteractiveRenderer {
             }
             resultList.innerHTML = listItems.join('');
         } else {
-            resultDiv.className = 'mt-2.5 p-2.5 rounded-lg border-2 border-red-500 bg-red-50';
+            resultDiv.className = 'mt-2.5 p-2.5 rounded-lg border-2 border-red-500 dark:border-red-400 bg-red-50 dark:bg-red-900/20';
             resultTitle.textContent = '⚠ Aandacht vereist';
             resultTitle.className = 'font-semibold mb-1.5 text-red-800 text-sm';
             resultText.textContent = `Je hebt ${aanwezigCount} van de 3 kwaliteitscriteria als aanwezig geïdentificeerd. Er ${afwezigCount === 1 ? 'is' : 'zijn'} ${afwezigCount} criterium/criteria afwezig. Werk de definitie bij om aan alle kwaliteitscriteria te voldoen.`;
@@ -1831,34 +1831,34 @@ class InteractiveRenderer {
             const escapedExplanation = scenario.explanation.replace(/"/g, '&quot;').replace(/'/g, '&#39;');
             
             return `
-                <div class="border-l-2 border-gray-200 rounded p-4 mb-4 bg-white" data-scenario-id="${scenarioId}" data-correct-query="${escapedCorrectQuery}" data-explanation="${escapedExplanation}">
-                    <h4 class="text-sm font-semibold text-gray-600 mb-2">Scenario ${index + 1}</h4>
-                    <p class="text-sm text-gray-700 mb-3">${scenario.description}</p>
+                <div class="border-l-2 border-gray-200 dark:border-gray-700 rounded p-4 mb-4 bg-white dark:bg-gray-800" data-scenario-id="${scenarioId}" data-correct-query="${escapedCorrectQuery}" data-explanation="${escapedExplanation}">
+                    <h4 class="text-sm font-semibold text-gray-600 dark:text-gray-400 mb-2">Scenario ${index + 1}</h4>
+                    <p class="text-sm text-gray-700 dark:text-gray-300 mb-3">${scenario.description}</p>
                     
                     <div class="mb-3">
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Jouw query:</label>
-                        <div id="${queryDisplayId}" class="min-h-[40px] p-3 bg-gray-50 border border-gray-300 rounded-md mb-2 flex flex-wrap items-center gap-2">
-                            <span class="text-sm text-gray-500 italic">Klik op termen en operatoren hieronder om je query te bouwen</span>
+                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Jouw query:</label>
+                        <div id="${queryDisplayId}" class="min-h-[40px] p-3 bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md mb-2 flex flex-wrap items-center gap-2">
+                            <span class="text-sm text-gray-500 dark:text-gray-400 italic">Klik op termen en operatoren hieronder om je query te bouwen</span>
                         </div>
                         <input type="hidden" id="${queryBuilderId}" value="" />
                     </div>
 
                     <div class="mb-3">
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Zoektermen:</label>
+                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Zoektermen:</label>
                         <div class="flex flex-wrap">
                             ${termsHtml}
                         </div>
                     </div>
 
                     <div class="mb-3">
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Operatoren:</label>
+                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Operatoren:</label>
                         <div class="flex flex-wrap">
                             ${operatorsHtml}
                         </div>
                     </div>
 
                     <div class="mb-3">
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Haakjes:</label>
+                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Haakjes:</label>
                         <div class="flex flex-wrap">
                             ${parenthesesHtml}
                         </div>
@@ -1887,9 +1887,9 @@ class InteractiveRenderer {
         }).join('');
 
         const html = `
-            <div class="boolean-operator-exercise mb-6 bg-white rounded-lg p-4" id="${exerciseId}">
-                <h3 class="text-lg font-semibold text-gray-900 mb-2">${title}</h3>
-                <p class="text-sm text-gray-600 mb-4">${instruction}</p>
+            <div class="boolean-operator-exercise mb-6 bg-white dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700" id="${exerciseId}">
+                <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">${title}</h3>
+                <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">${instruction}</p>
                 
                 <div class="space-y-4">
                     ${scenariosHtml}
@@ -2037,9 +2037,9 @@ class InteractiveRenderer {
             } else if (trimmed === 'NOT' || trimmed.match(/^\s*NOT\s*$/)) {
                 return `<span class="px-2 py-1 bg-purple-200 text-purple-900 rounded font-bold text-sm">NOT</span>`;
             } else if (trimmed === '(') {
-                return `<span class="px-1 text-gray-600 font-bold text-lg">(</span>`;
+                return `<span class="px-1 text-gray-600 dark:text-gray-400 font-bold text-lg">(</span>`;
             } else if (trimmed === ')') {
-                return `<span class="px-1 text-gray-600 font-bold text-lg">)</span>`;
+                return `<span class="px-1 text-gray-600 dark:text-gray-400 font-bold text-lg">)</span>`;
             } else if (trimmed) {
                 // It's a term (could be multi-word like "supply chain")
                 return `<span class="px-2 py-1 bg-blue-200 text-blue-900 rounded font-medium text-sm">${trimmed}</span>`;
@@ -2099,26 +2099,26 @@ class InteractiveRenderer {
         feedback.classList.remove('hidden');
 
         if (normalizedUser === normalizedCorrect) {
-            feedback.className = 'p-3 rounded-lg bg-green-50 border border-green-200';
+            feedback.className = 'p-3 rounded-lg bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800';
             feedback.innerHTML = `
                 <div class="flex items-start">
-                    <i class="fas fa-check-circle text-green-600 text-lg mr-2 mt-0.5"></i>
+                    <i class="fas fa-check-circle text-green-600 dark:text-green-400 text-lg mr-2 mt-0.5"></i>
                     <div>
-                        <p class="text-sm font-semibold text-green-900 mb-1">✓ Correct!</p>
-                        <p class="text-sm text-green-800">${explanation}</p>
+                        <p class="text-sm font-semibold text-green-900 dark:text-green-200 mb-1">✓ Correct!</p>
+                        <p class="text-sm text-green-800 dark:text-green-300">${explanation}</p>
                     </div>
                 </div>
             `;
         } else {
-            feedback.className = 'p-3 rounded-lg bg-red-50 border border-red-200';
+            feedback.className = 'p-3 rounded-lg bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800';
             feedback.innerHTML = `
                 <div class="flex items-start">
-                    <i class="fas fa-times-circle text-red-600 text-lg mr-2 mt-0.5"></i>
+                    <i class="fas fa-times-circle text-red-600 dark:text-red-400 text-lg mr-2 mt-0.5"></i>
                     <div>
-                        <p class="text-sm font-semibold text-red-900 mb-1">Niet correct</p>
-                        <p class="text-sm text-red-800 mb-2">Je query: <code class="bg-red-100 px-1 py-0.5 rounded">${userQuery || '(leeg)'}</code></p>
-                        <p class="text-sm text-red-800 mb-2">Correcte query: <code class="bg-green-100 px-1 py-0.5 rounded">${correctQuery}</code></p>
-                        <p class="text-sm text-red-800">${explanation}</p>
+                        <p class="text-sm font-semibold text-red-900 dark:text-red-200 mb-1">Niet correct</p>
+                        <p class="text-sm text-red-800 dark:text-red-300 mb-2">Je query: <code class="bg-red-100 dark:bg-red-900/30 px-1 py-0.5 rounded">${userQuery || '(leeg)'}</code></p>
+                        <p class="text-sm text-red-800 dark:text-red-300 mb-2">Correcte query: <code class="bg-green-100 dark:bg-green-900/30 px-1 py-0.5 rounded">${correctQuery}</code></p>
+                        <p class="text-sm text-red-800 dark:text-red-300">${explanation}</p>
                     </div>
                 </div>
             `;
@@ -2139,17 +2139,17 @@ class InteractiveRenderer {
         const availableTermsStr = JSON.stringify(availableTerms);
 
         const html = `
-            <div class="ai-query-exercise mb-6 bg-white rounded-lg p-4" id="${exerciseId}" data-generate-from-theory="${generateFromTheory}" data-available-terms='${availableTermsStr}' data-scenario-count="0">
-                <h3 class="text-lg font-semibold text-gray-900 mb-2">${title}</h3>
-                <p class="text-sm text-gray-600 mb-4">${instruction}</p>
+            <div class="ai-query-exercise mb-6 bg-white dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700" id="${exerciseId}" data-generate-from-theory="${generateFromTheory}" data-available-terms='${availableTermsStr}' data-scenario-count="0">
+                <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">${title}</h3>
+                <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">${instruction}</p>
                 
                 <div id="${exerciseId}-scenario-container" class="hidden">
-                    <div class="rounded mb-4 bg-white">
-                        <div id="${exerciseId}-scenario-number" class="text-sm font-semibold text-gray-600 mb-2"></div>
-                        <p id="${exerciseId}-description" class="text-sm text-gray-700 mb-3"></p>
+                    <div class="rounded mb-4 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 p-4">
+                        <div id="${exerciseId}-scenario-number" class="text-sm font-semibold text-gray-600 dark:text-gray-400 mb-2"></div>
+                        <p id="${exerciseId}-description" class="text-sm text-gray-700 dark:text-gray-300 mb-3"></p>
                         
                         <div class="mb-3">
-                            <label class="block text-sm font-medium text-gray-700 mb-2">Beschikbare zoektermen:</label>
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Beschikbare zoektermen:</label>
                             <div id="${exerciseId}-terms-container" class="flex flex-wrap gap-2 mb-3">
                                 ${availableTerms.map(term => {
                                     const escapedTerm = term.replace(/'/g, "&#39;").replace(/"/g, "&quot;");
@@ -2164,7 +2164,7 @@ class InteractiveRenderer {
                         </div>
 
                         <div class="mb-3">
-                            <label class="block text-sm font-medium text-gray-700 mb-2">Operatoren:</label>
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Operatoren:</label>
                             <div class="flex flex-wrap gap-2 mb-3">
                                 <button 
                                     type="button"
@@ -2188,17 +2188,17 @@ class InteractiveRenderer {
                         </div>
 
                         <div class="mb-3">
-                            <label class="block text-sm font-medium text-gray-700 mb-2">Haakjes:</label>
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Haakjes:</label>
                             <div class="flex flex-wrap gap-2 mb-3">
                                 <button 
                                     type="button"
-                                    class="px-3 py-1 bg-gray-50 hover:bg-gray-100 text-gray-700 rounded text-sm font-bold transition-colors cursor-pointer ai-query-btn"
+                                    class="px-3 py-1 bg-gray-50 dark:bg-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300 rounded text-sm font-bold transition-colors cursor-pointer ai-query-btn"
                                     data-exercise-id="${exerciseId}"
                                     data-item="("
                                 >(</button>
                                 <button 
                                     type="button"
-                                    class="px-3 py-1 bg-gray-50 hover:bg-gray-100 text-gray-700 rounded text-sm font-bold transition-colors cursor-pointer ai-query-btn"
+                                    class="px-3 py-1 bg-gray-50 dark:bg-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300 rounded text-sm font-bold transition-colors cursor-pointer ai-query-btn"
                                     data-exercise-id="${exerciseId}"
                                     data-item=")"
                                 >)</button>
@@ -2206,11 +2206,11 @@ class InteractiveRenderer {
                         </div>
 
                         <div class="mb-3">
-                            <label class="block text-sm font-medium text-gray-700 mb-2">Jouw query:</label>
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Jouw query:</label>
                             <input 
                                 type="text" 
                                 id="${exerciseId}-input"
-                                class="w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                                class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                                 placeholder="Bijvoorbeeld: transport AND optimalisatie"
                             />
                         </div>
@@ -2233,7 +2233,7 @@ class InteractiveRenderer {
                         </div>
 
                         <div id="${exerciseId}-loading" class="hidden mb-3">
-                            <div class="flex items-center text-sm text-gray-600">
+                            <div class="flex items-center text-sm text-gray-600 dark:text-gray-400">
                                 <i class="fas fa-spinner fa-spin mr-2"></i>
                                 <span>AI analyseert je query...</span>
                             </div>
@@ -2622,27 +2622,27 @@ class InteractiveRenderer {
             feedback.classList.remove('hidden');
 
             if (data.isCorrect) {
-                feedback.className = 'p-3 rounded-lg bg-green-50 border border-green-200';
+                feedback.className = 'p-3 rounded-lg bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800';
                 feedback.innerHTML = `
                     <div class="flex items-start">
-                        <i class="fas fa-check-circle text-green-600 text-lg mr-2 mt-0.5"></i>
+                        <i class="fas fa-check-circle text-green-600 dark:text-green-400 text-lg mr-2 mt-0.5"></i>
                         <div>
-                            <p class="text-sm font-semibold text-green-900 mb-1">✓ Correct!</p>
-                            <p class="text-sm text-green-800">${data.feedback || data.explanation}</p>
+                            <p class="text-sm font-semibold text-green-900 dark:text-green-200 mb-1">✓ Correct!</p>
+                            <p class="text-sm text-green-800 dark:text-green-300">${data.feedback || data.explanation}</p>
                         </div>
                     </div>
                 `;
             } else {
-                feedback.className = 'p-3 rounded-lg bg-yellow-50 border border-yellow-200';
+                feedback.className = 'p-3 rounded-lg bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800';
                 feedback.innerHTML = `
                     <div class="flex items-start">
-                        <i class="fas fa-exclamation-circle text-yellow-600 text-lg mr-2 mt-0.5"></i>
+                        <i class="fas fa-exclamation-circle text-yellow-600 dark:text-yellow-400 text-lg mr-2 mt-0.5"></i>
                         <div>
-                            <p class="text-sm font-semibold text-yellow-900 mb-1">Feedback</p>
-                            <p class="text-sm text-yellow-800 mb-2">${data.feedback || data.explanation}</p>
+                            <p class="text-sm font-semibold text-yellow-900 dark:text-yellow-200 mb-1">Feedback</p>
+                            <p class="text-sm text-yellow-800 dark:text-yellow-300 mb-2">${data.feedback || data.explanation}</p>
                             ${data.suggestedQuery ? `
-                                <p class="text-sm text-yellow-800">
-                                    <strong>Suggestie:</strong> <code class="bg-yellow-100 px-1 py-0.5 rounded">${data.suggestedQuery}</code>
+                                <p class="text-sm text-yellow-800 dark:text-yellow-300">
+                                    <strong>Suggestie:</strong> <code class="bg-yellow-100 dark:bg-yellow-900/30 px-1 py-0.5 rounded">${data.suggestedQuery}</code>
                                 </p>
                             ` : ''}
                         </div>
@@ -2654,13 +2654,13 @@ class InteractiveRenderer {
             loading.classList.add('hidden');
             input.disabled = false;
             feedback.classList.remove('hidden');
-            feedback.className = 'p-3 rounded-lg bg-red-50 border border-red-200';
+            feedback.className = 'p-3 rounded-lg bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800';
             feedback.innerHTML = `
                 <div class="flex items-start">
-                    <i class="fas fa-times-circle text-red-600 text-lg mr-2 mt-0.5"></i>
+                    <i class="fas fa-times-circle text-red-600 dark:text-red-400 text-lg mr-2 mt-0.5"></i>
                     <div>
-                        <p class="text-sm font-semibold text-red-900 mb-1">Fout</p>
-                        <p class="text-sm text-red-800">Er is een fout opgetreden bij het valideren van je query. Probeer het opnieuw.</p>
+                        <p class="text-sm font-semibold text-red-900 dark:text-red-200 mb-1">Fout</p>
+                        <p class="text-sm text-red-800 dark:text-red-300">Er is een fout opgetreden bij het valideren van je query. Probeer het opnieuw.</p>
                     </div>
                 </div>
             `;

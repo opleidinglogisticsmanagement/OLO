@@ -6,6 +6,11 @@
     <title>Instructies voor Docenten - E-Learning Template</title>
     <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+      }
+    </script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -17,8 +22,20 @@
             --text-light: #6c757d;
         }
         
+        /* Dark mode custom properties */
+        .dark {
+            --primary-blue: #4a9eff;
+            --success-green: #a8d977;
+            --neutral-bg: #1a1a1a;
+            --text-dark: #f5f5f5;
+            --text-light: #a0a0a0;
+        }
+        
         body {
             font-family: 'Inter', sans-serif;
+            background-color: var(--neutral-bg);
+            color: var(--text-dark);
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
         
         .custom-scrollbar::-webkit-scrollbar {
@@ -29,13 +46,25 @@
             background: #f1f1f1;
         }
         
+        .dark .custom-scrollbar::-webkit-scrollbar-track {
+            background: #2a2a2a;
+        }
+        
         .custom-scrollbar::-webkit-scrollbar-thumb {
             background: #c1c1c1;
             border-radius: 3px;
         }
         
+        .dark .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #4a4a4a;
+        }
+        
         .custom-scrollbar::-webkit-scrollbar-thumb:hover {
             background: #a8a8a8;
+        }
+        
+        .dark .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #5a5a5a;
         }
         
         .fade-in {
@@ -251,7 +280,10 @@
         }
     </style>
 </head>
-<body class="bg-gray-50">
+<body class="bg-gray-50 dark:bg-gray-900 transition-colors duration-200">
+    <!-- Dark Mode Utility - MOET EERST GELADEN WORDEN -->
+    <script src="js/DarkMode.js"></script>
+    
     <!-- Skip to content link for accessibility -->
     <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-blue-600 text-white px-4 py-2 rounded-md z-50 focus-ring">
         Spring naar hoofdinhoud
@@ -274,7 +306,7 @@
                             </div>
                         </div>
                         <!-- Close button for mobile -->
-                        <button id="sidebar-close-button" class="lg:hidden p-2 rounded-md text-gray-600 hover:text-gray-900 hover:bg-gray-100 focus-ring ml-2 flex-shrink-0" aria-label="Sluit navigatie menu">
+                        <button id="sidebar-close-button" class="lg:hidden p-2 rounded-md text-gray-600 dark:text-gray-400 hover:text-gray-900 hover:bg-gray-100 focus-ring ml-2 flex-shrink-0" aria-label="Sluit navigatie menu">
                             <i class="fas fa-times text-xl"></i>
                         </button>
                     </div>
@@ -358,7 +390,7 @@
                         <a href="afsluiting.html" class="block p-3 rounded-lg hover:bg-gray-50 focus-ring transition-colors">
                             <div class="flex items-center space-x-3">
                                 <div class="w-8 h-8 bg-gray-100 rounded-lg flex items-center justify-center">
-                                    <i class="fas fa-graduation-cap text-gray-600 text-sm"></i>
+                                    <i class="fas fa-graduation-cap text-gray-600 dark:text-gray-400 text-sm"></i>
                                 </div>
                                 <span class="font-medium text-gray-900">Afsluiting</span>
                             </div>
@@ -374,7 +406,7 @@
             <header class="bg-white shadow-sm border-b border-gray-200 px-4 sm:px-6 py-3 sm:py-4 sticky top-0 z-30">
                 <div class="flex items-center justify-between">
                     <!-- Mobile menu button -->
-                    <button id="mobile-menu-button" class="lg:hidden p-2 rounded-md text-gray-600 hover:text-gray-900 hover:bg-gray-100 focus-ring" aria-label="Open navigatie menu">
+                    <button id="mobile-menu-button" class="lg:hidden p-2 rounded-md text-gray-600 dark:text-gray-400 hover:text-gray-900 hover:bg-gray-100 focus-ring" aria-label="Open navigatie menu">
                         <i class="fas fa-bars text-xl"></i>
                     </button>
 
@@ -383,7 +415,7 @@
 
                     <!-- Breadcrumbs -->
                     <nav class="hidden sm:flex items-center space-x-2 text-sm" aria-label="Breadcrumb">
-                        <a href="index.html" class="text-gray-500 hover:text-gray-700 focus-ring">Start</a>
+                        <a href="index.html" class="text-gray-500 hover:text-gray-700 dark:text-gray-300 focus-ring">Start</a>
                         <i class="fas fa-chevron-right text-gray-400 text-xs"></i>
                         <span class="text-gray-900 font-medium">Instructies voor Docenten</span>
                     </nav>
@@ -409,11 +441,11 @@
                                 </div>
                                 <div class="flex-1 min-w-0 w-full sm:w-auto">
                                     <h2 class="text-lg sm:text-xl font-semibold text-gray-900 mb-3">Belangrijke informatie over dit template</h2>
-                                    <div class="prose max-w-none text-gray-700">
+                                    <div class="prose max-w-none text-gray-700 dark:text-gray-300">
                                         <p class="mb-3">
                                             <strong>Dit template is gemaakt met Cursor</strong> en werkt het beste met Cursor.
                                         </p>
-                                        <p class="text-sm text-gray-600 italic">
+                                        <p class="text-sm text-gray-600 dark:text-gray-400 italic">
                                             Wij raden aan om Cursor te gebruiken voor het beste resultaat bij het aanpassen van dit template.
                                         </p>
                                     </div>
@@ -430,7 +462,7 @@
                                 <div class="flex-1 min-w-0 w-full sm:w-auto">
                                     <h2 class="text-2xl font-semibold text-gray-900 mb-4">Stap 1: Benodigde Software</h2>
                                     <div class="prose max-w-none">
-                                        <p class="text-gray-700 mb-4">
+                                        <p class="text-gray-700 dark:text-gray-300 mb-4">
                                             Om dit e-learning template te gebruiken, heeft u de volgende software nodig. 
                                             Zorg ervoor dat alle benodigde software correct is geïnstalleerd voordat u begint.
                                         </p>
@@ -441,11 +473,11 @@
                                                 <i class="fab fa-github text-gray-900 mr-2"></i>
                                                 GitHub (Verplicht)
                                             </h3>
-                                            <p class="text-gray-700 mb-3">
+                                            <p class="text-gray-700 dark:text-gray-300 mb-3">
                                                 <strong>GitHub is verplicht</strong> voor het gebruik van dit template. Dit platform is gebaseerd op 
                                                 version control met Git en GitHub, wat essentieel is voor het beheren van de code en content.
                                             </p>
-                                            <ul class="list-disc list-inside space-y-2 text-gray-700 mb-3">
+                                            <ul class="list-disc list-inside space-y-2 text-gray-700 dark:text-gray-300 mb-3">
                                                 <li>Maak een <strong>GitHub account</strong> aan als u er nog geen heeft</li>
                                                 <li>Clone of fork deze repository naar uw eigen GitHub account</li>
                                                 <li>Gebruik GitHub Desktop of de command line interface voor versiebeheer</li>
@@ -492,10 +524,10 @@
                                                 <i class="fas fa-code text-gray-900 mr-2"></i>
                                                 Code Editor
                                             </h3>
-                                            <p class="text-gray-700 mb-2">
+                                            <p class="text-gray-700 dark:text-gray-300 mb-2">
                                                 Gebruik een AI-powered code editor voor het bewerken van het template.
                                             </p>
-                                            <ul class="list-disc list-inside space-y-1 text-gray-700 mb-3">
+                                            <ul class="list-disc list-inside space-y-1 text-gray-700 dark:text-gray-300 mb-3">
                                                 <li><strong>Cursor AI</strong> (aanbevolen) - AI-powered editor met geavanceerde functies</li>
                                             </ul>
                                         </div>
@@ -528,7 +560,7 @@
                                 <div class="flex-1 min-w-0 w-full sm:w-auto">
                                     <h2 class="text-2xl font-semibold text-gray-900 mb-4">Stap 2: Basisinformatie van het Vak</h2>
                                     <div class="prose max-w-none">
-                                        <p class="text-gray-700 mb-4">
+                                        <p class="text-gray-700 dark:text-gray-300 mb-4">
                                             Om dit template aan te passen naar uw vak, heeft u de volgende basisinformatie nodig. 
                                             U kunt deze informatie aan Cursor AI geven om het template automatisch aan te passen.
                                         </p>
@@ -546,11 +578,11 @@
                                                         <i class="fas fa-list-check text-blue-600 mr-2"></i>
                                                         Aanpak 1: Gedetailleerde Informatie
                                                     </h4>
-                                                    <p class="text-gray-700 text-sm mb-2">
+                                                    <p class="text-gray-700 dark:text-gray-300 text-sm mb-2">
                                                         <strong>Exact en compleet:</strong> Vul alle onderstaande stappen (1-8) gedetailleerd in. 
                                                         Deze informatie moet exact worden doorgegeven aan Cursor AI.
                                                     </p>
-                                                    <p class="text-gray-600 text-xs italic">
+                                                    <p class="text-gray-600 dark:text-gray-400 text-xs italic">
                                                         Ideaal als u alle details precies wilt controleren en specificeren.
                                                     </p>
                                                 </div>
@@ -561,11 +593,11 @@
                                                         <i class="fas fa-lightbulb text-green-600 mr-2"></i>
                                                         Aanpak 2: Eenvoudige Overzicht
                                                     </h4>
-                                                    <p class="text-gray-700 text-sm mb-2">
+                                                    <p class="text-gray-700 dark:text-gray-300 text-sm mb-2">
                                                         <strong>Minder detail nodig:</strong> Geef alleen de naam van het vak, de onderwijscontext, 
                                                         en een overzicht van wat er per week wordt gedaan.
                                                     </p>
-                                                    <p class="text-gray-600 text-xs italic">
+                                                    <p class="text-gray-600 dark:text-gray-400 text-xs italic">
                                                         Cursor kan de rest zelf invullen en de basisstructuur aanpassen.
                                                     </p>
                                                 </div>
@@ -578,13 +610,13 @@
                                                 <i class="fas fa-lightbulb text-green-600 mr-2"></i>
                                                 Aanpak 2: Eenvoudige Overzicht (Minimum Informatie)
                                             </h3>
-                                            <p class="text-gray-700 mb-3">
+                                            <p class="text-gray-700 dark:text-gray-300 mb-3">
                                                 Als u <strong>alleen een overzicht</strong> geeft van wat er per week wordt gedaan in uw vak, 
                                                 kan Cursor AI de hele basisstructuur van de hoofdpagina en andere pagina's automatisch aanpassen.
                                             </p>
                                             <div class="bg-white rounded p-4 border border-gray-200 mb-3">
                                                 <h4 class="font-semibold text-gray-900 mb-2">Minimale informatie die nodig is:</h4>
-                                                <ul class="list-disc list-inside space-y-1 text-gray-700 text-sm">
+                                                <ul class="list-disc list-inside space-y-1 text-gray-700 dark:text-gray-300 text-sm">
                                                     <li><strong>Naam van het vak</strong> (bijvoorbeeld: "Strategic Management")</li>
                                                     <li><strong>Onderwijscontext</strong> (bijvoorbeeld: HBO Bedrijfskunde, jaar 2)</li>
                                                     <li><strong>Overzicht per week</strong> - Wat gebeurt er per week in uw vak?</li>
@@ -602,7 +634,7 @@
                                                     Pas de hele basisstructuur aan op basis van deze informatie."
                                                 </div>
                                             </div>
-                                            <p class="text-gray-600 text-xs italic mt-3">
+                                            <p class="text-gray-600 dark:text-gray-400 text-xs italic mt-3">
                                                 <i class="fas fa-info-circle text-green-600 mr-1"></i>
                                                 <strong>Tip:</strong> U hoeft niet alle gedetailleerde sub-stappen hieronder uit te werken. 
                                                 Een overzicht per week is voldoende voor Cursor AI om de basisstructuur aan te passen.
@@ -615,11 +647,11 @@
                                                 <i class="fas fa-clipboard-list text-blue-600 mr-2"></i>
                                                 Aanpak 1: Gedetailleerde Informatie (Stappen 1-8)
                                             </h3>
-                                            <p class="text-gray-700 mb-3">
+                                            <p class="text-gray-700 dark:text-gray-300 mb-3">
                                                 Als u alle details precies wilt specificeren, gebruik dan onderstaande stap-voor-stap lijst. 
                                                 Deze informatie moet <strong>exact</strong> worden doorgegeven aan Cursor AI.
                                             </p>
-                                            <p class="text-gray-600 text-sm italic">
+                                            <p class="text-gray-600 dark:text-gray-400 text-sm italic">
                                                 <i class="fas fa-exclamation-triangle text-blue-600 mr-1"></i>
                                                 <strong>Let op:</strong> Bij deze aanpak moet alle informatie exact en compleet zijn voor het beste resultaat.
                                             </p>
@@ -633,10 +665,10 @@
                                                     <span class="bg-blue-600 text-white rounded-full w-6 h-6 inline-flex items-center justify-center text-sm mr-2">1</span>
                                                     Naam van het vak
                                                 </h4>
-                                                <p class="text-gray-700 text-sm mb-2">
+                                                <p class="text-gray-700 dark:text-gray-300 text-sm mb-2">
                                                     De volledige naam van uw vak of module (bijvoorbeeld: "Opzetten van Logistieke Onderzoeken")
                                                 </p>
-                                                <div class="bg-white rounded p-2 text-xs text-gray-600 italic border border-gray-200">
+                                                <div class="bg-white rounded p-2 text-xs text-gray-600 dark:text-gray-400 italic border border-gray-200">
                                                     <strong>Voorbeeld:</strong> "Strategic Management" of "Inleiding tot Marketing"
                                                 </div>
                                             </div>
@@ -647,10 +679,10 @@
                                                     <span class="bg-blue-600 text-white rounded-full w-6 h-6 inline-flex items-center justify-center text-sm mr-2">2</span>
                                                     Korte omschrijving / Subtitle
                                                 </h4>
-                                                <p class="text-gray-700 text-sm mb-2">
+                                                <p class="text-gray-700 dark:text-gray-300 text-sm mb-2">
                                                     Een korte, pakkende beschrijving van het vak (1-2 zinnen die verschijnen onder de titel)
                                                 </p>
-                                                <div class="bg-white rounded p-2 text-xs text-gray-600 italic border border-gray-200">
+                                                <div class="bg-white rounded p-2 text-xs text-gray-600 dark:text-gray-400 italic border border-gray-200">
                                                     <strong>Voorbeeld:</strong> "Een praktijkgerichte module over het opzetten en uitvoeren van logistiek onderzoek"
                                                 </div>
                                             </div>
@@ -661,10 +693,10 @@
                                                     <span class="bg-blue-600 text-white rounded-full w-6 h-6 inline-flex items-center justify-center text-sm mr-2">3</span>
                                                     Uitgebreide beschrijving van het vak
                                                 </h4>
-                                                <p class="text-gray-700 text-sm mb-2">
+                                                <p class="text-gray-700 dark:text-gray-300 text-sm mb-2">
                                                     Wat leert de student in dit vak? Wat is de inhoud en het doel? (Paragraaf voor de "Over dit vak" sectie)
                                                 </p>
-                                                <div class="bg-white rounded p-2 text-xs text-gray-600 italic border border-gray-200">
+                                                <div class="bg-white rounded p-2 text-xs text-gray-600 dark:text-gray-400 italic border border-gray-200">
                                                     <strong>Tip:</strong> Beschrijf de hoofddoelen en belangrijkste leerinhoud in 2-3 paragrafen
                                                 </div>
                                             </div>
@@ -675,10 +707,10 @@
                                                     <span class="bg-blue-600 text-white rounded-full w-6 h-6 inline-flex items-center justify-center text-sm mr-2">4</span>
                                                     Leerdoelen ("Wat ga je leren?")
                                                 </h4>
-                                                <p class="text-gray-700 text-sm mb-2">
+                                                <p class="text-gray-700 dark:text-gray-300 text-sm mb-2">
                                                     Een lijst met 3-6 concrete leerdoelen die studenten zullen behalen
                                                 </p>
-                                                <div class="bg-white rounded p-2 text-xs text-gray-600 italic border border-gray-200">
+                                                <div class="bg-white rounded p-2 text-xs text-gray-600 dark:text-gray-400 italic border border-gray-200">
                                                     <strong>Voorbeeld:</strong><br>
                                                     • Het verkennen en afbakenen van praktijkproblemen<br>
                                                     • Het formuleren van doelstellingen voor onderzoek<br>
@@ -692,10 +724,10 @@
                                                     <span class="bg-blue-600 text-white rounded-full w-6 h-6 inline-flex items-center justify-center text-sm mr-2">5</span>
                                                     Leeruitkomst (Optioneel maar aanbevolen)
                                                 </h4>
-                                                <p class="text-gray-700 text-sm mb-2">
+                                                <p class="text-gray-700 dark:text-gray-300 text-sm mb-2">
                                                     De formele leeruitkomst zoals beschreven in het curriculum (kan indien beschikbaar worden toegevoegd)
                                                 </p>
-                                                <div class="bg-white rounded p-2 text-xs text-gray-600 italic border border-gray-200">
+                                                <div class="bg-white rounded p-2 text-xs text-gray-600 dark:text-gray-400 italic border border-gray-200">
                                                     <strong>Voorbeeld:</strong> "De student is als individu of onderdeel van een duo in staat om een gefundeerd onderzoeksplan op te stellen..."
                                                 </div>
                                             </div>
@@ -706,10 +738,10 @@
                                                     <span class="bg-blue-600 text-white rounded-full w-6 h-6 inline-flex items-center justify-center text-sm mr-2">6</span>
                                                     Aantal weken / modules
                                                 </h4>
-                                                <p class="text-gray-700 text-sm mb-2">
+                                                <p class="text-gray-700 dark:text-gray-300 text-sm mb-2">
                                                     Hoeveel weken of modules heeft uw vak? (De structuur kan worden aangepast - weken kunnen worden toegevoegd of verwijderd)
                                                 </p>
-                                                <div class="bg-white rounded p-2 text-xs text-gray-600 italic border border-gray-200">
+                                                <div class="bg-white rounded p-2 text-xs text-gray-600 dark:text-gray-400 italic border border-gray-200">
                                                     <strong>Voorbeeld:</strong> 7 weken, 10 modules, 12 lessen, etc.
                                                 </div>
                                             </div>
@@ -720,10 +752,10 @@
                                                     <span class="bg-blue-600 text-white rounded-full w-6 h-6 inline-flex items-center justify-center text-sm mr-2">7</span>
                                                     Titel en beschrijving per week
                                                 </h4>
-                                                <p class="text-gray-700 text-sm mb-2">
+                                                <p class="text-gray-700 dark:text-gray-300 text-sm mb-2">
                                                     Voor elke week/module: een titel en een korte beschrijving (1-2 zinnen) van wat de student die week leert
                                                 </p>
-                                                <div class="bg-white rounded p-2 text-xs text-gray-600 italic border border-gray-200">
+                                                <div class="bg-white rounded p-2 text-xs text-gray-600 dark:text-gray-400 italic border border-gray-200">
                                                     <strong>Voorbeeld:</strong><br>
                                                     Week 1: "Inleiding" - Korte beschrijving van week 1<br>
                                                     Week 2: "Basisprincipes" - Korte beschrijving van week 2<br>
@@ -737,10 +769,10 @@
                                                     <span class="bg-blue-600 text-white rounded-full w-6 h-6 inline-flex items-center justify-center text-sm mr-2">8</span>
                                                     Sidebar informatie (Optioneel)
                                                 </h4>
-                                                <p class="text-gray-700 text-sm mb-2">
+                                                <p class="text-gray-700 dark:text-gray-300 text-sm mb-2">
                                                     Titel die in de sidebar verschijnt (standaard: "E-Learning") en eventuele afkorting (bijvoorbeeld: "OLO")
                                                 </p>
-                                                <div class="bg-white rounded p-2 text-xs text-gray-600 italic border border-gray-200">
+                                                <div class="bg-white rounded p-2 text-xs text-gray-600 dark:text-gray-400 italic border border-gray-200">
                                                     <strong>Voorbeeld:</strong> Hoofdtitel: "E-Learning", Ondertitel: "Opzetten van Logistieke Onderzoeken (OLO)"
                                                 </div>
                                             </div>
@@ -752,11 +784,11 @@
                                                 <i class="fas fa-robot text-green-600 mr-2"></i>
                                                 Hoe gebruikt u deze informatie met Cursor AI?
                                             </h3>
-                                            <p class="text-gray-700 mb-3">
+                                            <p class="text-gray-700 dark:text-gray-300 mb-3">
                                                 Geef alle bovenstaande informatie in een duidelijk geformatteerde prompt aan de AI:
                                             </p>
                                             <div class="bg-white rounded p-4 border border-gray-200 text-sm font-mono">
-                                                <div class="text-gray-600 mb-2">Voorbeeld prompt:</div>
+                                                <div class="text-gray-600 dark:text-gray-400 mb-2">Voorbeeld prompt:</div>
                                                 <div class="text-gray-800">
                                                     "Pas het e-learning template aan met de volgende informatie:<br>
                                                     <strong>Vaknaam:</strong> [Uw vaknaam]<br>
@@ -797,7 +829,7 @@
                                 <div class="flex-1 min-w-0 w-full sm:w-auto">
                                     <h2 class="text-2xl font-semibold text-gray-900 mb-4">Stap 3: Content per Week Leveren</h2>
                                     <div class="prose max-w-none">
-                                        <p class="text-gray-700 mb-4">
+                                        <p class="text-gray-700 dark:text-gray-300 mb-4">
                                             In dit deel wordt uitgelegd welke standaard onderdelen het template bevat en hoe u uw eigen content per week kunt leveren. 
                                             U leert welke content types u kunt gebruiken en hoe u deze structureert.
                                         </p>
@@ -824,11 +856,11 @@
                                                 <i class="fas fa-list-check text-blue-600 mr-2"></i>
                                                 Standaard Onderdelen in het Template
                                             </h3>
-                                            <p class="text-gray-700 mb-3">
+                                            <p class="text-gray-700 dark:text-gray-300 mb-3">
                                                 Elke week pagina in het template bevat de volgende standaard secties die u kunt vullen met uw eigen content:
                                             </p>
                                             <div class="bg-white rounded-lg p-4 border border-gray-200 mb-3">
-                                                <ul class="list-disc list-inside space-y-2 text-gray-700 text-sm">
+                                                <ul class="list-disc list-inside space-y-2 text-gray-700 dark:text-gray-300 text-sm">
                                                     <li><strong>Intro</strong> - Titel, subtitel en beschrijving van de week</li>
                                                     <li><strong>Leerdoelen</strong> - Lijst met leerdoelen die studenten behalen in deze week</li>
                                                     <li><strong>Theorie</strong> - Het hoofdgedeelte met theorie en content (paragrafen, URL's, documenten, highlights, etc.)</li>
@@ -843,7 +875,7 @@
                                                 <i class="fas fa-cube text-green-600 mr-2"></i>
                                                 Welke content types kunt u leveren?
                                             </h3>
-                                            <p class="text-gray-700 mb-3">
+                                            <p class="text-gray-700 dark:text-gray-300 mb-3">
                                                 In de <strong>theorie sectie</strong> kunt u de volgende content types gebruiken om uw lesmateriaal toe te voegen:
                                             </p>
                                             <div class="grid md:grid-cols-2 gap-3 mb-3">
@@ -873,7 +905,7 @@
                                                 </div>
                                             </div>
                                             <div class="bg-gray-50 rounded p-3 border border-gray-200">
-                                                <i class="fas fa-code text-gray-600 mr-2"></i>
+                                                <i class="fas fa-code text-gray-600 dark:text-gray-400 mr-2"></i>
                                                 <strong>HTML</strong> - Custom HTML content (optioneel, minder gebruikt)
                                             </div>
                                         </div>
@@ -884,7 +916,7 @@
                                                 <i class="fas fa-book-open text-purple-600 mr-2"></i>
                                                 Voorbeelden: hoe levert u uw content?
                                             </h3>
-                                            <p class="text-gray-700 mb-4 text-sm">
+                                            <p class="text-gray-700 dark:text-gray-300 mb-4 text-sm">
                                                 Hieronder vindt u voorbeelden van hoe u elk content type kunt leveren aan Cursor AI. 
                                                 Cursor AI kan deze informatie automatisch omzetten naar de juiste JSON structuur.
                                             </p>
@@ -895,17 +927,17 @@
                                                     <span class="bg-blue-100 text-blue-600 rounded-full w-6 h-6 inline-flex items-center justify-center text-xs mr-2">1</span>
                                                     Paragrafen
                                                 </h4>
-                                                <p class="text-gray-700 text-sm mb-2">
+                                                <p class="text-gray-700 dark:text-gray-300 text-sm mb-2">
                                                     <strong>Wat is het?</strong> Uw theorie teksten, uitleg en instructies in paragraaf vorm.
                                                 </p>
-                                                <p class="text-gray-700 text-sm mb-3">
+                                                <p class="text-gray-700 dark:text-gray-300 text-sm mb-3">
                                                     <strong>Hoe levert u het?</strong> Geef gewoon uw tekst aan de AI. Bijvoorbeeld:
                                                 </p>
                                                 <div class="bg-gray-50 rounded p-3 border border-gray-200 text-sm font-mono text-gray-800 mb-2">
                                                     "Voeg de volgende theorie toe:<br>
                                                     Je gaat een onderzoek uitvoeren maar hoe weet je nu hoe je moet gaan starten? Je hebt je eerste gesprekken gehad en vraagt je nu af hoe je verder moet gaan. Door middel van een doelstelling zorgen we ervoor dat je allereerst een probleem gaat verkennen om vervolgens een doelstelling op te stellen..."
                                                 </div>
-                                                <div class="bg-blue-50 rounded p-2 border border-blue-200 text-xs text-gray-700 italic">
+                                                <div class="bg-blue-50 rounded p-2 border border-blue-200 text-xs text-gray-700 dark:text-gray-300 italic">
                                                     <strong>Tip:</strong> U kunt meerdere paragrafen achter elkaar geven. De AI zorgt voor de juiste structuur.
                                                 </div>
                                             </div>
@@ -916,10 +948,10 @@
                                                     <span class="bg-purple-100 text-purple-600 rounded-full w-6 h-6 inline-flex items-center justify-center text-xs mr-2">2</span>
                                                     URL's
                                                 </h4>
-                                                <p class="text-gray-700 text-sm mb-2">
+                                                <p class="text-gray-700 dark:text-gray-300 text-sm mb-2">
                                                     <strong>Wat is het?</strong> Links naar externe websites, artikelen, tools of andere online resources.
                                                 </p>
-                                                <p class="text-gray-700 text-sm mb-3">
+                                                <p class="text-gray-700 dark:text-gray-300 text-sm mb-3">
                                                     <strong>Hoe levert u het?</strong> Geef de URL en beschrijvende link tekst:
                                                 </p>
                                                 <div class="bg-gray-50 rounded p-3 border border-gray-200 text-sm font-mono text-gray-800 mb-2">
@@ -927,7 +959,7 @@
                                                     <strong>URL:</strong> https://media.windesheim.nl/Mediasite/Play/3a0b3b8a6527464fb5373e80bba221251d<br>
                                                     <strong>Link tekst:</strong> Bekijk de kennisclip"
                                                 </div>
-                                                <div class="bg-purple-50 rounded p-2 border border-purple-200 text-xs text-gray-700 italic">
+                                                <div class="bg-purple-50 rounded p-2 border border-purple-200 text-xs text-gray-700 dark:text-gray-300 italic">
                                                     <strong>Tip:</strong> URL's worden standaard in een nieuw tabblad geopend voor gebruiksvriendelijkheid.
                                                 </div>
                                             </div>
@@ -938,7 +970,7 @@
                                                     <span class="bg-green-100 text-green-600 rounded-full w-6 h-6 inline-flex items-center justify-center text-xs mr-2">3</span>
                                                     Afbeeldingen
                                                 </h4>
-                                                <p class="text-gray-700 text-sm mb-2">
+                                                <p class="text-gray-700 dark:text-gray-300 text-sm mb-2">
                                                     <strong>Wat is het?</strong> Foto's, illustraties, diagrammen of andere afbeeldingen die u in de les wilt tonen.
                                                 </p>
                                                 <div class="bg-yellow-50 border-l-4 border-yellow-500 p-3 rounded-r-lg mb-3">
@@ -953,7 +985,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <p class="text-gray-700 text-sm mb-3">
+                                                <p class="text-gray-700 dark:text-gray-300 text-sm mb-3">
                                                     <strong>Hoe levert u het?</strong> Geef het pad naar de afbeelding (naar de map) en beschrijvende tekst:
                                                 </p>
                                                 <div class="bg-gray-50 rounded p-3 border border-gray-200 text-sm font-mono text-gray-800 mb-2">
@@ -961,13 +993,13 @@
                                                     <strong>Pad:</strong> assets/images/voorbeeld.png<br>
                                                     <strong>Alt tekst:</strong> Beschrijving van de afbeelding"
                                                 </div>
-                                                <div class="bg-green-50 rounded p-2 border border-green-200 text-xs text-gray-700 mb-2">
+                                                <div class="bg-green-50 rounded p-2 border border-green-200 text-xs text-gray-700 dark:text-gray-300 mb-2">
                                                     <strong>Stappen:</strong><br>
                                                     1. Plaats uw afbeelding (PNG, JPG, etc.) in de map <code>assets/images/</code><br>
                                                     2. Geef aan Cursor AI het pad naar de afbeelding (bijv. <code>assets/images/voorbeeld.png</code>)<br>
                                                     3. Geef een beschrijvende alt tekst voor toegankelijkheid
                                                 </div>
-                                                <div class="bg-green-50 rounded p-2 border border-green-200 text-xs text-gray-700 italic">
+                                                <div class="bg-green-50 rounded p-2 border border-green-200 text-xs text-gray-700 dark:text-gray-300 italic">
                                                     <strong>Tip:</strong> De laatste afbeelding in een week krijgt automatisch klikbare modal functionaliteit voor vergroting.
                                                 </div>
                                             </div>
@@ -978,7 +1010,7 @@
                                                     <span class="bg-red-100 text-red-600 rounded-full w-6 h-6 inline-flex items-center justify-center text-xs mr-2">4</span>
                                                     Documenten
                                                 </h4>
-                                                <p class="text-gray-700 text-sm mb-2">
+                                                <p class="text-gray-700 dark:text-gray-300 text-sm mb-2">
                                                     <strong>Wat is het?</strong> Downloadbare bestanden zoals PDF's, Word documenten, Excel sheets of andere documenten.
                                                 </p>
                                                 <div class="bg-yellow-50 border-l-4 border-yellow-500 p-3 rounded-r-lg mb-3">
@@ -993,7 +1025,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <p class="text-gray-700 text-sm mb-3">
+                                                <p class="text-gray-700 dark:text-gray-300 text-sm mb-3">
                                                     <strong>Hoe levert u het?</strong> Geef het pad naar het document (naar de map) en download tekst:
                                                 </p>
                                                 <div class="bg-gray-50 rounded p-3 border border-gray-200 text-sm font-mono text-gray-800 mb-2">
@@ -1002,13 +1034,13 @@
                                                     <strong>Link tekst:</strong> Download het voorbeelddocument<br>
                                                     <strong>Type:</strong> PDF"
                                                 </div>
-                                                <div class="bg-red-50 rounded p-2 border border-red-200 text-xs text-gray-700 mb-2">
+                                                <div class="bg-red-50 rounded p-2 border border-red-200 text-xs text-gray-700 dark:text-gray-300 mb-2">
                                                     <strong>Stappen:</strong><br>
                                                     1. Plaats uw document (PDF, DOCX, etc.) in de map <code>assets/Documents/</code><br>
                                                     2. Geef aan Cursor AI het pad naar het document (bijv. <code>assets/Documents/voorbeeld.pdf</code>)<br>
                                                     3. Geef een beschrijvende link tekst voor de download knop
                                                 </div>
-                                                <div class="bg-red-50 rounded p-2 border border-red-200 text-xs text-gray-700 italic">
+                                                <div class="bg-red-50 rounded p-2 border border-red-200 text-xs text-gray-700 dark:text-gray-300 italic">
                                                     <strong>Tip:</strong> Documenten worden automatisch voorzien van een geschikt icoon op basis van het bestandstype.
                                                 </div>
                                             </div>
@@ -1019,10 +1051,10 @@
                                                     <span class="bg-red-100 text-red-600 rounded-full w-6 h-6 inline-flex items-center justify-center text-xs mr-2">5</span>
                                                     Video's
                                                 </h4>
-                                                <p class="text-gray-700 text-sm mb-2">
+                                                <p class="text-gray-700 dark:text-gray-300 text-sm mb-2">
                                                     <strong>Wat is het?</strong> Video content zoals kennisclips, instructievideo's of opnames van colleges.
                                                 </p>
-                                                <p class="text-gray-700 text-sm mb-3">
+                                                <p class="text-gray-700 dark:text-gray-300 text-sm mb-3">
                                                     <strong>Hoe levert u het?</strong> Geef de embed URL van de video (YouTube, Vimeo, etc.):
                                                 </p>
                                                 <div class="bg-gray-50 rounded p-3 border border-gray-200 text-sm font-mono text-gray-800 mb-2">
@@ -1031,7 +1063,7 @@
                                                     <strong>Embed URL:</strong> https://www.youtube.com/embed/VIDEO_ID<br>
                                                     <strong>Beschrijving:</strong> Bekijk deze kennisclip over het opstellen van een doelstelling"
                                                 </div>
-                                                <div class="bg-red-50 rounded p-2 border border-red-200 text-xs text-gray-700 italic">
+                                                <div class="bg-red-50 rounded p-2 border border-red-200 text-xs text-gray-700 dark:text-gray-300 italic">
                                                     <strong>Tip:</strong> Voor YouTube: gebruik de embed URL (niet de gewone share URL). Voor andere platforms: gebruik de embed/iframe URL.
                                                 </div>
                                             </div>
@@ -1042,10 +1074,10 @@
                                                     <span class="bg-yellow-100 text-yellow-600 rounded-full w-6 h-6 inline-flex items-center justify-center text-xs mr-2">6</span>
                                                     Highlights (belangrijke informatie)
                                                 </h4>
-                                                <p class="text-gray-700 text-sm mb-2">
+                                                <p class="text-gray-700 dark:text-gray-300 text-sm mb-2">
                                                     <strong>Wat is het?</strong> Opvallende informatie boxen voor belangrijke tips, waarschuwingen of speciale opmerkingen.
                                                 </p>
-                                                <p class="text-gray-700 text-sm mb-3">
+                                                <p class="text-gray-700 dark:text-gray-300 text-sm mb-3">
                                                     <strong>Hoe levert u het?</strong> Geef de titel en inhoud:
                                                 </p>
                                                 <div class="bg-gray-50 rounded p-3 border border-gray-200 text-sm font-mono text-gray-800 mb-2">
@@ -1053,7 +1085,7 @@
                                                     <strong>Titel:</strong> GenAI Gebruik<br>
                                                     <strong>Inhoud:</strong> Je mag bij het opstellen van een doelstelling GenAI gebruiken. Wees je er wel altijd van bewust dat je het mens machine mens principe toepast."
                                                 </div>
-                                                <div class="bg-yellow-50 rounded p-2 border border-yellow-200 text-xs text-gray-700 italic">
+                                                <div class="bg-yellow-50 rounded p-2 border border-yellow-200 text-xs text-gray-700 dark:text-gray-300 italic">
                                                     <strong>Tip:</strong> Highlights worden automatisch gestyled met kleur en iconen om op te vallen.
                                                 </div>
                                             </div>
@@ -1065,11 +1097,11 @@
                                                 <i class="fas fa-robot text-green-600 mr-2"></i>
                                                 Hoe levert u content aan Cursor AI?
                                             </h3>
-                                            <p class="text-gray-700 mb-3">
+                                            <p class="text-gray-700 dark:text-gray-300 mb-3">
                                                 U kunt uw content op een natuurlijke manier beschrijven aan de AI. Bijvoorbeeld:
                                             </p>
                                             <div class="bg-white rounded p-4 border border-gray-200 text-sm font-mono mb-3">
-                                                <div class="text-gray-600 mb-2">Voorbeeld prompt:</div>
+                                                <div class="text-gray-600 dark:text-gray-400 mb-2">Voorbeeld prompt:</div>
                                                 <div class="text-gray-800">
                                                     "Voor week 2, voeg de volgende content toe:<br><br>
                                                     <strong>Theorie sectie:</strong><br>
@@ -1082,7 +1114,7 @@
                                                     - Beschrijving: 'Kennisclip over doelstellingen'"
                                                 </div>
                                             </div>
-                                            <p class="text-gray-600 text-xs italic">
+                                            <p class="text-gray-600 dark:text-gray-400 text-xs italic">
                                                 <i class="fas fa-info-circle text-green-600 mr-1"></i>
                                                 <strong>Tip:</strong> U hoeft niet de exacte JSON structuur te kennen. Beschrijf gewoon wat u wilt toevoegen, 
                                                 en Cursor AI zorgt voor de juiste structuur.

@@ -31,12 +31,12 @@ class BaseLessonPage {
             </div>
 
             <!-- Overlay for mobile menu -->
-            <div id="overlay" class="fixed inset-0 bg-black bg-opacity-50 z-30 hidden lg:hidden"></div>
+            <div id="overlay" class="fixed inset-0 bg-black bg-opacity-50 dark:bg-opacity-70 z-30 hidden lg:hidden transition-opacity"></div>
 
             <!-- Scroll to top button -->
             <button 
                 id="scroll-to-top-btn" 
-                class="fixed bottom-8 right-8 bg-blue-600 text-white p-4 rounded-full shadow-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all duration-300 z-50 opacity-0 pointer-events-none flex items-center justify-center"
+                class="fixed bottom-8 right-8 bg-blue-600 dark:bg-blue-700 text-white p-4 rounded-full shadow-lg hover:bg-blue-700 dark:hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition-all duration-300 z-50 opacity-0 pointer-events-none flex items-center justify-center" 
                 aria-label="Naar boven scrollen"
                 title="Naar boven">
                 <i class="fas fa-arrow-up text-xl"></i>
@@ -49,7 +49,7 @@ class BaseLessonPage {
      */
     renderSidebar() {
         return `
-            <aside id="sidebar" class="w-full sm:w-80 bg-white shadow-lg transform -translate-x-full lg:translate-x-0 transition-transform duration-300 ease-in-out lg:static fixed inset-y-0 z-40" aria-label="Navigatie menu">
+            <aside id="sidebar" class="w-full sm:w-80 bg-white dark:bg-gray-800 shadow-lg transform -translate-x-full lg:translate-x-0 transition-transform duration-300 ease-in-out lg:static fixed inset-y-0 z-40" aria-label="Navigatie menu">
                 <div class="h-full flex flex-col">
                     ${this.renderSidebarHeader()}
                     ${this.renderModuleNavigation()}
@@ -63,19 +63,19 @@ class BaseLessonPage {
      */
     renderSidebarHeader() {
         return `
-            <div class="p-4 sm:p-6 border-b border-gray-200">
+            <div class="p-4 sm:p-6 border-b border-gray-200 dark:border-gray-700">
                 <div class="flex items-start justify-between">
                     <div class="flex items-start space-x-3 flex-1 min-w-0">
                         <div class="w-10 h-10 bg-gradient-to-r from-blue-600 to-blue-700 rounded-lg flex items-center justify-center flex-shrink-0" aria-hidden="true">
                             <i class="fas fa-graduation-cap text-white text-lg"></i>
                         </div>
                         <div class="min-w-0 flex-1">
-                            <h1 class="text-lg sm:text-xl font-bold text-gray-900">E-Learning</h1>
-                            <p class="text-xs sm:text-sm text-gray-500 break-words">Opzetten van Logistieke Onderzoeken (OLO)</p>
+                            <h1 class="text-lg sm:text-xl font-bold text-gray-900 dark:text-white">E-Learning</h1>
+                            <p class="text-xs sm:text-sm text-gray-500 dark:text-gray-400 break-words">Opzetten van Logistieke Onderzoeken (OLO)</p>
                         </div>
                     </div>
                     <!-- Close button for mobile -->
-                    <button id="sidebar-close-button" class="lg:hidden p-2 rounded-md text-gray-600 hover:text-gray-900 hover:bg-gray-100 focus-ring ml-2 flex-shrink-0" aria-label="Sluit navigatie menu">
+                    <button id="sidebar-close-button" class="lg:hidden p-2 rounded-md text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 focus-ring ml-2 flex-shrink-0" aria-label="Sluit navigatie menu">
                         <i class="fas fa-times text-xl"></i>
                     </button>
                 </div>
@@ -102,9 +102,9 @@ class BaseLessonPage {
         const moduleItems = modules.map(module => {
             const isCurrent = module.id === this.moduleId;
             return `
-                <a href="${module.href}" class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-50 focus-ring transition-colors ${isCurrent ? 'bg-blue-50 text-blue-700' : 'text-gray-600'}">
-                    <div class="w-8 h-8 ${isCurrent ? 'bg-blue-100' : 'bg-gray-100'} rounded-lg flex items-center justify-center">
-                        <i class="fas fa-book text-sm ${isCurrent ? 'text-blue-600' : 'text-gray-400'}"></i>
+                <a href="${module.href}" class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 focus-ring transition-colors ${isCurrent ? 'bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300' : 'text-gray-600 dark:text-gray-300'}">
+                    <div class="w-8 h-8 ${isCurrent ? 'bg-blue-100 dark:bg-blue-800' : 'bg-gray-100 dark:bg-gray-700'} rounded-lg flex items-center justify-center">
+                        <i class="fas fa-book text-sm ${isCurrent ? 'text-blue-600 dark:text-blue-300' : 'text-gray-400 dark:text-gray-500'}"></i>
                     </div>
                     <span class="font-medium">${module.title}</span>
                 </a>
@@ -127,22 +127,38 @@ class BaseLessonPage {
      */
     renderHeader() {
         return `
-            <header class="bg-white shadow-sm border-b border-gray-200 px-4 sm:px-6 py-3 sm:py-4 sticky top-0 z-30">
+            <header class="bg-white dark:bg-gray-800 shadow-sm border-b border-gray-200 dark:border-gray-700 px-4 sm:px-6 py-3 sm:py-4 sticky top-0 z-30 transition-colors duration-200">
                 <div class="flex items-center justify-between">
                     <!-- Mobile menu button -->
-                    <button id="mobile-menu-button" class="lg:hidden p-2 rounded-md text-gray-600 hover:text-gray-900 hover:bg-gray-100 focus-ring" aria-label="Open navigatie menu">
+                    <button id="mobile-menu-button" class="lg:hidden p-2 rounded-md text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 focus-ring transition-colors" aria-label="Open navigatie menu">
                         <i class="fas fa-bars text-xl"></i>
                     </button>
 
                     <!-- Breadcrumbs - hidden on mobile, visible on tablet+ -->
                     <nav class="hidden sm:flex items-center space-x-2 text-sm flex-1 ml-4" aria-label="Breadcrumb">
-                        <a href="index.html" class="text-gray-500 hover:text-gray-700 focus-ring">Start</a>
-                        <i class="fas fa-chevron-right text-gray-400 text-xs"></i>
-                        <span class="text-gray-900 font-medium">${this.moduleTitle}</span>
+                        <a href="index.html" class="text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 focus-ring transition-colors">Start</a>
+                        <i class="fas fa-chevron-right text-gray-400 dark:text-gray-500 text-xs"></i>
+                        <span class="text-gray-900 dark:text-white font-medium">${this.moduleTitle}</span>
                     </nav>
                     
                     <!-- Mobile title - only visible on mobile -->
-                    <h1 class="lg:hidden text-base font-semibold text-gray-900 flex-1 ml-2 truncate">${this.moduleTitle}</h1>
+                    <h1 class="lg:hidden text-base font-semibold text-gray-900 dark:text-white flex-1 ml-2 truncate">${this.moduleTitle}</h1>
+                    
+                    <!-- Fancy Dark Mode Toggle -->
+                    <button 
+                        id="dark-mode-toggle" 
+                        class="relative p-2 rounded-lg bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-700 dark:to-gray-800 hover:from-gray-200 hover:to-gray-300 dark:hover:from-gray-600 dark:hover:to-gray-700 focus-ring transition-all duration-300 ml-2 group shadow-sm hover:shadow-md" 
+                        aria-label="Toggle dark mode"
+                        title="Dark mode">
+                        <div class="relative w-6 h-6 flex items-center justify-center overflow-hidden">
+                            <!-- Sun icon (light mode) -->
+                            <i id="dark-mode-icon-sun" class="fas fa-sun text-yellow-500 absolute transform transition-all duration-500 rotate-0 scale-100 opacity-100 dark:rotate-90 dark:scale-0 dark:opacity-0"></i>
+                            <!-- Moon icon (dark mode) -->
+                            <i id="dark-mode-icon-moon" class="fas fa-moon text-blue-400 absolute transform transition-all duration-500 rotate-0 scale-0 opacity-0 dark:rotate-0 dark:scale-100 dark:opacity-100"></i>
+                        </div>
+                        <!-- Animated background glow effect -->
+                        <span class="absolute inset-0 rounded-lg bg-gradient-to-r from-yellow-400/20 to-blue-400/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-sm"></span>
+                    </button>
                 </div>
             </header>
         `;
@@ -153,7 +169,7 @@ class BaseLessonPage {
      */
     renderMainContent() {
         return `
-            <main id="main-content" class="flex-1 overflow-y-auto custom-scrollbar">
+            <main id="main-content" class="flex-1 overflow-y-auto custom-scrollbar bg-gray-50 dark:bg-gray-900 transition-colors duration-200">
                 <div class="max-w-4xl mx-auto px-4 sm:px-6 py-4 sm:py-6 lg:py-8">
                     <article class="space-y-6 sm:space-y-8 fade-in">
                         ${this.renderModuleIntro()}
@@ -171,23 +187,23 @@ class BaseLessonPage {
      */
     renderModuleIntro() {
         return `
-            <section class="bg-white rounded-xl shadow-sm border border-gray-200 p-4 sm:p-6 hover-lift">
+            <section class="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-4 sm:p-6 hover-lift transition-colors duration-200">
                 <div class="flex flex-col sm:flex-row items-start">
                     <!-- Icon above title on mobile, beside on desktop -->
-                    <div class="w-10 h-10 sm:w-12 sm:h-12 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0 mb-3 sm:mb-0 sm:mr-4">
-                        <i class="fas fa-book text-blue-600 text-base sm:text-lg"></i>
+                    <div class="w-10 h-10 sm:w-12 sm:h-12 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center flex-shrink-0 mb-3 sm:mb-0 sm:mr-4">
+                        <i class="fas fa-book text-blue-600 dark:text-blue-400 text-base sm:text-lg"></i>
                     </div>
                     <div class="flex-1 min-w-0 w-full sm:w-auto">
-                        <h1 class="text-lg sm:text-xl lg:text-2xl font-bold text-gray-900 mb-2">${this.moduleTitle}: ${this.moduleSubtitle}</h1>
-                        <p class="text-sm sm:text-base text-gray-600 mb-3 sm:mb-4">
+                        <h1 class="text-lg sm:text-xl lg:text-2xl font-bold text-gray-900 dark:text-white mb-2">${this.moduleTitle}: ${this.moduleSubtitle}</h1>
+                        <p class="text-sm sm:text-base text-gray-600 dark:text-gray-300 mb-3 sm:mb-4">
                             Welkom bij ${this.moduleTitle}! Deze module behandelt ${this.moduleSubtitle.toLowerCase()}.
                         </p>
-                        <div class="bg-blue-50 border-l-4 border-blue-500 p-3 sm:p-4 rounded-r-lg">
+                        <div class="bg-blue-50 dark:bg-blue-900/20 border-l-4 border-blue-500 dark:border-blue-400 p-3 sm:p-4 rounded-r-lg">
                             <div class="flex items-start space-x-2 sm:space-x-3">
-                                <i class="fas fa-info-circle text-blue-600 mt-0.5 sm:mt-1 flex-shrink-0"></i>
+                                <i class="fas fa-info-circle text-blue-600 dark:text-blue-400 mt-0.5 sm:mt-1 flex-shrink-0"></i>
                                 <div class="min-w-0">
-                                    <h3 class="text-sm sm:text-base font-semibold text-blue-900 mb-1">Module Informatie</h3>
-                                    <p class="text-xs sm:text-sm text-blue-800">
+                                    <h3 class="text-sm sm:text-base font-semibold text-blue-900 dark:text-blue-200 mb-1">Module Informatie</h3>
+                                    <p class="text-xs sm:text-sm text-blue-800 dark:text-blue-300">
                                         Deze module bevat verschillende secties met theorie, voorbeelden en opdrachten.
                                     </p>
                                 </div>
@@ -206,17 +222,17 @@ class BaseLessonPage {
     renderContentSections() {
         return `
             <!-- Leerdoelen Sectie -->
-            <section class="bg-white rounded-xl shadow-sm border border-gray-200 p-4 sm:p-6 hover-lift">
+            <section class="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-4 sm:p-6 hover-lift transition-colors duration-200">
                 <div class="flex flex-col sm:flex-row items-start">
-                    <div class="w-10 h-10 sm:w-12 sm:h-12 bg-green-100 rounded-lg flex items-center justify-center flex-shrink-0 mb-3 sm:mb-0 sm:mr-4">
-                        <i class="fas fa-bullseye text-green-600 text-base sm:text-lg"></i>
+                    <div class="w-10 h-10 sm:w-12 sm:h-12 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center flex-shrink-0 mb-3 sm:mb-0 sm:mr-4">
+                        <i class="fas fa-bullseye text-green-600 dark:text-green-400 text-base sm:text-lg"></i>
                     </div>
                     <div class="flex-1 min-w-0 w-full sm:w-auto">
-                        <h2 class="text-lg sm:text-xl font-semibold text-gray-900 mb-4">Leerdoelen</h2>
+                        <h2 class="text-lg sm:text-xl font-semibold text-gray-900 dark:text-white mb-4">Leerdoelen</h2>
                         <div class="prose max-w-none">
-                            <p class="text-gray-600 mb-4">Na het voltooien van deze module kun je:</p>
-                            <div class="bg-gray-50 rounded-lg p-4">
-                                <p class="text-gray-600 text-sm">
+                            <p class="text-gray-600 dark:text-gray-300 mb-4">Na het voltooien van deze module kun je:</p>
+                            <div class="bg-gray-50 dark:bg-gray-900/50 rounded-lg p-4">
+                                <p class="text-gray-600 dark:text-gray-300 text-sm">
                                     <i class="fas fa-edit mr-2"></i>
                                     <strong>Voor collega's:</strong> Voeg hier de specifieke leerdoelen toe voor ${this.moduleTitle}.
                                 </p>
@@ -227,17 +243,17 @@ class BaseLessonPage {
             </section>
 
             <!-- Theorie Sectie -->
-            <section class="bg-white rounded-xl shadow-sm border border-gray-200 p-4 sm:p-6 hover-lift">
+            <section class="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-4 sm:p-6 hover-lift transition-colors duration-200">
                 <div class="flex flex-col sm:flex-row items-start">
-                    <div class="w-10 h-10 sm:w-12 sm:h-12 bg-purple-100 rounded-lg flex items-center justify-center flex-shrink-0 mb-3 sm:mb-0 sm:mr-4">
-                        <i class="fas fa-book text-purple-600 text-base sm:text-lg"></i>
+                    <div class="w-10 h-10 sm:w-12 sm:h-12 bg-purple-100 dark:bg-purple-900/30 rounded-lg flex items-center justify-center flex-shrink-0 mb-3 sm:mb-0 sm:mr-4">
+                        <i class="fas fa-book text-purple-600 dark:text-purple-400 text-base sm:text-lg"></i>
                     </div>
                     <div class="flex-1 min-w-0 w-full sm:w-auto">
-                        <h2 class="text-lg sm:text-xl font-semibold text-gray-900 mb-4">Theorie</h2>
+                        <h2 class="text-lg sm:text-xl font-semibold text-gray-900 dark:text-white mb-4">Theorie</h2>
                         <div class="prose max-w-none">
-                            <div class="bg-gray-50 rounded-lg p-4 mb-4">
-                                <h3 class="font-semibold text-gray-900 mb-2">Theorie Content</h3>
-                                <p class="text-gray-600 text-sm">
+                            <div class="bg-gray-50 dark:bg-gray-900/50 rounded-lg p-4 mb-4">
+                                <h3 class="font-semibold text-gray-900 dark:text-white mb-2">Theorie Content</h3>
+                                <p class="text-gray-600 dark:text-gray-300 text-sm">
                                     <i class="fas fa-edit mr-2"></i>
                                     <strong>Voor collega's:</strong> Voeg hier de theorie content toe voor ${this.moduleSubtitle}.
                                 </p>
@@ -248,21 +264,21 @@ class BaseLessonPage {
             </section>
 
             <!-- Video Sectie -->
-            <section class="bg-white rounded-xl shadow-sm border border-gray-200 p-4 sm:p-6 hover-lift">
+            <section class="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-4 sm:p-6 hover-lift transition-colors duration-200">
                 <div class="flex flex-col sm:flex-row items-start">
-                    <div class="w-10 h-10 sm:w-12 sm:h-12 bg-red-100 rounded-lg flex items-center justify-center flex-shrink-0 mb-3 sm:mb-0 sm:mr-4">
-                        <i class="fas fa-play text-red-600 text-base sm:text-lg"></i>
+                    <div class="w-10 h-10 sm:w-12 sm:h-12 bg-red-100 dark:bg-red-900/30 rounded-lg flex items-center justify-center flex-shrink-0 mb-3 sm:mb-0 sm:mr-4">
+                        <i class="fas fa-play text-red-600 dark:text-red-400 text-base sm:text-lg"></i>
                     </div>
                     <div class="flex-1 min-w-0 w-full sm:w-auto">
-                        <h2 class="text-lg sm:text-xl font-semibold text-gray-900 mb-4">Video</h2>
-                        <div class="bg-gray-900 rounded-lg aspect-video flex items-center justify-center mb-4 w-full">
+                        <h2 class="text-lg sm:text-xl font-semibold text-gray-900 dark:text-white mb-4">Video</h2>
+                        <div class="bg-black dark:bg-black rounded-lg aspect-video flex items-center justify-center mb-4 w-full">
                             <div class="text-center text-white">
                                 <i class="fas fa-play-circle text-6xl mb-4 opacity-75"></i>
                                 <p class="text-lg font-medium">Video Player</p>
                                 <p class="text-sm opacity-75">Video content komt hier</p>
                             </div>
                         </div>
-                        <p class="text-sm text-gray-600">
+                        <p class="text-sm text-gray-600 dark:text-gray-300">
                             <i class="fas fa-edit mr-2"></i>
                             <strong>Voor collega's:</strong> Voeg hier video content toe voor ${this.moduleSubtitle}.
                         </p>
@@ -283,19 +299,19 @@ class BaseLessonPage {
         return `
             <div class="mt-12 flex flex-col sm:flex-row justify-between items-stretch sm:items-center gap-4">
                 ${prevModule ? `
-                    <button class="nav-button flex items-center justify-center space-x-2 px-4 sm:px-6 py-3 w-full sm:w-auto bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 focus-ring transition-colors" data-nav-href="${prevModule.href}">
+                    <button class="nav-button flex items-center justify-center space-x-2 px-4 sm:px-6 py-3 w-full sm:w-auto bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-200 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 focus-ring transition-colors" data-nav-href="${prevModule.href}">
                         <i class="fas fa-arrow-left"></i>
                         <span>Vorige: ${prevModule.title}</span>
                     </button>
                 ` : `
-                    <button class="nav-button flex items-center justify-center space-x-2 px-4 sm:px-6 py-3 w-full sm:w-auto bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 focus-ring transition-colors" data-nav-href="index.html">
+                    <button class="nav-button flex items-center justify-center space-x-2 px-4 sm:px-6 py-3 w-full sm:w-auto bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-200 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 focus-ring transition-colors" data-nav-href="index.html">
                         <i class="fas fa-arrow-left"></i>
                         <span>Terug naar Start</span>
                     </button>
                 `}
                 
                 ${nextModule ? `
-                    <button class="nav-button flex items-center justify-center space-x-2 px-4 sm:px-6 py-3 w-full sm:w-auto bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus-ring transition-colors" data-nav-href="${nextModule.href}">
+                    <button class="nav-button flex items-center justify-center space-x-2 px-4 sm:px-6 py-3 w-full sm:w-auto bg-blue-600 dark:bg-blue-700 text-white rounded-lg hover:bg-blue-700 dark:hover:bg-blue-600 focus-ring transition-colors" data-nav-href="${nextModule.href}">
                         <span>Volgende: ${nextModule.title}</span>
                         <i class="fas fa-arrow-right"></i>
                     </button>
@@ -415,6 +431,78 @@ class BaseLessonPage {
         
         // Setup video error detection
         this.setupVideoErrorDetection();
+        
+        // Setup dark mode toggle
+        this.setupDarkModeToggle();
+    }
+    
+    /**
+     * Setup dark mode toggle functionality
+     */
+    setupDarkModeToggle() {
+        // Retry mechanisme - wacht tot DarkMode.js geladen is
+        const trySetup = (attempts = 0) => {
+            const darkModeToggle = document.getElementById('dark-mode-toggle');
+            const sunIcon = document.getElementById('dark-mode-icon-sun');
+            const moonIcon = document.getElementById('dark-mode-icon-moon');
+            
+            if (!darkModeToggle) {
+                // Toggle button bestaat nog niet (mogelijk nog niet gerenderd)
+                if (attempts < 10) {
+                    setTimeout(() => trySetup(attempts + 1), 100);
+                }
+                return;
+            }
+            
+            if (window.DarkMode) {
+                // Update icons on initial load
+                this.updateDarkModeIcons(sunIcon, moonIcon);
+                
+                // Toggle dark mode on click
+                darkModeToggle.addEventListener('click', () => {
+                    window.DarkMode.toggle();
+                    this.updateDarkModeIcons(sunIcon, moonIcon);
+                });
+                
+                // Listen for dark mode changes (e.g., from other pages or system preference)
+                window.addEventListener('darkModeChange', () => {
+                    this.updateDarkModeIcons(sunIcon, moonIcon);
+                });
+            } else {
+                // DarkMode.js nog niet geladen, probeer opnieuw
+                if (attempts < 10) {
+                    setTimeout(() => trySetup(attempts + 1), 100);
+                } else {
+                    console.warn('DarkMode.js kon niet worden geladen na 10 pogingen');
+                }
+            }
+        };
+        
+        // Start setup (met kleine delay om zeker te zijn dat DOM klaar is)
+        setTimeout(() => trySetup(), 50);
+    }
+    
+    /**
+     * Update dark mode icons based on current state
+     */
+    updateDarkModeIcons(sunIcon, moonIcon) {
+        if (!sunIcon || !moonIcon || !window.DarkMode) return;
+        
+        const isDark = window.DarkMode.isDark();
+        
+        if (isDark) {
+            // Dark mode: show moon, hide sun
+            sunIcon.classList.add('rotate-90', 'scale-0', 'opacity-0');
+            sunIcon.classList.remove('rotate-0', 'scale-100', 'opacity-100');
+            moonIcon.classList.remove('rotate-0', 'scale-0', 'opacity-0');
+            moonIcon.classList.add('rotate-0', 'scale-100', 'opacity-100');
+        } else {
+            // Light mode: show sun, hide moon
+            sunIcon.classList.remove('rotate-90', 'scale-0', 'opacity-0');
+            sunIcon.classList.add('rotate-0', 'scale-100', 'opacity-100');
+            moonIcon.classList.add('rotate-0', 'scale-0', 'opacity-0');
+            moonIcon.classList.remove('rotate-0', 'scale-100', 'opacity-100');
+        }
     }
     
     /**

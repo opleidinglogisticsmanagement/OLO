@@ -6,6 +6,11 @@
     <title>Week 3 - E-Learning Platform</title>
     <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+      }
+    </script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -17,8 +22,20 @@
             --text-light: #6c757d;
         }
         
+        /* Dark mode custom properties */
+        .dark {
+            --primary-blue: #4a9eff;
+            --success-green: #a8d977;
+            --neutral-bg: #1a1a1a;
+            --text-dark: #f5f5f5;
+            --text-light: #a0a0a0;
+        }
+        
         body {
             font-family: 'Inter', sans-serif;
+            background-color: var(--neutral-bg);
+            color: var(--text-dark);
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
         
         .custom-scrollbar::-webkit-scrollbar {
@@ -29,13 +46,25 @@
             background: #f1f1f1;
         }
         
+        .dark .custom-scrollbar::-webkit-scrollbar-track {
+            background: #2a2a2a;
+        }
+        
         .custom-scrollbar::-webkit-scrollbar-thumb {
             background: #c1c1c1;
             border-radius: 3px;
         }
         
+        .dark .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #4a4a4a;
+        }
+        
         .custom-scrollbar::-webkit-scrollbar-thumb:hover {
             background: #a8a8a8;
+        }
+        
+        .dark .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #5a5a5a;
         }
         
         .fade-in {
@@ -79,8 +108,27 @@
             margin-left: 1rem;
         }
         
-        /* Genummerde lijsten: nummer buiten, tekst uitgelijnd op volgende regel */
-        ol.list-decimal {
+        /* Lijsten met list-inside: zorg voor correcte inspringing tweede regel */
+        ul.list-disc.list-inside,
+        ol.list-decimal.list-inside {
+            padding-left: 1.5rem;
+        }
+        
+        /* Lijstitems met list-inside: zorg dat tweede regel correct inspringt */
+        ul.list-disc.list-inside li,
+        ol.list-decimal.list-inside li {
+            padding-left: 1.5em;
+            text-indent: -1.5em;
+        }
+        
+        /* Genummerde lijsten zonder list-inside: nummer buiten, tekst uitgelijnd */
+        ol.list-decimal:not(.list-inside) {
+            list-style-position: outside;
+            padding-left: 1.5rem;
+        }
+        
+        /* Bullet lijsten zonder list-inside: bullet buiten voor betere inspringing */
+        ul.list-disc:not(.list-inside) {
             list-style-position: outside;
             padding-left: 1.5rem;
         }
@@ -89,6 +137,114 @@
         ol.list-decimal li,
         ul.list-disc li {
             color: rgb(55, 65, 81); /* text-gray-700 */
+        }
+        
+        /* Dark mode support voor lijstitems */
+        .dark ol.list-decimal li,
+        .dark ul.list-disc li {
+            color: rgb(209, 213, 219); /* dark:text-gray-300 */
+        }
+        
+        /* Dark mode support voor alle genummerde lijsten in prose */
+        .dark .prose ol li,
+        .dark .prose ul li {
+            color: rgb(209, 213, 219); /* dark:text-gray-300 */
+        }
+        
+        /* Dark mode support voor alle genummerde lijsten (ol) en bullet lijsten (ul) */
+        .dark ol li,
+        .dark ul li {
+            color: rgb(209, 213, 219); /* dark:text-gray-300 */
+        }
+        
+        /* Dark mode support voor genummerde lijsten met list-decimal class */
+        .dark ol.list-decimal li {
+            color: rgb(209, 213, 219); /* dark:text-gray-300 */
+        }
+        
+        /* Dark mode support voor tekst in clickable steps content */
+        .dark .clickable-step-content p,
+        .dark .clickable-step-content li,
+        .dark .clickable-step-content ol li,
+        .dark .clickable-step-content ul li {
+            color: rgb(209, 213, 219); /* dark:text-gray-300 */
+        }
+        
+        /* Dark mode support voor text-gray-600 en text-gray-700 classes in content */
+        .dark .text-gray-600,
+        .dark .text-gray-700 {
+            color: rgb(209, 213, 219) !important; /* dark:text-gray-300 */
+        }
+        
+        /* Dark mode support voor text-gray-900 (headings) */
+        .dark .text-gray-900 {
+            color: rgb(255, 255, 255) !important; /* dark:text-white */
+        }
+        
+        /* Dark mode support voor alle paragrafen in clickable steps */
+        .dark .clickable-step-content p {
+            color: rgb(209, 213, 219) !important; /* dark:text-gray-300 */
+        }
+        
+        /* Dark mode support voor strong tags in content */
+        .dark .clickable-step-content strong {
+            color: rgb(255, 255, 255) !important; /* dark:text-white */
+        }
+        
+        /* Dark mode support voor em tags */
+        .dark .clickable-step-content em {
+            color: rgb(209, 213, 219) !important; /* dark:text-gray-300 */
+        }
+        
+        /* Tabellen dark mode support */
+        .dark table {
+            background-color: rgb(31, 41, 55); /* dark:bg-gray-800 */
+            border-color: rgb(75, 85, 99); /* dark:border-gray-600 */
+        }
+        
+        .dark table th {
+            background-color: rgb(55, 65, 81); /* dark:bg-gray-700 */
+            color: rgb(255, 255, 255); /* dark:text-white */
+            border-color: rgb(75, 85, 99); /* dark:border-gray-600 */
+        }
+        
+        .dark table td {
+            background-color: rgb(31, 41, 55); /* dark:bg-gray-800 */
+            color: rgb(209, 213, 219); /* dark:text-gray-300 */
+            border-color: rgb(75, 85, 99); /* dark:border-gray-600 */
+        }
+        
+        table {
+            background-color: rgb(255, 255, 255);
+            border-collapse: collapse;
+            width: 100%;
+        }
+        
+        table th,
+        table td {
+            border: 1px solid rgb(209, 213, 219); /* border-gray-300 */
+        }
+        
+        /* Toekomstbestendigheid: Automatische dark mode support voor alle kopjes */
+        .dark h1, .dark h2, .dark h3, .dark h4, .dark h5, .dark h6 {
+            color: rgb(255, 255, 255); /* dark:text-white */
+        }
+        
+        /* Toekomstbestendigheid: Automatische dark mode support voor gekleurde containers */
+        .dark .bg-blue-50, .dark .bg-green-50, .dark .bg-yellow-50, 
+        .dark .bg-red-50, .dark .bg-purple-50, .dark .bg-gray-50 {
+            background-color: rgb(17, 24, 39); /* dark:bg-gray-900 */
+        }
+        
+        /* Toekomstbestendigheid: Automatische dark mode support voor tekst in gekleurde containers */
+        .dark .text-blue-900, .dark .text-green-900, .dark .text-yellow-900,
+        .dark .text-red-900, .dark .text-purple-900 {
+            color: rgb(209, 213, 219); /* dark:text-gray-300 */
+        }
+        
+        .dark .text-blue-800, .dark .text-green-800, .dark .text-yellow-800,
+        .dark .text-red-800, .dark .text-purple-800 {
+            color: rgb(209, 213, 219); /* dark:text-gray-300 */
         }
         
         /* Geen regelafstand tussen h3 kopjes en tekst eronder (standaard voor alle weken) */
@@ -290,14 +446,17 @@
         }
     </style>
 </head>
-<body class="bg-gray-50">
+<body class="bg-gray-50 dark:bg-gray-900 transition-colors duration-200">
     <div id="loading" class="min-h-screen flex items-center justify-center">
         <div class="text-center">
-            <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
-            <p class="text-gray-600">Laden...</p>
+            <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 dark:border-blue-400 mx-auto mb-4"></div>
+            <p class="text-gray-600 dark:text-gray-300">Laden...</p>
         </div>
     </div>
 
+    <!-- Dark Mode Utility - MOET EERST GELADEN WORDEN -->
+    <script src="js/DarkMode.js"></script>
+    
     <script src="config.js"></script>
     <script src="pages/BaseLessonPage.js"></script>
     <script src="pages/ContentRenderer.js"></script>

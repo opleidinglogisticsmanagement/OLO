@@ -54,14 +54,14 @@ class MCQuestionRenderer {
             const shuffledQuestion = this.shuffleAnswers(currentQuestion);
             return `
                 <!-- MC Vragen Sectie -->
-                <section class="bg-white rounded-xl shadow-sm border border-gray-200 p-4 sm:p-6 sm:pr-[70px] hover-lift mt-8">
+                <section class="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-4 sm:p-6 sm:pr-[70px] hover-lift mt-8 transition-colors duration-200">
                     <div class="flex items-start space-x-4">
-                        <div class="w-12 h-12 bg-indigo-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                            <i class="fas fa-question-circle text-indigo-600 text-lg"></i>
+                        <div class="w-12 h-12 bg-indigo-100 dark:bg-indigo-900/30 rounded-lg flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-question-circle text-indigo-600 dark:text-indigo-400 text-lg"></i>
                         </div>
                         <div class="flex-1">
-                            <h2 class="text-xl font-semibold text-gray-900 mb-4">${this.escapeHtml(title)}</h2>
-                            ${description ? `<p class="text-gray-600 mb-6">${this.escapeHtml(description)}</p>` : ''}
+                            <h2 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">${this.escapeHtml(title)}</h2>
+                            ${description ? `<p class="text-gray-600 dark:text-gray-300 mb-6">${this.escapeHtml(description)}</p>` : ''}
                             
                             <div id="${containerId}" class="space-y-6">
                                 ${this.renderQuestion(shuffledQuestion, 0, true)}
@@ -79,14 +79,14 @@ class MCQuestionRenderer {
 
         return `
             <!-- MC Vragen Sectie -->
-            <section class="bg-white rounded-xl shadow-sm border border-gray-200 p-4 sm:p-6 sm:pr-[70px] hover-lift mt-8">
+            <section class="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-4 sm:p-6 sm:pr-[70px] hover-lift mt-8 transition-colors duration-200">
                 <div class="flex items-start space-x-4">
-                    <div class="w-12 h-12 bg-indigo-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                        <i class="fas fa-question-circle text-indigo-600 text-lg"></i>
+                    <div class="w-12 h-12 bg-indigo-100 dark:bg-indigo-900/30 rounded-lg flex items-center justify-center flex-shrink-0">
+                        <i class="fas fa-question-circle text-indigo-600 dark:text-indigo-400 text-lg"></i>
                     </div>
                     <div class="flex-1">
-                        <h2 class="text-xl font-semibold text-gray-900 mb-4">${this.escapeHtml(title)}</h2>
-                        ${description ? `<p class="text-gray-600 mb-6">${this.escapeHtml(description)}</p>` : ''}
+                        <h2 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">${this.escapeHtml(title)}</h2>
+                        ${description ? `<p class="text-gray-600 dark:text-gray-300 mb-6">${this.escapeHtml(description)}</p>` : ''}
                         
                         <div id="${containerId}" class="space-y-6">
                             ${mcConfig.vragen.map((vraag, index) => {
@@ -113,8 +113,8 @@ class MCQuestionRenderer {
         
         return `
             <div class="mc-question" data-question-id="${vraagId}">
-                <div class="border border-gray-200 rounded-lg p-5 bg-gray-50">
-                    <h3 class="text-lg font-semibold text-gray-900 mb-4">
+                <div class="border border-gray-200 dark:border-gray-700 rounded-lg p-5 bg-gray-50 dark:bg-gray-900/50">
+                    <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">
                         ${oneAtATime ? 'Vraag:' : `Vraag ${index + 1}:`} ${this.escapeHtml(vraagText)}
                     </h3>
                     
@@ -128,7 +128,7 @@ class MCQuestionRenderer {
                     
                     ${oneAtATime ? `
                         <div id="next-question-btn-${vraagId}" class="hidden mt-4">
-                            <button class="next-mc-question-btn w-full px-6 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 focus-ring transition-colors flex items-center justify-center space-x-2">
+                            <button class="next-mc-question-btn w-full px-6 py-3 bg-indigo-600 dark:bg-indigo-700 text-white rounded-lg hover:bg-indigo-700 dark:hover:bg-indigo-600 focus-ring transition-colors flex items-center justify-center space-x-2">
                                 <i class="fas fa-arrow-right"></i>
                                 <span>Volgende AI-gegenereerde vraag</span>
                             </button>
@@ -151,7 +151,7 @@ class MCQuestionRenderer {
         const optionLetter = antwoord.id.toUpperCase();
         
         return `
-            <label class="flex items-start space-x-3 p-3 border border-gray-300 rounded-lg cursor-pointer hover:bg-blue-50 transition-colors mc-option" 
+            <label class="flex items-start space-x-3 p-3 border border-gray-300 dark:border-gray-600 rounded-lg cursor-pointer hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-colors mc-option" 
                    data-question-id="${vraagId}" 
                    data-answer-id="${antwoord.id}"
                    data-is-correct="${antwoord.correct === true}">
@@ -159,13 +159,13 @@ class MCQuestionRenderer {
                        name="${vraagId}" 
                        id="${optionId}"
                        value="${antwoord.id}"
-                       class="mt-1 w-4 h-4 text-blue-600 focus:ring-blue-500 focus-ring"
+                       class="mt-1 w-4 h-4 text-blue-600 dark:text-blue-400 focus:ring-blue-500 dark:focus:ring-blue-400 focus-ring"
                        data-is-correct="${antwoord.correct === true}"
                        data-question-id="${vraagId}"
                        data-answer-id="${antwoord.id}">
                 <span class="flex-1">
-                    <span class="font-medium text-gray-900">${optionLetter}.</span>
-                    <span class="ml-2 text-gray-700">${this.escapeHtml(antwoord.tekst)}</span>
+                    <span class="font-medium text-gray-900 dark:text-white">${optionLetter}.</span>
+                    <span class="ml-2 text-gray-700 dark:text-gray-300">${this.escapeHtml(antwoord.tekst)}</span>
                 </span>
             </label>
         `;
@@ -207,34 +207,34 @@ class MCQuestionRenderer {
 
         // Show feedback
         if (isCorrect) {
-            selectedOption.classList.add('bg-green-50', 'border-green-500');
-            feedbackContainer.className = 'feedback-container mt-4 p-4 bg-green-50 border-l-4 border-green-500 rounded-r-lg';
+            selectedOption.classList.add('bg-green-50', 'dark:bg-green-900/20', 'border-green-500', 'dark:border-green-400');
+            feedbackContainer.className = 'feedback-container mt-4 p-4 bg-green-50 dark:bg-green-900/20 border-l-4 border-green-500 dark:border-green-400 rounded-r-lg';
             feedbackContainer.innerHTML = `
                 <div class="flex items-start space-x-3">
-                    <i class="fas fa-check-circle text-green-600 mt-1"></i>
+                    <i class="fas fa-check-circle text-green-600 dark:text-green-400 mt-1"></i>
                     <div>
-                        <p class="font-semibold text-green-900 mb-1">Correct!</p>
-                        <p class="text-green-800 text-sm">${this.escapeHtml(feedbackGoed)}</p>
+                        <p class="font-semibold text-green-900 dark:text-green-200 mb-1">Correct!</p>
+                        <p class="text-green-800 dark:text-green-300 text-sm">${this.escapeHtml(feedbackGoed)}</p>
                     </div>
                 </div>
             `;
             feedbackContainer.classList.remove('hidden');
         } else {
-            selectedOption.classList.add('bg-red-50', 'border-red-500');
+            selectedOption.classList.add('bg-red-50', 'dark:bg-red-900/20', 'border-red-500', 'dark:border-red-400');
             
             // Find and highlight correct answer
             const correctOption = questionElement.querySelector('[data-is-correct="true"]');
             if (correctOption) {
-                correctOption.classList.add('bg-green-50', 'border-green-500');
+                correctOption.classList.add('bg-green-50', 'dark:bg-green-900/20', 'border-green-500', 'dark:border-green-400');
             }
             
-            feedbackContainer.className = 'feedback-container mt-4 p-4 bg-red-50 border-l-4 border-red-500 rounded-r-lg';
+            feedbackContainer.className = 'feedback-container mt-4 p-4 bg-red-50 dark:bg-red-900/20 border-l-4 border-red-500 dark:border-red-400 rounded-r-lg';
             feedbackContainer.innerHTML = `
                 <div class="flex items-start space-x-3">
-                    <i class="fas fa-times-circle text-red-600 mt-1"></i>
+                    <i class="fas fa-times-circle text-red-600 dark:text-red-400 mt-1"></i>
                     <div>
-                        <p class="font-semibold text-red-900 mb-1">Niet helemaal juist</p>
-                        <p class="text-red-800 text-sm">${this.escapeHtml(feedbackFout)}</p>
+                        <p class="font-semibold text-red-900 dark:text-red-200 mb-1">Niet helemaal juist</p>
+                        <p class="text-red-800 dark:text-red-300 text-sm">${this.escapeHtml(feedbackFout)}</p>
                     </div>
                 </div>
             `;
@@ -305,10 +305,10 @@ class MCQuestionRenderer {
     static renderLoadingState(containerId) {
         return `
             <div id="${containerId}" class="space-y-6">
-                <div class="border border-gray-200 rounded-lg p-5 bg-gray-50">
+                <div class="border border-gray-200 dark:border-gray-700 rounded-lg p-5 bg-gray-50 dark:bg-gray-900/50">
                     <div class="flex items-center justify-center space-x-3 py-8">
-                        <div class="animate-spin rounded-full h-6 w-6 border-b-2 border-indigo-600"></div>
-                        <p class="text-gray-600">AI-generatie vragen...</p>
+                        <div class="animate-spin rounded-full h-6 w-6 border-b-2 border-indigo-600 dark:border-indigo-400"></div>
+                        <p class="text-gray-600 dark:text-gray-300">AI-generatie vragen...</p>
                     </div>
                 </div>
             </div>
@@ -331,12 +331,12 @@ class MCQuestionRenderer {
      */
     static renderErrorState(errorMessage) {
         return `
-            <div class="bg-red-50 border-l-4 border-red-500 p-4 rounded-r-lg mt-4">
+            <div class="bg-red-50 dark:bg-red-900/20 border-l-4 border-red-500 dark:border-red-400 p-4 rounded-r-lg mt-4">
                 <div class="flex items-start space-x-3">
-                    <i class="fas fa-exclamation-triangle text-red-600 mt-1"></i>
+                    <i class="fas fa-exclamation-triangle text-red-600 dark:text-red-400 mt-1"></i>
                     <div>
-                        <h3 class="font-semibold text-red-900 mb-1">Fout bij het laden van vragen</h3>
-                        <p class="text-red-800 text-sm">${this.escapeHtml(errorMessage)}</p>
+                        <h3 class="font-semibold text-red-900 dark:text-red-200 mb-1">Fout bij het laden van vragen</h3>
+                        <p class="text-red-800 dark:text-red-300 text-sm">${this.escapeHtml(errorMessage)}</p>
                     </div>
                 </div>
             </div>

@@ -6,6 +6,11 @@
     <title>Afsluiting - E-Learning Platform</title>
     <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+      }
+    </script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -17,8 +22,20 @@
             --text-light: #6c757d;
         }
         
+        /* Dark mode custom properties */
+        .dark {
+            --primary-blue: #4a9eff;
+            --success-green: #a8d977;
+            --neutral-bg: #1a1a1a;
+            --text-dark: #f5f5f5;
+            --text-light: #a0a0a0;
+        }
+        
         body {
             font-family: 'Inter', sans-serif;
+            background-color: var(--neutral-bg);
+            color: var(--text-dark);
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
         
         .custom-scrollbar::-webkit-scrollbar {
@@ -29,13 +46,25 @@
             background: #f1f1f1;
         }
         
+        .dark .custom-scrollbar::-webkit-scrollbar-track {
+            background: #2a2a2a;
+        }
+        
         .custom-scrollbar::-webkit-scrollbar-thumb {
             background: #c1c1c1;
             border-radius: 3px;
         }
         
+        .dark .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #4a4a4a;
+        }
+        
         .custom-scrollbar::-webkit-scrollbar-thumb:hover {
             background: #a8a8a8;
+        }
+        
+        .dark .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #5a5a5a;
         }
         
         .fade-in {
@@ -260,14 +289,17 @@
         }
     </style>
 </head>
-<body class="bg-gray-50">
+<body class="bg-gray-50 dark:bg-gray-900 transition-colors duration-200">
     <div id="loading" class="min-h-screen flex items-center justify-center">
         <div class="text-center">
-            <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
-            <p class="text-gray-600">Laden...</p>
+            <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 dark:border-blue-400 mx-auto mb-4"></div>
+            <p class="text-gray-600 dark:text-gray-300">Laden...</p>
         </div>
     </div>
 
+    <!-- Dark Mode Utility - MOET EERST GELADEN WORDEN -->
+    <script src="js/DarkMode.js"></script>
+    
     <script src="config.js"></script>
     <script src="pages/BaseLessonPage.js"></script>
     <script src="pages/ContentRenderer.js"></script>

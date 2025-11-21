@@ -1230,7 +1230,7 @@ class InteractiveRenderer {
             
             return `
                 <button
-                    class="flex-none md:flex-1 px-4 md:px-6 py-3 md:py-4 font-semibold text-sm md:text-lg transition-colors duration-200 ${isActive ? 'bg-white dark:bg-gray-800 text-green-600 dark:text-green-400' : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'} text-left cursor-pointer touch-manipulation active:bg-gray-200 dark:active:bg-gray-600 whitespace-normal md:whitespace-nowrap"
+                    class="tabs-button flex-1 md:flex-1 px-3 md:px-6 py-3 md:py-4 font-semibold text-sm md:text-lg transition-colors duration-200 ${isActive ? 'bg-white dark:bg-gray-800 text-green-600 dark:text-green-400' : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'} text-center md:text-left cursor-pointer touch-manipulation active:bg-gray-200 dark:active:bg-gray-600 whitespace-normal md:whitespace-nowrap"
                     onclick="InteractiveRenderer.switchTab('${tabsId}', ${index})"
                     aria-selected="${isActive}"
                     aria-controls="${contentId}"
@@ -1297,17 +1297,47 @@ class InteractiveRenderer {
                         -webkit-overflow-scrolling: touch;
                         scrollbar-width: none;
                         -ms-overflow-style: none;
+                        width: 100%;
                     }
                     
-                    .tabs-container [role="tab"] {
-                        flex: 0 0 auto;
-                        min-width: min-content;
-                        max-width: 50%;
+                    .tabs-container [role="tab"],
+                    .tabs-container .tabs-button {
+                        flex: 1 1 0;
+                        min-width: 0;
+                        max-width: none;
                         white-space: normal !important;
                         word-wrap: break-word !important;
                         overflow-wrap: break-word !important;
                         hyphens: auto;
                         line-height: 1.4;
+                        text-align: center;
+                        padding: 0.75rem 0.5rem;
+                        font-size: 0.875rem;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                    }
+                    
+                    /* Gelijk verdeelde tabs - zorg dat alle tabs even breed zijn */
+                    .tabs-container [role="tablist"] {
+                        gap: 0;
+                    }
+                    
+                    /* Eerste en laatste tab hebben iets meer padding voor visuele balans */
+                    .tabs-container [role="tab"]:first-child {
+                        padding-left: 0.75rem;
+                    }
+                    
+                    .tabs-container [role="tab"]:last-child {
+                        padding-right: 0.75rem;
+                    }
+                }
+                
+                /* Tablet optimalisatie */
+                @media (min-width: 641px) and (max-width: 1023px) {
+                    .tabs-container [role="tab"],
+                    .tabs-container .tabs-button {
+                        padding: 0.875rem 1rem;
                     }
                 }
             </style>

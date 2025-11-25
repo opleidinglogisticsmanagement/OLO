@@ -2,7 +2,7 @@
   "intro": {
     "title": "Week 3",
     "subtitle": "Onderzoeksmodel + Onderzoeksvragen",
-    "description": "In deze week leer je wat een onderzoeksmodel is en waarom je het nodig hebt. Je ontdekt hoe je een schematische weergave maakt van je onderzoek en welke stappen je moet zetten om je doelstelling te bereiken. Daarnaast leer je over de zes basishandelingen bij het maken van een onderzoeksmodel.<br><br>Deze week bestaat uit een <strong>coachingscollege</strong> en een <strong>werkcollege</strong>.<br><br>Voor het <strong>coachingscollege</strong> zorg je dat je de theorie voor het werkcollege van afgelopen week hebt begrepen en heb je de volgende vijf punten helder:<br><ul class=\"list-disc list-inside ml-4 mb-4\"><li>Welke onderwerpen er in een probleemverkenning worden beschreven.</li><li>Op welke wijze jij de juiste vragen kunt opstellen.</li><li>Hoe een goede doelstelling is te formuleren waarbij rekening is gehouden met het a- en b- gedeelte.</li><li>Wat het SMART-principe inhoudt.</li><li>Heb jij per onderwerp vanuit de probleemverkenning minimaal 2 goede vragen opgesteld waarmee je de opdrachtgever kunt bevragen over het probleem?</li></ul>Tijdens dit <strong>coachingscollege</strong> zijn de opdrachtgevers van de diverse onderzoeken (online) aanwezig en bereid om alle vragen die jullie hebben voorbereid te stellen. Hierin kunnen jullie dus ook gebruik maken van elkaars vragen, maar zorg er ook voor dat er een 'eigen' karakter komt in je probleemverkenning.<br><br>Voor het <strong>werkcollege</strong> van week 3 ga je je leren hoe je een eerste richting kunt gaan geven aan het onderzoeksmodel. Let wel op, dit model is eigenlijk het centrale model dat jij in de komende weken continu blijft aanpassen aan de hand van (nieuwe) inzichten die jij tijdens de verkenning van het probleem, aan de hand van nieuwe interviews of door middel van kleine analyses op doet. We rafelen hierin het onderzoeksmodel uitéén in een onderzoeksobject, onderzoeksoptiek en de daarvoor benodigde bronnen of theorieën die jou in je onderzoek vorm en richting kunnen gaan geven. Tevens ga jij een eerste richting geven aan de centrale vraag en krijg je handvatten hoe je deze op een goede wijze kunt opstellen.<br><br>Bestudeer voor aanvang van het <strong>werkcollege</strong> de theorie van week 3."
+    "description": "In deze week leer je wat een onderzoeksmodel is en waarom je het nodig hebt. Je ontdekt hoe je een schematische weergave maakt van je onderzoek en welke stappen je moet zetten om je doelstelling te bereiken. Daarnaast leer je over de zes basishandelingen bij het maken van een onderzoeksmodel.<br><br>Deze week bestaat uit een <strong>coachingscollege</strong> en een <strong>werkcollege</strong>.<br><br>Voor het <strong>coachingscollege</strong> zorg je dat je de theorie voor het werkcollege van afgelopen week hebt begrepen en heb je de volgende vijf punten helder:<br><ul class=\"list-disc list-inside ml-4 mb-4\"><li>Welke onderwerpen er in een probleemverkenning worden beschreven.</li><li>Op welke wijze jij de juiste vragen kunt opstellen.</li><li>Hoe een goede doelstelling is te formuleren waarbij rekening is gehouden met het a- en b- gedeelte.</li><li>Wat het SMART-principe inhoudt.</li><li>Heb jij per onderwerp vanuit de probleemverkenning minimaal 2 goede vragen opgesteld waarmee je de opdrachtgever kunt bevragen over het probleem?</li></ul>Tijdens dit <strong>coachingscollege</strong> zijn de opdrachtgevers van de diverse onderzoeken (online) aanwezig en bereid om alle vragen die jullie hebben voorbereid te stellen. Hierin kunnen jullie dus ook gebruik maken van elkaars vragen, maar zorg er ook voor dat er een 'eigen' karakter komt in je probleemverkenning.<br><br>Voor het <strong>werkcollege</strong> van week 3 ga je je leren hoe je een eerste richting kunt gaan geven aan het onderzoeksmodel. Let wel op, dit model is eigenlijk het centrale model dat jij in de komende weken continu blijft aanpassen aan de hand van (nieuwe) inzichten die jij tijdens de verkenning van het probleem, aan de hand van nieuwe interviews of door middel van kleine analyses op doet. We rafelen hierin het onderzoeksmodel uitéén in een onderzoeksobject, onderzoeksoptiek en de daarvoor benodigde bronnen of theorieën die jou in je onderzoek vorm en richting kunnen gaan geven. Tevens ga jij een eerste richting geven aan de centrale vraag en krijg je handvatten hoe je deze op een goede wijze kunt opstellen.<br><br><div class=\"accordion-container mb-4\" id=\"intro-opdracht1-accordion\"><div class=\"border border-gray-200 dark:border-gray-700 rounded-lg mb-3 overflow-hidden transition-colors duration-200\"><button class=\"w-full px-6 py-4 bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 active:bg-gray-200 dark:active:bg-gray-600 transition-colors duration-200 flex items-center justify-between text-left cursor-pointer touch-manipulation\" onclick=\"InteractiveRenderer.toggleAccordion('intro-opdracht1-content','intro-opdracht1-item',true)\" aria-expanded=\"false\" aria-controls=\"intro-opdracht1-content\" id=\"intro-opdracht1-item\"><span class=\"font-semibold text-gray-900 dark:text-white text-lg\">Opdracht 1: Voorbereiding werkcollege week 3</span><i class=\"fas fa-plus transform transition-transform duration-200 text-gray-600 dark:text-gray-300\" id=\"intro-opdracht1-item-icon\"></i></button><div id=\"intro-opdracht1-content\" class=\"accordion-content overflow-hidden transition-all duration-300 ease-in-out max-h-0 opacity-0 bg-white dark:bg-gray-800\" aria-hidden=\"true\" style=\"display: none;\"><div class=\"px-6 py-4\"><p class=\"text-gray-700 dark:text-gray-300 mb-4\">Bestudeer voor aanvang van het <strong>werkcollege</strong> de volledige theorie van week 3 in deze e-learning. Zorg dat je de voorbeeldmodellen, de zes basishandelingen en de uitleg over onderzoeksmodel en onderzoeksvragen hebt doorgenomen, zodat je tijdens het werkcollege direct met je eigen onderzoeksmodel aan de slag kunt.</p></div></div></div></div>"
   },
   "leerdoelen": {
     "title": "Leerdoelen",
@@ -22,18 +22,6 @@
       {
         "type": "paragraph",
         "text": [
-          "<h3 class=\"text-lg font-semibold text-gray-900 dark:text-white mb-4\">Oefen met het Research Architect Game</h3>",
-          "Aan het einde van deze theorie kun je je kennis testen door het <strong>Research Architect Game</strong> te spelen. In dit interactieve spel bouw je stap voor stap een onderzoeksmodel op en leer je werken van rechts naar links. <strong>Bestudeer eerst de onderstaande theorie goed</strong>, want je hebt deze kennis nodig om de missie succesvol te volbrengen.",
-          "Klik op onderstaande afbeelding om naar het game te gaan (na het bestuderen van de theorie)."
-        ]
-      },
-      {
-        "type": "html",
-        "html": "<a href=\"/game/index.html\" target=\"_blank\" class=\"block mb-6 hover:opacity-90 transition-opacity inline-block\"><img src=\"assets/images/3.game.png\" alt=\"Research Architect Game - Klik om te spelen\" class=\"rounded-lg max-w-full h-auto cursor-pointer\" style=\"max-width: 600px;\" /></a>"
-      },
-      {
-        "type": "paragraph",
-        "text": [
           "Je bent inmiddels bezig geweest met het opstellen van een doelstelling vanuit een praktijk gestuurd vraagstuk. Nu je weet wat het doel gaat worden van je onderzoek, komt de vraag naar voren hoe je het onderzoek verder gaat aanpakken, kortom hoe ga je je geformuleerde doelstelling bereiken. Deze structuur ga je opbouwen aan de hand van onderzoeksvragen die je gaat stellen. Echter, hoe bepaal je nu wanneer onderzoeksvragen nuttig zijn, wanneer ze goed zijn en welke inhoud deze onderzoeksvragen moeten bevatten. Om over deze vragen na te denken sta je stil bij het onderzoeksmodel."
         ]
       },
@@ -41,6 +29,25 @@
         "type": "paragraph",
         "text": [
           "In het onderzoeksmodel maak je een schematische weergave van het onderzoek en de globale stappen die gezet moeten worden om het doel te bereiken. Deze stappen bestaan uit zowel procesmatige stappen (bijvoorbeeld bepalen in welke volgorde de vragen beantwoord worden) maar ook uit welke inhoud en/of theorieën geput kan worden ten einde een goed onderbouwd antwoord te formuleren."
+        ]
+      },
+      {
+        "type": "accordion",
+        "usePlusIcon": true,
+        "defaultOpen": false,
+        "items": [
+          {
+            "title": "Oefen met het Research Architect Game",
+            "defaultOpen": false,
+            "content": [
+              "Aan het einde van deze theorie kun je je kennis testen door het <strong>Research Architect Game</strong> te spelen. In dit interactieve spel bouw je stap voor stap een onderzoeksmodel op en leer je werken van rechts naar links. <strong>Bestudeer eerst de onderstaande theorie goed</strong>, want je hebt deze kennis nodig om de missie succesvol te volbrengen.",
+              "Klik op onderstaande afbeelding om naar het game te gaan (na het bestuderen van de theorie).",
+              {
+                "type": "html",
+                "html": "<a href=\"/game/index.html\" target=\"_blank\" class=\"block mb-6 hover:opacity-90 transition-opacity inline-block\"><img src=\"assets/images/3.game.png\" alt=\"Research Architect Game - Klik om te spelen\" class=\"rounded-lg max-w-full h-auto cursor-pointer\" style=\"max-width: 600px;\" /></a>"
+              }
+            ]
+          }
         ]
       },
       {
@@ -290,6 +297,21 @@
         ]
       },
       {
+        "type": "accordion",
+        "usePlusIcon": true,
+        "defaultOpen": false,
+        "items": [
+          {
+            "title": "Opdracht 2: Template Onderzoeksmodel klaarzetten",
+            "defaultOpen": false,
+            "content": [
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Open het bestand <strong>Onderzoeksmodel Template.vsdx</strong> (via de link hierboven of in Brightspace) in <strong>Microsoft Visio</strong> en sla een eigen kopie op waarin jij direct kunt werken.</p>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-0\">Neem voor het werkcollege de <strong>instructies en werkwijze</strong> in het template zorgvuldig door, zodat je tijdens het college meteen kunt beginnen met het invullen van je eigen onderzoeksmodel.</p>"
+            ]
+          }
+        ]
+      },
+      {
         "type": "image",
         "src": "assets/images/3.1.10.png",
         "alt": "Figuur 10: Template van het onderzoeksmodel. Het template is nog voorzien van toelichting en een handige werkwijze.",
@@ -330,6 +352,42 @@
       {
         "type": "video",
         "url": "https://media.windesheim.nl/Mediasite/Play/2b19c1b3a5664942917aab81d23887971d"
+      },
+      {
+        "type": "accordion",
+        "usePlusIcon": true,
+        "defaultOpen": false,
+        "items": [
+          {
+            "title": "Opdracht 3: 🤖 Bouw je eigen AI-Onderzoeksassistent",
+            "defaultOpen": false,
+            "content": [
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Je gaat de komende weken aan de slag met het opzetten van je volledige onderzoeksplan: van de probleemstelling en doelstelling tot het onderzoeksmodel en de deelvragen. Omdat je hierbij vaak vragen zult hebben op momenten dat je docent niet direct beschikbaar is, ga je in deze opdracht je eigen digitale OLO-docent bouwen.</p>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Dit doe je door een <strong>Custom GPT</strong> (in ChatGPT) of een <strong>Gem</strong> (in Google Gemini) te maken. Je voedt deze AI-assistent met de theorie van dit vak, zodat hij precies weet wat wij op het hbo verstaan onder een goed onderzoeksplan en jou kan coachen bij elke stap. Let op: een Custom GPT kun je alleen aanmaken met een betaald ChatGPT Plus-account; in Google Gemini kun je ook met een gratis account altijd een Gem bouwen.</p>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>Let op:</strong> Dit is een opdracht voor jezelf om je studie makkelijker te maken. Je hoeft hiervoor niets in te leveren.</p>",
+              "<h4 class=\"text-md font-semibold text-gray-900 dark:text-white mt-4 mb-2\">Stap 1: Bekijk de instructievideo</h4>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-2\">Om je op weg te helpen is er een instructievideo beschikbaar die laat zien hoe je een <strong>Gem</strong> bouwt in Google Gemini. De stappen voor ChatGPT werken vergelijkbaar.</p>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-3\">📺 Bekijk de video hier: <a href=\"https://www.youtube.com/watch?v=yO01B8OoXfo\" target=\"_blank\" class=\"text-blue-600 hover:text-blue-800 underline font-medium\">Instructievideo: Gem bouwen in Google Gemini</a></p>",
+              "<p class=\"text-sm text-gray-600 dark:text-gray-400 mb-4\"><strong>Disclaimer:</strong> De interface van AI-tools verandert snel. Sommige knoppen kunnen net op een andere plek zitten dan in de video. De werkwijze en logica blijven echter hetzelfde, dus met een beetje puzzelen kom je er zeker uit.</p>",
+              "<h4 class=\"text-md font-semibold text-gray-900 dark:text-white mt-4 mb-2\">Stap 2: Configureer je AI-docent</h4>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-2\">Of je nu kiest voor een Gemini Gem of een ChatGPT Custom GPT, de kracht zit in de instructies die je geeft. Je wilt dat de AI zich gedraagt als een <strong>expert-docent</strong> die jouw hele onderzoeksplan kan reviewen.</p>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-2\"><strong>Naam:</strong> OLO Onderzoeksassistent</p>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-3\"><strong>Instructies (system prompt):</strong> kopieer en plak onderstaande structuur in het instructieveld van je AI en vul deze aan met je eigen situatie.</p>",
+              "<ul class=\"list-disc list-inside ml-4 mb-4 space-y-2\">",
+              "<li><strong>🧍‍♀️ Persona</strong><br>Beschrijf de rol die jouw assistent krijgt, zodat hij weet vanuit welk perspectief hij jou helpt. Bijvoorbeeld: <em>\"Jij bent mijn persoonlijke onderzoeksassistent en methodoloog in het vak 'Opzetten van een Logistiek Onderzoek' op hbo-niveau.\"</em></li>",
+              "<li><strong>🧭 Taak</strong><br>Beschrijf wat jouw assistent precies moet doen. Bijvoorbeeld: <em>\"Jouw doel is om mij te coachen bij het schrijven van delen van mijn onderzoeksplan op basis van de context die ik meegeef. Geef nooit zomaar het volledige antwoord, maar stel kritische, didactische vragen zodat ik zelf blijf nadenken.\"</em></li>",
+              "<li><strong>🌍 Context</strong><br>Leg uit in welke situatie jij je bevindt. Bijvoorbeeld: <em>\"Ik ben een 2ejaars student Logistics Management en werk aan een praktijkgericht onderzoek. Gebruik de theorie uit het vak OLO om mij goed te begeleiden en te coachen.\"</em></li>",
+              "<li><strong>🧾 Format</strong><br>Geef aan in welke vorm je feedback wilt. Bijvoorbeeld: <em>\"Geef je feedback vooral in tekstvorm en gebruik waar dat helpt ook andere formats, zoals een tabel met verbeterpunten of een checklist.\"</em></li>",
+              "</ul>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>Kennis toevoegen:</strong> kopieer de volledige theorie van OLO (bijvoorbeeld vanuit deze e-learning of het theorieboek) en plak deze bij de instructies, of upload de theorie als Word-document/PDF als <em>knowledge</em>. Dit is cruciaal: zonder deze kennis blijft je assistent te algemeen.</p>",
+              "<h4 class=\"text-md font-semibold text-gray-900 dark:text-white mt-4 mb-2\">Stap 3: Gebruik en test je assistent</h4>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-2\">Loop je vast bij een onderdeel van je onderzoeksplan (bijvoorbeeld bij het aanscherpen van je doelstelling, onderzoeksmodel of centrale vraag)?</p>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-2\">Stel je vraag dan eerst aan je eigen <strong>AI-Onderzoeksassistent</strong>. Hij is 24/7 beschikbaar en kent – als je de theorie goed hebt toegevoegd – de OLO-werkwijze en begrippen.</p>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-0\">Blijf wel altijd het <strong>mens–machine–mens</strong>-principe gebruiken: jij beoordeelt zelf of de feedback klopt, past deze aan waar nodig en blijft eindverantwoordelijk voor de inhoud van je onderzoeksplan.</p>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mt-3 mb-0\"><strong>Succes met bouwen en gebruiken van je eigen AI-Onderzoeksassistent!</strong></p>"
+            ]
+          }
+        ]
       }
     ]
   },

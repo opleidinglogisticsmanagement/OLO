@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useMemo } from "react";
 import PropTypes from "prop-types";
 import { motion } from "framer-motion";
 import Level1 from "./Level1.jsx";
@@ -11,19 +11,34 @@ import Level3 from "./Level3.jsx";
  */
 export function GameContainer({ title = "The Research Architect", onJumpToLevelRef }) {
   const [currentLevel, setCurrentLevel] = useState(0);
-  const [score, setScore] = useState(0);
+  const [qualityIndex, setQualityIndex] = useState(50); // Research Quality Index (0-100)
   const [isStarted, setIsStarted] = useState(false);
+
+  const clamp = (value, min = 0, max = 100) => Math.max(min, Math.min(max, value));
+
+  const percentage = useMemo(() => Math.round(clamp(qualityIndex)), [qualityIndex]);
+
+  const rank = useMemo(() => {
+    if (percentage < 55) return "Junior Intern";
+    if (percentage < 75) return "Research Assistant";
+    if (percentage < 90) return "Logistics Architect";
+    return "Chief Visionary Officer";
+  }, [percentage]);
+
+  const addQuality = useCallback((delta) => {
+    setQualityIndex((prev) => clamp(prev + delta));
+  }, []);
 
   const resetGame = () => {
     setIsStarted(false);
     setCurrentLevel(0);
-    setScore(0);
+    setQualityIndex(50);
   };
 
   const restartFromLevel1 = () => {
     setIsStarted(true);
     setCurrentLevel(1);
-    setScore(0);
+    setQualityIndex(50);
   };
 
   const handleStart = () => {
@@ -31,19 +46,26 @@ export function GameContainer({ title = "The Research Architect", onJumpToLevelR
     setCurrentLevel(1);
   };
 
-  const handleLevelComplete = (bonus = 100) => {
-    setScore((prev) => prev + bonus);
+  const handleLevelComplete = () => {
     setCurrentLevel((prev) => Math.min(prev + 1, 3));
   };
 
   const renderLevelContent = () => {
     switch (currentLevel) {
       case 1:
-        return <Level1 onComplete={() => handleLevelComplete(150)} />;
+        return <Level1 onComplete={handleLevelComplete} onAddQuality={addQuality} />;
       case 2:
-        return <Level2 onComplete={() => handleLevelComplete(200)} />;
+        return <Level2 onComplete={handleLevelComplete} onAddQuality={addQuality} />;
       case 3:
-        return <Level3 onComplete={() => handleLevelComplete(250)} onRestart={restartFromLevel1} />;
+        return (
+          <Level3
+            onComplete={handleLevelComplete}
+            onRestart={restartFromLevel1}
+            onAddQuality={addQuality}
+            qualityPercentage={percentage}
+            qualityRank={rank}
+          />
+        );
       default:
         return null;
     }
@@ -64,7 +86,7 @@ export function GameContainer({ title = "The Research Architect", onJumpToLevelR
   }, [onJumpToLevelRef, handleJumpToLevel]);
 
   return (
-    <div className="w-full max-w-4xl mx-auto relative" data-game-container>
+    <div className="w-full max-w-6xl mx-auto px-2 md:px-4 relative" data-game-container>
       <motion.section
         className="bg-lab-surface/80 border border-white/5 rounded-3xl p-8 shadow-neon backdrop-blur-sm"
         initial={{ opacity: 0, y: 20 }}
@@ -73,7 +95,7 @@ export function GameContainer({ title = "The Research Architect", onJumpToLevelR
       >
         <header className="flex flex-row items-center justify-between w-full p-4 border-b border-white/10 mb-6">
           <h2 className="text-2xl font-semibold text-white">{title}</h2>
-          
+
           {isStarted && (
             <div className="flex gap-6 text-sm text-slate-300 font-mono">
               <div className="flex items-center gap-2">
@@ -81,8 +103,18 @@ export function GameContainer({ title = "The Research Architect", onJumpToLevelR
                 <span className="text-white font-semibold">{currentLevel}/3</span>
               </div>
               <div className="flex items-center gap-2">
-                <span className="text-xs uppercase tracking-widest text-slate-500">Score</span>
-                <span className="text-white font-semibold">{score}</span>
+                <span className="text-xs uppercase tracking-widest text-slate-500">RQI</span>
+                <span
+                  className={`font-semibold ${
+                    percentage < 55
+                      ? "text-red-400"
+                      : percentage < 75
+                      ? "text-orange-300"
+                      : "text-green-400"
+                  }`}
+                >
+                  {percentage}%
+                </span>
               </div>
             </div>
           )}
@@ -98,7 +130,7 @@ export function GameContainer({ title = "The Research Architect", onJumpToLevelR
 
         {!isStarted ? (
           <motion.div
-            className="mt-10 text-center"
+            className="mt-8 text-center"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.2 }}
@@ -116,7 +148,7 @@ export function GameContainer({ title = "The Research Architect", onJumpToLevelR
         ) : (
           <motion.div
             key={`level-${currentLevel}`}
-            className="mt-10 border border-white/10 rounded-3xl p-6 md:p-8 bg-white/5 text-slate-300"
+            className="mt-6 border border-white/10 rounded-3xl p-4 md:p-6 bg-white/5 text-slate-300"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4 }}

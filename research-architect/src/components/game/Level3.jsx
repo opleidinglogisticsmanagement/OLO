@@ -46,7 +46,7 @@ const STEP3_ITEMS = [
   { id: "result-d", label: "RESULTAAT D: Totale Voorraadhoogte", isCorrect: false },
 ];
 
-export default function Level3({ onComplete, onRestart }) {
+export default function Level3({ onComplete, onRestart, onAddQuality, qualityPercentage, qualityRank }) {
   const [step, setStep] = useState(1); // 1, 2a, 2b, 3
   const [mixerSlots, setMixerSlots] = useState({ 1: null }); // Start with 1 empty slot
   const [slotCount, setSlotCount] = useState(1); // Track number of slots
@@ -449,6 +449,10 @@ export default function Level3({ onComplete, onRestart }) {
         type: "error",
         message: validation.message,
       });
+    // Stap 3 fout: verkeerd advies -> -10 punten
+    if (step === 3 && onAddQuality) {
+      onAddQuality(-10);
+    }
       setTimeout(() => {
         setIsShaking(false);
         // DO NOT reset slots - let player correct their mistake
@@ -472,6 +476,10 @@ export default function Level3({ onComplete, onRestart }) {
           message: "Correct! Je hebt een solide fundering gelegd voor je meetlat (Optiek):\n\n• Theorie (KPI's): Geeft standaard meetwaarden zoals Picks/Uur en Foutpercentage.\n\n• Theorie (Herzberg - Motivatie Medewerkers): Zorgt dat je ook 'zachte' criteria zoals werkplezier en motivatie meetbaar maakt.\n\n• Vooronderzoek: Door je gesprekken op de werkvloer, deskresearch en het leren kennen van de organisatie, weet je wat de context is.\n\n• Interview: De manager bevestigt wat strategisch belangrijk is. Samen zorgt dit dat je criteria perfect passen bij Scania.",
         });
         setStepCompleted(true);
+        // Stap 1 voltooid: +10 punten
+        if (onAddQuality) {
+          onAddQuality(10);
+        }
       } else if (step === "2a") {
         setIsSuccess(true);
         setOutput("RESULTAAT A: Current State (100 picks/u)");
@@ -488,6 +496,10 @@ export default function Level3({ onComplete, onRestart }) {
           message: "Correct! Je hebt de pilot-meting bepaald: 150 picks per uur.",
         });
         setStepCompleted(true);
+        // Stap 2 voltooid (na afronden 2b): +10 punten
+        if (onAddQuality) {
+          onAddQuality(10);
+        }
       } else if (step === 3) {
         setIsSuccess(true);
         setOutput("CONCLUSIE: Productiviteit +50%");
@@ -496,6 +508,10 @@ export default function Level3({ onComplete, onRestart }) {
           message: "Gefeliciteerd! Je hebt het B-deel (inzicht in productiviteit) geleverd. Hiermee kan het A-deel (Advies aan Scania: Aanschaffen!) worden ingevuld. Doelstelling behaald!",
         });
         setStepCompleted(true);
+        // Stap 3 (advies) correct: +20 punten
+        if (onAddQuality) {
+          onAddQuality(20);
+        }
       }
     }, 1500);
   };
@@ -909,6 +925,22 @@ export default function Level3({ onComplete, onRestart }) {
 
               {/* Report Content */}
               <div className="space-y-4 font-mono text-sm text-white">
+                {/* Research Quality Index & Rank */}
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border-b border-white/10 pb-4">
+                  <div>
+                    <div className="text-lab-neon-green/70 mb-1">RESEARCH QUALITY INDEX (RQI):</div>
+                    <div className="text-slate-200 pl-4">
+                      {typeof qualityPercentage === "number" ? `${qualityPercentage}%` : "n.v.t."}
+                    </div>
+                  </div>
+                  <div>
+                    <div className="text-lab-neon-green/70 mb-1">RANK:</div>
+                    <div className="text-slate-200 pl-4">
+                      {qualityRank || "Onbekend"}
+                    </div>
+                  </div>
+                </div>
+
                 <div>
                   <div className="text-lab-neon-green/70 mb-1">DOELSTELLING:</div>
                   <div className="text-slate-200 pl-4">
@@ -982,4 +1014,7 @@ export default function Level3({ onComplete, onRestart }) {
 Level3.propTypes = {
   onComplete: PropTypes.func.isRequired,
   onRestart: PropTypes.func,
+  onAddQuality: PropTypes.func,
+  qualityPercentage: PropTypes.number,
+  qualityRank: PropTypes.string,
 };

@@ -11,6 +11,7 @@ const BLOCKS = [
   { id: "optic", label: "ONDERZOEKSOPTIEK", position: 2 },
   { id: "sources", label: "BRONNEN", position: 1 },
   { id: "vooronderzoek", label: "VOORONDERZOEK", position: 1 },
+  { id: "theorie", label: "THEORIE", position: 1 },
 ];
 
 // Fisher-Yates shuffle algorithm
@@ -23,10 +24,11 @@ const shuffleArray = (array) => {
   return shuffled;
 };
 
-export default function Level1({ onComplete }) {
+export default function Level1({ onComplete, onAddQuality }) {
   const [placements, setPlacements] = useState({
     1: null, // Kolom 1: Bronnen
     2: null, // Kolom 1: Vooronderzoek
+    9: null, // Kolom 1: Theorie
     3: null, // Kolom 2: Onderzoeksoptiek (centered)
     4: null, // Kolom 3: Onderzoeksobject 1
     5: null, // Kolom 3: Onderzoeksobject 2
@@ -38,9 +40,10 @@ export default function Level1({ onComplete }) {
   const [completed, setCompleted] = useState(false);
   const [shuffledBlocks, setShuffledBlocks] = useState([]);
   const [unlockedColumns, setUnlockedColumns] = useState(new Set([5])); // Start with only column 5 unlocked
+  const [hadError, setHadError] = useState(false); // Track for perfect run bonus
   const dragRefs = useRef({});
   const containerRef = useRef(null);
-  const placementsRef = useRef({ 1: null, 2: null, 3: null, 4: null, 5: null, 6: null, 7: null, 8: null });
+  const placementsRef = useRef({ 1: null, 2: null, 9: null, 3: null, 4: null, 5: null, 6: null, 7: null, 8: null });
   const lastDragPosition = useRef({ x: 0, y: 0 });
 
   // Shuffle blocks on component mount
@@ -127,6 +130,8 @@ export default function Level1({ onComplete }) {
 
     if (!zoneElement) {
       setFeedback("Drop je blok in een van de blauwdruk-slots.");
+      if (onAddQuality) onAddQuality(-2);
+      setHadError(true);
       resetDragPosition(block.id);
       return;
     }
@@ -136,7 +141,7 @@ export default function Level1({ onComplete }) {
 
     // Determine which column this slot belongs to
     let columnNumber;
-    if (slotNumber === 1 || slotNumber === 2) columnNumber = 1;
+    if (slotNumber === 1 || slotNumber === 2 || slotNumber === 9) columnNumber = 1;
     else if (slotNumber === 3) columnNumber = 2;
     else if (slotNumber === 4 || slotNumber === 5) columnNumber = 3;
     else if (slotNumber === 6 || slotNumber === 7) columnNumber = 4;
@@ -146,6 +151,8 @@ export default function Level1({ onComplete }) {
     // Check if column is unlocked
     if (!unlockedColumns.has(columnNumber)) {
       setFeedback("Deze kolom is nog niet beschikbaar.");
+      if (onAddQuality) onAddQuality(-2);
+      setHadError(true);
       resetDragPosition(block.id);
       return;
     }
@@ -153,6 +160,8 @@ export default function Level1({ onComplete }) {
     // Check if slot is already filled
     if (currentPlacements[slotNumber]) {
       setFeedback("Dit slot is al gevuld. Kies een ander slot.");
+      if (onAddQuality) onAddQuality(-2);
+      setHadError(true);
       resetDragPosition(block.id);
       return;
     }
@@ -162,6 +171,8 @@ export default function Level1({ onComplete }) {
       // Slot 8 (Column 5): Must be DOEL
       if (block.id !== "goal") {
         setFeedback("Dit blok hoort op een andere positie.");
+        if (onAddQuality) onAddQuality(-2);
+        setHadError(true);
         resetDragPosition(block.id);
         return;
       }
@@ -169,6 +180,8 @@ export default function Level1({ onComplete }) {
       // Slots 6 & 7 (Column 4): Must be ANALYSERESULTAAT
       if (block.id !== "analyse1" && block.id !== "analyse2") {
         setFeedback("Dit blok hoort op een andere positie.");
+        if (onAddQuality) onAddQuality(-2);
+        setHadError(true);
         resetDragPosition(block.id);
         return;
       }
@@ -176,6 +189,8 @@ export default function Level1({ onComplete }) {
       const otherResultSlot = slotNumber === 6 ? 7 : 6;
       if (currentPlacements[otherResultSlot] === block.id) {
         setFeedback("Je hebt dit blok al geplaatst. Kies het andere resultaat-slot.");
+        if (onAddQuality) onAddQuality(-2);
+        setHadError(true);
         resetDragPosition(block.id);
         return;
       }
@@ -183,6 +198,8 @@ export default function Level1({ onComplete }) {
       // Slots 4 & 5 (Column 3): Must be ONDERZOEKSOBJECT
       if (block.id !== "object1" && block.id !== "object2") {
         setFeedback("Dit blok hoort op een andere positie.");
+        if (onAddQuality) onAddQuality(-2);
+        setHadError(true);
         resetDragPosition(block.id);
         return;
       }
@@ -190,6 +207,8 @@ export default function Level1({ onComplete }) {
       const otherObjectSlot = slotNumber === 4 ? 5 : 4;
       if (currentPlacements[otherObjectSlot] === block.id) {
         setFeedback("Je hebt dit blok al geplaatst. Kies het andere object-slot.");
+        if (onAddQuality) onAddQuality(-2);
+        setHadError(true);
         resetDragPosition(block.id);
         return;
       }
@@ -197,20 +216,29 @@ export default function Level1({ onComplete }) {
       // Slot 3 (Column 2): Must be ONDERZOEKSOPTIEK
       if (block.id !== "optic") {
         setFeedback("Dit blok hoort op een andere positie.");
+        if (onAddQuality) onAddQuality(-2);
+        setHadError(true);
         resetDragPosition(block.id);
         return;
       }
-    } else if (slotNumber === 1 || slotNumber === 2) {
-      // Slots 1 & 2 (Column 1): Must be BRONNEN or VOORONDERZOEK
-      if (block.id !== "sources" && block.id !== "vooronderzoek") {
+    } else if (slotNumber === 1 || slotNumber === 2 || slotNumber === 9) {
+      // Slots 1 & 2 (Column 1): Must be BRONNEN, VOORONDERZOEK of THEORIE
+      if (block.id !== "sources" && block.id !== "vooronderzoek" && block.id !== "theorie") {
         setFeedback("Dit blok hoort op een andere positie.");
+        if (onAddQuality) onAddQuality(-2);
+        setHadError(true);
         resetDragPosition(block.id);
         return;
       }
-      // Check if the other left slot already has the same type
-      const otherLeftSlot = slotNumber === 1 ? 2 : 1;
-      if (currentPlacements[otherLeftSlot] === block.id) {
-        setFeedback("Je hebt dit blok al geplaatst. Kies het andere linker slot.");
+      // Check if any other left slot already has the same type
+      const leftSlots = [1, 2, 9];
+      const duplicateInOtherSlot = leftSlots.some(
+        (s) => s !== slotNumber && currentPlacements[s] === block.id
+      );
+      if (duplicateInOtherSlot) {
+        setFeedback("Je hebt dit blok al geplaatst. Kies een ander slot in kolom 1.");
+        if (onAddQuality) onAddQuality(-2);
+        setHadError(true);
         resetDragPosition(block.id);
         return;
       }
@@ -233,10 +261,16 @@ export default function Level1({ onComplete }) {
     placementsRef.current = newPlacements;
     setPlacements(newPlacements);
 
+    // Correcte plaatsing: beloon speler
+    if (onAddQuality) {
+      onAddQuality(5);
+    }
+
     // Check completion
     const allPlaced = 
       newPlacements[1] && 
       newPlacements[2] && 
+      newPlacements[9] &&
       newPlacements[3] && 
       newPlacements[4] && 
       newPlacements[5] &&
@@ -244,8 +278,8 @@ export default function Level1({ onComplete }) {
       newPlacements[7] &&
       newPlacements[8];
     
-    const hasSources = newPlacements[1] === "sources" || newPlacements[2] === "sources";
-    const hasVooronderzoek = newPlacements[1] === "vooronderzoek" || newPlacements[2] === "vooronderzoek";
+    const hasSources = [1, 2, 9].some((s) => newPlacements[s] === "sources");
+    const hasVooronderzoek = [1, 2, 9].some((s) => newPlacements[s] === "vooronderzoek");
     const hasObject1 = newPlacements[4] === "object1" || newPlacements[5] === "object1";
     const hasObject2 = newPlacements[4] === "object2" || newPlacements[5] === "object2";
     const hasAnalyse1 = newPlacements[6] === "analyse1" || newPlacements[7] === "analyse1";
@@ -262,6 +296,10 @@ export default function Level1({ onComplete }) {
       hasVooronderzoek;
 
     if (allPlaced && isCorrectOrder) {
+      // Perfecte run bonus als er geen fouten waren
+      if (!hadError && onAddQuality) {
+        onAddQuality(10);
+      }
       setTimeout(() => {
         setCompleted(true);
       }, 300);
@@ -285,9 +323,9 @@ export default function Level1({ onComplete }) {
     if (fromCol === 3 && toCol === 2) {
       return (placements[4] || placements[5]) && placements[3];
     }
-    // Column 2 (slot 3) -> Column 1 (slots 1 & 2)
+    // Column 2 (slot 3) -> Column 1 (slots 1, 2 & 9)
     if (fromCol === 2 && toCol === 1) {
-      return placements[3] && (placements[1] || placements[2]);
+      return placements[3] && (placements[1] || placements[2] || placements[9]);
     }
     return false;
   };
@@ -427,7 +465,7 @@ export default function Level1({ onComplete }) {
             )}
           </svg>
 
-          {/* Column 1: Bronnen + Vooronderzoek (stacked) */}
+          {/* Column 1: Bronnen + Vooronderzoek + Theorie (stacked) */}
           <div className="space-y-4 col-span-1 flex flex-col justify-center">
             <div className="text-xs uppercase tracking-[0.3em] text-slate-500 text-center">
               Kolom 1
@@ -437,7 +475,7 @@ export default function Level1({ onComplete }) {
             <div className="space-y-2">
               <div
                 data-slot={1}
-                className={`min-h-[100px] rounded-2xl border-2 border-dashed flex items-center justify-center px-2 font-mono transition-all ${
+                className={`min-h-[80px] rounded-2xl border-2 border-dashed flex items-center justify-center px-2 font-mono transition-all ${
                   !unlockedColumns.has(1)
                     ? "border-slate-700/50 bg-slate-900/30 text-slate-600 opacity-50 cursor-not-allowed"
                     : placements[1]
@@ -466,7 +504,7 @@ export default function Level1({ onComplete }) {
             <div className="space-y-2">
               <div
                 data-slot={2}
-                className={`min-h-[100px] rounded-2xl border-2 border-dashed flex items-center justify-center px-2 font-mono transition-all ${
+                className={`min-h-[80px] rounded-2xl border-2 border-dashed flex items-center justify-center px-2 font-mono transition-all ${
                   !unlockedColumns.has(1)
                     ? "border-slate-700/50 bg-slate-900/30 text-slate-600 opacity-50 cursor-not-allowed"
                     : placements[2]
@@ -482,6 +520,35 @@ export default function Level1({ onComplete }) {
                     className="w-full py-3 rounded-xl bg-gradient-to-r from-lab-neon-green/30 to-lab-neon-blue/20 text-white font-semibold text-xs shadow-neon whitespace-normal break-words text-center leading-tight"
                   >
                     {BLOCKS.find((block) => block.id === placements[2])?.label}
+                  </motion.div>
+                ) : (
+                  <span className={!unlockedColumns.has(1) ? "text-slate-600 text-xs" : "text-xs"}>
+                    {!unlockedColumns.has(1) ? "🔒" : "Sleep"}
+                  </span>
+                )}
+              </div>
+            </div>
+
+            {/* Slot 3 (data-slot=9) */}
+            <div className="space-y-2">
+              <div
+                data-slot={9}
+                className={`min-h-[80px] rounded-2xl border-2 border-dashed flex items-center justify-center px-2 font-mono transition-all ${
+                  !unlockedColumns.has(1)
+                    ? "border-slate-700/50 bg-slate-900/30 text-slate-600 opacity-50 cursor-not-allowed"
+                    : placements[9]
+                    ? "border-lab-neon-green/70 bg-lab-neon-green/10"
+                    : "border-white/15 bg-white/5 text-slate-400"
+                }`}
+              >
+                {placements[9] ? (
+                  <motion.div
+                    layout
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    className="w-full py-3 rounded-xl bg-gradient-to-r from-lab-neon-green/30 to-lab-neon-blue/20 text-white font-semibold text-xs shadow-neon whitespace-normal break-words text-center leading-tight"
+                  >
+                    {BLOCKS.find((block) => block.id === placements[9])?.label}
                   </motion.div>
                 ) : (
                   <span className={!unlockedColumns.has(1) ? "text-slate-600 text-xs" : "text-xs"}>
@@ -758,4 +825,5 @@ export default function Level1({ onComplete }) {
 
 Level1.propTypes = {
   onComplete: PropTypes.func.isRequired,
+  onAddQuality: PropTypes.func,
 };

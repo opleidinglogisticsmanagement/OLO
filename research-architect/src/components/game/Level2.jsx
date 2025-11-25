@@ -105,7 +105,7 @@ const shuffleArray = (array) => {
   return shuffled;
 };
 
-export default function Level2({ onComplete }) {
+export default function Level2({ onComplete, onAddQuality }) {
   const [currentCase, setCurrentCase] = useState(1);
   const [phase, setPhase] = useState("choice"); // "choice" or "evidence"
   const [selectedOptics, setSelectedOptics] = useState(null); // "normatief" or "feitelijk"
@@ -116,6 +116,7 @@ export default function Level2({ onComplete }) {
   const [caseCompleted, setCaseCompleted] = useState(false);
   const [shakingSource, setShakingSource] = useState(null);
   const [shuffledSources, setShuffledSources] = useState([]);
+  const [caseScores, setCaseScores] = useState(() => CASES.map(() => 0)); // Max 15 per case
   
   const dragRefs = useRef({});
   const lastDragPosition = useRef({ x: 0, y: 0 });
@@ -227,6 +228,17 @@ export default function Level2({ onComplete }) {
         type: "success",
         message: `Correct. ${currentCaseData.explanation}`,
       });
+      // Beloon deze casus tot max 15 punten
+      const caseIndex = currentCase - 1;
+      setCaseScores((prev) => {
+        const next = [...prev];
+        const remaining = Math.max(0, 15 - next[caseIndex]);
+        if (remaining > 0 && onAddQuality) {
+          onAddQuality(remaining);
+        }
+        next[caseIndex] = Math.min(15, next[caseIndex] + remaining);
+        return next;
+      });
       setCaseCompleted(true);
 
       setTimeout(() => {
@@ -241,6 +253,10 @@ export default function Level2({ onComplete }) {
         type: "error",
         message: specificFeedback,
       });
+      // Foute bron: -5 punten
+      if (onAddQuality) {
+        onAddQuality(-5);
+      }
 
       setTimeout(() => {
         setIsShaking(false);
@@ -551,4 +567,5 @@ export default function Level2({ onComplete }) {
 
 Level2.propTypes = {
   onComplete: PropTypes.func.isRequired,
+  onAddQuality: PropTypes.func,
 };

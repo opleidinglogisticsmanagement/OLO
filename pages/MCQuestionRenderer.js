@@ -1,4 +1,4 @@
-/**
+/**M
  * MCQuestionRenderer
  * 
  * Renderer voor Multiple Choice vragen

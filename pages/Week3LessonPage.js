@@ -98,7 +98,9 @@ class Week3LessonPage extends BaseLessonPage {
                     </div>
                     <div class="flex-1 min-w-0 w-full sm:w-auto">
                         <h1 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">${this.content.intro.title}: ${this.content.intro.subtitle}</h1>
-                        <p class="text-gray-600 dark:text-gray-300 mb-4">${this.content.intro.description}</p>
+                        <div class="text-gray-600 dark:text-gray-300 mb-4 [&_strong]:dark:text-gray-200 [&_ul]:dark:text-gray-300 [&_li]:dark:text-gray-300">
+                            ${this.content.intro.description}
+                        </div>
                     </div>
                 </div>
             </section>

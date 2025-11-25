@@ -1069,6 +1069,82 @@ app.get('/', (req, res, next) => {
     });
 });
 
+// Serveer game/index.html expliciet
+app.get('/game/index.html', (req, res, next) => {
+    const filePath = path.join(rootDir, 'game', 'index.html');
+    console.log(`Attempting to serve game/index.html from: ${filePath}`);
+    
+    if (fs.existsSync(filePath)) {
+        res.sendFile(filePath, (err) => {
+            if (err) {
+                console.error('Error serving game/index.html:', err);
+                next(err);
+            }
+        });
+    } else {
+        console.error(`❌ Game file not found: ${filePath}`);
+        res.status(404).send(`Game not found: ${filePath}`);
+    }
+});
+
+// Serveer game assets (CSS, JS, SVG) - moet VOOR de algemene static middleware komen
+app.get('/game/assets/:filename', (req, res, next) => {
+    const filename = req.params.filename;
+    
+    // Security: voorkom path traversal (../, /, \ of andere onveilige tekens)
+    // Sta alleen "veilige" bestandsnamen toe: letters, cijfers, punt, underscore en streepje
+    const safeFilenamePattern = /^[a-zA-Z0-9._-]+$/;
+    if (!safeFilenamePattern.test(filename)) {
+        console.warn(`[Security] Blocked invalid game asset filename: ${filename}`);
+        return res.status(400).send('Invalid asset path');
+    }
+
+    const filePath = path.join(rootDir, 'game', 'assets', filename);
+    console.log(`Attempting to serve game asset: ${filename} from ${filePath}`);
+    
+    if (fs.existsSync(filePath)) {
+        // Set correct MIME type based on file extension
+        const ext = path.extname(filename).toLowerCase();
+        const mimeTypes = {
+            '.js': 'application/javascript',
+            '.css': 'text/css',
+            '.svg': 'image/svg+xml',
+            '.png': 'image/png',
+            '.jpg': 'image/jpeg',
+            '.jpeg': 'image/jpeg',
+            '.json': 'application/json'
+        };
+        const contentType = mimeTypes[ext] || 'application/octet-stream';
+        res.setHeader('Content-Type', contentType);
+        
+        res.sendFile(filePath, (err) => {
+            if (err) {
+                console.error(`Error serving game asset ${filename}:`, err);
+                next(err);
+            }
+        });
+    } else {
+        console.error(`❌ Game asset not found: ${filePath}`);
+        res.status(404).send(`Game asset not found: ${filename}`);
+    }
+});
+
+// Serveer game vite.svg
+app.get('/game/vite.svg', (req, res, next) => {
+    const filePath = path.join(rootDir, 'game', 'vite.svg');
+    if (fs.existsSync(filePath)) {
+        res.setHeader('Content-Type', 'image/svg+xml');
+        res.sendFile(filePath, (err) => {
+            if (err) {
+                console.error('Error serving game vite.svg:', err);
+                next(err);
+            }
+        });
+    } else {
+        next();
+    }
+});
+
 // Serveer alle HTML bestanden expliciet (week1.html, week2.html, instructies.html, etc.)
 // Deze route moet VOOR de static middleware komen om zeker te zijn dat HTML files worden geserveerd
 app.get(/\.html$/, (req, res, next) => {

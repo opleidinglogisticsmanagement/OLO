@@ -22,6 +22,18 @@
       {
         "type": "paragraph",
         "text": [
+          "<h3 class=\"text-lg font-semibold text-gray-900 dark:text-white mb-4\">Oefen met het Research Architect Game</h3>",
+          "Aan het einde van deze theorie kun je je kennis testen door het <strong>Research Architect Game</strong> te spelen. In dit interactieve spel bouw je stap voor stap een onderzoeksmodel op en leer je werken van rechts naar links. <strong>Bestudeer eerst de onderstaande theorie goed</strong>, want je hebt deze kennis nodig om de missie succesvol te volbrengen.",
+          "Klik op onderstaande afbeelding om naar het game te gaan (na het bestuderen van de theorie)."
+        ]
+      },
+      {
+        "type": "html",
+        "html": "<a href=\"/game/index.html\" target=\"_blank\" class=\"block mb-6 hover:opacity-90 transition-opacity inline-block\"><img src=\"assets/images/3.game.png\" alt=\"Research Architect Game - Klik om te spelen\" class=\"rounded-lg max-w-full h-auto cursor-pointer\" style=\"max-width: 600px;\" /></a>"
+      },
+      {
+        "type": "paragraph",
+        "text": [
           "Je bent inmiddels bezig geweest met het opstellen van een doelstelling vanuit een praktijk gestuurd vraagstuk. Nu je weet wat het doel gaat worden van je onderzoek, komt de vraag naar voren hoe je het onderzoek verder gaat aanpakken, kortom hoe ga je je geformuleerde doelstelling bereiken. Deze structuur ga je opbouwen aan de hand van onderzoeksvragen die je gaat stellen. Echter, hoe bepaal je nu wanneer onderzoeksvragen nuttig zijn, wanneer ze goed zijn en welke inhoud deze onderzoeksvragen moeten bevatten. Om over deze vragen na te denken sta je stil bij het onderzoeksmodel."
         ]
       },

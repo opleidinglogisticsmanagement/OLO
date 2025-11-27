@@ -359,6 +359,42 @@
         "defaultOpen": false,
         "items": [
           {
+            "title": "Voorbeeld: Ultimo onderzoek",
+            "defaultOpen": false,
+            "content": [
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Hieronder staat een voorbeeld van een probleemstelling, doelstelling en onderzoeksvragen. Dit voorbeeld helpt je om te begrijpen hoe je de functie- en vormeisen kunt toepassen bij het opstellen van onderzoeksvragen.</p>",
+              "<h4 class=\"text-md font-semibold text-gray-900 dark:text-white mb-2 mt-4\">Probleemstelling</h4>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Ultimo is een softwarepakket voor asset management en onderhoudsbeheer dat wordt gebruikt door organisaties om hun materieel, voertuigen en werkplaatsen te beheren. De afdeling wagenparkbeheer van een organisatie heeft moeite met het genereren van betrouwbare rapportages over werkplaats en materieel uit het Ultimo-systeem. De huidige rapportages zijn onvolledig en bevatten fouten, waardoor de afdeling niet goed kan sturen op basis van de beschikbare informatie. Dit leidt tot inefficiënties en verkeerde beslissingen.</p>",
+              "<h4 class=\"text-md font-semibold text-gray-900 dark:text-white mb-2 mt-4\">Doelstelling</h4>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">De doelstelling van dit onderzoek is om een plan op te leveren waarin beschreven wordt hoe Ultimo zodanig kan worden ingericht dat rapportages over werkplaats en materieel met minimaal 90% betrouwbaarheid (volledigheid en juistheid) kunnen worden gegenereerd ten behoeve van de afdeling wagenparkbeheer.</p>",
+              "<h4 class=\"text-md font-semibold text-gray-900 dark:text-white mb-2 mt-4\">Onderzoeksvragen</h4>",
+              "<ol class=\"list-decimal list-outside space-y-3 mb-4 ml-6 pl-4\">",
+              "<li class=\"text-gray-700 dark:text-gray-300\">Welke verwachtingen heeft de organisatie van Ultimo en wat is de informatiebehoefte uit het systeem?</li>",
+              "<li class=\"text-gray-700 dark:text-gray-300\">Welke functies worden op dit moment door Ultimo aangeboden en hoe hoog ligt het betrouwbaarheidspercentage hiervan?</li>",
+              "<li class=\"text-gray-700 dark:text-gray-300\">Op welke manier kan Ultimo worden verbeterd zodat de door Ultimo geleverde functionaliteiten aansluiten op de informatiebehoefte en wensen van de organisatie?</li>",
+              "<li class=\"text-gray-700 dark:text-gray-300\">Hoe kunnen de aanpassingen aan het systeem worden verwerkt in een haalbare business case?</li>",
+              "<li class=\"text-gray-700 dark:text-gray-300\">Hoe kan ervoor worden gezorgd dat Ultimo na de aanpassingen goed gebruikt blijft worden?</li>",
+              "</ol>",
+              "<div class=\"bg-blue-50 dark:bg-gray-800 border-l-4 border-blue-500 dark:border-blue-400 p-4 rounded-r-lg mb-4\">",
+              "<p class=\"text-gray-700 dark:text-gray-300 font-medium mb-2\"><strong>Vraag aan jou:</strong></p>",
+              "<p class=\"text-gray-700 dark:text-gray-300\">In welke mate voldoen de bovenstaande onderzoeksvragen aan de functie- en vormeisen (afbakening, efficiëntie en sturend vermogen)? Analyseer elke vraag en geef aan waar deze goed aan voldoet en waar eventuele verbeteringen mogelijk zijn.</p>",
+              "</div>"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "Nu je hebt gezien hoe onderzoeksvragen worden geformuleerd en welke eisen hieraan worden gesteld, kun je zelf aan de slag met het opstellen van je eigen onderzoeksvragen. Om je hierbij te helpen, kun je gebruik maken van een AI-assistent die specifiek is getraind op de theorie van dit vak."
+        ]
+      },
+      {
+        "type": "accordion",
+        "usePlusIcon": true,
+        "defaultOpen": false,
+        "items": [
+          {
             "title": "Opdracht 3: 🤖 Bouw je eigen AI-Onderzoeksassistent",
             "defaultOpen": false,
             "content": [

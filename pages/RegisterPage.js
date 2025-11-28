@@ -18,16 +18,26 @@ class RegisterPage extends BaseLessonPage {
      */
     async loadTerms() {
         try {
-            const response = await fetch('./content/register.json');
+            // Voeg timestamp toe om caching te voorkomen
+            const timestamp = new Date().getTime();
+            const response = await fetch(`./content/register.json?v=${timestamp}`);
+            
             if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
+                throw new Error(`HTTP fout: ${response.status} ${response.statusText} bij laden van register.json`);
             }
+            
             const data = await response.json();
+            
+            if (!Array.isArray(data)) {
+                throw new Error('Ongeldig data formaat: verwacht een array');
+            }
+
             // Sorteer alfabetisch
             this.terms = data.sort((a, b) => a.term.localeCompare(b.term, 'nl'));
             this.filteredTerms = this.terms;
         } catch (error) {
             console.error('Fout bij laden begrippenlijst:', error);
+            this.error = error.message; // Sla error op voor weergave
             this.terms = [];
             this.filteredTerms = [];
         }
@@ -110,6 +120,18 @@ class RegisterPage extends BaseLessonPage {
     renderTermsList() {
         const container = document.getElementById('terms-list');
         if (!container) return;
+
+        // Toon foutmelding als die er is
+        if (this.error) {
+            container.innerHTML = `
+                <div class="text-center py-8 text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-900/20 rounded-lg border border-red-200 dark:border-red-800">
+                    <i class="fas fa-exclamation-circle mb-2 text-2xl"></i>
+                    <p class="font-bold">Er is een fout opgetreden bij het laden van de begrippen.</p>
+                    <p class="text-sm mt-1 opacity-80">${this.error}</p>
+                </div>
+            `;
+            return;
+        }
 
         if (this.filteredTerms.length === 0) {
             container.innerHTML = `

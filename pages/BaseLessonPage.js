@@ -224,38 +224,74 @@ class BaseLessonPage {
      */
     renderHeader() {
         return `
-            <header class="bg-white dark:bg-gray-800 shadow-sm border-b border-gray-200 dark:border-gray-700 px-4 sm:px-6 py-3 sm:py-4 sticky top-0 z-30 transition-colors duration-200">
-                <div class="flex items-center justify-between">
-                    <!-- Mobile menu button -->
-                    <button id="mobile-menu-button" class="lg:hidden p-2 rounded-md text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 focus-ring transition-colors" aria-label="Open navigatie menu">
-                        <i class="fas fa-bars text-xl"></i>
-                    </button>
+            <header class="bg-white dark:bg-gray-800 shadow-sm border-b border-gray-200 dark:border-gray-700 px-4 sm:px-6 py-3 sm:py-4 sticky top-0 z-30 transition-colors duration-200 relative">
+                <div class="flex items-center justify-between relative z-10 bg-white dark:bg-gray-800 transition-colors duration-200">
+                    <!-- Left section: Mobile menu & Breadcrumbs -->
+                    <div class="flex items-center flex-1 min-w-0">
+                        <!-- Mobile menu button -->
+                        <button id="mobile-menu-button" class="lg:hidden p-2 rounded-md text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 focus-ring transition-colors mr-2" aria-label="Open navigatie menu">
+                            <i class="fas fa-bars text-xl"></i>
+                        </button>
 
-                    <!-- Breadcrumbs - hidden on mobile, visible on tablet+ -->
-                    <nav class="hidden sm:flex items-center space-x-2 text-sm flex-1 ml-4" aria-label="Breadcrumb">
-                        <a href="index.html" class="text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 focus-ring transition-colors">Start</a>
-                        <i class="fas fa-chevron-right text-gray-400 dark:text-gray-500 text-xs"></i>
-                        <span class="text-gray-900 dark:text-white font-medium">${this.moduleTitle}</span>
-                    </nav>
-                    
-                    <!-- Mobile title - only visible on mobile -->
-                    <h1 class="lg:hidden text-base font-semibold text-gray-900 dark:text-white flex-1 ml-2 truncate">${this.moduleTitle}</h1>
-                    
-                    <!-- Fancy Dark Mode Toggle -->
-                    <button 
-                        id="dark-mode-toggle" 
-                        class="relative p-2 rounded-lg bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-700 dark:to-gray-800 hover:from-gray-200 hover:to-gray-300 dark:hover:from-gray-600 dark:hover:to-gray-700 focus-ring transition-all duration-300 ml-2 group shadow-sm hover:shadow-md" 
-                        aria-label="Toggle dark mode"
-                        title="Dark mode">
-                        <div class="relative w-6 h-6 flex items-center justify-center overflow-hidden">
-                            <!-- Sun icon (light mode) -->
-                            <i id="dark-mode-icon-sun" class="fas fa-sun text-yellow-500 absolute transform transition-all duration-500 rotate-0 scale-100 opacity-100 dark:rotate-90 dark:scale-0 dark:opacity-0"></i>
-                            <!-- Moon icon (dark mode) -->
-                            <i id="dark-mode-icon-moon" class="fas fa-moon text-blue-400 absolute transform transition-all duration-500 rotate-0 scale-0 opacity-0 dark:rotate-0 dark:scale-100 dark:opacity-100"></i>
+                        <!-- Breadcrumbs - hidden on mobile, visible on tablet+ -->
+                        <nav class="hidden sm:flex items-center space-x-2 text-sm flex-shrink-0" aria-label="Breadcrumb">
+                            <a href="index.html" class="text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 focus-ring transition-colors">Start</a>
+                            <i class="fas fa-chevron-right text-gray-400 dark:text-gray-500 text-xs"></i>
+                            <span class="text-gray-900 dark:text-white font-medium">${this.moduleTitle}</span>
+                        </nav>
+                        
+                        <!-- Mobile title - only visible on mobile -->
+                        <h1 class="lg:hidden text-base font-semibold text-gray-900 dark:text-white truncate flex-1">${this.moduleTitle}</h1>
+                    </div>
+
+                    <!-- Right section: Actions -->
+                    <div class="flex items-center space-x-2 sm:space-x-3 ml-4">
+                        <!-- Search Toggle Button -->
+                        <button 
+                            id="search-toggle-btn" 
+                            class="p-2 rounded-lg text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 transition-colors"
+                            aria-label="Zoeken">
+                            <i class="fas fa-search text-lg"></i>
+                        </button>
+                        
+                        <!-- Fancy Dark Mode Toggle -->
+                        <button 
+                            id="dark-mode-toggle" 
+                            class="relative p-2 rounded-lg bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-700 dark:to-gray-800 hover:from-gray-200 hover:to-gray-300 dark:hover:from-gray-600 dark:hover:to-gray-700 focus-ring transition-all duration-300 group shadow-sm hover:shadow-md" 
+                            aria-label="Toggle dark mode"
+                            title="Dark mode">
+                            <div class="relative w-6 h-6 flex items-center justify-center overflow-hidden">
+                                <!-- Sun icon (light mode) -->
+                                <i id="dark-mode-icon-sun" class="fas fa-sun text-yellow-500 absolute transform transition-all duration-500 rotate-0 scale-100 opacity-100 dark:rotate-90 dark:scale-0 dark:opacity-0"></i>
+                                <!-- Moon icon (dark mode) -->
+                                <i id="dark-mode-icon-moon" class="fas fa-moon text-blue-400 absolute transform transition-all duration-500 rotate-0 scale-0 opacity-0 dark:rotate-0 dark:scale-100 dark:opacity-100"></i>
+                            </div>
+                            <!-- Animated background glow effect -->
+                            <span class="absolute inset-0 rounded-lg bg-gradient-to-r from-yellow-400/20 to-blue-400/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-sm"></span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Search Overlay (Hidden by default) -->
+                <div id="search-overlay" class="absolute inset-0 bg-white dark:bg-gray-800 z-20 px-4 sm:px-6 flex items-center opacity-0 pointer-events-none transition-all duration-300 transform -translate-y-2">
+                    <div class="relative w-full max-w-3xl mx-auto flex items-center">
+                        <i class="fas fa-search text-gray-400 dark:text-gray-500 absolute left-3"></i>
+                        <input 
+                            type="text" 
+                            id="global-search-input" 
+                            class="block w-full pl-10 pr-10 py-2 border-b-2 border-gray-200 dark:border-gray-700 bg-transparent text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:border-blue-500 dark:focus:border-blue-400 sm:text-lg transition-colors duration-200" 
+                            placeholder="Waar ben je naar op zoek?"
+                            autocomplete="off"
+                        >
+                        <button id="close-search-btn" class="absolute right-0 p-2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors">
+                            <i class="fas fa-times text-lg"></i>
+                        </button>
+                        
+                        <!-- Results Dropdown -->
+                        <div id="search-results-dropdown" class="absolute top-full left-0 right-0 mt-2 bg-white dark:bg-gray-800 shadow-xl rounded-b-lg border-x border-b border-gray-200 dark:border-gray-700 max-h-[70vh] overflow-auto hidden z-50 custom-scrollbar">
+                            <!-- Results will be injected here -->
                         </div>
-                        <!-- Animated background glow effect -->
-                        <span class="absolute inset-0 rounded-lg bg-gradient-to-r from-yellow-400/20 to-blue-400/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-sm"></span>
-                    </button>
+                    </div>
                 </div>
             </header>
         `;
@@ -542,6 +578,154 @@ class BaseLessonPage {
         
         // Setup anchor scrolling
         this.setupAnchorScrolling();
+        
+        // Setup Global Search
+        this.setupSearchFunctionality();
+    }
+    
+    /**
+     * Setup global search functionality
+     */
+    async setupSearchFunctionality() {
+        const searchInput = document.getElementById('global-search-input');
+        const resultsDropdown = document.getElementById('search-results-dropdown');
+        const searchToggleBtn = document.getElementById('search-toggle-btn');
+        const searchOverlay = document.getElementById('search-overlay');
+        const closeSearchBtn = document.getElementById('close-search-btn');
+        
+        if (!searchInput || !resultsDropdown) return;
+        
+        // Initialize search service (lazy load)
+        if (window.SearchService && !window.SearchService.isInitialized) {
+            // Start init in background
+            window.SearchService.init().catch(console.error);
+        }
+        
+        // Toggle Search Overlay Logic
+        if (searchToggleBtn && searchOverlay) {
+            const openSearch = () => {
+                searchOverlay.classList.remove('opacity-0', 'pointer-events-none', '-translate-y-2');
+                searchOverlay.classList.add('opacity-100', 'pointer-events-auto', 'translate-y-0');
+                // Focus input after transition starts
+                setTimeout(() => searchInput.focus(), 50);
+            };
+
+            const closeSearch = () => {
+                searchOverlay.classList.add('opacity-0', 'pointer-events-none', '-translate-y-2');
+                searchOverlay.classList.remove('opacity-100', 'pointer-events-auto', 'translate-y-0');
+                // Optional: Clear results when closing, but keep query text for now
+                resultsDropdown.classList.add('hidden');
+            };
+
+            searchToggleBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                openSearch();
+            });
+
+            if (closeSearchBtn) {
+                closeSearchBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    closeSearch();
+                });
+            }
+            
+            // Close on Escape key
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && !searchOverlay.classList.contains('opacity-0')) {
+                    closeSearch();
+                }
+            });
+        }
+        
+        let debounceTimer;
+        
+        searchInput.addEventListener('input', (e) => {
+            const query = e.target.value;
+            
+            clearTimeout(debounceTimer);
+            debounceTimer = setTimeout(() => {
+                if (query.length < 2) {
+                    resultsDropdown.classList.add('hidden');
+                    resultsDropdown.innerHTML = '';
+                    return;
+                }
+                
+                if (window.SearchService) {
+                    // Ensure initialized
+                    if (!window.SearchService.isInitialized) {
+                        window.SearchService.init().then(() => {
+                            this.performSearch(query, resultsDropdown);
+                        });
+                    } else {
+                        this.performSearch(query, resultsDropdown);
+                    }
+                }
+            }, 300);
+        });
+        
+        // Close dropdown on click outside
+        document.addEventListener('click', (e) => {
+            // Check if click is outside search input and dropdown
+            const isOutsideSearch = !searchInput.contains(e.target) && !resultsDropdown.contains(e.target);
+            
+            // Also check if it's outside the toggle button (to prevent immediate closing when opening)
+            const isOutsideToggle = !searchToggleBtn || !searchToggleBtn.contains(e.target);
+            
+            // If we have an overlay, check if we clicked the overlay background (outside the input container)
+            // The input container is the first child of overlay
+            let isOutsideContainer = true;
+            if (searchOverlay && searchOverlay.contains(e.target)) {
+                const container = searchOverlay.firstElementChild;
+                if (container && container.contains(e.target)) {
+                    isOutsideContainer = false;
+                }
+            }
+
+            if (isOutsideSearch && isOutsideToggle) {
+                resultsDropdown.classList.add('hidden');
+                
+                // If we clicked on the overlay background (and not the input container), close the whole search
+                if (searchOverlay && !searchOverlay.classList.contains('opacity-0') && e.target === searchOverlay) {
+                    searchOverlay.classList.add('opacity-0', 'pointer-events-none', '-translate-y-2');
+                    searchOverlay.classList.remove('opacity-100', 'pointer-events-auto', 'translate-y-0');
+                }
+            }
+        });
+        
+        // Show results again on focus if there is a query
+        searchInput.addEventListener('focus', () => {
+            if (searchInput.value.length >= 2 && resultsDropdown.children.length > 0) {
+                resultsDropdown.classList.remove('hidden');
+            }
+        });
+    }
+    
+    /**
+     * Perform search and render results
+     */
+    performSearch(query, container) {
+        const results = window.SearchService.search(query);
+        
+        if (results.length === 0) {
+            container.innerHTML = `
+                <div class="px-4 py-3 text-sm text-gray-500 dark:text-gray-400">
+                    Geen resultaten gevonden voor "${query}"
+                </div>
+            `;
+        } else {
+            container.innerHTML = results.map(result => `
+                <a href="${result.url}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors border-b border-gray-100 dark:border-gray-700 last:border-0">
+                    <div class="flex items-center justify-between">
+                        <span class="text-sm font-medium text-blue-600 dark:text-blue-400">${result.context || result.week}</span>
+                        <span class="text-xs text-gray-400 bg-gray-100 dark:bg-gray-800 px-2 py-0.5 rounded-full uppercase tracking-wider">${result.type}</span>
+                    </div>
+                    <div class="text-sm font-semibold text-gray-900 dark:text-white mt-0.5">${result.title}</div>
+                    ${result.snippet ? `<div class="text-xs text-gray-500 dark:text-gray-400 mt-1 line-clamp-2">${result.snippet}</div>` : ''}
+                </a>
+            `).join('');
+        }
+        
+        container.classList.remove('hidden');
     }
     
     /**

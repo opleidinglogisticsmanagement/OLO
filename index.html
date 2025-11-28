@@ -203,6 +203,12 @@
             color: rgb(209, 213, 219); /* dark:text-gray-300 */
         }
 
+        /* Geen regelafstand tussen h2 en h3 kopjes en tekst eronder (standaard voor alle weken) */
+        .prose h2,
+        .prose h3 {
+            margin-bottom: 0;
+        }
+
         /* Prevent horizontal scrolling globally */
         html, body {
             overflow-x: hidden;
@@ -447,23 +453,81 @@
                             </div>
                         </a>
                         
-                        <a href="week2.html" class="block p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 focus-ring transition-colors">
-                            <div class="flex items-center space-x-3">
-                                <div class="w-8 h-8 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center">
-                                    <i class="fas fa-book text-blue-600 dark:text-blue-400 text-sm"></i>
+                        <div class="week-2-nav-item">
+                            <a href="week2.html" class="block p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 focus-ring transition-colors">
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-8 h-8 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center">
+                                        <i class="fas fa-book text-blue-600 dark:text-blue-400 text-sm"></i>
+                                    </div>
+                                    <span class="font-medium text-gray-900 dark:text-white flex-1">Week 2</span>
+                                    <i class="fas fa-chevron-down text-xs text-gray-400 dark:text-gray-500 transition-transform duration-200" id="week-2-chevron-index"></i>
                                 </div>
-                                <span class="font-medium text-gray-900 dark:text-white">Week 2</span>
+                            </a>
+                            <div class="week-2-subitems hidden" id="week-2-subitems-index">
+                                <a href="week2.html#probleem-verkennen" class="nav-sub-item flex items-center space-x-3 pl-11 pr-3 py-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 focus-ring transition-colors text-gray-600 dark:text-gray-300" data-anchor="#probleem-verkennen">
+                                    <div class="w-6 h-6 bg-gray-100 dark:bg-gray-700 rounded flex items-center justify-center flex-shrink-0">
+                                        <i class="fas fa-circle text-xs text-gray-400 dark:text-gray-500"></i>
+                                    </div>
+                                    <span class="text-sm font-medium">Probleem verkennen</span>
+                                </a>
+                                <a href="week2.html#doelstelling-opstellen" class="nav-sub-item flex items-center space-x-3 pl-11 pr-3 py-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 focus-ring transition-colors text-gray-600 dark:text-gray-300" data-anchor="#doelstelling-opstellen">
+                                    <div class="w-6 h-6 bg-gray-100 dark:bg-gray-700 rounded flex items-center justify-center flex-shrink-0">
+                                        <i class="fas fa-circle text-xs text-gray-400 dark:text-gray-500"></i>
+                                    </div>
+                                    <span class="text-sm font-medium">Doelstelling opstellen</span>
+                                </a>
+                                <a href="week2.html#opdrachtgever-onderzoeker" class="nav-sub-item flex items-center space-x-3 pl-11 pr-3 py-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 focus-ring transition-colors text-gray-600 dark:text-gray-300" data-anchor="#opdrachtgever-onderzoeker">
+                                    <div class="w-6 h-6 bg-gray-100 dark:bg-gray-700 rounded flex items-center justify-center flex-shrink-0">
+                                        <i class="fas fa-circle text-xs text-gray-400 dark:text-gray-500"></i>
+                                    </div>
+                                    <span class="text-sm font-medium">Opdrachtgever-onderzoeker relatie</span>
+                                </a>
+                                <a href="week2.html#vormen-praktijkgericht" class="nav-sub-item flex items-center space-x-3 pl-11 pr-3 py-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 focus-ring transition-colors text-gray-600 dark:text-gray-300" data-anchor="#vormen-praktijkgericht">
+                                    <div class="w-6 h-6 bg-gray-100 dark:bg-gray-700 rounded flex items-center justify-center flex-shrink-0">
+                                        <i class="fas fa-circle text-xs text-gray-400 dark:text-gray-500"></i>
+                                    </div>
+                                    <span class="text-sm font-medium">Vormen van praktijkgericht onderzoek</span>
+                                </a>
                             </div>
-                        </a>
+                        </div>
                         
-                        <a href="week3.html" class="block p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 focus-ring transition-colors">
-                            <div class="flex items-center space-x-3">
-                                <div class="w-8 h-8 bg-purple-100 dark:bg-purple-900/30 rounded-lg flex items-center justify-center">
-                                    <i class="fas fa-book text-purple-600 dark:text-purple-400 text-sm"></i>
+                        <div class="week-3-nav-item">
+                            <a href="week3.html" class="block p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 focus-ring transition-colors">
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-8 h-8 bg-purple-100 dark:bg-purple-900/30 rounded-lg flex items-center justify-center">
+                                        <i class="fas fa-book text-purple-600 dark:text-purple-400 text-sm"></i>
+                                    </div>
+                                    <span class="font-medium text-gray-900 dark:text-white flex-1">Week 3</span>
+                                    <i class="fas fa-chevron-down text-xs text-gray-400 dark:text-gray-500 transition-transform duration-200" id="week-3-chevron-index"></i>
                                 </div>
-                                <span class="font-medium text-gray-900 dark:text-white">Week 3</span>
+                            </a>
+                            <div class="week-3-subitems hidden" id="week-3-subitems-index">
+                                <a href="week3.html#onderzoeksmodel" class="nav-sub-item flex items-center space-x-3 pl-11 pr-3 py-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 focus-ring transition-colors text-gray-600 dark:text-gray-300" data-anchor="#onderzoeksmodel">
+                                    <div class="w-6 h-6 bg-gray-100 dark:bg-gray-700 rounded flex items-center justify-center flex-shrink-0">
+                                        <i class="fas fa-circle text-xs text-gray-400 dark:text-gray-500"></i>
+                                    </div>
+                                    <span class="text-sm font-medium">Onderzoeksmodel</span>
+                                </a>
+                                <a href="week3.html#onderzoeksmodel-why" class="nav-sub-item flex items-center space-x-3 pl-11 pr-3 py-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 focus-ring transition-colors text-gray-600 dark:text-gray-300" data-anchor="#onderzoeksmodel-why">
+                                    <div class="w-6 h-6 bg-gray-100 dark:bg-gray-700 rounded flex items-center justify-center flex-shrink-0">
+                                        <i class="fas fa-circle text-xs text-gray-400 dark:text-gray-500"></i>
+                                    </div>
+                                    <span class="text-sm font-medium">Onderzoeksmodel, why?</span>
+                                </a>
+                                <a href="week3.html#onderzoeksvragen" class="nav-sub-item flex items-center space-x-3 pl-11 pr-3 py-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 focus-ring transition-colors text-gray-600 dark:text-gray-300" data-anchor="#onderzoeksvragen">
+                                    <div class="w-6 h-6 bg-gray-100 dark:bg-gray-700 rounded flex items-center justify-center flex-shrink-0">
+                                        <i class="fas fa-circle text-xs text-gray-400 dark:text-gray-500"></i>
+                                    </div>
+                                    <span class="text-sm font-medium">Onderzoeksvragen</span>
+                                </a>
+                                <a href="week3.html#ai-onderzoeksassistent" class="nav-sub-item flex items-center space-x-3 pl-11 pr-3 py-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 focus-ring transition-colors text-gray-600 dark:text-gray-300" data-anchor="#ai-onderzoeksassistent">
+                                    <div class="w-6 h-6 bg-gray-100 dark:bg-gray-700 rounded flex items-center justify-center flex-shrink-0">
+                                        <i class="fas fa-circle text-xs text-gray-400 dark:text-gray-500"></i>
+                                    </div>
+                                    <span class="text-sm font-medium">AI-Onderzoeksassistent</span>
+                                </a>
                             </div>
-                        </a>
+                        </div>
                         
                         <a href="week4.html" class="block p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 focus-ring transition-colors">
                             <div class="flex items-center space-x-3">
@@ -627,70 +691,97 @@
                                         </p>
                                         
                                         <h4 class="text-lg font-semibold text-gray-900 dark:text-white mb-3">Overzicht van de weken</h4>
-                                        <div class="grid md:grid-cols-2 gap-4 mb-6">
-                                            <a href="week1.html" class="bg-gray-50 dark:bg-gray-900/50 rounded-lg p-4 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-200 cursor-pointer focus-ring hover-lift block">
-                                                <h5 class="font-semibold text-gray-900 dark:text-white mb-2 flex items-center">
-                                                    Week 1: Geen onderwijs i.v.m. studiereis
-                                                    <i class="fas fa-arrow-right ml-2 text-sm text-gray-400 dark:text-gray-500"></i>
-                                                </h5>
-                                                
-                                                <p class="text-gray-500 dark:text-gray-400 text-xs italic">
-                                                    Geen onderwijs of voorbereiding deze week.
-                                                </p>
+                                        <div class="flex flex-col gap-3 mb-6">
+                                            <a href="week1.html" class="bg-gray-50 dark:bg-gray-900/50 rounded-lg px-6 py-3 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-200 cursor-pointer focus-ring hover-lift block">
+                                                <div class="flex items-center justify-between">
+                                                    <div class="flex-1">
+                                                        <h5 class="font-semibold text-gray-900 dark:text-white mb-1">
+                                                            Week 1: Geen onderwijs i.v.m. studiereis
+                                                        </h5>
+                                                        <p class="text-gray-500 dark:text-gray-400 text-xs italic">
+                                                            Geen onderwijs of voorbereiding deze week.
+                                                        </p>
+                                                    </div>
+                                                    <i class="fas fa-arrow-right text-sm text-gray-400 dark:text-gray-500 ml-4 flex-shrink-0"></i>
+                                                </div>
                                             </a>
-                                            <a href="week2.html" class="bg-gray-50 dark:bg-gray-900/50 rounded-lg p-4 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-200 cursor-pointer focus-ring hover-lift block">
-                                                <h5 class="font-semibold text-gray-900 dark:text-white mb-2 flex items-center">
-                                                    Week 2: Van probleem naar doelstelling
-                                                    <i class="fas fa-arrow-right ml-2 text-sm text-gray-400 dark:text-gray-500"></i>
-                                                </h5>
-                                                <p class="text-gray-600 dark:text-gray-300 text-sm">
-                                                    Je leert hoe je een praktijkprobleem verkent en afbakent, en hoe je een doelstelling formuleert met het a- en b-gedeelte. Je leert ook hoe je een doelstelling SMART maakt.
-                                                </p>
+                                            <a href="week2.html" class="bg-gray-50 dark:bg-gray-900/50 rounded-lg px-6 py-3 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-200 cursor-pointer focus-ring hover-lift block">
+                                                <div class="flex items-center justify-between">
+                                                    <div class="flex-1">
+                                                        <h5 class="font-semibold text-gray-900 dark:text-white mb-1">
+                                                            Week 2: Van probleem naar doelstelling
+                                                        </h5>
+                                                        <p class="text-gray-600 dark:text-gray-300 text-sm">
+                                                            Je leert hoe je een praktijkprobleem verkent en afbakent, en hoe je een doelstelling formuleert met het a- en b-gedeelte. Je leert ook hoe je een doelstelling SMART maakt.
+                                                        </p>
+                                                    </div>
+                                                    <i class="fas fa-arrow-right text-sm text-gray-400 dark:text-gray-500 ml-4 flex-shrink-0"></i>
+                                                </div>
                                             </a>
-                                            <a href="week3.html" class="bg-gray-50 dark:bg-gray-900/50 rounded-lg p-4 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-200 cursor-pointer focus-ring hover-lift block">
-                                                <h5 class="font-semibold text-gray-900 dark:text-white mb-2 flex items-center">
-                                                    Week 3: Onderzoeksmodel + Onderzoeksvragen
-                                                    <i class="fas fa-arrow-right ml-2 text-sm text-gray-400 dark:text-gray-500"></i>
-                                                </h5>
-                                                <p class="text-gray-600 dark:text-gray-300 text-sm">
-                                                    Je leert hoe je een onderzoeksmodel opstelt en onderzoeksvragen formuleert voor je onderzoek.
-                                                </p>
+                                            <a href="week3.html" class="bg-gray-50 dark:bg-gray-900/50 rounded-lg px-6 py-3 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-200 cursor-pointer focus-ring hover-lift block">
+                                                <div class="flex items-center justify-between">
+                                                    <div class="flex-1">
+                                                        <h5 class="font-semibold text-gray-900 dark:text-white mb-1">
+                                                            Week 3: Onderzoeksmodel + Onderzoeksvragen
+                                                        </h5>
+                                                        <p class="text-gray-600 dark:text-gray-300 text-sm">
+                                                            Je leert hoe je een onderzoeksmodel opstelt en onderzoeksvragen formuleert voor je onderzoek.
+                                                        </p>
+                                                    </div>
+                                                    <i class="fas fa-arrow-right text-sm text-gray-400 dark:text-gray-500 ml-4 flex-shrink-0"></i>
+                                                </div>
                                             </a>
-                                            <a href="week4.html" class="bg-gray-50 dark:bg-gray-900/50 rounded-lg p-4 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-200 cursor-pointer focus-ring hover-lift block">
-                                                <h5 class="font-semibold text-gray-900 dark:text-white mb-2 flex items-center">
-                                                    Week 4: Begripsbepaling + Voorbereiding literatuuronderzoek
-                                                    <i class="fas fa-arrow-right ml-2 text-sm text-gray-400 dark:text-gray-500"></i>
-                                                </h5>
-                                                <p class="text-gray-600 dark:text-gray-300 text-sm">
-                                                    Je leert hoe je begrippen bepaalt en voorbereidt op het literatuuronderzoek.
-                                                </p>
+                                            <a href="week4.html" class="bg-gray-50 dark:bg-gray-900/50 rounded-lg px-6 py-3 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-200 cursor-pointer focus-ring hover-lift block">
+                                                <div class="flex items-center justify-between">
+                                                    <div class="flex-1">
+                                                        <h5 class="font-semibold text-gray-900 dark:text-white mb-1">
+                                                            Week 4: Begripsbepaling + Voorbereiding literatuuronderzoek
+                                                        </h5>
+                                                        <p class="text-gray-600 dark:text-gray-300 text-sm">
+                                                            Je leert hoe je begrippen bepaalt en voorbereidt op het literatuuronderzoek.
+                                                        </p>
+                                                    </div>
+                                                    <i class="fas fa-arrow-right text-sm text-gray-400 dark:text-gray-500 ml-4 flex-shrink-0"></i>
+                                                </div>
                                             </a>
-                                            <a href="week5.html" class="bg-gray-50 dark:bg-gray-900/50 rounded-lg p-4 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-200 cursor-pointer focus-ring hover-lift block">
-                                                <h5 class="font-semibold text-gray-900 dark:text-white mb-2 flex items-center">
-                                                    Week 5: Uitvoeren literatuuronderzoek + Theoretisch kader
-                                                    <i class="fas fa-arrow-right ml-2 text-sm text-gray-400 dark:text-gray-500"></i>
-                                                </h5>
-                                                <p class="text-gray-600 dark:text-gray-300 text-sm">
-                                                    Je voert literatuuronderzoek uit en werkt aan je theoretisch kader.
-                                                </p>
+                                            <a href="week5.html" class="bg-gray-50 dark:bg-gray-900/50 rounded-lg px-6 py-3 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-200 cursor-pointer focus-ring hover-lift block">
+                                                <div class="flex items-center justify-between">
+                                                    <div class="flex-1">
+                                                        <h5 class="font-semibold text-gray-900 dark:text-white mb-1">
+                                                            Week 5: Uitvoeren literatuuronderzoek + Theoretisch kader
+                                                        </h5>
+                                                        <p class="text-gray-600 dark:text-gray-300 text-sm">
+                                                            Je voert literatuuronderzoek uit en werkt aan je theoretisch kader.
+                                                        </p>
+                                                    </div>
+                                                    <i class="fas fa-arrow-right text-sm text-gray-400 dark:text-gray-500 ml-4 flex-shrink-0"></i>
+                                                </div>
                                             </a>
-                                            <a href="week6.html" class="bg-gray-50 dark:bg-gray-900/50 rounded-lg p-4 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-200 cursor-pointer focus-ring hover-lift block">
-                                                <h5 class="font-semibold text-gray-900 dark:text-white mb-2 flex items-center">
-                                                    Week 6: Onderzoeksstrategie + dataverzamelingsplan
-                                                    <i class="fas fa-arrow-right ml-2 text-sm text-gray-400 dark:text-gray-500"></i>
-                                                </h5>
-                                                <p class="text-gray-600 dark:text-gray-300 text-sm">
-                                                    Je bepaalt je onderzoeksstrategie en maakt een dataverzamelingsplan.
-                                                </p>
+                                            <a href="week6.html" class="bg-gray-50 dark:bg-gray-900/50 rounded-lg px-6 py-3 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-200 cursor-pointer focus-ring hover-lift block">
+                                                <div class="flex items-center justify-between">
+                                                    <div class="flex-1">
+                                                        <h5 class="font-semibold text-gray-900 dark:text-white mb-1">
+                                                            Week 6: Onderzoeksstrategie + dataverzamelingsplan
+                                                        </h5>
+                                                        <p class="text-gray-600 dark:text-gray-300 text-sm">
+                                                            Je bepaalt je onderzoeksstrategie en maakt een dataverzamelingsplan.
+                                                        </p>
+                                                    </div>
+                                                    <i class="fas fa-arrow-right text-sm text-gray-400 dark:text-gray-500 ml-4 flex-shrink-0"></i>
+                                                </div>
                                             </a>
-                                            <a href="week7.html" class="bg-gray-50 dark:bg-gray-900/50 rounded-lg p-4 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-200 cursor-pointer focus-ring hover-lift block">
-                                                <h5 class="font-semibold text-gray-900 dark:text-white mb-2 flex items-center">
-                                                    Week 7: Rapportage 1
-                                                    <i class="fas fa-arrow-right ml-2 text-sm text-gray-400 dark:text-gray-500"></i>
-                                                </h5>
-                                                <p class="text-gray-600 dark:text-gray-300 text-sm">
-                                                    Je werkt aan de eerste rapportage van je onderzoeksplan.
-                                                </p>
+                                            <a href="week7.html" class="bg-gray-50 dark:bg-gray-900/50 rounded-lg px-6 py-3 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-200 cursor-pointer focus-ring hover-lift block">
+                                                <div class="flex items-center justify-between">
+                                                    <div class="flex-1">
+                                                        <h5 class="font-semibold text-gray-900 dark:text-white mb-1">
+                                                            Week 7: Rapportage 1
+                                                        </h5>
+                                                        <p class="text-gray-600 dark:text-gray-300 text-sm">
+                                                            Je werkt aan de eerste rapportage van je onderzoeksplan.
+                                                        </p>
+                                                    </div>
+                                                    <i class="fas fa-arrow-right text-sm text-gray-400 dark:text-gray-500 ml-4 flex-shrink-0"></i>
+                                                </div>
                                             </a>
                                         </div>
                                         
@@ -875,6 +966,58 @@
                 setTimeout(() => {
                     handleScroll();
                 }, 100);
+            }
+            
+            // Week 2 submenu functionality for index.html
+            const week2NavItem = document.querySelector('.week-2-nav-item');
+            if (week2NavItem) {
+                const week2Link = week2NavItem.querySelector('a');
+                const subItemsContainer = document.getElementById('week-2-subitems-index');
+                const chevron = document.getElementById('week-2-chevron-index');
+                
+                if (week2Link && subItemsContainer && chevron) {
+                    week2Link.addEventListener('click', (e) => {
+                        // Only toggle if clicking on the link itself (not sub-items)
+                        if (e.target === week2Link || week2Link.contains(e.target)) {
+                            e.preventDefault();
+                            const isHidden = subItemsContainer.classList.contains('hidden');
+                            
+                            if (isHidden) {
+                                subItemsContainer.classList.remove('hidden');
+                                chevron.classList.add('rotate-180');
+                            } else {
+                                subItemsContainer.classList.add('hidden');
+                                chevron.classList.remove('rotate-180');
+                            }
+                        }
+                    });
+                }
+            }
+            
+            // Week 3 submenu functionality for index.html
+            const week3NavItem = document.querySelector('.week-3-nav-item');
+            if (week3NavItem) {
+                const week3Link = week3NavItem.querySelector('a');
+                const subItemsContainer = document.getElementById('week-3-subitems-index');
+                const chevron = document.getElementById('week-3-chevron-index');
+                
+                if (week3Link && subItemsContainer && chevron) {
+                    week3Link.addEventListener('click', (e) => {
+                        // Only toggle if clicking on the link itself (not sub-items)
+                        if (e.target === week3Link || week3Link.contains(e.target)) {
+                            e.preventDefault();
+                            const isHidden = subItemsContainer.classList.contains('hidden');
+                            
+                            if (isHidden) {
+                                subItemsContainer.classList.remove('hidden');
+                                chevron.classList.add('rotate-180');
+                            } else {
+                                subItemsContainer.classList.add('hidden');
+                                chevron.classList.remove('rotate-180');
+                            }
+                        }
+                    });
+                }
             }
         });
         

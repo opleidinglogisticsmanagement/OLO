@@ -18,7 +18,7 @@
   "interactive": false
   },
   "theorie": {
-    "title": "Onderzoek uitvoeren",
+    "title": "Introductie",
     "content": [
       {
         "type": "paragraph",
@@ -49,7 +49,7 @@
         "type": "paragraph",
         "text": [
           "Binnen het HBO doen de meeste studenten een praktijkgericht onderzoek. Een theoretisch vraagstuk is ook mogelijk op het HBO, maar zien we minder vaak terug. Wij zullen ons in deze module met name focussen op het praktijkgericht onderzoek. Belangrijk te beseffen dat er een praktisch vraagstuk aan je onderzoek ten grondslag ligt. In een praktijkgericht onderzoek gaan we bestaande theorieën onderzoeken en vooral toepassen in verschillende situaties. Een onderdeel van een praktijkgericht onderzoek is het inzichtelijk maken van bestaande theorieën en inzichten. Hierover zullen we later meer toelichten.",
-          "Nu nemen we je mee in de reis om van een globaal vraagstuk toe te gaan werken naar een doordacht opgezet onderzoeksplan. Tijdens deze reis worden de volgende onderwerpen doorlopen. In het 'rode' kwadrant is weergegeven welk onderdeel in deze voorbereiding centraal staat."
+          "Nu nemen we je mee in de reis om van een globaal vraagstuk toe te gaan werken naar een doordacht opgezet onderzoeksplan. Tijdens deze reis worden de volgende onderwerpen doorlopen, zoals weergegeven in het figuur hieronder 'De vier fasen bij het opstellen van een logistiek onderzoek'."
         ]
       },
       {
@@ -57,6 +57,12 @@
         "src": "assets/images/Stappenplannen 1.0.png",
         "alt": "De vier fasen bij het opstellen van een logistiek onderzoek.",
         "enableModal": true
+      },
+      {
+        "type": "heading",
+        "text": "Probleem verkennen",
+        "level": 2,
+        "id": "probleem-verkennen"
       },
       {
         "type": "paragraph",
@@ -85,6 +91,12 @@
         "text": [
           "Wanneer je aan de hand van deze inzichten het probleem verder hebt omschreven kun je gaan nadenken over het formuleren van je doelstelling. Let er wel op dat je doelstelling anders is dan je hoofdvraag van je onderzoek. In de doelstelling stel je jezelf ten doel om het praktijkprobleem (voor een specifieke organisatie) op te lossen. De hoofdvraag is de invulling van de doelstelling in dit onderzoek. Logischerwijs zit er een relatie tussen beiden. Hierop zullen we later nadrukkelijker stilstaan."
         ]
+      },
+      {
+        "type": "heading",
+        "text": "Doelstelling opstellen",
+        "level": 2,
+        "id": "doelstelling-opstellen"
       },
       {
         "type": "paragraph",
@@ -247,7 +259,6 @@
       {
         "type": "paragraph",
         "text": [
-          "<strong>SMART</strong>",
           "Naast het formuleren van de doelstelling aan de hand van het a- en b-gedeelte, is het belangrijk om in je doelstelling ook SMART te herkennen. Bekijk deze kennisclip voor uitleg over het SMART principe bij het formuleren van doelstellingen."
         ]
       },
@@ -348,13 +359,29 @@
         ]
       },
       {
+        "type": "heading",
+        "text": "Opdrachtgever-onderzoeker relatie",
+        "level": 2,
+        "id": "opdrachtgever-onderzoeker"
+      },
+      {
         "type": "paragraph",
         "text": [
-          "<strong>Wat is er zo bijzonder aan praktijkgericht onderzoek?</strong>",
           "Kijken naar praktijkgericht onderzoek is één onderdeel zeer belangrijk. Dat is namelijk jouw relatie met de opdrachtgever, ook wel de opdrachtgever-onderzoeker relatie genoemd. De opdrachtgever verwacht van jou een goed, gedegen en kritisch onderzoek. Dit terwijl jij nog (deels) met je studie bezig bent en voor je gevoel relatief kort in de logistieke wereld komt kijken. Toch word je gevraagd om een organisatie te helpen om een probleem op te lossen. Dit zelfs door een eigen pro-actieve een kritische houding. De organisatie(s) waar jij bij aan de slag gaat, of dit nu vanuit een project binnen het onderwijs gaat of vanuit je stage- en/of afstuderen zien graag dat je kritisch bent op de organisatie en de processen. Zij willen graag jouw frisse inzichten gebruiken om hun organisatie te verbeteren.",
           "Belangrijk is om tijdens het gehele onderzoek stil te blijven staan wie je opdrachtgever is. De opdrachtgever zou je begeleider kunnen zijn, maar dit is niet noodzakelijk. Betrek hem dus goed in de aanpak en het opstellen van je onderzoek.",
           "Een tweede aandachtspunt is de 'tunnelvisie' die vanuit de opdrachtgever kan bestaan. De opdrachtgever werkt soms al meerdere jaren in de organisatie en denken ze te weten waar de oorzaak ligt, sterker nog soms noemen ze al direct de oplossing. Blijf kritisch als onderzoeker en zorg dat jij de onderzoek stappen doordacht doorloopt. Kom je daarmee alsnog op hetzelfde beeld, dan heb je het gevoel van de opdrachtgever goed kunnen onderbouwen. Je staat er versteld van hoevaak je nog nieuwe inzichten bovenwater weet te halen voor de organisatie.",
-          "Een laatste aandachtspunten in dit kader is het de focus op de doelstelling van de opdracht. De organisatie verwacht van jou een oplossing van het probleem. Echter ben je er wel van bewust dat jij met de doelstelling van het onderzoek het probleem van de organisatie hebt ingekaderd. Dat wil zeggen, dat je bijvoorbeeld minder invloedsfactoren hebt meegenomen of de scope van het proces of de omgeving versimpeld hebt waardoor de probleemstelling ook realistisch binnen de gestelde termijn is op te lossen. Blijf je beseffen dat de meeste onderzoeken die wij vanuit de opleiding oppakken bestaan uit advies opdrachten. Soms zit er direct al een implementatie deel aan vast waardoor het direct in de praktijk wordt toegepast. Deze opdrachten zijn echter beperkt onder andere doordat onderzoek vaak al een forse tijdsinvestering vraagt en jij als (student) onderzoeker beperkte de tijd hebt.",
+          "Een laatste aandachtspunten in dit kader is het de focus op de doelstelling van de opdracht. De organisatie verwacht van jou een oplossing van het probleem. Echter ben je er wel van bewust dat jij met de doelstelling van het onderzoek het probleem van de organisatie hebt ingekaderd. Dat wil zeggen, dat je bijvoorbeeld minder invloedsfactoren hebt meegenomen of de scope van het proces of de omgeving versimpeld hebt waardoor de probleemstelling ook realistisch binnen de gestelde termijn is op te lossen. Blijf je beseffen dat de meeste onderzoeken die wij vanuit de opleiding oppakken bestaan uit advies opdrachten. Soms zit er direct al een implementatie deel aan vast waardoor het direct in de praktijk wordt toegepast. Deze opdrachten zijn echter beperkt onder andere doordat onderzoek vaak al een forse tijdsinvestering vraagt en jij als (student) onderzoeker beperkte de tijd hebt."
+        ]
+      },
+      {
+        "type": "heading",
+        "text": "Vormen van praktijkgericht onderzoek",
+        "level": 2,
+        "id": "vormen-praktijkgericht"
+      },
+      {
+        "type": "paragraph",
+        "text": [
           "Nu benoemen we praktijkgericht onderzoek als één vorm van onderzoek. Enerzijds is dat ook zo, immers het onderzoek wordt uitgevoerd met betrekking tot een praktijkvraagstuk. Tegelijkertijd zijn er verschillende vormen van praktijkgericht onderzoek waarin ook verschillende taken en daarmee ook rollen van jouw als onderzoek gevraagd worden.",
           "Bekijk deze kennisclip voor uitleg over de verschillende vormen van praktijkgericht onderzoek."
         ]

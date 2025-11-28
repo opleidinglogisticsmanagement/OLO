@@ -17,18 +17,12 @@
     "interactive": false
   },
   "theorie": {
-    "title": "Theorie",
+    "title": "Introductie",
     "content": [
       {
         "type": "paragraph",
         "text": [
           "Je bent inmiddels bezig geweest met het opstellen van een doelstelling vanuit een praktijk gestuurd vraagstuk. Nu je weet wat het doel gaat worden van je onderzoek, komt de vraag naar voren hoe je het onderzoek verder gaat aanpakken, kortom hoe ga je je geformuleerde doelstelling bereiken. Deze structuur ga je opbouwen aan de hand van onderzoeksvragen die je gaat stellen. Echter, hoe bepaal je nu wanneer onderzoeksvragen nuttig zijn, wanneer ze goed zijn en welke inhoud deze onderzoeksvragen moeten bevatten. Om over deze vragen na te denken sta je stil bij het onderzoeksmodel."
-        ]
-      },
-      {
-        "type": "paragraph",
-        "text": [
-          "In het onderzoeksmodel maak je een schematische weergave van het onderzoek en de globale stappen die gezet moeten worden om het doel te bereiken. Deze stappen bestaan uit zowel procesmatige stappen (bijvoorbeeld bepalen in welke volgorde de vragen beantwoord worden) maar ook uit welke inhoud en/of theorieën geput kan worden ten einde een goed onderbouwd antwoord te formuleren."
         ]
       },
       {
@@ -48,6 +42,18 @@
               }
             ]
           }
+        ]
+      },
+      {
+        "type": "heading",
+        "text": "Onderzoeksmodel",
+        "level": 2,
+        "id": "onderzoeksmodel"
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "In het onderzoeksmodel maak je een schematische weergave van het onderzoek en de globale stappen die gezet moeten worden om het doel te bereiken. Deze stappen bestaan uit zowel procesmatige stappen (bijvoorbeeld bepalen in welke volgorde de vragen beantwoord worden) maar ook uit welke inhoud en/of theorieën geput kan worden ten einde een goed onderbouwd antwoord te formuleren."
         ]
       },
       {
@@ -267,31 +273,6 @@
       {
         "type": "paragraph",
         "text": [
-          "<h3 class=\"text-lg font-semibold text-gray-900 dark:text-white mb-0\">Onderzoeksmodel – is dat nu nodig?</h3>",
-          "In het voorgaande heb je inzicht gekregen in de wijze waarop een onderzoeksmodel is opgezet en waar je rekening mee gaat houden. Je hebt daarbij inzicht gekregen dat het maken van een onderzoeksmodel erg handig kan zijn om verschillende redenen, zoals:"
-        ]
-      },
-      {
-        "type": "paragraph",
-        "text": [
-          "<ol class=\"list-decimal list-outside space-y-2 mb-4 ml-6 pl-4\">",
-          "<li>Het geeft een helder beeld van de aard van het onderzoek en de te verwachten resultaten.</li>",
-          "<li>Alle betrokkenen kijken gezamenlijk naar een en dezelfde voorstelling van het onderzoek.</li>",
-          "<li>Het ondersteunt en vergemakkelijkt het proces van kiezen van relevante literatuur en maakt duidelijk vanuit welke optiek literatuur moet worden bestudeerd.</li>",
-          "<li>Het maakt het eenvoudiger en duidelijker op welke wijze je de doelstelling van je onderzoek wilt gaan behalen</li>",
-          "<li>Je kunt aan de hand van het onderzoeksmodel alvast een grove inhoudsopgave maken van je eindrapport.</li>",
-          "</ol>"
-        ]
-      },
-      {
-        "type": "paragraph",
-        "text": [
-          "Nu je het onderzoeksmodel hebt kunnen vaststellen gaan we dit onderzoeksmodel gebruiken om de centrale vraag of hoofdvraag van dit onderzoek te verkennen. Deze vragen zullen uiteindelijk worden gebruikt om een verdere richting te geven aan de deelvragen én kernbegrippen welke in het volgende college centraal staan. In de theorie van deze week zullen we dus voornamelijk stil staan bij het formuleren van de centrale onderzoeksvraag."
-        ]
-      },
-      {
-        "type": "paragraph",
-        "text": [
           "<h3 class=\"text-lg font-semibold text-gray-900 dark:text-white mb-0\">Template Onderzoeksmodel</h3>",
           "Om je op weg te helpen is er een <a href=\"assets/Documents/Onderzoeksmodel Template.vsdx\" download class=\"text-blue-600 hover:text-blue-800 underline font-medium\">template</a> gemaakt voor het onderzoeksmodel dat voorzien is van een korte uitleg en enkele instructies. Zie ook Figuur 10. Je kunt dit template downloaden in Brightspace en uploaden in Microsoft Visio. Uiteraard mag je het template ook aanpassen en opslaan voor later gebruik bijvoorbeeld in je stage. Indien je zelf een onderzoeksmodel wilt maken in Draw.io dan is dat uiteraard goed. Daar is helaas geen template voor beschikbaar."
         ]
@@ -321,9 +302,44 @@
         "size": "auto"
       },
       {
+        "type": "heading",
+        "text": "Onderzoeksmodel, why?",
+        "level": 2,
+        "id": "onderzoeksmodel-why"
+      },
+      {
         "type": "paragraph",
         "text": [
-          "<h3 class=\"text-lg font-semibold text-gray-900 dark:text-white mb-0\">Onderzoeksvragen</h3>",
+          "In het voorgaande heb je inzicht gekregen in de wijze waarop een onderzoeksmodel is opgezet en waar je rekening mee gaat houden. Je hebt daarbij inzicht gekregen dat het maken van een onderzoeksmodel erg handig kan zijn om verschillende redenen, zoals:"
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "<ol class=\"list-decimal list-outside space-y-2 mb-4 ml-6 pl-4\">",
+          "<li>Het geeft een helder beeld van de aard van het onderzoek en de te verwachten resultaten.</li>",
+          "<li>Alle betrokkenen kijken gezamenlijk naar een en dezelfde voorstelling van het onderzoek.</li>",
+          "<li>Het ondersteunt en vergemakkelijkt het proces van kiezen van relevante literatuur en maakt duidelijk vanuit welke optiek literatuur moet worden bestudeerd.</li>",
+          "<li>Het maakt het eenvoudiger en duidelijker op welke wijze je de doelstelling van je onderzoek wilt gaan behalen</li>",
+          "<li>Je kunt aan de hand van het onderzoeksmodel alvast een grove inhoudsopgave maken van je eindrapport.</li>",
+          "</ol>"
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "Nu je het onderzoeksmodel hebt kunnen vaststellen gaan we dit onderzoeksmodel gebruiken om de centrale vraag of hoofdvraag van dit onderzoek te verkennen. Deze vragen zullen uiteindelijk worden gebruikt om een verdere richting te geven aan de deelvragen én kernbegrippen welke in het volgende college centraal staan. In de theorie van deze week zullen we dus voornamelijk stil staan bij het formuleren van de centrale onderzoeksvraag."
+        ]
+      },
+      {
+        "type": "heading",
+        "text": "Onderzoeksvragen",
+        "level": 2,
+        "id": "onderzoeksvragen"
+      },
+      {
+        "type": "paragraph",
+        "text": [
           "Aan de hand van de onderzoeksvragen ga je verder de aanpak van je onderzoek opstellen en vaststellen. Deze onderzoeksvragen staan centraal voor het herleiden van kernbegrippen en daarmee dus ook welke theorieën en modellen voor houvast zorgen of input kunnen geven aan je onderzoek. We gaan in dit deel stil staan bij het begrip 'centrale vragen'. Aan de hand van deze centrale vragen kunnen vervolgens deelvragen uit herleid worden."
         ]
       },
@@ -382,6 +398,12 @@
             ]
           }
         ]
+      },
+      {
+        "type": "heading",
+        "text": "AI-Onderzoeksassistent",
+        "level": 2,
+        "id": "ai-onderzoeksassistent"
       },
       {
         "type": "paragraph",

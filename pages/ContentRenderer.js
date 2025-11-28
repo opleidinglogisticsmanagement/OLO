@@ -25,6 +25,8 @@ class ContentRenderer {
             switch (item.type) {
                 case 'paragraph':
                     return this.renderParagraph(item);
+                case 'heading':
+                    return this.renderHeading(item);
                 case 'image':
                     currentImageIndex++;
                     const isLastImage = currentImageIndex === lastImageIndex;
@@ -98,6 +100,24 @@ class ContentRenderer {
             }
             return `<p class="text-gray-700 dark:text-gray-300 mb-4">${item.text}</p>`;
         }
+    }
+
+    /**
+     * Render een heading item
+     * @param {Object} item - Heading item met text, level (optioneel, default h2), en id (optioneel)
+     * @returns {string} HTML string
+     */
+    static renderHeading(item) {
+        if (!item.text) {
+            return '';
+        }
+        
+        const level = item.level || 2; // Default h2
+        const id = item.id || '';
+        const idAttr = id ? ` id="${id}"` : '';
+        const scrollMargin = id ? ' scroll-mt-20' : '';
+        
+        return `<h${level} class="text-2xl font-bold text-gray-900 dark:text-white mb-0 mt-8${scrollMargin}"${idAttr}>${item.text}</h${level}>`;
     }
 
     /**

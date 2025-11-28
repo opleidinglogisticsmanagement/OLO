@@ -90,8 +90,28 @@ class BaseLessonPage {
         const modules = [
             { id: 'start', title: 'Start', href: 'index.html' },
             { id: 'week-1', title: 'Week 1', href: 'week1.html' },
-            { id: 'week-2', title: 'Week 2', href: 'week2.html' },
-            { id: 'week-3', title: 'Week 3', href: 'week3.html' },
+            { 
+                id: 'week-2', 
+                title: 'Week 2', 
+                href: 'week2.html',
+                subItems: [
+                    { id: 'probleem-verkennen', title: 'Probleem verkennen', anchor: '#probleem-verkennen' },
+                    { id: 'doelstelling-opstellen', title: 'Doelstelling opstellen', anchor: '#doelstelling-opstellen' },
+                    { id: 'opdrachtgever-onderzoeker', title: 'Opdrachtgever-onderzoeker relatie', anchor: '#opdrachtgever-onderzoeker' },
+                    { id: 'vormen-praktijkgericht', title: 'Vormen van praktijkgericht onderzoek', anchor: '#vormen-praktijkgericht' }
+                ]
+            },
+            { 
+                id: 'week-3', 
+                title: 'Week 3', 
+                href: 'week3.html',
+                subItems: [
+                    { id: 'onderzoeksmodel', title: 'Onderzoeksmodel', anchor: '#onderzoeksmodel' },
+                    { id: 'onderzoeksmodel-why', title: 'Onderzoeksmodel, why?', anchor: '#onderzoeksmodel-why' },
+                    { id: 'onderzoeksvragen', title: 'Onderzoeksvragen', anchor: '#onderzoeksvragen' },
+                    { id: 'ai-onderzoeksassistent', title: 'AI-Onderzoeksassistent', anchor: '#ai-onderzoeksassistent' }
+                ]
+            },
             { id: 'week-4', title: 'Week 4', href: 'week4.html' },
             { id: 'week-5', title: 'Week 5', href: 'week5.html' },
             { id: 'week-6', title: 'Week 6', href: 'week6.html' },
@@ -101,6 +121,48 @@ class BaseLessonPage {
 
         const moduleItems = modules.map(module => {
             const isCurrent = module.id === this.moduleId;
+            const hasSubItems = module.subItems && module.subItems.length > 0;
+            const isWeek2 = module.id === 'week-2';
+            const isWeek3 = module.id === 'week-3';
+            
+            // Special handling for Week 2 and Week 3 with sub-items
+            if (hasSubItems && (isWeek2 || isWeek3)) {
+                const subItemsHtml = module.subItems.map(subItem => {
+                    const isSubCurrent = window.location.hash === subItem.anchor || 
+                                        (isCurrent && window.location.hash === subItem.anchor);
+                    return `
+                        <a href="${module.href}${subItem.anchor}" 
+                           class="nav-sub-item flex items-center space-x-3 pl-11 pr-3 py-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 focus-ring transition-colors ${isSubCurrent ? 'bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300' : 'text-gray-600 dark:text-gray-300'}"
+                           data-anchor="${subItem.anchor}">
+                            <div class="w-6 h-6 ${isSubCurrent ? 'bg-blue-100 dark:bg-blue-800' : 'bg-gray-100 dark:bg-gray-700'} rounded flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-circle text-xs ${isSubCurrent ? 'text-blue-600 dark:text-blue-300' : 'text-gray-400 dark:text-gray-500'}"></i>
+                            </div>
+                            <span class="text-sm font-medium">${subItem.title}</span>
+                        </a>
+                    `;
+                }).join('');
+                
+                const navItemClass = isWeek2 ? 'week-2-nav-item' : 'week-3-nav-item';
+                const chevronId = isWeek2 ? 'week-2-chevron' : 'week-3-chevron';
+                const subItemsId = isWeek2 ? 'week-2-subitems' : 'week-3-subitems';
+                
+                return `
+                    <div class="${navItemClass}">
+                        <a href="${module.href}" class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 focus-ring transition-colors ${isCurrent ? 'bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300' : 'text-gray-600 dark:text-gray-300'}">
+                            <div class="w-8 h-8 ${isCurrent ? 'bg-blue-100 dark:bg-blue-800' : 'bg-gray-100 dark:bg-gray-700'} rounded-lg flex items-center justify-center">
+                                <i class="fas fa-book text-sm ${isCurrent ? 'text-blue-600 dark:text-blue-300' : 'text-gray-400 dark:text-gray-500'}"></i>
+                            </div>
+                            <span class="font-medium flex-1">${module.title}</span>
+                            <i class="fas fa-chevron-down text-xs text-gray-400 dark:text-gray-500 transition-transform duration-200 ${isCurrent ? 'rotate-180' : ''}" id="${chevronId}"></i>
+                        </a>
+                        <div class="${isWeek2 ? 'week-2-subitems' : 'week-3-subitems'} ${isCurrent ? '' : 'hidden'}" id="${subItemsId}">
+                            ${subItemsHtml}
+                        </div>
+                    </div>
+                `;
+            }
+            
+            // Regular module item without sub-items
             return `
                 <a href="${module.href}" class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 focus-ring transition-colors ${isCurrent ? 'bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300' : 'text-gray-600 dark:text-gray-300'}">
                     <div class="w-8 h-8 ${isCurrent ? 'bg-blue-100 dark:bg-blue-800' : 'bg-gray-100 dark:bg-gray-700'} rounded-lg flex items-center justify-center">
@@ -434,6 +496,266 @@ class BaseLessonPage {
         
         // Setup dark mode toggle
         this.setupDarkModeToggle();
+        
+        // Setup Week 2 and Week 3 submenu functionality
+        this.setupWeek2Submenu();
+        this.setupWeek3Submenu();
+        
+        // Setup anchor scrolling
+        this.setupAnchorScrolling();
+    }
+    
+    /**
+     * Setup Week 2 submenu expand/collapse functionality
+     */
+    setupWeek2Submenu() {
+        const week2NavItem = document.querySelector('.week-2-nav-item');
+        if (!week2NavItem) return;
+        
+        const week2Link = week2NavItem.querySelector('a');
+        const subItemsContainer = document.getElementById('week-2-subitems');
+        const chevron = document.getElementById('week-2-chevron');
+        
+        if (!week2Link || !subItemsContainer || !chevron) return;
+        
+        // Check if we're on Week 2 page - if so, expand by default
+        const isWeek2Page = this.moduleId === 'week-2';
+        if (isWeek2Page) {
+            subItemsContainer.classList.remove('hidden');
+            chevron.classList.add('rotate-180');
+        }
+        
+        // Toggle submenu on click (but allow navigation)
+        week2Link.addEventListener('click', (e) => {
+            // Only toggle if we're already on week2.html (prevent navigation)
+            if (isWeek2Page && window.location.pathname.includes('week2.html')) {
+                e.preventDefault();
+                const isHidden = subItemsContainer.classList.contains('hidden');
+                
+                if (isHidden) {
+                    subItemsContainer.classList.remove('hidden');
+                    chevron.classList.add('rotate-180');
+                } else {
+                    subItemsContainer.classList.add('hidden');
+                    chevron.classList.remove('rotate-180');
+                }
+            }
+        });
+    }
+    
+    /**
+     * Setup Week 3 submenu expand/collapse functionality
+     */
+    setupWeek3Submenu() {
+        const week3NavItem = document.querySelector('.week-3-nav-item');
+        if (!week3NavItem) return;
+        
+        const week3Link = week3NavItem.querySelector('a');
+        const subItemsContainer = document.getElementById('week-3-subitems');
+        const chevron = document.getElementById('week-3-chevron');
+        
+        if (!week3Link || !subItemsContainer || !chevron) return;
+        
+        // Check if we're on Week 3 page - if so, expand by default
+        const isWeek3Page = this.moduleId === 'week-3';
+        if (isWeek3Page) {
+            subItemsContainer.classList.remove('hidden');
+            chevron.classList.add('rotate-180');
+        }
+        
+        // Toggle submenu on click (but allow navigation)
+        week3Link.addEventListener('click', (e) => {
+            // Only toggle if we're already on week3.html (prevent navigation)
+            if (isWeek3Page && window.location.pathname.includes('week3.html')) {
+                e.preventDefault();
+                const isHidden = subItemsContainer.classList.contains('hidden');
+                
+                if (isHidden) {
+                    subItemsContainer.classList.remove('hidden');
+                    chevron.classList.add('rotate-180');
+                } else {
+                    subItemsContainer.classList.add('hidden');
+                    chevron.classList.remove('rotate-180');
+                }
+            }
+        });
+    }
+    
+    /**
+     * Setup smooth scrolling to anchors
+     */
+    setupAnchorScrolling() {
+        // Use event delegation to handle clicks on navigation sub-items
+        // This works even if elements are added dynamically
+        const handleNavClick = (e) => {
+            const navSubItem = e.target.closest('.nav-sub-item');
+            if (navSubItem) {
+                let anchor = navSubItem.getAttribute('data-anchor');
+                const href = navSubItem.getAttribute('href');
+                
+                // If no data-anchor, extract from href
+                if (!anchor && href && href.includes('#')) {
+                    anchor = '#' + href.split('#')[1];
+                }
+                
+                // Ensure anchor starts with #
+                if (anchor && !anchor.startsWith('#')) {
+                    anchor = '#' + anchor;
+                }
+                
+                if (anchor && href) {
+                    // If we're already on week2.html or week3.html, prevent navigation and scroll
+                    const isWeek2Page = window.location.pathname.includes('week2.html') || 
+                                       window.location.pathname.endsWith('week2.html') ||
+                                       window.location.href.includes('week2.html');
+                    const isWeek3Page = window.location.pathname.includes('week3.html') || 
+                                       window.location.pathname.endsWith('week3.html') ||
+                                       window.location.href.includes('week3.html');
+                    
+                    if (isWeek2Page || isWeek3Page) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        
+                        console.log('[BaseLessonPage] Scrolling to anchor:', anchor);
+                        this.scrollToAnchor(anchor);
+                        
+                        // Update URL hash without scrolling
+                        if (window.history && window.history.pushState) {
+                            window.history.pushState(null, null, anchor);
+                        }
+                        
+                        // Close sidebar on mobile after clicking
+                        const sidebar = document.getElementById('sidebar');
+                        const overlay = document.getElementById('overlay');
+                        if (window.innerWidth < 1024 && sidebar && overlay) {
+                            sidebar.classList.add('-translate-x-full');
+                            overlay.classList.add('hidden');
+                            document.body.style.overflow = '';
+                        }
+                    }
+                    // If we're not on week2.html, let the link navigate normally
+                    // The hash will be handled when the page loads via Week2LessonPage.init()
+                }
+            }
+        };
+        
+        // Add event listener using delegation
+        document.addEventListener('click', handleNavClick, true);
+        
+        // Handle hash in URL on page load (after content is loaded)
+        const handleHashOnLoad = () => {
+            if (window.location.hash && (this.moduleId === 'week-2' || this.moduleId === 'week-3')) {
+                setTimeout(() => {
+                    this.scrollToAnchor(window.location.hash);
+                }, 800); // Longer delay to ensure content is fully rendered
+            }
+        };
+        
+        // Try after a delay (in case content loads asynchronously)
+        setTimeout(handleHashOnLoad, 500);
+        setTimeout(handleHashOnLoad, 1500);
+    }
+    
+    /**
+     * Scroll to anchor with smooth behavior
+     */
+    scrollToAnchor(anchor) {
+        // Ensure anchor starts with #
+        const anchorId = anchor.startsWith('#') ? anchor : '#' + anchor;
+        console.log('[BaseLessonPage] scrollToAnchor called with:', anchorId);
+        
+        // Try multiple times in case content is still loading
+        const attemptScroll = (attempts = 0) => {
+            const element = document.querySelector(anchorId);
+            const mainContent = document.getElementById('main-content');
+            const headerOffset = 100;
+            
+            if (element && mainContent) {
+                console.log('[BaseLessonPage] Element found:', element);
+                
+                // Calculate scroll position: find element's offsetTop relative to main-content
+                let scrollPosition = 0;
+                let currentElement = element;
+                
+                // Walk up the DOM tree until we reach main-content
+                while (currentElement && currentElement !== mainContent && currentElement !== document.body) {
+                    scrollPosition += currentElement.offsetTop;
+                    currentElement = currentElement.offsetParent;
+                }
+                
+                // Subtract header offset
+                const targetScroll = Math.max(0, scrollPosition - headerOffset);
+                
+                console.log('[BaseLessonPage] Calculated scroll position:', targetScroll, 'Current scroll:', mainContent.scrollTop);
+                
+                // Scroll the container
+                mainContent.scrollTo({
+                    top: targetScroll,
+                    behavior: 'smooth'
+                });
+                
+                // Verify scroll worked after a delay
+                setTimeout(() => {
+                    const elementRect = element.getBoundingClientRect();
+                    const containerRect = mainContent.getBoundingClientRect();
+                    const elementTopRelative = elementRect.top - containerRect.top;
+                    
+                    // If element is not at the right position, use scrollIntoView as fallback
+                    if (Math.abs(elementTopRelative - headerOffset) > 50) {
+                        console.log('[BaseLessonPage] Scroll position incorrect, using scrollIntoView fallback');
+                        element.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start',
+                            inline: 'nearest'
+                        });
+                        
+                        // Adjust for header after scrollIntoView
+                        setTimeout(() => {
+                            const currentScroll = mainContent.scrollTop;
+                            mainContent.scrollTo({
+                                top: Math.max(0, currentScroll - headerOffset),
+                                behavior: 'smooth'
+                            });
+                        }, 400);
+                    }
+                }, 600);
+                
+            } else if (element && !mainContent) {
+                // Fallback: scroll window if no main-content container
+                console.log('[BaseLessonPage] No main-content container, scrolling window');
+                element.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start',
+                    inline: 'nearest'
+                });
+                
+                setTimeout(() => {
+                    const elementRect = element.getBoundingClientRect();
+                    const offsetPosition = elementRect.top + window.pageYOffset - headerOffset;
+                    window.scrollTo({
+                        top: Math.max(0, offsetPosition),
+                        behavior: 'smooth'
+                    });
+                }, 100);
+                
+            } else if (attempts < 10) {
+                // Retry if element not found yet (content might still be loading)
+                console.log(`[BaseLessonPage] Element not found, retrying... (attempt ${attempts + 1})`);
+                setTimeout(() => attemptScroll(attempts + 1), 300);
+            } else {
+                console.warn(`[BaseLessonPage] Element with anchor ${anchorId} not found after ${attempts} attempts.`);
+                // List available IDs for debugging
+                const availableIds = Array.from(document.querySelectorAll('[id]')).map(el => el.id);
+                const relevantIds = availableIds.filter(id => 
+                    id.includes('probleem') || id.includes('doelstelling') || 
+                    id.includes('opdrachtgever') || id.includes('vormen')
+                );
+                console.log('[BaseLessonPage] Available relevant IDs:', relevantIds);
+            }
+        };
+        
+        // Start attempt immediately
+        attemptScroll();
     }
     
     /**

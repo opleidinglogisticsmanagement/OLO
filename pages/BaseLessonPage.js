@@ -133,6 +133,7 @@ class BaseLessonPage {
             },
             { id: 'week-6', title: 'Week 6', href: 'week6.html' },
             { id: 'week-7', title: 'Week 7', href: 'week7.html' },
+            { id: 'register', title: 'Begrippenlijst', href: 'register.html' },
             { id: 'afsluiting', title: 'Afsluiting', href: 'afsluiting.html' }
         ];
 
@@ -430,6 +431,7 @@ class BaseLessonPage {
             { id: 'week-5', title: 'Week 5', href: 'week5.html' },
             { id: 'week-6', title: 'Week 6', href: 'week6.html' },
             { id: 'week-7', title: 'Week 7', href: 'week7.html' },
+            { id: 'register', title: 'Begrippenlijst', href: 'register.html' },
             { id: 'afsluiting', title: 'Afsluiting', href: 'afsluiting.html' }
         ];
 
@@ -449,6 +451,7 @@ class BaseLessonPage {
             { id: 'week-5', title: 'Week 5', href: 'week5.html' },
             { id: 'week-6', title: 'Week 6', href: 'week6.html' },
             { id: 'week-7', title: 'Week 7', href: 'week7.html' },
+            { id: 'register', title: 'Begrippenlijst', href: 'register.html' },
             { id: 'afsluiting', title: 'Afsluiting', href: 'afsluiting.html' }
         ];
 

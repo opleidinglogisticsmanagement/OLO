@@ -149,21 +149,16 @@ class Week4LessonPage extends BaseLessonPage {
                 </div>
             </section>
 
-            <!-- Theorie Sectie -->
+            <!-- Theorie Sectie met subsecties -->
             <section class="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-4 sm:p-6 sm:pr-[70px] hover-lift transition-colors duration-200">
                 <div class="flex flex-col sm:flex-row items-start">
                     <div class="w-10 h-10 sm:w-12 sm:h-12 bg-purple-100 dark:bg-purple-900/30 rounded-lg flex items-center justify-center flex-shrink-0 mb-3 sm:mb-0 sm:mr-4">
                         <i class="fas fa-book text-purple-600 dark:text-purple-400 text-lg"></i>
                     </div>
                     <div class="flex-1 min-w-0 w-full sm:w-auto">
-                        <h2 class="text-lg sm:text-xl font-semibold text-gray-900 dark:text-white mb-4">${this.content.theorie.title}</h2>
+                        <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">${this.content.theorie.title}</h2>
                         <div class="prose max-w-none">
-                            ${this.content.theorie.content 
-                                ? ContentRenderer.renderContentItems(this.content.theorie.content, { enableModal: true })
-                                : (this.content.theorie.paragraphs ? this.content.theorie.paragraphs.map(paragraph => `
-                                    <p class="text-gray-700 dark:text-gray-300 mb-4">${paragraph}</p>
-                                `).join('') : '')
-                            }
+                            ${this.renderTheorieContentWithSections()}
                         </div>
                     </div>
                 </div>
@@ -172,6 +167,52 @@ class Week4LessonPage extends BaseLessonPage {
             ${this.content.mcVragen ? this.renderMCQuestionsSection() : ''}
 
         `;
+    }
+
+    /**
+     * Render theorie content met sectie IDs voor navigatie
+     */
+    renderTheorieContentWithSections() {
+        if (!this.content || !this.content.theorie || !this.content.theorie.content) {
+            return '';
+        }
+        
+        const content = this.content.theorie.content;
+        let html = '';
+        let currentSection = null;
+        let sectionContent = [];
+        
+        // Process content items and group into sections based on heading items with IDs
+        for (let i = 0; i < content.length; i++) {
+            const item = content[i];
+            
+            // Check if this is a heading with an ID (section marker)
+            if (item.type === 'heading' && item.id) {
+                // Close previous section
+                if (currentSection && sectionContent.length > 0) {
+                    html += ContentRenderer.renderContentItems(sectionContent, { enableModal: true });
+                    sectionContent = [];
+                }
+                // Start new section - render the heading (which has the ID)
+                html += ContentRenderer.renderContentItems([item], { enableModal: true });
+                currentSection = item.id;
+            } else {
+                // Add item to current section (or render intro content before first section)
+                if (currentSection) {
+                    sectionContent.push(item);
+                } else {
+                    // This is intro content before first section, render it directly
+                    html += ContentRenderer.renderContentItems([item], { enableModal: true });
+                }
+            }
+        }
+        
+        // Close last section if there is one
+        if (currentSection && sectionContent.length > 0) {
+            html += ContentRenderer.renderContentItems(sectionContent, { enableModal: true });
+        }
+        
+        return html;
     }
 
     /**
@@ -658,9 +699,38 @@ class Week4LessonPage extends BaseLessonPage {
         document.body.innerHTML = this.render();
         this.attachEventListeners();
         
+        // Handle hash in URL after content is loaded
+        if (window.location.hash) {
+            setTimeout(() => {
+                const element = document.querySelector(window.location.hash);
+                if (element) {
+                    const mainContent = document.getElementById('main-content');
+                    const headerOffset = 100;
+                    
+                    if (mainContent) {
+                        const elementRect = element.getBoundingClientRect();
+                        const elementTop = elementRect.top + mainContent.scrollTop;
+                        const offsetPosition = elementTop - headerOffset;
+                        
+                        mainContent.scrollTo({
+                            top: Math.max(0, offsetPosition),
+                            behavior: 'smooth'
+                        });
+                    } else {
+                        const elementRect = element.getBoundingClientRect();
+                        const offsetPosition = elementRect.top + window.pageYOffset - headerOffset;
+                        
+                        window.scrollTo({
+                            top: Math.max(0, offsetPosition),
+                            behavior: 'smooth'
+                        });
+                    }
+                }
+            }, 500);
+        }
+        
         // Generate MC questions if needed (after DOM is ready)
         if (this.content && this.content.mcVragen && this.content.mcVragen.generateFromTheory) {
-            // Small delay to ensure DOM is ready
             setTimeout(() => {
                 this.generateMCQuestions();
             }, 100);

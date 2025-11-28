@@ -112,8 +112,25 @@ class BaseLessonPage {
                     { id: 'ai-onderzoeksassistent', title: 'AI-Onderzoeksassistent', anchor: '#ai-onderzoeksassistent' }
                 ]
             },
-            { id: 'week-4', title: 'Week 4', href: 'week4.html' },
-            { id: 'week-5', title: 'Week 5', href: 'week5.html' },
+            { 
+                id: 'week-4', 
+                title: 'Week 4', 
+                href: 'week4.html',
+                subItems: [
+                    { id: 'definieren-begrippen', title: 'Definiëren van begrippen', anchor: '#definieren-begrippen' },
+                    { id: 'literatuuronderzoek', title: 'Het uitvoeren van literatuuronderzoek', anchor: '#literatuuronderzoek' }
+                ]
+            },
+            { 
+                id: 'week-5', 
+                title: 'Week 5', 
+                href: 'week5.html',
+                subItems: [
+                    { id: 'selecteren-beoordelen', title: 'Selecteren en beoordelen', anchor: '#selecteren-beoordelen' },
+                    { id: 'slim-bronnen-beheren', title: 'Slim bronnen beheren', anchor: '#slim-bronnen-beheren' },
+                    { id: 'theoretisch-kader-schrijven', title: 'Theoretisch kader schrijven', anchor: '#theoretisch-kader-schrijven' }
+                ]
+            },
             { id: 'week-6', title: 'Week 6', href: 'week6.html' },
             { id: 'week-7', title: 'Week 7', href: 'week7.html' },
             { id: 'afsluiting', title: 'Afsluiting', href: 'afsluiting.html' }
@@ -124,9 +141,11 @@ class BaseLessonPage {
             const hasSubItems = module.subItems && module.subItems.length > 0;
             const isWeek2 = module.id === 'week-2';
             const isWeek3 = module.id === 'week-3';
+            const isWeek4 = module.id === 'week-4';
+            const isWeek5 = module.id === 'week-5';
             
-            // Special handling for Week 2 and Week 3 with sub-items
-            if (hasSubItems && (isWeek2 || isWeek3)) {
+            // Special handling for Week 2, Week 3, Week 4 and Week 5 with sub-items
+            if (hasSubItems && (isWeek2 || isWeek3 || isWeek4 || isWeek5)) {
                 const subItemsHtml = module.subItems.map(subItem => {
                     const isSubCurrent = window.location.hash === subItem.anchor || 
                                         (isCurrent && window.location.hash === subItem.anchor);
@@ -142,9 +161,24 @@ class BaseLessonPage {
                     `;
                 }).join('');
                 
-                const navItemClass = isWeek2 ? 'week-2-nav-item' : 'week-3-nav-item';
-                const chevronId = isWeek2 ? 'week-2-chevron' : 'week-3-chevron';
-                const subItemsId = isWeek2 ? 'week-2-subitems' : 'week-3-subitems';
+                let navItemClass, chevronId, subItemsId;
+                if (isWeek2) {
+                    navItemClass = 'week-2-nav-item';
+                    chevronId = 'week-2-chevron';
+                    subItemsId = 'week-2-subitems';
+                } else if (isWeek3) {
+                    navItemClass = 'week-3-nav-item';
+                    chevronId = 'week-3-chevron';
+                    subItemsId = 'week-3-subitems';
+                } else if (isWeek4) {
+                    navItemClass = 'week-4-nav-item';
+                    chevronId = 'week-4-chevron';
+                    subItemsId = 'week-4-subitems';
+                } else if (isWeek5) {
+                    navItemClass = 'week-5-nav-item';
+                    chevronId = 'week-5-chevron';
+                    subItemsId = 'week-5-subitems';
+                }
                 
                 return `
                     <div class="${navItemClass}">
@@ -155,7 +189,7 @@ class BaseLessonPage {
                             <span class="font-medium flex-1">${module.title}</span>
                             <i class="fas fa-chevron-down text-xs text-gray-400 dark:text-gray-500 transition-transform duration-200 ${isCurrent ? 'rotate-180' : ''}" id="${chevronId}"></i>
                         </a>
-                        <div class="${isWeek2 ? 'week-2-subitems' : 'week-3-subitems'} ${isCurrent ? '' : 'hidden'}" id="${subItemsId}">
+                        <div class="${navItemClass.replace('-nav-item', '-subitems')} ${isCurrent ? '' : 'hidden'}" id="${subItemsId}">
                             ${subItemsHtml}
                         </div>
                     </div>
@@ -497,9 +531,11 @@ class BaseLessonPage {
         // Setup dark mode toggle
         this.setupDarkModeToggle();
         
-        // Setup Week 2 and Week 3 submenu functionality
+        // Setup Week 2, Week 3, Week 4 and Week 5 submenu functionality
         this.setupWeek2Submenu();
         this.setupWeek3Submenu();
+        this.setupWeek4Submenu();
+        this.setupWeek5Submenu();
         
         // Setup anchor scrolling
         this.setupAnchorScrolling();
@@ -525,21 +561,29 @@ class BaseLessonPage {
             chevron.classList.add('rotate-180');
         }
         
-        // Toggle submenu on click (but allow navigation)
-        week2Link.addEventListener('click', (e) => {
-            // Only toggle if we're already on week2.html (prevent navigation)
-            if (isWeek2Page && window.location.pathname.includes('week2.html')) {
-                e.preventDefault();
-                const isHidden = subItemsContainer.classList.contains('hidden');
-                
-                if (isHidden) {
-                    subItemsContainer.classList.remove('hidden');
-                    chevron.classList.add('rotate-180');
-                } else {
-                    subItemsContainer.classList.add('hidden');
-                    chevron.classList.remove('rotate-180');
-                }
+        // Toggle submenu only when clicking the chevron icon
+        chevron.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            const isHidden = subItemsContainer.classList.contains('hidden');
+            
+            if (isHidden) {
+                subItemsContainer.classList.remove('hidden');
+                chevron.classList.add('rotate-180');
+            } else {
+                subItemsContainer.classList.add('hidden');
+                chevron.classList.remove('rotate-180');
             }
+        });
+        
+        // Allow normal navigation when clicking the link (not chevron)
+        week2Link.addEventListener('click', (e) => {
+            // Only prevent if clicking the chevron (handled above)
+            if (e.target === chevron || chevron.contains(e.target)) {
+                e.preventDefault();
+                e.stopPropagation();
+            }
+            // Otherwise, allow normal navigation
         });
     }
     
@@ -563,21 +607,121 @@ class BaseLessonPage {
             chevron.classList.add('rotate-180');
         }
         
-        // Toggle submenu on click (but allow navigation)
-        week3Link.addEventListener('click', (e) => {
-            // Only toggle if we're already on week3.html (prevent navigation)
-            if (isWeek3Page && window.location.pathname.includes('week3.html')) {
-                e.preventDefault();
-                const isHidden = subItemsContainer.classList.contains('hidden');
-                
-                if (isHidden) {
-                    subItemsContainer.classList.remove('hidden');
-                    chevron.classList.add('rotate-180');
-                } else {
-                    subItemsContainer.classList.add('hidden');
-                    chevron.classList.remove('rotate-180');
-                }
+        // Toggle submenu only when clicking the chevron icon
+        chevron.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            const isHidden = subItemsContainer.classList.contains('hidden');
+            
+            if (isHidden) {
+                subItemsContainer.classList.remove('hidden');
+                chevron.classList.add('rotate-180');
+            } else {
+                subItemsContainer.classList.add('hidden');
+                chevron.classList.remove('rotate-180');
             }
+        });
+        
+        // Allow normal navigation when clicking the link (not chevron)
+        week3Link.addEventListener('click', (e) => {
+            // Only prevent if clicking the chevron (handled above)
+            if (e.target === chevron || chevron.contains(e.target)) {
+                e.preventDefault();
+                e.stopPropagation();
+            }
+            // Otherwise, allow normal navigation
+        });
+    }
+    
+    /**
+     * Setup Week 4 submenu expand/collapse functionality
+     */
+    setupWeek4Submenu() {
+        const week4NavItem = document.querySelector('.week-4-nav-item');
+        if (!week4NavItem) return;
+        
+        const week4Link = week4NavItem.querySelector('a');
+        const subItemsContainer = document.getElementById('week-4-subitems');
+        const chevron = document.getElementById('week-4-chevron');
+        
+        if (!week4Link || !subItemsContainer || !chevron) return;
+        
+        // Check if we're on Week 4 page - if so, expand by default
+        const isWeek4Page = this.moduleId === 'week-4';
+        if (isWeek4Page) {
+            subItemsContainer.classList.remove('hidden');
+            chevron.classList.add('rotate-180');
+        }
+        
+        // Toggle submenu only when clicking the chevron icon
+        chevron.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            const isHidden = subItemsContainer.classList.contains('hidden');
+            
+            if (isHidden) {
+                subItemsContainer.classList.remove('hidden');
+                chevron.classList.add('rotate-180');
+            } else {
+                subItemsContainer.classList.add('hidden');
+                chevron.classList.remove('rotate-180');
+            }
+        });
+        
+        // Allow normal navigation when clicking the link (not chevron)
+        week4Link.addEventListener('click', (e) => {
+            // Only prevent if clicking the chevron (handled above)
+            if (e.target === chevron || chevron.contains(e.target)) {
+                e.preventDefault();
+                e.stopPropagation();
+            }
+            // Otherwise, allow normal navigation
+        });
+    }
+    
+    /**
+     * Setup Week 5 submenu expand/collapse functionality
+     */
+    setupWeek5Submenu() {
+        const week5NavItem = document.querySelector('.week-5-nav-item');
+        if (!week5NavItem) return;
+        
+        const week5Link = week5NavItem.querySelector('a');
+        const subItemsContainer = document.getElementById('week-5-subitems');
+        const chevron = document.getElementById('week-5-chevron');
+        
+        if (!week5Link || !subItemsContainer || !chevron) return;
+        
+        // Check if we're on Week 5 page - if so, expand by default
+        const isWeek5Page = this.moduleId === 'week-5';
+        if (isWeek5Page) {
+            subItemsContainer.classList.remove('hidden');
+            chevron.classList.add('rotate-180');
+        }
+        
+        // Toggle submenu only when clicking the chevron icon
+        chevron.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            const isHidden = subItemsContainer.classList.contains('hidden');
+            
+            if (isHidden) {
+                subItemsContainer.classList.remove('hidden');
+                chevron.classList.add('rotate-180');
+            } else {
+                subItemsContainer.classList.add('hidden');
+                chevron.classList.remove('rotate-180');
+            }
+        });
+        
+        // Allow normal navigation when clicking the link (not chevron)
+        week5Link.addEventListener('click', (e) => {
+            // Only prevent if clicking the chevron (handled above)
+            if (e.target === chevron || chevron.contains(e.target)) {
+                e.preventDefault();
+                e.stopPropagation();
+            }
+            // Otherwise, allow normal navigation
         });
     }
     
@@ -604,15 +748,21 @@ class BaseLessonPage {
                 }
                 
                 if (anchor && href) {
-                    // If we're already on week2.html or week3.html, prevent navigation and scroll
+                    // If we're already on week2.html, week3.html, week4.html or week5.html, prevent navigation and scroll
                     const isWeek2Page = window.location.pathname.includes('week2.html') || 
                                        window.location.pathname.endsWith('week2.html') ||
                                        window.location.href.includes('week2.html');
                     const isWeek3Page = window.location.pathname.includes('week3.html') || 
                                        window.location.pathname.endsWith('week3.html') ||
                                        window.location.href.includes('week3.html');
+                    const isWeek4Page = window.location.pathname.includes('week4.html') || 
+                                       window.location.pathname.endsWith('week4.html') ||
+                                       window.location.href.includes('week4.html');
+                    const isWeek5Page = window.location.pathname.includes('week5.html') || 
+                                       window.location.pathname.endsWith('week5.html') ||
+                                       window.location.href.includes('week5.html');
                     
-                    if (isWeek2Page || isWeek3Page) {
+                    if (isWeek2Page || isWeek3Page || isWeek4Page || isWeek5Page) {
                         e.preventDefault();
                         e.stopPropagation();
                         
@@ -644,7 +794,7 @@ class BaseLessonPage {
         
         // Handle hash in URL on page load (after content is loaded)
         const handleHashOnLoad = () => {
-            if (window.location.hash && (this.moduleId === 'week-2' || this.moduleId === 'week-3')) {
+            if (window.location.hash && (this.moduleId === 'week-2' || this.moduleId === 'week-3' || this.moduleId === 'week-4' || this.moduleId === 'week-5')) {
                 setTimeout(() => {
                     this.scrollToAnchor(window.location.hash);
                 }, 800); // Longer delay to ensure content is fully rendered

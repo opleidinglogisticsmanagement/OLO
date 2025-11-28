@@ -2,30 +2,35 @@
   "intro": {
     "title": "Week 4",
     "subtitle": "Begripsbepaling + Voorbereiding literatuuronderzoek",
-    "description": "In deze week leer je hoe je begrippen definieert voor je onderzoek. Je ontdekt waarom het belangrijk is om begrippen helder te hebben en hoe je dit systematisch aanpakt. Daarnaast leer je hoe je begrippen uiteenrafelt en selecteert om de scope van je onderzoek vorm te geven."
+    "description": "Deze week bestaat uit weer uit een <strong>coachingscollege</strong> en een <strong>werkcollege</strong>.<br><br>Voor het <strong>coachingscollege</strong> zorg je dat je de theorie van het werkcollege van afgelopen week hebt begrepen en heb je helder:<br><ul class=\"list-disc list-inside ml-4 mb-4\"><li>Welk probleem je wilt gaan onderzoeken. Dat betekent dat je de probleemverkenning hebt uitgewerkt in ongeveer 350 woorden.</li><li>Heb jij een concrete doelstelling bepaald die te relateren is aan de vraag van de opdrachtgever in ongeveer 50 woorden.</li><li>Werk je op basis van de theorie van week 3 een onderzoeksmodel en onderzoeksvragen uit.</li></ul>De probleemverkenning, doelstelling en onderzoeksmodel ga je pitchen.<br><br>Voor het <strong>werkcollege</strong> van week 4 ga je je verdiepen hoe je begrippen kunt operationaliseren. Want je wilt uiteindelijk bepaalde zaken meetbaar maken om data te gaan verzamelen. Daarnaast wil je gedegen literatuuronderzoek verrichten naar belangrijke zoektermen uit bijvoorbeeld de doelstelling of de hoofdvraag.<br><br><div class=\"accordion-container mb-4\" id=\"intro-opdracht1-accordion\"><div class=\"border border-gray-200 dark:border-gray-700 rounded-lg mb-3 overflow-hidden transition-colors duration-200\"><button class=\"w-full px-6 py-4 bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 active:bg-gray-200 dark:active:bg-gray-600 transition-colors duration-200 flex items-center justify-between text-left cursor-pointer touch-manipulation\" onclick=\"InteractiveRenderer.toggleAccordion('intro-opdracht1-content','intro-opdracht1-item',true)\" aria-expanded=\"false\" aria-controls=\"intro-opdracht1-content\" id=\"intro-opdracht1-item\"><span class=\"font-semibold text-gray-900 dark:text-white text-lg\">Opdracht 1: Voorbereiding werkcollege week 4</span><i class=\"fas fa-plus transform transition-transform duration-200 text-gray-600 dark:text-gray-300\" id=\"intro-opdracht1-item-icon\"></i></button><div id=\"intro-opdracht1-content\" class=\"accordion-content overflow-hidden transition-all duration-300 ease-in-out max-h-0 opacity-0 bg-white dark:bg-gray-800\" aria-hidden=\"true\" style=\"display: none;\"><div class=\"px-6 py-4\"><p class=\"text-gray-700 dark:text-gray-300 mb-4\">Bestudeer voor aanvang van het <strong>werkcollege</strong> de volledige theorie van week 4 in deze e-learning. Zorg dat je de uitleg over begripsbepaling, de bouwsteenmethode en het gebruik van Windesearch hebt doorgenomen, zodat je tijdens het werkcollege direct met begrippen en literatuuronderzoek aan de slag kunt.</p></div></div></div></div>"
   },
   "leerdoelen": {
     "title": "Leerdoelen",
     "items": [
       "Je kunt begrippen definiëren door ze vast te stellen, uiteen te rafelen in dimensies/aspecten/deelaspecten, een selectie te maken en de kwaliteit te beoordelen aan de hand van afbakening, operationalisatie en aansluiting.",
-      "Je kunt Windesearch gebruiken om wetenschappelijke literatuur te vinden en effectieve zoektermen formuleren met behulp van de bouwsteenmethode.",
+      "Je kunt Windesearch gebruiken om (semi)wetenschappelijke literatuur te vinden en effectieve zoektermen formuleren met behulp van de bouwsteenmethode.",
       "Je kunt Booleaanse operatoren (AND, OR, NOT) en haakjes gebruiken om gerichte zoekopdrachten te formuleren."
     ],
     "interactive": false
   },
   "theorie": {
-    "title": "Definiëren van begrippen",
+    "title": "Introductie",
     "content": [
       {
         "type": "paragraph",
         "text": [
-          "Als onderzoeker wil je precies helder hebben wat je onderzoekt. Om precies te gaan bepalen wat er nu onderzocht moet worden is het van belang om begrippen te definiëren. Eerst wordt toegelicht waarom dit belangrijk is. Daarna wordt toegelicht hoe je dit kunt aanpakken."
+          "Deze week focussen we op twee fundamentele pijlers van een sterk onderzoeksplan:<br><br><strong>Het definiëren van begrippen:</strong> Wat onderzoek je nu precies? Een term als 'vrachtvervoer' lijkt simpel, totdat je in gesprek gaat met stakeholders en blijkt dat iedereen hier op een eigen manier naar kijkt. We leren je hoe je begrippen afbakent, uiteenrafelt en selecteert. Dit is essentieel om de scope en haalbaarheid van je onderzoek te bewaken en misverstanden te voorkomen.<br><br><strong>Het uitvoeren van literatuuronderzoek:</strong> Je hoeft het wiel niet opnieuw uit te vinden. Literatuuronderzoek helpt je om je probleem in een breder kader te plaatsen en de 'knowledge gap' te vinden. We gaan praktisch aan de slag met Windesearch, Google Scholar en slimme zoekstrategieën zoals Booleaanse operatoren en de bouwsteenmethode."
         ]
+      },
+      {
+        "type": "heading",
+        "text": "Definiëren van begrippen",
+        "level": 2,
+        "id": "definieren-begrippen"
       },
       {
         "type": "paragraph",
         "text": [
-          "<h3 class=\"text-xl font-semibold text-gray-900 dark:text-white mb-4\">Waarom?</h3>",
           "De definiëring van een begrip leidt vaak tot het inzicht dat het begrip veel meer inhoudt dan vooraf werd gedacht. Je ontdekt dus dat niet alles onderzocht kan worden of dat niet alle details die horen bij een begrip onderzocht kunnen worden. Daarom moeten er prioriteiten gesteld worden en zal er een selectie gemaakt moeten worden van datgene wat er onderzocht moet worden. Zo krijgt ook de scope van het onderzoek vorm. Het vaststellen van de scope is erg belangrijk want hiermee wordt de haalbaarheid van het onderzoek aangetoond en daarmee ook de kwaliteit van de te behalen resultaten.",
           "Als uiteindelijk de definities zijn vastgesteld in samenwerking en in overleg met de stakeholders geeft het ook meer zekerheid dat elke stakeholder over hetzelfde praat. Maar dat kan alleen als het lukt om begrippen te omschrijven in een taal die voor iedereen begrijpelijk is. Het zal niet voor het eerst zijn dat twee stakeholders hetzelfde begrip gebruiken, maar een totaal andere definitie hanteren."
         ]
@@ -71,13 +76,13 @@
                     "content": [
                       "<p class=\"text-gray-700 dark:text-gray-300 mb-3\">Je doet onderzoek voor logistiek dienstverlener HML dat transport verzorgt voor verschillende bedrijven. HML heeft een afdeling expeditie, een warehouse en een crossdock. Je onderzoekt de mogelijkheden voor optimalisatie van het interne transport op het crossdock want de transportmanager denkt dat er veel tijd wordt verspild aan intern transport en dat het crossdock efficiënter ingezet kan worden. De doelstelling is:</p>",
                       "<div class=\"bg-blue-50 dark:bg-blue-900/20 border-l-4 border-blue-500 dark:border-blue-400 p-4 mb-4 rounded-r-lg\">",
-                      "<p class=\"text-gray-700 dark:text-gray-300 mb-2\"><strong>Het opstellen van aanbevelingen voor de transportmanager van HML voor de mogelijkheden van het optimaliseren van het intern transport van de goederen op het crossdock.</strong></p>",
+                      "<p class=\"text-gray-700 dark:text-gray-300 mb-2\"><strong>Het opstellen van aanbevelingen voor 31 januari 2026 voor de transportmanager van HML waarmee 10% tijdswinst wordt gerealiseerd voor het intern transport van de goederen op het crossdock</strong></p>",
                       "<p class=\"text-gray-700 dark:text-gray-300 mb-0\"><strong>door</strong></p>",
                       "<p class=\"text-gray-700 dark:text-gray-300 mb-0\"><strong>inzicht te geven in oorzaken van inefficiënte transportstromen en de mogelijkheden die er zijn om het interne transport te optimaliseren.</strong></p>",
                       "</div>",
                       "<p class=\"text-gray-700 dark:text-gray-300 mb-3\">De hoofdvraag bij deze doelstelling is:</p>",
                       "<div class=\"bg-green-50 dark:bg-green-900/20 border-l-4 border-green-500 dark:border-green-400 p-4 mb-4 rounded-r-lg\">",
-                      "<p class=\"text-gray-700 dark:text-gray-300 mb-0\"><strong>Welke mogelijkheden heeft HML om de interne transportstromen van het crossdock te optimaliseren?</strong></p>",
+                      "<p class=\"text-gray-700 dark:text-gray-300 mb-0\"><strong>Welke tegenmaatregelen moeten genomen worden om 10% tijdswinst te realiseren bij de interne transportstromen van het crossdock van HML?</strong></p>",
                       "</div>",
                       "<p class=\"text-gray-700 dark:text-gray-300 mb-3\">Je stelt vast dat het begrip <strong>transportstromen</strong> gedefinieerd moet worden zodat:</p>",
                       "<ul class=\"list-disc list-inside space-y-2 mb-4 ml-4\">",
@@ -248,9 +253,14 @@
         ]
       },
       {
+        "type": "heading",
+        "text": "Het uitvoeren van literatuuronderzoek",
+        "level": 2,
+        "id": "literatuuronderzoek"
+      },
+      {
         "type": "paragraph",
         "text": [
-          "<h3 class=\"text-xl font-semibold text-gray-900 dark:text-white mb-4\">Het uitvoeren van literatuuronderzoek</h3>",
           "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Literatuuronderzoek is van groot belang voor het opstellen van je onderzoeksopzet. Literatuuronderzoek heeft veel voordelen:</p>",
           "<ol class=\"list-decimal list-inside space-y-2 mb-4 ml-4\">",
           "<li class=\"text-gray-700 dark:text-gray-300 mb-2\">Je vergaart meer kennis over een onderwerp.</li>",
@@ -533,13 +543,25 @@
         ]
       },
       {
-        "type": "paragraph",
-        "text": [
-          "<div class=\"bg-blue-50 dark:bg-blue-900/20 border-l-4 border-blue-500 dark:border-blue-400 p-4 rounded-r-lg mb-4\">",
-          "<h4 class=\"font-semibold text-blue-900 dark:text-blue-200 mb-2\">Opdracht ter voorbereiding op het college</h4>",
-          "<p class=\"text-blue-800 dark:text-blue-300 mb-2\">Bij de Oefenasus komt het begrip magazijnoptimalisatie naar voren. Ga voor dit begrip alvast een start maken met de bouwsteenmethode.</p>",
-          "<p class=\"text-blue-800 dark:text-blue-300 mb-0\"><strong>Neem een schaar mee naar het college.</strong></p>",
-          "</div>"
+        "type": "accordion",
+        "usePlusIcon": true,
+        "defaultOpen": false,
+        "items": [
+          {
+            "title": "Opdracht 2: Bouwsteenmethode voor magazijnoptimalisatie",
+            "defaultOpen": false,
+            "content": [
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Bij de Oefenasus komt het begrip magazijnoptimalisatie naar voren. Ga voor dit begrip alvast een start maken met de bouwsteenmethode.</p>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-0\">Gebruik de tabel die je hierboven hebt gezien om het begrip magazijnoptimalisatie uit te werken volgens de bouwsteenmethode. Vul de tabel in met synoniemen, vertalingen, afkortingen, spellingsvormen, vaktermen, bredere termen en nauwere termen.</p>"
+            ]
+          },
+          {
+            "title": "Opdracht 3: Materiaal meenemen",
+            "defaultOpen": false,
+            "content": [
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-0\"><strong>Neem een schaar mee naar het college.</strong> We gaan tijdens het college aan de slag met het uiteenrafelen van een begrip en daarvoor heb je een schaar nodig.</p>"
+            ]
+          }
         ]
       }
     ]

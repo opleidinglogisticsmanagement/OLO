@@ -2,7 +2,7 @@
   "intro": {
     "title": "Week 5",
     "subtitle": "Uitvoeren literatuuronderzoek + Theoretisch kader",
-    "description": "In deze week leer je hoe je literatuuronderzoek daadwerkelijk uitvoert en hoe je de gevonden kennis structureert in een theoretisch kader. Je ontdekt hoe je relevante bronnen selecteert, analyseert en hoe je verschillende theorieën met elkaar confronteert om tot een onderbouwd theoretisch kader te komen.<br><br>Vanuit het vorige college heb je begripsbepalingen inclusief visualisaties opgeleverd en een zoekplan voor je literatuuronderzoek opgesteld (gebaseerd op het zoekplan literatuuronderzoek van het MMC).<br><br>Op basis van die output gaan we in week 5 verder met het daadwerkelijk uitvoeren van het literatuuronderzoek, het analyseren van de resultaten, en het vaststellen van je theoretisch kader volgens het principe van breed naar smal.<br><br>Het doel van deze week is dat je in staat bent om je theoretisch kader te gaan schrijven. In het theoretisch kader leer je verschillende theorieën of theoretische concepten met elkaar te confronteren, waardoor je een onderbouwde basis legt voor je onderzoek.<br><br>Voor het werkcollege van week 5 ga jij je verdiepen in de manier waarop je literatuuronderzoek systematisch uitvoert en hoe je de gevonden kennis structureert in een theoretisch kader. Je leert hoe je bronnen kritisch beoordeelt en analyseert, en hoe je deze kennis gebruikt om je onderzoeksmodel te onderbouwen. Bestudeer voor aanvang van het college de theorie."
+    "description": "Deze week bestaat uit een <strong>coachingscollege</strong> en een <strong>werkcollege</strong>.<br><br>Voor het <strong>coachingscollege</strong> zorg je dat je de theorie van het werkcollege van afgelopen week hebt begrepen en heb je het volgende af:<br><ul class=\"list-disc list-inside ml-4 mb-4\"><li>Probleemverkenning + Doelstelling</li><li>Onderzoeksmodel + beschrijving</li><li>Onderzoeksvragen (Hoofdvraag + Deelvragen)</li><li>Selecteer je uit de doelstelling en onderzoeksvragen de belangrijkste begrippen. Voor één van de begrippen begin je met het creëren van een boomdiagram</li><li>Plaats je de tabel behorend bij de bouwsteenmethode in het onderzoeksplan en selecteer je uit de doelstelling en onderzoeksvragen de zoektermen/elementen/begrippen. Plaats deze in de tabel van de bouwsteenmethode en maak een begin met het invullen van de tabel.</li></ul>Voor het <strong>werkcollege</strong> ga je verder met het uitvoeren van deskresearch voor de casus magazijnoptimalisatie. In de voorbereiding sta je stil bij de wijze waarop je (semi)wetenschappelijke literatuur kunt vinden en hoe je kunt vaststellen of het ook relevante literatuur is. Vervolgens krijg je een tip over de reference organizer. Afsluitend sta je stil bij de wijze waarop je daadwerkelijk het theoretisch kader gaat schrijven. Hoe pak je dat nu aan en waar moet je op letten? Bestudeer de theorie goed.<br><br><div class=\"accordion-container mb-4\" id=\"intro-opdracht1-accordion\"><div class=\"border border-gray-200 dark:border-gray-700 rounded-lg mb-3 overflow-hidden transition-colors duration-200\"><button class=\"w-full px-6 py-4 bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 active:bg-gray-200 dark:active:bg-gray-600 transition-colors duration-200 flex items-center justify-between text-left cursor-pointer touch-manipulation\" onclick=\"InteractiveRenderer.toggleAccordion('intro-opdracht1-content','intro-opdracht1-item',true)\" aria-expanded=\"false\" aria-controls=\"intro-opdracht1-content\" id=\"intro-opdracht1-item\"><span class=\"font-semibold text-gray-900 dark:text-white text-lg\">Opdracht 1: Voorbereiding werkcollege week 5</span><i class=\"fas fa-plus transform transition-transform duration-200 text-gray-600 dark:text-gray-300\" id=\"intro-opdracht1-item-icon\"></i></button><div id=\"intro-opdracht1-content\" class=\"accordion-content overflow-hidden transition-all duration-300 ease-in-out max-h-0 opacity-0 bg-white dark:bg-gray-800\" aria-hidden=\"true\" style=\"display: none;\"><div class=\"px-6 py-4\"><p class=\"text-gray-700 dark:text-gray-300 mb-4\">Bestudeer voor aanvang van het <strong>werkcollege</strong> de volledige theorie van week 5 in deze e-learning. Zorg dat je de uitleg over het selecteren en beoordelen van bronnen (1e en 2e check, CRAP-test), het gebruik van reference organizers zoals Zotero, en het schrijven van het theoretisch kader hebt doorgenomen, zodat je tijdens het werkcollege direct met literatuuronderzoek en theoretisch kader aan de slag kunt.</p></div></div></div></div>"
   },
   "leerdoelen": {
     "title": "Leerdoelen",
@@ -17,8 +17,20 @@
     "interactive": false
   },
   "theorie": {
-    "title": "Onderzoek uitvoeren",
+    "title": "Introductie",
     "content": [
+      {
+        "type": "paragraph",
+        "text": [
+          "Van Informatieberg naar Theoretisch Kader<br><br>Vorige week heb je geleerd hoe je moet zoeken. De kans is groot dat je nu een flinke lijst met zoekresultaten hebt. Maar let op: niet alles wat je vindt, is goud.<br><br>Deze week maken we de vertaalslag van zoeken naar verwerken. We focussen op drie essentiële stappen die het verschil maken tussen een \"verslagje\" en een gedegen theoretisch kader.<br><br><strong>Selecteren en Beoordelen:</strong> Hoe scheid je het kaf van het koren? Je leert werken met een 1e en 2e check voor literatuur en de CRAP-test voor internetbronnen. Zo voorkom je dat je je onderzoek bouwt op onbetrouwbare funderingen.<br><br><strong>Slim Opslaan:</strong> Stop met het handmatig typen van bronvermeldingen. We introduceren tools zoals Zotero. De tijd die je nu investeert in het inrichten van zo'n reference organizer, verdien je later dubbel en dwars terug bij het maken van je literatuurlijst (volgens de laatste APA-richtlijnen).<br><br><strong>Het Theoretisch Kader Schrijven:</strong> Dit is vaak het lastigste stuk. Een theoretisch kader is geen opsomming van feitjes of een uitleg van standaardmodellen (zoals een Pareto-analyse). Het is een samenhangend geheel waarmee je aantoont waar de knowledge gap zit."
+        ]
+      },
+      {
+        "type": "heading",
+        "text": "Selecteren en beoordelen",
+        "level": 2,
+        "id": "selecteren-beoordelen"
+      },
       {
         "type": "paragraph",
         "text": [
@@ -142,9 +154,14 @@
         ]
       },
       {
+        "type": "heading",
+        "text": "Slim bronnen beheren",
+        "level": 2,
+        "id": "slim-bronnen-beheren"
+      },
+      {
         "type": "paragraph",
         "text": [
-          "<h3 class=\"text-xl font-semibold text-gray-900 dark:text-white mb-4\">Bronnen opslaan met behulp van een reference organizer</h3>",
           "Er bestaat software om georganiseerd je bronnen bij te houden. Met een simpele klik kun je van websites en van (semi)wetenschappelijke literatuur alle benodigde informatie voor een referentie opslaan. Voorbeelden van software die dat kunnen zijn bijvoorbeeld Mendeley en Zotero. Maar er zijn veel meer voorbeelden. Bekijk voor de aardigheid maar eens gewoon <a href=\"https://en.wikipedia.org/wiki/Comparison_of_reference_management_software\" target=\"_blank\" class=\"text-blue-600 hover:text-blue-800 underline\">Wikipedia</a>, waarin je mooi overzichtelijk kunt welke verschillende typen software er zijn en welke mogelijkheden ze bieden.",
           "We focussen ons in dit vak op Zotero omdat het gratis software is en werkt op verschillende Browsers. Uiteraard mag je ook andere software gebruiken. Voor nu wijzen we op deze instructievideo van Zotero voor de installatie. In een van de colleges kunnen we dan vervolgens aan jullie demonstreren hoe het werkt en wat de verdere voordelen zijn. De investering die je nu maakt in reference organizer gaat zich dubbel en dwars uitbetalen."
         ]
@@ -160,9 +177,14 @@
         ]
       },
       {
+        "type": "heading",
+        "text": "Theoretisch kader schrijven",
+        "level": 2,
+        "id": "theoretisch-kader-schrijven"
+      },
+      {
         "type": "paragraph",
         "text": [
-          "<h3 class=\"text-xl font-semibold text-gray-900 dark:text-white mb-4\">Schrijven van het theoretisch kader</h3>",
           "Als onderzoeker heb je net de begripsbepaling van de kernbegrippen afgerond en heb je literatuuronderzoek verricht. Als het literatuuronderzoek goed is uitgevoerd kun je het theoretisch kader gaan schrijven. De vraag is alleen wanneer weet je nu of het literatuuronderzoek goed is uitgevoerd? Je kunt namelijk altijd op zoek gaan naar meer bronnen en meer informatie alleen is dat niet realistisch.",
           "Je zult dus een afweging gaan maken of je voldoende bronnen hebt gevonden en of die in voldoende mate de beweringen, die je gaat maken in het theoretisch kader, kunnen aantonen. Dat betekent dat je tijdens het schrijven van het theoretisch kader ook tot het inzicht kunt komen dat er meer literatuur nodig is. Tijdens het schrijven van het theoretisch kader kun je daarom een aantal aspecten monitoren waarmee je de kwaliteit van het theoretisch kader kunt borgen."
         ]
@@ -173,9 +195,11 @@
           "<ol class=\"list-decimal list-outside space-y-3 mb-4 ml-6 pl-4\">",
           "<li class=\"text-gray-700 dark:text-gray-300 mb-2\">Per bewering die je maakt voeg je het liefst twee of meer bronnen toe die de bewering ondersteunen. Deze bronnen zijn allemaal uniek en refereren niet naar elkaar.</li>",
           "<li class=\"text-gray-700 dark:text-gray-300 mb-2\">Kun je aantoonbaar maken dat je de meest relevante literatuur hebt gevonden en dat je dus niet het wiel opnieuw aan het uitvinden bent?</li>",
-          "<li class=\"text-gray-700 dark:text-gray-300 mb-2\">Heb je zelf het idee dat je door het schrijven boven het onderzoek bent komen te staan? Dat kun je bepalen door naar:<br>",
-          "<span class=\"ml-4\">a. Het onderzoeksmodel. Is het nodig om het model nog aan te passen naar aanleiding van het literatuuronderzoek?</span><br>",
-          "<span class=\"ml-4\">b. Het conceptueel model. Als je bijvoorbeeld beoordelingscriteria nodig hebt voor het beoordelen van een proces, dan zul je in het theoretisch kader al een duidelijk beeld geschetst moeten hebben van die beoordelingscriteria.</span>",
+          "<li class=\"text-gray-700 dark:text-gray-300 mb-2\">Heb je zelf het idee dat je door het schrijven boven het onderzoek bent komen te staan? Dat kun je bepalen door naar:<br><br>",
+          "<div class=\"ml-6 pl-2\">",
+          "<div class=\"mb-1\"><strong>a.</strong> Het onderzoeksmodel. Is het nodig om het model nog aan te passen naar aanleiding van het literatuuronderzoek?</div>",
+          "<div class=\"mb-1\"><strong>b.</strong> Het conceptueel model. Als je bijvoorbeeld beoordelingscriteria nodig hebt voor het beoordelen van een proces, dan zul je in het theoretisch kader al een duidelijk beeld geschetst moeten hebben van die beoordelingscriteria.</div>",
+          "</div>",
           "</li>",
           "<li class=\"text-gray-700 dark:text-gray-300 mb-2\">Uit het theoretisch kader moet blijken dat je de juiste literatuur hebt gevonden en geen aspecten over het hoofd hebt gezien. Dus is het misschien ook nodig om te schrijven over het ontbreken van bronnen.</li>",
           "<li class=\"text-gray-700 dark:text-gray-300 mb-2\">Werkt het theoretisch kader uiteindelijk naar een knowledge gap toe waarmee het belang van het onderzoek wordt aangetoond?</li>",
@@ -211,7 +235,45 @@
       {
         "type": "paragraph",
         "text": [
-          "Tot zover de theorie ter voorbereiding op het werkcollege van week 5."
+          "Tot zover de theorie ter voorbereiding op het werkcollege van week 5. Hieronder vind je de opdrachten die je moet uitvoeren voor het werkcollege."
+        ]
+      },
+      {
+        "type": "accordion",
+        "usePlusIcon": true,
+        "defaultOpen": false,
+        "items": [
+          {
+            "title": "Opdracht 2: Literatuuronderzoek starten",
+            "defaultOpen": false,
+            "content": [
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Ga voor enkele zoektermen bij de casus magazijnoptimalisatie alvast starten met het literatuuronderzoek. Gebruik hiervoor de zoektermen die je hebt geselecteerd uit de doelstelling en onderzoeksvragen en die je hebt uitgewerkt in de bouwsteenmethode (week 4).</p>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Voer je zoekopdrachten uit in Windesearch of Google Scholar en noteer de gegevens van de informatiebronnen waarvan je denkt dat die bruikbaar zijn voor je onderzoek. Let erop dat je (semi)wetenschappelijke literatuur zoekt.</p>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-0\">Je hoeft de bronnen nog niet volledig te beoordelen met de 1e en 2e check - dat komt in opdracht 3 aan bod. Focus je nu op het vinden van relevante bronnen en het noteren van de basisgegevens (titel, auteur, jaar, bron).</p>"
+            ]
+          },
+          {
+            "title": "Opdracht 3: Tabellen voorbereiden",
+            "defaultOpen": false,
+            "content": [
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-0\">Plaats de tabellen voor de 1e en 2e check (voor (semi)wetenschappelijke literatuur) en de CRAP-test (voor internetbronnen) alvast in een bijlage van je onderzoeksplan. Je vindt deze tabellen in de theorie hierboven.</p>"
+            ]
+          },
+          {
+            "title": "Opdracht 4: Artikel Careful with that warehouse",
+            "defaultOpen": false,
+            "content": [
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Zorg dat je de kern van het artikel <a href=\"assets/Documents/Careful with that warehouse.pdf\" target=\"_blank\" class=\"text-blue-600 hover:text-blue-800 underline font-medium\">Careful with that warehouse</a> hebt begrepen.</p>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-0\">Voer de 1e check uit op het artikel en beschrijf kort je bevinding.</p>"
+            ]
+          },
+          {
+            "title": "Opdracht 5: Reference organizer downloaden (optioneel maar aanbevolen)",
+            "defaultOpen": false,
+            "content": [
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-0\">Download en installeer een reference organizer (bijvoorbeeld Zotero). Maak zelf een beschrijving van hoe je dit hebt gedaan en wat de voordelen zijn van het gebruik van een reference organizer.</p>"
+            ]
+          }
         ]
       }
     ]

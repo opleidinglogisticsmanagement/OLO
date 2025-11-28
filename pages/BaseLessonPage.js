@@ -1313,16 +1313,30 @@ class BaseLessonPage {
         document.addEventListener('click', handleInteractiveClick, true);
         
         // Verify InteractiveRenderer is available
+        let attempts = 0;
         const checkInteractiveRenderer = () => {
             if (typeof window.InteractiveRenderer !== 'undefined') {
                 console.log('InteractiveRenderer is available - accordions and tabs should work');
             } else {
-                console.warn('InteractiveRenderer not yet available - retrying...');
-                setTimeout(checkInteractiveRenderer, 100);
+                attempts++;
+                // Stop na 20 pogingen (2 seconden) om oneindige lussen op pagina's zonder interactieve elementen te voorkomen
+                // zoals register.html, index.html, etc.
+                if (attempts < 20) {
+                    // Alleen loggen bij de eerste paar keer om console spam te voorkomen
+                    if (attempts <= 3) {
+                        console.warn('InteractiveRenderer not yet available - retrying...');
+                    }
+                    setTimeout(checkInteractiveRenderer, 100);
+                } else {
+                    console.log('InteractiveRenderer niet gevonden na timeout - waarschijnlijk niet nodig op deze pagina.');
+                }
             }
         };
         
-        checkInteractiveRenderer();
+        // Alleen checken als we niet op de register pagina zijn (die heeft geen interactive renderer nodig)
+        if (this.moduleId !== 'register') {
+            checkInteractiveRenderer();
+        }
     }
 
     /**

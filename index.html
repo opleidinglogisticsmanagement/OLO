@@ -433,7 +433,7 @@
 
 
                 <!-- Module Navigation -->
-                <nav class="flex-1 overflow-y-auto custom-scrollbar p-6" aria-label="Module navigatie">
+                <nav class="flex-1 overflow-y-auto custom-scrollbar p-6" aria-label="Module navigatie" style="scrollbar-gutter: stable;">
                     <div class="space-y-2">
                         <div class="px-3 mb-2 text-xs font-semibold text-gray-500 uppercase tracking-wider">E-Learning</div>
                         <a href="index.html" class="block p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 focus-ring transition-colors">
@@ -461,7 +461,9 @@
                                         <i class="fas fa-book text-blue-600 dark:text-blue-400 text-sm"></i>
                                     </div>
                                     <span class="font-medium text-gray-900 dark:text-white flex-1">Week 2</span>
-                                    <i class="fas fa-chevron-down text-xs text-gray-400 dark:text-gray-500 transition-transform duration-200" id="week-2-chevron-index"></i>
+                                    <div class="w-8 h-8 flex items-center justify-center rounded hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors z-10 flex-shrink-0" id="week-2-chevron-container">
+                                        <i class="fas fa-chevron-down text-xs text-gray-400 dark:text-gray-500 transition-transform duration-200" id="week-2-chevron-index"></i>
+                                    </div>
                                 </div>
                             </a>
                             <div class="week-2-subitems hidden" id="week-2-subitems-index">
@@ -499,7 +501,9 @@
                                         <i class="fas fa-book text-purple-600 dark:text-purple-400 text-sm"></i>
                                     </div>
                                     <span class="font-medium text-gray-900 dark:text-white flex-1">Week 3</span>
-                                    <i class="fas fa-chevron-down text-xs text-gray-400 dark:text-gray-500 transition-transform duration-200" id="week-3-chevron-index"></i>
+                                    <div class="w-8 h-8 flex items-center justify-center rounded hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors z-10 flex-shrink-0" id="week-3-chevron-container">
+                                        <i class="fas fa-chevron-down text-xs text-gray-400 dark:text-gray-500 transition-transform duration-200" id="week-3-chevron-index"></i>
+                                    </div>
                                 </div>
                             </a>
                             <div class="week-3-subitems hidden" id="week-3-subitems-index">
@@ -537,7 +541,9 @@
                                         <i class="fas fa-book text-orange-600 dark:text-orange-400 text-sm"></i>
                                     </div>
                                     <span class="font-medium text-gray-900 dark:text-white flex-1">Week 4</span>
-                                    <i class="fas fa-chevron-down text-xs text-gray-400 dark:text-gray-500 transition-transform duration-200" id="week-4-chevron-index"></i>
+                                    <div class="w-8 h-8 flex items-center justify-center rounded hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors z-10 flex-shrink-0" id="week-4-chevron-container">
+                                        <i class="fas fa-chevron-down text-xs text-gray-400 dark:text-gray-500 transition-transform duration-200" id="week-4-chevron-index"></i>
+                                    </div>
                                 </div>
                             </a>
                             <div class="week-4-subitems hidden" id="week-4-subitems-index">
@@ -563,7 +569,9 @@
                                         <i class="fas fa-book text-red-600 dark:text-red-400 text-sm"></i>
                                     </div>
                                     <span class="font-medium text-gray-900 dark:text-white flex-1">Week 5</span>
-                                    <i class="fas fa-chevron-down text-xs text-gray-400 dark:text-gray-500 transition-transform duration-200" id="week-5-chevron-index"></i>
+                                    <div class="w-8 h-8 flex items-center justify-center rounded hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors z-10 flex-shrink-0" id="week-5-chevron-container">
+                                        <i class="fas fa-chevron-down text-xs text-gray-400 dark:text-gray-500 transition-transform duration-200" id="week-5-chevron-index"></i>
+                                    </div>
                                 </div>
                             </a>
                             <div class="week-5-subitems hidden" id="week-5-subitems-index">
@@ -1047,149 +1055,55 @@
                 }, 100);
             }
             
-            // Week 2 submenu functionality for index.html
-            // On index.html, submenus stay collapsed - clicking navigates normally
-            const week2NavItem = document.querySelector('.week-2-nav-item');
-            if (week2NavItem) {
-                const week2Link = week2NavItem.querySelector('a');
-                const subItemsContainer = document.getElementById('week-2-subitems-index');
-                const chevron = document.getElementById('week-2-chevron-index');
+            // Generic helper for setting up submenu toggles
+            const setupSubmenuToggle = (weekNum) => {
+                const navItemClass = `.week-${weekNum}-nav-item`;
+                const navItem = document.querySelector(navItemClass);
                 
-                if (week2Link && subItemsContainer && chevron) {
-                    // Only toggle when clicking the chevron icon, not the link itself
-                    chevron.addEventListener('click', (e) => {
+                if (!navItem) return;
+                
+                const link = navItem.querySelector('a');
+                const subItemsContainer = document.getElementById(`week-${weekNum}-subitems-index`);
+                const chevron = document.getElementById(`week-${weekNum}-chevron-index`);
+                const chevronContainer = document.getElementById(`week-${weekNum}-chevron-container`);
+                
+                if (!link || !subItemsContainer || !chevron) return;
+                
+                // Use chevron container if available, otherwise fallback to chevron
+                const triggerElement = chevronContainer || chevron;
+                
+                // Toggle only when clicking the trigger element
+                triggerElement.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    
+                    const isHidden = subItemsContainer.classList.contains('hidden');
+                    
+                    if (isHidden) {
+                        subItemsContainer.classList.remove('hidden');
+                        chevron.classList.add('rotate-180');
+                    } else {
+                        subItemsContainer.classList.add('hidden');
+                        chevron.classList.remove('rotate-180');
+                    }
+                });
+                
+                // Allow normal navigation when clicking the link (not trigger)
+                link.addEventListener('click', (e) => {
+                    // Only prevent if clicking the trigger (handled above)
+                    if (e.target === triggerElement || triggerElement.contains(e.target)) {
                         e.preventDefault();
                         e.stopPropagation();
-                        const isHidden = subItemsContainer.classList.contains('hidden');
-                        
-                        if (isHidden) {
-                            subItemsContainer.classList.remove('hidden');
-                            chevron.classList.add('rotate-180');
-                        } else {
-                            subItemsContainer.classList.add('hidden');
-                            chevron.classList.remove('rotate-180');
-                        }
-                    });
-                    
-                    // Allow normal navigation when clicking the link (not chevron)
-                    week2Link.addEventListener('click', (e) => {
-                        // Don't prevent navigation - let it navigate normally
-                        // Only prevent if clicking the chevron (handled above)
-                        if (e.target === chevron || chevron.contains(e.target)) {
-                            e.preventDefault();
-                            e.stopPropagation();
-                        }
-                    });
-                }
-            }
+                    }
+                    // Otherwise, allow normal navigation
+                });
+            };
             
-            // Week 3 submenu functionality for index.html
-            // On index.html, submenus stay collapsed - clicking navigates normally
-            const week3NavItem = document.querySelector('.week-3-nav-item');
-            if (week3NavItem) {
-                const week3Link = week3NavItem.querySelector('a');
-                const subItemsContainer = document.getElementById('week-3-subitems-index');
-                const chevron = document.getElementById('week-3-chevron-index');
-                
-                if (week3Link && subItemsContainer && chevron) {
-                    // Only toggle when clicking the chevron icon, not the link itself
-                    chevron.addEventListener('click', (e) => {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        const isHidden = subItemsContainer.classList.contains('hidden');
-                        
-                        if (isHidden) {
-                            subItemsContainer.classList.remove('hidden');
-                            chevron.classList.add('rotate-180');
-                        } else {
-                            subItemsContainer.classList.add('hidden');
-                            chevron.classList.remove('rotate-180');
-                        }
-                    });
-                    
-                    // Allow normal navigation when clicking the link (not chevron)
-                    week3Link.addEventListener('click', (e) => {
-                        // Don't prevent navigation - let it navigate normally
-                        // Only prevent if clicking the chevron (handled above)
-                        if (e.target === chevron || chevron.contains(e.target)) {
-                            e.preventDefault();
-                            e.stopPropagation();
-                        }
-                    });
-                }
-            }
-            
-            // Week 4 submenu functionality for index.html
-            // On index.html, submenus stay collapsed - clicking navigates normally
-            const week4NavItem = document.querySelector('.week-4-nav-item');
-            if (week4NavItem) {
-                const week4Link = week4NavItem.querySelector('a');
-                const subItemsContainer = document.getElementById('week-4-subitems-index');
-                const chevron = document.getElementById('week-4-chevron-index');
-                
-                if (week4Link && subItemsContainer && chevron) {
-                    // Only toggle when clicking the chevron icon, not the link itself
-                    chevron.addEventListener('click', (e) => {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        const isHidden = subItemsContainer.classList.contains('hidden');
-                        
-                        if (isHidden) {
-                            subItemsContainer.classList.remove('hidden');
-                            chevron.classList.add('rotate-180');
-                        } else {
-                            subItemsContainer.classList.add('hidden');
-                            chevron.classList.remove('rotate-180');
-                        }
-                    });
-                    
-                    // Allow normal navigation when clicking the link (not chevron)
-                    week4Link.addEventListener('click', (e) => {
-                        // Don't prevent navigation - let it navigate normally
-                        // Only prevent if clicking the chevron (handled above)
-                        if (e.target === chevron || chevron.contains(e.target)) {
-                            e.preventDefault();
-                            e.stopPropagation();
-                        }
-                    });
-                }
-            }
-            
-            // Week 5 submenu functionality for index.html
-            // On index.html, submenus stay collapsed - clicking navigates normally
-            const week5NavItem = document.querySelector('.week-5-nav-item');
-            if (week5NavItem) {
-                const week5Link = week5NavItem.querySelector('a');
-                const subItemsContainer = document.getElementById('week-5-subitems-index');
-                const chevron = document.getElementById('week-5-chevron-index');
-                
-                if (week5Link && subItemsContainer && chevron) {
-                    // Only toggle when clicking the chevron icon, not the link itself
-                    chevron.addEventListener('click', (e) => {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        const isHidden = subItemsContainer.classList.contains('hidden');
-                        
-                        if (isHidden) {
-                            subItemsContainer.classList.remove('hidden');
-                            chevron.classList.add('rotate-180');
-                        } else {
-                            subItemsContainer.classList.add('hidden');
-                            chevron.classList.remove('rotate-180');
-                        }
-                    });
-                    
-                    // Allow normal navigation when clicking the link (not chevron)
-                    week5Link.addEventListener('click', (e) => {
-                        // Don't prevent navigation - let it navigate normally
-                        // Only prevent if clicking the chevron (handled above)
-                        if (e.target === chevron || chevron.contains(e.target)) {
-                            e.preventDefault();
-                            e.stopPropagation();
-                        }
-                    });
-                }
-            }
+            // Setup all submenus
+            setupSubmenuToggle(2);
+            setupSubmenuToggle(3);
+            setupSubmenuToggle(4);
+            setupSubmenuToggle(5);
         });
         
         // Dark Mode Toggle

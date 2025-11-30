@@ -695,32 +695,8 @@ class Week5LessonPage extends BaseLessonPage {
         
         // Handle hash in URL after content is loaded
         if (window.location.hash) {
-            setTimeout(() => {
-                const element = document.querySelector(window.location.hash);
-                if (element) {
-                    const mainContent = document.getElementById('main-content');
-                    const headerOffset = 100;
-                    
-                    if (mainContent) {
-                        const elementRect = element.getBoundingClientRect();
-                        const elementTop = elementRect.top + mainContent.scrollTop;
-                        const offsetPosition = elementTop - headerOffset;
-                        
-                        mainContent.scrollTo({
-                            top: Math.max(0, offsetPosition),
-                            behavior: 'smooth'
-                        });
-                    } else {
-                        const elementRect = element.getBoundingClientRect();
-                        const offsetPosition = elementRect.top + window.pageYOffset - headerOffset;
-                        
-                        window.scrollTo({
-                            top: Math.max(0, offsetPosition),
-                            behavior: 'smooth'
-                        });
-                    }
-                }
-            }, 500);
+            // Immediately try to scroll to anchor, BaseLessonPage.scrollToAnchor handles retries
+            this.scrollToAnchor(window.location.hash);
         }
         
         // Generate MC questions if needed (after DOM is ready)

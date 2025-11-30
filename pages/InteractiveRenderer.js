@@ -78,15 +78,32 @@ class InteractiveRenderer {
                 : `fas fa-chevron-down transform transition-transform duration-200 ${isOpen ? 'rotate-180' : ''} text-gray-600 dark:text-gray-300`;
 
             // Different styling for nested accordions (like clickable steps - no border, seamless)
-            const containerClass = isNested 
+            const isLeftBorder = item.style === 'left-border';
+            
+            let containerClass = isNested 
                 ? `mb-3 overflow-hidden` 
                 : `border border-gray-200 dark:border-gray-700 rounded-lg mb-3 overflow-hidden transition-colors duration-200`;
-            const buttonClass = isNested
+            
+            if (isLeftBorder) {
+                containerClass = `border-l-4 border-gray-400 dark:border-gray-500 bg-white dark:bg-gray-800 mb-3 overflow-hidden`;
+            }
+
+            let buttonClass = isNested
                 ? `w-full px-6 py-4 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 active:bg-gray-300 dark:active:bg-gray-600 transition-colors duration-200 flex items-center justify-between text-left font-semibold text-lg text-gray-600 dark:text-gray-300 cursor-pointer touch-manipulation`
                 : `w-full px-6 py-4 bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 active:bg-gray-200 dark:active:bg-gray-600 transition-colors duration-200 flex items-center justify-between text-left cursor-pointer touch-manipulation`;
-            const contentBgClass = isNested
-                ? `bg-white dark:bg-gray-800`
-                : `bg-white dark:bg-gray-800`;
+
+            if (isLeftBorder) {
+                buttonClass = `w-full px-4 py-3 bg-transparent hover:bg-gray-50 dark:hover:bg-gray-700/30 transition-colors duration-200 flex items-center justify-between text-left font-semibold text-gray-900 dark:text-white cursor-pointer touch-manipulation`;
+            }
+            const contentPadding = isLeftBorder ? 'px-4 py-4' : 'px-6 py-4';
+            
+            // Fix: Define contentBgClass
+            let contentBgClass = 'bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700';
+            if (isNested) {
+                contentBgClass = 'bg-gray-50 dark:bg-gray-900/50 border-t-0';
+            } else if (isLeftBorder) {
+                contentBgClass = 'bg-transparent border-t-0';
+            }
 
             return `
                 <div class="${containerClass}">
@@ -106,7 +123,7 @@ class InteractiveRenderer {
                         aria-hidden="${!isOpen}"
                         style="${isOpen ? '' : 'display: none;'}"
                     >
-                        <div class="px-6 py-4">
+                        <div class="${contentPadding}">
                             ${contentHtml}
                         </div>
                     </div>
@@ -1797,13 +1814,31 @@ class InteractiveRenderer {
         const title = item.title || 'Booleaanse operatoroefeningen';
         const instruction = item.instruction || 'Bouw de juiste zoekquery voor elk scenario.';
         
-        console.log('[InteractiveRenderer] Exercise ID:', exerciseId, 'Scenarios:', item.scenarios.length);
+        // 1. Render Scenario Buttons
+        const buttonsHtml = item.scenarios.map((_, index) => {
+            const isActive = index === 0;
+            const activeClass = 'bg-blue-600 text-white ring-2 ring-blue-600 ring-offset-2 dark:ring-offset-gray-800';
+            const inactiveClass = 'bg-gray-200 text-gray-700 hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600';
+            
+            return `<button 
+                type="button"
+                class="scenario-tab-btn w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold transition-all duration-200 ${isActive ? activeClass : inactiveClass}"
+                data-exercise-id="${exerciseId}"
+                data-index="${index}"
+                aria-label="Ga naar scenario ${index + 1}"
+                aria-current="${isActive ? 'true' : 'false'}"
+            >
+                ${index + 1}
+            </button>`;
+        }).join('');
 
+        // 2. Render Scenarios
         const scenariosHtml = item.scenarios.map((scenario, index) => {
             const scenarioId = `${exerciseId}-scenario-${index}`;
             const queryBuilderId = `${scenarioId}-query-builder`;
             const queryDisplayId = `${scenarioId}-query-display`;
             const feedbackId = `${scenarioId}-feedback`;
+            const isVisible = index === 0;
             
             // Helper function to escape for HTML attribute (single quotes)
             const escapeForAttr = (str) => {
@@ -1861,7 +1896,12 @@ class InteractiveRenderer {
             const escapedExplanation = scenario.explanation.replace(/"/g, '&quot;').replace(/'/g, '&#39;');
             
             return `
-                <div class="border-l-2 border-gray-200 dark:border-gray-700 rounded p-4 mb-4 bg-white dark:bg-gray-800" data-scenario-id="${scenarioId}" data-correct-query="${escapedCorrectQuery}" data-explanation="${escapedExplanation}">
+                <div class="scenario-container mb-8 transition-opacity duration-300 ${isVisible ? '' : 'hidden'}" 
+                     id="${exerciseId}-content-${index}"
+                     data-scenario-id="${scenarioId}" 
+                     data-correct-query="${escapedCorrectQuery}" 
+                     data-explanation="${escapedExplanation}">
+                    
                     <h4 class="text-sm font-semibold text-gray-600 dark:text-gray-400 mb-2">Scenario ${index + 1}</h4>
                     <p class="text-sm text-gray-700 dark:text-gray-300 mb-3">${scenario.description}</p>
                     
@@ -1917,11 +1957,16 @@ class InteractiveRenderer {
         }).join('');
 
         const html = `
-            <div class="boolean-operator-exercise mb-6 bg-white dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700" id="${exerciseId}">
+            <div class="boolean-operator-exercise mb-6" id="${exerciseId}">
                 <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">${title}</h3>
-                <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">${instruction}</p>
+                <p class="text-sm text-gray-600 dark:text-gray-400 mb-6">${instruction}</p>
                 
-                <div class="space-y-4">
+                <div class="flex items-center flex-wrap gap-3 mb-6 pb-4 border-b border-gray-200 dark:border-gray-700">
+                    <span class="text-sm font-bold text-gray-700 dark:text-gray-300 mr-1">Kies het scenario:</span>
+                    ${buttonsHtml}
+                </div>
+
+                <div class="scenarios-wrapper">
                     ${scenariosHtml}
                 </div>
             </div>
@@ -1945,6 +1990,41 @@ class InteractiveRenderer {
             console.warn('[InteractiveRenderer] Exercise container not found:', exerciseId);
             return;
         }
+        
+        // --- NIEUW: Tab Switching Logic ---
+        const tabButtons = exerciseContainer.querySelectorAll('.scenario-tab-btn');
+        const scenarioContents = exerciseContainer.querySelectorAll('.scenario-container');
+
+        tabButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const targetIndex = btn.getAttribute('data-index');
+                
+                // 1. Update buttons style
+                tabButtons.forEach(b => {
+                    // Reset styles
+                    b.className = 'scenario-tab-btn w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold transition-all duration-200 bg-gray-200 text-gray-700 hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600';
+                    b.setAttribute('aria-current', 'false');
+                });
+                
+                // Set active style
+                btn.className = 'scenario-tab-btn w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold transition-all duration-200 bg-blue-600 text-white ring-2 ring-blue-600 ring-offset-2 dark:ring-offset-gray-800';
+                btn.setAttribute('aria-current', 'true');
+
+                // 2. Show/Hide content
+                scenarioContents.forEach(content => {
+                    content.classList.add('hidden');
+                });
+                
+                const targetContent = document.getElementById(`${exerciseId}-content-${targetIndex}`);
+                if (targetContent) {
+                    targetContent.classList.remove('hidden');
+                    // Optional: fade in animation effect
+                    targetContent.classList.add('opacity-0');
+                    setTimeout(() => targetContent.classList.remove('opacity-0'), 10);
+                }
+            });
+        });
+        // ----------------------------------
         
         // Setup buttons for adding terms/operators/parentheses
         const buttons = exerciseContainer.querySelectorAll('.boolean-exercise-btn');
@@ -2120,15 +2200,63 @@ class InteractiveRenderer {
 
         // Normalize queries for comparison (remove extra spaces, case insensitive)
         const normalizeQuery = (q) => {
-            return q.replace(/\s+/g, ' ').trim().toUpperCase();
+            // Vervang haakjes met spaties eromheen zodat we termen beter kunnen isoleren
+            let processed = q.replace(/\(/g, ' ( ').replace(/\)/g, ' ) ');
+            return processed.replace(/\s+/g, ' ').trim().toUpperCase();
         };
 
         const normalizedUser = normalizeQuery(userQuery);
         const normalizedCorrect = normalizeQuery(correctQuery);
 
+        // Check for exact match first (fastest)
+        let isCorrect = normalizedUser === normalizedCorrect;
+
+        // If not exact match, try to handle commutativity for AND/OR operators
+        // This is a simple implementation that handles basic cases like "A AND B" == "B AND A"
+        // It won't handle complex nested expressions perfectly, but covers most common issues
+        if (!isCorrect) {
+            try {
+                // Helper to check if two parts are equivalent (considering commutativity)
+                const areEquivalent = (q1, q2) => {
+                    if (q1 === q2) return true;
+                    
+                    // Check for AND/OR
+                    const checkOperator = (op) => {
+                        if (q1.includes(` ${op} `) && q2.includes(` ${op} `)) {
+                            // Split by top-level operator only (not inside parentheses)
+                            // This is tricky with regex, so we use a simplified approach for this specific exercise level
+                            const parts1 = q1.split(` ${op} `).map(p => p.trim()).sort();
+                            const parts2 = q2.split(` ${op} `).map(p => p.trim()).sort();
+                            return JSON.stringify(parts1) === JSON.stringify(parts2);
+                        }
+                        return false;
+                    };
+
+                    return checkOperator('AND') || checkOperator('OR');
+                };
+
+                // Only attempt fuzzy matching if the operators count matches
+                const countOps = (str) => (str.match(/AND/g) || []).length + (str.match(/OR/g) || []).length + (str.match(/NOT/g) || []).length;
+                
+                if (countOps(normalizedUser) === countOps(normalizedCorrect)) {
+                    // Remove outer parentheses for comparison if both have them
+                    let u = normalizedUser;
+                    let c = normalizedCorrect;
+                    if (u.startsWith('(') && u.endsWith(')') && c.startsWith('(') && c.endsWith(')')) {
+                        u = u.slice(1, -1).trim();
+                        c = c.slice(1, -1).trim();
+                    }
+                    
+                    isCorrect = areEquivalent(u, c);
+                }
+            } catch (e) {
+                console.warn('Error in fuzzy validation', e);
+            }
+        }
+
         feedback.classList.remove('hidden');
 
-        if (normalizedUser === normalizedCorrect) {
+        if (isCorrect) {
             feedback.className = 'p-3 rounded-lg bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800';
             feedback.innerHTML = `
                 <div class="flex items-start">
@@ -2764,6 +2892,316 @@ class InteractiveRenderer {
             feedback.innerHTML = '';
         }
         if (loading) loading.classList.add('hidden');
+    }
+
+    /**
+     * Render AI Bouwsteen generator component
+     * @param {Object} item - The content item configuration
+     */
+    static renderAIBouwsteenGenerator(item) {
+        const generatorId = `ai-bouwsteen-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+        const title = item.title || 'AI Bouwsteen Generator';
+        const description = item.description || 'Vul een woord en optionele context in om automatisch een bouwsteentabel te genereren.';
+        
+        const html = `
+            <div class="ai-bouwsteen-generator mb-8 bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden" id="${generatorId}">
+                <div class="p-6">
+                    <div class="mb-6">
+                        <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2 flex items-center">
+                            <i class="fas fa-magic text-blue-600 dark:text-blue-400 mr-2"></i>
+                            ${title}
+                        </h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm">${description}</p>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                        <div>
+                            <label for="${generatorId}-word" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                Zoekwoord <span class="text-red-500">*</span>
+                            </label>
+                            <input 
+                                type="text" 
+                                id="${generatorId}-word" 
+                                class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg text-gray-900 dark:text-white bg-white dark:bg-gray-700 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+                                placeholder="Bijv. Logistiek"
+                            >
+                        </div>
+                        <div>
+                            <label for="${generatorId}-context" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                Context (optioneel)
+                            </label>
+                            <input 
+                                type="text" 
+                                id="${generatorId}-context" 
+                                class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg text-gray-900 dark:text-white bg-white dark:bg-gray-700 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+                                placeholder="Bijv. Binnen de zorgsector"
+                            >
+                        </div>
+                    </div>
+
+                    <div class="flex justify-end mb-6">
+                        <button 
+                            type="button"
+                            class="ai-bouwsteen-generate-btn inline-flex items-center px-6 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-all shadow-sm hover:shadow-md disabled:opacity-50 disabled:cursor-not-allowed"
+                            data-generator-id="${generatorId}"
+                        >
+                            <i class="fas fa-cogs mr-2"></i>
+                            Genereer Tabel
+                        </button>
+                    </div>
+
+                    <div id="${generatorId}-loading" class="hidden">
+                        <div class="flex flex-col items-center justify-center py-8 text-gray-500 dark:text-gray-400">
+                            <div class="w-12 h-12 border-4 border-blue-200 border-t-blue-600 rounded-full animate-spin mb-3"></div>
+                            <p>AI is de tabel aan het genereren...</p>
+                        </div>
+                    </div>
+
+                    <div id="${generatorId}-error" class="hidden mb-6 p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg text-red-700 dark:text-red-300"></div>
+
+                    <div id="${generatorId}-result" class="hidden">
+                        <div class="flex justify-between items-center mb-3">
+                            <h4 class="text-md font-semibold text-gray-900 dark:text-white">Resultaat</h4>
+                            <button 
+                                type="button"
+                                id="${generatorId}-copy-btn"
+                                class="text-sm px-3 py-1.5 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300 rounded-md transition-colors flex items-center"
+                                title="Kopieer tabel naar klembord"
+                            >
+                                <i class="fas fa-copy mr-2"></i> Kopieer tabel
+                            </button>
+                        </div>
+                        <div class="overflow-x-auto">
+                            <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700 border border-gray-200 dark:border-gray-700 rounded-lg">
+                                <thead class="bg-gray-50 dark:bg-gray-800">
+                                    <tr>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider border-b border-gray-200 dark:border-gray-700">Categorie</th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider border-b border-gray-200 dark:border-gray-700">Suggesties</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="bg-white dark:bg-gray-900 divide-y divide-gray-200 dark:divide-gray-700 text-sm" id="${generatorId}-table-body">
+                                    <!-- Results will be injected here -->
+                                </tbody>
+                            </table>
+                        </div>
+                        <p class="text-xs text-gray-500 dark:text-gray-400 mt-2 text-right">Gegenereerd met AI - controleer altijd de resultaten.</p>
+                    </div>
+                </div>
+            </div>
+        `;
+
+        // Setup event listeners via timeout to bypass CSP inline limitations
+        setTimeout(() => {
+            InteractiveRenderer.setupAIBouwsteenListeners(generatorId);
+        }, 100);
+
+        return html;
+    }
+
+    /**
+     * Setup listeners for the AI Bouwsteen generator
+     */
+    static setupAIBouwsteenListeners(generatorId) {
+        const container = document.getElementById(generatorId);
+        if (!container) return;
+
+        container.addEventListener('click', (e) => {
+            const btn = e.target.closest('.ai-bouwsteen-generate-btn');
+            if (btn && btn.getAttribute('data-generator-id') === generatorId) {
+                InteractiveRenderer.generateBouwsteenTable(generatorId);
+            }
+        });
+
+        // Also allow Enter key in input fields
+        const inputs = container.querySelectorAll('input');
+        inputs.forEach(input => {
+            input.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    InteractiveRenderer.generateBouwsteenTable(generatorId);
+                }
+            });
+        });
+
+        // Copy button listener
+        const copyBtn = document.getElementById(`${generatorId}-copy-btn`);
+        if (copyBtn) {
+            copyBtn.addEventListener('click', () => {
+                const table = document.querySelector(`#${generatorId}-result table`);
+                if (table) {
+                    try {
+                        // Create a clean clone for copying
+                        const clone = table.cloneNode(true);
+                        
+                        // Clean up the clone for Word/Excel compatibility
+                        // Convert chips to comma-separated text
+                        const rows = clone.querySelectorAll('tbody tr');
+                        rows.forEach(row => {
+                            const contentCell = row.cells[1];
+                            if (contentCell) {
+                                // Get all chip spans
+                                const chips = contentCell.querySelectorAll('span.inline-block');
+                                if (chips.length > 0) {
+                                    // Extract text from chips and join with comma
+                                    const texts = Array.from(chips).map(chip => chip.textContent.trim());
+                                    contentCell.textContent = texts.join(', ');
+                                } else {
+                                    // Handle "Geen suggesties" span
+                                    contentCell.textContent = contentCell.textContent.trim();
+                                }
+                                // Basic styling for the cell
+                                contentCell.style.verticalAlign = 'top';
+                            }
+                            const labelCell = row.cells[0];
+                            if (labelCell) {
+                                labelCell.style.fontWeight = 'bold';
+                                labelCell.style.verticalAlign = 'top';
+                                labelCell.style.backgroundColor = '#f3f4f6'; // gray-50
+                            }
+                        });
+
+                        // Style the table itself
+                        clone.style.borderCollapse = 'collapse';
+                        clone.style.width = '100%';
+                        clone.querySelectorAll('td, th').forEach(cell => {
+                            cell.style.border = '1px solid #d1d5db'; // gray-300
+                            cell.style.padding = '8px';
+                            cell.style.textAlign = 'left';
+                        });
+
+                        // Place clone off-screen
+                        clone.style.position = 'absolute';
+                        clone.style.left = '-9999px';
+                        document.body.appendChild(clone);
+
+                        // Select and copy
+                        const range = document.createRange();
+                        range.selectNode(clone);
+                        const selection = window.getSelection();
+                        selection.removeAllRanges();
+                        selection.addRange(range);
+                        
+                        const successful = document.execCommand('copy');
+                        
+                        // Cleanup
+                        selection.removeAllRanges();
+                        document.body.removeChild(clone);
+                        
+                        if (successful) {
+                            // Show temporary success message
+                            const originalHtml = copyBtn.innerHTML;
+                            copyBtn.innerHTML = '<i class="fas fa-check mr-2"></i> Gekopieerd!';
+                            copyBtn.classList.add('text-green-600', 'dark:text-green-400');
+                            
+                            setTimeout(() => {
+                                copyBtn.innerHTML = originalHtml;
+                                copyBtn.classList.remove('text-green-600', 'dark:text-green-400');
+                            }, 2000);
+                        } else {
+                            throw new Error('Copy command failed');
+                        }
+                    } catch (err) {
+                        console.error('Failed to copy table', err);
+                        alert('Kon de tabel niet automatisch kopiëren. Selecteer de tabel en gebruik Ctrl+C.');
+                    }
+                }
+            });
+        }
+    }
+
+    /**
+     * Handle generation of the Bouwsteen table
+     */
+    static async generateBouwsteenTable(generatorId) {
+        const wordInput = document.getElementById(`${generatorId}-word`);
+        const contextInput = document.getElementById(`${generatorId}-context`);
+        const loadingEl = document.getElementById(`${generatorId}-loading`);
+        const resultEl = document.getElementById(`${generatorId}-result`);
+        const errorEl = document.getElementById(`${generatorId}-error`);
+        const tableBody = document.getElementById(`${generatorId}-table-body`);
+        const btn = document.querySelector(`button[data-generator-id="${generatorId}"]`);
+
+        if (!wordInput || !wordInput.value.trim()) {
+            alert('Vul een zoekwoord in.');
+            wordInput?.focus();
+            return;
+        }
+
+        const word = wordInput.value.trim();
+        const context = contextInput ? contextInput.value.trim() : '';
+
+        // UI State: Loading
+        loadingEl.classList.remove('hidden');
+        resultEl.classList.add('hidden');
+        errorEl.classList.add('hidden');
+        btn.disabled = true;
+
+        try {
+            // Check if AIGenerator is available
+            if (typeof window.AIGenerator === 'undefined') {
+                throw new Error('AIGenerator module is niet geladen.');
+            }
+
+            const generator = new window.AIGenerator();
+            const data = await generator.generateBouwsteenTable(word, context);
+
+            // Render results
+            const rows = [
+                { label: 'Synoniemen', key: 'synoniemen' },
+                { label: 'Vertalingen', key: 'vertalingen' },
+                { label: 'Afkortingen', key: 'afkortingen' },
+                { label: 'Spellingsvormen', key: 'spellingsvormen' },
+                { label: 'Vaktermen', key: 'vaktermen' },
+                { label: 'Bredere termen', key: 'bredere_termen' },
+                { label: 'Nauwere termen', key: 'nauwere_termen' }
+            ];
+
+            tableBody.innerHTML = rows.map(row => {
+                const items = data[row.key];
+                let content = '';
+                
+                if (Array.isArray(items) && items.length > 0) {
+                    content = items.map(item => `<span class="inline-block bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 px-2 py-1 rounded text-xs mr-2 mb-1">${item}</span>`).join('');
+                } else {
+                    content = '<span class="text-gray-400 italic">Geen suggesties gevonden</span>';
+                }
+
+                return `
+                    <tr>
+                        <td class="px-6 py-4 whitespace-nowrap font-medium text-gray-900 dark:text-white bg-gray-50 dark:bg-gray-800/50 w-1/4">
+                            ${row.label}
+                        </td>
+                        <td class="px-6 py-4 text-gray-700 dark:text-gray-300">
+                            ${content}
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+
+            resultEl.classList.remove('hidden');
+
+        } catch (error) {
+            console.error('Error generating bouwsteen table:', error);
+            
+            let errorMessage = error.message;
+            
+            // Friendly error for Rate Limits (429)
+            if (errorMessage.includes('429') || errorMessage.includes('quota') || errorMessage.includes('Too Many Requests')) {
+                errorMessage = 'Het AI-limiet is tijdelijk bereikt (Quota exceeded). Probeer het over een minuutje nog eens.';
+            } else if (errorMessage.includes('400') && errorMessage.includes('API key expired')) {
+                errorMessage = 'De ingestelde API key is verlopen. Neem contact op met de beheerder.';
+            } else if (errorMessage.includes('400') && errorMessage.includes('key not found')) {
+                errorMessage = 'De ingestelde API key is ongeldig. Neem contact op met de beheerder.';
+            } else if (errorMessage.includes('fetch') && errorMessage.includes('GoogleGenerativeAI Error')) {
+                // Clean up the technical Gemini error message
+                errorMessage = 'Er is een fout opgetreden bij de AI service. Probeer het later opnieuw.';
+            }
+
+            errorEl.innerHTML = `<i class="fas fa-exclamation-triangle mr-2"></i> ${errorMessage}`;
+            errorEl.classList.remove('hidden');
+        } finally {
+            loadingEl.classList.add('hidden');
+            btn.disabled = false;
+        }
     }
 }
 

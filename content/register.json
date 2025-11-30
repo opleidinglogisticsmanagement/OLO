@@ -376,6 +376,87 @@
       "anchor": "#slim-bronnen-beheren",
       "week": "Week 5"
     }
+  },
+  {
+    "term": "Onderzoeksplan",
+    "description": "Het document waarin je de opzet van je onderzoek beschrijft, inclusief de probleemstelling, doelstelling, het onderzoeksmodel en de onderzoeksvragen.",
+    "location": {
+      "page": "week2.html",
+      "anchor": "#probleem-verkennen",
+      "week": "Week 2"
+    }
+  },
+  {
+    "term": "Scope",
+    "description": "De afbakening van je onderzoek (wat doe je wel en wat niet). Een goede scope toont de haalbaarheid van het onderzoek aan.",
+    "location": {
+      "page": "week2.html",
+      "anchor": "#opdrachtgever-onderzoeker",
+      "week": "Week 2"
+    }
+  },
+  {
+    "term": "Vooronderzoek",
+    "description": "Een eerste verkenning van het probleem die onder andere bestaat uit de 5W's + V + O, maar waar ook een (eerste) interview onderdeel van is.",
+    "location": {
+      "page": "week3.html",
+      "anchor": "#onderzoeksmodel",
+      "week": "Week 3"
+    }
+  },
+  {
+    "term": "Wetenschappelijke literatuur",
+    "description": "Informatiebronnen die geschreven zijn door wetenschappers, peer-reviewed zijn en gepubliceerd in wetenschappelijke tijdschriften. Ze zijn gericht op waarheidsvinding en theorievorming.",
+    "location": {
+      "page": "week5.html",
+      "anchor": "#selecteren-beoordelen",
+      "week": "Week 5"
+    }
+  },
+  {
+    "term": "Semi-wetenschappelijke literatuur",
+    "description": "Vakliteratuur en rapporten van kennisinstituten (zoals TNO of banken) die gedegen onderzoek bevatten en praktijkgericht zijn, maar niet altijd het strenge peer-review proces van wetenschappelijke tijdschriften hebben doorlopen.",
+    "location": {
+      "page": "week5.html",
+      "anchor": "#selecteren-beoordelen",
+      "week": "Week 5"
+    }
+  },
+  {
+    "term": "Autoriteit",
+    "description": "Een criterium bij het beoordelen van bronnen dat kijkt naar wie de auteur is, wat diens achtergrond is en of deze deskundig is op het vakgebied.",
+    "location": {
+      "page": "week5.html",
+      "anchor": "#selecteren-beoordelen",
+      "week": "Week 5"
+    }
+  },
+  {
+    "term": "Actualiteit",
+    "description": "Een criterium bij het beoordelen van bronnen dat kijkt of de informatie recent genoeg is voor het onderzoek en of de inhoud nog klopt met de huidige stand van zaken.",
+    "location": {
+      "page": "week5.html",
+      "anchor": "#selecteren-beoordelen",
+      "week": "Week 5"
+    }
+  },
+  {
+    "term": "Objectiviteit",
+    "description": "Een criterium bij het beoordelen van bronnen dat kijkt of de informatie feitelijk en neutraal is, of dat deze gekleurd is door een mening, commercieel doel of politieke agenda.",
+    "location": {
+      "page": "week5.html",
+      "anchor": "#selecteren-beoordelen",
+      "week": "Week 5"
+    }
+  },
+  {
+    "term": "Nauwkeurigheid",
+    "description": "Een criterium bij het beoordelen van bronnen dat kijkt of de informatie correct, foutloos en verifieerbaar is, bijvoorbeeld door bronvermeldingen.",
+    "location": {
+      "page": "week5.html",
+      "anchor": "#selecteren-beoordelen",
+      "week": "Week 5"
+    }
   }
 ]
 

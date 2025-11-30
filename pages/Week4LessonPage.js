@@ -30,7 +30,8 @@ class Week4LessonPage extends BaseLessonPage {
      */
     async loadContent() {
         try {
-            const response = await fetch('./content/week4.content.json');
+            // Add timestamp to prevent caching issues
+            const response = await fetch(`./content/week4.content.json?v=${new Date().getTime()}`);
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
@@ -39,19 +40,19 @@ class Week4LessonPage extends BaseLessonPage {
         } catch (error) {
             console.error('Error loading content:', error);
             this.contentLoaded = false;
-            this.content = this.getFallbackContent();
+            this.content = this.getFallbackContent(error.message);
         }
     }
 
     /**
      * Fallback content als JSON niet kan worden geladen
      */
-    getFallbackContent() {
+    getFallbackContent(errorMessage = "") {
         return {
             intro: {
                 title: "Week 4",
                 subtitle: "Begripsbepaling + Voorbereiding literatuuronderzoek",
-                description: "De content voor deze module kon niet correct worden geladen. Controleer of het bestand week4.content.json bestaat en toegankelijk is."
+                description: `De content voor deze module kon niet correct worden geladen. Controleer of het bestand week4.content.json bestaat en toegankelijk is.<br><br><strong>Foutmelding:</strong> ${errorMessage}`
             },
             leerdoelen: {
                 title: "Leerdoelen",
@@ -70,6 +71,27 @@ class Week4LessonPage extends BaseLessonPage {
                         text: [
                             "Er is een probleem opgetreden bij het laden van de content. De pagina kon niet correct worden geladen."
                         ]
+                    },
+                    // Dummy headings to prevent navigation errors
+                    {
+                        type: "heading",
+                        text: "Definiëren van begrippen (Niet beschikbaar)",
+                        level: 2,
+                        id: "definieren-begrippen"
+                    },
+                    {
+                        type: "paragraph",
+                        text: ["Content niet beschikbaar."]
+                    },
+                    {
+                        type: "heading",
+                        text: "Het uitvoeren van literatuuronderzoek (Niet beschikbaar)",
+                        level: 2,
+                        id: "literatuuronderzoek"
+                    },
+                    {
+                        type: "paragraph",
+                        text: ["Content niet beschikbaar."]
                     }
                 ]
             },
@@ -701,32 +723,8 @@ class Week4LessonPage extends BaseLessonPage {
         
         // Handle hash in URL after content is loaded
         if (window.location.hash) {
-            setTimeout(() => {
-                const element = document.querySelector(window.location.hash);
-                if (element) {
-                    const mainContent = document.getElementById('main-content');
-                    const headerOffset = 100;
-                    
-                    if (mainContent) {
-                        const elementRect = element.getBoundingClientRect();
-                        const elementTop = elementRect.top + mainContent.scrollTop;
-                        const offsetPosition = elementTop - headerOffset;
-                        
-                        mainContent.scrollTo({
-                            top: Math.max(0, offsetPosition),
-                            behavior: 'smooth'
-                        });
-                    } else {
-                        const elementRect = element.getBoundingClientRect();
-                        const offsetPosition = elementRect.top + window.pageYOffset - headerOffset;
-                        
-                        window.scrollTo({
-                            top: Math.max(0, offsetPosition),
-                            behavior: 'smooth'
-                        });
-                    }
-                }
-            }, 500);
+            // Immediately try to scroll to anchor, BaseLessonPage.scrollToAnchor handles retries
+            this.scrollToAnchor(window.location.hash);
         }
         
         // Generate MC questions if needed (after DOM is ready)

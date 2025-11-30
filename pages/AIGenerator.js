@@ -238,6 +238,71 @@ class AIGenerator {
         const hash = (segmentIndex * 7919 + 137) % numSegments; // Prime numbers for better distribution
         return hash;
     }
+
+    /**
+     * Genereer een Bouwsteenmethode tabel op basis van een woord en context
+     * @param {string} word - Het woord waarvoor de tabel gegenereerd moet worden
+     * @param {string} context - (Optioneel) De context waarin het woord gebruikt wordt
+     * @returns {Promise<Object>} Object met de gegenereerde tabel data
+     */
+    async generateBouwsteenTable(word, context = '') {
+        if (!word || typeof word !== 'string' || word.trim().length === 0) {
+            throw new Error('Word is required and cannot be empty');
+        }
+
+        try {
+            console.log('[AIGenerator] Generating bouwsteen table...');
+            
+            // Determine the correct API endpoint URL
+            // Use the same logic as in constructor but for the specific endpoint
+            let apiUrl;
+            const currentPort = window.location.port;
+            if (currentPort && currentPort !== '3000') {
+                apiUrl = 'http://localhost:3000/api/generate-bouwsteen';
+            } else {
+                apiUrl = '/api/generate-bouwsteen';
+            }
+
+            const response = await fetch(apiUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    word: word,
+                    context: context
+                })
+            });
+
+            if (!response.ok) {
+                let errorData;
+                try {
+                    errorData = await response.json();
+                } catch (e) {
+                    const errorText = await response.text();
+                    errorData = { message: errorText };
+                }
+                throw new Error(errorData.message || errorData.error || 'Server error');
+            }
+
+            const data = await response.json();
+            
+            if (!data.success || !data.data) {
+                throw new Error('Invalid response format from server');
+            }
+
+            return data.data;
+
+        } catch (error) {
+            console.error('[AIGenerator] Error generating bouwsteen table:', error);
+            // Only report connection error if it's actually a network error (Failed to fetch)
+            // The Gemini error "Error fetching from..." should NOT trigger this.
+            if (error.message.includes('Failed to fetch') || error.message.includes('NetworkError') || error.message.includes('Network request failed')) {
+                throw new Error('Kan niet verbinden met de server. Zorg ervoor dat de server draait op http://localhost:3000');
+            }
+            throw error;
+        }
+    }
 }
 
 // Export voor gebruik in andere modules

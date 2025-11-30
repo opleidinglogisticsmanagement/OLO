@@ -10,6 +10,11 @@ class BaseLessonPage {
         this.moduleId = moduleId;
         this.moduleTitle = moduleTitle;
         this.moduleSubtitle = moduleSubtitle;
+        this.activeScrollId = null;
+        this.initialScrollComplete = false;
+        this.scrollVerificationTimeout = null;
+        this.isAutoScrolling = false;
+        this.userInterruptedScroll = false;
     }
 
     /**
@@ -22,9 +27,9 @@ class BaseLessonPage {
                 Spring naar hoofdinhoud
             </a>
 
-            <div id="app" class="min-h-screen flex">
+            <div id="app" class="h-screen flex overflow-hidden">
                 ${this.renderSidebar()}
-                <div class="flex-1 flex flex-col lg:ml-0">
+                <div class="flex-1 flex flex-col lg:ml-80 h-full">
                     ${this.renderHeader()}
                     ${this.renderMainContent()}
                 </div>
@@ -49,7 +54,7 @@ class BaseLessonPage {
      */
     renderSidebar() {
         return `
-            <aside id="sidebar" class="w-full sm:w-80 bg-white dark:bg-gray-800 shadow-lg transform -translate-x-full lg:translate-x-0 transition-transform duration-300 ease-in-out lg:static fixed inset-y-0 z-40" aria-label="Navigatie menu">
+            <aside id="sidebar" class="w-full sm:w-80 bg-white dark:bg-gray-800 shadow-lg transform -translate-x-full lg:translate-x-0 transition-transform duration-300 ease-in-out fixed inset-y-0 left-0 z-40" aria-label="Navigatie menu">
                 <div class="h-full flex flex-col">
                     ${this.renderSidebarHeader()}
                     ${this.renderModuleNavigation()}
@@ -63,15 +68,14 @@ class BaseLessonPage {
      */
     renderSidebarHeader() {
         return `
-            <div class="p-4 sm:p-6 border-b border-gray-200 dark:border-gray-700">
-                <div class="flex items-start justify-between">
-                    <div class="flex items-start space-x-3 flex-1 min-w-0">
+            <div class="h-16 px-6 border-b border-gray-200 dark:border-gray-700 flex items-center">
+                <div class="flex items-center justify-between w-full">
+                    <div class="flex items-center space-x-3 flex-1 min-w-0">
                         <div class="w-10 h-10 bg-gradient-to-r from-blue-600 to-blue-700 rounded-lg flex items-center justify-center flex-shrink-0" aria-hidden="true">
                             <i class="fas fa-graduation-cap text-white text-lg"></i>
                         </div>
                         <div class="min-w-0 flex-1">
-                            <h1 class="text-lg sm:text-xl font-bold text-gray-900 dark:text-white">E-Learning</h1>
-                            <p class="text-xs sm:text-sm text-gray-500 dark:text-gray-400 break-words">Opzetten van Logistieke Onderzoeken (OLO)</p>
+                            <h1 class="text-sm font-bold text-gray-900 dark:text-white leading-tight">Opzetten van Logistieke<br>Onderzoeken (OLO)</h1>
                         </div>
                     </div>
                     <!-- Close button for mobile -->
@@ -84,10 +88,10 @@ class BaseLessonPage {
     }
 
     /**
-     * Render module navigatie
+     * Get all modules configuration
      */
-    renderModuleNavigation() {
-        const modules = [
+    getModules() {
+        return [
             { id: 'start', title: 'Start', href: 'index.html' },
             { id: 'week-1', title: 'Week 1', href: 'week1.html' },
             { 
@@ -134,19 +138,23 @@ class BaseLessonPage {
             { id: 'week-6', title: 'Week 6', href: 'week6.html' },
             { id: 'week-7', title: 'Week 7', href: 'week7.html' },
             { id: 'register', title: 'Begrippenlijst', href: 'register.html' },
+            { id: 'flashcards', title: 'Oefenen', href: 'flashcards.html' },
             { id: 'afsluiting', title: 'Afsluiting', href: 'afsluiting.html' }
         ];
+    }
+
+    /**
+     * Render module navigatie
+     */
+    renderModuleNavigation() {
+        const modules = this.getModules();
 
         const moduleItems = modules.map(module => {
             const isCurrent = module.id === this.moduleId;
             const hasSubItems = module.subItems && module.subItems.length > 0;
-            const isWeek2 = module.id === 'week-2';
-            const isWeek3 = module.id === 'week-3';
-            const isWeek4 = module.id === 'week-4';
-            const isWeek5 = module.id === 'week-5';
             
-            // Special handling for Week 2, Week 3, Week 4 and Week 5 with sub-items
-            if (hasSubItems && (isWeek2 || isWeek3 || isWeek4 || isWeek5)) {
+            // Generic handling for modules with sub-items
+            if (hasSubItems) {
                 const subItemsHtml = module.subItems.map(subItem => {
                     const isSubCurrent = window.location.hash === subItem.anchor || 
                                         (isCurrent && window.location.hash === subItem.anchor);
@@ -162,33 +170,20 @@ class BaseLessonPage {
                     `;
                 }).join('');
                 
-                let navItemClass, chevronId, subItemsId;
-                if (isWeek2) {
-                    navItemClass = 'week-2-nav-item';
-                    chevronId = 'week-2-chevron';
-                    subItemsId = 'week-2-subitems';
-                } else if (isWeek3) {
-                    navItemClass = 'week-3-nav-item';
-                    chevronId = 'week-3-chevron';
-                    subItemsId = 'week-3-subitems';
-                } else if (isWeek4) {
-                    navItemClass = 'week-4-nav-item';
-                    chevronId = 'week-4-chevron';
-                    subItemsId = 'week-4-subitems';
-                } else if (isWeek5) {
-                    navItemClass = 'week-5-nav-item';
-                    chevronId = 'week-5-chevron';
-                    subItemsId = 'week-5-subitems';
-                }
+                const navItemClass = `${module.id}-nav-item`;
+                const chevronId = `${module.id}-chevron`;
+                const subItemsId = `${module.id}-subitems`;
                 
                 return `
                     <div class="${navItemClass}">
                         <a href="${module.href}" class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 focus-ring transition-colors ${isCurrent ? 'bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300' : 'text-gray-600 dark:text-gray-300'}">
-                            <div class="w-8 h-8 ${isCurrent ? 'bg-blue-100 dark:bg-blue-800' : 'bg-gray-100 dark:bg-gray-700'} rounded-lg flex items-center justify-center">
+                            <div class="w-8 h-8 ${isCurrent ? 'bg-blue-100 dark:bg-blue-800' : 'bg-gray-100 dark:bg-gray-700'} rounded-lg flex items-center justify-center flex-shrink-0">
                                 <i class="fas fa-book text-sm ${isCurrent ? 'text-blue-600 dark:text-blue-300' : 'text-gray-400 dark:text-gray-500'}"></i>
                             </div>
                             <span class="font-medium flex-1">${module.title}</span>
-                            <i class="fas fa-chevron-down text-xs text-gray-400 dark:text-gray-500 transition-transform duration-200 ${isCurrent ? 'rotate-180' : ''}" id="${chevronId}"></i>
+                            <div class="w-8 h-8 flex items-center justify-center rounded hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors z-10 flex-shrink-0" id="${chevronId}-container">
+                                <i class="fas fa-chevron-down text-xs text-gray-400 dark:text-gray-500 transition-transform duration-200 ${isCurrent ? 'rotate-180' : ''}" id="${chevronId}"></i>
+                            </div>
                         </a>
                         <div class="${navItemClass.replace('-nav-item', '-subitems')} ${isCurrent ? '' : 'hidden'}" id="${subItemsId}">
                             ${subItemsHtml}
@@ -200,7 +195,7 @@ class BaseLessonPage {
             // Regular module item without sub-items
             return `
                 <a href="${module.href}" class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 focus-ring transition-colors ${isCurrent ? 'bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300' : 'text-gray-600 dark:text-gray-300'}">
-                    <div class="w-8 h-8 ${isCurrent ? 'bg-blue-100 dark:bg-blue-800' : 'bg-gray-100 dark:bg-gray-700'} rounded-lg flex items-center justify-center">
+                    <div class="w-8 h-8 ${isCurrent ? 'bg-blue-100 dark:bg-blue-800' : 'bg-gray-100 dark:bg-gray-700'} rounded-lg flex items-center justify-center flex-shrink-0">
                         <i class="fas fa-book text-sm ${isCurrent ? 'text-blue-600 dark:text-blue-300' : 'text-gray-400 dark:text-gray-500'}"></i>
                     </div>
                     <span class="font-medium">${module.title}</span>
@@ -209,8 +204,9 @@ class BaseLessonPage {
         }).join('');
 
         return `
-            <nav class="flex-1 overflow-y-auto custom-scrollbar p-4 sm:p-6" aria-label="Module navigatie">
+            <nav class="flex-1 overflow-y-auto custom-scrollbar p-4 sm:p-6" aria-label="Module navigatie" style="scrollbar-gutter: stable;">
                 <div class="space-y-2">
+                    <div class="px-3 mb-2 text-xs font-semibold text-gray-500 uppercase tracking-wider">E-Learning</div>
                     ${moduleItems}
                 </div>
             </nav>
@@ -224,8 +220,8 @@ class BaseLessonPage {
      */
     renderHeader() {
         return `
-            <header class="bg-white dark:bg-gray-800 shadow-sm border-b border-gray-200 dark:border-gray-700 px-4 sm:px-6 py-3 sm:py-4 sticky top-0 z-30 transition-colors duration-200 relative">
-                <div class="flex items-center justify-between relative z-10 bg-white dark:bg-gray-800 transition-colors duration-200">
+            <header class="h-16 bg-white dark:bg-gray-800 shadow-sm border-b border-gray-200 dark:border-gray-700 px-6 flex items-center sticky top-0 z-30 transition-colors duration-200 relative">
+                <div class="flex items-center justify-between w-full relative z-10 bg-white dark:bg-gray-800 transition-colors duration-200">
                     <!-- Left section: Mobile menu & Breadcrumbs -->
                     <div class="flex items-center flex-1 min-w-0">
                         <!-- Mobile menu button -->
@@ -459,17 +455,7 @@ class BaseLessonPage {
      * Get previous module
      */
     getPreviousModule() {
-        const modules = [
-            { id: 'week-1', title: 'Week 1', href: 'week1.html' },
-            { id: 'week-2', title: 'Week 2', href: 'week2.html' },
-            { id: 'week-3', title: 'Week 3', href: 'week3.html' },
-            { id: 'week-4', title: 'Week 4', href: 'week4.html' },
-            { id: 'week-5', title: 'Week 5', href: 'week5.html' },
-            { id: 'week-6', title: 'Week 6', href: 'week6.html' },
-            { id: 'week-7', title: 'Week 7', href: 'week7.html' },
-            { id: 'register', title: 'Begrippenlijst', href: 'register.html' },
-            { id: 'afsluiting', title: 'Afsluiting', href: 'afsluiting.html' }
-        ];
+        const modules = this.getModules();
 
         const currentIndex = modules.findIndex(module => module.id === this.moduleId);
         return modules[currentIndex - 1] || null;
@@ -479,17 +465,7 @@ class BaseLessonPage {
      * Get next module
      */
     getNextModule() {
-        const modules = [
-            { id: 'week-1', title: 'Week 1', href: 'week1.html' },
-            { id: 'week-2', title: 'Week 2', href: 'week2.html' },
-            { id: 'week-3', title: 'Week 3', href: 'week3.html' },
-            { id: 'week-4', title: 'Week 4', href: 'week4.html' },
-            { id: 'week-5', title: 'Week 5', href: 'week5.html' },
-            { id: 'week-6', title: 'Week 6', href: 'week6.html' },
-            { id: 'week-7', title: 'Week 7', href: 'week7.html' },
-            { id: 'register', title: 'Begrippenlijst', href: 'register.html' },
-            { id: 'afsluiting', title: 'Afsluiting', href: 'afsluiting.html' }
-        ];
+        const modules = this.getModules();
 
         const currentIndex = modules.findIndex(module => module.id === this.moduleId);
         return modules[currentIndex + 1] || null;
@@ -570,11 +546,8 @@ class BaseLessonPage {
         // Setup dark mode toggle
         this.setupDarkModeToggle();
         
-        // Setup Week 2, Week 3, Week 4 and Week 5 submenu functionality
-        this.setupWeek2Submenu();
-        this.setupWeek3Submenu();
-        this.setupWeek4Submenu();
-        this.setupWeek5Submenu();
+        // Setup submenu functionality for all modules with sub-items
+        this.setupSubmenuToggles();
         
         // Setup anchor scrolling
         this.setupAnchorScrolling();
@@ -729,186 +702,64 @@ class BaseLessonPage {
     }
     
     /**
-     * Setup Week 2 submenu expand/collapse functionality
+     * Setup submenu expand/collapse functionality for all modules
      */
-    setupWeek2Submenu() {
-        const week2NavItem = document.querySelector('.week-2-nav-item');
-        if (!week2NavItem) return;
+    setupSubmenuToggles() {
+        const modules = this.getModules();
         
-        const week2Link = week2NavItem.querySelector('a');
-        const subItemsContainer = document.getElementById('week-2-subitems');
-        const chevron = document.getElementById('week-2-chevron');
-        
-        if (!week2Link || !subItemsContainer || !chevron) return;
-        
-        // Check if we're on Week 2 page - if so, expand by default
-        const isWeek2Page = this.moduleId === 'week-2';
-        if (isWeek2Page) {
-            subItemsContainer.classList.remove('hidden');
-            chevron.classList.add('rotate-180');
-        }
-        
-        // Toggle submenu only when clicking the chevron icon
-        chevron.addEventListener('click', (e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            const isHidden = subItemsContainer.classList.contains('hidden');
+        modules.forEach(module => {
+            // Only setup for modules with sub-items
+            if (!module.subItems || module.subItems.length === 0) return;
             
-            if (isHidden) {
+            const navItemClass = `.${module.id}-nav-item`;
+            const navItem = document.querySelector(navItemClass);
+            if (!navItem) return;
+            
+            const link = navItem.querySelector('a');
+            const subItemsContainer = document.getElementById(`${module.id}-subitems`);
+            const chevron = document.getElementById(`${module.id}-chevron`);
+            const chevronContainer = document.getElementById(`${module.id}-chevron-container`);
+            
+            if (!link || !subItemsContainer || !chevron) return;
+            
+            // Check if we're on this module's page - if so, expand by default
+            // Note: This is already handled in renderModuleNavigation by not adding 'hidden' class
+            // But we ensure it here just in case
+            const isCurrentPage = this.moduleId === module.id;
+            if (isCurrentPage) {
                 subItemsContainer.classList.remove('hidden');
                 chevron.classList.add('rotate-180');
-            } else {
-                subItemsContainer.classList.add('hidden');
-                chevron.classList.remove('rotate-180');
             }
-        });
-        
-        // Allow normal navigation when clicking the link (not chevron)
-        week2Link.addEventListener('click', (e) => {
-            // Only prevent if clicking the chevron (handled above)
-            if (e.target === chevron || chevron.contains(e.target)) {
-                e.preventDefault();
-                e.stopPropagation();
-            }
-            // Otherwise, allow normal navigation
-        });
-    }
-    
-    /**
-     * Setup Week 3 submenu expand/collapse functionality
-     */
-    setupWeek3Submenu() {
-        const week3NavItem = document.querySelector('.week-3-nav-item');
-        if (!week3NavItem) return;
-        
-        const week3Link = week3NavItem.querySelector('a');
-        const subItemsContainer = document.getElementById('week-3-subitems');
-        const chevron = document.getElementById('week-3-chevron');
-        
-        if (!week3Link || !subItemsContainer || !chevron) return;
-        
-        // Check if we're on Week 3 page - if so, expand by default
-        const isWeek3Page = this.moduleId === 'week-3';
-        if (isWeek3Page) {
-            subItemsContainer.classList.remove('hidden');
-            chevron.classList.add('rotate-180');
-        }
-        
-        // Toggle submenu only when clicking the chevron icon
-        chevron.addEventListener('click', (e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            const isHidden = subItemsContainer.classList.contains('hidden');
             
-            if (isHidden) {
-                subItemsContainer.classList.remove('hidden');
-                chevron.classList.add('rotate-180');
-            } else {
-                subItemsContainer.classList.add('hidden');
-                chevron.classList.remove('rotate-180');
-            }
-        });
-        
-        // Allow normal navigation when clicking the link (not chevron)
-        week3Link.addEventListener('click', (e) => {
-            // Only prevent if clicking the chevron (handled above)
-            if (e.target === chevron || chevron.contains(e.target)) {
+            // Toggle submenu only when clicking the chevron icon
+            const toggleHandler = (e) => {
                 e.preventDefault();
                 e.stopPropagation();
-            }
-            // Otherwise, allow normal navigation
-        });
-    }
-    
-    /**
-     * Setup Week 4 submenu expand/collapse functionality
-     */
-    setupWeek4Submenu() {
-        const week4NavItem = document.querySelector('.week-4-nav-item');
-        if (!week4NavItem) return;
-        
-        const week4Link = week4NavItem.querySelector('a');
-        const subItemsContainer = document.getElementById('week-4-subitems');
-        const chevron = document.getElementById('week-4-chevron');
-        
-        if (!week4Link || !subItemsContainer || !chevron) return;
-        
-        // Check if we're on Week 4 page - if so, expand by default
-        const isWeek4Page = this.moduleId === 'week-4';
-        if (isWeek4Page) {
-            subItemsContainer.classList.remove('hidden');
-            chevron.classList.add('rotate-180');
-        }
-        
-        // Toggle submenu only when clicking the chevron icon
-        chevron.addEventListener('click', (e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            const isHidden = subItemsContainer.classList.contains('hidden');
+                
+                const isHidden = subItemsContainer.classList.contains('hidden');
+                
+                if (isHidden) {
+                    subItemsContainer.classList.remove('hidden');
+                    chevron.classList.add('rotate-180');
+                } else {
+                    subItemsContainer.classList.add('hidden');
+                    chevron.classList.remove('rotate-180');
+                }
+            };
             
-            if (isHidden) {
-                subItemsContainer.classList.remove('hidden');
-                chevron.classList.add('rotate-180');
-            } else {
-                subItemsContainer.classList.add('hidden');
-                chevron.classList.remove('rotate-180');
-            }
-        });
-        
-        // Allow normal navigation when clicking the link (not chevron)
-        week4Link.addEventListener('click', (e) => {
-            // Only prevent if clicking the chevron (handled above)
-            if (e.target === chevron || chevron.contains(e.target)) {
-                e.preventDefault();
-                e.stopPropagation();
-            }
-            // Otherwise, allow normal navigation
-        });
-    }
-    
-    /**
-     * Setup Week 5 submenu expand/collapse functionality
-     */
-    setupWeek5Submenu() {
-        const week5NavItem = document.querySelector('.week-5-nav-item');
-        if (!week5NavItem) return;
-        
-        const week5Link = week5NavItem.querySelector('a');
-        const subItemsContainer = document.getElementById('week-5-subitems');
-        const chevron = document.getElementById('week-5-chevron');
-        
-        if (!week5Link || !subItemsContainer || !chevron) return;
-        
-        // Check if we're on Week 5 page - if so, expand by default
-        const isWeek5Page = this.moduleId === 'week-5';
-        if (isWeek5Page) {
-            subItemsContainer.classList.remove('hidden');
-            chevron.classList.add('rotate-180');
-        }
-        
-        // Toggle submenu only when clicking the chevron icon
-        chevron.addEventListener('click', (e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            const isHidden = subItemsContainer.classList.contains('hidden');
+            // Add click listener to chevron container if it exists, otherwise fallback to chevron
+            const triggerElement = chevronContainer || chevron;
+            triggerElement.addEventListener('click', toggleHandler);
             
-            if (isHidden) {
-                subItemsContainer.classList.remove('hidden');
-                chevron.classList.add('rotate-180');
-            } else {
-                subItemsContainer.classList.add('hidden');
-                chevron.classList.remove('rotate-180');
-            }
-        });
-        
-        // Allow normal navigation when clicking the link (not chevron)
-        week5Link.addEventListener('click', (e) => {
-            // Only prevent if clicking the chevron (handled above)
-            if (e.target === chevron || chevron.contains(e.target)) {
-                e.preventDefault();
-                e.stopPropagation();
-            }
-            // Otherwise, allow normal navigation
+            // Allow normal navigation when clicking the link (not chevron)
+            link.addEventListener('click', (e) => {
+                // Only prevent if clicking the chevron or its container (handled above)
+                if (e.target === triggerElement || triggerElement.contains(e.target)) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                }
+                // Otherwise, allow normal navigation
+            });
         });
     }
     
@@ -935,25 +786,19 @@ class BaseLessonPage {
                 }
                 
                 if (anchor && href) {
-                    // If we're already on week2.html, week3.html, week4.html or week5.html, prevent navigation and scroll
-                    const isWeek2Page = window.location.pathname.includes('week2.html') || 
-                                       window.location.pathname.endsWith('week2.html') ||
-                                       window.location.href.includes('week2.html');
-                    const isWeek3Page = window.location.pathname.includes('week3.html') || 
-                                       window.location.pathname.endsWith('week3.html') ||
-                                       window.location.href.includes('week3.html');
-                    const isWeek4Page = window.location.pathname.includes('week4.html') || 
-                                       window.location.pathname.endsWith('week4.html') ||
-                                       window.location.href.includes('week4.html');
-                    const isWeek5Page = window.location.pathname.includes('week5.html') || 
-                                       window.location.pathname.endsWith('week5.html') ||
-                                       window.location.href.includes('week5.html');
+                    // Extract the page part from href (e.g., "week3.html" from "week3.html#anchor")
+                    const targetPage = href.split('#')[0];
                     
-                    if (isWeek2Page || isWeek3Page || isWeek4Page || isWeek5Page) {
+                    // Check if we are currently on the target page
+                    const isCurrentPage = window.location.pathname.includes(targetPage) || 
+                                         window.location.pathname.endsWith(targetPage) ||
+                                         window.location.href.includes(targetPage);
+                    
+                    if (isCurrentPage) {
                         e.preventDefault();
                         e.stopPropagation();
                         
-                        console.log('[BaseLessonPage] Scrolling to anchor:', anchor);
+                        console.log('[BaseLessonPage] Scrolling to anchor on current page:', anchor);
                         this.scrollToAnchor(anchor);
                         
                         // Update URL hash without scrolling
@@ -970,8 +815,8 @@ class BaseLessonPage {
                             document.body.style.overflow = '';
                         }
                     }
-                    // If we're not on week2.html, let the link navigate normally
-                    // The hash will be handled when the page loads via Week2LessonPage.init()
+                    // If we're NOT on the target page, let the link navigate normally
+                    // The hash will be handled when the new page loads
                 }
             }
         };
@@ -979,18 +824,35 @@ class BaseLessonPage {
         // Add event listener using delegation
         document.addEventListener('click', handleNavClick, true);
         
-        // Handle hash in URL on page load (after content is loaded)
-        const handleHashOnLoad = () => {
-            if (window.location.hash && (this.moduleId === 'week-2' || this.moduleId === 'week-3' || this.moduleId === 'week-4' || this.moduleId === 'week-5')) {
-                setTimeout(() => {
-                    this.scrollToAnchor(window.location.hash);
-                }, 800); // Longer delay to ensure content is fully rendered
+        // Handle user interaction to cancel auto-scroll
+        const cancelScroll = () => {
+            if (this.isAutoScrolling) {
+                console.log('[BaseLessonPage] User interaction detected, cancelling auto-scroll');
+                this.userInterruptedScroll = true;
+                this.isAutoScrolling = false;
+                // Clear any pending timeouts
+                if (this.scrollVerificationTimeout) {
+                    clearTimeout(this.scrollVerificationTimeout);
+                    this.scrollVerificationTimeout = null;
+                }
             }
         };
         
-        // Try after a delay (in case content loads asynchronously)
-        setTimeout(handleHashOnLoad, 500);
-        setTimeout(handleHashOnLoad, 1500);
+        const mainContent = document.getElementById('main-content');
+        if (mainContent) {
+            mainContent.addEventListener('wheel', cancelScroll, { passive: true });
+            mainContent.addEventListener('touchstart', cancelScroll, { passive: true });
+            mainContent.addEventListener('keydown', cancelScroll, { passive: true });
+        }
+        
+        // Handle hash in URL on page load (after content is loaded)
+        // We rely on the subclass init() calling scrollToAnchor manually after loading content
+        // This listener is a fallback for when the hash changes without reload
+        window.addEventListener('hashchange', () => {
+            if (window.location.hash) {
+                this.scrollToAnchor(window.location.hash);
+            }
+        });
     }
     
     /**
@@ -1001,11 +863,30 @@ class BaseLessonPage {
         const anchorId = anchor.startsWith('#') ? anchor : '#' + anchor;
         console.log('[BaseLessonPage] scrollToAnchor called with:', anchorId);
         
+        // Generate a unique ID for this scroll attempt
+        const currentScrollId = Date.now();
+        this.activeScrollId = currentScrollId;
+        
+        // Reset state
+        this.userInterruptedScroll = false;
+        this.isAutoScrolling = true;
+        
+        // Clear any pending verification timeout
+        if (this.scrollVerificationTimeout) {
+            clearTimeout(this.scrollVerificationTimeout);
+            this.scrollVerificationTimeout = null;
+        }
+        
         // Try multiple times in case content is still loading
         const attemptScroll = (attempts = 0) => {
+            // Check if this attempt is still valid
+            if (this.activeScrollId !== currentScrollId || this.userInterruptedScroll) {
+                return;
+            }
+
             const element = document.querySelector(anchorId);
             const mainContent = document.getElementById('main-content');
-            const headerOffset = 100;
+            const headerOffset = 100; // Height of sticky header + padding
             
             if (element && mainContent) {
                 console.log('[BaseLessonPage] Element found:', element);
@@ -1020,42 +901,49 @@ class BaseLessonPage {
                     currentElement = currentElement.offsetParent;
                 }
                 
-                // Subtract header offset
+                // Subtract header offset and ensure we don't scroll past 0
                 const targetScroll = Math.max(0, scrollPosition - headerOffset);
                 
                 console.log('[BaseLessonPage] Calculated scroll position:', targetScroll, 'Current scroll:', mainContent.scrollTop);
                 
+                // Check if we are already close enough (prevents jitter)
+                if (Math.abs(mainContent.scrollTop - targetScroll) < 10) {
+                    console.log('[BaseLessonPage] Already at target position');
+                    this.isAutoScrolling = false;
+                    return;
+                }
+
                 // Scroll the container
                 mainContent.scrollTo({
                     top: targetScroll,
                     behavior: 'smooth'
                 });
                 
-                // Verify scroll worked after a delay
-                setTimeout(() => {
+                // Verify scroll worked after expected duration of smooth scroll
+                this.scrollVerificationTimeout = setTimeout(() => {
+                    // Check valid again
+                    if (this.activeScrollId !== currentScrollId || this.userInterruptedScroll) return;
+
                     const elementRect = element.getBoundingClientRect();
                     const containerRect = mainContent.getBoundingClientRect();
                     const elementTopRelative = elementRect.top - containerRect.top;
                     
-                    // If element is not at the right position, use scrollIntoView as fallback
+                    // If element is not at the right position (e.g. content shifted), retry ONCE
+                    // Only if significantly off (> 50px)
                     if (Math.abs(elementTopRelative - headerOffset) > 50) {
-                        console.log('[BaseLessonPage] Scroll position incorrect, using scrollIntoView fallback');
-                        element.scrollIntoView({
-                            behavior: 'smooth',
-                            block: 'start',
-                            inline: 'nearest'
-                        });
+                        console.log('[BaseLessonPage] Scroll position incorrect, using fallback');
                         
-                        // Adjust for header after scrollIntoView
-                        setTimeout(() => {
-                            const currentScroll = mainContent.scrollTop;
-                            mainContent.scrollTo({
-                                top: Math.max(0, currentScroll - headerOffset),
+                        // Use smooth behavior for fallback too
+                        if (!this.userInterruptedScroll) {
+                             mainContent.scrollTo({
+                                top: targetScroll, // Try same target again
                                 behavior: 'smooth'
                             });
-                        }, 400);
+                        }
                     }
-                }, 600);
+                    
+                    this.isAutoScrolling = false;
+                }, 1000);
                 
             } else if (element && !mainContent) {
                 // Fallback: scroll window if no main-content container
@@ -1065,29 +953,15 @@ class BaseLessonPage {
                     block: 'start',
                     inline: 'nearest'
                 });
-                
-                setTimeout(() => {
-                    const elementRect = element.getBoundingClientRect();
-                    const offsetPosition = elementRect.top + window.pageYOffset - headerOffset;
-                    window.scrollTo({
-                        top: Math.max(0, offsetPosition),
-                        behavior: 'smooth'
-                    });
-                }, 100);
+                this.isAutoScrolling = false;
                 
             } else if (attempts < 10) {
                 // Retry if element not found yet (content might still be loading)
-                console.log(`[BaseLessonPage] Element not found, retrying... (attempt ${attempts + 1})`);
-                setTimeout(() => attemptScroll(attempts + 1), 300);
+                // Increase interval slightly
+                setTimeout(() => attemptScroll(attempts + 1), 200);
             } else {
                 console.warn(`[BaseLessonPage] Element with anchor ${anchorId} not found after ${attempts} attempts.`);
-                // List available IDs for debugging
-                const availableIds = Array.from(document.querySelectorAll('[id]')).map(el => el.id);
-                const relevantIds = availableIds.filter(id => 
-                    id.includes('probleem') || id.includes('doelstelling') || 
-                    id.includes('opdrachtgever') || id.includes('vormen')
-                );
-                console.log('[BaseLessonPage] Available relevant IDs:', relevantIds);
+                this.isAutoScrolling = false;
             }
         };
         
@@ -1905,4 +1779,3 @@ if (typeof module !== 'undefined' && module.exports) {
 } else {
     window.BaseLessonPage = BaseLessonPage;
 }
-

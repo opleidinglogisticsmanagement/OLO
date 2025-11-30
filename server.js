@@ -94,6 +94,8 @@ app.use('/api/', apiLimiter);
 
 // API Key validation
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
+// Optionele specifieke key voor bouwsteenmethode
+const GEMINI_BOUWSTEEN_API_KEY = process.env.GEMINI_BOUWSTEEN_API_KEY || GEMINI_API_KEY;
 
 if (!GEMINI_API_KEY) {
     console.error('⚠️  WARNING: GEMINI_API_KEY is not set in .env file');
@@ -947,6 +949,138 @@ Antwoord alleen met de JSON, geen extra tekst.`;
 
     } catch (error) {
         console.error('[Gemini Proxy] Error validating query:', error);
+        return res.status(500).json({
+            error: 'Internal server error',
+            message: error.message
+        });
+    }
+});
+
+/**
+ * Input validatie middleware voor generate-bouwsteen
+ */
+const validateBouwsteenGenerator = [
+    body('word')
+        .isString()
+        .trim()
+        .isLength({ min: 1, max: 100 })
+        .withMessage('word is required and must be between 1 and 100 characters'),
+    body('context')
+        .optional()
+        .isString()
+        .trim()
+        .isLength({ max: 500 })
+        .withMessage('context must be max 500 characters')
+];
+
+/**
+ * Generate Bouwsteen table based on word and context
+ * POST /api/generate-bouwsteen
+ */
+app.post('/api/generate-bouwsteen', validateBouwsteenGenerator, async (req, res) => {
+    try {
+        // Check voor validatie errors
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(400).json({ 
+                error: 'Invalid input', 
+                message: 'Input validation failed',
+                errors: errors.array()
+            });
+        }
+
+        const { word, context } = req.body;
+
+        // Use specific key if available, otherwise fallback to general key
+        const apiKey = GEMINI_BOUWSTEEN_API_KEY;
+
+        if (!apiKey) {
+            return res.status(500).json({
+                error: 'API key not configured',
+                message: 'GEMINI_API_KEY is not set in environment variables'
+            });
+        }
+
+        const contextInfo = context ? `\nContext: "${context}"` : '';
+
+        const prompt = `Je bent een expert in informatievaardigheden en het opstellen van zoekstrategieën met de bouwsteenmethode.
+
+Genereer een tabel voor de bouwsteenmethode voor het woord: "${word}"${contextInfo}
+
+De tabel moet de volgende kolommen bevatten:
+1. Synoniemen (Andere woorden met dezelfde betekenis)
+2. Vertalingen (Engels is de standaard, eventueel andere relevante talen)
+3. Afkortingen (Indien van toepassing)
+4. Spellingsvormen (Enkelvoud/meervoud, alternatieve spellingen)
+5. Vaktermen (Specifieke jargon of technische termen)
+6. Bredere termen (Algemenere begrippen)
+7. Nauwere termen (Specifiekere begrippen)
+
+Geef voor elke categorie minimaal 2-3 relevante suggesties als die er zijn. Als er voor een categorie echt niets relevants is, laat deze dan leeg of geef "n.v.t." aan.
+
+Geef het antwoord terug in JSON format met deze structuur:
+{
+  "synoniemen": ["...", "..."],
+  "vertalingen": ["...", "..."],
+  "afkortingen": ["...", "..."],
+  "spellingsvormen": ["...", "..."],
+  "vaktermen": ["...", "..."],
+  "bredere_termen": ["...", "..."],
+  "nauwere_termen": ["...", "..."]
+}
+
+    Antwoord alleen met de JSON, geen extra tekst.`;
+
+        const genAI = new GoogleGenerativeAI(apiKey);
+        
+        // We gebruiken expliciet de nieuwere modellen omdat 1.5-flash/pro 404 errors geven
+        // gemini-2.5-flash-lite bleek te werken in de logs voor de andere generator
+        const models = [
+            'gemini-2.5-flash-lite', 
+            'gemini-flash-latest', 
+            'gemini-1.5-flash-latest',
+            'gemini-1.5-flash' // Fallback
+        ];
+        
+        console.log(`[generate-bouwsteen] Using API key ending in ...${apiKey.slice(-4)}`);
+        console.log(`[generate-bouwsteen] Will try models in order:`, models);
+        
+        let lastError = null;
+        for (const modelName of models) {
+            try {
+                const model = genAI.getGenerativeModel({ model: modelName });
+                const result = await model.generateContent(prompt);
+                const response = await result.response;
+                const text = response.text();
+                
+                const jsonMatch = text.match(/\{[\s\S]*\}/);
+                if (jsonMatch) {
+                    try {
+                        const jsonStr = jsonMatch[0].replace(/```json\s*/g, '').replace(/```/g, '').trim();
+                        const parsed = JSON.parse(jsonStr);
+                        
+                        return res.json({
+                            success: true,
+                            data: parsed
+                        });
+                    } catch (parseError) {
+                        console.error('[generate-bouwsteen] JSON parse error:', parseError.message);
+                        throw new Error(`Failed to parse JSON: ${parseError.message}`);
+                    }
+                } else {
+                    throw new Error('No JSON found in response');
+                }
+            } catch (error) {
+                console.error(`[Gemini Proxy] Error with model ${modelName}:`, error.message);
+                lastError = error;
+                continue;
+            }
+        }
+
+        throw lastError || new Error('All models failed');
+
+    } catch (error) {
+        console.error('[Gemini Proxy] Error generating bouwsteen:', error);
         return res.status(500).json({
             error: 'Internal server error',
             message: error.message

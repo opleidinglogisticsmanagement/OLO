@@ -18,15 +18,22 @@ class RegisterPage extends BaseLessonPage {
      */
     async loadTerms() {
         try {
-            // Voeg timestamp toe om caching te voorkomen
+            // Voeg timestamp toe en forceer geen cache
             const timestamp = new Date().getTime();
-            const response = await fetch(`./content/register.json?v=${timestamp}`);
+            const response = await fetch(`./content/register.json?v=${timestamp}`, {
+                cache: 'no-store',
+                headers: {
+                    'Pragma': 'no-cache',
+                    'Cache-Control': 'no-cache'
+                }
+            });
             
             if (!response.ok) {
                 throw new Error(`HTTP fout: ${response.status} ${response.statusText} bij laden van register.json`);
             }
             
             const data = await response.json();
+            console.log(`Register geladen: ${data.length} begrippen gevonden.`); // Debug info
             
             if (!Array.isArray(data)) {
                 throw new Error('Ongeldig data formaat: verwacht een array');
@@ -56,7 +63,7 @@ class RegisterPage extends BaseLessonPage {
                     <div class="flex-1 min-w-0 w-full sm:w-auto">
                         <h1 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">Begrippenlijst</h1>
                         <p class="text-gray-600 dark:text-gray-300 mb-4">
-                            Hier vind je alle <strong id="term-count">${this.terms.length}</strong> belangrijke begrippen uit de e-learning. Klik op een begrip om direct naar de sectie te navigeren waar dit concept wordt uitgelegd.
+                            Hier vind je in totaal <strong id="term-count">${this.terms.length}</strong> belangrijke begrippen uit de e-learning. Klik op een begrip om direct naar de sectie te navigeren waar dit concept wordt uitgelegd.
                         </p>
                         <div class="bg-yellow-50 dark:bg-yellow-900/20 border-l-4 border-yellow-500 dark:border-yellow-400 p-3 rounded-r-lg mb-4">
                             <p class="text-sm text-yellow-800 dark:text-yellow-300">

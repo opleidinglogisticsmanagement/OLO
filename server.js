@@ -1187,12 +1187,19 @@ if (process.env.VERCEL && process.env.VERCEL_ROOT_DIR) {
 // Serveer index.html voor root route
 app.get('/', (req, res, next) => {
     // Eerst proberen: gebruik in-memory cache (voor Vercel serverless)
-    if (global.htmlFilesCache && global.htmlFilesCache['index.html']) {
+    // MAAR: Als er query parameters zijn, lees altijd van disk
+    const hasQueryParams = req.url.includes('?') || (req.query && Object.keys(req.query).length > 0);
+    
+    if (global.htmlFilesCache && global.htmlFilesCache['index.html'] && !hasQueryParams) {
         console.log(`✅ Serving index.html from memory cache`);
         res.setHeader('Content-Type', 'text/html; charset=utf-8');
         // HTML-bestanden korter cachen zodat nieuwe versienummers worden geladen
         res.setHeader('Cache-Control', 'public, max-age=300, must-revalidate'); // 5 minuten
         return res.send(global.htmlFilesCache['index.html']);
+    }
+    
+    if (hasQueryParams) {
+        console.log(`🔄 Serving index.html from disk (query params detected - bypassing cache)`);
     }
     
     // Fallback: probeer bestand van disk te lezen
@@ -1290,12 +1297,20 @@ app.get(/\.html$/, (req, res, next) => {
     const fileName = req.path.replace(/^\//, ''); // bijv. week1.html (zonder leading slash)
     
     // Eerst proberen: gebruik in-memory cache (voor Vercel serverless)
-    if (global.htmlFilesCache && global.htmlFilesCache[fileName]) {
+    // MAAR: Als er query parameters zijn in de request URL, lees altijd van disk
+    // Dit zorgt ervoor dat nieuwe versies worden geladen
+    const hasQueryParams = req.url.includes('?') || (req.query && Object.keys(req.query).length > 0);
+    
+    if (global.htmlFilesCache && global.htmlFilesCache[fileName] && !hasQueryParams) {
         console.log(`✅ Serving ${fileName} from memory cache`);
         res.setHeader('Content-Type', 'text/html; charset=utf-8');
         // HTML-bestanden korter cachen zodat nieuwe versienummers worden geladen
         res.setHeader('Cache-Control', 'public, max-age=300, must-revalidate'); // 5 minuten
         return res.send(global.htmlFilesCache[fileName]);
+    }
+    
+    if (hasQueryParams) {
+        console.log(`🔄 Serving ${fileName} from disk (query params detected - bypassing cache)`);
     }
     
     // Fallback: probeer bestand van disk te lezen

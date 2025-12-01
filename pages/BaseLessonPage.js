@@ -662,14 +662,14 @@ class BaseLessonPage {
         // Mapping van bestandsnamen naar Class namen en script paden
         const routes = {
             'index.html': { class: 'BaseLessonPage', script: 'pages/BaseLessonPage.js' },
-            'week1.html': { class: 'Week1LessonPage', script: 'pages/Week1LessonPage.js?v=7' },
-            'week2.html': { class: 'Week2LessonPage', script: 'pages/Week2LessonPage.js?v=7' },
-            'week3.html': { class: 'Week3LessonPage', script: 'pages/Week3LessonPage.js?v=7' },
-            'week4.html': { class: 'Week4LessonPage', script: 'pages/Week4LessonPage.js?v=7' },
-            'week5.html': { class: 'Week5LessonPage', script: 'pages/Week5LessonPage.js?v=7' },
-            'week6.html': { class: 'Week6LessonPage', script: 'pages/Week6LessonPage.js?v=7' },
-            'week7.html': { class: 'Week7LessonPage', script: 'pages/Week7LessonPage.js?v=7' },
-            'afsluiting.html': { class: 'AfsluitingLessonPage', script: 'pages/AfsluitingLessonPage.js?v=7' },
+            'week1.html': { class: 'Week1LessonPage', script: 'pages/Week1LessonPage.js?v=8' },
+            'week2.html': { class: 'Week2LessonPage', script: 'pages/Week2LessonPage.js?v=8' },
+            'week3.html': { class: 'Week3LessonPage', script: 'pages/Week3LessonPage.js?v=8' },
+            'week4.html': { class: 'Week4LessonPage', script: 'pages/Week4LessonPage.js?v=8' },
+            'week5.html': { class: 'Week5LessonPage', script: 'pages/Week5LessonPage.js?v=8' },
+            'week6.html': { class: 'Week6LessonPage', script: 'pages/Week6LessonPage.js?v=8' },
+            'week7.html': { class: 'Week7LessonPage', script: 'pages/Week7LessonPage.js?v=8' },
+            'afsluiting.html': { class: 'AfsluitingLessonPage', script: 'pages/AfsluitingLessonPage.js?v=8' },
             'register.html': { class: 'RegisterPage', script: 'pages/RegisterPage.js?v=6' },
             'flashcards.html': { class: 'FlashcardsPage', script: 'pages/FlashcardsPage.js?v=6' },
         };

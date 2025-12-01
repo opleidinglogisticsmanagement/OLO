@@ -8,6 +8,7 @@
 class Week4LessonPage extends BaseLessonPage {
     constructor() {
         super('week-4', 'Week 4', 'Begripsbepaling + Voorbereiding literatuuronderzoek');
+        console.log('[Week4LessonPage] Constructor called - VERSION 8');
         this.content = null;
         this.contentLoaded = false;
         // API key is no longer needed on client-side (handled by server)

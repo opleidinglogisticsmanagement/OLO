@@ -679,7 +679,7 @@ class Week3LessonPage extends BaseLessonPage {
         // Use a small delay to ensure DOM is fully rendered
         if (window.location.hash) {
             setTimeout(() => {
-                this.scrollToAnchor(window.location.hash);
+                this.router.scrollToAnchor(window.location.hash);
             }, 100);
         }
         

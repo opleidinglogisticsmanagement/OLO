@@ -894,8 +894,8 @@ class Week4LessonPage extends BaseLessonPage {
         
         // Handle hash in URL after content is loaded
         if (window.location.hash) {
-            // Immediately try to scroll to anchor, BaseLessonPage.scrollToAnchor handles retries
-            this.scrollToAnchor(window.location.hash);
+            // Immediately try to scroll to anchor, Router.scrollToAnchor handles retries
+            this.router.scrollToAnchor(window.location.hash);
         }
     }
     

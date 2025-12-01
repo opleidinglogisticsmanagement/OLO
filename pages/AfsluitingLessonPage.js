@@ -650,9 +650,7 @@ class AfsluitingLessonPage extends BaseLessonPage {
      * Initialiseer de pagina met content loading
      */
     async init() {
-        await this.loadContent();
-        document.body.innerHTML = this.render();
-        this.attachEventListeners();
+        await super.init();
         
         // Generate MC questions if needed (after DOM is ready)
         if (this.content && this.content.mcVragen && this.content.mcVragen.generateFromTheory) {
@@ -668,3 +666,5 @@ class AfsluitingLessonPage extends BaseLessonPage {
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = AfsluitingLessonPage;
 }
+// Altijd aan window toevoegen voor browser gebruik
+window.AfsluitingLessonPage = AfsluitingLessonPage;

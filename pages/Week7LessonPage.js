@@ -29,8 +29,10 @@ class Week7LessonPage extends BaseLessonPage {
      * Laad content uit JSON bestand
      */
     async loadContent() {
+        console.log('[Week7LessonPage] Loading content...');
         try {
-            const response = await fetch('./content/week7.content.json');
+            const timestamp = new Date().getTime();
+            const response = await fetch(`./content/week7.content.json?v=${timestamp}`, { cache: "no-store" });
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
@@ -648,9 +650,7 @@ class Week7LessonPage extends BaseLessonPage {
      * Initialiseer de pagina met content loading
      */
     async init() {
-        await this.loadContent();
-        document.body.innerHTML = this.render();
-        this.attachEventListeners();
+        await super.init();
         
         // Generate MC questions if needed (after DOM is ready)
         if (this.content && this.content.mcVragen && this.content.mcVragen.generateFromTheory) {
@@ -662,7 +662,13 @@ class Week7LessonPage extends BaseLessonPage {
     }
 }
 
+console.log('Week7LessonPage.js executed');
+
 // Export voor gebruik in andere modules
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = Week7LessonPage;
 }
+
+// Altijd aan window toevoegen voor browser gebruik
+window.Week7LessonPage = Week7LessonPage;
+console.log('Week7LessonPage assigned to window.Week7LessonPage', window.Week7LessonPage);

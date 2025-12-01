@@ -717,9 +717,7 @@ class Week4LessonPage extends BaseLessonPage {
      * Initialiseer de pagina met content loading
      */
     async init() {
-        await this.loadContent();
-        document.body.innerHTML = this.render();
-        this.attachEventListeners();
+        await super.init();
         
         // Handle hash in URL after content is loaded
         if (window.location.hash) {
@@ -740,3 +738,5 @@ class Week4LessonPage extends BaseLessonPage {
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = Week4LessonPage;
 }
+// Altijd aan window toevoegen voor browser gebruik
+window.Week4LessonPage = Week4LessonPage;

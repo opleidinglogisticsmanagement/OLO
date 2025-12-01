@@ -410,6 +410,25 @@
     <script src="js/PDFExporter.js"></script>
     <script src="js/SearchService.js"></script>
     
+    <!-- Core Scripts voor SPA functionaliteit -->
+    <script src="pages/ContentRenderer.js"></script>
+    <script src="pages/InteractiveRenderer.js"></script>
+    <script src="pages/MCQuestionRenderer.js"></script>
+    <script src="pages/AIGenerator.js"></script>
+    <script src="pages/BaseLessonPage.js?v=4"></script>
+    
+    <!-- Page Scripts (Preload voor snellere navigatie en betrouwbaarheid) -->
+    <script src="pages/Week1LessonPage.js?v=6"></script>
+    <script src="pages/Week2LessonPage.js?v=6"></script>
+    <script src="pages/Week3LessonPage.js?v=6"></script>
+    <script src="pages/Week4LessonPage.js?v=6"></script>
+    <script src="pages/Week5LessonPage.js?v=6"></script>
+    <script src="pages/Week6LessonPage.js?v=6"></script>
+    <script src="pages/Week7LessonPage.js?v=6"></script>
+    <script src="pages/AfsluitingLessonPage.js?v=6"></script>
+    <script src="pages/RegisterPage.js?v=6"></script>
+    <script src="pages/FlashcardsPage.js?v=6"></script>
+    
     <!-- Skip to content link for accessibility -->
     <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-blue-600 text-white px-4 py-2 rounded-md z-50 focus-ring">
         Spring naar hoofdinhoud
@@ -1056,54 +1075,9 @@
             }
             
             // Generic helper for setting up submenu toggles
-            const setupSubmenuToggle = (weekNum) => {
-                const navItemClass = `.week-${weekNum}-nav-item`;
-                const navItem = document.querySelector(navItemClass);
-                
-                if (!navItem) return;
-                
-                const link = navItem.querySelector('a');
-                const subItemsContainer = document.getElementById(`week-${weekNum}-subitems-index`);
-                const chevron = document.getElementById(`week-${weekNum}-chevron-index`);
-                const chevronContainer = document.getElementById(`week-${weekNum}-chevron-container`);
-                
-                if (!link || !subItemsContainer || !chevron) return;
-                
-                // Use chevron container if available, otherwise fallback to chevron
-                const triggerElement = chevronContainer || chevron;
-                
-                // Toggle only when clicking the trigger element
-                triggerElement.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    
-                    const isHidden = subItemsContainer.classList.contains('hidden');
-                    
-                    if (isHidden) {
-                        subItemsContainer.classList.remove('hidden');
-                        chevron.classList.add('rotate-180');
-                    } else {
-                        subItemsContainer.classList.add('hidden');
-                        chevron.classList.remove('rotate-180');
-                    }
-                });
-                
-                // Allow normal navigation when clicking the link (not trigger)
-                link.addEventListener('click', (e) => {
-                    // Only prevent if clicking the trigger (handled above)
-                    if (e.target === triggerElement || triggerElement.contains(e.target)) {
-                        e.preventDefault();
-                        e.stopPropagation();
-                    }
-                    // Otherwise, allow normal navigation
-                });
-            };
-            
-            // Setup all submenus
-            setupSubmenuToggle(2);
-            setupSubmenuToggle(3);
-            setupSubmenuToggle(4);
-            setupSubmenuToggle(5);
+            // NOTE: This is now handled by BaseLessonPage.setupSubmenuToggles() which uses event delegation on document level
+            // We skip this setup to avoid conflicts - BaseLessonPage will handle all submenu toggles
+            // The global handler in BaseLessonPage works for both initial load and SPA navigation
         });
         
         // Dark Mode Toggle
@@ -1296,6 +1270,22 @@
         };
         
         setupSearch();
+
+        // Initialize SPA Router
+        document.addEventListener('DOMContentLoaded', () => {
+            // Check if BaseLessonPage is loaded
+            if (typeof BaseLessonPage !== 'undefined') {
+                const basePage = new BaseLessonPage('start', 'Start', 'Opzetten van Logistieke Onderzoeken');
+                basePage.setupSPARouter();
+                
+                // Setup submenu toggles (singleton pattern - only runs once)
+                basePage.setupSubmenuToggles();
+                
+                // Activeer ook de current link in sidebar
+                // (Op index.html is dit 'Start', maar voor consistentie)
+                basePage.updateActiveLink();
+            }
+        });
     </script>
 </body>
 </html>

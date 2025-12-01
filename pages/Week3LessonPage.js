@@ -7,6 +7,7 @@
 
 class Week3LessonPage extends BaseLessonPage {
     constructor() {
+        console.log('Week3LessonPage constructor called');
         super('week-3', 'Week 3', 'Onderzoeksmodel + Onderzoeksvragen');
         this.content = null;
         this.contentLoaded = false;
@@ -29,8 +30,10 @@ class Week3LessonPage extends BaseLessonPage {
      * Laad content uit JSON bestand
      */
     async loadContent() {
+        console.log('[Week3LessonPage] Loading content...');
         try {
-            const response = await fetch('./content/week3.content.json');
+            const timestamp = new Date().getTime();
+            const response = await fetch(`./content/week3.content.json?v=${timestamp}`, { cache: "no-store" });
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
@@ -668,14 +671,14 @@ class Week3LessonPage extends BaseLessonPage {
      * Initialiseer de pagina met content loading
      */
     async init() {
-        await this.loadContent();
-        document.body.innerHTML = this.render();
-        this.attachEventListeners();
+        await super.init();
         
         // Handle hash in URL after content is loaded
+        // Use a small delay to ensure DOM is fully rendered
         if (window.location.hash) {
-            // Immediately try to scroll to anchor, BaseLessonPage.scrollToAnchor handles retries
-            this.scrollToAnchor(window.location.hash);
+            setTimeout(() => {
+                this.scrollToAnchor(window.location.hash);
+            }, 100);
         }
         
         // Generate MC questions if needed (after DOM is ready)
@@ -691,3 +694,5 @@ class Week3LessonPage extends BaseLessonPage {
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = Week3LessonPage;
 }
+// Altijd aan window toevoegen voor browser gebruik
+window.Week3LessonPage = Week3LessonPage;

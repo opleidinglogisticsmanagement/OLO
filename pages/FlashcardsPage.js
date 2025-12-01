@@ -695,21 +695,26 @@ class FlashcardsPage extends BaseLessonPage {
     }
 
     /**
+     * Alias voor loadTerms om consistent te zijn met BaseLessonPage
+     */
+    async loadContent() {
+        await this.loadTerms();
+    }
+
+    /**
      * Initialiseer de pagina
      */
     async init() {
         // Maak instantie globaal beschikbaar voor inline onclick handlers
         window.FlashcardsPageInstance = this;
         
-        await this.loadTerms();
-        document.body.innerHTML = this.render();
-        this.attachEventListeners();
+        await super.init();
     }
 }
 
 // Export voor gebruik in andere modules
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = FlashcardsPage;
-} else {
-    window.FlashcardsPage = FlashcardsPage;
 }
+// Altijd aan window toevoegen voor browser gebruik
+window.FlashcardsPage = FlashcardsPage;

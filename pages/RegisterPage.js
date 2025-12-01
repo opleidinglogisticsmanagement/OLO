@@ -244,12 +244,17 @@ class RegisterPage extends BaseLessonPage {
     }
 
     /**
+     * Alias voor loadTerms om consistent te zijn met BaseLessonPage
+     */
+    async loadContent() {
+        await this.loadTerms();
+    }
+
+    /**
      * Initialiseer de pagina
      */
     async init() {
-        await this.loadTerms();
-        document.body.innerHTML = this.render();
-        this.attachEventListeners();
+        await super.init();
         // Initial render of the list
         this.renderTermsList();
     }
@@ -258,7 +263,7 @@ class RegisterPage extends BaseLessonPage {
 // Export voor gebruik in andere modules
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = RegisterPage;
-} else {
-    window.RegisterPage = RegisterPage;
 }
+// Altijd aan window toevoegen voor browser gebruik
+window.RegisterPage = RegisterPage;
 

@@ -16,8 +16,10 @@ class Week1LessonPage extends BaseLessonPage {
      * Laad content uit JSON bestand
      */
     async loadContent() {
+        console.log('[Week1LessonPage] Loading content...');
         try {
-            const response = await fetch('./content/week1.content.json');
+            const timestamp = new Date().getTime();
+            const response = await fetch(`./content/week1.content.json?v=${timestamp}`, { cache: "no-store" });
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
@@ -188,15 +190,19 @@ class Week1LessonPage extends BaseLessonPage {
 
     /**
      * Initialiseer de pagina met content loading
+     * @override
      */
-    async init() {
-        await this.loadContent();
-        document.body.innerHTML = this.render();
-        this.attachEventListeners();
-    }
+    // init() wordt nu afgehandeld door BaseLessonPage met loadContent() check
+
 }
+
+console.log('Week1LessonPage.js executed');
 
 // Export voor gebruik in andere modules
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = Week1LessonPage;
 }
+
+// Altijd aan window toevoegen voor browser gebruik
+window.Week1LessonPage = Week1LessonPage;
+console.log('Week1LessonPage assigned to window.Week1LessonPage', window.Week1LessonPage);

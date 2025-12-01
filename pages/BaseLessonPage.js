@@ -474,9 +474,261 @@ class BaseLessonPage {
     /**
      * Initialiseer de pagina
      */
-    init() {
-        document.body.innerHTML = this.render();
+    async init() {
+        // 1. Data laden
+        if (this.loadContent) {
+            await this.loadContent();
+        }
+
+        // 2. Check of de 'app shell' (sidebar + header) al bestaat
+        const appContainer = document.getElementById('app');
+        
+        if (appContainer) {
+            // SPA MODUS: Shell bestaat al, update alleen de content en titel
+            this.updateMainContentOnly();
+            this.updateActiveLink();
+        } else {
+            // FULL LOAD MODUS: Render de hele pagina (eerste bezoek of refresh)
+            document.body.innerHTML = this.render();
+        }
+
+        // 3. Event listeners koppelen (opnieuw nodig voor nieuwe content)
         this.attachEventListeners();
+        
+        // 4. Start de SPA router (onderschept links) - doe dit maar 1 keer
+        if (!window.routerInitialized) {
+            this.setupSPARouter();
+            window.routerInitialized = true;
+        }
+    }
+
+    /**
+     * Nieuwe methode: Update alleen het middelste gedeelte
+     */
+    updateMainContentOnly() {
+        const mainContent = document.getElementById('main-content');
+        if (!mainContent) return;
+
+        // We renderen de 'main content' string en halen daar de binnenkant uit
+        // Dit is een simpele manier om je bestaande renderMainContent() te hergebruiken
+        const tempDiv = document.createElement('div');
+        tempDiv.innerHTML = this.renderMainContent();
+        
+        // Vervang de inhoud van de bestaande main tag
+        // Let op: renderMainContent geeft een <main>... </main> terug,
+        // dus we pakken de innerHTML van het eerste kind van tempDiv
+        if (tempDiv.firstElementChild) {
+             mainContent.innerHTML = tempDiv.firstElementChild.innerHTML;
+             // Scroll naar boven
+             mainContent.scrollTop = 0;
+        }
+        
+        // Update de document titel
+        document.title = `${this.moduleTitle} - ${this.moduleSubtitle || 'OLO'}`;
+    }
+
+    /**
+     * Nieuwe methode: Update de actieve link in de sidebar
+     */
+    updateActiveLink() {
+        // Verwijder active classes van alle links
+        document.querySelectorAll('aside a').forEach(a => {
+            a.classList.remove('bg-blue-50', 'dark:bg-blue-900/30', 'text-blue-700', 'dark:text-blue-300');
+            a.classList.add('text-gray-600', 'dark:text-gray-300');
+            
+            // Reset icon kleuren
+            const iconDiv = a.querySelector('div:first-child');
+            if(iconDiv) {
+                iconDiv.classList.remove('bg-blue-100', 'dark:bg-blue-800');
+                iconDiv.classList.add('bg-gray-100', 'dark:bg-gray-700');
+            }
+        });
+
+        // Zoek de link die matcht met de huidige pagina (this.moduleId of bestandsnaam)
+        let targetHref = `${this.moduleId}.html`;
+        if (this.moduleId === 'start') targetHref = 'index.html';
+        if (this.moduleId.startsWith('week-')) targetHref = `${this.moduleId.replace('-', '')}.html`;
+        
+        const activeLink = document.querySelector(`aside a[href*="${targetHref}"]`);
+        
+        if (activeLink) {
+            activeLink.classList.add('bg-blue-50', 'dark:bg-blue-900/30', 'text-blue-700', 'dark:text-blue-300');
+            activeLink.classList.remove('text-gray-600', 'dark:text-gray-300');
+             
+             // Update icon kleuren
+            const iconDiv = activeLink.querySelector('div:first-child');
+            if(iconDiv) {
+                iconDiv.classList.add('bg-blue-100', 'dark:bg-blue-800');
+                iconDiv.classList.remove('bg-gray-100', 'dark:bg-gray-700');
+            }
+        }
+    }
+
+    /**
+     * Nieuwe methode: SPA Router
+     * Onderschept klikken op links en laadt de juiste class dynamisch
+     */
+    setupSPARouter() {
+        console.log('[SPA] Router setup active');
+        // Gebruik capture phase om clicks te onderscheppen voordat andere handlers dat doen
+        document.addEventListener('click', async (e) => {
+            // Check of dit een sidebar toggle click is (chevron)
+            // Als dat zo is, laten we het event doorgaan zodat de specifieke toggle handler het kan oppakken
+            // Check in capture phase (before other handlers)
+            const chevronElement = e.target.closest('[id*="-chevron"]');
+            const chevronContainer = e.target.closest('[id*="-chevron-container"]');
+            if (chevronElement || chevronContainer) {
+                console.log('[SPA] Chevron click detected, ignoring router');
+                // Don't prevent default or stop propagation - let the submenu toggle handler handle it
+                return;
+            }
+
+            const link = e.target.closest('a');
+            if (!link) return;
+            
+            // Gebruik volledige URL object voor robuuste parsing
+            const href = link.href;
+            const urlObj = new URL(href, window.location.origin);
+            
+            // Check 1: Same origin?
+            if (urlObj.origin !== window.location.origin) return;
+            
+            // Check 2: Is het een HTML pagina? (of root)
+            // Negeer links die niet op .html eindigen (tenzij root /)
+            const isHtml = urlObj.pathname.endsWith('.html') || urlObj.pathname.endsWith('/') || urlObj.pathname.indexOf('.') === -1;
+            if (!isHtml) return;
+            
+            // Check 3: Interne anchor navigatie op ZELFDE pagina?
+            if (urlObj.pathname === window.location.pathname) {
+                // Als er een hash is, is het een interne scroll -> laat browser afhandelen (of onze eigen smooth scroll)
+                if (urlObj.hash) {
+                    console.log('[SPA] Internal anchor navigation, ignoring router:', urlObj.hash);
+                    return;
+                }
+                // Zelfde pagina zonder hash = reload -> we doen een SPA refresh
+            }
+            
+            // Check 4: Speciale uitzonderingen
+            if (link.hasAttribute('download') || link.target === '_blank') return;
+
+            console.log('[SPA] Intercepting navigation to:', href);
+            e.preventDefault();
+            e.stopPropagation(); // Stop verdere bubbling
+            
+            // Bepaal bestandsnaam
+            let filename = urlObj.pathname.split('/').pop();
+            if (!filename || filename === '') filename = 'index.html';
+
+            // Update URL in browser zonder reload
+            history.pushState(null, '', href);
+
+            // Laad de juiste pagina class
+            try {
+                await this.loadPageByFilename(filename);
+            } catch (error) {
+                console.error('[SPA] Error loading page:', error);
+                alert(`Fout bij laden pagina: ${error.message}`);
+                // Fallback: hard reload als SPA navigatie faalt
+                window.location.href = href;
+            }
+            
+            // Als er een hash in de nieuwe URL zit, scroll er naar toe na laden
+            // De init() methode van de pagina class zal dit ook proberen, dus we wachten
+            // tot de pagina volledig geladen is voordat we scrollen
+            if (urlObj.hash) {
+                // Wacht langer om te zorgen dat content volledig geladen is
+                // De init() methode zal dit ook proberen, maar we doen dit als backup
+                setTimeout(() => {
+                    // Check of we nog steeds op dezelfde pagina zijn (niet genavigeerd naar andere pagina)
+                    if (window.location.hash === urlObj.hash) {
+                        this.scrollToAnchor(urlObj.hash);
+                    }
+                }, 800);
+            }
+        }, true); // Capture: true!
+
+        // Ondersteuning voor Terug/Vooruit knoppen in browser
+        window.addEventListener('popstate', () => {
+            const filename = window.location.pathname.split('/').pop() || 'index.html';
+            console.log('[SPA] Popstate detected, loading:', filename);
+            this.loadPageByFilename(filename);
+        });
+    }
+
+    /**
+     * Helper: Bepaal welke class geladen moet worden op basis van bestandsnaam
+     */
+    async loadPageByFilename(filename) {
+        // Mapping van bestandsnamen naar Class namen en script paden
+        const routes = {
+            'index.html': { class: 'BaseLessonPage', script: 'pages/BaseLessonPage.js' },
+            'week1.html': { class: 'Week1LessonPage', script: 'pages/Week1LessonPage.js?v=6' },
+            'week2.html': { class: 'Week2LessonPage', script: 'pages/Week2LessonPage.js?v=6' },
+            'week3.html': { class: 'Week3LessonPage', script: 'pages/Week3LessonPage.js?v=6' },
+            'week4.html': { class: 'Week4LessonPage', script: 'pages/Week4LessonPage.js?v=6' },
+            'week5.html': { class: 'Week5LessonPage', script: 'pages/Week5LessonPage.js?v=6' },
+            'week6.html': { class: 'Week6LessonPage', script: 'pages/Week6LessonPage.js?v=6' },
+            'week7.html': { class: 'Week7LessonPage', script: 'pages/Week7LessonPage.js?v=6' },
+            'afsluiting.html': { class: 'AfsluitingLessonPage', script: 'pages/AfsluitingLessonPage.js?v=6' },
+            'register.html': { class: 'RegisterPage', script: 'pages/RegisterPage.js?v=6' },
+            'flashcards.html': { class: 'FlashcardsPage', script: 'pages/FlashcardsPage.js?v=6' },
+        };
+
+        const route = routes[filename];
+        if (!route) {
+            // Als we geen route hebben, reload gewoon de pagina
+            window.location.reload(); 
+            return;
+        }
+
+        // Specifieke behandeling voor index.html als er geen aparte HomePage class is
+        if (filename === 'index.html' && route.class === 'BaseLessonPage') {
+             const pageInstance = new BaseLessonPage('start', 'Start', 'Opzetten van Logistieke Onderzoeken');
+             await pageInstance.init();
+             return;
+        }
+
+        // Check of de class al bestaat, zo niet, laad het script
+        if (typeof window[route.class] === 'undefined') {
+            await this.loadScript(route.script);
+        }
+
+        // Wacht even en check opnieuw (polling) om race conditions te voorkomen
+        if (typeof window[route.class] === 'undefined') {
+             // Poll maximaal 20x met 50ms interval (totaal 1000ms)
+             for (let i = 0; i < 20; i++) {
+                 await new Promise(resolve => setTimeout(resolve, 50));
+                 if (typeof window[route.class] !== 'undefined') break;
+             }
+        }
+
+        // Check nogmaals of de class nu wel bestaat
+        if (typeof window[route.class] === 'undefined') {
+             console.error(`[SPA] Class ${route.class} not found after loading script ${route.script}. Window keys:`, Object.keys(window).filter(k => k.includes('LessonPage')));
+             throw new Error(`Class ${route.class} not found after loading script ${route.script}. Controleer of de class correct aan window is toegewezen (ook als module.exports bestaat).`);
+        }
+
+        // Instantieer de nieuwe pagina
+        const pageInstance = new window[route.class]();
+        await pageInstance.init();
+    }
+
+    loadScript(src) {
+        return new Promise((resolve, reject) => {
+            // Check of script al bestaat (ook als er query params achter zitten zoals ?v=2)
+            const scriptName = src.split('?')[0];
+            const existingScript = Array.from(document.scripts).find(s => s.src && s.src.includes(scriptName));
+            
+            if (existingScript) {
+                resolve();
+                return;
+            }
+            const script = document.createElement('script');
+            script.src = src;
+            script.onload = resolve;
+            script.onerror = reject;
+            document.head.appendChild(script);
+        });
     }
 
     /**
@@ -703,8 +955,60 @@ class BaseLessonPage {
     
     /**
      * Setup submenu expand/collapse functionality for all modules
+     * Supports both dynamic navigation (from renderModuleNavigation) and static sidebar (from index.html)
+     * Uses a global singleton pattern to ensure only one handler exists
      */
     setupSubmenuToggles() {
+        // Use a global flag to ensure we only setup once
+        if (window._submenuTogglesInitialized) {
+            return; // Already initialized, skip
+        }
+        
+        // Use event delegation on document to handle chevron clicks
+        // This works regardless of when elements are added or removed
+        const globalToggleHandler = (e) => {
+            // Check if click is on a chevron container or chevron icon
+            const chevronContainer = e.target.closest('[id*="-chevron-container"]');
+            const chevronIcon = e.target.closest('[id*="-chevron-index"]');
+            
+            if (!chevronContainer && !chevronIcon) return;
+            
+            // Extract week number from ID (e.g., "week-2-chevron-container" -> "2")
+            const id = (chevronContainer || chevronIcon).id;
+            const match = id.match(/week-(\d+)-chevron/);
+            if (!match) return;
+            
+            const weekNum = match[1];
+            const subItemsContainer = document.getElementById(`week-${weekNum}-subitems-index`);
+            const chevronElement = document.getElementById(`week-${weekNum}-chevron-index`);
+            
+            if (!subItemsContainer || !chevronElement) return;
+            
+            // Prevent default and stop propagation to prevent other handlers from interfering
+            e.preventDefault();
+            e.stopPropagation();
+            e.stopImmediatePropagation();
+            
+            const isHidden = subItemsContainer.classList.contains('hidden');
+            
+            if (isHidden) {
+                subItemsContainer.classList.remove('hidden');
+                chevronElement.classList.add('rotate-180');
+            } else {
+                subItemsContainer.classList.add('hidden');
+                chevronElement.classList.remove('rotate-180');
+            }
+        };
+        
+        // Attach the delegated event listener in capture phase to run before other handlers
+        // Use document instead of sidebar to ensure it always works
+        document.addEventListener('click', globalToggleHandler, true);
+        
+        // Store reference for potential cleanup (though we probably won't need it)
+        window._submenuToggleHandler = globalToggleHandler;
+        window._submenuTogglesInitialized = true;
+        
+        // Also setup for dynamic navigation (if modules are defined)
         const modules = this.getModules();
         
         modules.forEach(module => {
@@ -723,8 +1027,6 @@ class BaseLessonPage {
             if (!link || !subItemsContainer || !chevron) return;
             
             // Check if we're on this module's page - if so, expand by default
-            // Note: This is already handled in renderModuleNavigation by not adding 'hidden' class
-            // But we ensure it here just in case
             const isCurrentPage = this.moduleId === module.id;
             if (isCurrentPage) {
                 subItemsContainer.classList.remove('hidden');
@@ -861,7 +1163,17 @@ class BaseLessonPage {
     scrollToAnchor(anchor) {
         // Ensure anchor starts with #
         const anchorId = anchor.startsWith('#') ? anchor : '#' + anchor;
+        
+        // Debounce: if we're already scrolling to the same anchor, cancel previous attempt
+        if (this.isAutoScrolling && this.pendingAnchor === anchorId) {
+            console.log('[BaseLessonPage] Already scrolling to', anchorId, '- skipping duplicate call');
+            return;
+        }
+        
         console.log('[BaseLessonPage] scrollToAnchor called with:', anchorId);
+        
+        // Store pending anchor
+        this.pendingAnchor = anchorId;
         
         // Generate a unique ID for this scroll attempt
         const currentScrollId = Date.now();
@@ -910,6 +1222,7 @@ class BaseLessonPage {
                 if (Math.abs(mainContent.scrollTop - targetScroll) < 10) {
                     console.log('[BaseLessonPage] Already at target position');
                     this.isAutoScrolling = false;
+                    this.pendingAnchor = null;
                     return;
                 }
 
@@ -943,6 +1256,7 @@ class BaseLessonPage {
                     }
                     
                     this.isAutoScrolling = false;
+                    this.pendingAnchor = null;
                 }, 1000);
                 
             } else if (element && !mainContent) {
@@ -954,6 +1268,7 @@ class BaseLessonPage {
                     inline: 'nearest'
                 });
                 this.isAutoScrolling = false;
+                this.pendingAnchor = null;
                 
             } else if (attempts < 10) {
                 // Retry if element not found yet (content might still be loading)
@@ -962,6 +1277,7 @@ class BaseLessonPage {
             } else {
                 console.warn(`[BaseLessonPage] Element with anchor ${anchorId} not found after ${attempts} attempts.`);
                 this.isAutoScrolling = false;
+                this.pendingAnchor = null;
             }
         };
         

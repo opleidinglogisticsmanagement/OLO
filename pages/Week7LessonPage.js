@@ -165,7 +165,8 @@ class Week7LessonPage extends BaseLessonPage {
                 </div>
             </section>
 
-            ${this.content.mcVragen ? this.renderMCQuestionsSection() : ''}
+            <!-- TEST JE KENNIS SECTIE UITGESCHAKELD - Code behouden voor later gebruik -->
+            <!-- ${this.content.mcVragen ? this.renderMCQuestionsSection() : ''} -->
 
         `;
     }
@@ -635,10 +636,11 @@ class Week7LessonPage extends BaseLessonPage {
     attachEventListeners() {
         super.attachEventListeners();
         
+        // TEST JE KENNIS API UITGESCHAKELD - Code behouden voor later gebruik
         // Generate MC questions after content is loaded
-        if (this.content && this.content.mcVragen) {
-            this.generateMCQuestions();
-        }
+        // if (this.content && this.content.mcVragen) {
+        //     this.generateMCQuestions();
+        // }
         
         // Listen for "next question" event
         window.addEventListener('loadNextMCQuestion', () => {
@@ -652,13 +654,14 @@ class Week7LessonPage extends BaseLessonPage {
     async init() {
         await super.init();
         
+        // TEST JE KENNIS API UITGESCHAKELD - Code behouden voor later gebruik
         // Generate MC questions if needed (after DOM is ready)
-        if (this.content && this.content.mcVragen && this.content.mcVragen.generateFromTheory) {
-            // Small delay to ensure DOM is ready
-            setTimeout(() => {
-                this.generateMCQuestions();
-            }, 100);
-        }
+        // if (this.content && this.content.mcVragen && this.content.mcVragen.generateFromTheory) {
+        //     // Small delay to ensure DOM is ready
+        //     setTimeout(() => {
+        //         this.generateMCQuestions();
+        //     }, 100);
+        // }
     }
 }
 

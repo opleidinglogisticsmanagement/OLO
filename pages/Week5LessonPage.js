@@ -160,7 +160,8 @@ class Week5LessonPage extends BaseLessonPage {
                 </div>
             </section>
 
-            ${this.content.mcVragen ? this.renderMCQuestionsSection() : ''}
+            <!-- TEST JE KENNIS SECTIE UITGESCHAKELD - Code behouden voor later gebruik -->
+            <!-- ${this.content.mcVragen ? this.renderMCQuestionsSection() : ''} -->
 
         `;
     }
@@ -676,10 +677,11 @@ class Week5LessonPage extends BaseLessonPage {
     attachEventListeners() {
         super.attachEventListeners();
         
+        // TEST JE KENNIS API UITGESCHAKELD - Code behouden voor later gebruik
         // Generate MC questions after content is loaded
-        if (this.content && this.content.mcVragen) {
-            this.generateMCQuestions();
-        }
+        // if (this.content && this.content.mcVragen) {
+        //     this.generateMCQuestions();
+        // }
         
         // Listen for "next question" event
         window.addEventListener('loadNextMCQuestion', () => {
@@ -700,11 +702,12 @@ class Week5LessonPage extends BaseLessonPage {
         }
         
         // Generate MC questions if needed (after DOM is ready)
-        if (this.content && this.content.mcVragen && this.content.mcVragen.generateFromTheory) {
-            setTimeout(() => {
-                this.generateMCQuestions();
-            }, 100);
-        }
+        // TEST JE KENNIS API UITGESCHAKELD - Code behouden voor later gebruik
+        // if (this.content && this.content.mcVragen && this.content.mcVragen.generateFromTheory) {
+        //     setTimeout(() => {
+        //         this.generateMCQuestions();
+        //     }, 100);
+        // }
     }
 }
 

@@ -662,14 +662,14 @@ class BaseLessonPage {
         // Mapping van bestandsnamen naar Class namen en script paden
         const routes = {
             'index.html': { class: 'BaseLessonPage', script: 'pages/BaseLessonPage.js' },
-            'week1.html': { class: 'Week1LessonPage', script: 'pages/Week1LessonPage.js?v=6' },
-            'week2.html': { class: 'Week2LessonPage', script: 'pages/Week2LessonPage.js?v=6' },
-            'week3.html': { class: 'Week3LessonPage', script: 'pages/Week3LessonPage.js?v=6' },
-            'week4.html': { class: 'Week4LessonPage', script: 'pages/Week4LessonPage.js?v=6' },
-            'week5.html': { class: 'Week5LessonPage', script: 'pages/Week5LessonPage.js?v=6' },
-            'week6.html': { class: 'Week6LessonPage', script: 'pages/Week6LessonPage.js?v=6' },
-            'week7.html': { class: 'Week7LessonPage', script: 'pages/Week7LessonPage.js?v=6' },
-            'afsluiting.html': { class: 'AfsluitingLessonPage', script: 'pages/AfsluitingLessonPage.js?v=6' },
+            'week1.html': { class: 'Week1LessonPage', script: 'pages/Week1LessonPage.js?v=7' },
+            'week2.html': { class: 'Week2LessonPage', script: 'pages/Week2LessonPage.js?v=7' },
+            'week3.html': { class: 'Week3LessonPage', script: 'pages/Week3LessonPage.js?v=7' },
+            'week4.html': { class: 'Week4LessonPage', script: 'pages/Week4LessonPage.js?v=7' },
+            'week5.html': { class: 'Week5LessonPage', script: 'pages/Week5LessonPage.js?v=7' },
+            'week6.html': { class: 'Week6LessonPage', script: 'pages/Week6LessonPage.js?v=7' },
+            'week7.html': { class: 'Week7LessonPage', script: 'pages/Week7LessonPage.js?v=7' },
+            'afsluiting.html': { class: 'AfsluitingLessonPage', script: 'pages/AfsluitingLessonPage.js?v=7' },
             'register.html': { class: 'RegisterPage', script: 'pages/RegisterPage.js?v=6' },
             'flashcards.html': { class: 'FlashcardsPage', script: 'pages/FlashcardsPage.js?v=6' },
         };
@@ -708,6 +708,15 @@ class BaseLessonPage {
              throw new Error(`Class ${route.class} not found after loading script ${route.script}. Controleer of de class correct aan window is toegewezen (ook als module.exports bestaat).`);
         }
 
+        // Cleanup oude pagina instantie als we naar een andere pagina navigeren
+        // Check of er een Week4LessonPage instantie is die opgeruimd moet worden
+        if (window.currentWeek4Page && filename !== 'week4.html') {
+            if (typeof window.currentWeek4Page.cleanup === 'function') {
+                window.currentWeek4Page.cleanup();
+            }
+            window.currentWeek4Page = null;
+        }
+        
         // Instantieer de nieuwe pagina
         const pageInstance = new window[route.class]();
         await pageInstance.init();
@@ -715,14 +724,34 @@ class BaseLessonPage {
 
     loadScript(src) {
         return new Promise((resolve, reject) => {
-            // Check of script al bestaat (ook als er query params achter zitten zoals ?v=2)
-            const scriptName = src.split('?')[0];
-            const existingScript = Array.from(document.scripts).find(s => s.src && s.src.includes(scriptName));
+            // Normaliseer de src URL voor vergelijking
+            const normalizedSrc = new URL(src, window.location.origin).href;
             
-            if (existingScript) {
+            // Check of script al bestaat met exact dezelfde src (inclusief versienummer)
+            const exactMatch = Array.from(document.scripts).find(s => 
+                s.src && (s.src === normalizedSrc || s.src === src)
+            );
+            
+            if (exactMatch) {
+                // Script bestaat al met exact dezelfde versie
                 resolve();
                 return;
             }
+            
+            // Als er al een script bestaat met dezelfde bestandsnaam maar andere versie, verwijder die eerst
+            const scriptName = src.split('?')[0];
+            const oldScripts = Array.from(document.scripts).filter(s => {
+                if (!s.src) return false;
+                const oldScriptName = s.src.split('?')[0];
+                return oldScriptName === scriptName && s.src !== normalizedSrc && s.src !== src;
+            });
+            
+            // Verwijder oude scripts met andere versie
+            oldScripts.forEach(oldScript => {
+                oldScript.remove();
+            });
+            
+            // Laad het nieuwe script
             const script = document.createElement('script');
             script.src = src;
             script.onload = resolve;

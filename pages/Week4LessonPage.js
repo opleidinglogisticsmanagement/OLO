@@ -20,6 +20,7 @@ class Week4LessonPage extends BaseLessonPage {
         this.cachedTheoryContent = null; // Cache for theory content (Optie 2)
         this.prefetchedQuestion = null; // OPTIE 4: Prefetch next question
         this.isPrefetching = false; // Track if prefetch is in progress
+        this.isGeneratingQuestion = false; // Track if first question is being generated
         this.segmentIndex = 0; // Track which text segment to use (for variety)
         this.usedSegments = []; // Track recently used segments to avoid repetition
         this.totalSegments = null; // Cache total number of segments
@@ -269,7 +270,31 @@ class Week4LessonPage extends BaseLessonPage {
             return MCQuestionRenderer.render(mcConfig, 'mc-questions-container', this.currentQuestion);
         }
         
-        // Anders toon loading state - binnen een sectie
+        // Als er een loading state is (vraag wordt gegenereerd), toon die
+        if (this.isGeneratingQuestion) {
+            return `
+                <section class="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-4 sm:p-6 sm:pr-[70px] hover-lift mt-8 transition-colors duration-200">
+                    <div class="flex flex-col sm:flex-row items-start">
+                        <div class="w-10 h-10 sm:w-12 sm:h-12 bg-indigo-100 dark:bg-indigo-900/30 rounded-lg flex items-center justify-center flex-shrink-0 mb-3 sm:mb-0 sm:mr-4">
+                            <i class="fas fa-question-circle text-indigo-600 dark:text-indigo-400 text-lg"></i>
+                        </div>
+                        <div class="flex-1 min-w-0 w-full sm:w-auto">
+                            <h2 class="text-lg sm:text-xl font-semibold text-gray-900 dark:text-white mb-4">${mcConfig.title || 'Test je kennis'}</h2>
+                            <div id="mc-questions-container" class="space-y-6">
+                                <div class="border border-gray-200 dark:border-gray-700 rounded-lg p-5 bg-gray-50 dark:bg-gray-900/50">
+                                    <div class="flex items-center justify-center space-x-3 py-8">
+                                        <div class="animate-spin rounded-full h-6 w-6 border-b-2 border-indigo-600 dark:border-indigo-400"></div>
+                                        <p class="text-gray-600 dark:text-gray-300">AI-generatie vraag...</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            `;
+        }
+        
+        // Anders toon knop om eerste vraag te starten
         return `
             <section class="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-4 sm:p-6 sm:pr-[70px] hover-lift mt-8 transition-colors duration-200">
                 <div class="flex flex-col sm:flex-row items-start">
@@ -279,11 +304,12 @@ class Week4LessonPage extends BaseLessonPage {
                     <div class="flex-1 min-w-0 w-full sm:w-auto">
                         <h2 class="text-lg sm:text-xl font-semibold text-gray-900 dark:text-white mb-4">${mcConfig.title || 'Test je kennis'}</h2>
                         <div id="mc-questions-container" class="space-y-6">
-                            <div class="border border-gray-200 dark:border-gray-700 rounded-lg p-5 bg-gray-50 dark:bg-gray-900/50">
-                                <div class="flex items-center justify-center space-x-3 py-8">
-                                    <div class="animate-spin rounded-full h-6 w-6 border-b-2 border-indigo-600 dark:border-indigo-400"></div>
-                                    <p class="text-gray-600 dark:text-gray-300">AI-generatie vraag...</p>
-                                </div>
+                            <div class="border border-gray-200 dark:border-gray-700 rounded-lg p-5 bg-gray-50 dark:bg-gray-900/50 text-center">
+                                <p class="text-gray-700 dark:text-gray-300 mb-4">Klik op de knop hieronder om te beginnen met de eerste vraag.</p>
+                                <button id="start-mc-questions-btn" data-action="start-first-question" class="px-6 py-3 bg-indigo-600 dark:bg-indigo-700 text-white rounded-lg hover:bg-indigo-700 dark:hover:bg-indigo-600 focus-ring transition-colors flex items-center justify-center space-x-2 mx-auto">
+                                    <i class="fas fa-play"></i>
+                                    <span>Start eerste vraag</span>
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -296,6 +322,13 @@ class Week4LessonPage extends BaseLessonPage {
      * Genereer MC vragen met AI
      */
     async generateMCQuestions() {
+        // Check of we nog op week 4 zijn - alleen blokkeren als we zeker weten dat we NIET op week 4 zijn
+        // Als window.currentWeek4Page === this, dan zijn we op week 4
+        if (window.currentWeek4Page !== this) {
+            console.log('[Week4LessonPage] Stopping question generation - not the current week 4 page instance');
+            return;
+        }
+        
         if (!this.content || !this.content.mcVragen) {
             return;
         }
@@ -374,6 +407,13 @@ class Week4LessonPage extends BaseLessonPage {
             const generatedQuestions = await this.aiGenerator.generateMCQuestions(theorySegment, 1, nextSegmentIndex);
             console.log('Generated question:', generatedQuestions);
             
+            // Check opnieuw of we nog de actieve week 4 instantie zijn na async operatie
+            if (window.currentWeek4Page !== this) {
+                console.log('[Week4LessonPage] Stopping - navigated away during generation');
+                this.isGeneratingQuestion = false;
+                return;
+            }
+            
             if (generatedQuestions && generatedQuestions.length > 0) {
                 // Track this segment as used
                 this.usedSegments.push(nextSegmentIndex);
@@ -408,6 +448,7 @@ class Week4LessonPage extends BaseLessonPage {
         } catch (error) {
             console.error('Error generating MC questions:', error);
             const errorMessage = error.message || 'Er is een fout opgetreden bij het genereren van vragen. Probeer de pagina te verversen.';
+            this.isGeneratingQuestion = false; // Reset flag bij error
             this.showErrorInContainer(errorMessage);
         }
     }
@@ -419,10 +460,16 @@ class Week4LessonPage extends BaseLessonPage {
         const container = document.getElementById('mc-questions-container');
         if (container && container.parentElement) {
             const mcSection = container.closest('section');
-            if (mcSection && this.currentQuestion) {
-                // Render single question
-                const newSection = MCQuestionRenderer.render(this.content.mcVragen, 'mc-questions-container', this.currentQuestion);
-                mcSection.outerHTML = newSection;
+            if (mcSection) {
+                // Als er een vraag is, render die
+                if (this.currentQuestion) {
+                    const newSection = MCQuestionRenderer.render(this.content.mcVragen, 'mc-questions-container', this.currentQuestion);
+                    mcSection.outerHTML = newSection;
+                } else if (this.isGeneratingQuestion) {
+                    // Als we aan het genereren zijn, toon loading state
+                    const newSection = this.renderMCQuestionsSection();
+                    mcSection.outerHTML = newSection;
+                }
             }
         }
     }
@@ -432,6 +479,13 @@ class Week4LessonPage extends BaseLessonPage {
      * This improves UX by generating the next question while user is still answering current one
      */
     async prefetchNextQuestion() {
+        // Check of we nog de actieve week 4 instantie zijn
+        if (window.currentWeek4Page !== this) {
+            console.log('[Week4LessonPage] Stopping prefetch - not the current week 4 page instance');
+            this.isPrefetching = false;
+            return;
+        }
+        
         // Don't prefetch if already prefetching or if we already have a prefetched question
         if (this.isPrefetching || this.prefetchedQuestion) {
             return;
@@ -472,6 +526,13 @@ class Week4LessonPage extends BaseLessonPage {
             
             const generatedQuestions = await this.aiGenerator.generateMCQuestions(theorySegment, 1, nextSegmentIndex);
             
+            // Check opnieuw of we nog de actieve week 4 instantie zijn na async operatie
+            if (window.currentWeek4Page !== this) {
+                console.log('[Week4LessonPage] Stopping prefetch - navigated away during generation');
+                this.isPrefetching = false;
+                return;
+            }
+            
             if (generatedQuestions && generatedQuestions.length > 0) {
                 // Store prefetched question
                 this.prefetchedQuestion = generatedQuestions[0];
@@ -493,6 +554,12 @@ class Week4LessonPage extends BaseLessonPage {
      * OPTIE 4: Use prefetched question if available, otherwise generate on-demand
      */
     async loadNextQuestion() {
+        // Check of we nog de actieve week 4 instantie zijn
+        if (window.currentWeek4Page !== this) {
+            console.log('[Week4LessonPage] Ignoring loadNextQuestion - not the current week 4 page instance');
+            return;
+        }
+        
         const mcConfig = this.content.mcVragen;
         
         if (!mcConfig.generateFromTheory) {
@@ -591,6 +658,12 @@ class Week4LessonPage extends BaseLessonPage {
             console.log('[Week4LessonPage] Theory segment preview:', theorySegment.substring(0, 100) + '...');
             
             const generatedQuestions = await this.aiGenerator.generateMCQuestions(theorySegment, 1, nextSegmentIndex);
+            
+            // Check opnieuw of we nog de actieve week 4 instantie zijn na async operatie
+            if (window.currentWeek4Page !== this) {
+                console.log('[Week4LessonPage] Stopping loadNextQuestion - navigated away during generation');
+                return;
+            }
             
             if (generatedQuestions && generatedQuestions.length > 0) {
                 // Track this segment as used
@@ -699,18 +772,107 @@ class Week4LessonPage extends BaseLessonPage {
      * Attach event listeners (override base class)
      * Image modal functionality is now in BaseLessonPage
      */
+    /**
+     * Check of we nog op week 4 pagina zijn
+     */
+    isOnWeek4Page() {
+        const currentPath = window.location.pathname;
+        const currentHash = window.location.hash;
+        // Check of we op week4.html zijn (met of zonder hash)
+        // Ook check via moduleId als fallback
+        const isWeek4Path = currentPath.includes('week4.html') || currentHash.includes('week-4') || currentHash.includes('#week-4');
+        const isWeek4Module = this.moduleId === 'week-4';
+        return isWeek4Path || isWeek4Module;
+    }
+
     attachEventListeners() {
         super.attachEventListeners();
         
-        // Generate MC questions after content is loaded
-        if (this.content && this.content.mcVragen) {
-            this.generateMCQuestions();
+        // Listen for "next question" event - alleen op week 4
+        if (!this._loadNextQuestionListenerAdded) {
+            this._loadNextQuestionListenerAdded = true;
+            window.addEventListener('loadNextMCQuestion', () => {
+                // Check of we nog de actieve week 4 instantie zijn
+                if (window.currentWeek4Page === this) {
+                    this.loadNextQuestion();
+                }
+            });
         }
         
-        // Listen for "next question" event
-        window.addEventListener('loadNextMCQuestion', () => {
-            this.loadNextQuestion();
-        });
+        // Event listener voor "Start eerste vraag" knop
+        // Gebruik event delegation omdat de knop dynamisch wordt toegevoegd
+        // Voorkom dat de listener meerdere keren wordt toegevoegd
+        if (!this._startQuestionListenerAdded) {
+            this._startQuestionListenerAdded = true;
+            // Gebruik capture phase om zeker te zijn dat we het event oppakken
+            // Bind this context correct
+            const self = this;
+            document.addEventListener('click', (e) => {
+                // Check of de klik op de button zelf of op een child element (zoals icon) is
+                const button = e.target.closest('[data-action="start-first-question"]');
+                if (button) {
+                    console.log('[Week4LessonPage] Button click detected');
+                    
+                    // Als de button zichtbaar is, betekent dat we op week 4 zijn
+                    // Gebruik de opgeslagen referentie (meest betrouwbaar)
+                    const pageInstance = window.currentWeek4Page;
+                    if (!pageInstance) {
+                        console.warn('[Week4LessonPage] Ignoring click - no currentWeek4Page instance. Pathname:', window.location.pathname, 'Hash:', window.location.hash);
+                        return;
+                    }
+                    
+                    // Check of de button daadwerkelijk op de pagina staat (is zichtbaar)
+                    // Dit is een betere check dan URL parsing
+                    const buttonInDOM = document.querySelector('[data-action="start-first-question"]');
+                    if (!buttonInDOM || buttonInDOM !== button) {
+                        console.warn('[Week4LessonPage] Ignoring click - button not in DOM or mismatch');
+                        return;
+                    }
+                    
+                    e.preventDefault();
+                    e.stopPropagation();
+                    console.log('[Week4LessonPage] Start button clicked - proceeding');
+                    
+                    if (typeof pageInstance.startFirstQuestion === 'function') {
+                        pageInstance.startFirstQuestion();
+                    } else {
+                        console.error('[Week4LessonPage] startFirstQuestion method not found');
+                    }
+                }
+            }, true); // Capture phase
+        }
+    }
+    
+    /**
+     * Start de eerste MC vraag na klik op knop
+     */
+    async startFirstQuestion() {
+        console.log('[Week4LessonPage] startFirstQuestion called');
+        
+        if (!this.content || !this.content.mcVragen) {
+            console.warn('[Week4LessonPage] No content or mcVragen found');
+            return;
+        }
+        
+        console.log('[Week4LessonPage] Starting question generation...');
+        
+        // Zet flag dat we aan het genereren zijn
+        this.isGeneratingQuestion = true;
+        
+        // Update de sectie om loading state te tonen
+        this.updateMCQuestionsSection();
+        
+        try {
+            // Genereer de eerste vraag
+            await this.generateMCQuestions();
+        } catch (error) {
+            console.error('[Week4LessonPage] Error in startFirstQuestion:', error);
+            this.isGeneratingQuestion = false;
+            this.showErrorInContainer('Er is een fout opgetreden bij het starten van de vraag.');
+        }
+        
+        // Reset flag (wordt al gedaan in generateMCQuestions bij succes)
+        this.isGeneratingQuestion = false;
     }
 
     /**
@@ -719,18 +881,37 @@ class Week4LessonPage extends BaseLessonPage {
     async init() {
         await super.init();
         
+        // Bewaar referentie naar huidige instantie voor inline onclick handlers
+        // Reset eerst oude referenties van andere instanties
+        if (window.currentWeek4Page && window.currentWeek4Page !== this) {
+            // Stop prefetch van oude instantie
+            if (window.currentWeek4Page.isPrefetching) {
+                window.currentWeek4Page.isPrefetching = false;
+            }
+        }
+        window.currentWeek4Page = this;
+        
         // Handle hash in URL after content is loaded
         if (window.location.hash) {
             // Immediately try to scroll to anchor, BaseLessonPage.scrollToAnchor handles retries
             this.scrollToAnchor(window.location.hash);
         }
+    }
+    
+    /**
+     * Cleanup methode om te worden aangeroepen bij navigatie weg van week 4
+     */
+    cleanup() {
+        // Stop prefetch processen
+        this.isPrefetching = false;
+        this.prefetchedQuestion = null;
         
-        // Generate MC questions if needed (after DOM is ready)
-        if (this.content && this.content.mcVragen && this.content.mcVragen.generateFromTheory) {
-            setTimeout(() => {
-                this.generateMCQuestions();
-            }, 100);
+        // Reset referentie als dit de huidige instantie is
+        if (window.currentWeek4Page === this) {
+            window.currentWeek4Page = null;
         }
+        
+        console.log('[Week4LessonPage] Cleanup completed');
     }
 }
 

@@ -1193,8 +1193,10 @@ app.get('/', (req, res, next) => {
     if (global.htmlFilesCache && global.htmlFilesCache['index.html'] && !hasQueryParams) {
         console.log(`✅ Serving index.html from memory cache`);
         res.setHeader('Content-Type', 'text/html; charset=utf-8');
-        // HTML-bestanden korter cachen zodat nieuwe versienummers worden geladen
-        res.setHeader('Cache-Control', 'public, max-age=300, must-revalidate'); // 5 minuten
+        // Strict no-cache beleid om te forceren dat de browser altijd bij de server checkt
+        res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+        res.setHeader('Pragma', 'no-cache');
+        res.setHeader('Expires', '0');
         return res.send(global.htmlFilesCache['index.html']);
     }
     
@@ -1204,7 +1206,10 @@ app.get('/', (req, res, next) => {
     
     // Fallback: probeer bestand van disk te lezen
     const indexPath = path.join(rootDir, 'index.html');
-    res.setHeader('Cache-Control', 'public, max-age=300, must-revalidate'); // 5 minuten
+    // Strict no-cache beleid om te forceren dat de browser altijd bij de server checkt
+    res.setHeader('Cache-Control', 'no-cache, must-revalidate, proxy-revalidate');
+    res.setHeader('Pragma', 'no-cache');
+    res.setHeader('Expires', '0');
     res.sendFile(indexPath, (err) => {
         if (err) {
             console.error('Error serving index.html:', err);
@@ -1219,8 +1224,10 @@ app.get('/game/index.html', (req, res, next) => {
     console.log(`Attempting to serve game/index.html from: ${filePath}`);
     
     if (fs.existsSync(filePath)) {
-        // HTML-bestanden korter cachen zodat nieuwe versienummers worden geladen
-        res.setHeader('Cache-Control', 'public, max-age=300, must-revalidate'); // 5 minuten
+        // Strict no-cache beleid om te forceren dat de browser altijd bij de server checkt
+        res.setHeader('Cache-Control', 'no-cache, must-revalidate, proxy-revalidate');
+        res.setHeader('Pragma', 'no-cache');
+        res.setHeader('Expires', '0');
         res.sendFile(filePath, (err) => {
             if (err) {
                 console.error('Error serving game/index.html:', err);
@@ -1304,8 +1311,10 @@ app.get(/\.html$/, (req, res, next) => {
     if (global.htmlFilesCache && global.htmlFilesCache[fileName] && !hasQueryParams) {
         console.log(`✅ Serving ${fileName} from memory cache`);
         res.setHeader('Content-Type', 'text/html; charset=utf-8');
-        // HTML-bestanden korter cachen zodat nieuwe versienummers worden geladen
-        res.setHeader('Cache-Control', 'public, max-age=300, must-revalidate'); // 5 minuten
+        // Strict no-cache beleid om te forceren dat de browser altijd bij de server checkt
+        res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+        res.setHeader('Pragma', 'no-cache');
+        res.setHeader('Expires', '0');
         return res.send(global.htmlFilesCache[fileName]);
     }
     
@@ -1336,8 +1345,10 @@ app.get(/\.html$/, (req, res, next) => {
     }
     
     if (foundPath) {
-        // HTML-bestanden korter cachen zodat nieuwe versienummers worden geladen
-        res.setHeader('Cache-Control', 'public, max-age=300, must-revalidate'); // 5 minuten
+        // Strict no-cache beleid om te forceren dat de browser altijd bij de server checkt
+        res.setHeader('Cache-Control', 'no-cache, must-revalidate, proxy-revalidate');
+        res.setHeader('Pragma', 'no-cache');
+        res.setHeader('Expires', '0');
         res.sendFile(foundPath, (err) => {
             if (err) {
                 console.error(`Error serving ${fileName}:`, err);
@@ -1385,17 +1396,10 @@ app.get(/\.js$/, (req, res, next) => {
     if (foundPath) {
         res.setHeader('Content-Type', 'application/javascript; charset=utf-8');
         
-        // BELANGRIJK: Als er een query parameter is (zoals ?v=7), cache korter
-        // Dit zorgt ervoor dat nieuwe versies worden geladen
-        const hasQueryParam = req.query && Object.keys(req.query).length > 0;
-        if (hasQueryParam) {
-            // Met query param: cache 1 uur (voor development/testing)
-            // must-revalidate zorgt ervoor dat browser altijd checkt of er een nieuwe versie is
-            res.setHeader('Cache-Control', 'public, max-age=3600, must-revalidate');
-        } else {
-            // Zonder query param: cache 1 jaar (immutable assets)
-            res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
-        }
+        // Strict no-cache beleid om te forceren dat de browser altijd bij de server checkt
+        res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+        res.setHeader('Pragma', 'no-cache');
+        res.setHeader('Expires', '0');
         
         res.sendFile(foundPath, (err) => {
             if (err) {
@@ -1442,6 +1446,10 @@ app.get(/\.json$/, (req, res, next) => {
     
     if (foundPath) {
         res.setHeader('Content-Type', 'application/json; charset=utf-8');
+        // Strict no-cache beleid om te forceren dat de browser altijd bij de server checkt
+        res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+        res.setHeader('Pragma', 'no-cache');
+        res.setHeader('Expires', '0');
         res.sendFile(foundPath, (err) => {
             if (err) {
                 console.error(`Error serving JSON file ${fileName}:`, err);

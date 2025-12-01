@@ -659,53 +659,55 @@ class BaseLessonPage {
      * Helper: Bepaal welke class geladen moet worden op basis van bestandsnaam
      */
     async loadPageByFilename(filename) {
-        // Mapping van bestandsnamen naar Class namen en script paden
-        const routes = {
-            'index.html': { class: 'BaseLessonPage', script: 'pages/BaseLessonPage.js' },
-            'week1.html': { class: 'Week1LessonPage', script: 'pages/Week1LessonPage.js?v=8' },
-            'week2.html': { class: 'Week2LessonPage', script: 'pages/Week2LessonPage.js?v=8' },
-            'week3.html': { class: 'Week3LessonPage', script: 'pages/Week3LessonPage.js?v=8' },
-            'week4.html': { class: 'Week4LessonPage', script: 'pages/Week4LessonPage.js?v=8' },
-            'week5.html': { class: 'Week5LessonPage', script: 'pages/Week5LessonPage.js?v=8' },
-            'week6.html': { class: 'Week6LessonPage', script: 'pages/Week6LessonPage.js?v=8' },
-            'week7.html': { class: 'Week7LessonPage', script: 'pages/Week7LessonPage.js?v=8' },
-            'afsluiting.html': { class: 'AfsluitingLessonPage', script: 'pages/AfsluitingLessonPage.js?v=8' },
-            'register.html': { class: 'RegisterPage', script: 'pages/RegisterPage.js?v=6' },
-            'flashcards.html': { class: 'FlashcardsPage', script: 'pages/FlashcardsPage.js?v=6' },
-        };
+        // Dynamisch bepalen van class naam en script pad op basis van bestandsnaam
+        let className, scriptPath;
+        
+        if (filename === 'index.html') {
+            className = 'BaseLessonPage';
+            scriptPath = 'pages/BaseLessonPage.js';
+        } else {
+            // Converteer bestandsnaam naar class naam (bijv. week1.html -> Week1LessonPage)
+            const baseName = filename.replace('.html', '');
+            const capitalized = baseName.charAt(0).toUpperCase() + baseName.slice(1);
+            
+            // Speciale gevallen
+            if (baseName === 'afsluiting') {
+                className = 'AfsluitingLessonPage';
+            } else if (baseName.startsWith('week')) {
+                className = capitalized + 'LessonPage';
+            } else {
+                // Voor register, flashcards, etc.
+                className = capitalized + 'Page';
+            }
+            
+            scriptPath = `pages/${className}.js`;
+        }
 
-        const route = routes[filename];
-        if (!route) {
-            // Als we geen route hebben, reload gewoon de pagina
-            window.location.reload(); 
+        // Specifieke behandeling voor index.html
+        if (filename === 'index.html') {
+            const pageInstance = new BaseLessonPage('start', 'Start', 'Opzetten van Logistieke Onderzoeken');
+            await pageInstance.init();
             return;
         }
 
-        // Specifieke behandeling voor index.html als er geen aparte HomePage class is
-        if (filename === 'index.html' && route.class === 'BaseLessonPage') {
-             const pageInstance = new BaseLessonPage('start', 'Start', 'Opzetten van Logistieke Onderzoeken');
-             await pageInstance.init();
-             return;
-        }
-
         // Check of de class al bestaat, zo niet, laad het script
-        if (typeof window[route.class] === 'undefined') {
-            await this.loadScript(route.script);
+        if (typeof window[className] === 'undefined') {
+            await this.loadScript(scriptPath);
         }
 
         // Wacht even en check opnieuw (polling) om race conditions te voorkomen
-        if (typeof window[route.class] === 'undefined') {
+        if (typeof window[className] === 'undefined') {
              // Poll maximaal 20x met 50ms interval (totaal 1000ms)
              for (let i = 0; i < 20; i++) {
                  await new Promise(resolve => setTimeout(resolve, 50));
-                 if (typeof window[route.class] !== 'undefined') break;
+                 if (typeof window[className] !== 'undefined') break;
              }
         }
 
         // Check nogmaals of de class nu wel bestaat
-        if (typeof window[route.class] === 'undefined') {
-             console.error(`[SPA] Class ${route.class} not found after loading script ${route.script}. Window keys:`, Object.keys(window).filter(k => k.includes('LessonPage')));
-             throw new Error(`Class ${route.class} not found after loading script ${route.script}. Controleer of de class correct aan window is toegewezen (ook als module.exports bestaat).`);
+        if (typeof window[className] === 'undefined') {
+             console.error(`[SPA] Class ${className} not found after loading script ${scriptPath}. Window keys:`, Object.keys(window).filter(k => k.includes('LessonPage') || k.includes('Page')));
+             throw new Error(`Class ${className} not found after loading script ${scriptPath}. Controleer of de class correct aan window is toegewezen (ook als module.exports bestaat).`);
         }
 
         // Cleanup oude pagina instantie als we naar een andere pagina navigeren
@@ -718,42 +720,43 @@ class BaseLessonPage {
         }
         
         // Instantieer de nieuwe pagina
-        const pageInstance = new window[route.class]();
+        const pageInstance = new window[className]();
         await pageInstance.init();
     }
 
     loadScript(src) {
         return new Promise((resolve, reject) => {
-            // Normaliseer de src URL voor vergelijking
-            const normalizedSrc = new URL(src, window.location.origin).href;
+            // Voeg altijd een timestamp toe voor cache-busting
+            const scriptUrl = src + '?t=' + Date.now();
+            const normalizedSrc = new URL(scriptUrl, window.location.origin).href;
             
-            // Check of script al bestaat met exact dezelfde src (inclusief versienummer)
+            // Check of script al bestaat met exact dezelfde src
             const exactMatch = Array.from(document.scripts).find(s => 
-                s.src && (s.src === normalizedSrc || s.src === src)
+                s.src && (s.src === normalizedSrc || s.src === scriptUrl)
             );
             
             if (exactMatch) {
-                // Script bestaat al met exact dezelfde versie
+                // Script bestaat al met exact dezelfde URL
                 resolve();
                 return;
             }
             
-            // Als er al een script bestaat met dezelfde bestandsnaam maar andere versie, verwijder die eerst
+            // Als er al een script bestaat met dezelfde bestandsnaam maar andere timestamp, verwijder die eerst
             const scriptName = src.split('?')[0];
             const oldScripts = Array.from(document.scripts).filter(s => {
                 if (!s.src) return false;
                 const oldScriptName = s.src.split('?')[0];
-                return oldScriptName === scriptName && s.src !== normalizedSrc && s.src !== src;
+                return oldScriptName === scriptName && s.src !== normalizedSrc && s.src !== scriptUrl;
             });
             
-            // Verwijder oude scripts met andere versie
+            // Verwijder oude scripts met andere timestamp
             oldScripts.forEach(oldScript => {
                 oldScript.remove();
             });
             
             // Laad het nieuwe script
             const script = document.createElement('script');
-            script.src = src;
+            script.src = scriptUrl;
             script.onload = resolve;
             script.onerror = reject;
             document.head.appendChild(script);

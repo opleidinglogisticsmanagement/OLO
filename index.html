@@ -422,6 +422,7 @@
     <script src="pages/MCQuestionRenderer.js"></script>
     <script src="pages/AIGenerator.js"></script>
     <script src="pages/BaseLessonPage.js"></script>
+    <script src="pages/StartLessonPage.js?v=1"></script>
     
     <!-- Page Scripts (Preload voor snellere navigatie en betrouwbaarheid) -->
     <script src="pages/Week1LessonPage.js?v=8"></script>
@@ -442,17 +443,23 @@
 
     <div id="app" class="h-screen flex overflow-hidden">
         <!-- Sidebar -->
-        <aside id="sidebar" class="w-80 bg-white dark:bg-gray-800 shadow-lg transform -translate-x-full lg:translate-x-0 transition-transform duration-300 ease-in-out fixed inset-y-0 left-0 z-40" aria-label="Navigatie menu">
+        <aside id="sidebar" class="w-full sm:w-80 bg-white dark:bg-gray-800 shadow-lg transform -translate-x-full lg:translate-x-0 transition-transform duration-300 ease-in-out fixed inset-y-0 left-0 z-40" aria-label="Navigatie menu">
             <div class="h-full flex flex-col">
                 <!-- Sidebar Header -->
                 <div class="h-16 px-6 border-b border-gray-200 dark:border-gray-700 flex items-center">
-                    <div class="flex items-center space-x-3 w-full">
-                        <div class="w-10 h-10 bg-gradient-to-r from-blue-600 to-blue-700 rounded-lg flex items-center justify-center flex-shrink-0">
-                            <i class="fas fa-graduation-cap text-white text-lg"></i>
+                    <div class="flex items-center justify-between w-full">
+                        <div class="flex items-center space-x-3 flex-1 min-w-0">
+                            <div class="w-10 h-10 bg-gradient-to-r from-blue-600 to-blue-700 rounded-lg flex items-center justify-center flex-shrink-0" aria-hidden="true">
+                                <i class="fas fa-graduation-cap text-white text-lg"></i>
+                            </div>
+                            <div class="min-w-0 flex-1">
+                                <h1 class="text-sm font-bold text-gray-900 dark:text-white leading-tight">Opzetten van Logistieke<br>Onderzoeken (OLO)</h1>
+                            </div>
                         </div>
-                        <div class="min-w-0 flex-1">
-                            <h1 class="text-sm font-bold text-gray-900 dark:text-white leading-tight">Opzetten van Logistieke<br>Onderzoeken (OLO)</h1>
-                        </div>
+                        <!-- Close button for mobile -->
+                        <button id="sidebar-close-button" class="lg:hidden p-2 rounded-md text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 focus-ring ml-2 flex-shrink-0" aria-label="Sluit navigatie menu">
+                            <i class="fas fa-times text-xl"></i>
+                        </button>
                     </div>
                 </div>
 
@@ -1279,18 +1286,29 @@
 
         // Initialize SPA Router
         document.addEventListener('DOMContentLoaded', () => {
-            // Check if BaseLessonPage is loaded
-            if (typeof BaseLessonPage !== 'undefined') {
-                const basePage = new BaseLessonPage('start', 'Start', 'Opzetten van Logistieke Onderzoeken');
-                basePage.setupSPARouter();
-                
-                // Setup submenu toggles (singleton pattern - only runs once)
-                basePage.setupSubmenuToggles();
-                
-                // Activeer ook de current link in sidebar
-                // (Op index.html is dit 'Start', maar voor consistentie)
-                basePage.updateActiveLink();
+            // Check if StartLessonPage is loaded, otherwise fallback to BaseLessonPage
+            let startPage;
+            if (typeof StartLessonPage !== 'undefined') {
+                startPage = new StartLessonPage();
+            } else if (typeof BaseLessonPage !== 'undefined') {
+                // Fallback to BaseLessonPage if StartLessonPage is not available
+                startPage = new BaseLessonPage('start', 'Start', 'Opzetten van Logistieke Onderzoeken');
+            } else {
+                console.error('Neither StartLessonPage nor BaseLessonPage is available');
+                return;
             }
+            
+            // Setup SPA router (singleton pattern - only runs once)
+            if (!window.routerInitialized) {
+                startPage.router.setupSPARouter();
+                window.routerInitialized = true;
+            }
+            
+            // Setup submenu toggles (singleton pattern - only runs once)
+            startPage.setupSubmenuToggles();
+            
+            // Activeer ook de current link in sidebar
+            startPage.router.updateActiveLink('start');
         });
     </script>
 </body>

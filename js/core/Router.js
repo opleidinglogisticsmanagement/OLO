@@ -115,8 +115,8 @@ class Router {
         let className, scriptPath;
         
         if (filename === 'index.html') {
-            className = 'BaseLessonPage';
-            scriptPath = 'pages/BaseLessonPage.js';
+            className = 'StartLessonPage';
+            scriptPath = 'pages/StartLessonPage.js';
         } else {
             // Converteer bestandsnaam naar class naam (bijv. week1.html -> Week1LessonPage)
             const baseName = filename.replace('.html', '');
@@ -137,7 +137,28 @@ class Router {
 
         // Specifieke behandeling voor index.html
         if (filename === 'index.html') {
-            const pageInstance = new BaseLessonPage('start', 'Start', 'Opzetten van Logistieke Onderzoeken');
+            // Laad StartLessonPage script als het nog niet geladen is
+            if (typeof window.StartLessonPage === 'undefined') {
+                await this.loadScript('pages/StartLessonPage.js');
+            }
+            
+            // Wacht even en check opnieuw (polling) om race conditions te voorkomen
+            if (typeof window.StartLessonPage === 'undefined') {
+                for (let i = 0; i < 20; i++) {
+                    await new Promise(resolve => setTimeout(resolve, 50));
+                    if (typeof window.StartLessonPage !== 'undefined') break;
+                }
+            }
+            
+            // Check of de class nu wel bestaat
+            if (typeof window.StartLessonPage === 'undefined') {
+                console.error('[SPA] StartLessonPage not found after loading script. Falling back to BaseLessonPage.');
+                const pageInstance = new BaseLessonPage('start', 'Start', 'Opzetten van Logistieke Onderzoeken');
+                await pageInstance.init();
+                return;
+            }
+            
+            const pageInstance = new window.StartLessonPage();
             await pageInstance.init();
             return;
         }

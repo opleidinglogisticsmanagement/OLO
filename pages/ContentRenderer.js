@@ -85,22 +85,29 @@ class ContentRenderer {
             return '';
         }
 
+        // Check if Sanitizer is available
+        const sanitize = (typeof window !== 'undefined' && window.Sanitizer) 
+            ? window.Sanitizer.sanitizeHTML.bind(window.Sanitizer)
+            : (text) => text; // Fallback: return as-is if Sanitizer not available
+
         if (Array.isArray(item.text)) {
             return item.text.map(textItem => {
                 const trimmedText = textItem.trim();
-                // Als text begint met HTML tag, render direct
+                // Als text begint met HTML tag, sanitize maar behoud HTML structuur
                 if (trimmedText.startsWith('<')) {
-                    return trimmedText;
+                    return sanitize(trimmedText);
                 }
-                // Anders wrap in <p> tag
-                return `<p class="text-gray-700 dark:text-gray-300 mb-4">${textItem}</p>`;
+                // Anders wrap in <p> tag en sanitize de tekst
+                const sanitizedText = sanitize(textItem);
+                return `<p class="text-gray-700 dark:text-gray-300 mb-4">${sanitizedText}</p>`;
             }).join('');
         } else {
             const trimmedText = String(item.text).trim();
             if (trimmedText.startsWith('<')) {
-                return trimmedText;
+                return sanitize(trimmedText);
             }
-            return `<p class="text-gray-700 dark:text-gray-300 mb-4">${item.text}</p>`;
+            const sanitizedText = sanitize(item.text);
+            return `<p class="text-gray-700 dark:text-gray-300 mb-4">${sanitizedText}</p>`;
         }
     }
 
@@ -114,12 +121,18 @@ class ContentRenderer {
             return '';
         }
         
+        // Check if Sanitizer is available
+        const sanitize = (typeof window !== 'undefined' && window.Sanitizer) 
+            ? window.Sanitizer.sanitizeHTML.bind(window.Sanitizer)
+            : (text) => text; // Fallback: return as-is if Sanitizer not available
+        
         const level = item.level || 2; // Default h2
         const id = item.id || '';
         const idAttr = id ? ` id="${id}"` : '';
         const scrollMargin = id ? ' scroll-mt-20' : '';
+        const sanitizedText = sanitize(item.text);
         
-        return `<h${level} class="text-2xl font-bold text-gray-900 dark:text-white mb-0 mt-8${scrollMargin}"${idAttr}>${item.text}</h${level}>`;
+        return `<h${level} class="text-2xl font-bold text-gray-900 dark:text-white mb-0 mt-8${scrollMargin}"${idAttr}>${sanitizedText}</h${level}>`;
     }
 
     /**
@@ -237,11 +250,20 @@ class ContentRenderer {
             return '';
         }
 
+        // Check if Sanitizer is available
+        const sanitize = (typeof window !== 'undefined' && window.Sanitizer) 
+            ? window.Sanitizer.sanitizeHTML.bind(window.Sanitizer)
+            : (text) => text; // Fallback: return as-is if Sanitizer not available
+
         const target = item.target || '_blank';
         const classes = item.classes || 'text-blue-600 hover:text-blue-800 underline font-medium';
+        // Sanitize the link text, but keep URL as-is (URLs should be validated separately if needed)
+        const sanitizedText = sanitize(item.text);
+        // Escape URL for safety (basic protection)
+        const escapedUrl = item.url.replace(/"/g, '&quot;').replace(/'/g, '&#x27;');
         
         return `<p class="mb-4">
-            <a href="${item.url}" target="${target}" class="${classes}">${item.text}</a>
+            <a href="${escapedUrl}" target="${target}" class="${classes}">${sanitizedText}</a>
         </p>`;
     }
 
@@ -256,10 +278,19 @@ class ContentRenderer {
             return '';
         }
 
+        // Check if Sanitizer is available
+        const sanitize = (typeof window !== 'undefined' && window.Sanitizer) 
+            ? window.Sanitizer.sanitizeHTML.bind(window.Sanitizer)
+            : (text) => text; // Fallback: return as-is if Sanitizer not available
+
         const title = item.title || '';
         const description = item.description || '';
         const showLink = item.showLink !== false; // Default true, kan worden uitgeschakeld
         const videoId = `video-${Math.random().toString(36).substr(2, 9)}`;
+        
+        // Sanitize title and description
+        const sanitizedTitle = sanitize(title);
+        const sanitizedDescription = sanitize(description);
         
         // Handle Mediasite URLs - convert to embed format if needed
         let embedUrl = item.url;
@@ -273,22 +304,27 @@ class ContentRenderer {
             }
         }
         
+        // Escape URLs for safety
+        const escapedUrl = item.url.replace(/"/g, '&quot;').replace(/'/g, '&#x27;');
+        const escapedEmbedUrl = embedUrl.replace(/"/g, '&quot;').replace(/'/g, '&#x27;');
+        const escapedTitleForAttr = (title || 'Video').replace(/"/g, '&quot;').replace(/'/g, '&#x27;');
+        
         return `
             <div class="mb-6">
-                ${title ? `<h4 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">${title}</h4>` : ''}
+                ${sanitizedTitle ? `<h4 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">${sanitizedTitle}</h4>` : ''}
                 <div class="rounded-lg overflow-hidden mb-2 relative bg-black dark:bg-black w-full video-responsive-container" id="${videoId}-container" style="max-width: 100%;">
                     <div class="video-responsive-wrapper" style="position: relative; width: 100%; padding-bottom: 56.25%; height: 0; overflow: hidden; background-color: #000;">
                         <iframe 
                             id="${videoId}"
-                            src="${embedUrl}" 
-                            title="${title || 'Video'}"
+                            src="${escapedEmbedUrl}" 
+                            title="${escapedTitleForAttr}"
                             frameborder="0"
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
                             referrerpolicy="strict-origin-when-cross-origin"
                             allowfullscreen
                             class="video-responsive-iframe"
                             style="position: absolute !important; top: 0 !important; left: 0 !important; width: 100% !important; height: 100% !important; border: 0 !important; margin: 0 !important; padding: 0 !important; background-color: #000;"
-                            data-video-url="${item.url}"
+                            data-video-url="${escapedUrl}"
                             loading="lazy">
                         </iframe>
                     </div>
@@ -297,15 +333,15 @@ class ContentRenderer {
                             <i class="fas fa-exclamation-triangle text-yellow-600 dark:text-yellow-400 text-4xl mb-4"></i>
                             <p class="text-gray-700 dark:text-gray-200 font-semibold mb-2">Video kan niet worden geladen</p>
                             <p class="text-sm text-gray-600 dark:text-gray-300 mb-4">De video kan mogelijk niet worden ingesloten. Probeer de video te openen in een nieuw tabblad.</p>
-                            <a href="${item.url}" target="_blank" class="inline-flex items-center px-4 py-2 bg-blue-600 dark:bg-blue-700 text-white rounded-lg hover:bg-blue-700 dark:hover:bg-blue-600 transition-colors font-medium">
+                            <a href="${escapedUrl}" target="_blank" class="inline-flex items-center px-4 py-2 bg-blue-600 dark:bg-blue-700 text-white rounded-lg hover:bg-blue-700 dark:hover:bg-blue-600 transition-colors font-medium">
                                 <i class="fas fa-external-link-alt mr-2"></i>Open video in nieuw tabblad
                             </a>
                         </div>
                     </div>
                 </div>
-                ${description ? `<p class="text-sm text-gray-600 dark:text-gray-300 mb-2">${description}</p>` : ''}
+                ${sanitizedDescription ? `<p class="text-sm text-gray-600 dark:text-gray-300 mb-2">${sanitizedDescription}</p>` : ''}
                 ${showLink ? `<p class="text-sm mb-0">
-                    <a href="${item.url}" target="_blank" class="text-blue-600 hover:text-blue-800 underline font-medium">
+                    <a href="${escapedUrl}" target="_blank" class="text-blue-600 hover:text-blue-800 underline font-medium">
                         <i class="fas fa-external-link-alt mr-1"></i>Open video in nieuw tabblad
                     </a>
                 </p>` : ''}
@@ -345,13 +381,22 @@ class ContentRenderer {
             return '';
         }
 
+        // Check if Sanitizer is available
+        const sanitize = (typeof window !== 'undefined' && window.Sanitizer) 
+            ? window.Sanitizer.sanitizeHTML.bind(window.Sanitizer)
+            : (text) => text; // Fallback: return as-is if Sanitizer not available
+
         const icon = item.icon || 'fa-file';
         const iconClass = item.iconClass || 'fas';
         const classes = item.classes || 'text-blue-600 hover:text-blue-800 underline font-medium';
+        // Sanitize the link text, but keep src as-is (URLs should be validated separately if needed)
+        const sanitizedText = sanitize(item.text);
+        // Escape src for safety (basic protection)
+        const escapedSrc = item.src.replace(/"/g, '&quot;').replace(/'/g, '&#x27;');
         
         return `<p class="mb-4">
             <i class="${iconClass} ${icon} mr-2"></i>
-            <a href="${item.src}" target="_blank" class="${classes}">${item.text}</a>
+            <a href="${escapedSrc}" target="_blank" class="${classes}">${sanitizedText}</a>
         </p>`;
     }
 
@@ -365,6 +410,11 @@ class ContentRenderer {
             console.warn('Highlight item missing content:', item);
             return '';
         }
+
+        // Check if Sanitizer is available
+        const sanitize = (typeof window !== 'undefined' && window.Sanitizer) 
+            ? window.Sanitizer.sanitizeHTML.bind(window.Sanitizer)
+            : (text) => text; // Fallback: return as-is if Sanitizer not available
 
         const title = item.title || '';
         const icon = item.icon || 'fa-info-circle';
@@ -383,16 +433,19 @@ class ContentRenderer {
             (item.contentColor.includes('dark:') ? item.contentColor : `${item.contentColor} dark:text-gray-300`) : 
             'text-blue-800 dark:text-blue-300';
 
+        // Sanitize title and content
+        const sanitizedTitle = title ? sanitize(title) : '';
+        const sanitizedContent = Array.isArray(item.content) 
+            ? item.content.map(c => `<p class="mb-2">${sanitize(c)}</p>`).join('')
+            : `<p>${sanitize(item.content)}</p>`;
+
         return `<div class="${bgColor} border-l-4 ${borderColor} p-4 rounded-r-lg mt-4 mb-4 transition-colors duration-200">
             <div class="flex items-start space-x-3">
                 <i class="${iconClass} ${icon} text-blue-600 dark:text-blue-400 mt-1"></i>
                 <div>
-                    ${title ? `<h3 class="font-semibold ${titleColor} mb-1">${title}</h3>` : ''}
+                    ${sanitizedTitle ? `<h3 class="font-semibold ${titleColor} mb-1">${sanitizedTitle}</h3>` : ''}
                     <div class="${contentColor} text-sm">
-                        ${Array.isArray(item.content) 
-                            ? item.content.map(c => `<p class="mb-2">${c}</p>`).join('')
-                            : `<p>${item.content}</p>`
-                        }
+                        ${sanitizedContent}
                     </div>
                 </div>
             </div>
@@ -487,11 +540,17 @@ class ContentRenderer {
             return '';
         }
 
+        // Check if Sanitizer is available
+        const sanitize = (typeof window !== 'undefined' && window.Sanitizer) 
+            ? window.Sanitizer.sanitizeHTML.bind(window.Sanitizer)
+            : (text) => text; // Fallback: return as-is if Sanitizer not available
+
         const stepsHtml = item.steps.map(step => {
             // Als step een string is, wrap in <p>
             // Als step een object is met text property, gebruik die
             const stepText = typeof step === 'string' ? step : (step.text || '');
-            return `<p class="mb-0">${stepText}</p>`;
+            const sanitizedStepText = sanitize(stepText);
+            return `<p class="mb-0">${sanitizedStepText}</p>`;
         }).join('');
 
         return `<div class="ml-4 space-y-4 mb-4">${stepsHtml}</div>`;

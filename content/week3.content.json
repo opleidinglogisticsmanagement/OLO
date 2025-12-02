@@ -92,9 +92,9 @@
           {
             "label": "2. Bepalen van de onderzoeksobjecten",
             "content": [
-              "Het onderzoeksobject is een concreet verschijnsel wat je gaat onderzoeken. Dit kan een persoon zijn (wat is de impact van de leiderschapsstijl van persoon A op persoon B), maar in ons geval gaat het hier grotendeels om een (deel van) een proces of een fysieke locatie. Andere mogelijkheden zijn er uiteraard ook. Je kunt het onderzoeksobject vergelijken met het onderwerp van een zin. Dit is de essentie waar het onderzoek betrekking op heeft. Als helder is welk object er onderzocht gaat worden dan kun je vaststellen welke onderzoeksoptiek er gebruikt kan worden.",
-              "In het voorbeeld van het gebruik van pickrobots zijn de onderzoeksobjecten het pickproces en de werknemers waarvan je de werknemerstevredenheid wilt vaststellen. Zie ook figuur 2.",
-              "<div class=\"float-left w-48 h-auto mb-4 mr-4 mt-4\"><img src=\"assets/images/3.1.2.png\" alt=\"Figuur 2\" class=\"w-full h-auto mb-2\" /><p class=\"text-xs text-gray-600 dark:text-gray-400 italic text-center\">Figuur 2: De onderzoeksobjecten</p></div>"
+              "Het onderzoeksobject is een concreet verschijnsel wat je gaat onderzoeken. Dit kan een persoon zijn (wat is de impact van de leiderschapsstijl van persoon A op persoon B), maar in ons geval gaat het hier grotendeels om een (deel van) een proces of een fysieke locatie. Andere mogelijkheden zijn er uiteraard ook. Je kunt het onderzoeksobject vergelijken met het onderwerp van een zin. Dit is de essentie waar het onderzoek betrekking op heeft. Als helder is welk object er onderzocht gaat worden dan kun je vaststellen welke onderzoeksoptiek er gebruikt kan worden. In het voorbeeld van het gebruik van pickrobots zijn de onderzoeksobjecten het pickproces en de werknemers waarvan je de werknemerstevredenheid wilt vaststellen. Zie ook figuur 2.",
+              "<br><br>",
+              "<div class=\"flex flex-col items-center mb-4\"><img src=\"assets/images/3.1.2.png\" alt=\"Figuur 2\" class=\"w-full h-auto mb-2 max-w-md\" /><p class=\"text-xs text-gray-600 dark:text-gray-400 italic text-center\">Figuur 2: De onderzoeksobjecten</p></div>"
             ]
           },
           {
@@ -256,7 +256,7 @@
                 "enableModal": true,
                 "size": "auto"
               },
-              "Naast de schematische weergave (het aan elkaar verbinden van de verschillende onderdelen) is het ook van belang om de verschillende stappen die in het onderzoeksmodel naar voren komen te benoemen en kort te omschrijven. De verwoording zou er bijvoorbeeld als volgt uit kunnen zien:",
+              "Naast de schematische weergave (het aan elkaar verbinden van de verschillende onderdelen) is het ook van belang om de verschillende stappen die in het onderzoeksmodel naar voren komen te benoemen en kort te omschrijven. De verwoording zou er bijvoorbeeld als volgt uit kunnen zien:<br><br>",
               {
                 "type": "steps",
                 "steps": [

@@ -6,11 +6,6 @@
     <title>Afsluiting - E-Learning Platform</title>
     <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-      tailwind.config = {
-        darkMode: 'class',
-      }
-    </script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- DOMPurify for XSS protection -->
@@ -315,11 +310,9 @@
     <script src="pages/MCQuestionRenderer.js"></script>
     <script src="pages/AfsluitingLessonPage.js"></script>
     <script>
-        // Initialize Afsluiting page
-        document.addEventListener('DOMContentLoaded', () => {
-            const afsluitingPage = new AfsluitingLessonPage();
-            afsluitingPage.init();
-        });
     </script>
+    
+    <!-- App Initialization - Must be last -->
+    <script src="js/AppInit.js"></script>
 </body>
 </html>

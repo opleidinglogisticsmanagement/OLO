@@ -422,7 +422,7 @@
     <script src="pages/MCQuestionRenderer.js"></script>
     <script src="pages/AIGenerator.js"></script>
     <script src="pages/BaseLessonPage.js"></script>
-    <script src="pages/StartLessonPage.js?v=1"></script>
+    <script src="pages/IndexPage.js?v=1"></script>
     
     <!-- Page Scripts (Preload voor snellere navigatie en betrouwbaarheid) -->
     <script src="pages/Week1LessonPage.js?v=8"></script>
@@ -1286,29 +1286,27 @@
 
         // Initialize SPA Router
         document.addEventListener('DOMContentLoaded', () => {
-            // Check if StartLessonPage is loaded, otherwise fallback to BaseLessonPage
-            let startPage;
-            if (typeof StartLessonPage !== 'undefined') {
-                startPage = new StartLessonPage();
+            // Check if IndexPage is loaded (preferred) or BaseLessonPage (fallback)
+            if (typeof IndexPage !== 'undefined') {
+                const indexPage = new IndexPage();
+                indexPage.setupSPARouter();
+                
+                // Setup submenu toggles (singleton pattern - only runs once)
+                indexPage.setupSubmenuToggles();
+                
+                // Activeer ook de current link in sidebar
+                indexPage.updateActiveLink();
             } else if (typeof BaseLessonPage !== 'undefined') {
-                // Fallback to BaseLessonPage if StartLessonPage is not available
-                startPage = new BaseLessonPage('start', 'Start', 'Opzetten van Logistieke Onderzoeken');
-            } else {
-                console.error('Neither StartLessonPage nor BaseLessonPage is available');
-                return;
+                // Fallback naar BaseLessonPage als IndexPage niet beschikbaar is
+                const basePage = new BaseLessonPage('start', 'Start', 'Opzetten van Logistieke Onderzoeken');
+                basePage.setupSPARouter();
+                
+                // Setup submenu toggles (singleton pattern - only runs once)
+                basePage.setupSubmenuToggles();
+                
+                // Activeer ook de current link in sidebar
+                basePage.updateActiveLink();
             }
-            
-            // Setup SPA router (singleton pattern - only runs once)
-            if (!window.routerInitialized) {
-                startPage.router.setupSPARouter();
-                window.routerInitialized = true;
-            }
-            
-            // Setup submenu toggles (singleton pattern - only runs once)
-            startPage.setupSubmenuToggles();
-            
-            // Activeer ook de current link in sidebar
-            startPage.router.updateActiveLink('start');
         });
     </script>
 </body>

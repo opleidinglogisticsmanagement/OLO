@@ -20,6 +20,7 @@ class Week5LessonPage extends BaseLessonPage {
         this.cachedTheoryContent = null; // Cache for theory content (Optie 2)
         this.prefetchedQuestion = null; // OPTIE 4: Prefetch next question
         this.isPrefetching = false; // Track if prefetch is in progress
+        this.isGeneratingQuestion = false; // Track if first question is being generated
         this.segmentIndex = 0; // Track which text segment to use (for variety)
         this.usedSegments = []; // Track recently used segments to avoid repetition
         this.totalSegments = null; // Cache total number of segments
@@ -160,8 +161,7 @@ class Week5LessonPage extends BaseLessonPage {
                 </div>
             </section>
 
-            <!-- TEST JE KENNIS SECTIE UITGESCHAKELD - Code behouden voor later gebruik -->
-            <!-- ${this.content.mcVragen ? this.renderMCQuestionsSection() : ''} -->
+            ${this.content.mcVragen ? this.renderMCQuestionsSection() : ''}
 
         `;
     }
@@ -244,7 +244,8 @@ class Week5LessonPage extends BaseLessonPage {
             return MCQuestionRenderer.render(mcConfig, 'mc-questions-container', this.currentQuestion);
         }
         
-        // Anders toon loading state - binnen een sectie
+        // Als er een loading state is (vraag wordt gegenereerd), toon die
+        if (this.isGeneratingQuestion) {
         return `
             <section class="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-4 sm:p-6 sm:pr-[70px] hover-lift mt-8 transition-colors duration-200">
                 <div class="flex flex-col sm:flex-row items-start">
@@ -259,6 +260,30 @@ class Week5LessonPage extends BaseLessonPage {
                                     <div class="animate-spin rounded-full h-6 w-6 border-b-2 border-indigo-600 dark:border-indigo-400"></div>
                                     <p class="text-gray-600 dark:text-gray-300">AI-generatie vraag...</p>
                                 </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            `;
+        }
+        
+        // Anders toon knop om eerste vraag te starten
+        return `
+            <section class="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-4 sm:p-6 sm:pr-[70px] hover-lift mt-8 transition-colors duration-200">
+                <div class="flex flex-col sm:flex-row items-start">
+                    <div class="w-10 h-10 sm:w-12 sm:h-12 bg-indigo-100 dark:bg-indigo-900/30 rounded-lg flex items-center justify-center flex-shrink-0 mb-3 sm:mb-0 sm:mr-4">
+                        <i class="fas fa-question-circle text-indigo-600 dark:text-indigo-400 text-lg"></i>
+                    </div>
+                    <div class="flex-1 min-w-0 w-full sm:w-auto">
+                        <h2 class="text-lg sm:text-xl font-semibold text-gray-900 dark:text-white mb-4">${mcConfig.title || 'Test je kennis'}</h2>
+                        <div id="mc-questions-container" class="space-y-6">
+                            <div class="border border-gray-200 dark:border-gray-700 rounded-lg p-5 bg-gray-50 dark:bg-gray-900/50 text-center">
+                                <p class="text-gray-700 dark:text-gray-300 mb-4">Klik op de knop hieronder om te beginnen met de eerste vraag.</p>
+                                <button id="start-mc-questions-btn" data-action="start-first-question" class="px-6 py-3 bg-indigo-600 dark:bg-indigo-700 text-white rounded-lg hover:bg-indigo-700 dark:hover:bg-indigo-600 focus-ring transition-colors flex items-center justify-center space-x-2 mx-auto">
+                                    <i class="fas fa-play"></i>
+                                    <span>Start eerste vraag</span>
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -271,6 +296,13 @@ class Week5LessonPage extends BaseLessonPage {
      * Genereer MC vragen met AI
      */
     async generateMCQuestions() {
+        // Check of we nog op week 5 zijn - alleen blokkeren als we zeker weten dat we NIET op week 5 zijn
+        // Als window.currentWeek5Page === this, dan zijn we op week 5
+        if (window.currentWeek5Page !== this) {
+            console.log('[Week5LessonPage] Stopping question generation - not the current week 5 page instance');
+            return;
+        }
+        
         if (!this.content || !this.content.mcVragen) {
             return;
         }
@@ -349,6 +381,13 @@ class Week5LessonPage extends BaseLessonPage {
             const generatedQuestions = await this.aiGenerator.generateMCQuestions(theorySegment, 1, nextSegmentIndex);
             console.log('Generated question:', generatedQuestions);
             
+            // Check opnieuw of we nog de actieve week 5 instantie zijn na async operatie
+            if (window.currentWeek5Page !== this) {
+                console.log('[Week5LessonPage] Stopping - navigated away during generation');
+                this.isGeneratingQuestion = false;
+                return;
+            }
+            
             if (generatedQuestions && generatedQuestions.length > 0) {
                 // Track this segment as used
                 this.usedSegments.push(nextSegmentIndex);
@@ -383,6 +422,7 @@ class Week5LessonPage extends BaseLessonPage {
         } catch (error) {
             console.error('Error generating MC questions:', error);
             const errorMessage = error.message || 'Er is een fout opgetreden bij het genereren van vragen. Probeer de pagina te verversen.';
+            this.isGeneratingQuestion = false; // Reset flag bij error
             this.showErrorInContainer(errorMessage);
         }
     }
@@ -394,10 +434,16 @@ class Week5LessonPage extends BaseLessonPage {
         const container = document.getElementById('mc-questions-container');
         if (container && container.parentElement) {
             const mcSection = container.closest('section');
-            if (mcSection && this.currentQuestion) {
-                // Render single question
+            if (mcSection) {
+                // Als er een vraag is, render die
+                if (this.currentQuestion) {
                 const newSection = MCQuestionRenderer.render(this.content.mcVragen, 'mc-questions-container', this.currentQuestion);
                 mcSection.outerHTML = newSection;
+                } else if (this.isGeneratingQuestion) {
+                    // Als we aan het genereren zijn, toon loading state
+                    const newSection = this.renderMCQuestionsSection();
+                mcSection.outerHTML = newSection;
+                }
             }
         }
     }
@@ -407,6 +453,13 @@ class Week5LessonPage extends BaseLessonPage {
      * This improves UX by generating the next question while user is still answering current one
      */
     async prefetchNextQuestion() {
+        // Check of we nog de actieve week 5 instantie zijn
+        if (window.currentWeek5Page !== this) {
+            console.log('[Week5LessonPage] Stopping prefetch - not the current week 5 page instance');
+            this.isPrefetching = false;
+            return;
+        }
+        
         // Don't prefetch if already prefetching or if we already have a prefetched question
         if (this.isPrefetching || this.prefetchedQuestion) {
             return;
@@ -447,6 +500,13 @@ class Week5LessonPage extends BaseLessonPage {
             
             const generatedQuestions = await this.aiGenerator.generateMCQuestions(theorySegment, 1, nextSegmentIndex);
             
+            // Check opnieuw of we nog de actieve week 5 instantie zijn na async operatie
+            if (window.currentWeek5Page !== this) {
+                console.log('[Week5LessonPage] Stopping prefetch - navigated away during generation');
+                this.isPrefetching = false;
+                return;
+            }
+            
             if (generatedQuestions && generatedQuestions.length > 0) {
                 // Store prefetched question
                 this.prefetchedQuestion = generatedQuestions[0];
@@ -468,6 +528,12 @@ class Week5LessonPage extends BaseLessonPage {
      * OPTIE 4: Use prefetched question if available, otherwise generate on-demand
      */
     async loadNextQuestion() {
+        // Check of we nog de actieve week 5 instantie zijn
+        if (window.currentWeek5Page !== this) {
+            console.log('[Week5LessonPage] Ignoring loadNextQuestion - not the current week 5 page instance');
+            return;
+        }
+        
         const mcConfig = this.content.mcVragen;
         
         if (!mcConfig.generateFromTheory) {
@@ -567,14 +633,21 @@ class Week5LessonPage extends BaseLessonPage {
             
             const generatedQuestions = await this.aiGenerator.generateMCQuestions(theorySegment, 1, nextSegmentIndex);
             
+            // Check opnieuw of we nog de actieve week 5 instantie zijn na async operatie
+            if (window.currentWeek5Page !== this) {
+                console.log('[Week5LessonPage] Stopping loadNextQuestion - navigated away during generation');
+                return;
+            }
+            
             if (generatedQuestions && generatedQuestions.length > 0) {
                 // Track this segment as used
                 this.usedSegments.push(nextSegmentIndex);
-                // Keep only last 3 used segments
-                if (this.usedSegments.length > 3) {
+                // Keep track of recently used segments
+                const maxTrackedSegments = Math.min(this.totalSegments - 1, Math.max(2, Math.floor(this.totalSegments / 2)));
+                if (this.usedSegments.length > maxTrackedSegments) {
                     this.usedSegments.shift();
                 }
-                console.log('[Week5LessonPage] Used segments (last 3):', this.usedSegments);
+                console.log('[Week5LessonPage] Used segments (last', maxTrackedSegments + '):', this.usedSegments);
                 
                 // Store in questions array
                 if (!this.mcQuestions) {
@@ -677,16 +750,91 @@ class Week5LessonPage extends BaseLessonPage {
     attachEventListeners() {
         super.attachEventListeners();
         
-        // TEST JE KENNIS API UITGESCHAKELD - Code behouden voor later gebruik
-        // Generate MC questions after content is loaded
-        // if (this.content && this.content.mcVragen) {
-        //     this.generateMCQuestions();
-        // }
-        
-        // Listen for "next question" event
+        // Listen for "next question" event - alleen op week 5
+        if (!this._loadNextQuestionListenerAdded) {
+            this._loadNextQuestionListenerAdded = true;
         window.addEventListener('loadNextMCQuestion', () => {
+                // Check of we nog de actieve week 5 instantie zijn
+                if (window.currentWeek5Page === this) {
             this.loadNextQuestion();
-        });
+                }
+            });
+        }
+        
+        // Event listener voor "Start eerste vraag" knop
+        // Gebruik event delegation omdat de knop dynamisch wordt toegevoegd
+        // Voorkom dat de listener meerdere keren wordt toegevoegd
+        if (!this._startQuestionListenerAdded) {
+            this._startQuestionListenerAdded = true;
+            // Gebruik capture phase om zeker te zijn dat we het event oppakken
+            // Bind this context correct
+            const self = this;
+            document.addEventListener('click', (e) => {
+                // Check of de klik op de button zelf of op een child element (zoals icon) is
+                const button = e.target.closest('[data-action="start-first-question"]');
+                if (button) {
+                    console.log('[Week5LessonPage] Button click detected');
+                    
+                    // Als de button zichtbaar is, betekent dat we op week 5 zijn
+                    // Gebruik de opgeslagen referentie (meest betrouwbaar)
+                    const pageInstance = window.currentWeek5Page;
+                    if (!pageInstance) {
+                        console.warn('[Week5LessonPage] Ignoring click - no currentWeek5Page instance. Pathname:', window.location.pathname, 'Hash:', window.location.hash);
+                        return;
+                    }
+                    
+                    // Check of de button daadwerkelijk op de pagina staat (is zichtbaar)
+                    // Dit is een betere check dan URL parsing
+                    const buttonInDOM = document.querySelector('[data-action="start-first-question"]');
+                    if (!buttonInDOM || buttonInDOM !== button) {
+                        console.warn('[Week5LessonPage] Ignoring click - button not in DOM or mismatch');
+                        return;
+                    }
+                    
+                    e.preventDefault();
+                    e.stopPropagation();
+                    console.log('[Week5LessonPage] Start button clicked - proceeding');
+                    
+                    if (typeof pageInstance.startFirstQuestion === 'function') {
+                        pageInstance.startFirstQuestion();
+                    } else {
+                        console.error('[Week5LessonPage] startFirstQuestion method not found');
+                    }
+                }
+            }, true); // Capture phase
+        }
+    }
+    
+    /**
+     * Start de eerste MC vraag na klik op knop
+     */
+    async startFirstQuestion() {
+        console.log('[Week5LessonPage] startFirstQuestion called');
+        
+        if (!this.content || !this.content.mcVragen) {
+            console.warn('[Week5LessonPage] No content or mcVragen found');
+            return;
+        }
+        
+        console.log('[Week5LessonPage] Starting question generation...');
+        
+        // Zet flag dat we aan het genereren zijn
+        this.isGeneratingQuestion = true;
+        
+        // Update de sectie om loading state te tonen
+        this.updateMCQuestionsSection();
+        
+        try {
+            // Genereer de eerste vraag
+            await this.generateMCQuestions();
+        } catch (error) {
+            console.error('[Week5LessonPage] Error in startFirstQuestion:', error);
+            this.isGeneratingQuestion = false;
+            this.showErrorInContainer('Er is een fout opgetreden bij het starten van de vraag.');
+        }
+        
+        // Reset flag (wordt al gedaan in generateMCQuestions bij succes)
+        this.isGeneratingQuestion = false;
     }
 
     /**
@@ -695,19 +843,360 @@ class Week5LessonPage extends BaseLessonPage {
     async init() {
         await super.init();
         
+        // Bewaar referentie naar huidige instantie voor inline onclick handlers
+        // Reset eerst oude referenties van andere instanties
+        if (window.currentWeek5Page && window.currentWeek5Page !== this) {
+            // Stop prefetch van oude instantie
+            if (window.currentWeek5Page.isPrefetching) {
+                window.currentWeek5Page.isPrefetching = false;
+            }
+        }
+        window.currentWeek5Page = this;
+        
+        // Voeg kopieerknoppen toe aan tabellen
+        this.addCopyButtonsToTables();
+        
         // Handle hash in URL after content is loaded
         if (window.location.hash) {
             // Immediately try to scroll to anchor, Router.scrollToAnchor handles retries
             this.router.scrollToAnchor(window.location.hash);
         }
+    }
+    
+    /**
+     * Voeg kopieerknoppen toe aan alle tabellen in de content
+     */
+    addCopyButtonsToTables() {
+        // Functie om kopieerknop aan een tabel toe te voegen
+        const addCopyButtonToTable = (table) => {
+            // Check of er al een kopieerknop is toegevoegd
+            if (table.closest('.table-wrapper-with-copy') || table.parentElement.querySelector('.table-copy-button')) {
+                return;
+            }
+            
+            // Zoek de h3 titel die direct boven deze specifieke tabel staat
+            // Aanpak: zoek in de DOM structuur omhoog vanaf de tabel
+            let titleElement = null;
+            
+            // Zoek omhoog in de DOM tree vanaf de tabel
+            let currentElement = table.parentElement;
+            let depth = 0;
+            const maxDepth = 15;
+            
+            while (currentElement && depth < maxDepth) {
+                // Zoek naar h3 in de parent of zijn siblings
+                const h3s = currentElement.querySelectorAll('h3');
+                
+                // Check alle h3's in deze container
+                for (let h3 of Array.from(h3s)) {
+                    // Check of deze h3 al een button heeft
+                    const flexParent = h3.closest('.flex.justify-between');
+                    const hasButton = flexParent ? flexParent.querySelector('.table-copy-button') : 
+                                    h3.parentElement.querySelector('.table-copy-button');
+                    
+                    if (!hasButton) {
+                        // Check of deze h3 voor de tabel staat (in de DOM)
+                        const h3Index = Array.from(currentElement.children).indexOf(h3);
+                        const tableIndex = Array.from(currentElement.children).indexOf(table.parentElement);
+                        
+                        // Als h3 voor de tabel staat in de DOM, gebruik deze
+                        if (h3Index < tableIndex || h3Index === 0) {
+                            titleElement = h3;
+                            break;
+                        }
+                    }
+                }
+                
+                if (titleElement) break;
+                
+                // Check previous siblings voor h3
+                let sibling = currentElement.previousElementSibling;
+                while (sibling && !titleElement) {
+                    const h3s = sibling.querySelectorAll('h3');
+                    for (let h3 of Array.from(h3s)) {
+                        const flexParent = h3.closest('.flex.justify-between');
+                        const hasButton = flexParent ? flexParent.querySelector('.table-copy-button') : 
+                                        h3.parentElement.querySelector('.table-copy-button');
+                        if (!hasButton) {
+                            titleElement = h3;
+                            break;
+                        }
+                    }
+                    sibling = sibling.previousElementSibling;
+                }
+                
+                if (titleElement) break;
+                
+                currentElement = currentElement.parentElement;
+                depth++;
+            }
+            
+            // Fallback: zoek op visuele afstand als DOM zoeken faalt
+            if (!titleElement) {
+                const allH3s = Array.from(document.querySelectorAll('h3'));
+                const tableRect = table.getBoundingClientRect();
+                
+                for (let h3 of allH3s) {
+                    const h3Rect = h3.getBoundingClientRect();
+                    const distance = tableRect.top - h3Rect.bottom;
+                    
+                    if (distance >= 0 && distance < 500) {
+                        const flexParent = h3.closest('.flex.justify-between');
+                        const hasButton = flexParent ? flexParent.querySelector('.table-copy-button') : 
+                                        h3.parentElement.querySelector('.table-copy-button');
+                        
+                        if (!hasButton) {
+                            titleElement = h3;
+                            break;
+                        }
+                    }
+                }
+            }
+            
+            // Maak de kopieerknop met dezelfde styling als bouwsteengenerator
+            const copyButton = document.createElement('button');
+            copyButton.className = 'table-copy-button text-sm px-3 py-1.5 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300 rounded-md transition-colors flex items-center';
+            copyButton.innerHTML = '<i class="fas fa-copy mr-2"></i> Kopieer tabel';
+            copyButton.setAttribute('aria-label', 'Kopieer tabel');
+            copyButton.setAttribute('title', 'Kopieer tabel naar klembord');
+            
+            // Voeg click event toe
+            copyButton.addEventListener('click', async (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                await this.copyTableToClipboard(table, copyButton);
+            });
+            
+            // Als we een titel hebben gevonden, plaats de button in dezelfde regel (rechts uitgelijnd)
+            if (titleElement) {
+                // Check eerst of de h3 al in een flex container zit (voorkom dubbele wrappers)
+                let flexParent = titleElement.closest('.flex.justify-between');
+                
+                if (flexParent && flexParent.classList.contains('items-center')) {
+                    // Al in een flex container, voeg gewoon de button toe
+                    flexParent.appendChild(copyButton);
+                } else {
+                    // Verwijder mb-4 van h3
+                    titleElement.classList.remove('mb-4');
+                    titleElement.classList.add('mb-0');
+                    
+                    // Maak een flex wrapper met justify-between (zoals in bouwsteengenerator) - titel links, button rechts
+                    const flexWrapper = document.createElement('div');
+                    flexWrapper.className = 'flex justify-between items-center mb-4';
+                    
+                    // Vervang de h3 met de flex wrapper
+                    const titleParent = titleElement.parentElement;
+                    titleParent.insertBefore(flexWrapper, titleElement);
+                    flexWrapper.appendChild(titleElement);
+                    flexWrapper.appendChild(copyButton);
+                }
+            } else {
+                // Fallback: plaats button voor de overflow wrapper
+                const overflowWrapper = table.parentElement;
+                if (overflowWrapper.classList.contains('overflow-x-auto')) {
+                    overflowWrapper.parentElement.insertBefore(copyButton, overflowWrapper);
+                    copyButton.classList.add('mb-2');
+                } else {
+                    // Anders wrap de tabel
+                    const wrapper = document.createElement('div');
+                    wrapper.className = 'table-wrapper-with-copy';
+                    const tableParent = table.parentElement;
+                    tableParent.insertBefore(wrapper, table);
+                    wrapper.appendChild(copyButton);
+                    wrapper.appendChild(table);
+                    copyButton.classList.add('mb-2');
+                }
+            }
+        };
         
-        // Generate MC questions if needed (after DOM is ready)
-        // TEST JE KENNIS API UITGESCHAKELD - Code behouden voor later gebruik
-        // if (this.content && this.content.mcVragen && this.content.mcVragen.generateFromTheory) {
-        //     setTimeout(() => {
-        //         this.generateMCQuestions();
-        //     }, 100);
-        // }
+        // Voeg kopieerknoppen toe aan bestaande tabellen
+        const processTables = () => {
+            const tables = document.querySelectorAll('#app table');
+            tables.forEach(table => {
+                addCopyButtonToTable(table);
+            });
+        };
+        
+        // Wacht even tot de DOM volledig is geladen
+        setTimeout(processTables, 100);
+        
+        // Observeer voor nieuwe tabellen (bijvoorbeeld in accordions die worden geopend)
+        if (typeof MutationObserver !== 'undefined') {
+            const observer = new MutationObserver((mutations) => {
+                mutations.forEach((mutation) => {
+                    mutation.addedNodes.forEach((node) => {
+                        if (node.nodeType === 1) { // Element node
+                            // Check of het node zelf een tabel is
+                            if (node.tagName === 'TABLE') {
+                                addCopyButtonToTable(node);
+                            }
+                            // Check of het node tabellen bevat
+                            const tables = node.querySelectorAll && node.querySelectorAll('table');
+                            if (tables) {
+                                tables.forEach(table => {
+                                    addCopyButtonToTable(table);
+                                });
+                            }
+                        }
+                    });
+                });
+            });
+            
+            // Start observer op de app container
+            const appContainer = document.getElementById('app');
+            if (appContainer) {
+                observer.observe(appContainer, {
+                    childList: true,
+                    subtree: true
+                });
+            }
+        }
+    }
+    
+    /**
+     * Kopieer tabelinhoud naar klembord
+     * @param {HTMLTableElement} table - De tabel om te kopiëren
+     * @param {HTMLButtonElement} button - De button om feedback te geven
+     */
+    async copyTableToClipboard(table, button) {
+        try {
+            // Maak een kopie van de tabel voor HTML export
+            const tableClone = table.cloneNode(true);
+            
+            // Verwijder eventuele buttons of andere interactieve elementen uit de clone
+            const buttons = tableClone.querySelectorAll('button, .table-copy-button');
+            buttons.forEach(btn => btn.remove());
+            
+            // Maak een schone HTML versie van de tabel met basis styling
+            const htmlTable = `
+                <table border="1" cellpadding="5" cellspacing="0" style="border-collapse: collapse; width: 100%;">
+                    ${Array.from(tableClone.querySelectorAll('tr')).map(row => {
+                        const cells = Array.from(row.querySelectorAll('th, td'));
+                        return `<tr>${cells.map(cell => {
+                            const isHeader = cell.tagName === 'TH';
+                            const tag = isHeader ? 'th' : 'td';
+                            const text = cell.textContent.trim();
+                            const style = isHeader ? 'background-color: #f3f4f6; font-weight: bold;' : '';
+                            return `<${tag} style="${style} border: 1px solid #d1d5db; padding: 8px;">${text}</${tag}>`;
+                        }).join('')}</tr>`;
+                    }).join('')}
+                </table>
+            `;
+            
+            // Maak ook een TSV versie voor Excel/Google Sheets
+            const rows = Array.from(table.querySelectorAll('tr'));
+            const tableData = rows.map(row => {
+                const cells = Array.from(row.querySelectorAll('th, td'));
+                return cells.map(cell => {
+                    let text = cell.textContent.trim();
+                    text = text.replace(/\s+/g, ' ');
+                    return text;
+                });
+            });
+            const tsv = tableData.map(row => row.join('\t')).join('\n');
+            
+            // Probeer eerst HTML te kopiëren (voor Word en andere rich text editors)
+            // Probeer moderne Clipboard API met HTML support
+            if (navigator.clipboard && navigator.clipboard.write) {
+                try {
+                    // Check of ClipboardItem wordt ondersteund
+                    if (typeof ClipboardItem !== 'undefined') {
+                        const clipboardItem = new ClipboardItem({
+                            'text/html': new Blob([htmlTable], { type: 'text/html' }),
+                            'text/plain': new Blob([tsv], { type: 'text/plain' })
+                        });
+                        await navigator.clipboard.write([clipboardItem]);
+                    } else {
+                        // Fallback: gebruik execCommand voor HTML support
+                        await this.copyTableAsHTML(table, htmlTable, tsv);
+                    }
+                } catch (htmlError) {
+                    // Fallback naar execCommand methode
+                    await this.copyTableAsHTML(table, htmlTable, tsv);
+                }
+            } else {
+                // Oudere browsers: gebruik execCommand
+                await this.copyTableAsHTML(table, htmlTable, tsv);
+            }
+            
+            // Geef visuele feedback (gebruik dezelfde stijl als bouwsteengenerator)
+            const originalHTML = button.innerHTML;
+            button.innerHTML = '<i class="fas fa-check mr-2"></i> Gekopieerd!';
+            button.classList.remove('text-gray-700', 'dark:text-gray-300');
+            button.classList.add('text-green-600', 'dark:text-green-400');
+            
+            // Reset na 2 seconden
+            setTimeout(() => {
+                button.innerHTML = originalHTML;
+                button.classList.remove('text-green-600', 'dark:text-green-400');
+                button.classList.add('text-gray-700', 'dark:text-gray-300');
+            }, 2000);
+            
+        } catch (error) {
+            console.error('Error copying table to clipboard:', error);
+            
+            // Fallback: toon error message
+            const originalHTML = button.innerHTML;
+            button.innerHTML = '<i class="fas fa-exclamation-triangle mr-2"></i> Fout';
+            button.classList.remove('text-gray-700', 'dark:text-gray-300');
+            button.classList.add('text-red-600', 'dark:text-red-400');
+            
+            setTimeout(() => {
+                button.innerHTML = originalHTML;
+                button.classList.remove('text-red-600', 'dark:text-red-400');
+                button.classList.add('text-gray-700', 'dark:text-gray-300');
+            }, 2000);
+        }
+    }
+    
+    /**
+     * Kopieer tabel als HTML met execCommand (fallback methode)
+     * @param {HTMLTableElement} table - De originele tabel
+     * @param {string} htmlTable - De HTML string van de tabel
+     * @param {string} tsv - De TSV string als fallback
+     */
+    async copyTableAsHTML(table, htmlTable, tsv) {
+        // Maak een tijdelijk element om de HTML in te plakken
+        const tempDiv = document.createElement('div');
+        tempDiv.style.position = 'fixed';
+        tempDiv.style.left = '-9999px';
+        tempDiv.innerHTML = htmlTable;
+        document.body.appendChild(tempDiv);
+        
+        // Selecteer de inhoud
+        const range = document.createRange();
+        range.selectNodeContents(tempDiv);
+        const selection = window.getSelection();
+        selection.removeAllRanges();
+        selection.addRange(range);
+        
+        try {
+            // Probeer te kopiëren met execCommand
+            const successful = document.execCommand('copy');
+            if (!successful) {
+                throw new Error('execCommand copy failed');
+            }
+        } finally {
+            // Cleanup
+            selection.removeAllRanges();
+            document.body.removeChild(tempDiv);
+        }
+    }
+    
+    /**
+     * Cleanup methode om te worden aangeroepen bij navigatie weg van week 5
+     */
+    cleanup() {
+        // Stop prefetch processen
+        this.isPrefetching = false;
+        this.prefetchedQuestion = null;
+        
+        // Reset referentie als dit de huidige instantie is
+        if (window.currentWeek5Page === this) {
+            window.currentWeek5Page = null;
+        }
+        
+        console.log('[Week5LessonPage] Cleanup completed');
     }
 }
 

@@ -162,18 +162,27 @@
       {
         "type": "paragraph",
         "text": [
-          "Er bestaat software om georganiseerd je bronnen bij te houden. Met een simpele klik kun je van websites en van (semi)wetenschappelijke literatuur alle benodigde informatie voor een referentie opslaan. Voorbeelden van software die dat kunnen zijn bijvoorbeeld Mendeley en Zotero. Maar er zijn veel meer voorbeelden. Bekijk voor de aardigheid maar eens gewoon <a href=\"https://en.wikipedia.org/wiki/Comparison_of_reference_management_software\" target=\"_blank\" class=\"text-blue-600 hover:text-blue-800 underline\">Wikipedia</a>, waarin je mooi overzichtelijk kunt welke verschillende typen software er zijn en welke mogelijkheden ze bieden.",
-          "We focussen ons in dit vak op Zotero omdat het gratis software is en werkt op verschillende Browsers. Uiteraard mag je ook andere software gebruiken. Voor nu wijzen we op deze instructievideo van Zotero voor de installatie. In een van de colleges kunnen we dan vervolgens aan jullie demonstreren hoe het werkt en wat de verdere voordelen zijn. De investering die je nu maakt in reference organizer gaat zich dubbel en dwars uitbetalen."
+          "Tijdens je literatuuronderzoek verzamel je al snel veel bronnen. Maar wat nu als je tientallen bronnen hebt gevonden? Hoe houd je dan overzicht? En misschien nog belangrijker: hoe zorg je ervoor dat je in je tekst correct refereert naar deze bronnen en automatisch een correcte referentielijst genereert volgens de laatste APA-richtlijnen? Gelukkig bestaan er handige tools die je hierbij kunnen helpen."
         ]
       },
       {
-        "type": "paragraph",
-        "text": [
-          "<div class=\"max-w-2xl mx-auto mb-6\">",
-          "<div class=\"rounded-lg overflow-hidden\">",
-          "<iframe width=\"100%\" height=\"315\" src=\"https://www.youtube.com/embed/JG7Uq_JFDzE\" title=\"Zotero installatie instructie\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen class=\"w-full aspect-video\"></iframe>",
-          "</div>",
-          "</div>"
+        "type": "accordion",
+        "usePlusIcon": true,
+        "defaultOpen": false,
+        "items": [
+          {
+            "title": "Slim bronnen beheren",
+            "defaultOpen": false,
+            "content": [
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Er bestaat software om georganiseerd je bronnen bij te houden. Met een simpele klik kun je van websites en van (semi)wetenschappelijke literatuur alle benodigde informatie voor een referentie opslaan. Voorbeelden van software die dat kunnen zijn bijvoorbeeld Mendeley en Zotero. Maar er zijn veel meer voorbeelden. Bekijk voor de aardigheid maar eens gewoon <a href=\"https://en.wikipedia.org/wiki/Comparison_of_reference_management_software\" target=\"_blank\" class=\"text-blue-600 hover:text-blue-800 underline\">Wikipedia</a>, waarin je mooi overzichtelijk kunt welke verschillende typen software er zijn en welke mogelijkheden ze bieden.</p>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">We focussen ons in dit vak op Zotero omdat het gratis software is en werkt op verschillende Browsers. Uiteraard mag je ook andere software gebruiken. Voor nu wijzen we op deze instructievideo van Zotero voor de installatie. In een van de colleges kunnen we dan vervolgens aan jullie demonstreren hoe het werkt en wat de verdere voordelen zijn. De investering die je nu maakt in reference organizer gaat zich dubbel en dwars uitbetalen.</p>",
+              "<div class=\"max-w-2xl mx-auto mb-6\">",
+              "<div class=\"rounded-lg overflow-hidden\">",
+              "<iframe width=\"100%\" height=\"315\" src=\"https://www.youtube.com/embed/JG7Uq_JFDzE\" title=\"Zotero installatie instructie\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen class=\"w-full aspect-video\"></iframe>",
+              "</div>",
+              "</div>"
+            ]
+          }
         ]
       },
       {

@@ -419,6 +419,7 @@
     <script src="pages/MCQuestionRenderer.js"></script>
     <script src="pages/AIGenerator.js"></script>
     <script src="pages/BaseLessonPage.js"></script>
+    <script src="pages/IndexPage.js?v=1"></script>
     
     <!-- Page Scripts (Preload voor snellere navigatie en betrouwbaarheid) -->
     <script src="pages/Week1LessonPage.js?v=8"></script>
@@ -1276,8 +1277,18 @@
 
         // Initialize SPA Router
         document.addEventListener('DOMContentLoaded', () => {
-            // Check if BaseLessonPage is loaded
-            if (typeof BaseLessonPage !== 'undefined') {
+            // Check if IndexPage is loaded (preferred) or BaseLessonPage (fallback)
+            if (typeof IndexPage !== 'undefined') {
+                const indexPage = new IndexPage();
+                indexPage.setupSPARouter();
+                
+                // Setup submenu toggles (singleton pattern - only runs once)
+                indexPage.setupSubmenuToggles();
+                
+                // Activeer ook de current link in sidebar
+                indexPage.updateActiveLink();
+            } else if (typeof BaseLessonPage !== 'undefined') {
+                // Fallback naar BaseLessonPage als IndexPage niet beschikbaar is
                 const basePage = new BaseLessonPage('start', 'Start', 'Opzetten van Logistieke Onderzoeken');
                 basePage.setupSPARouter();
                 
@@ -1285,7 +1296,6 @@
                 basePage.setupSubmenuToggles();
                 
                 // Activeer ook de current link in sidebar
-                // (Op index.html is dit 'Start', maar voor consistentie)
                 basePage.updateActiveLink();
             }
         });

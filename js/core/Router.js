@@ -115,8 +115,8 @@ class Router {
         let className, scriptPath;
         
         if (filename === 'index.html') {
-            className = 'BaseLessonPage';
-            scriptPath = 'pages/BaseLessonPage.js';
+            className = 'IndexPage';
+            scriptPath = 'pages/IndexPage.js';
         } else {
             // Converteer bestandsnaam naar class naam (bijv. week1.html -> Week1LessonPage)
             const baseName = filename.replace('.html', '');
@@ -137,7 +137,32 @@ class Router {
 
         // Specifieke behandeling voor index.html
         if (filename === 'index.html') {
-            const pageInstance = new BaseLessonPage('start', 'Start', 'Opzetten van Logistieke Onderzoeken');
+            // Gebruik IndexPage in plaats van BaseLessonPage voor de index
+            // Check of IndexPage al bestaat, zo niet, laad het script
+            if (typeof window.IndexPage === 'undefined') {
+                await this.loadScript('pages/IndexPage.js');
+            }
+            
+            // Wacht even en check opnieuw (polling) om race conditions te voorkomen
+            if (typeof window.IndexPage === 'undefined') {
+                // Poll maximaal 20x met 50ms interval (totaal 1000ms)
+                for (let i = 0; i < 20; i++) {
+                    await new Promise(resolve => setTimeout(resolve, 50));
+                    if (typeof window.IndexPage !== 'undefined') break;
+                }
+            }
+            
+            // Check nogmaals of de class nu wel bestaat
+            if (typeof window.IndexPage === 'undefined') {
+                console.error('[SPA] IndexPage not found after loading script. Falling back to BaseLessonPage.');
+                // Fallback naar BaseLessonPage als IndexPage niet geladen kan worden
+                const pageInstance = new BaseLessonPage('start', 'Start', 'Opzetten van Logistieke Onderzoeken');
+                await pageInstance.init();
+                return;
+            }
+            
+            // Instantieer IndexPage
+            const pageInstance = new window.IndexPage();
             await pageInstance.init();
             return;
         }

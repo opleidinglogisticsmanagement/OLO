@@ -46,6 +46,9 @@ class SearchService {
      * Bouw de zoekindex op door alle JSON bestanden op te halen
      */
     async buildIndex() {
+        // Reset index voordat we opnieuw indexeren
+        this.index = [];
+        
         const promises = this.files.map(file => this.fetchAndIndexFile(file));
         const results = await Promise.allSettled(promises);
         
@@ -100,13 +103,49 @@ class SearchService {
     }
 
     /**
+     * Check of tekst een placeholder/template instructie is (voor collega's)
+     */
+    isPlaceholderText(text) {
+        if (!text || typeof text !== 'string') return false;
+        const lowerText = text.toLowerCase();
+        const placeholderPatterns = [
+            'voor collega\'s',
+            'voor collega',
+            'voeg hier',
+            'formuleer hier',
+            'formuleer pas wanneer',
+            'wacht met het formuleren',
+            'content komt hier',
+            'deze module bevat verschillende secties',
+            'voeg hier de specifieke',
+            'voeg hier de theorie content toe',
+            'voeg hier de theorie toe',
+            'bestand kon niet worden geladen',
+            'content kon niet worden geladen',
+            'er is een probleem opgetreden',
+            'controleer of het bestand bestaat'
+        ];
+        return placeholderPatterns.some(pattern => lowerText.includes(pattern));
+    }
+
+    /**
+     * Check of content leeg of alleen placeholders bevat
+     */
+    hasRealContent(text) {
+        if (!text || typeof text !== 'string') return false;
+        const cleanText = text.trim();
+        if (cleanText.length < 10) return false; // Te kort om echte content te zijn
+        return !this.isPlaceholderText(cleanText);
+    }
+
+    /**
      * Indexeer een week content bestand
      */
     indexContent(data, fileInfo) {
         const items = [];
         
-        // 1. Intro
-        if (data.intro) {
+        // 1. Intro - alleen indexeren als het echte content is
+        if (data.intro && data.intro.description && this.hasRealContent(data.intro.description)) {
             items.push({
                 title: data.intro.title || fileInfo.title,
                 subtitle: data.intro.subtitle,
@@ -118,35 +157,51 @@ class SearchService {
             });
         }
 
-        // 2. Leerdoelen
+        // 2. Leerdoelen - alleen indexeren als er echte leerdoelen zijn (niet alleen instructies)
         if (data.leerdoelen) {
-            const leerdoelenText = [
-                data.leerdoelen.description,
-                ...(data.leerdoelen.items || [])
-            ].join(' ');
+            // Filter placeholder instructies uit description
+            let description = data.leerdoelen.description || '';
+            if (this.isPlaceholderText(description)) {
+                description = '';
+            }
             
-            items.push({
-                title: data.leerdoelen.title || 'Leerdoelen',
-                text: leerdoelenText,
-                url: fileInfo.url, // Leerdoelen staan meestal bovenaan
-                type: 'leerdoelen',
-                context: fileInfo.title,
-                week: fileInfo.title
-            });
+            // Negeer instruction veld (dat is altijd voor collega's)
+            const leerdoelenItems = data.leerdoelen.items || [];
+            const realItems = leerdoelenItems.filter(item => item && item.trim().length > 0);
+            
+            // Alleen indexeren als er echte leerdoelen zijn
+            if (realItems.length > 0 || (description && this.hasRealContent(description))) {
+                const leerdoelenText = [
+                    description,
+                    ...realItems
+                ].filter(Boolean).join(' ');
+                
+                if (this.hasRealContent(leerdoelenText)) {
+                    items.push({
+                        title: data.leerdoelen.title || 'Leerdoelen',
+                        text: leerdoelenText,
+                        url: fileInfo.url,
+                        type: 'leerdoelen',
+                        context: fileInfo.title,
+                        week: fileInfo.title
+                    });
+                }
+            }
         }
 
-        // 3. Video
+        // 3. Video - alleen indexeren als het echte content is
         if (data.video) {
             const videoText = [
                 data.video.description,
                 data.video.info
             ].filter(Boolean).join(' ');
             
-            if (videoText || data.video.title) {
+            // Alleen indexeren als er echte content is (niet placeholder)
+            if (videoText && this.hasRealContent(videoText) && data.video.url) {
                 items.push({
                     title: data.video.title || 'Video',
                     text: videoText,
-                    url: fileInfo.url, // Video staat vaak onderaan, maar geen vast anker
+                    url: fileInfo.url,
                     type: 'video',
                     context: `${fileInfo.title} - Video`,
                     week: fileInfo.title
@@ -179,14 +234,17 @@ class SearchService {
                     });
                 } else if (item.type === 'paragraph') {
                     const text = Array.isArray(item.text) ? item.text.join(' ') : item.text;
-                    items.push({
-                        title: currentSectionTitle,
-                        text: text,
-                        url: `${fileInfo.url}${currentAnchor}`,
-                        type: 'theorie',
-                        context: `${fileInfo.title} > ${currentSectionTitle}`,
-                        week: fileInfo.title
-                    });
+                    // Alleen indexeren als het echte content is (niet placeholder)
+                    if (text && this.hasRealContent(text)) {
+                        items.push({
+                            title: currentSectionTitle,
+                            text: text,
+                            url: `${fileInfo.url}${currentAnchor}`,
+                            type: 'theorie',
+                            context: `${fileInfo.title} > ${currentSectionTitle}`,
+                            week: fileInfo.title
+                        });
+                    }
                 } else if (item.type === 'accordion' || item.type === 'tabs') {
                     // Verwerk geneste items
                     const subItems = item.items || item.tabs || [];
@@ -208,14 +266,17 @@ class SearchService {
                                 // Check of het strings zijn of objecten
                                 subItem.content.forEach(contentPart => {
                                     if (typeof contentPart === 'string') {
-                                        items.push({
-                                            title: subItem.title,
-                                            text: contentPart,
-                                            url: `${fileInfo.url}${currentAnchor}`,
-                                            type: 'detail',
-                                            context: `${fileInfo.title} > ${currentSectionTitle} > ${subItem.title}`,
-                                            week: fileInfo.title
-                                        });
+                                        // Alleen indexeren als het echte content is (niet placeholder)
+                                        if (this.hasRealContent(contentPart)) {
+                                            items.push({
+                                                title: subItem.title,
+                                                text: contentPart,
+                                                url: `${fileInfo.url}${currentAnchor}`,
+                                                type: 'detail',
+                                                context: `${fileInfo.title} > ${currentSectionTitle} > ${subItem.title}`,
+                                                week: fileInfo.title
+                                            });
+                                        }
                                     } else if (typeof contentPart === 'object') {
                                         // Recursief verwerken als het een content object is
                                         processContentItem(contentPart);
@@ -226,14 +287,17 @@ class SearchService {
                     });
                 } else if (item.type === 'list') {
                     const listText = (item.items || []).join(' ');
-                    items.push({
-                        title: currentSectionTitle,
-                        text: listText,
-                        url: `${fileInfo.url}${currentAnchor}`,
-                        type: 'lijst',
-                        context: `${fileInfo.title} > ${currentSectionTitle}`,
-                        week: fileInfo.title
-                    });
+                    // Alleen indexeren als het echte content is (niet placeholder)
+                    if (listText && this.hasRealContent(listText)) {
+                        items.push({
+                            title: currentSectionTitle,
+                            text: listText,
+                            url: `${fileInfo.url}${currentAnchor}`,
+                            type: 'lijst',
+                            context: `${fileInfo.title} > ${currentSectionTitle}`,
+                            week: fileInfo.title
+                        });
+                    }
                 }
                 // Andere types (image, etc.) slaan we over of voegen we toe indien relevant
             };

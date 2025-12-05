@@ -104,11 +104,48 @@
             outline-offset: 2px;
         }
         
-        /* Globale inspringing voor alle lijsten */
-        .prose ul,
+        /* Globale styling voor lijsten binnen de content (article/prose) */
+        .prose ul {
+            list-style-type: disc;      /* Forceer bullets */
+            padding-left: 1.5rem;       /* Zorg voor inspringing */
+            margin-bottom: 1rem;         /* Ruimte onder de lijst */
+            margin-left: 1rem;          /* Extra marge links */
+        }
+
         .prose ol {
+            list-style-type: decimal;   /* Forceer nummers */
+            padding-left: 1.5rem;       /* Zorg voor inspringing */
+            margin-bottom: 1rem;         /* Ruimte onder de lijst */
             margin-left: 1rem;
-            padding-left: 0;
+        }
+
+        /* Zorg dat geneste lijsten (lijst in een lijst) netjes uitlijnen */
+        .prose ul ul,
+        .prose ol ul,
+        .prose ul ol {
+            margin-top: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Uitzondering: Als er expliciet Tailwind classes (zoals pl-4 of list-inside) worden gebruikt */
+        /* Dit beschermt de hardcoded lijsten in de introductie tegen dubbele styling */
+        .prose ul[class*="pl-"], 
+        .prose ol[class*="pl-"] {
+            padding-left: unset !important; /* Laat Tailwind de padding bepalen */
+        }
+
+        .prose ul[class*="list-inside"],
+        .prose ol[class*="list-inside"] {
+            list-style-position: inside !important;
+            padding-left: 0 !important; /* Bij inside is geen extra padding nodig */
+        }
+
+        /* Zorg dat de bullets zichtbaar zijn (donkergrijs) */
+        .prose li::marker {
+            color: #4b5563; /* text-gray-600 */
+        }
+        .dark .prose li::marker {
+            color: #9ca3af; /* text-gray-400 */
         }
         
         /* Zorg dat lijsten in content ook inspringing hebben */

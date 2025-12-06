@@ -24,9 +24,11 @@ class BaseLessonPage {
 
             <div id="app" class="min-h-screen flex">
                 ${this.renderSidebar()}
-                <div class="flex-1 flex flex-col lg:ml-0">
+                <div class="flex-1 flex flex-col lg:ml-80 relative">
                     ${this.renderHeader()}
-                    ${this.renderMainContent()}
+                    <div class="flex-1 overflow-y-auto custom-scrollbar pt-[56px] sm:pt-[64px]">
+                        ${this.renderMainContent()}
+                    </div>
                 </div>
             </div>
 
@@ -49,7 +51,7 @@ class BaseLessonPage {
      */
     renderSidebar() {
         return `
-            <aside id="sidebar" class="w-full sm:w-80 bg-white dark:bg-gray-800 shadow-lg transform -translate-x-full lg:translate-x-0 transition-transform duration-300 ease-in-out lg:static fixed inset-y-0 z-40" aria-label="Navigatie menu">
+            <aside id="sidebar" class="w-full sm:w-80 bg-white dark:bg-gray-800 shadow-lg transform -translate-x-full lg:translate-x-0 transition-transform duration-300 ease-in-out fixed inset-y-0 z-40" aria-label="Navigatie menu">
                 <div class="h-full flex flex-col">
                     ${this.renderSidebarHeader()}
                     ${this.renderModuleNavigation()}
@@ -226,8 +228,9 @@ class BaseLessonPage {
      */
     renderHeader() {
         return `
-            <header class="bg-white dark:bg-gray-800 shadow-sm border-b border-gray-200 dark:border-gray-700 px-4 sm:px-6 h-[56px] sm:h-[64px] sticky top-0 z-30 transition-colors duration-200 relative flex items-center">
-                <div class="flex items-center justify-between relative z-10 bg-white dark:bg-gray-800 transition-colors duration-200 w-full">
+            <header class="fixed top-0 z-40 bg-white dark:bg-gray-800 shadow-sm border-b border-gray-200 dark:border-gray-700 lg:left-80 left-0 right-0" id="main-header">
+                <div class="px-4 sm:px-6 h-[56px] sm:h-[64px] transition-colors duration-200 flex items-center">
+                    <div class="flex items-center justify-between relative z-10 bg-white dark:bg-gray-800 transition-colors duration-200 w-full">
                     <!-- Left section: Mobile menu & Breadcrumbs -->
                     <div class="flex items-center flex-1 min-w-0">
                         <!-- Mobile menu button -->
@@ -304,10 +307,10 @@ class BaseLessonPage {
      */
     renderMainContent() {
         return `
-            <main id="main-content" class="flex-1 overflow-y-auto custom-scrollbar bg-gray-50 dark:bg-gray-900 transition-colors duration-200">
+            <main id="main-content" class="flex-1 custom-scrollbar bg-gray-50 dark:bg-gray-900 transition-colors duration-200">
                 <div class="max-w-4xl mx-auto px-4 sm:px-6 py-4 sm:py-6 lg:py-8">
-                    <article class="space-y-6 sm:space-y-8 fade-in">
-                        ${this.renderModuleIntro()}
+                    ${this.renderModuleIntro()}
+                    <article class="space-y-6 sm:space-y-8 fade-in mt-6 sm:mt-8">
                         ${this.renderContentSections()}
                     </article>
 

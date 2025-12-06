@@ -980,9 +980,25 @@ class BaseLessonPage {
         document.addEventListener('click', handleNavClick, true);
         
         // Handle hash in URL on page load (after content is loaded)
+        // Only scroll if there's actually a hash in the URL
         const handleHashOnLoad = (attempt = 1, maxAttempts = 10) => {
-            if (window.location.hash && (this.moduleId === 'week-2' || this.moduleId === 'week-3' || this.moduleId === 'week-4' || this.moduleId === 'week-5')) {
-                const hash = window.location.hash;
+            // Check if hash exists and is not empty
+            const hash = window.location.hash;
+            if (!hash || hash === '#' || hash.trim() === '') {
+                // No hash, don't scroll - ensure we're at the top
+                if (attempt === 1) {
+                    // Only on first attempt, ensure we're at the top of the page
+                    const mainContent = document.getElementById('main-content');
+                    if (mainContent) {
+                        mainContent.scrollTo({ top: 0, behavior: 'instant' });
+                    }
+                    window.scrollTo({ top: 0, behavior: 'instant' });
+                }
+                return; // Exit early if no hash
+            }
+            
+            // Only handle hash scrolling for week-2, week-3, week-4, week-5
+            if (this.moduleId === 'week-2' || this.moduleId === 'week-3' || this.moduleId === 'week-4' || this.moduleId === 'week-5') {
                 const element = document.querySelector(hash);
                 
                 if (element) {
@@ -1008,11 +1024,24 @@ class BaseLessonPage {
             }
         };
         
-        // Try after delays (in case content loads asynchronously)
-        // Start with shorter delay, then increase
-        setTimeout(() => handleHashOnLoad(1), 500);
-        setTimeout(() => handleHashOnLoad(3), 1500);
-        setTimeout(() => handleHashOnLoad(6), 3000);
+        // Only try to handle hash if there actually is one
+        // Don't call multiple times if there's no hash - that's wasteful
+        if (window.location.hash && window.location.hash !== '#' && window.location.hash.trim() !== '') {
+            // Try after delays (in case content loads asynchronously)
+            // Start with shorter delay, then increase
+            setTimeout(() => handleHashOnLoad(1), 500);
+            setTimeout(() => handleHashOnLoad(3), 1500);
+            setTimeout(() => handleHashOnLoad(6), 3000);
+        } else {
+            // No hash - ensure we start at the top of the page
+            setTimeout(() => {
+                const mainContent = document.getElementById('main-content');
+                if (mainContent) {
+                    mainContent.scrollTo({ top: 0, behavior: 'instant' });
+                }
+                window.scrollTo({ top: 0, behavior: 'instant' });
+            }, 100);
+        }
     }
     
     /**

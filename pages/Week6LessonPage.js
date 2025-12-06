@@ -246,7 +246,7 @@ class Week6LessonPage extends BaseLessonPage {
             return MCQuestionRenderer.render(mcConfig, 'mc-questions-container', this.currentQuestion);
         }
         
-        // Anders toon loading state - binnen een sectie
+        // Anders toon een knop om de vraag te genereren (bespaart API tokens)
         return `
             <section class="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-4 sm:p-6 sm:pr-[70px] hover-lift mt-8 transition-colors duration-200">
                 <div class="flex flex-col sm:flex-row items-start">
@@ -256,11 +256,15 @@ class Week6LessonPage extends BaseLessonPage {
                     <div class="flex-1 min-w-0 w-full sm:w-auto">
                         <h2 class="text-lg sm:text-xl font-semibold text-gray-900 dark:text-white mb-4">${mcConfig.title || 'Test je kennis'}</h2>
                         <div id="mc-questions-container" class="space-y-6">
-                            <div class="border border-gray-200 dark:border-gray-700 rounded-lg p-5 bg-gray-50 dark:bg-gray-900/50">
-                                <div class="flex items-center justify-center space-x-3 py-8">
-                                    <div class="animate-spin rounded-full h-6 w-6 border-b-2 border-indigo-600 dark:border-indigo-400"></div>
-                                    <p class="text-gray-600 dark:text-gray-300">AI-generatie vraag...</p>
-                                </div>
+                            <div class="border border-gray-200 dark:border-gray-700 rounded-lg p-6 bg-gray-50 dark:bg-gray-900/50 text-center">
+                                <p class="text-gray-600 dark:text-gray-300 mb-4">Klik op de knop hieronder om een AI-gegenereerde vraag te maken op basis van de theorie.</p>
+                                <button 
+                                    id="generate-mc-question-btn" 
+                                    class="px-6 py-3 bg-indigo-600 dark:bg-indigo-700 text-white rounded-lg hover:bg-indigo-700 dark:hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-400 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition-colors font-medium flex items-center justify-center space-x-2 mx-auto"
+                                    aria-label="Genereer MC vraag">
+                                    <i class="fas fa-magic"></i>
+                                    <span>Genereer vraag</span>
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -307,6 +311,19 @@ class Week6LessonPage extends BaseLessonPage {
 
         try {
             console.log('Starting MC question generation...');
+            
+            // Show loading state in container
+            const container = document.getElementById('mc-questions-container');
+            if (container) {
+                container.innerHTML = `
+                    <div class="border border-gray-200 dark:border-gray-700 rounded-lg p-5 bg-gray-50 dark:bg-gray-900/50">
+                        <div class="flex items-center justify-center space-x-3 py-8">
+                            <div class="animate-spin rounded-full h-6 w-6 border-b-2 border-indigo-600 dark:border-indigo-400"></div>
+                            <p class="text-gray-600 dark:text-gray-300">AI-generatie vraag...</p>
+                        </div>
+                    </div>
+                `;
+            }
             
             if (!this.aiGenerator) {
                 // API key no longer required - server handles it
@@ -386,6 +403,16 @@ class Week6LessonPage extends BaseLessonPage {
             console.error('Error generating MC questions:', error);
             const errorMessage = error.message || 'Er is een fout opgetreden bij het genereren van vragen. Probeer de pagina te verversen.';
             this.showErrorInContainer(errorMessage);
+            
+            // Re-enable the generate button if it exists
+            const generateBtn = document.getElementById('generate-mc-question-btn');
+            if (generateBtn) {
+                generateBtn.disabled = false;
+                generateBtn.innerHTML = `
+                    <i class="fas fa-magic"></i>
+                    <span>Genereer vraag</span>
+                `;
+            }
         }
     }
 
@@ -659,16 +686,34 @@ class Week6LessonPage extends BaseLessonPage {
                 <div class="border border-red-200 dark:border-red-800 rounded-lg p-5 bg-red-50 dark:bg-red-900/20">
                     <div class="flex items-start space-x-3">
                         <i class="fas fa-exclamation-triangle text-red-600 dark:text-red-400 mt-1"></i>
-                        <div>
+                        <div class="flex-1">
                             <h3 class="font-semibold text-red-900 dark:text-red-200 mb-1">Fout bij genereren</h3>
-                            <p class="text-red-800 dark:text-red-300 text-sm">${message}</p>
-                            <button onclick="location.reload()" class="mt-3 px-4 py-2 bg-red-600 dark:bg-red-700 text-white rounded-lg hover:bg-red-700 dark:hover:bg-red-600 transition-colors text-sm">
-                                Pagina verversen
-                            </button>
+                            <p class="text-red-800 dark:text-red-300 text-sm mb-3">${message}</p>
+                            <div class="flex space-x-2">
+                                <button 
+                                    id="retry-generate-mc-question-btn"
+                                    class="px-4 py-2 bg-indigo-600 dark:bg-indigo-700 text-white rounded-lg hover:bg-indigo-700 dark:hover:bg-indigo-600 transition-colors text-sm font-medium flex items-center space-x-2">
+                                    <i class="fas fa-redo"></i>
+                                    <span>Opnieuw proberen</span>
+                                </button>
+                                <button 
+                                    onclick="location.reload()" 
+                                    class="px-4 py-2 bg-gray-600 dark:bg-gray-700 text-white rounded-lg hover:bg-gray-700 dark:hover:bg-gray-600 transition-colors text-sm">
+                                    Pagina verversen
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
             `;
+            
+            // Setup retry button
+            const retryBtn = document.getElementById('retry-generate-mc-question-btn');
+            if (retryBtn) {
+                retryBtn.addEventListener('click', () => {
+                    this.generateMCQuestions();
+                });
+            }
         }
     }
 
@@ -679,9 +724,20 @@ class Week6LessonPage extends BaseLessonPage {
     attachEventListeners() {
         super.attachEventListeners();
         
-        // Generate MC questions after content is loaded
-        if (this.content && this.content.mcVragen) {
-            this.generateMCQuestions();
+        // Setup button to generate MC questions (instead of auto-generating)
+        const generateBtn = document.getElementById('generate-mc-question-btn');
+        if (generateBtn) {
+            generateBtn.addEventListener('click', () => {
+                // Disable button and show loading state
+                generateBtn.disabled = true;
+                generateBtn.innerHTML = `
+                    <div class="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
+                    <span>Genereren...</span>
+                `;
+                
+                // Generate the question
+                this.generateMCQuestions();
+            });
         }
         
         // Listen for "next question" event
@@ -698,13 +754,8 @@ class Week6LessonPage extends BaseLessonPage {
         document.body.innerHTML = this.render();
         this.attachEventListeners();
         
-        // Generate MC questions if needed (after DOM is ready)
-        if (this.content && this.content.mcVragen && this.content.mcVragen.generateFromTheory) {
-            // Small delay to ensure DOM is ready
-            setTimeout(() => {
-                this.generateMCQuestions();
-            }, 100);
-        }
+        // MC questions are now generated on button click (not automatically)
+        // This saves API tokens
     }
 }
 

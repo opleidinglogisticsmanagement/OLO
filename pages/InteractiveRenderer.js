@@ -2912,15 +2912,24 @@ class InteractiveRenderer {
                         input.disabled = false;
                         input.readOnly = false;
                         
-                        // Test if we can focus it
-                        try {
-                            input.focus();
-                            input.blur(); // Remove focus immediately, user will click
-                        } catch (e) {
-                            console.warn('[InteractiveRenderer] Could not test focus on input:', e);
-                        }
+                        // Don't test focus() here - it causes automatic scrolling to the element
+                        // The inputs will work fine without this test, and users can click/focus them when needed
                     }
                 });
+                
+                // If there's no hash in the URL, ensure we stay at the top of the page
+                // This prevents any accidental scrolling that might have occurred during setup
+                if (!window.location.hash || window.location.hash === '#' || window.location.hash.trim() === '') {
+                    const mainContent = document.getElementById('main-content');
+                    if (mainContent) {
+                        // Use requestAnimationFrame to ensure this happens after any potential scroll
+                        requestAnimationFrame(() => {
+                            if (mainContent.scrollTop > 0) {
+                                mainContent.scrollTo({ top: 0, behavior: 'instant' });
+                            }
+                        });
+                    }
+                }
             }, 100);
         });
         

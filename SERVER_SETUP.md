@@ -72,7 +72,7 @@ Health check endpoint om te controleren of de server draait.
 
 ## Troubleshooting
 
-- **API Key niet gevonden:** Zorg ervoor dat `.env` bestand bestaat en `GEMINI_API_KEY` bevat
+- **API-Key niet gevonden:** Zorg ervoor dat `.env` bestand bestaat en `GEMINI_API_KEY` bevat
 - **Port al in gebruik:** Wijzig `PORT` in `.env` bestand
 - **CORS errors:** De server heeft CORS enabled voor alle origins
 

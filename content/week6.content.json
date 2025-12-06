@@ -86,6 +86,21 @@
           "<li class=\"text-gray-700 dark:text-gray-300\">Bureauonderzoek</li>",
           "</ol>"
         ]
+      },
+      {
+        "type": "clickableSteps",
+        "steps": [
+          {
+            "label": "Het survey-onderzoek",
+            "content": [
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">In de context van Logistieke Onderzoeken laat het woord Survey zich Een survey-onderzoek kan worden ingezet bij grote aantallen willekeurig gekozen onderzoekseenheden waarbij een breed overzicht wordt vereist. Het survey-onderzoek focust dus op de breedte en generaliseerbaarheid. Vaak worden verkregen resultaten kwantitatief verwerkt. Een survey-onderzoek is dus ook vaak kwantitatief van aard. In de kennisclip vindt je een uitgebreidere toelichting op het survey-onderzoek.</p>",
+              {
+                "type": "video",
+                "url": "https://media.windesheim.nl/Mediasite/Play/9fd33a5ba2cd480aa94dff6b6b227a891d"
+              }
+            ]
+          }
+        ]
       }
     ]
   },

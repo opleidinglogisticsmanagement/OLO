@@ -14,7 +14,7 @@
 
 3. **Open in browser**: `http://localhost:3000/week2.html`
 
-## 🔧 Automatisch Opstarten 
+## 🔧 Automatisch opstarten 
 
 De server start automatisch wanneer je Cursor opent (via `.vscode/tasks.json`).
 

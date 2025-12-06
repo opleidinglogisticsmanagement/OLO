@@ -25,23 +25,73 @@ class AfsluitingLessonPage extends BaseLessonPage {
     }
 
     /**
-     * Laad content uit JSON bestand (optioneel - als bestand bestaat)
+     * Laad content uit JSON bestand met retry logica (optioneel - als bestand bestaat)
      */
-    async loadContent() {
-        try {
-            const response = await fetch('./content/afsluiting.content.json');
-            if (!response.ok) {
-                // Bestand bestaat niet - gebruik fallback
+    async loadContent(retries = 3) {
+        for (let attempt = 1; attempt <= retries; attempt++) {
+            try {
+                // Probeer verschillende paden
+                const paths = [
+                    './content/afsluiting.content.json',
+                    'content/afsluiting.content.json',
+                    '/content/afsluiting.content.json'
+                ];
+                
+                let lastError = null;
+                for (const contentPath of paths) {
+                    try {
+                        console.log(`[AfsluitingLessonPage] Loading content from: ${contentPath} (attempt ${attempt}/${retries})`);
+                        const response = await fetch(contentPath, {
+                            cache: 'no-cache',
+                            headers: {
+                                'Accept': 'application/json'
+                            }
+                        });
+                        
+                        if (!response.ok) {
+                            // Bestand bestaat niet - gebruik fallback (dit is OK voor Afsluiting)
+                            console.log(`[AfsluitingLessonPage] File not found at ${contentPath}, using fallback content`);
+                            this.content = this.getFallbackContent();
+                            this.contentLoaded = true;
+                            return;
+                        }
+                        
+                        const contentType = response.headers.get('content-type');
+                        if (!contentType || !contentType.includes('application/json')) {
+                            console.warn(`[AfsluitingLessonPage] Unexpected content-type: ${contentType}`);
+                        }
+                        
+                        this.content = await response.json();
+                        this.contentLoaded = true;
+                        console.log('[AfsluitingLessonPage] ✅ Content loaded successfully');
+                        return; // Success, exit function
+                    } catch (pathError) {
+                        console.warn(`[AfsluitingLessonPage] Failed to load from ${contentPath}:`, pathError.message);
+                        lastError = pathError;
+                        // Try next path
+                    }
+                }
+                
+                // All paths failed - voor Afsluiting is dit OK, gebruik fallback
+                console.log('[AfsluitingLessonPage] Content file not found, using fallback content');
                 this.content = this.getFallbackContent();
                 this.contentLoaded = true;
                 return;
+            } catch (error) {
+                console.error(`[AfsluitingLessonPage] Error loading content (attempt ${attempt}/${retries}):`, error);
+                
+                if (attempt === retries) {
+                    // Last attempt failed - voor Afsluiting is dit OK
+                    console.log('[AfsluitingLessonPage] Using fallback content');
+                    this.contentLoaded = true;
+                    this.content = this.getFallbackContent();
+                } else {
+                    // Wait before retry (exponential backoff)
+                    const delay = Math.min(1000 * Math.pow(2, attempt - 1), 5000);
+                    console.log(`[AfsluitingLessonPage] Retrying in ${delay}ms...`);
+                    await new Promise(resolve => setTimeout(resolve, delay));
+                }
             }
-            this.content = await response.json();
-            this.contentLoaded = true;
-        } catch (error) {
-            console.log('Afsluiting content bestand niet gevonden, gebruik standaard content');
-            this.contentLoaded = true;
-            this.content = this.getFallbackContent();
         }
     }
 

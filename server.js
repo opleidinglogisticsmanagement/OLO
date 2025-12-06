@@ -1255,6 +1255,11 @@ if (process.env.VERCEL && process.env.VERCEL_ROOT_DIR) {
 
 // Serveer index.html voor root route
 app.get('/', (req, res, next) => {
+    // Set no-cache headers
+    res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+    res.setHeader('Pragma', 'no-cache');
+    res.setHeader('Expires', '0');
+    
     // Eerst proberen: gebruik in-memory cache (voor Vercel serverless)
     if (global.htmlFilesCache && global.htmlFilesCache['index.html']) {
         console.log(`✅ Serving index.html from memory cache`);
@@ -1353,6 +1358,11 @@ app.get('/game/vite.svg', (req, res, next) => {
 app.get(/\.html$/, (req, res, next) => {
     const fileName = req.path.replace(/^\//, ''); // bijv. week1.html (zonder leading slash)
     
+    // Set no-cache headers
+    res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+    res.setHeader('Pragma', 'no-cache');
+    res.setHeader('Expires', '0');
+    
     // Eerst proberen: gebruik in-memory cache (voor Vercel serverless)
     if (global.htmlFilesCache && global.htmlFilesCache[fileName]) {
         console.log(`✅ Serving ${fileName} from memory cache`);
@@ -1411,6 +1421,11 @@ app.get(/\.js$/, (req, res, next) => {
     const fileName = req.path.replace(/^\//, ''); // bijv. pages/Week2LessonPage.js
     const filePath = path.join(rootDir, fileName);
     
+    // Set no-cache headers
+    res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+    res.setHeader('Pragma', 'no-cache');
+    res.setHeader('Expires', '0');
+    
     // Probeer verschillende paden
     const possiblePaths = [
         filePath,
@@ -1455,6 +1470,11 @@ app.use(express.static(rootDir, {
 app.get(/\.json$/, (req, res, next) => {
     const fileName = req.path.replace(/^\//, ''); // bijv. content/week2.content.json
     const filePath = path.join(rootDir, fileName);
+    
+    // Set no-cache headers
+    res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+    res.setHeader('Pragma', 'no-cache');
+    res.setHeader('Expires', '0');
     
     // Probeer verschillende paden
     const possiblePaths = [

@@ -26,20 +26,66 @@ class Week2LessonPage extends BaseLessonPage {
     }
 
     /**
-     * Laad content uit JSON bestand
+     * Laad content uit JSON bestand met retry logica
      */
-    async loadContent() {
-        try {
-            const response = await fetch('./content/week2.content.json');
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
+    async loadContent(retries = 3) {
+        for (let attempt = 1; attempt <= retries; attempt++) {
+            try {
+                // Probeer verschillende paden
+                const paths = [
+                    './content/week2.content.json',
+                    'content/week2.content.json',
+                    '/content/week2.content.json'
+                ];
+                
+                let lastError = null;
+                for (const contentPath of paths) {
+                    try {
+                        console.log(`[Week2LessonPage] Loading content from: ${contentPath} (attempt ${attempt}/${retries})`);
+                        const response = await fetch(contentPath, {
+                            cache: 'no-cache',
+                            headers: {
+                                'Accept': 'application/json'
+                            }
+                        });
+                        
+                        if (!response.ok) {
+                            throw new Error(`HTTP error! status: ${response.status} for path: ${contentPath}`);
+                        }
+                        
+                        const contentType = response.headers.get('content-type');
+                        if (!contentType || !contentType.includes('application/json')) {
+                            console.warn(`[Week2LessonPage] Unexpected content-type: ${contentType}`);
+                        }
+                        
+                        this.content = await response.json();
+                        this.contentLoaded = true;
+                        console.log('[Week2LessonPage] ✅ Content loaded successfully');
+                        return; // Success, exit function
+                    } catch (pathError) {
+                        console.warn(`[Week2LessonPage] Failed to load from ${contentPath}:`, pathError.message);
+                        lastError = pathError;
+                        // Try next path
+                    }
+                }
+                
+                // All paths failed, throw last error
+                throw lastError || new Error('All content paths failed');
+            } catch (error) {
+                console.error(`[Week2LessonPage] Error loading content (attempt ${attempt}/${retries}):`, error);
+                
+                if (attempt === retries) {
+                    // Last attempt failed, use fallback
+                    console.error('[Week2LessonPage] ❌ All attempts failed, using fallback content');
+                    this.contentLoaded = false;
+                    this.content = this.getFallbackContent();
+                } else {
+                    // Wait before retry (exponential backoff)
+                    const delay = Math.min(1000 * Math.pow(2, attempt - 1), 5000);
+                    console.log(`[Week2LessonPage] Retrying in ${delay}ms...`);
+                    await new Promise(resolve => setTimeout(resolve, delay));
+                }
             }
-            this.content = await response.json();
-            this.contentLoaded = true;
-        } catch (error) {
-            console.error('Error loading content:', error);
-            this.contentLoaded = false;
-            this.content = this.getFallbackContent();
         }
     }
 

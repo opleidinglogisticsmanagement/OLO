@@ -1,6 +1,6 @@
 # Server Setup Instructies
 
-## ✅ Snelle Start
+## ✅ Snelle Start 
 
 1. **Dependencies installeren** (eenmalig):
    ```bash

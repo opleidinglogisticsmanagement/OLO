@@ -63,15 +63,14 @@ class BaseLessonPage {
      */
     renderSidebarHeader() {
         return `
-            <div class="p-4 sm:p-6 border-b border-gray-200 dark:border-gray-700">
-                <div class="flex items-start justify-between">
-                    <div class="flex items-start space-x-3 flex-1 min-w-0">
+            <div class="px-4 sm:px-6 h-[56px] sm:h-[64px] border-b border-gray-200 dark:border-gray-700 flex items-center">
+                <div class="flex items-center justify-between w-full">
+                    <div class="flex items-center space-x-3 flex-1 min-w-0">
                         <div class="w-10 h-10 bg-gradient-to-r from-blue-600 to-blue-700 rounded-lg flex items-center justify-center flex-shrink-0" aria-hidden="true">
                             <i class="fas fa-graduation-cap text-white text-lg"></i>
                         </div>
                         <div class="min-w-0 flex-1">
-                            <h1 class="text-lg sm:text-xl font-bold text-gray-900 dark:text-white">E-Learning</h1>
-                            <p class="text-xs sm:text-sm text-gray-500 dark:text-gray-400 break-words">Opzetten van Logistieke Onderzoeken (OLO)</p>
+                            <p class="text-xs sm:text-sm text-gray-500 dark:text-gray-400 break-words leading-tight m-0 font-bold">Opzetten van Logistieke Onderzoeken (OLO)</p>
                         </div>
                     </div>
                     <!-- Close button for mobile -->
@@ -211,6 +210,9 @@ class BaseLessonPage {
         return `
             <nav class="flex-1 overflow-y-auto custom-scrollbar p-4 sm:p-6" aria-label="Module navigatie">
                 <div class="space-y-2">
+                    <div class="px-3 py-2 mb-2">
+                        <span class="text-sm font-semibold text-gray-700 dark:text-gray-300">E-Learning</span>
+                    </div>
                     ${moduleItems}
                 </div>
             </nav>
@@ -224,8 +226,8 @@ class BaseLessonPage {
      */
     renderHeader() {
         return `
-            <header class="bg-white dark:bg-gray-800 shadow-sm border-b border-gray-200 dark:border-gray-700 px-4 sm:px-6 py-3 sm:py-4 sticky top-0 z-30 transition-colors duration-200 relative">
-                <div class="flex items-center justify-between relative z-10 bg-white dark:bg-gray-800 transition-colors duration-200">
+            <header class="bg-white dark:bg-gray-800 shadow-sm border-b border-gray-200 dark:border-gray-700 px-4 sm:px-6 h-[56px] sm:h-[64px] sticky top-0 z-30 transition-colors duration-200 relative flex items-center">
+                <div class="flex items-center justify-between relative z-10 bg-white dark:bg-gray-800 transition-colors duration-200 w-full">
                     <!-- Left section: Mobile menu & Breadcrumbs -->
                     <div class="flex items-center flex-1 min-w-0">
                         <!-- Mobile menu button -->

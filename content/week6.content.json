@@ -17,7 +17,74 @@
       {
         "type": "paragraph",
         "text": [
-          "[Theorie content komt hier]"
+          "The final step - Fase 04 Onderzoekstechnisch ontwerp",
+          "",
+          "Van het onderzoeksplan is nu de probleemstelling, doelstelling, onderzoeksmodel, onderzoeksvragen, begripsbepaling en het theoretisch kader doorlopen. Het is nog niet af, want er kunnen altijd nog wijzigingen gemaakt worden op basis van voortschrijdend inzicht (itereren). Na fase 1, 2 en 3 komt fase 4 het onderzoekstechnisch ontwerp. Hieronder ook weer even kort weergegeven vanuit het raamwerk: het opzetten van een onderzoek."
+        ]
+      },
+      {
+        "type": "image",
+        "src": "assets/images/Stappenplannen 1.0.png",
+        "alt": "De vier fasen bij het opstellen van een logistiek onderzoek.",
+        "enableModal": true
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "De eerste stap van het onderzoekstechnisch ontwerp is het bepalen van de onderzoeksstrategie.",
+          "",
+          "Het bepalen van de onderzoekstrategie gebeurt eerst in hoofdlijnen en daarvoor moeten drie kernbeslissingen genomen worden. Deze worden hieronder in een kennisclip verder toegelicht."
+        ]
+      },
+      {
+        "type": "video",
+        "url": "https://media.windesheim.nl/Mediasite/Play/041963fc68794573b93a3646733eede51d"
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "Deze drie kernbeslissingen helpen je om het onderzoek meer vorm te geven."
+        ]
+      },
+      {
+        "type": "accordion",
+        "usePlusIcon": true,
+        "defaultOpen": false,
+        "items": [
+          {
+            "title": "Voorbeeld – Leveranciersprestaties en een Service Level Agreement",
+            "defaultOpen": false,
+            "content": [
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Een verkoper van bedden merkt dat een aantal leveranciers wel eens een dag of meer te laat leveren, bestellingen niet compleet zijn of beschadigd. Aan jou de opdracht om te bepalen met welk Service Level Agreement (SLA) de organisatie een contract zou kunnen sluiten met de leveranciers. Je hebt al het een en ander verkend via deskresearch en met behulp van enkele interviews heb je al een concept onderzoeksmodel kunnen opstellen. Je staat nu voor de keuze om het onderzoek concreter te maken en gaat de drie kernbeslissingen nemen.</p>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Je besluit ten eerste om het onderzoek breed te houden door de leverprestaties van alle leveranciers over de afgelopen 6 maanden vast te stellen. Je geeft het onderzoek dus minder diepgang wat je had kunnen doen door bijvoorbeeld de drie grootste leveranciers die meerdere keren per week leveren te beoordelen op levertijd, de compleetheid van de bestelling en beschadigingen. Door het onderzoek breed te houden kun je een algemeen SLA aanleveren en op basis van leverprestaties aanbevelingen doen voor de leveranciers waar qua leverprestaties het eerste een SLA afgesloten zou moeten worden. Als de kernbeslissing was om het onderzoek diepgang te geven dan was het mogelijk om een specifiek SLA te maken voor bijvoorbeeld de drie grootste leveranciers op basis van levertijd, compleetheid van de bestelling en beschadigingen.</p>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Bij de tweede kernbeslissing besluit je om het onderzoek voornamelijk kwantitatief te houden. Je wilt de leverprestaties analyseren en presenteren met behulp van diagrammen. Je kiest niet voor een kwalitatief onderzoek. Je vermoed dat de betrouwbaarheid van de resultaten in twijfel getrokken kunnen worden. Het vaststellen van de inhoud van een SLA of met welke leveranciers eerst een SLA afgesloten moet worden op basis van interviews met mensen binnen de organisatie en met deskresearch is immers minder betrouwbaar.</p>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Bij de derde kernbeslissing besluit je dat het voornamelijk een bureauonderzoek wordt. Je gaat immers data raadplegen om leverprestaties te bepalen en daarnaast zul je in de literatuur gaan zoeken om de globale inhoud van een SLA vast te stellen. Het analyseren van leverprestaties (bureauonderzoek) past ook bij een kwantitatieve verwerking van de gegevens. Je kiest niet voor een empirisch onderzoek dat ook meer diepgang zou hebben. Het empirische gedeelte zou dan terugkomen bij het meten van leverprestaties, compleetheid van de bestelling en beschadigingen bij de drie grootste leveranciers. Bij dit meten zou je namelijk de werkvloer op gaan. Deze resultaten zul je ook kwantitatief gaan verwerken, maar het kwalitatieve aspect waarbij je de inhoud van een SLA op basis van interviews gaat vaststellen zou de boventoon gaan voeren.</p>"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "Na het maken van de drie kernbeslissingen kun je het onderzoek in een volgende stap concreter gaan maken. Je hebt nu namelijk helder wat je gaat onderzoeken, hoe je dat gaat onderzoeken en hoe je de resultaten gaat verwerken. Het concreter maken van het onderzoek kan nu door specifieke onderzoeksstrategie te kiezen."
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "Bij Logistieke Onderzoeken gaan we dus nu niet direct een dataverzamelingsplan opstellen. Tussen de drie kernbeslissingen en het dataverzamelingsplan zit nog het vaststellen van je daadwerkelijke onderzoeksstrategie. Als onderzoeker is het van belang om te bepalen met welk type onderzoek je te werk wilt gaan. Daarom behandelen we hieronder vijf algemene onderzoeksstrategieën. Sommige strategieën zullen we bij (praktijkgerichte) logistieke onderzoeken sneller gebruiken dan andere, maar we noemen wel alle vijf de mogelijkheden. Het is namelijk niet zo dat een specifieke strategie op voorhand uitgesloten is. Het zijn de onderstaande vijf strategieën:"
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "<ol class=\"list-decimal list-outside space-y-2 mb-4 ml-6 pl-4\">",
+          "<li class=\"text-gray-700 dark:text-gray-300\">Survey-onderzoek</li>",
+          "<li class=\"text-gray-700 dark:text-gray-300\">Experiment</li>",
+          "<li class=\"text-gray-700 dark:text-gray-300\">Casestudy</li>",
+          "<li class=\"text-gray-700 dark:text-gray-300\">Gefundeerde theoriebenadering</li>",
+          "<li class=\"text-gray-700 dark:text-gray-300\">Bureauonderzoek</li>",
+          "</ol>"
         ]
       }
     ]

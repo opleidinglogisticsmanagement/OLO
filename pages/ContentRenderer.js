@@ -66,6 +66,8 @@ class ContentRenderer {
                     return this.renderBooleanOperatorExercise(item);
                 case 'aiQueryExercise':
                     return this.renderAIQueryExercise(item);
+                case 'aiBouwsteenGenerator':
+                    return this.renderAIBouwsteenGenerator(item);
                 default:
                     console.warn(`Unknown content type: ${item.type}`);
                     return '';
@@ -560,6 +562,19 @@ class ContentRenderer {
             return InteractiveRenderer.renderAIQueryExercise(item);
         }
         console.warn('InteractiveRenderer not loaded. AI query exercise will not render.');
+        return '';
+    }
+
+    /**
+     * Render AI Bouwsteen Generator component (delegates to InteractiveRenderer)
+     * @param {Object} item - AI Bouwsteen Generator item
+     * @returns {string} HTML string
+     */
+    static renderAIBouwsteenGenerator(item) {
+        if (typeof window.InteractiveRenderer !== 'undefined') {
+            return InteractiveRenderer.renderAIBouwsteenGenerator(item);
+        }
+        console.warn('InteractiveRenderer not loaded. AI Bouwsteen Generator will not render.');
         return '';
     }
 }

@@ -2765,6 +2765,580 @@ class InteractiveRenderer {
         }
         if (loading) loading.classList.add('hidden');
     }
+
+    /**
+     * Render AI Bouwsteen Generator tool
+     * Laat studenten een zoekwoord en context invoeren en genereert een bouwsteentabel
+     * @param {Object} item - AI Bouwsteen Generator item
+     * @returns {string} HTML string
+     */
+    static renderAIBouwsteenGenerator(item) {
+        const generatorId = `ai-bouwsteen-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+        
+        const html = `
+            <div class="ai-bouwsteen-generator mb-6 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 overflow-hidden" id="${generatorId}" style="pointer-events: auto;">
+                <!-- Tool Header -->
+                <div class="bg-gray-50 dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700 px-4 py-3 flex items-center justify-between">
+                    <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Tool: AI Bouwsteen Generator</h3>
+                    <button 
+                        type="button"
+                        class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 transition-colors ai-bouwsteen-close-btn"
+                        data-generator-id="${generatorId}"
+                        aria-label="Sluiten"
+                    >
+                        <i class="fas fa-times text-xl"></i>
+                    </button>
+                </div>
+                
+                <!-- Tool Content -->
+                <div class="p-6">
+                    <!-- Title -->
+                    <div class="flex items-center mb-4">
+                        <div class="flex items-center space-x-2">
+                            <i class="fas fa-pencil-alt text-blue-600 dark:text-blue-400"></i>
+                            <h4 class="text-xl font-bold text-blue-600 dark:text-blue-400">AI Bouwsteen Generator</h4>
+                        </div>
+                    </div>
+                    
+                    <!-- Description -->
+                    <p class="text-gray-700 dark:text-gray-300 mb-6">
+                        Gebruik deze tool om inspiratie op te doen voor je bouwsteentabel. Vul een zoekwoord in en krijg suggesties voor synoniemen, vertalingen en gerelateerde termen.
+                    </p>
+                    
+                    <!-- Input Fields -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                        <div>
+                            <label for="${generatorId}-keyword" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                Zoekwoord <span class="text-red-500">*</span>
+                            </label>
+                            <input 
+                                type="text" 
+                                id="${generatorId}-keyword"
+                                class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                                placeholder="Bijv. Logistiek"
+                                autocomplete="off"
+                                style="pointer-events: auto; cursor: text;"
+                            />
+                        </div>
+                        <div>
+                            <label for="${generatorId}-context" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                Context (optioneel)
+                            </label>
+                            <input 
+                                type="text" 
+                                id="${generatorId}-context"
+                                class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                                placeholder="Bijv. Binnen de zorgsector"
+                                autocomplete="off"
+                                style="pointer-events: auto; cursor: text;"
+                            />
+                        </div>
+                    </div>
+                    
+                    <!-- Generate Button -->
+                    <div class="flex justify-center mb-6">
+                        <button 
+                            type="button"
+                            class="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-md font-medium transition-colors flex items-center space-x-2 ai-bouwsteen-generate-btn"
+                            data-generator-id="${generatorId}"
+                        >
+                            <i class="fas fa-cog"></i>
+                            <span>Genereer Tabel</span>
+                        </button>
+                    </div>
+                    
+                    <!-- Loading State -->
+                    <div id="${generatorId}-loading" class="hidden mb-6">
+                        <div class="flex items-center justify-center text-gray-600 dark:text-gray-400">
+                            <i class="fas fa-spinner fa-spin mr-2"></i>
+                            <span>Bezig met genereren...</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Result Section -->
+                    <div id="${generatorId}-result" class="hidden">
+                        <div class="flex items-center justify-between mb-4">
+                            <h5 class="text-lg font-semibold text-gray-900 dark:text-white">Resultaat</h5>
+                            <button 
+                                type="button"
+                                class="px-4 py-2 bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300 rounded-md text-sm font-medium transition-colors ai-bouwsteen-copy-result-btn"
+                                data-generator-id="${generatorId}"
+                            >
+                                <i class="fas fa-copy mr-2"></i>Kopieer tabel
+                            </button>
+                        </div>
+                        
+                        <div id="${generatorId}-result-table" class="overflow-x-auto mb-4"></div>
+                        
+                        <p class="text-xs text-gray-500 dark:text-gray-400 text-center">
+                            Gegenereerd met AI - controleer altijd de resultaten.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        `;
+        
+        // Setup event listeners after DOM is ready
+        // Use requestAnimationFrame to ensure DOM is fully rendered
+        requestAnimationFrame(() => {
+            setTimeout(() => {
+                InteractiveRenderer.setupAIBouwsteenGeneratorListeners(generatorId);
+                
+                // Ensure inputs are focusable and clickable
+                const keywordInput = document.getElementById(`${generatorId}-keyword`);
+                const contextInput = document.getElementById(`${generatorId}-context`);
+                
+                [keywordInput, contextInput].forEach(input => {
+                    if (input) {
+                        // Remove any blocking attributes
+                        input.removeAttribute('readonly');
+                        input.removeAttribute('disabled');
+                        
+                        // Ensure pointer events are enabled
+                        input.style.pointerEvents = 'auto';
+                        input.style.cursor = 'text';
+                        input.style.userSelect = 'text';
+                        
+                        // Remove any event listeners that might block
+                        input.onclick = null;
+                        input.onmousedown = null;
+                        
+                        // Make sure tabindex allows focus
+                        if (!input.hasAttribute('tabindex')) {
+                            input.setAttribute('tabindex', '0');
+                        }
+                        
+                        // Force enable the input
+                        input.disabled = false;
+                        input.readOnly = false;
+                        
+                        // Test if we can focus it
+                        try {
+                            input.focus();
+                            input.blur(); // Remove focus immediately, user will click
+                        } catch (e) {
+                            console.warn('[InteractiveRenderer] Could not test focus on input:', e);
+                        }
+                    }
+                });
+            }, 100);
+        });
+        
+        return html;
+    }
+    
+    /**
+     * Setup event listeners for AI Bouwsteen Generator
+     */
+    static setupAIBouwsteenGeneratorListeners(generatorId) {
+        const generatorContainer = document.getElementById(generatorId);
+        if (!generatorContainer) {
+            console.warn('[InteractiveRenderer] AI Bouwsteen Generator container not found:', generatorId);
+            return;
+        }
+        
+        // Generate button
+        const generateBtn = generatorContainer.querySelector('.ai-bouwsteen-generate-btn');
+        if (generateBtn) {
+            generateBtn.addEventListener('click', () => {
+                InteractiveRenderer.generateBouwsteenTabel(generatorId);
+            });
+        }
+        
+        // Close button - collapse content instead of removing
+        const closeBtn = generatorContainer.querySelector('.ai-bouwsteen-close-btn');
+        const toolContent = generatorContainer.querySelector('.p-6') || generatorContainer.querySelector('[class*="p-6"]');
+        if (closeBtn) {
+            closeBtn.addEventListener('click', () => {
+                // Find the content div (the one with class p-6)
+                const contentDiv = generatorContainer.querySelector('div.p-6');
+                if (contentDiv) {
+                    // Toggle visibility instead of removing
+                    const isHidden = contentDiv.style.display === 'none' || contentDiv.classList.contains('hidden');
+                    if (isHidden) {
+                        // Show
+                        contentDiv.style.display = '';
+                        contentDiv.classList.remove('hidden');
+                        closeBtn.innerHTML = '<i class="fas fa-times text-xl"></i>';
+                        closeBtn.setAttribute('aria-label', 'Sluiten');
+                    } else {
+                        // Hide
+                        contentDiv.style.display = 'none';
+                        contentDiv.classList.add('hidden');
+                        closeBtn.innerHTML = '<i class="fas fa-chevron-down text-xl"></i>';
+                        closeBtn.setAttribute('aria-label', 'Openen');
+                    }
+                }
+            });
+        }
+        
+        // Copy button (only the one in result section)
+        const copyBtn = generatorContainer.querySelector('.ai-bouwsteen-copy-result-btn');
+        if (copyBtn) {
+            copyBtn.addEventListener('click', () => {
+                InteractiveRenderer.copyBouwsteenTabel(generatorId);
+            });
+        }
+        
+        // Allow Enter key to trigger generation
+        const keywordInput = document.getElementById(`${generatorId}-keyword`);
+        const contextInput = document.getElementById(`${generatorId}-context`);
+        
+        [keywordInput, contextInput].forEach(input => {
+            if (input) {
+                input.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter' && generateBtn) {
+                        generateBtn.click();
+                    }
+                });
+            }
+        });
+    }
+    
+    /**
+     * Generate bouwsteen tabel using AI
+     */
+    static async generateBouwsteenTabel(generatorId) {
+        const keywordInput = document.getElementById(`${generatorId}-keyword`);
+        const contextInput = document.getElementById(`${generatorId}-context`);
+        const loadingEl = document.getElementById(`${generatorId}-loading`);
+        const resultEl = document.getElementById(`${generatorId}-result`);
+        const resultTableEl = document.getElementById(`${generatorId}-result-table`);
+        
+        if (!keywordInput || !loadingEl || !resultEl || !resultTableEl) {
+            console.warn('[InteractiveRenderer] AI Bouwsteen Generator elements not found');
+            return;
+        }
+        
+        const keyword = keywordInput.value.trim();
+        if (!keyword) {
+            alert('Vul een zoekwoord in');
+            keywordInput.focus();
+            return;
+        }
+        
+        const context = contextInput ? contextInput.value.trim() : '';
+        
+        // Show loading
+        loadingEl.classList.remove('hidden');
+        resultEl.classList.add('hidden');
+        
+        try {
+            const response = await fetch('/api/generate-bouwsteen-tabel', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ keyword, context })
+            });
+            
+            if (!response.ok) {
+                // Try to get error message from response
+                let errorMessage = `Server error: ${response.status}`;
+                try {
+                    const errorData = await response.json();
+                    errorMessage = errorData.message || errorData.error || errorMessage;
+                    if (errorData.details) {
+                        console.error('[InteractiveRenderer] Server error details:', errorData.details);
+                    }
+                } catch (parseError) {
+                    // If response is not JSON, use status text
+                    errorMessage = `Server error: ${response.status} ${response.statusText}`;
+                }
+                throw new Error(errorMessage);
+            }
+            
+            const data = await response.json();
+            
+            if (!data.success || !data.table) {
+                throw new Error(data.message || 'Failed to generate table');
+            }
+            
+            // Render table
+            const tableHtml = InteractiveRenderer.renderBouwsteenTabel(data.table);
+            resultTableEl.innerHTML = tableHtml;
+            
+            // Show result
+            loadingEl.classList.add('hidden');
+            resultEl.classList.remove('hidden');
+            
+        } catch (error) {
+            console.error('[InteractiveRenderer] Error generating bouwsteen tabel:', error);
+            loadingEl.classList.add('hidden');
+            
+            // Get more detailed error message
+            let errorMessage = 'Er is een fout opgetreden bij het genereren van de tabel.';
+            if (error.message) {
+                errorMessage += `\n\nFout: ${error.message}`;
+            }
+            alert(errorMessage);
+        }
+    }
+    
+    /**
+     * Render bouwsteen tabel from data
+     */
+    static renderBouwsteenTabel(tableData) {
+        const categories = [
+            { key: 'synoniemen', label: 'Synoniemen' },
+            { key: 'vertalingen', label: 'Vertalingen' },
+            { key: 'afkortingen', label: 'Afkortingen' },
+            { key: 'spellingsvormen', label: 'Spellingsvormen' },
+            { key: 'vaktermen', label: 'Vaktermen' },
+            { key: 'bredereTermen', label: 'Bredere termen' },
+            { key: 'nauwereTermen', label: 'Nauwere termen' }
+        ];
+        
+        let tableHtml = `
+            <div class="overflow-x-auto">
+                <table class="min-w-full border border-gray-300 dark:border-gray-600 rounded-lg">
+                    <thead class="bg-gray-100 dark:bg-gray-700">
+                        <tr>
+                            <th class="border border-gray-300 dark:border-gray-600 px-4 py-3 text-left text-sm font-semibold text-gray-900 dark:text-white">CATEGORIE</th>
+                            <th class="border border-gray-300 dark:border-gray-600 px-4 py-3 text-left text-sm font-semibold text-gray-900 dark:text-white">SUGGESTIES</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+        `;
+        
+        categories.forEach(category => {
+            const items = tableData[category.key] || [];
+            const itemsHtml = items.length > 0 
+                ? items.map(item => `<span class="inline-block px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300 rounded-md text-sm mr-2 mb-2">${InteractiveRenderer.escapeHtml(item)}</span>`).join('')
+                : '<span class="text-gray-400 dark:text-gray-500 italic">Geen suggesties</span>';
+            
+            tableHtml += `
+                <tr class="bg-white dark:bg-gray-800">
+                    <td class="border border-gray-300 dark:border-gray-600 px-4 py-3 text-sm font-medium text-gray-900 dark:text-white">${category.label}</td>
+                    <td class="border border-gray-300 dark:border-gray-600 px-4 py-3 text-sm text-gray-700 dark:text-gray-300">
+                        <div class="flex flex-wrap">${itemsHtml}</div>
+                    </td>
+                </tr>
+            `;
+        });
+        
+        tableHtml += `
+                    </tbody>
+                </table>
+            </div>
+        `;
+        
+        return tableHtml;
+    }
+    
+    /**
+     * Copy bouwsteen tabel to clipboard
+     */
+    static async copyBouwsteenTabel(generatorId) {
+        const resultTableEl = document.getElementById(`${generatorId}-result-table`);
+        const copyBtn = document.querySelector(`[data-generator-id="${generatorId}"].ai-bouwsteen-copy-result-btn`);
+        
+        if (!resultTableEl) {
+            if (copyBtn) {
+                const originalText = copyBtn.innerHTML;
+                copyBtn.innerHTML = '<i class="fas fa-exclamation-triangle mr-2"></i>Geen tabel gevonden';
+                copyBtn.classList.remove('bg-gray-100', 'hover:bg-gray-200', 'dark:bg-gray-700', 'dark:hover:bg-gray-600');
+                copyBtn.classList.add('bg-red-500', 'hover:bg-red-600', 'text-white');
+                setTimeout(() => {
+                    copyBtn.innerHTML = originalText;
+                    copyBtn.classList.remove('bg-red-500', 'hover:bg-red-600', 'text-white');
+                    copyBtn.classList.add('bg-gray-100', 'hover:bg-gray-200', 'dark:bg-gray-700', 'dark:hover:bg-gray-600', 'text-gray-700', 'dark:text-gray-300');
+                }, 2000);
+            }
+            return;
+        }
+        
+        const table = resultTableEl.querySelector('table');
+        if (!table) {
+            if (copyBtn) {
+                const originalText = copyBtn.innerHTML;
+                copyBtn.innerHTML = '<i class="fas fa-exclamation-triangle mr-2"></i>Geen tabel gevonden';
+                copyBtn.classList.remove('bg-gray-100', 'hover:bg-gray-200', 'dark:bg-gray-700', 'dark:hover:bg-gray-600');
+                copyBtn.classList.add('bg-red-500', 'hover:bg-red-600', 'text-white');
+                setTimeout(() => {
+                    copyBtn.innerHTML = originalText;
+                    copyBtn.classList.remove('bg-red-500', 'hover:bg-red-600', 'text-white');
+                    copyBtn.classList.add('bg-gray-100', 'hover:bg-gray-200', 'dark:bg-gray-700', 'dark:hover:bg-gray-600', 'text-gray-700', 'dark:text-gray-300');
+                }, 2000);
+            }
+            return;
+        }
+        
+        try {
+            // Clone the table to preserve structure
+            const tableClone = table.cloneNode(true);
+            
+            // Add inline styles to preserve formatting
+            tableClone.style.borderCollapse = 'collapse';
+            tableClone.style.width = '100%';
+            tableClone.style.border = '1px solid #d1d5db';
+            
+            // Style thead
+            const thead = tableClone.querySelector('thead');
+            if (thead) {
+                thead.style.backgroundColor = '#f3f4f6';
+                const ths = thead.querySelectorAll('th');
+                ths.forEach(th => {
+                    th.style.border = '1px solid #d1d5db';
+                    th.style.padding = '12px 16px';
+                    th.style.textAlign = 'left';
+                    th.style.fontWeight = '600';
+                    th.style.fontSize = '14px';
+                    th.style.color = '#111827';
+                    th.style.backgroundColor = '#f3f4f6';
+                });
+            }
+            
+            // Style tbody rows
+            const tbody = tableClone.querySelector('tbody');
+            if (tbody) {
+                const rows = tbody.querySelectorAll('tr');
+                rows.forEach(row => {
+                    row.style.backgroundColor = '#ffffff';
+                    const tds = row.querySelectorAll('td');
+                    tds.forEach((td, index) => {
+                        td.style.border = '1px solid #d1d5db';
+                        td.style.padding = '12px 16px';
+                        td.style.fontSize = '14px';
+                        if (index === 0) {
+                            td.style.fontWeight = '500';
+                            td.style.color = '#111827';
+                        } else {
+                            td.style.color = '#374151';
+                            
+                            // For the suggestions column, add separators between spans
+                            const spans = td.querySelectorAll('span');
+                            if (spans.length > 0) {
+                                // Clear the cell content and rebuild with separators
+                                const spansArray = Array.from(spans);
+                                const fragment = document.createDocumentFragment();
+                                
+                                spansArray.forEach((span, spanIndex) => {
+                                    // Style each span
+                                    span.style.display = 'inline-block';
+                                    span.style.padding = '4px 12px';
+                                    span.style.backgroundColor = '#dbeafe';
+                                    span.style.color = '#1e40af';
+                                    span.style.borderRadius = '6px';
+                                    span.style.fontSize = '14px';
+                                    span.style.marginRight = '8px';
+                                    span.style.marginBottom = '8px';
+                                    
+                                    fragment.appendChild(span);
+                                    
+                                    // Add comma and space separator after each span (except the last)
+                                    if (spanIndex < spansArray.length - 1) {
+                                        const separator = document.createTextNode(', ');
+                                        fragment.appendChild(separator);
+                                    }
+                                });
+                                
+                                // Replace cell content with the fragment
+                                td.innerHTML = '';
+                                td.appendChild(fragment);
+                            }
+                        }
+                    });
+                });
+            }
+            
+            // Create HTML with table and disclaimer
+            const disclaimer = '<p style="margin-top: 16px; font-size: 12px; color: #6b7280; text-align: center;">Gegenereerd met AI - controleer altijd de resultaten.</p>';
+            const htmlContent = tableClone.outerHTML + disclaimer;
+            
+            // Create plain text fallback
+            const rows = table.querySelectorAll('tbody tr');
+            let text = 'CATEGORIE\tSUGGESTIES\n';
+            
+            rows.forEach(row => {
+                const cells = row.querySelectorAll('td');
+                if (cells.length >= 2) {
+                    const category = cells[0].textContent.trim();
+                    const suggestions = Array.from(cells[1].querySelectorAll('span'))
+                        .map(span => span.textContent.trim())
+                        .filter(text => text && !text.includes('Geen suggesties'))
+                        .join(', ');
+                    
+                    text += `${category}\t${suggestions || 'Geen suggesties'}\n`;
+                }
+            });
+            text += '\nGegenereerd met AI - controleer altijd de resultaten.';
+            
+            // Try to copy HTML with formatting, fallback to plain text if ClipboardItem is not supported
+            try {
+                if (window.ClipboardItem) {
+                    // Modern browsers: copy both HTML and plain text
+                    const clipboardItem = new ClipboardItem({
+                        'text/html': new Blob([htmlContent], { type: 'text/html' }),
+                        'text/plain': new Blob([text], { type: 'text/plain' })
+                    });
+                    await navigator.clipboard.write([clipboardItem]);
+                } else {
+                    // Fallback: use a temporary div to copy HTML
+                    const tempDiv = document.createElement('div');
+                    tempDiv.innerHTML = htmlContent;
+                    tempDiv.style.position = 'fixed';
+                    tempDiv.style.left = '-9999px';
+                    document.body.appendChild(tempDiv);
+                    
+                    // Select the content
+                    const range = document.createRange();
+                    range.selectNodeContents(tempDiv);
+                    const selection = window.getSelection();
+                    selection.removeAllRanges();
+                    selection.addRange(range);
+                    
+                    // Copy
+                    document.execCommand('copy');
+                    
+                    // Cleanup
+                    selection.removeAllRanges();
+                    document.body.removeChild(tempDiv);
+                }
+            } catch (clipboardError) {
+                // If HTML copy fails, fallback to plain text
+                console.warn('[InteractiveRenderer] HTML copy failed, using plain text:', clipboardError);
+                await navigator.clipboard.writeText(text);
+            }
+            
+            // Show success feedback in button
+            if (copyBtn) {
+                const originalText = copyBtn.innerHTML;
+                copyBtn.innerHTML = '<i class="fas fa-check mr-2"></i>Gekopieerd!';
+                copyBtn.classList.remove('bg-gray-100', 'hover:bg-gray-200', 'dark:bg-gray-700', 'dark:hover:bg-gray-600', 'text-gray-700', 'dark:text-gray-300');
+                copyBtn.classList.add('bg-green-500', 'hover:bg-green-600', 'text-white');
+                
+                setTimeout(() => {
+                    copyBtn.innerHTML = originalText;
+                    copyBtn.classList.remove('bg-green-500', 'hover:bg-green-600', 'text-white');
+                    copyBtn.classList.add('bg-gray-100', 'hover:bg-gray-200', 'dark:bg-gray-700', 'dark:hover:bg-gray-600', 'text-gray-700', 'dark:text-gray-300');
+                }, 2000);
+            }
+        } catch (error) {
+            console.error('[InteractiveRenderer] Error copying table:', error);
+            
+            // Show error feedback in button
+            if (copyBtn) {
+                const originalText = copyBtn.innerHTML;
+                copyBtn.innerHTML = '<i class="fas fa-exclamation-triangle mr-2"></i>Fout bij kopiëren';
+                copyBtn.classList.remove('bg-gray-100', 'hover:bg-gray-200', 'dark:bg-gray-700', 'dark:hover:bg-gray-600', 'text-gray-700', 'dark:text-gray-300');
+                copyBtn.classList.add('bg-red-500', 'hover:bg-red-600', 'text-white');
+                
+                setTimeout(() => {
+                    copyBtn.innerHTML = originalText;
+                    copyBtn.classList.remove('bg-red-500', 'hover:bg-red-600', 'text-white');
+                    copyBtn.classList.add('bg-gray-100', 'hover:bg-gray-200', 'dark:bg-gray-700', 'dark:hover:bg-gray-600', 'text-gray-700', 'dark:text-gray-300');
+                }, 2000);
+            }
+        }
+    }
+    
+    /**
+     * Escape HTML to prevent XSS
+     */
+    static escapeHtml(text) {
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
+    }
 }
 
 // Export voor gebruik in andere modules

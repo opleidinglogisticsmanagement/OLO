@@ -980,17 +980,39 @@ class BaseLessonPage {
         document.addEventListener('click', handleNavClick, true);
         
         // Handle hash in URL on page load (after content is loaded)
-        const handleHashOnLoad = () => {
+        const handleHashOnLoad = (attempt = 1, maxAttempts = 10) => {
             if (window.location.hash && (this.moduleId === 'week-2' || this.moduleId === 'week-3' || this.moduleId === 'week-4' || this.moduleId === 'week-5')) {
-                setTimeout(() => {
-                    this.scrollToAnchor(window.location.hash);
-                }, 800); // Longer delay to ensure content is fully rendered
+                const hash = window.location.hash;
+                const element = document.querySelector(hash);
+                
+                if (element) {
+                    console.log(`[BaseLessonPage] ✅ Element found for ${hash} (attempt ${attempt})`);
+                    this.scrollToAnchor(hash);
+                } else if (attempt < maxAttempts) {
+                    // Element not found yet, retry with increasing delay
+                    const delay = Math.min(300 * attempt, 2000); // Max 2 seconds between attempts
+                    console.log(`[BaseLessonPage] Element not found for ${hash}, retrying in ${delay}ms (attempt ${attempt}/${maxAttempts})...`);
+                    setTimeout(() => handleHashOnLoad(attempt + 1, maxAttempts), delay);
+                } else {
+                    console.warn(`[BaseLessonPage] ⚠️ Element with hash ${hash} not found after ${maxAttempts} attempts`);
+                    // List available IDs for debugging
+                    const availableIds = Array.from(document.querySelectorAll('[id]')).map(el => el.id);
+                    const relevantIds = availableIds.filter(id => 
+                        id.includes('probleem') || id.includes('doelstelling') || 
+                        id.includes('opdrachtgever') || id.includes('vormen') ||
+                        id.includes('definieren') || id.includes('literatuur') ||
+                        id.includes('selecteren') || id.includes('slim') || id.includes('theoretisch')
+                    );
+                    console.log('[BaseLessonPage] Available relevant IDs:', relevantIds);
+                }
             }
         };
         
-        // Try after a delay (in case content loads asynchronously)
-        setTimeout(handleHashOnLoad, 500);
-        setTimeout(handleHashOnLoad, 1500);
+        // Try after delays (in case content loads asynchronously)
+        // Start with shorter delay, then increase
+        setTimeout(() => handleHashOnLoad(1), 500);
+        setTimeout(() => handleHashOnLoad(3), 1500);
+        setTimeout(() => handleHashOnLoad(6), 3000);
     }
     
     /**
@@ -1075,19 +1097,25 @@ class BaseLessonPage {
                     });
                 }, 100);
                 
-            } else if (attempts < 10) {
+            } else if (attempts < 15) {
                 // Retry if element not found yet (content might still be loading)
-                console.log(`[BaseLessonPage] Element not found, retrying... (attempt ${attempts + 1})`);
-                setTimeout(() => attemptScroll(attempts + 1), 300);
+                // Use increasing delay for retries
+                const delay = Math.min(300 * (attempts + 1), 2000); // Max 2 seconds between attempts
+                console.log(`[BaseLessonPage] Element not found, retrying in ${delay}ms... (attempt ${attempts + 1}/15)`);
+                setTimeout(() => attemptScroll(attempts + 1), delay);
             } else {
-                console.warn(`[BaseLessonPage] Element with anchor ${anchorId} not found after ${attempts} attempts.`);
+                console.warn(`[BaseLessonPage] ⚠️ Element with anchor ${anchorId} not found after ${attempts} attempts.`);
                 // List available IDs for debugging
                 const availableIds = Array.from(document.querySelectorAll('[id]')).map(el => el.id);
                 const relevantIds = availableIds.filter(id => 
                     id.includes('probleem') || id.includes('doelstelling') || 
-                    id.includes('opdrachtgever') || id.includes('vormen')
+                    id.includes('opdrachtgever') || id.includes('vormen') ||
+                    id.includes('definieren') || id.includes('literatuur') ||
+                    id.includes('selecteren') || id.includes('slim') || id.includes('theoretisch') ||
+                    id.includes('onderzoeksmodel') || id.includes('onderzoeksvragen') || id.includes('ai-onderzoeksassistent')
                 );
                 console.log('[BaseLessonPage] Available relevant IDs:', relevantIds);
+                console.log('[BaseLessonPage] All IDs on page:', availableIds);
             }
         };
         

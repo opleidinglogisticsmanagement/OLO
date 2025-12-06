@@ -26,20 +26,66 @@ class Week4LessonPage extends BaseLessonPage {
     }
 
     /**
-     * Laad content uit JSON bestand
+     * Laad content uit JSON bestand met retry logica
      */
-    async loadContent() {
-        try {
-            const response = await fetch('./content/week4.content.json');
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
+    async loadContent(retries = 3) {
+        for (let attempt = 1; attempt <= retries; attempt++) {
+            try {
+                // Probeer verschillende paden
+                const paths = [
+                    './content/week4.content.json',
+                    'content/week4.content.json',
+                    '/content/week4.content.json'
+                ];
+                
+                let lastError = null;
+                for (const contentPath of paths) {
+                    try {
+                        console.log(`[Week4LessonPage] Loading content from: ${contentPath} (attempt ${attempt}/${retries})`);
+                        const response = await fetch(contentPath, {
+                            cache: 'no-cache',
+                            headers: {
+                                'Accept': 'application/json'
+                            }
+                        });
+                        
+                        if (!response.ok) {
+                            throw new Error(`HTTP error! status: ${response.status} for path: ${contentPath}`);
+                        }
+                        
+                        const contentType = response.headers.get('content-type');
+                        if (!contentType || !contentType.includes('application/json')) {
+                            console.warn(`[Week4LessonPage] Unexpected content-type: ${contentType}`);
+                        }
+                        
+                        this.content = await response.json();
+                        this.contentLoaded = true;
+                        console.log('[Week4LessonPage] ✅ Content loaded successfully');
+                        return; // Success, exit function
+                    } catch (pathError) {
+                        console.warn(`[Week4LessonPage] Failed to load from ${contentPath}:`, pathError.message);
+                        lastError = pathError;
+                        // Try next path
+                    }
+                }
+                
+                // All paths failed, throw last error
+                throw lastError || new Error('All content paths failed');
+            } catch (error) {
+                console.error(`[Week4LessonPage] Error loading content (attempt ${attempt}/${retries}):`, error);
+                
+                if (attempt === retries) {
+                    // Last attempt failed, use fallback
+                    console.error('[Week4LessonPage] ❌ All attempts failed, using fallback content');
+                    this.contentLoaded = false;
+                    this.content = this.getFallbackContent();
+                } else {
+                    // Wait before retry (exponential backoff)
+                    const delay = Math.min(1000 * Math.pow(2, attempt - 1), 5000);
+                    console.log(`[Week4LessonPage] Retrying in ${delay}ms...`);
+                    await new Promise(resolve => setTimeout(resolve, delay));
+                }
             }
-            this.content = await response.json();
-            this.contentLoaded = true;
-        } catch (error) {
-            console.error('Error loading content:', error);
-            this.contentLoaded = false;
-            this.content = this.getFallbackContent();
         }
     }
 
@@ -220,14 +266,22 @@ class Week4LessonPage extends BaseLessonPage {
      */
     renderErrorState() {
         return `
-            <section class="bg-red-50 dark:bg-red-900/20 border-l-4 border-red-500 dark:border-red-400 p-6 rounded-r-lg">
+            <section class="bg-red-50 dark:bg-red-900/20 border-l-4 border-red-500 dark:border-red-400 p-6 rounded-r-lg mb-4">
                 <div class="flex items-start space-x-3">
-                    <i class="fas fa-exclamation-triangle text-red-600 dark:text-red-400 mt-1"></i>
-                    <div>
-                        <h3 class="font-semibold text-red-900 dark:text-red-200 mb-1">Content Kon Niet Worden Geladen</h3>
-                        <p class="text-red-800 dark:text-red-300 text-sm">
+                    <i class="fas fa-exclamation-triangle text-red-600 dark:text-red-400 mt-1 text-2xl"></i>
+                    <div class="flex-1">
+                        <h3 class="font-semibold text-red-900 dark:text-red-200 mb-2">Content Kon Niet Worden Geladen</h3>
+                        <p class="text-red-800 dark:text-red-300 text-sm mb-3">
                             Het bestand week4.content.json kon niet worden geladen. Controleer of het bestand bestaat en toegankelijk is.
                         </p>
+                        <div class="mt-4 space-y-2">
+                            <button onclick="location.reload()" class="px-4 py-2 bg-red-600 dark:bg-red-700 text-white rounded-lg hover:bg-red-700 dark:hover:bg-red-600 transition-colors text-sm font-medium">
+                                <i class="fas fa-sync-alt mr-2"></i>Pagina opnieuw laden
+                            </button>
+                            <p class="text-xs text-red-700 dark:text-red-400 mt-2">
+                                Als het probleem aanhoudt, controleer de browser console voor meer details.
+                            </p>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -699,34 +753,57 @@ class Week4LessonPage extends BaseLessonPage {
         document.body.innerHTML = this.render();
         this.attachEventListeners();
         
-        // Handle hash in URL after content is loaded
+        // Handle hash in URL after content is loaded and rendered
+        // Wait longer to ensure all content is fully rendered, especially for dynamic content
         if (window.location.hash) {
-            setTimeout(() => {
-                const element = document.querySelector(window.location.hash);
-                if (element) {
-                    const mainContent = document.getElementById('main-content');
-                    const headerOffset = 100;
-                    
-                    if (mainContent) {
-                        const elementRect = element.getBoundingClientRect();
-                        const elementTop = elementRect.top + mainContent.scrollTop;
-                        const offsetPosition = elementTop - headerOffset;
+            const hash = window.location.hash;
+            console.log(`[Week4LessonPage] Hash detected in URL: ${hash}`);
+            
+            // Multiple attempts with increasing delays to handle async rendering
+            const attemptScroll = (attempt = 1, maxAttempts = 5) => {
+                setTimeout(() => {
+                    const element = document.querySelector(hash);
+                    if (element) {
+                        console.log(`[Week4LessonPage] ✅ Element found for ${hash} (attempt ${attempt})`);
+                        const mainContent = document.getElementById('main-content');
+                        const headerOffset = 100;
                         
-                        mainContent.scrollTo({
-                            top: Math.max(0, offsetPosition),
-                            behavior: 'smooth'
-                        });
+                        if (mainContent) {
+                            // Calculate scroll position relative to main-content
+                            let scrollPosition = 0;
+                            let currentElement = element;
+                            
+                            while (currentElement && currentElement !== mainContent && currentElement !== document.body) {
+                                scrollPosition += currentElement.offsetTop;
+                                currentElement = currentElement.offsetParent;
+                            }
+                            
+                            const targetScroll = Math.max(0, scrollPosition - headerOffset);
+                            
+                            mainContent.scrollTo({
+                                top: targetScroll,
+                                behavior: 'smooth'
+                            });
+                        } else {
+                            // Fallback to window scroll
+                            const elementRect = element.getBoundingClientRect();
+                            const offsetPosition = elementRect.top + window.pageYOffset - headerOffset;
+                            
+                            window.scrollTo({
+                                top: Math.max(0, offsetPosition),
+                                behavior: 'smooth'
+                            });
+                        }
+                    } else if (attempt < maxAttempts) {
+                        console.log(`[Week4LessonPage] Element not found for ${hash}, retrying (attempt ${attempt}/${maxAttempts})...`);
+                        attemptScroll(attempt + 1, maxAttempts);
                     } else {
-                        const elementRect = element.getBoundingClientRect();
-                        const offsetPosition = elementRect.top + window.pageYOffset - headerOffset;
-                        
-                        window.scrollTo({
-                            top: Math.max(0, offsetPosition),
-                            behavior: 'smooth'
-                        });
+                        console.warn(`[Week4LessonPage] ⚠️ Element with hash ${hash} not found after ${maxAttempts} attempts`);
                     }
-                }
-            }, 500);
+                }, 300 * attempt); // Increasing delay: 300ms, 600ms, 900ms, etc.
+            };
+            
+            attemptScroll();
         }
         
         // Generate MC questions if needed (after DOM is ready)

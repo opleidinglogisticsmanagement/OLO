@@ -955,6 +955,209 @@ Antwoord alleen met de JSON, geen extra tekst.`;
 });
 
 /**
+ * Input validatie middleware voor generate-bouwsteen-tabel
+ */
+const validateBouwsteenTabel = [
+    body('keyword')
+        .isString()
+        .trim()
+        .isLength({ min: 1, max: 100 })
+        .withMessage('keyword must be between 1 and 100 characters'),
+    body('context')
+        .optional()
+        .isString()
+        .trim()
+        .isLength({ max: 200 })
+        .withMessage('context must be max 200 characters')
+];
+
+/**
+ * Generate bouwsteen tabel using AI
+ * POST /api/generate-bouwsteen-tabel
+ */
+app.post('/api/generate-bouwsteen-tabel', validateBouwsteenTabel, async (req, res) => {
+    try {
+        // Check voor validatie errors
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(400).json({ 
+                error: 'Invalid input', 
+                message: 'Input validation failed',
+                errors: errors.array()
+            });
+        }
+
+        const { keyword, context } = req.body;
+
+        console.log('[generate-bouwsteen-tabel] Received request');
+        console.log('[generate-bouwsteen-tabel] keyword:', keyword);
+        console.log('[generate-bouwsteen-tabel] context:', context || 'none');
+
+        if (!GEMINI_API_KEY) {
+            console.error('[generate-bouwsteen-tabel] API key not configured');
+            return res.status(500).json({
+                error: 'API key not configured',
+                message: 'GEMINI_API_KEY is not set in environment variables'
+            });
+        }
+
+        // Build prompt for Gemini
+        const contextInfo = context ? ` binnen de context: "${context}"` : '';
+        const prompt = `Je bent een expert in informatievaardigheden en de bouwsteenmethode voor literatuuronderzoek.
+
+Voor het zoekwoord "${keyword}"${contextInfo}, genereer een bouwsteentabel met de volgende categorieën:
+
+1. **Synoniemen**: Woorden met dezelfde of vergelijkbare betekenis (3-5 suggesties)
+2. **Vertalingen**: Vertalingen in andere talen, vooral Engels en Frans (2-4 suggesties, format: "woord (TAAL)")
+3. **Afkortingen**: Veelgebruikte afkortingen met uitleg (1-3 suggesties, format: "AFK (Uitleg)")
+4. **Spellingsvormen**: Verschillende spellingsvarianten, meervoudsvormen, etc. (2-4 suggesties)
+5. **Vaktermen**: Specifieke vakjargon termen die gerelateerd zijn (3-5 suggesties)
+6. **Bredere termen**: Meer algemene termen die het begrip omvatten (2-4 suggesties)
+7. **Nauwere termen**: Meer specifieke termen die onder het begrip vallen (3-5 suggesties)
+
+Geef de output ALLEEN als JSON in het volgende formaat (geen extra tekst, geen markdown):
+{
+  "synoniemen": ["term1", "term2", "term3"],
+  "vertalingen": ["term (EN)", "term (FR)"],
+  "afkortingen": ["AFK (Uitleg)"],
+  "spellingsvormen": ["vorm1", "vorm2"],
+  "vaktermen": ["term1", "term2"],
+  "bredereTermen": ["term1", "term2"],
+  "nauwereTermen": ["term1", "term2", "term3"]
+}
+
+Zorg ervoor dat:
+- Alle suggesties relevant zijn voor het zoekwoord${context ? ' en de context' : ''}
+- Suggesties praktisch en bruikbaar zijn voor literatuuronderzoek
+- Geen duplicaten voorkomen
+- De suggesties in het Nederlands zijn, tenzij het vertalingen zijn`;
+
+        // Get available models
+        let models = ['gemini-1.5-flash', 'gemini-1.5-pro'];
+        try {
+            const availableModels = await getAvailableModels();
+            if (availableModels && availableModels.length > 0) {
+                // Filter for working models (exclude -latest and old gemini-pro)
+                const preferred = availableModels.filter(m => {
+                    const modelLower = m.toLowerCase();
+                    // Only include 1.5 models, exclude -latest variants and old gemini-pro
+                    return (modelLower.includes('1.5-flash') || modelLower.includes('1.5-pro')) &&
+                           !modelLower.includes('-latest') &&
+                           !modelLower.includes('gemini-pro') && // Exclude old gemini-pro
+                           !modelLower.includes('embedding'); // Exclude embedding models
+                });
+                
+                if (preferred.length > 0) {
+                    // Sort: flash first (faster), then pro
+                    models = preferred.sort((a, b) => {
+                        if (a.includes('flash') && !b.includes('flash')) return -1;
+                        if (b.includes('flash') && !a.includes('flash')) return 1;
+                        return 0;
+                    });
+                } else {
+                    // Fallback: use first available models (max 3)
+                    models = availableModels.slice(0, 3);
+                }
+            }
+        } catch (modelError) {
+            console.warn('[generate-bouwsteen-tabel] Error getting models, using defaults:', modelError.message);
+            // Use only flash as fallback (most reliable)
+            models = ['gemini-1.5-flash'];
+        }
+
+        // Remove any -latest suffix and normalize model names
+        models = models.map(m => {
+            // Remove -latest suffix if present
+            let normalized = m.replace(/-latest$/i, '');
+            // Ensure we're using the correct format
+            if (normalized.includes('models/')) {
+                normalized = normalized.replace('models/', '');
+            }
+            return normalized;
+        }).filter(m => m.length > 0); // Remove empty strings
+
+        console.log('[generate-bouwsteen-tabel] Will try models in order:', models);
+
+        if (models.length === 0) {
+            throw new Error('No available models found');
+        }
+
+        // Initialize Gemini AI
+        const genAI = new GoogleGenerativeAI(GEMINI_API_KEY);
+
+        // Try each model until one succeeds
+        let lastError = null;
+        for (const modelName of models) {
+            try {
+                console.log(`[generate-bouwsteen-tabel] Trying model: ${modelName}`);
+                // Normalize model name one more time before use
+                const normalizedModel = modelName.replace(/-latest$/i, '').replace('models/', '');
+                const model = genAI.getGenerativeModel({ model: normalizedModel });
+                const result = await model.generateContent(prompt);
+                const response = await result.response;
+                const text = response.text();
+                
+                console.log(`[generate-bouwsteen-tabel] Response from ${modelName} (first 500 chars):`, text.substring(0, 500));
+
+                // Extract JSON from response
+                const jsonMatch = text.match(/\{[\s\S]*\}/);
+                if (jsonMatch) {
+                    try {
+                        const jsonStr = jsonMatch[0].replace(/```json\s*/g, '').replace(/```/g, '').trim();
+                        const parsed = JSON.parse(jsonStr);
+                        
+                        console.log('[generate-bouwsteen-tabel] Successfully parsed JSON');
+                        
+                        // Validate structure
+                        const requiredKeys = ['synoniemen', 'vertalingen', 'afkortingen', 'spellingsvormen', 'vaktermen', 'bredereTermen', 'nauwereTermen'];
+                        const hasAllKeys = requiredKeys.every(key => key in parsed);
+                        
+                        if (!hasAllKeys) {
+                            throw new Error('Missing required keys in response');
+                        }
+                        
+                        return res.json({
+                            success: true,
+                            table: parsed
+                        });
+                    } catch (parseError) {
+                        console.error('[generate-bouwsteen-tabel] JSON parse error:', parseError.message);
+                        console.error('[generate-bouwsteen-tabel] JSON string:', jsonMatch[0].substring(0, 200));
+                        throw new Error(`Failed to parse JSON: ${parseError.message}`);
+                    }
+                } else {
+                    throw new Error('No JSON found in response');
+                }
+            } catch (error) {
+                console.error(`[generate-bouwsteen-tabel] Error with model ${modelName}:`, error.message);
+                lastError = error;
+                continue;
+            }
+        }
+
+        console.error('[generate-bouwsteen-tabel] All models failed');
+        throw lastError || new Error('All models failed');
+
+    } catch (error) {
+        console.error('[generate-bouwsteen-tabel] Error generating bouwsteen tabel:', error);
+        console.error('[generate-bouwsteen-tabel] Error stack:', error.stack);
+        
+        // Return more detailed error in development
+        const errorResponse = {
+            error: 'Internal server error',
+            message: error.message || 'Unknown error occurred'
+        };
+        
+        if (process.env.NODE_ENV === 'development') {
+            errorResponse.details = error.stack;
+            errorResponse.fullError = error.toString();
+        }
+        
+        return res.status(500).json(errorResponse);
+    }
+});
+
+/**
  * Health check endpoint
  * GET /api/health
  */

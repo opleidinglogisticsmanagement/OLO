@@ -270,174 +270,273 @@
           "<li class=\"text-gray-700 dark:text-gray-300 mb-2\">Literatuuronderzoek voorkomt dat je het wiel opnieuw gaat uitvinden.</li>",
           "</ol>",
           "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Bij het laatste punt geldt namelijk dat je niet onderzoek wilt gaan doen naar wat andere onderzoekers al hebben gedaan. Dat heeft geen zin.</p>",
-          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Het uitvoeren van literatuuronderzoek wordt gestructureerd uitgevoerd en aan de hand van de kennisclips van het mediacentrum ga je zelf aan de slag. De kennis en vaardigheden die je hierna gaat opdoen zijn namelijk in alle fasen van het onderzoek van belang. We gaan ervanuit dat je de opgedane kennis ook straks kunt inzetten bij stage en bij afstuderen.</p>",
-          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">We starten bij het begin en veronderstellen dat we niet weten of je in een oriënterende of verdiepende fase zit. Je vraagt je af hoe en waar je kunt zoeken. Bekijk deze video die dit onderwerp goed introduceert.</p>"
-        ]
-      },
-      {
-        "type": "video",
-        "url": "https://www.youtube.com/embed/eLavUYuM_ec"
-      },
-      {
-        "type": "paragraph",
-        "text": [
-          "<p class=\"text-gray-700 dark:text-gray-300 mb-4 font-semibold\">Wat is Windesearch?</p>"
-        ]
-      },
-      {
-        "type": "paragraph",
-        "text": [
-          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">In de vorige kennisclip zag je al een aantal mogelijkheden hoe je literatuur kunt vinden. De volgende kennisclip introduceert welke bronnen het mediacentrum heeft en hoe je deze bronnen kunt vinden.</p>"
-        ]
-      },
-      {
-        "type": "video",
-        "url": "https://www.youtube.com/embed/JQr6F_eMC-s"
-      },
-      {
-        "type": "paragraph",
-        "text": [
-          "<p class=\"text-gray-700 dark:text-gray-300 dark:text-gray-300 mb-4\">Je kunt nu onderstaande vragen beantwoorden. Formuleer zelf eerst een antwoord, klik daarna op de vraag om het voorbeeldantwoord te bekijken.</p>"
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Het uitvoeren van literatuuronderzoek wordt gestructureerd uitgevoerd en aan de hand van de kennisclips van het mediacentrum ga je zelf aan de slag. De kennis en vaardigheden die je hierna gaat opdoen zijn namelijk in alle fasen van het onderzoek van belang. We gaan ervanuit dat je de opgedane kennis ook straks kunt inzetten bij stage en bij afstuderen.</p>"
         ]
       },
       {
         "type": "clickableSteps",
         "steps": [
           {
-            "label": "Welke bronnen biedt het Mediacentrum aan?",
+            "label": "1. Introductie: waar en hoe zoeken",
             "content": [
-              "<p class=\"text-gray-700 dark:text-gray-300 dark:text-gray-300 mb-3\">Het Mediacentrum biedt verschillende informatiebronnen aan:</p>",
-              "<ul class=\"list-disc list-inside space-y-2 mb-3 ml-4\">",
-              "<li class=\"text-gray-700 dark:text-gray-300 dark:text-gray-300\"><strong>Windesheim Search:</strong> een zoekmachine waarmee je in één keer in meerdere databanken en de catalogus kunt zoeken.</li>",
-              "<li class=\"text-gray-700 dark:text-gray-300 dark:text-gray-300\"><strong>Databanken:</strong> met krantenartikelen, wetenschappelijke tijdschriften, videomateriaal en thematische databanken zoals Company.info (bedrijfsinformatie) en ERIC (onderwijsonderzoek).</li>",
-              "<li class=\"text-gray-700 dark:text-gray-300 dark:text-gray-300\"><strong>Catalogus Mediacentrum:</strong> toegang tot de fysieke collectie zoals boeken, tijdschriften, methodes en ander studiemateriaal.</li>",
-              "<li class=\"text-gray-700 dark:text-gray-300 dark:text-gray-300\"><strong>E-tijdschriften en e-books:</strong> digitale bronnen die op titel doorzoekbaar zijn en gratis toegankelijk zijn voor studenten.</li>",
-              "</ul>"
-            ]
-          },
-          {
-            "label": "Wat is het voordeel van Windesearch?",
-            "content": [
-              "<p class=\"text-gray-700 dark:text-gray-300 dark:text-gray-300 mb-3\">Het voordeel van Windesearch is dat je:</p>",
-              "<ul class=\"list-disc list-inside space-y-2 mb-3 ml-4\">",
-              "<li class=\"text-gray-700 dark:text-gray-300 dark:text-gray-300\">met één zoekactie een overzicht krijgt van fulltext-artikelen over jouw onderwerp;</li>",
-              "<li class=\"text-gray-700 dark:text-gray-300 dark:text-gray-300\">tegelijkertijd zoekt in meerdere databanken én de catalogus;</li>",
-              "<li class=\"text-gray-700 dark:text-gray-300 dark:text-gray-300\">resultaten kunt filteren op publicatiedatum, taal of materiaalsoort.</li>",
-              "</ul>",
-              "<p class=\"text-gray-700 dark:text-gray-300 dark:text-gray-300 mb-0\">Zo vind je sneller relevante en betrouwbare informatie zonder in elke databank apart te hoeven zoeken.</p>"
-            ]
-          },
-          {
-            "label": "Welke databank lijkt je nu nuttig en welke niet? Waarom?",
-            "content": [
-              "<p class=\"text-gray-700 dark:text-gray-300 dark:text-gray-300 mb-3\"><strong>Nuttig:</strong></p>",
-              "<p class=\"text-gray-700 dark:text-gray-300 dark:text-gray-300 mb-3\">De databank Company.info lijkt mij als student Logistics Management erg nuttig, omdat ik vaak onderzoek doe naar bedrijven, markten en ketenpartners. In deze databank vind je financiële gegevens, marktrapporten en bedrijfsprofielen die helpen om de logistieke prestaties van organisaties beter te begrijpen of te vergelijken.</p>",
-              "<p class=\"text-gray-700 dark:text-gray-300 dark:text-gray-300 mb-3\"><strong>Minder nuttig:</strong></p>",
-              "<p class=\"text-gray-700 dark:text-gray-300 dark:text-gray-300 mb-0\">De databank ERIC lijkt me minder nuttig voor mijn studie, omdat die zich richt op onderwijskundig onderzoek. Dat is interessant voor docenten of onderzoekers in het onderwijs, maar minder relevant voor logistieke vraagstukken zoals voorraadbeheer, transport of supply chain-analyse.</p>"
-            ]
-          }
-        ]
-      },
-      {
-        "type": "paragraph",
-        "text": [
-          "<p class=\"text-gray-700 dark:text-gray-300 dark:text-gray-300 mb-4\">Voor je onderzoek gebruik je het liefst (semi)wetenschappelijke informatie. Deze (semi) wetenschappelijke informatie is namelijk meer betrouwbaar dan een nieuwsartikel of website die je via Google hebt gevonden. In de volgende kennisclip worden er drie manieren besproken om aan wetenschappelijke informatie te komen. Afsluitend wordt er in de kennisclip een koppeling tussen Windesearch en Google Scholar. Deze koppeling is essentieel voor je literatuuronderzoek.</p>"
-        ]
-      },
-      {
-        "type": "video",
-        "url": "https://www.youtube.com/embed/oCnqZRah4_0"
-      },
-      {
-        "type": "paragraph",
-        "text": [
-          "<p class=\"text-gray-700 dark:text-gray-300 mb-4 font-semibold\">Wat betekent precies Open Access in de context van wetenschappelijke literatuur?</p>"
-        ]
-      },
-      {
-        "type": "paragraph",
-        "text": [
-          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Inmiddels weet je waar je wetenschappelijke informatie kunt vinden maar kopieer je nu gewoon de belangrijkste begrippen uit de doelstelling of hoofdvraag in de zoekbalk? Hoe kun je nou gericht zoeken naar literatuur. In de vorige kennisclips zag je al veel mogelijkheden om gericht te zoeken naar type bestand of binnen een onderwerp. Deze selecties kunnen je al heel veel tijd besparen, maar er zijn nog meer mogelijkheden bijvoorbeeld door gebruik te maken van de juiste zoektermen. Goede zoektermen = goede zoekresultaten. Bekijk maar eens de volgende kennisclip.</p>"
-        ]
-      },
-      {
-        "type": "video",
-        "url": "https://www.youtube.com/embed/4P3jZuUZnkc"
-      },
-      {
-        "type": "paragraph",
-        "text": [
-          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Zoals de vorige kennisclip al aangeeft kun je zoektermen combineren of uitsluiten met AND, OR en NOT. Dit zijn zogenoemde Booleaanse operatoren. Het gebruik van deze Booleaanse operatoren is van belang om het aantal zoekresultaten te beperken.</p>"
-        ]
-      },
-      {
-        "type": "video",
-        "url": "https://www.youtube.com/embed/bXR4dmm4m4A"
-      },
-      {
-        "type": "paragraph",
-        "text": [
-          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Test je kennis van Booleaanse operatoren door de onderstaande oefening te maken. Je leert hoe je zoektermen effectief combineert met AND, OR en NOT, en hoe je haakjes gebruikt voor complexe queries. Let op: deze oefeningen werken mogelijk niet goed op mobiele apparaten. Gebruik bij voorkeur een desktop of tablet voor de beste ervaring.</p>"
-        ]
-      },
-      {
-        "type": "accordion",
-        "usePlusIcon": true,
-        "defaultOpen": false,
-        "items": [
-          {
-            "title": "Oefening 3: Vijf Booleaanse operatoroefeningen",
-            "defaultOpen": false,
-            "content": [
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">We starten bij het begin en veronderstellen dat we niet weten of je in een oriënterende of verdiepende fase zit. Je vraagt je af hoe en waar je kunt zoeken. Bekijk deze video die dit onderwerp goed introduceert.</p>",
               {
-                "type": "booleanOperatorExercise",
-                "title": "Vijf Booleaanse operatoroefeningen",
-                "instruction": "Bouw de juiste zoekquery voor elk scenario door de zoektermen en operatoren te selecteren. Gebruik haakjes waar nodig voor complexe queries.",
-                "scenarios": [
+                "type": "video",
+                "url": "https://www.youtube.com/embed/eLavUYuM_ec"
+              }
+            ]
+          },
+          {
+            "label": "2. Wat is Windesearch?",
+            "content": [
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4 font-semibold\">Wat is Windesearch?</p>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">In de vorige kennisclip zag je al een aantal mogelijkheden hoe je literatuur kunt vinden. De volgende kennisclip introduceert welke bronnen het mediacentrum heeft en hoe je deze bronnen kunt vinden.</p>",
+              {
+                "type": "video",
+                "url": "https://www.youtube.com/embed/JQr6F_eMC-s"
+              },
+              "<p class=\"text-gray-700 dark:text-gray-300 dark:text-gray-300 mb-4\">Je kunt nu onderstaande vragen beantwoorden. Formuleer zelf eerst een antwoord, klik daarna op de vraag om het voorbeeldantwoord te bekijken.</p>",
+              {
+                "type": "clickableSteps",
+                "steps": [
                   {
-                    "id": "scenario1",
-                    "title": "Scenario 1: AND-operator",
-                    "description": "Je zoekt naar artikelen die zowel over transport als over optimalisatie gaan.",
-                    "availableTerms": ["transport", "optimalisatie", "logistiek", "warehouse", "supply chain", "luchtvaart", "magazijnbeheer", "automatisering", "robotica", "e-commerce"],
-                    "availableOperators": ["AND", "OR", "NOT"],
-                    "correctQuery": "transport AND optimalisatie",
-                    "explanation": "De AND-operator zorgt ervoor dat beide termen (transport én optimalisatie) in de resultaten moeten voorkomen. Dit beperkt het aantal resultaten tot artikelen die beide onderwerpen behandelen."
+                    "label": "Welke bronnen biedt het Mediacentrum aan?",
+                    "content": [
+                      "<p class=\"text-gray-700 dark:text-gray-300 dark:text-gray-300 mb-3\">Het Mediacentrum biedt verschillende informatiebronnen aan:</p>",
+                      "<ul class=\"list-disc list-inside space-y-2 mb-3 ml-4\">",
+                      "<li class=\"text-gray-700 dark:text-gray-300 dark:text-gray-300\"><strong>Windesheim Search:</strong> een zoekmachine waarmee je in één keer in meerdere databanken en de catalogus kunt zoeken.</li>",
+                      "<li class=\"text-gray-700 dark:text-gray-300 dark:text-gray-300\"><strong>Databanken:</strong> met krantenartikelen, wetenschappelijke tijdschriften, videomateriaal en thematische databanken zoals Company.info (bedrijfsinformatie) en ERIC (onderwijsonderzoek).</li>",
+                      "<li class=\"text-gray-700 dark:text-gray-300 dark:text-gray-300\"><strong>Catalogus Mediacentrum:</strong> toegang tot de fysieke collectie zoals boeken, tijdschriften, methodes en ander studiemateriaal.</li>",
+                      "<li class=\"text-gray-700 dark:text-gray-300 dark:text-gray-300\"><strong>E-tijdschriften en e-books:</strong> digitale bronnen die op titel doorzoekbaar zijn en gratis toegankelijk zijn voor studenten.</li>",
+                      "</ul>"
+                    ]
                   },
                   {
-                    "id": "scenario2",
-                    "title": "Scenario 2: OR-operator",
-                    "description": "Je zoekt naar artikelen die over logistiek of warehouse gaan (of beide).",
-                    "availableTerms": ["transport", "optimalisatie", "logistiek", "warehouse", "supply chain", "luchtvaart", "magazijnbeheer", "automatisering", "robotica", "e-commerce"],
-                    "availableOperators": ["AND", "OR", "NOT"],
-                    "correctQuery": "logistiek OR warehouse",
-                    "explanation": "De OR-operator zorgt ervoor dat minstens één van de termen (logistiek óf warehouse) in de resultaten voorkomt. Dit breidt het aantal resultaten uit tot artikelen die over een van beide onderwerpen gaan."
+                    "label": "Wat is het voordeel van Windesearch?",
+                    "content": [
+                      "<p class=\"text-gray-700 dark:text-gray-300 dark:text-gray-300 mb-3\">Het voordeel van Windesearch is dat je:</p>",
+                      "<ul class=\"list-disc list-inside space-y-2 mb-3 ml-4\">",
+                      "<li class=\"text-gray-700 dark:text-gray-300 dark:text-gray-300\">met één zoekactie een overzicht krijgt van fulltext-artikelen over jouw onderwerp;</li>",
+                      "<li class=\"text-gray-700 dark:text-gray-300 dark:text-gray-300\">tegelijkertijd zoekt in meerdere databanken én de catalogus;</li>",
+                      "<li class=\"text-gray-700 dark:text-gray-300 dark:text-gray-300\">resultaten kunt filteren op publicatiedatum, taal of materiaalsoort.</li>",
+                      "</ul>",
+                      "<p class=\"text-gray-700 dark:text-gray-300 dark:text-gray-300 mb-0\">Zo vind je sneller relevante en betrouwbare informatie zonder in elke databank apart te hoeven zoeken.</p>"
+                    ]
                   },
                   {
-                    "id": "scenario3",
-                    "title": "Scenario 3: NOT-operator",
-                    "description": "Je zoekt naar artikelen over transport, maar niet over luchtvaart.",
-                    "availableTerms": ["transport", "optimalisatie", "logistiek", "warehouse", "supply chain", "luchtvaart", "magazijnbeheer", "automatisering", "robotica", "e-commerce"],
-                    "availableOperators": ["AND", "OR", "NOT"],
-                    "correctQuery": "transport NOT luchtvaart",
-                    "explanation": "De NOT-operator sluit artikelen uit die de term 'luchtvaart' bevatten. Je krijgt dus alle artikelen over transport, behalve die over luchtvaart."
+                    "label": "Welke databank lijkt je nu nuttig en welke niet? Waarom?",
+                    "content": [
+                      "<p class=\"text-gray-700 dark:text-gray-300 dark:text-gray-300 mb-3\"><strong>Nuttig:</strong></p>",
+                      "<p class=\"text-gray-700 dark:text-gray-300 dark:text-gray-300 mb-3\">De databank Company.info lijkt mij als student Logistics Management erg nuttig, omdat ik vaak onderzoek doe naar bedrijven, markten en ketenpartners. In deze databank vind je financiële gegevens, marktrapporten en bedrijfsprofielen die helpen om de logistieke prestaties van organisaties beter te begrijpen of te vergelijken.</p>",
+                      "<p class=\"text-gray-700 dark:text-gray-300 dark:text-gray-300 mb-3\"><strong>Minder nuttig:</strong></p>",
+                      "<p class=\"text-gray-700 dark:text-gray-300 dark:text-gray-300 mb-0\">De databank ERIC lijkt me minder nuttig voor mijn studie, omdat die zich richt op onderwijskundig onderzoek. Dat is interessant voor docenten of onderzoekers in het onderwijs, maar minder relevant voor logistieke vraagstukken zoals voorraadbeheer, transport of supply chain-analyse.</p>"
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "label": "3. (Semi)wetenschappelijke informatie",
+            "content": [
+              "<p class=\"text-gray-700 dark:text-gray-300 dark:text-gray-300 mb-4\">Voor je onderzoek gebruik je het liefst (semi)wetenschappelijke informatie. Deze (semi) wetenschappelijke informatie is namelijk meer betrouwbaar dan een nieuwsartikel of website die je via Google hebt gevonden. In de volgende kennisclip worden er drie manieren besproken om aan wetenschappelijke informatie te komen. Afsluitend wordt er in de kennisclip een koppeling tussen Windesearch en Google Scholar. Deze koppeling is essentieel voor je literatuuronderzoek.</p>",
+              {
+                "type": "video",
+                "url": "https://www.youtube.com/embed/oCnqZRah4_0"
+              },
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4 font-semibold\">Wat betekent precies Open Access in de context van wetenschappelijke literatuur?</p>"
+            ]
+          },
+          {
+            "label": "4. Zoektermen formuleren",
+            "content": [
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Inmiddels weet je waar je wetenschappelijke informatie kunt vinden maar kopieer je nu gewoon de belangrijkste begrippen uit de doelstelling of hoofdvraag in de zoekbalk? Hoe kun je nou gericht zoeken naar literatuur. In de vorige kennisclips zag je al veel mogelijkheden om gericht te zoeken naar type bestand of binnen een onderwerp. Deze selecties kunnen je al heel veel tijd besparen, maar er zijn nog meer mogelijkheden bijvoorbeeld door gebruik te maken van de juiste zoektermen. Goede zoektermen = goede zoekresultaten. Bekijk maar eens de volgende kennisclip.</p>",
+              {
+                "type": "video",
+                "url": "https://www.youtube.com/embed/4P3jZuUZnkc"
+              }
+            ]
+          },
+          {
+            "label": "5. Booleaanse operatoren",
+            "content": [
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Zoals de vorige kennisclip al aangeeft kun je zoektermen combineren of uitsluiten met AND, OR en NOT. Dit zijn zogenoemde Booleaanse operatoren. Het gebruik van deze Booleaanse operatoren is van belang om het aantal zoekresultaten te beperken.</p>",
+              {
+                "type": "video",
+                "url": "https://www.youtube.com/embed/bXR4dmm4m4A"
+              },
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Test je kennis van Booleaanse operatoren door de onderstaande oefening te maken. Je leert hoe je zoektermen effectief combineert met AND, OR en NOT, en hoe je haakjes gebruikt voor complexe queries. Let op: deze oefeningen werken mogelijk niet goed op mobiele apparaten. Gebruik bij voorkeur een desktop of tablet voor de beste ervaring.</p>",
+              {
+                "type": "accordion",
+                "usePlusIcon": true,
+                "defaultOpen": false,
+                "items": [
+                  {
+                    "title": "Oefening 3: Vijf Booleaanse operatoroefeningen",
+                    "defaultOpen": false,
+                    "content": [
+                      {
+                        "type": "booleanOperatorExercise",
+                        "title": "Vijf Booleaanse operatoroefeningen",
+                        "instruction": "Bouw de juiste zoekquery voor elk scenario door de zoektermen en operatoren te selecteren. Gebruik haakjes waar nodig voor complexe queries.",
+                        "scenarios": [
+                          {
+                            "id": "scenario1",
+                            "title": "Scenario 1: AND-operator",
+                            "description": "Je zoekt naar artikelen die zowel over transport als over optimalisatie gaan.",
+                            "availableTerms": ["transport", "optimalisatie", "logistiek", "warehouse", "supply chain", "luchtvaart", "magazijnbeheer", "automatisering", "robotica", "e-commerce"],
+                            "availableOperators": ["AND", "OR", "NOT"],
+                            "correctQuery": "transport AND optimalisatie",
+                            "explanation": "De AND-operator zorgt ervoor dat beide termen (transport én optimalisatie) in de resultaten moeten voorkomen. Dit beperkt het aantal resultaten tot artikelen die beide onderwerpen behandelen."
+                          },
+                          {
+                            "id": "scenario2",
+                            "title": "Scenario 2: OR-operator",
+                            "description": "Je zoekt naar artikelen die over logistiek of warehouse gaan (of beide).",
+                            "availableTerms": ["transport", "optimalisatie", "logistiek", "warehouse", "supply chain", "luchtvaart", "magazijnbeheer", "automatisering", "robotica", "e-commerce"],
+                            "availableOperators": ["AND", "OR", "NOT"],
+                            "correctQuery": "logistiek OR warehouse",
+                            "explanation": "De OR-operator zorgt ervoor dat minstens één van de termen (logistiek óf warehouse) in de resultaten voorkomt. Dit breidt het aantal resultaten uit tot artikelen die over een van beide onderwerpen gaan."
+                          },
+                          {
+                            "id": "scenario3",
+                            "title": "Scenario 3: NOT-operator",
+                            "description": "Je zoekt naar artikelen over transport, maar niet over luchtvaart.",
+                            "availableTerms": ["transport", "optimalisatie", "logistiek", "warehouse", "supply chain", "luchtvaart", "magazijnbeheer", "automatisering", "robotica", "e-commerce"],
+                            "availableOperators": ["AND", "OR", "NOT"],
+                            "correctQuery": "transport NOT luchtvaart",
+                            "explanation": "De NOT-operator sluit artikelen uit die de term 'luchtvaart' bevatten. Je krijgt dus alle artikelen over transport, behalve die over luchtvaart."
+                          },
+                          {
+                            "id": "scenario4",
+                            "title": "Scenario 4: Gecombineerde operatoren met haakjes",
+                            "description": "Je zoekt naar artikelen die over optimalisatie gaan EN (logistiek of supply chain) bevatten.",
+                            "availableTerms": ["transport", "optimalisatie", "logistiek", "warehouse", "supply chain", "luchtvaart", "magazijnbeheer", "automatisering", "robotica", "e-commerce"],
+                            "availableOperators": ["AND", "OR", "NOT"],
+                            "correctQuery": "(logistiek OR supply chain) AND optimalisatie",
+                            "explanation": "Haakjes bepalen de volgorde van bewerkingen. Eerst wordt (logistiek OR supply chain) geëvalueerd, daarna wordt het resultaat gecombineerd met optimalisatie via AND. Dit geeft artikelen die over optimalisatie gaan én over logistiek of supply chain."
+                          },
+                          {
+                            "id": "scenario5",
+                            "title": "Scenario 5: Complexe query",
+                            "description": "Je zoekt naar artikelen over magazijnbeheer die (automatisering of robotica) bevatten, maar niet over e-commerce gaan.",
+                            "availableTerms": ["transport", "optimalisatie", "logistiek", "warehouse", "supply chain", "luchtvaart", "magazijnbeheer", "automatisering", "robotica", "e-commerce"],
+                            "availableOperators": ["AND", "OR", "NOT"],
+                            "correctQuery": "magazijnbeheer AND (automatisering OR robotica) NOT e-commerce",
+                            "explanation": "Dit is een complexe query met meerdere operatoren. Eerst wordt (automatisering OR robotica) geëvalueerd, daarna wordt dit gecombineerd met magazijnbeheer via AND, en ten slotte worden artikelen over e-commerce uitgesloten met NOT."
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "accordion",
+                "usePlusIcon": true,
+                "defaultOpen": false,
+                "items": [
+                  {
+                    "title": "Oefening 4: Schrijf je eigen zoekquery met AI-feedback",
+                    "defaultOpen": false,
+                    "content": [
+                      {
+                        "type": "aiQueryExercise",
+                        "title": "Schrijf je eigen zoekquery",
+                        "instruction": "Klik op 'Nieuw scenario' om een nieuwe oefening te krijgen. Schrijf de zoekquery die je denkt dat correct is en krijg AI-feedback.",
+                        "generateFromTheory": true,
+                        "availableTerms": ["transport", "optimalisatie", "logistiek", "warehouse", "supply chain", "luchtvaart", "magazijnbeheer", "automatisering", "robotica", "e-commerce"]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "label": "6. Bouwsteenmethode",
+            "content": [
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Nu zou je kunnen starten met zoeken, maar dat pakken we nog wel met iets meer structuur aan door middel van de bouwsteenmethode. De volgende kennisclip helpt je daarbij. Daarna kun je voor je eigen onderzoek de tabel hieronder gebruiken.</p>",
+              {
+                "type": "video",
+                "url": "https://www.youtube.com/embed/U-QMd92R1dk"
+              },
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Gebruik onderstaande tabel om de belangrijkste begrippen/elementen te analyseren voordat je gaat starten met zoeken. De tabel is een combinatie van de kennisclip over Zoektermen en de Bouwsteenmethode. De uitgewerkte tabel verwerk je in een aparte bijlage van je onderzoeksopzet.</p>",
+              "<div class=\"overflow-x-auto mb-6\">",
+              "<table class=\"min-w-full border border-gray-300 rounded-lg\">",
+              "<thead class=\"bg-gray-100\">",
+              "<tr>",
+              "<th class=\"border border-gray-300 dark:border-gray-600 px-4 py-3 text-left text-sm font-semibold text-gray-900 dark:text-white\">Zoekterm/Begrip/element</th>",
+              "<th class=\"border border-gray-300 dark:border-gray-600 px-4 py-3 text-left text-sm font-semibold text-gray-900 dark:text-white\">Element 1</th>",
+              "<th class=\"border border-gray-300 dark:border-gray-600 px-4 py-3 text-left text-sm font-semibold text-gray-900 dark:text-white\">Element ..</th>",
+              "<th class=\"border border-gray-300 dark:border-gray-600 px-4 py-3 text-left text-sm font-semibold text-gray-900 dark:text-white\">Element n</th>",
+              "</tr>",
+              "</thead>",
+              "<tbody>",
+              "<tr>",
+              "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700 dark:text-gray-300\">Synoniemen</td>",
+              "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700 dark:text-gray-300\"></td>",
+              "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700 dark:text-gray-300\"></td>",
+              "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700 dark:text-gray-300\"></td>",
+              "</tr>",
+              "<tr>",
+              "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700 dark:text-gray-300\">Vertalingen</td>",
+              "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700 dark:text-gray-300\"></td>",
+              "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700 dark:text-gray-300\"></td>",
+              "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700 dark:text-gray-300\"></td>",
+              "</tr>",
+              "<tr>",
+              "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700 dark:text-gray-300\">Afkortingen</td>",
+              "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700 dark:text-gray-300\"></td>",
+              "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700 dark:text-gray-300\"></td>",
+              "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700 dark:text-gray-300\"></td>",
+              "</tr>",
+              "<tr>",
+              "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700 dark:text-gray-300\">Spellingsvormen</td>",
+              "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700 dark:text-gray-300\"></td>",
+              "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700 dark:text-gray-300\"></td>",
+              "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700 dark:text-gray-300\"></td>",
+              "</tr>",
+              "<tr>",
+              "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700 dark:text-gray-300\">Vaktermen</td>",
+              "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700 dark:text-gray-300\"></td>",
+              "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700 dark:text-gray-300\"></td>",
+              "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700 dark:text-gray-300\"></td>",
+              "</tr>",
+              "<tr>",
+              "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700 dark:text-gray-300\">Bredere termen</td>",
+              "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700 dark:text-gray-300\"></td>",
+              "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700 dark:text-gray-300\"></td>",
+              "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700 dark:text-gray-300\"></td>",
+              "</tr>",
+              "<tr>",
+              "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700 dark:text-gray-300\">Nauwere termen</td>",
+              "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700 dark:text-gray-300\"></td>",
+              "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700 dark:text-gray-300\"></td>",
+              "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700 dark:text-gray-300\"></td>",
+              "</tr>",
+              "</tbody>",
+              "</table>",
+              "</div>",
+              {
+                "type": "accordion",
+                "usePlusIcon": true,
+                "defaultOpen": false,
+                "items": [
+                  {
+                    "title": "Opdracht 2: Bouwsteenmethode voor magazijnoptimalisatie",
+                    "defaultOpen": false,
+                    "content": [
+                      "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Bij de Oefenasus komt het begrip magazijnoptimalisatie naar voren. Ga voor dit begrip alvast een start maken met de bouwsteenmethode.</p>",
+                      "<p class=\"text-gray-700 dark:text-gray-300 mb-0\">Gebruik de tabel die je hierboven hebt gezien om het begrip magazijnoptimalisatie uit te werken volgens de bouwsteenmethode. Vul de tabel in met synoniemen, vertalingen, afkortingen, spellingsvormen, vaktermen, bredere termen en nauwere termen.</p>"
+                    ]
                   },
                   {
-                    "id": "scenario4",
-                    "title": "Scenario 4: Gecombineerde operatoren met haakjes",
-                    "description": "Je zoekt naar artikelen die over optimalisatie gaan EN (logistiek of supply chain) bevatten.",
-                    "availableTerms": ["transport", "optimalisatie", "logistiek", "warehouse", "supply chain", "luchtvaart", "magazijnbeheer", "automatisering", "robotica", "e-commerce"],
-                    "availableOperators": ["AND", "OR", "NOT"],
-                    "correctQuery": "(logistiek OR supply chain) AND optimalisatie",
-                    "explanation": "Haakjes bepalen de volgorde van bewerkingen. Eerst wordt (logistiek OR supply chain) geëvalueerd, daarna wordt het resultaat gecombineerd met optimalisatie via AND. Dit geeft artikelen die over optimalisatie gaan én over logistiek of supply chain."
-                  },
-                  {
-                    "id": "scenario5",
-                    "title": "Scenario 5: Complexe query",
-                    "description": "Je zoekt naar artikelen over magazijnbeheer die (automatisering of robotica) bevatten, maar niet over e-commerce gaan.",
-                    "availableTerms": ["transport", "optimalisatie", "logistiek", "warehouse", "supply chain", "luchtvaart", "magazijnbeheer", "automatisering", "robotica", "e-commerce"],
-                    "availableOperators": ["AND", "OR", "NOT"],
-                    "correctQuery": "magazijnbeheer AND (automatisering OR robotica) NOT e-commerce",
-                    "explanation": "Dit is een complexe query met meerdere operatoren. Eerst wordt (automatisering OR robotica) geëvalueerd, daarna wordt dit gecombineerd met magazijnbeheer via AND, en ten slotte worden artikelen over e-commerce uitgesloten met NOT."
+                    "title": "Opdracht 3: Materiaal meenemen",
+                    "defaultOpen": false,
+                    "content": [
+                      "<p class=\"text-gray-700 dark:text-gray-300 mb-0\"><strong>Neem een schaar mee naar het college.</strong> We gaan tijdens het college aan de slag met het uiteenrafelen van een begrip en daarvoor heb je een schaar nodig.</p>"
+                    ]
                   }
                 ]
               }
@@ -446,100 +545,18 @@
         ]
       },
       {
-        "type": "accordion",
-        "usePlusIcon": true,
-        "defaultOpen": false,
-        "items": [
-          {
-            "title": "Oefening 4: Schrijf je eigen zoekquery met AI-feedback",
-            "defaultOpen": false,
-            "content": [
-              {
-                "type": "aiQueryExercise",
-                "title": "Schrijf je eigen zoekquery",
-                "instruction": "Klik op 'Nieuw scenario' om een nieuwe oefening te krijgen. Schrijf de zoekquery die je denkt dat correct is en krijg AI-feedback.",
-                "generateFromTheory": true,
-                "availableTerms": ["transport", "optimalisatie", "logistiek", "warehouse", "supply chain", "luchtvaart", "magazijnbeheer", "automatisering", "robotica", "e-commerce"]
-              }
-            ]
-          }
+        "type": "paragraph",
+        "text": [
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Nu je bekend bent met de bouwsteenmethode en hoe je zoektermen gestructureerd kunt combineren, is het tijd om dit zelf toe te passen. Voor de komende opdracht kun je gebruikmaken van de AI Bouwsteen Generator hieronder. Deze tool helpt je om snel synoniemen, vertalingen en gerelateerde termen te vinden, wat een goede startbasis is voor je eigen tabel.</p>"
         ]
+      },
+      {
+        "type": "aiBouwsteenGenerator"
       },
       {
         "type": "paragraph",
         "text": [
-          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Nu zou je kunnen starten met zoeken, maar dat pakken we nog wel met iets meer structuur aan door middel van de bouwsteenmethode. De volgende kennisclip helpt je daarbij. Daarna kun je voor je eigen onderzoek de tabel hieronder gebruiken.</p>"
-        ]
-      },
-      {
-        "type": "video",
-        "url": "https://www.youtube.com/embed/U-QMd92R1dk"
-      },
-      {
-        "type": "paragraph",
-        "text": [
-          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Gebruik onderstaande tabel om de belangrijkste begrippen/elementen te analyseren voordat je gaat starten met zoeken. De tabel is een combinatie van de kennisclip over Zoektermen en de Bouwsteenmethode. De uitgewerkte tabel verwerk je in een aparte bijlage van je onderzoeksopzet.</p>"
-        ]
-      },
-      {
-        "type": "paragraph",
-        "text": [
-          "<div class=\"overflow-x-auto mb-6\">",
-          "<table class=\"min-w-full border border-gray-300 rounded-lg\">",
-          "<thead class=\"bg-gray-100\">",
-          "<tr>",
-          "<th class=\"border border-gray-300 dark:border-gray-600 px-4 py-3 text-left text-sm font-semibold text-gray-900 dark:text-white\">Zoekterm/Begrip/element</th>",
-          "<th class=\"border border-gray-300 dark:border-gray-600 px-4 py-3 text-left text-sm font-semibold text-gray-900 dark:text-white\">Element 1</th>",
-          "<th class=\"border border-gray-300 dark:border-gray-600 px-4 py-3 text-left text-sm font-semibold text-gray-900 dark:text-white\">Element ..</th>",
-          "<th class=\"border border-gray-300 dark:border-gray-600 px-4 py-3 text-left text-sm font-semibold text-gray-900 dark:text-white\">Element n</th>",
-          "</tr>",
-          "</thead>",
-          "<tbody>",
-          "<tr>",
-          "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700 dark:text-gray-300\">Synoniemen</td>",
-          "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700 dark:text-gray-300\"></td>",
-          "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700 dark:text-gray-300\"></td>",
-          "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700 dark:text-gray-300\"></td>",
-          "</tr>",
-          "<tr>",
-          "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700 dark:text-gray-300\">Vertalingen</td>",
-          "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700 dark:text-gray-300\"></td>",
-          "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700 dark:text-gray-300\"></td>",
-          "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700 dark:text-gray-300\"></td>",
-          "</tr>",
-          "<tr>",
-          "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700 dark:text-gray-300\">Afkortingen</td>",
-          "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700 dark:text-gray-300\"></td>",
-          "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700 dark:text-gray-300\"></td>",
-          "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700 dark:text-gray-300\"></td>",
-          "</tr>",
-          "<tr>",
-          "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700 dark:text-gray-300\">Spellingsvormen</td>",
-          "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700 dark:text-gray-300\"></td>",
-          "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700 dark:text-gray-300\"></td>",
-          "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700 dark:text-gray-300\"></td>",
-          "</tr>",
-          "<tr>",
-          "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700 dark:text-gray-300\">Vaktermen</td>",
-          "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700 dark:text-gray-300\"></td>",
-          "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700 dark:text-gray-300\"></td>",
-          "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700 dark:text-gray-300\"></td>",
-          "</tr>",
-          "<tr>",
-          "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700 dark:text-gray-300\">Bredere termen</td>",
-          "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700 dark:text-gray-300\"></td>",
-          "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700 dark:text-gray-300\"></td>",
-          "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700 dark:text-gray-300\"></td>",
-          "</tr>",
-          "<tr>",
-          "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700 dark:text-gray-300\">Nauwere termen</td>",
-          "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700 dark:text-gray-300\"></td>",
-          "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700 dark:text-gray-300\"></td>",
-          "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700 dark:text-gray-300\"></td>",
-          "</tr>",
-          "</tbody>",
-          "</table>",
-          "</div>"
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Met de kennis van de bouwsteenmethode en de AI-tool bij de hand, ga je nu zelf aan de slag met een concrete casus en tref je een praktische voorbereiding voor het werkcollege.</p>"
         ]
       },
       {
@@ -551,15 +568,21 @@
             "title": "Opdracht 2: Bouwsteenmethode voor magazijnoptimalisatie",
             "defaultOpen": false,
             "content": [
-              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Bij de Oefenasus komt het begrip magazijnoptimalisatie naar voren. Ga voor dit begrip alvast een start maken met de bouwsteenmethode.</p>",
-              "<p class=\"text-gray-700 dark:text-gray-300 mb-0\">Gebruik de tabel die je hierboven hebt gezien om het begrip magazijnoptimalisatie uit te werken volgens de bouwsteenmethode. Vul de tabel in met synoniemen, vertalingen, afkortingen, spellingsvormen, vaktermen, bredere termen en nauwere termen.</p>"
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Bij de Oefencasus komt het begrip magazijnoptimalisatie naar voren. Ga voor dit begrip een start maken met de bouwsteenmethode.</p>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Je mag hierbij gebruikmaken van de AI Bouwsteen Generator hierboven. Pas hierbij wel strikt het mens-machine-mens principe toe:</p>",
+              "<ul class=\"list-disc list-inside space-y-2 mb-4 ml-4\">",
+              "<li class=\"text-gray-700 dark:text-gray-300\"><strong>Mens:</strong> Bedenk eerst zelf wat de context is. Wat houdt magazijnoptimalisatie in voor dit specifieke bedrijf?</li>",
+              "<li class=\"text-gray-700 dark:text-gray-300\"><strong>Machine:</strong> Gebruik de AI-tool om suggesties te genereren voor synoniemen, vertalingen en gerelateerde termen.</li>",
+              "<li class=\"text-gray-700 dark:text-gray-300\"><strong>Mens:</strong> Beoordeel de output kritisch. Kloppen de termen? Zijn ze relevant voor jouw onderzoek? Vul de tabel aan, corrigeer fouten en selecteer alleen de bruikbare 'bouwstenen'.</li>",
+              "</ul>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-0\">Vul uiteindelijk jouw eigen tabel in met de definitieve selectie van synoniemen, vertalingen, afkortingen, spellingsvormen, vaktermen, bredere termen en nauwere termen.</p>"
             ]
           },
           {
             "title": "Opdracht 3: Materiaal meenemen",
             "defaultOpen": false,
             "content": [
-              "<p class=\"text-gray-700 dark:text-gray-300 mb-0\"><strong>Neem een schaar mee naar het college.</strong> We gaan tijdens het college aan de slag met het uiteenrafelen van een begrip en daarvoor heb je een schaar nodig.</p>"
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-0\">Neem een schaar mee naar het college. We gaan tijdens het college aan de slag met het uiteenrafelen van een begrip en daarvoor heb je een schaar nodig.</p>"
             ]
           }
         ]

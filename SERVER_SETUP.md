@@ -68,7 +68,7 @@ Genereer MC vragen op basis van theorie content.
 ```
 
 ### GET /api/health
-Health check endpoint om te controleren of de server draait.
+Health check end-point om te controleren of de server draait.
 
 ## Troubleshooting
 

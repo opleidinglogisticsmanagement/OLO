@@ -1406,6 +1406,71 @@ app.get(/\.html$/, (req, res, next) => {
     }
 });
 
+/**
+ * Genereer dynamische config.js op basis van environment variables
+ * Dit voorkomt 404 errors op Vercel waar config.js niet in de repo staat
+ */
+function generateDynamicConfig(res) {
+    res.setHeader('Content-Type', 'application/javascript; charset=utf-8');
+    
+    // Haal API key uit environment variables (Vercel) of process.env
+    const apiKey = process.env.GEMINI_API_KEY || '';
+    
+    console.log('Generating dynamic config.js, API key present:', !!apiKey);
+    
+    // Genereer config.js content
+    const configContent = `// Dynamically generated config.js
+// On Vercel, this is generated from environment variables
+// Locally, use config.js file if available
+
+window.AppConfig = {
+    geminiApiKey: ${apiKey ? `'${apiKey}'` : 'null'}
+};
+
+// Log voor debugging
+if (typeof console !== 'undefined') {
+    console.log('Config loaded:', window.AppConfig.geminiApiKey ? 'API key present' : 'No API key');
+}
+`;
+    
+    res.send(configContent);
+}
+
+// Expliciete route voor config.js (MOET VOOR static middleware komen!)
+// Op Vercel wordt config.js dynamisch gegenereerd op basis van environment variables
+app.get('/config.js', (req, res, next) => {
+    const possiblePaths = [
+        path.join(rootDir, 'config.js'),
+        path.join('/var/task', 'config.js'),
+        path.join(process.cwd(), 'config.js'),
+    ];
+    
+    let foundPath = null;
+    for (const possiblePath of possiblePaths) {
+        if (fs.existsSync(possiblePath)) {
+            foundPath = possiblePath;
+            break;
+        }
+    }
+    
+    if (foundPath) {
+        // Lokaal bestand bestaat, serveer dat
+        res.setHeader('Content-Type', 'application/javascript; charset=utf-8');
+        res.sendFile(foundPath, (err) => {
+            if (err) {
+                console.error('Error serving config.js:', err);
+                // Fallback naar dynamische config
+                generateDynamicConfig(res);
+            }
+        });
+    } else {
+        // Geen lokaal bestand gevonden, genereer dynamische config op basis van environment variables
+        // Dit is nodig voor Vercel deployment waar config.js niet in de repo staat
+        console.log('No config.js file found, generating dynamic config from environment variables');
+        generateDynamicConfig(res);
+    }
+});
+
 // Serve static files (CSS, JS, images, JSON, etc.) - maar NIET HTML (die handlen we hierboven)
 // Belangrijk: JavaScript bestanden moeten beschikbaar zijn voor de HTML pagina's
 app.use(express.static(rootDir, { 
@@ -1556,39 +1621,6 @@ app.get(/\.(png|jpg|jpeg|gif|svg|ico|woff|woff2|ttf|eot|docx)$/i, (req, res, nex
     } else {
         console.error(`❌ Asset not found: ${fileName}`);
         res.status(404).send(`Asset not found: ${fileName}`);
-    }
-});
-
-// Expliciete route voor config.js (kan in .gitignore staan)
-app.get('/config.js', (req, res, next) => {
-    const possiblePaths = [
-        path.join(rootDir, 'config.js'),
-        path.join('/var/task', 'config.js'),
-        path.join(process.cwd(), 'config.js'),
-    ];
-    
-    let foundPath = null;
-    for (const possiblePath of possiblePaths) {
-        if (fs.existsSync(possiblePath)) {
-            foundPath = possiblePath;
-            break;
-        }
-    }
-    
-    if (foundPath) {
-        res.setHeader('Content-Type', 'application/javascript; charset=utf-8');
-        res.sendFile(foundPath, (err) => {
-            if (err) {
-                console.error('Error serving config.js:', err);
-                // Als config.js niet bestaat, stuur een lege config
-                res.setHeader('Content-Type', 'application/javascript; charset=utf-8');
-                res.send('// Config file not found');
-            }
-        });
-    } else {
-        // Stuur een lege config als fallback
-        res.setHeader('Content-Type', 'application/javascript; charset=utf-8');
-        res.send('// Config file not found');
     }
 });
 

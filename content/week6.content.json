@@ -99,6 +99,12 @@
                 "url": "https://media.windesheim.nl/Mediasite/Play/9fd33a5ba2cd480aa94dff6b6b227a891d"
               }
             ]
+          },
+          {
+            "label": "Het Experiment",
+            "content": [
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Een experimentele onderzoeksstrategie kan gebruikt worden in een evaluatieonderzoek. Bijvoorbeeld als je van bepaald beleid wilt vaststellen wat de effectiviteit is. Of je wilt onderzoeken wat de effecten zijn van een reorganisatie op de productiviteit van werknemers. Het experiment kan ook ingezet worden om erachter te komen wat de meest geschikte werkprocedures in een organisatie zijn.</p>"
+            ]
           }
         ]
       }

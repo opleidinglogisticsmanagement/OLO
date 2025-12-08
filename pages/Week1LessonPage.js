@@ -156,9 +156,10 @@ class Week1LessonPage extends BaseLessonPage {
                     <div class="flex-1 min-w-0 w-full sm:w-auto">
                         <h2 class="text-lg sm:text-xl font-semibold text-gray-900 mb-4">${this.content.video.title}</h2>
                         ${this.content.video.url ? `
-                            <div class="rounded-lg overflow-hidden mb-4 relative bg-black dark:bg-black w-full video-responsive-container" style="max-width: 100%;">
+                            <div class="rounded-lg overflow-hidden mb-4 relative bg-black dark:bg-black w-full video-responsive-container" id="week1-video-container" style="max-width: 100%;">
                                 <div class="video-responsive-wrapper" style="position: relative; width: 100%; padding-bottom: 56.25%; height: 0; overflow: hidden; background-color: #000;">
                                     <iframe 
+                                        id="week1-video"
                                         src="${this.content.video.url}" 
                                         title="Video player" 
                                         frameborder="0" 
@@ -167,8 +168,20 @@ class Week1LessonPage extends BaseLessonPage {
                                         allowfullscreen
                                         class="video-responsive-iframe"
                                         style="position: absolute !important; top: 0 !important; left: 0 !important; width: 100% !important; height: 100% !important; border: 0 !important; margin: 0 !important; padding: 0 !important; background-color: #000;"
+                                        data-video-url="${this.content.video.url}"
                                         loading="lazy">
                                     </iframe>
+                                </div>
+                                <div id="week1-video-fallback" class="hidden absolute inset-0 bg-gray-200 dark:bg-gray-700 rounded-lg flex flex-col items-center justify-center p-6 z-10">
+                                    <div class="text-center">
+                                        <i class="fas fa-exclamation-triangle text-yellow-600 dark:text-yellow-400 text-4xl mb-4"></i>
+                                        <p class="text-gray-700 dark:text-gray-200 font-semibold mb-2">Video kan niet worden geladen</p>
+                                        <p class="text-sm text-gray-600 dark:text-gray-300 mb-4">De video kan mogelijk niet worden ingesloten. Probeer de video te openen in een nieuw tabblad.</p>
+                                        <a href="${this.content.video.url}" target="_blank" class="inline-flex items-center px-4 py-2 bg-blue-600 dark:bg-blue-700 text-white rounded-lg hover:bg-blue-700 dark:hover:bg-blue-600 transition-colors font-medium">
+                                            <i class="fas fa-external-link-alt mr-2"></i>
+                                            Open video in nieuw tabblad
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                             <style>

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VideoManager Test Page</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { font-family: sans-serif; padding: 20px; }
+        .test-section { margin: 20px 0; padding: 20px; border: 2px solid #ccc; border-radius: 8px; }
+        .success { color: green; }
+        .error { color: red; }
+        .info { color: blue; }
+        button { padding: 10px 20px; margin: 5px; background: #0077b6; color: white; border: none; border-radius: 4px; cursor: pointer; }
+        button:hover { background: #005a8b; }
+    </style>
+</head>
+<body>
+    <h1>VideoManager Test Suite</h1>
+    
+    <div class="test-section">
+        <h2>Test 1: Video iframe met data-video-url (correct)</h2>
+        <div id="test1-container" class="relative bg-black w-full" style="max-width: 800px; padding-bottom: 56.25%; height: 0;">
+            <iframe 
+                id="test1-iframe"
+                src="https://example.com/nonexistent-video"
+                data-video-url="https://example.com/nonexistent-video"
+                style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
+                frameborder="0">
+            </iframe>
+            <div id="test1-fallback" class="hidden absolute inset-0 bg-gray-200 flex items-center justify-center">
+                <div class="text-center">
+                    <p class="font-semibold">✅ Fallback message (dit zou moeten verschijnen)</p>
+                    <p class="text-sm">Video kan niet worden geladen</p>
+                </div>
+            </div>
+        </div>
+        <p id="test1-status" class="info">Wachtend op check (2+3+4 seconden = 9 seconden totaal)...</p>
+    </div>
+
+    <div class="test-section">
+        <h2>Test 2: Dynamisch toegevoegde iframe</h2>
+        <button onclick="addDynamicIframe()">Voeg dynamische iframe toe</button>
+        <div id="test2-container" style="margin-top: 10px;"></div>
+        <p id="test2-status" class="info">Klik op de knop om een dynamische iframe toe te voegen</p>
+    </div>
+
+    <div class="test-section">
+        <h2>Test 3: Kleine iframe (height < 50px)</h2>
+        <div id="test3-container" class="relative bg-black" style="width: 100%; height: 30px;">
+            <iframe 
+                id="test3-iframe"
+                src="https://example.com/nonexistent"
+                data-video-url="https://example.com/nonexistent"
+                style="width: 100%; height: 30px;"
+                frameborder="0">
+            </iframe>
+            <div id="test3-fallback" class="hidden absolute inset-0 bg-gray-200 flex items-center justify-center">
+                <p>✅ Fallback voor kleine iframe</p>
+            </div>
+        </div>
+        <p id="test3-status" class="info">Wachtend op check...</p>
+    </div>
+
+    <div class="test-section">
+        <h2>Console Logs</h2>
+        <div id="console-logs" style="background: #f5f5f5; padding: 10px; border-radius: 4px; max-height: 300px; overflow-y: auto; font-family: monospace; font-size: 12px;"></div>
+    </div>
+
+    <script src="js/ui/VideoManager.js"></script>
+    <script>
+        // Override console.log to show in page
+        const originalLog = console.log;
+        const originalError = console.error;
+        const logDiv = document.getElementById('console-logs');
+        
+        function addLog(message, type = 'log') {
+            const p = document.createElement('p');
+            p.style.color = type === 'error' ? 'red' : 'black';
+            p.textContent = `[${new Date().toLocaleTimeString()}] ${message}`;
+            logDiv.appendChild(p);
+            logDiv.scrollTop = logDiv.scrollHeight;
+        }
+        
+        console.log = function(...args) {
+            originalLog.apply(console, args);
+            addLog(args.join(' '), 'log');
+        };
+        
+        console.error = function(...args) {
+            originalError.apply(console, args);
+            addLog(args.join(' '), 'error');
+        };
+
+        // Initialize VideoManager
+        const videoManager = new VideoManager();
+        videoManager.init();
+        console.log('✅ VideoManager geïnitialiseerd');
+
+        // Test 1: Check na 10 seconden
+        setTimeout(() => {
+            const iframe = document.getElementById('test1-iframe');
+            const fallback = document.getElementById('test1-fallback');
+            const status = document.getElementById('test1-status');
+            
+            if (fallback.classList.contains('hidden')) {
+                status.innerHTML = '<span class="error">❌ Fallback is nog steeds hidden - VideoManager heeft iframe niet gedetecteerd als gefaald</span>';
+            } else {
+                status.innerHTML = '<span class="success">✅ SUCCESS: Fallback message is zichtbaar!</span>';
+            }
+        }, 10000);
+
+        // Test 2: Dynamische iframe
+        function addDynamicIframe() {
+            const container = document.getElementById('test2-container');
+            const status = document.getElementById('test2-status');
+            
+            container.innerHTML = `
+                <div id="dynamic-container" class="relative bg-black" style="max-width: 800px; padding-bottom: 56.25%; height: 0;">
+                    <iframe 
+                        id="dynamic-iframe"
+                        src="https://example.com/nonexistent"
+                        data-video-url="https://example.com/nonexistent"
+                        style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
+                        frameborder="0">
+                    </iframe>
+                    <div id="dynamic-fallback" class="hidden absolute inset-0 bg-gray-200 flex items-center justify-center">
+                        <p>✅ Dynamische fallback</p>
+                    </div>
+                </div>
+            `;
+            
+            status.innerHTML = '<span class="info">⏳ Dynamische iframe toegevoegd. Wacht 10 seconden...</span>';
+            
+            setTimeout(() => {
+                const fallback = document.getElementById('dynamic-fallback');
+                if (fallback && !fallback.classList.contains('hidden')) {
+                    status.innerHTML = '<span class="success">✅ SUCCESS: MutationObserver heeft dynamische iframe gedetecteerd!</span>';
+                } else {
+                    status.innerHTML = '<span class="error">❌ Fallback niet zichtbaar - MutationObserver werkt mogelijk niet</span>';
+                }
+            }, 10000);
+        }
+
+        // Test 3: Kleine iframe check
+        setTimeout(() => {
+            const fallback = document.getElementById('test3-fallback');
+            const status = document.getElementById('test3-status');
+            
+            if (fallback.classList.contains('hidden')) {
+                status.innerHTML = '<span class="error">❌ Kleine iframe check werkt niet</span>';
+            } else {
+                status.innerHTML = '<span class="success">✅ SUCCESS: Kleine iframe check werkt!</span>';
+            }
+        }, 10000);
+
+        // Check voor bestaande iframes
+        setTimeout(() => {
+            const iframes = document.querySelectorAll('iframe[data-video-url]');
+            console.log(`📊 Gevonden ${iframes.length} iframe(s) met data-video-url attribuut`);
+            
+            iframes.forEach((iframe, index) => {
+                const container = iframe.closest('[id$="-container"]');
+                const fallback = container ? container.querySelector('[id$="-fallback"]') : null;
+                console.log(`Iframe ${index + 1}: container=${!!container}, fallback=${!!fallback}`);
+            });
+        }, 2000);
+    </script>
+</body>
+</html>

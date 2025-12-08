@@ -6,6 +6,8 @@
  * 
  * Structuur na refactoring:
  * - LayoutRenderer: Rendering van sidebar en header
+ * - ContentTemplateRenderer: Rendering van default content templates
+ * - NavigationRenderer: Rendering van navigatie buttons (vorige/volgende module)
  * - SidebarManager: Sidebar functionaliteit (mobile menu, submenu's)
  * - HeaderManager: Header functionaliteit (search, dark mode)
  * - ScrollManager: Scroll functionaliteit (scroll to top, anchor scrolling)
@@ -28,6 +30,7 @@ class BaseLessonPage {
         this.videoManager = new VideoManager();
         this.navigationService = new NavigationService();
         this.contentTemplateRenderer = new ContentTemplateRenderer();
+        this.navigationRenderer = new NavigationRenderer(this.navigationService, moduleId);
     }
 
     /**
@@ -101,33 +104,7 @@ class BaseLessonPage {
      * Render navigatie buttons
      */
     renderNavigation() {
-        const prevModule = this.navigationService.getPreviousModule(this.moduleId);
-        const nextModule = this.navigationService.getNextModule(this.moduleId);
-
-        return `
-            <div class="mt-12 flex flex-col sm:flex-row justify-between items-stretch sm:items-center gap-4">
-                ${prevModule ? `
-                    <button class="nav-button flex items-center justify-center space-x-2 px-4 sm:px-6 py-3 w-full sm:w-auto bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-200 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 focus-ring transition-colors" data-nav-href="${prevModule.href}">
-                        <i class="fas fa-arrow-left"></i>
-                        <span>Vorige: ${prevModule.title}</span>
-                    </button>
-                ` : `
-                    <button class="nav-button flex items-center justify-center space-x-2 px-4 sm:px-6 py-3 w-full sm:w-auto bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-200 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 focus-ring transition-colors" data-nav-href="index.html">
-                        <i class="fas fa-arrow-left"></i>
-                        <span>Terug naar Start</span>
-                    </button>
-                `}
-                
-                ${nextModule ? `
-                    <button class="nav-button flex items-center justify-center space-x-2 px-4 sm:px-6 py-3 w-full sm:w-auto bg-blue-600 dark:bg-blue-700 text-white rounded-lg hover:bg-blue-700 dark:hover:bg-blue-600 focus-ring transition-colors" data-nav-href="${nextModule.href}">
-                        <span>Volgende: ${nextModule.title}</span>
-                        <i class="fas fa-arrow-right"></i>
-                    </button>
-                ` : `
-                    <div></div>
-                `}
-            </div>
-        `;
+        return this.navigationRenderer.renderNavigation();
     }
 
 

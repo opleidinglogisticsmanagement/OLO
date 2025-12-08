@@ -3,6 +3,15 @@
  * 
  * Basis template voor alle week pages
  * Collega's kunnen deze gebruiken als startpunt voor hun eigen content
+ * 
+ * Structuur na refactoring:
+ * - LayoutRenderer: Rendering van sidebar en header
+ * - SidebarManager: Sidebar functionaliteit (mobile menu, submenu's)
+ * - HeaderManager: Header functionaliteit (search, dark mode)
+ * - ScrollManager: Scroll functionaliteit (scroll to top, anchor scrolling)
+ * - ImageModalManager: Image modal functionaliteit
+ * - InteractiveManager: Interactieve componenten (accordions, tabs, drag-drop, MC questions)
+ * - VideoManager: Video error detection
  */
 
 class BaseLessonPage {
@@ -30,9 +39,9 @@ class BaseLessonPage {
             </a>
 
             <div id="app" class="min-h-screen flex">
-                ${this.renderSidebar()}
+                ${this.layoutRenderer.renderSidebar()}
                 <div class="flex-1 flex flex-col lg:ml-80 relative">
-                    ${this.renderHeader()}
+                    ${this.layoutRenderer.renderHeader()}
                     <div class="flex-1 overflow-y-auto custom-scrollbar pt-[56px] sm:pt-[64px]">
                         ${this.renderMainContent()}
                     </div>
@@ -51,34 +60,6 @@ class BaseLessonPage {
                 <i class="fas fa-arrow-up text-xl"></i>
             </button>
         `;
-    }
-
-    /**
-     * Render sidebar met navigatie
-     */
-    renderSidebar() {
-        return this.layoutRenderer.renderSidebar();
-    }
-
-    /**
-     * Render sidebar header
-     */
-    renderSidebarHeader() {
-        return this.layoutRenderer.renderSidebarHeader();
-    }
-
-    /**
-     * Render module navigatie
-     */
-    renderModuleNavigation() {
-        return this.layoutRenderer.renderModuleNavigation();
-    }
-
-    /**
-     * Render header met breadcrumbs
-     */
-    renderHeader() {
-        return this.layoutRenderer.renderHeader();
     }
 
     /**
@@ -291,22 +272,12 @@ class BaseLessonPage {
      * Attach event listeners
      */
     attachEventListeners() {
-        // Initialize sidebar manager
+        // Initialize all managers (in dependency order)
         this.sidebarManager.init();
-
-        // Initialize header manager
         this.headerManager.init();
-
-        // Initialize scroll manager
         this.scrollManager.init();
-
-        // Initialize image modal manager
         this.imageModalManager.init();
-        
-        // Initialize interactive manager
         this.interactiveManager.init();
-        
-        // Initialize video manager
         this.videoManager.init();
     }
 }

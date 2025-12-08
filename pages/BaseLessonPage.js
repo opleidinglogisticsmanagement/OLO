@@ -26,6 +26,7 @@ class BaseLessonPage {
         this.imageModalManager = new ImageModalManager();
         this.interactiveManager = new InteractiveManager(moduleId);
         this.videoManager = new VideoManager();
+        this.navigationService = new NavigationService();
     }
 
     /**
@@ -191,8 +192,8 @@ class BaseLessonPage {
      * Render navigatie buttons
      */
     renderNavigation() {
-        const prevModule = this.getPreviousModule();
-        const nextModule = this.getNextModule();
+        const prevModule = this.navigationService.getPreviousModule(this.moduleId);
+        const nextModule = this.navigationService.getNextModule(this.moduleId);
 
         return `
             <div class="mt-12 flex flex-col sm:flex-row justify-between items-stretch sm:items-center gap-4">
@@ -220,45 +221,6 @@ class BaseLessonPage {
         `;
     }
 
-    /**
-     * Get previous module
-     */
-    getPreviousModule() {
-        const modules = [
-            { id: 'week-1', title: 'Week 1', href: 'week1.html' },
-            { id: 'week-2', title: 'Week 2', href: 'week2.html' },
-            { id: 'week-3', title: 'Week 3', href: 'week3.html' },
-            { id: 'week-4', title: 'Week 4', href: 'week4.html' },
-            { id: 'week-5', title: 'Week 5', href: 'week5.html' },
-            { id: 'week-6', title: 'Week 6', href: 'week6.html' },
-            { id: 'week-7', title: 'Week 7', href: 'week7.html' },
-            { id: 'register', title: 'Begrippenlijst', href: 'register.html' },
-            { id: 'afsluiting', title: 'Afsluiting', href: 'afsluiting.html' }
-        ];
-
-        const currentIndex = modules.findIndex(module => module.id === this.moduleId);
-        return modules[currentIndex - 1] || null;
-    }
-
-    /**
-     * Get next module
-     */
-    getNextModule() {
-        const modules = [
-            { id: 'week-1', title: 'Week 1', href: 'week1.html' },
-            { id: 'week-2', title: 'Week 2', href: 'week2.html' },
-            { id: 'week-3', title: 'Week 3', href: 'week3.html' },
-            { id: 'week-4', title: 'Week 4', href: 'week4.html' },
-            { id: 'week-5', title: 'Week 5', href: 'week5.html' },
-            { id: 'week-6', title: 'Week 6', href: 'week6.html' },
-            { id: 'week-7', title: 'Week 7', href: 'week7.html' },
-            { id: 'register', title: 'Begrippenlijst', href: 'register.html' },
-            { id: 'afsluiting', title: 'Afsluiting', href: 'afsluiting.html' }
-        ];
-
-        const currentIndex = modules.findIndex(module => module.id === this.moduleId);
-        return modules[currentIndex + 1] || null;
-    }
 
     /**
      * Initialiseer de pagina

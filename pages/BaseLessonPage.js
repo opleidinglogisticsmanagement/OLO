@@ -17,16 +17,17 @@
  */
 
 class BaseLessonPage {
-    constructor(moduleId, moduleTitle, moduleSubtitle) {
+    constructor(moduleId, moduleTitle, moduleSubtitle, historyManager = null) {
         this.moduleId = moduleId;
         this.moduleTitle = moduleTitle;
         this.moduleSubtitle = moduleSubtitle;
+        this.historyManager = historyManager;
         this.layoutRenderer = new LayoutRenderer(moduleId, moduleTitle);
         this.sidebarManager = new SidebarManager(moduleId);
         this.headerManager = new HeaderManager();
-        this.scrollManager = new ScrollManager(moduleId);
+        this.scrollManager = new ScrollManager(moduleId, historyManager);
         this.imageModalManager = new ImageModalManager();
-        this.interactiveManager = new InteractiveManager(moduleId);
+        this.interactiveManager = new InteractiveManager(moduleId, historyManager);
         this.videoManager = new VideoManager();
         this.navigationService = new NavigationService();
         this.contentTemplateRenderer = new ContentTemplateRenderer();

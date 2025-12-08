@@ -9,8 +9,9 @@
  */
 
 class ContentLoaderService {
-    constructor(routerService) {
+    constructor(routerService, historyManager = null) {
         this.routerService = routerService;
+        this.historyManager = historyManager;
         this.currentPageInstance = null; // Huidige WeekLessonPage instantie
     }
 
@@ -41,6 +42,18 @@ class ContentLoaderService {
             // They set moduleId, title, subtitle in their constructor
             const PageClass = route.pageClass;
             const pageInstance = new PageClass();
+
+            // 2.5. Set historyManager on page instance and its managers (for SPA navigation)
+            if (this.historyManager && pageInstance) {
+                pageInstance.historyManager = this.historyManager;
+                // Also update managers that need historyManager
+                if (pageInstance.scrollManager) {
+                    pageInstance.scrollManager.historyManager = this.historyManager;
+                }
+                if (pageInstance.interactiveManager) {
+                    pageInstance.interactiveManager.historyManager = this.historyManager;
+                }
+            }
 
             // 3. Load content if method exists
             if (typeof pageInstance.loadContent === 'function') {

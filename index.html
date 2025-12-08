@@ -404,21 +404,77 @@
     </style>
 </head>
 <body class="bg-gray-50 dark:bg-gray-900 transition-colors duration-200">
+    <!-- Loading Screen -->
+    <div id="loading" class="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900">
+        <div class="text-center">
+            <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
+            <p class="text-gray-600 dark:text-gray-300">Laden...</p>
+        </div>
+    </div>
+
+    <!-- App Container (will be populated by SPA) -->
+    <div id="app" class="min-h-screen flex" style="display: none;">
+        <!-- Layout will be rendered here by SPA -->
+    </div>
+
     <!-- Dark Mode Utility - MOET EERST GELADEN WORDEN -->
     <script src="js/DarkMode.js"></script>
     <!-- PDF Exporter -->
     <script src="js/PDFExporter.js"></script>
+    <script src="config.js"></script>
     <script src="js/SearchService.js"></script>
     
-    <!-- Skip to content link for accessibility -->
-    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-blue-600 text-white px-4 py-2 rounded-md z-50 focus-ring">
-        Spring naar hoofdinhoud
-    </a>
-
-    <div id="app" class="min-h-screen flex">
-        <!-- Sidebar -->
-        <aside id="sidebar" class="w-80 bg-white dark:bg-gray-800 shadow-lg transform -translate-x-full lg:translate-x-0 transition-transform duration-300 ease-in-out fixed inset-y-0 z-40" aria-label="Navigatie menu">
-            <div class="h-full flex flex-col">
+    <!-- Core services (moeten eerst) -->
+    <script src="js/services/RouterService.js"></script>
+    <script src="js/services/ContentLoaderService.js"></script>
+    <script src="js/ui/HistoryManager.js"></script>
+    
+    <!-- Components -->
+    <script src="js/components/LayoutRenderer.js"></script>
+    <script src="js/components/NavigationRenderer.js"></script>
+    <script src="js/components/ContentTemplateRenderer.js"></script>
+    
+    <!-- UI Managers -->
+    <script src="js/ui/SidebarManager.js"></script>
+    <script src="js/ui/HeaderManager.js"></script>
+    <script src="js/ui/ScrollManager.js"></script>
+    <script src="js/ui/ImageModalManager.js"></script>
+    <script src="js/ui/InteractiveManager.js"></script>
+    <script src="js/ui/VideoManager.js"></script>
+    
+    <!-- Services -->
+    <script src="js/services/NavigationService.js"></script>
+    
+    <!-- Pages -->
+    <script src="pages/BaseLessonPage.js"></script>
+    <script src="pages/ContentRenderer.js"></script>
+    <script src="pages/InteractiveRenderer.js"></script>
+    <script src="pages/AIGenerator.js"></script>
+    <script src="pages/MCQuestionRenderer.js"></script>
+    
+    <!-- Alle WeekLessonPage classes -->
+    <script src="pages/Week1LessonPage.js"></script>
+    <script src="pages/Week2LessonPage.js"></script>
+    <script src="pages/Week3LessonPage.js"></script>
+    <script src="pages/Week4LessonPage.js"></script>
+    <script src="pages/Week5LessonPage.js"></script>
+    <script src="pages/Week6LessonPage.js"></script>
+    <script src="pages/Week7LessonPage.js"></script>
+    <script src="pages/RegisterPage.js"></script>
+    <script src="pages/AfsluitingLessonPage.js"></script>
+    
+    <!-- SPA Core -->
+    <script src="js/core/SPA.js"></script>
+    
+    <script>
+        // Initialize SPA
+        document.addEventListener('DOMContentLoaded', async () => {
+            const spa = new SPA();
+            await spa.init();
+        });
+    </script>
+</body>
+</html>
                 <!-- Sidebar Header -->
                 <div class="px-4 sm:px-6 h-[56px] sm:h-[64px] border-b border-gray-200 dark:border-gray-700 flex items-center">
                     <div class="flex items-center space-x-3 w-full">

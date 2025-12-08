@@ -8,8 +8,33 @@
  */
 
 class InteractiveManager {
-    constructor(moduleId) {
+    constructor(moduleId, historyManager = null) {
         this.moduleId = moduleId;
+        this.historyManager = historyManager;
+        // RouterService will be lazily initialized when needed
+        this._routerService = null;
+    }
+
+    /**
+     * Get RouterService instance (lazy initialization)
+     * @returns {RouterService|null} RouterService instance or null if not available
+     */
+    get routerService() {
+        if (this._routerService === null) {
+            // Check if RouterService is available
+            if (typeof RouterService !== 'undefined') {
+                try {
+                    this._routerService = new RouterService();
+                } catch (error) {
+                    console.error('[InteractiveManager] Failed to create RouterService:', error);
+                    this._routerService = false; // Mark as failed to avoid retrying
+                }
+            } else {
+                console.warn('[InteractiveManager] RouterService not available. Make sure RouterService.js is loaded before InteractiveManager.js');
+                this._routerService = false; // Mark as not available
+            }
+        }
+        return this._routerService || null;
     }
 
     /**
@@ -227,15 +252,98 @@ class InteractiveManager {
             }
         }, true); // Use capture phase to catch events early
         
-        // Handle navigation button clicks (using data-nav-href attribute)
+        // Handle navigation button clicks and sidebar links (using data-spa-route or data-nav-href attribute)
         document.addEventListener('click', (e) => {
+            // First check for sidebar links with data-spa-route (anchor tags)
+            const sidebarLink = e.target.closest('a[data-spa-route]');
+            if (sidebarLink && !sidebarLink.classList.contains('nav-button')) {
+                const spaRoute = sidebarLink.getAttribute('data-spa-route');
+                const spaHash = sidebarLink.getAttribute('data-spa-hash');
+                
+                if (spaRoute) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    
+                    // Use HistoryManager if available, otherwise fallback to old behavior
+                    if (this.historyManager) {
+                        try {
+                            this.historyManager.navigate(spaRoute, spaHash || null);
+                        } catch (error) {
+                            console.error('[InteractiveManager] Navigation error:', error);
+                            // Fallback to old behavior on error
+                            const href = sidebarLink.getAttribute('href');
+                            if (href) {
+                                window.location.href = href;
+                            }
+                        }
+                    } else {
+                        // Fallback: navigate normally
+                        const href = sidebarLink.getAttribute('href');
+                        if (href) {
+                            window.location.href = href + (spaHash || '');
+                        }
+                    }
+                    return;
+                }
+            }
+            
+            // Then check for navigation buttons
             const target = e.target.closest('.nav-button');
             if (target) {
+                // Check for new SPA route format first
+                const spaRoute = target.getAttribute('data-spa-route');
+                const spaHash = target.getAttribute('data-spa-hash');
+                
+                if (spaRoute) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    
+                    // Use HistoryManager if available, otherwise fallback to old behavior
+                    if (this.historyManager) {
+                        try {
+                            this.historyManager.navigate(spaRoute, spaHash || null);
+                        } catch (error) {
+                            console.error('[InteractiveManager] Navigation error:', error);
+                            // Fallback to old behavior on error
+                            const href = target.getAttribute('href');
+                            if (href) {
+                                window.location.href = href + (spaHash || '');
+                            }
+                        }
+                    } else {
+                        // Fallback: parse URL and navigate normally
+                        const href = target.getAttribute('href');
+                        if (href) {
+                            window.location.href = href + (spaHash || '');
+                        }
+                    }
+                    return;
+                }
+                
+                // Fallback: Handle old data-nav-href format (for backwards compatibility)
                 const href = target.getAttribute('data-nav-href');
                 if (href) {
                     e.preventDefault();
                     e.stopPropagation();
-                    window.location.href = href;
+                    
+                    // Use HistoryManager if available
+                    if (this.historyManager && this.routerService) {
+                        try {
+                            const { moduleId, hash } = this.routerService.parseUrl(href);
+                            if (moduleId) {
+                                this.historyManager.navigate(moduleId, hash);
+                            } else {
+                                // If parsing fails, fallback to old behavior
+                                window.location.href = href;
+                            }
+                        } catch (error) {
+                            console.error('[InteractiveManager] Navigation error:', error);
+                            window.location.href = href;
+                        }
+                    } else {
+                        // Fallback to old behavior if HistoryManager or RouterService not available
+                        window.location.href = href;
+                    }
                     return;
                 }
             }
@@ -251,7 +359,24 @@ class InteractiveManager {
                         e.preventDefault();
                         e.stopPropagation();
                         const url = match[1];
-                        window.location.href = url;
+                        
+                        // Use HistoryManager if available
+                        if (this.historyManager && this.routerService) {
+                            try {
+                                const { moduleId, hash } = this.routerService.parseUrl(url);
+                                if (moduleId) {
+                                    this.historyManager.navigate(moduleId, hash);
+                                } else {
+                                    window.location.href = url;
+                                }
+                            } catch (error) {
+                                console.error('[InteractiveManager] Navigation error:', error);
+                                window.location.href = url;
+                            }
+                        } else {
+                            // Fallback to old behavior if HistoryManager or RouterService not available
+                            window.location.href = url;
+                        }
                     }
                 }
             }

@@ -8,8 +8,33 @@
  */
 
 class ScrollManager {
-    constructor(moduleId) {
+    constructor(moduleId, historyManager = null) {
         this.moduleId = moduleId;
+        this.historyManager = historyManager;
+        // RouterService will be lazily initialized when needed
+        this._routerService = null;
+    }
+
+    /**
+     * Get RouterService instance (lazy initialization)
+     * @returns {RouterService|null} RouterService instance or null if not available
+     */
+    get routerService() {
+        if (this._routerService === null) {
+            // Check if RouterService is available
+            if (typeof RouterService !== 'undefined') {
+                try {
+                    this._routerService = new RouterService();
+                } catch (error) {
+                    console.error('[ScrollManager] Failed to create RouterService:', error);
+                    this._routerService = false; // Mark as failed to avoid retrying
+                }
+            } else {
+                console.warn('[ScrollManager] RouterService not available. Make sure RouterService.js is loaded before ScrollManager.js');
+                this._routerService = false; // Mark as not available
+            }
+        }
+        return this._routerService || null;
     }
 
     /**
@@ -30,10 +55,13 @@ class ScrollManager {
         const handleNavClick = (e) => {
             const navSubItem = e.target.closest('.nav-sub-item');
             if (navSubItem) {
-                let anchor = navSubItem.getAttribute('data-anchor');
+                let anchor = navSubItem.getAttribute('data-anchor') || navSubItem.getAttribute('data-spa-hash');
                 const href = navSubItem.getAttribute('href');
                 
-                // If no data-anchor, extract from href
+                // Check for SPA route attributes first (new format)
+                const spaRoute = navSubItem.getAttribute('data-spa-route');
+                
+                // If no data-anchor, extract from href or data-spa-hash
                 if (!anchor && href && href.includes('#')) {
                     anchor = '#' + href.split('#')[1];
                 }
@@ -43,7 +71,7 @@ class ScrollManager {
                     anchor = '#' + anchor;
                 }
                 
-                if (anchor && href) {
+                if (anchor && (href || spaRoute)) {
                     // Determine which week we're currently on
                     const currentWeek = this.moduleId; // 'week-2', 'week-3', 'week-4', 'week-5', etc.
                     const isOnAnchorScrollingPage = currentWeek === 'week-2' || 
@@ -52,21 +80,37 @@ class ScrollManager {
                                                    currentWeek === 'week-5';
                     
                     // Determine which week the link points to
-                    const linkPointsToWeek2 = href.includes('week2.html');
-                    const linkPointsToWeek3 = href.includes('week3.html');
-                    const linkPointsToWeek4 = href.includes('week4.html');
-                    const linkPointsToWeek5 = href.includes('week5.html');
-                    const linkIsOnlyAnchor = href.startsWith('#');
-                    
-                    // Map link to module ID
+                    // Prefer data-spa-route if available, otherwise parse from href
                     let linkWeekModuleId = null;
-                    if (linkPointsToWeek2) linkWeekModuleId = 'week-2';
-                    else if (linkPointsToWeek3) linkWeekModuleId = 'week-3';
-                    else if (linkPointsToWeek4) linkWeekModuleId = 'week-4';
-                    else if (linkPointsToWeek5) linkWeekModuleId = 'week-5';
-                    else if (linkIsOnlyAnchor) {
-                        // If link is only an anchor, assume it's for the current page
-                        linkWeekModuleId = currentWeek;
+                    if (spaRoute) {
+                        linkWeekModuleId = spaRoute;
+                    } else if (href) {
+                        const linkPointsToWeek2 = href.includes('week2.html');
+                        const linkPointsToWeek3 = href.includes('week3.html');
+                        const linkPointsToWeek4 = href.includes('week4.html');
+                        const linkPointsToWeek5 = href.includes('week5.html');
+                        const linkIsOnlyAnchor = href.startsWith('#');
+                        
+                        // Map link to module ID
+                        if (linkPointsToWeek2) linkWeekModuleId = 'week-2';
+                        else if (linkPointsToWeek3) linkWeekModuleId = 'week-3';
+                        else if (linkPointsToWeek4) linkWeekModuleId = 'week-4';
+                        else if (linkPointsToWeek5) linkWeekModuleId = 'week-5';
+                        else if (linkIsOnlyAnchor) {
+                            // If link is only an anchor, assume it's for the current page
+                            linkWeekModuleId = currentWeek;
+                        } else {
+                            // Try parsing with RouterService if available
+                            if (this.routerService) {
+                                try {
+                                    const parsed = this.routerService.parseUrl(href);
+                                    linkWeekModuleId = parsed.moduleId;
+                                } catch (error) {
+                                    console.warn('[ScrollManager] Failed to parse URL with RouterService:', error);
+                                    // Fallback: continue without parsing
+                                }
+                            }
+                        }
                     }
                     
                     // Only handle anchor scrolling if:
@@ -96,10 +140,25 @@ class ScrollManager {
                             document.body.style.overflow = '';
                         }
                     } else {
-                        // Different week or not an anchor scrolling page - allow normal navigation
-                        console.log('[ScrollManager] ⏭️ Allowing normal navigation. Current:', currentWeek, 'Link:', linkWeekModuleId, 'href:', href);
-                        // Don't prevent default - let the browser navigate normally
-                        // The hash will be handled when the target page loads
+                        // Different week or not an anchor scrolling page - use HistoryManager for SPA navigation
+                        e.preventDefault();
+                        e.stopPropagation();
+                        
+                        console.log('[ScrollManager] ⏭️ Navigating to different week. Current:', currentWeek, 'Link:', linkWeekModuleId, 'href:', href);
+                        
+                        // Use HistoryManager if available
+                        if (this.historyManager && linkWeekModuleId) {
+                            try {
+                                this.historyManager.navigate(linkWeekModuleId, anchor || null);
+                            } catch (error) {
+                                console.error('[ScrollManager] Navigation error:', error);
+                                // Fallback to normal navigation on error
+                                window.location.href = href;
+                            }
+                        } else {
+                            // Fallback to normal navigation if HistoryManager not available
+                            window.location.href = href;
+                        }
                     }
                 }
             }

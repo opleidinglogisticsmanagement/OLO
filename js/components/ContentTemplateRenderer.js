@@ -14,7 +14,7 @@ class ContentTemplateRenderer {
      */
     renderModuleIntro(moduleTitle, moduleSubtitle) {
         return `
-            <section class="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-4 sm:p-6 hover-lift transition-colors duration-200">
+            <section class="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-4 sm:p-6 hover-lift transition-colors duration-200 mb-6 sm:mb-8">
                 <div class="flex flex-col sm:flex-row items-start">
                     <!-- Icon above title on mobile, beside on desktop -->
                     <div class="w-10 h-10 sm:w-12 sm:h-12 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center flex-shrink-0 mb-3 sm:mb-0 sm:mr-4">
@@ -122,3 +122,4 @@ if (typeof module !== 'undefined' && module.exports) {
 } else {
     window.ContentTemplateRenderer = ContentTemplateRenderer;
 }
+

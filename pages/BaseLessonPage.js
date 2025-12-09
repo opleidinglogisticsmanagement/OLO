@@ -28,6 +28,7 @@ class BaseLessonPage {
         this.imageModalManager = new ImageModalManager();
         this.interactiveManager = new InteractiveManager(moduleId);
         this.videoManager = new VideoManager();
+        this.tableCopyManager = new TableCopyManager();
         this.navigationService = new NavigationService();
         this.contentTemplateRenderer = new ContentTemplateRenderer();
         this.navigationRenderer = new NavigationRenderer(this.navigationService, moduleId);
@@ -128,6 +129,7 @@ class BaseLessonPage {
         this.imageModalManager.init();
         this.interactiveManager.init();
         this.videoManager.init();
+        this.tableCopyManager.init();
     }
 }
 

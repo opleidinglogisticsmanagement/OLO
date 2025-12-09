@@ -86,7 +86,8 @@ class ContentRenderer {
         }
 
         if (Array.isArray(item.text)) {
-            return item.text.map(textItem => {
+            // Join all text items first, then process for table copy buttons
+            const joinedHtml = item.text.map(textItem => {
                 const trimmedText = textItem.trim();
                 // Als text begint met HTML tag, render direct
                 if (trimmedText.startsWith('<')) {
@@ -95,13 +96,76 @@ class ContentRenderer {
                 // Anders wrap in <p> tag
                 return `<p class="text-gray-700 dark:text-gray-300 mb-4">${textItem}</p>`;
             }).join('');
+            
+            // Process the joined HTML for table copy buttons
+            return this.processTableWithCopyButton(joinedHtml);
         } else {
             const trimmedText = String(item.text).trim();
             if (trimmedText.startsWith('<')) {
-                return trimmedText;
+                return this.processTableWithCopyButton(trimmedText);
             }
             return `<p class="text-gray-700 dark:text-gray-300 mb-4">${item.text}</p>`;
         }
+    }
+
+    /**
+     * Process HTML content to add copy buttons for tables with h3 titles
+     * @param {string} html - HTML string to process
+     * @returns {string} Processed HTML with copy buttons
+     */
+    static processTableWithCopyButton(html) {
+        // Check if this HTML contains an h3 tag - if not, return as is
+        if (!html.includes('<h3')) {
+            return html;
+        }
+        
+        // Pattern to match: <h3...>title</h3> followed by <div...overflow-x-auto...><table...>
+        // This pattern handles whitespace, newlines, and attributes flexibly
+        // The pattern looks for h3, then optional whitespace, then div with overflow-x-auto class, then table
+        const pattern = /<h3([^>]*)>([^<]+)<\/h3>[\s\n]*(<div[^>]*class="[^"]*overflow-x-auto[^"]*"[^>]*>[\s\n]*<table([^>]*)>)/gi;
+        
+        let processedHtml = html;
+        let match;
+        let tableCounter = 0;
+        const replacements = [];
+        
+        // Find all matches and collect replacement data
+        while ((match = pattern.exec(html)) !== null) {
+            tableCounter++;
+            const tableId = `copyable-table-${Date.now()}-${tableCounter}`;
+            const fullMatch = match[0];
+            const h3Attrs = match[1];
+            const h3Text = match[2];
+            const divAndTable = match[3];
+            const tableAttrs = match[4];
+            
+            // Create replacement with flex container for h3 and button
+            // Note: h3Attrs already contains the classes, so we keep them
+            const replacement = `<div class="flex items-center justify-between mb-4">
+                    <h3${h3Attrs}>${h3Text}</h3>
+                    <button 
+                        class="copy-table-btn ml-4 px-4 py-2 bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300 rounded-md text-sm font-medium transition-colors flex items-center space-x-2 flex-shrink-0" 
+                        data-table-id="${tableId}"
+                        aria-label="Kopieer tabel"
+                        title="Kopieer tabel naar klembord">
+                        <i class="fas fa-copy"></i>
+                        <span class="hidden sm:inline">Kopieer tabel</span>
+                    </button>
+                </div>
+                ${divAndTable.replace(/<table([^>]*)>/, `<table$1 id="${tableId}">`)}`;
+            
+            replacements.push({
+                original: fullMatch,
+                replacement: replacement
+            });
+        }
+        
+        // Apply replacements in reverse order to maintain string indices
+        for (let i = replacements.length - 1; i >= 0; i--) {
+            processedHtml = processedHtml.replace(replacements[i].original, replacements[i].replacement);
+        }
+        
+        return processedHtml;
     }
 
     /**

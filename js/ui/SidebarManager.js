@@ -3,7 +3,7 @@
  * 
  * Beheert alle sidebar-gerelateerde functionaliteit:
  * - Mobile menu open/close
- * - Week 2/3/4/5 submenu expand/collapse
+ * - Week 2/3/4/5/6 submenu expand/collapse
  * - Nav link click handling (sluit sidebar op mobile)
  */
 
@@ -22,6 +22,7 @@ class SidebarManager {
         this.setupWeek3Submenu();
         this.setupWeek4Submenu();
         this.setupWeek5Submenu();
+        this.setupWeek6Submenu();
     }
 
     /**
@@ -244,6 +245,56 @@ class SidebarManager {
         week5Link.addEventListener('click', (e) => {
             // Only prevent if clicking the chevron (handled above)
             if (e.target === chevron || chevron.contains(e.target)) {
+                e.preventDefault();
+                e.stopPropagation();
+            }
+            // Otherwise, allow normal navigation
+        });
+    }
+
+    /**
+     * Setup Week 6 submenu expand/collapse functionality
+     */
+    setupWeek6Submenu() {
+        const week6NavItem = document.querySelector('.week-6-nav-item');
+        if (!week6NavItem) return;
+        
+        const week6Link = week6NavItem.querySelector('a');
+        const subItemsContainer = document.getElementById('week-6-subitems');
+        const chevron = document.getElementById('week-6-chevron');
+        
+        if (!week6Link || !subItemsContainer || !chevron) return;
+        
+        // Check if we're on Week 6 page - if so, expand by default
+        const isWeek6Page = this.moduleId === 'week-6';
+        if (isWeek6Page) {
+            subItemsContainer.classList.remove('hidden');
+            chevron.classList.add('rotate-180');
+        }
+        
+        // Toggle submenu only when clicking the chevron icon
+        chevron.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            const isHidden = subItemsContainer.classList.contains('hidden');
+            
+            if (isHidden) {
+                subItemsContainer.classList.remove('hidden');
+                chevron.classList.add('rotate-180');
+            } else {
+                subItemsContainer.classList.add('hidden');
+                chevron.classList.remove('rotate-180');
+            }
+        });
+        
+        // Prevent navigation when clicking the chevron, allow normal navigation otherwise
+        week6Link.addEventListener('click', (e) => {
+            // Check if click is on chevron (the <i> element with fa-chevron-down class)
+            const clickedChevron = e.target === chevron || 
+                                   (e.target.tagName === 'I' && e.target.id === 'week-6-chevron') ||
+                                   (e.target.classList && e.target.classList.contains('fa-chevron-down'));
+            
+            if (clickedChevron) {
                 e.preventDefault();
                 e.stopPropagation();
             }

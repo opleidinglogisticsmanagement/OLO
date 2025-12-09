@@ -93,10 +93,22 @@
           {
             "label": "Het survey-onderzoek",
             "content": [
-              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">In de context van Logistieke Onderzoeken laat het woord Survey zich Een survey-onderzoek kan worden ingezet bij grote aantallen willekeurig gekozen onderzoekseenheden waarbij een breed overzicht wordt vereist. Het survey-onderzoek focust dus op de breedte en generaliseerbaarheid. Vaak worden verkregen resultaten kwantitatief verwerkt. Een survey-onderzoek is dus ook vaak kwantitatief van aard. In de kennisclip vindt je een uitgebreidere toelichting op het survey-onderzoek.</p>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">In de context van Logistieke Onderzoeken laat het woord Survey zich Een survey-onderzoek kan worden ingezet bij grote aantallen willekeurig gekozen onderzoekseenheden waarbij een breed overzicht wordt vereist. Het survey-onderzoek focust dus op de breedte en generaliseerbaarheid. Vaak worden verkregen resultaten kwantitatief verwerkt. Een survey-onderzoek is dus ook vaak kwantitatief van aard.</p>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">In de kennisclip vindt je een uitgebreidere toelichting op het survey-onderzoek, waarbij de kenmerken van een surveyonderzoek, de varianten van een survey onderzoek (cross-sectioneel onderzoek, panelonderzoek, tijdsreeksonderzoek/longitudinaal onderzoek) en de voor- en nadelen van een survey worden besproken.</p>",
               {
                 "type": "video",
                 "url": "https://media.windesheim.nl/Mediasite/Play/9fd33a5ba2cd480aa94dff6b6b227a891d"
+              }
+            ]
+          },
+          {
+            "label": "Casestudy",
+            "content": [
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">De casestudy is in meerdere opzichten de tegenpool van het survey-onderzoek. De casestudy is een onderzoeksstrategie waarbij getracht wordt om diepgaand en integraal inzicht te krijgen in één of enkele objecten of processen. Dit kan een groep werknemers zijn, verschillende transporttrajecten, de locatiekeuze van producten in een warehouse of een productielijn.</p>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">In de kennisclip vind je verdere belangrijke informatie over de casestudy, waarbij de kenmerken van de casestudy, de varianten van de casestudy (enkelvoudige casestudy, vergelijkende casestudy die bestaat uit een hiërarchische en sequentiële casestudy) en de voor- en nadelen worden besproken.</p>",
+              {
+                "type": "video",
+                "url": "https://media.windesheim.nl/Mediasite/Play/ca2da9eee66e4475bde331e54b2bf89e1d"
               }
             ]
           },
@@ -105,8 +117,151 @@
             "content": [
               "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Een experimentele onderzoeksstrategie kan gebruikt worden in een evaluatieonderzoek. Bijvoorbeeld als je van bepaald beleid wilt vaststellen wat de effectiviteit is. Of je wilt onderzoeken wat de effecten zijn van een reorganisatie op de productiviteit van werknemers. Het experiment kan ook ingezet worden om erachter te komen wat de meest geschikte werkprocedures in een organisatie zijn.</p>"
             ]
+          },
+          {
+            "label": "Gefundeerde theoriebenadering",
+            "content": [
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">De gefundeerde theoriebenadering, ook bekend als Grounded Theory, is een kwalitatieve onderzoeksmethodologie die gericht is op het systematisch ontwikkelen van theorieën in plaats van gebruik te maken van bestaande theoretische kaders. De gefundeerde theoriebenadering wordt vaak toegepast in diverse disciplines, zoals managementwetenschappen. Het biedt een flexibele en krachtige methode om verregaande inzichten te verkrijgen in complexe sociale fenomenen en processen binnen organisaties.</p>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">In de logistiek kan de gefundeerde theoriebenadering waardevol zijn bij het onderzoeken van bijvoorbeeld de optimalisatie van magazijnoperaties. Jij als onderzoeker kunt interviews houden met magazijnmedewerkers, logistiek managers en andere stakeholders om goed begrip te krijgen van de dagelijkse operationele uitdagingen, de complexiteit van de besluitvorming en de factoren die van invloed zijn op de efficiëntie. Door analyse van deze data kunnen nieuwe theoretische inzichten ontstaan over hoe magazijnoperaties kunnen worden verbeterd.</p>"
+            ]
+          },
+          {
+            "label": "Bureauonderzoek",
+            "content": [
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Bureauonderzoek, ook bekend als literatuuronderzoek, documentanalyse, of desk research, is een onderzoeksmethode waarbij onderzoekers gebruikmaken van bestaande bronnen en documenten om informatie te verzamelen en analyseren. In tegenstelling tot veldonderzoek, vereist bureauonderzoek geen directe interactie met de onderzoekseenheid, maar wordt er vertrouwd op secundaire gegevens. Je hebt bij dit type onderzoek geen contact met het onderzoeksobject.</p>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Bureauonderzoek biedt onderzoekers een kostenefficiënte manier om informatie te verkrijgen en een solide basis te leggen voor verdere analyse. Het is een veelgebruikte methode in verschillende disciplines, waaronder wetenschappelijk onderzoek, bedrijfsanalyse en beleidsevaluatie.</p>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">In de logistiek kan bureauonderzoek worden toegepast bij de optimalisatie van supply chain processen. Onderzoekers kunnen literatuur raadplegen, zoals wetenschappelijke artikelen en industriële rapporten, om best practices te identificeren die gerelateerd zijn aan het stroomlijnen van voorraadbeheer, transport en distributie. Documentanalyse van eerdere supply chain strategieën en rapporten kan waardevolle inzichten bieden in succesvolle benaderingen, risico's en uitdagingen. Dit bureauonderzoek vormt de basis voor verdere besluitvorming en strategische planning in supply chain-optimalisatie.</p>"
+            ]
           }
         ]
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Nadat je hebt kennisgemaakt met de kernbeslissingen die gemaakt moeten worden bij het bepalen van de onderzoeksstrategieën kun je een keuze maken voor een onderzoekstrategie. Vanuit die kernbeslissingen en de onderzoekstrategie is het mogelijk om te beginnen met het dataverzamelingsplan. Daarover gaat het volgende stuk.</p>",
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Hieronder zie je in een tabel welke methoden bij Procesmanagement en Project Procesverbetering zijn behandeld. Deze keuzes werden vastgelegd in een dataverzamelingsplan of een meetplan.</p>"
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "<div class=\"overflow-x-auto mb-6\">",
+          "<table class=\"min-w-full border border-gray-300 rounded-lg\">",
+          "<thead class=\"bg-gray-100\">",
+          "<tr>",
+          "<th class=\"border border-gray-300 dark:border-gray-600 px-4 py-3 text-left text-sm font-semibold text-gray-900 dark:text-white\">Methoden</th>",
+          "<th class=\"border border-gray-300 dark:border-gray-600 px-4 py-3 text-left text-sm font-semibold text-gray-900 dark:text-white\">Vormen</th>",
+          "<th class=\"border border-gray-300 dark:border-gray-600 px-4 py-3 text-left text-sm font-semibold text-gray-900 dark:text-white\">Wanneer?</th>",
+          "</tr>",
+          "</thead>",
+          "<tbody>",
+          "<tr>",
+          "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700 dark:text-gray-300 font-medium\">Interview</td>",
+          "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700 dark:text-gray-300\">(semi) gestructureerd (Vragenlijst)<br>Ongestructureerd</td>",
+          "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700 dark:text-gray-300\">Geschikt voor verkennen van procesverloop of inventariseren factoren die van invloed zijn op de procesprestatie.</td>",
+          "</tr>",
+          "<tr>",
+          "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700 dark:text-gray-300 font-medium\">Observatie</td>",
+          "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700 dark:text-gray-300\">Gemba walk, Procesobservatie (formulier)</td>",
+          "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700 dark:text-gray-300\">Geschikt voor het in kaart brengen van het procesverloop en de current state.</td>",
+          "</tr>",
+          "<tr>",
+          "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700 dark:text-gray-300 font-medium\">Metingen procesprestaties</td>",
+          "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700 dark:text-gray-300\">Turven, Tijdserie analyse (numeriek)</td>",
+          "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700 dark:text-gray-300\">Geschikt voor het in kaart brengen van procesprestaties en het uitvoeren van specifieke metingen.</td>",
+          "</tr>",
+          "<tr>",
+          "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700 dark:text-gray-300 font-medium\">Secundaire data</td>",
+          "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700 dark:text-gray-300\">Bijvoorbeeld: cijfers over procesprestaties, standaardtijden voor handelingen, klantenreviews.</td>",
+          "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700 dark:text-gray-300\">Data die al beschikbaar is vanuit een systeem.</td>",
+          "</tr>",
+          "</tbody>",
+          "</table>",
+          "</div>"
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Dit zijn vrije specifieke vormen. Na het nemen van de drie kernbeslissingen bij het voorbeeld van Leveranciersprestaties en een Service Level Agreement kun je vaststellen dat je voornamelijk gebruik zult maken van secundaire data, data die dus al beschikbaar is vanuit een systeem. Indien je gekozen had voor meer diepgang dan was je waarschijnlijk uitgekomen bij een onderzoeksstrategie die meer focust op de observatie.</p>",
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Naast deze methoden die bij Procesmanagement en Project Procesverbetering zijn behandeld, kunnen op basis van de verschillende onderzoeksstrategieën nog andere methoden en metingen worden toegevoegd aan het dataverzamelingsplan.</p>",
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Bij een <b>survey-onderzoek</b> wordt vaak gebruik gemaakt van vragenlijsten of online surveys om kwantitatieve data te verzamelen bij grote groepen respondenten.</p>",
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Een <b>casestudy</b> kan worden uitgebreid met focusgroepen voor groepsdiscussies of documentanalyse van relevante bedrijfsdocumenten.</p>",
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Bij een <b>experiment</b> kunnen experimentele metingen worden uitgevoerd om effecten te meten, bijvoorbeeld voor- en nametingen of vergelijkingen tussen groepen.</p>",
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">De <b>gefundeerde theoriebenadering</b> maakt vaak gebruik van semi-gestructureerde interviews voor diepgaande dataverzameling.</p>",
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Bij <b>bureauonderzoek</b> wordt naast secundaire data ook gebruik gemaakt van literatuuronderzoek en systematische documentanalyse van wetenschappelijke bronnen en rapporten.</p>"
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "<div class=\"overflow-x-auto mb-6\">",
+          "<table class=\"min-w-full border border-gray-300 rounded-lg\">",
+          "<thead class=\"bg-gray-100\">",
+          "<tr>",
+          "<th class=\"border border-gray-300 dark:border-gray-600 px-4 py-3 text-left text-sm font-semibold text-gray-900 dark:text-white\">Methoden</th>",
+          "<th class=\"border border-gray-300 dark:border-gray-600 px-4 py-3 text-left text-sm font-semibold text-gray-900 dark:text-white\">Vormen</th>",
+          "<th class=\"border border-gray-300 dark:border-gray-600 px-4 py-3 text-left text-sm font-semibold text-gray-900 dark:text-white\">Wanneer?</th>",
+          "<th class=\"border border-gray-300 dark:border-gray-600 px-4 py-3 text-left text-sm font-semibold text-gray-900 dark:text-white\">Gerelateerd aan strategie</th>",
+          "</tr>",
+          "</thead>",
+          "<tbody>",
+          "<tr>",
+          "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700 dark:text-gray-300 font-medium\">Vragenlijst/Survey</td>",
+          "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700 dark:text-gray-300\">Online survey, papieren vragenlijst, telefonische enquête</td>",
+          "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700 dark:text-gray-300\">Geschikt voor het verzamelen van kwantitatieve data bij grote groepen respondenten</td>",
+          "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700 dark:text-gray-300\">Survey-onderzoek</td>",
+          "</tr>",
+          "<tr>",
+          "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700 dark:text-gray-300 font-medium\">Focusgroep</td>",
+          "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700 dark:text-gray-300\">Gestructureerde discussie, brainstorm sessie</td>",
+          "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700 dark:text-gray-300\">Geschikt voor het verkennen van meningen en attitudes in groepsverband</td>",
+          "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700 dark:text-gray-300\">Casestudy, Gefundeerde theoriebenadering</td>",
+          "</tr>",
+          "<tr>",
+          "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700 dark:text-gray-300 font-medium\">Documentanalyse</td>",
+          "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700 dark:text-gray-300\">Analyse van rapporten, procedures, handleidingen, contracten</td>",
+          "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700 dark:text-gray-300\">Geschikt voor het begrijpen van formele processen en afspraken</td>",
+          "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700 dark:text-gray-300\">Casestudy, Bureauonderzoek</td>",
+          "</tr>",
+          "<tr>",
+          "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700 dark:text-gray-300 font-medium\">Experimentele metingen</td>",
+          "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700 dark:text-gray-300\">Voor- en nametingen, vergelijking tussen groepen, pilot testen</td>",
+          "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700 dark:text-gray-300\">Geschikt voor het meten van effecten en causaliteit</td>",
+          "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700 dark:text-gray-300\">Experiment</td>",
+          "</tr>",
+          "<tr>",
+          "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700 dark:text-gray-300 font-medium\">Literatuuronderzoek</td>",
+          "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700 dark:text-gray-300\">Systematische analyse van wetenschappelijke artikelen, rapporten, best practices</td>",
+          "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700 dark:text-gray-300\">Geschikt voor het verzamelen van theoretische kennis en best practices</td>",
+          "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700 dark:text-gray-300\">Bureauonderzoek</td>",
+          "</tr>",
+          "</tbody>",
+          "</table>",
+          "</div>"
+        ]
+      },
+      {
+        "type": "heading",
+        "text": "Het dataverzamelingsplan",
+        "level": 2,
+        "id": "dataverzamelingsplan"
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Wanneer je hebt bepaald welke onderzoeksstrategie je gaat inzetten, ben je natuurlijk nog niet klaar. Je weet nu wat je wilt gaan inzetten en hebt een grof idee wat je wilt gaan doen. Nu is het aan jouw om je onderzoeksplanning (oftewel je dataverzamelingsplan) compleet te gaan maken. Dit plan heb jij ook al gebruikt tijdens de EvE's Project Procesverbetering en Business Case Analysis. Waarom was het dataverzamelingsplan ook alweer zo belangrijk?</p>",
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Het dataverzamelingsplan kent eigenlijk 2 doelen:</p>",
+          "<ol class=\"list-decimal list-outside space-y-2 mb-4 ml-6 pl-4\">",
+          "<li class=\"text-gray-700 dark:text-gray-300 mb-4\">Jij als onderzoeker gaat goed nadenken op welke wijze jij je data gaat verzamelen waarbij je rekening gaat houden met validiteit en betrouwbaarheid ten einde een goed onderbouwd onderzoek uit te voeren.</li>",
+          "<li class=\"text-gray-700 dark:text-gray-300 mb-4\">Door middel van dit plan, kun jij je opdrachtgever exact laten zien wat je plan is, waarbij eventueel ook een inschatting gegeven kan worden in de impact van het dataverzamelingsplan op de input van (specifieke) personen en/of functionarissen in het bedrijf. Denk hierbij bijvoorbeeld aan het uitvoeren van interviews waarbij jij wel tijd van een persoon binnen een organisatie vraagt om geen operationele taken uit te voeren.</li>",
+          "</ol>",
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Vanuit deze doelen is voor jouw als onderzoeker, in de fase van het ontwerpen van je onderzoek, het eerste doel heel belangrijk. Immers, je wilt natuurlijk je bevindingen goed onderbouwen zodat de organisatie er ook het meeste aan heeft. Daarbij spelen de begrippen validiteit en betrouwbaarheid een belangrijke rol. Bekijk hiervoor ook onderstaande kennisclip. De clip gaat in op validiteit en betrouwbaarheid en behandelt verschillende toepassingen.</p>"
+        ]
+      },
+      {
+        "type": "video",
+        "url": "https://media.windesheim.nl/Mediasite/Play/54ebdb1a3a1946aa8b89b496d1b252bc1d"
       }
     ]
   },

@@ -97,7 +97,14 @@ class LayoutRenderer {
                     { id: 'theoretisch-kader-schrijven', title: 'Theoretisch kader schrijven', anchor: '#theoretisch-kader-schrijven' }
                 ]
             },
-            { id: 'week-6', title: 'Week 6', href: 'week6.html' },
+            { 
+                id: 'week-6', 
+                title: 'Week 6', 
+                href: 'week6.html',
+                subItems: [
+                    { id: 'dataverzamelingsplan', title: 'Het dataverzamelingsplan', anchor: '#dataverzamelingsplan' }
+                ]
+            },
             { id: 'week-7', title: 'Week 7', href: 'week7.html' },
             { id: 'register', title: 'Begrippenlijst', href: 'register.html' },
             { id: 'afsluiting', title: 'Afsluiting', href: 'afsluiting.html' }
@@ -110,9 +117,10 @@ class LayoutRenderer {
             const isWeek3 = module.id === 'week-3';
             const isWeek4 = module.id === 'week-4';
             const isWeek5 = module.id === 'week-5';
+            const isWeek6 = module.id === 'week-6';
             
-            // Special handling for Week 2, Week 3, Week 4 and Week 5 with sub-items
-            if (hasSubItems && (isWeek2 || isWeek3 || isWeek4 || isWeek5)) {
+            // Special handling for Week 2, Week 3, Week 4, Week 5 and Week 6 with sub-items
+            if (hasSubItems && (isWeek2 || isWeek3 || isWeek4 || isWeek5 || isWeek6)) {
                 const subItemsHtml = module.subItems.map(subItem => {
                     const isSubCurrent = window.location.hash === subItem.anchor || 
                                         (isCurrent && window.location.hash === subItem.anchor);
@@ -145,6 +153,10 @@ class LayoutRenderer {
                     navItemClass = 'week-5-nav-item';
                     chevronId = 'week-5-chevron';
                     subItemsId = 'week-5-subitems';
+                } else if (isWeek6) {
+                    navItemClass = 'week-6-nav-item';
+                    chevronId = 'week-6-chevron';
+                    subItemsId = 'week-6-subitems';
                 }
                 
                 return `

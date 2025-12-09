@@ -45,17 +45,19 @@ class ScrollManager {
                 
                 if (anchor && href) {
                     // Determine which week we're currently on
-                    const currentWeek = this.moduleId; // 'week-2', 'week-3', 'week-4', 'week-5', etc.
+                    const currentWeek = this.moduleId; // 'week-2', 'week-3', 'week-4', 'week-5', 'week-6', etc.
                     const isOnAnchorScrollingPage = currentWeek === 'week-2' || 
                                                    currentWeek === 'week-3' || 
                                                    currentWeek === 'week-4' || 
-                                                   currentWeek === 'week-5';
+                                                   currentWeek === 'week-5' ||
+                                                   currentWeek === 'week-6';
                     
                     // Determine which week the link points to
                     const linkPointsToWeek2 = href.includes('week2.html');
                     const linkPointsToWeek3 = href.includes('week3.html');
                     const linkPointsToWeek4 = href.includes('week4.html');
                     const linkPointsToWeek5 = href.includes('week5.html');
+                    const linkPointsToWeek6 = href.includes('week6.html');
                     const linkIsOnlyAnchor = href.startsWith('#');
                     
                     // Map link to module ID
@@ -64,6 +66,7 @@ class ScrollManager {
                     else if (linkPointsToWeek3) linkWeekModuleId = 'week-3';
                     else if (linkPointsToWeek4) linkWeekModuleId = 'week-4';
                     else if (linkPointsToWeek5) linkWeekModuleId = 'week-5';
+                    else if (linkPointsToWeek6) linkWeekModuleId = 'week-6';
                     else if (linkIsOnlyAnchor) {
                         // If link is only an anchor, assume it's for the current page
                         linkWeekModuleId = currentWeek;
@@ -126,8 +129,8 @@ class ScrollManager {
                 return; // Exit early if no hash
             }
             
-            // Only handle hash scrolling for week-2, week-3, week-4, week-5
-            if (this.moduleId === 'week-2' || this.moduleId === 'week-3' || this.moduleId === 'week-4' || this.moduleId === 'week-5') {
+            // Only handle hash scrolling for week-2, week-3, week-4, week-5, week-6
+            if (this.moduleId === 'week-2' || this.moduleId === 'week-3' || this.moduleId === 'week-4' || this.moduleId === 'week-5' || this.moduleId === 'week-6') {
                 const element = document.querySelector(hash);
                 
                 if (element) {
@@ -146,7 +149,8 @@ class ScrollManager {
                         id.includes('probleem') || id.includes('doelstelling') || 
                         id.includes('opdrachtgever') || id.includes('vormen') ||
                         id.includes('definieren') || id.includes('literatuur') ||
-                        id.includes('selecteren') || id.includes('slim') || id.includes('theoretisch')
+                        id.includes('selecteren') || id.includes('slim') || id.includes('theoretisch') ||
+                        id.includes('kernbeslissingen') || id.includes('onderzoekstrategie') || id.includes('dataverzamelingsplan')
                     );
                     console.log('[ScrollManager] Available relevant IDs:', relevantIds);
                 }
@@ -182,8 +186,8 @@ class ScrollManager {
         console.log('[ScrollManager] scrollToAnchor called with:', anchorId, 'on module:', this.moduleId);
         
         // Try multiple times in case content is still loading
-        // Week 2 and 3 may need more retries due to async content loading
-        const maxAttempts = (this.moduleId === 'week-2' || this.moduleId === 'week-3') ? 20 : 15;
+        // Week 2, 3, and 6 may need more retries due to async content loading
+        const maxAttempts = (this.moduleId === 'week-2' || this.moduleId === 'week-3' || this.moduleId === 'week-6') ? 20 : 15;
         
         const attemptScroll = (attempts = 0) => {
             const element = document.querySelector(anchorId);
@@ -266,8 +270,8 @@ class ScrollManager {
                 
             } else if (attempts < maxAttempts) {
                 // Retry if element not found yet (content might still be loading)
-                // Use increasing delay for retries, with longer initial delay for week 2/3
-                const baseDelay = (this.moduleId === 'week-2' || this.moduleId === 'week-3') ? 200 : 100;
+                // Use increasing delay for retries, with longer initial delay for week 2/3/6
+                const baseDelay = (this.moduleId === 'week-2' || this.moduleId === 'week-3' || this.moduleId === 'week-6') ? 200 : 100;
                 const delay = Math.min(baseDelay * (attempts + 1), 2000); // Max 2 seconds between attempts
                 console.log(`[ScrollManager] ⏳ Element not found, retrying in ${delay}ms... (attempt ${attempts + 1}/${maxAttempts})`);
                 setTimeout(() => attemptScroll(attempts + 1), delay);
@@ -280,7 +284,8 @@ class ScrollManager {
                     id.includes('opdrachtgever') || id.includes('vormen') ||
                     id.includes('definieren') || id.includes('literatuur') ||
                     id.includes('selecteren') || id.includes('slim') || id.includes('theoretisch') ||
-                    id.includes('onderzoeksmodel') || id.includes('onderzoeksvragen') || id.includes('ai-onderzoeksassistent')
+                    id.includes('onderzoeksmodel') || id.includes('onderzoeksvragen') || id.includes('ai-onderzoeksassistent') ||
+                    id.includes('kernbeslissingen') || id.includes('onderzoekstrategie') || id.includes('dataverzamelingsplan')
                 );
                 console.log('[ScrollManager] Available relevant IDs:', relevantIds);
                 console.log('[ScrollManager] All IDs on page:', availableIds);
@@ -288,8 +293,8 @@ class ScrollManager {
         };
         
         // Start attempt with a small delay to ensure DOM is ready
-        // Week 2 and 3 may need a longer initial delay due to async content loading
-        const initialDelay = (this.moduleId === 'week-2' || this.moduleId === 'week-3') ? 100 : 0;
+        // Week 2, 3, and 6 may need a longer initial delay due to async content loading
+        const initialDelay = (this.moduleId === 'week-2' || this.moduleId === 'week-3' || this.moduleId === 'week-6') ? 100 : 0;
         if (initialDelay > 0) {
             setTimeout(() => attemptScroll(), initialDelay);
         } else {

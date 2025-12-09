@@ -102,6 +102,8 @@ class LayoutRenderer {
                 title: 'Week 6', 
                 href: 'week6.html',
                 subItems: [
+                    { id: 'kernbeslissingen', title: 'Kernbeslissingen', anchor: '#kernbeslissingen' },
+                    { id: 'onderzoekstrategie', title: 'Onderzoekstrategie', anchor: '#onderzoekstrategie' },
                     { id: 'dataverzamelingsplan', title: 'Het dataverzamelingsplan', anchor: '#dataverzamelingsplan' }
                 ]
             },

@@ -17,9 +17,7 @@
       {
         "type": "paragraph",
         "text": [
-          "The final step - Fase 04 Onderzoekstechnisch ontwerp",
-          "",
-          "Van het onderzoeksplan is nu de probleemstelling, doelstelling, onderzoeksmodel, onderzoeksvragen, begripsbepaling en het theoretisch kader doorlopen. Het is nog niet af, want er kunnen altijd nog wijzigingen gemaakt worden op basis van voortschrijdend inzicht (itereren). Na fase 1, 2 en 3 komt fase 4 het onderzoekstechnisch ontwerp. Hieronder ook weer even kort weergegeven vanuit het raamwerk: het opzetten van een onderzoek."
+          "Van het onderzoeksplan is nu de probleemstelling, doelstelling, onderzoeksmodel, onderzoeksvragen, begripsbepaling en het theoretisch kader doorlopen. Het is nog niet af, want er kunnen altijd nog wijzigingen gemaakt worden op basis van voortschrijdend inzicht (itereren). Fase 1 en 2 zijn dus min of meer afgerond. Fase 3 is bijna afgerond. In deze fase moet nog de onderzoekstrategie vastgesteld worden. Hieronder ook weer even kort weergegeven vanuit het raamwerk: het opzetten van een onderzoek."
         ]
       },
       {
@@ -29,11 +27,15 @@
         "enableModal": true
       },
       {
+        "type": "heading",
+        "text": "Kernbeslissingen",
+        "level": 2,
+        "id": "kernbeslissingen"
+      },
+      {
         "type": "paragraph",
         "text": [
-          "De eerste stap van het onderzoekstechnisch ontwerp is het bepalen van de onderzoeksstrategie.",
-          "",
-          "Het bepalen van de onderzoekstrategie gebeurt eerst in hoofdlijnen en daarvoor moeten drie kernbeslissingen genomen worden. Deze worden hieronder in een kennisclip verder toegelicht."
+          "Om de laatste stap van Fase 3 het Literatuuronderzoek af te ronden moet er een onderzoekstrategie komen. Het bepalen van de onderzoekstrategie gebeurt eerst in hoofdlijnen met behulp van drie kernbeslissingen. Deze worden hieronder in een kennisclip verder toegelicht."
         ]
       },
       {
@@ -64,6 +66,12 @@
         ]
       },
       {
+        "type": "heading",
+        "text": "Onderzoekstrategie",
+        "level": 2,
+        "id": "onderzoekstrategie"
+      },
+      {
         "type": "paragraph",
         "text": [
           "Na het maken van de drie kernbeslissingen kun je het onderzoek in een volgende stap concreter gaan maken. Je hebt nu namelijk helder wat je gaat onderzoeken, hoe je dat gaat onderzoeken en hoe je de resultaten gaat verwerken. Het concreter maken van het onderzoek kan nu door specifieke onderzoeksstrategie te kiezen."
@@ -72,19 +80,7 @@
       {
         "type": "paragraph",
         "text": [
-          "Bij Logistieke Onderzoeken gaan we dus nu niet direct een dataverzamelingsplan opstellen. Tussen de drie kernbeslissingen en het dataverzamelingsplan zit nog het vaststellen van je daadwerkelijke onderzoeksstrategie. Als onderzoeker is het van belang om te bepalen met welk type onderzoek je te werk wilt gaan. Daarom behandelen we hieronder vijf algemene onderzoeksstrategieën. Sommige strategieën zullen we bij (praktijkgerichte) logistieke onderzoeken sneller gebruiken dan andere, maar we noemen wel alle vijf de mogelijkheden. Het is namelijk niet zo dat een specifieke strategie op voorhand uitgesloten is. Het zijn de onderstaande vijf strategieën:"
-        ]
-      },
-      {
-        "type": "paragraph",
-        "text": [
-          "<ol class=\"list-decimal list-outside space-y-2 mb-4 ml-6 pl-4\">",
-          "<li class=\"text-gray-700 dark:text-gray-300\">Survey-onderzoek</li>",
-          "<li class=\"text-gray-700 dark:text-gray-300\">Experiment</li>",
-          "<li class=\"text-gray-700 dark:text-gray-300\">Casestudy</li>",
-          "<li class=\"text-gray-700 dark:text-gray-300\">Gefundeerde theoriebenadering</li>",
-          "<li class=\"text-gray-700 dark:text-gray-300\">Bureauonderzoek</li>",
-          "</ol>"
+          "Bij Logistieke Onderzoeken gaan we dus nu niet direct een dataverzamelingsplan opstellen. Tussen de drie kernbeslissingen en het dataverzamelingsplan zit nog het vaststellen van je daadwerkelijke onderzoeksstrategie. Als onderzoeker is het van belang om te bepalen met welk type onderzoek je te werk wilt gaan. Daarom behandelen we hieronder vijf algemene onderzoeksstrategieën."
         ]
       },
       {
@@ -138,7 +134,7 @@
       {
         "type": "paragraph",
         "text": [
-          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Nadat je hebt kennisgemaakt met de kernbeslissingen die gemaakt moeten worden bij het bepalen van de onderzoeksstrategieën kun je een keuze maken voor een onderzoekstrategie. Vanuit die kernbeslissingen en de onderzoekstrategie is het mogelijk om te beginnen met het dataverzamelingsplan. Daarover gaat het volgende stuk.</p>",
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Nu je een kernbeslissing kunt nemen en ook je onderzoeksstrategie kunt kiezen, is het mogelijk om te beginnen met je dataverzamelingsplan. Daarover gaat het volgende stuk.</p>",
           "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Hieronder zie je in een tabel welke methoden bij Procesmanagement en Project Procesverbetering zijn behandeld. Deze keuzes werden vastgelegd in een dataverzamelingsplan of een meetplan.</p>"
         ]
       },
@@ -250,7 +246,8 @@
       {
         "type": "paragraph",
         "text": [
-          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Wanneer je hebt bepaald welke onderzoeksstrategie je gaat inzetten, ben je natuurlijk nog niet klaar. Je weet nu wat je wilt gaan inzetten en hebt een grof idee wat je wilt gaan doen. Nu is het aan jouw om je onderzoeksplanning (oftewel je dataverzamelingsplan) compleet te gaan maken. Dit plan heb jij ook al gebruikt tijdens de EvE's Project Procesverbetering en Business Case Analysis. Waarom was het dataverzamelingsplan ook alweer zo belangrijk?</p>",
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Wanneer je de kernbeslissingen hebt genomen en hebt bepaald welke onderzoeksstrategie je gaat inzetten, ben je natuurlijk nog niet klaar. Je hebt wel fase 3 afgerond en gaat nu naar fase 4: Het onderzoekstechnisch ontwerp.</p>",
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Je weet nu wat je wilt gaan inzetten en hebt een grof idee wat je wilt gaan doen. Nu is het aan jouw om je onderzoeksplanning (oftewel je dataverzamelingsplan) compleet te gaan maken. Dit plan heb jij ook al gebruikt tijdens de EvE's Project Procesverbetering en Business Case Analysis. Waarom was het dataverzamelingsplan ook alweer zo belangrijk?</p>",
           "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Het dataverzamelingsplan kent eigenlijk 2 doelen:</p>",
           "<ol class=\"list-decimal list-outside space-y-2 mb-4 ml-6 pl-4\">",
           "<li class=\"text-gray-700 dark:text-gray-300 mb-4\">Jij als onderzoeker gaat goed nadenken op welke wijze jij je data gaat verzamelen waarbij je rekening gaat houden met validiteit en betrouwbaarheid ten einde een goed onderbouwd onderzoek uit te voeren.</li>",
@@ -262,6 +259,27 @@
       {
         "type": "video",
         "url": "https://media.windesheim.nl/Mediasite/Play/54ebdb1a3a1946aa8b89b496d1b252bc1d"
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Vanuit het doen van goed onderzoek is het dataverzamelingsplan wat je in eerdere modules hebt geleerd aangepast. Zie hiervoor ook het template dataverzamelingsplan welke hieronder is weergegeven.</p>",
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\"><b>Template Dataverzamelingsplan</b> <i>(verschijnt binnenkort)</i></p>",
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Wat zijn de belangrijkste aanpassingen die hierin zijn ten opzichte van eerdere dataverzamelingsplannen?</p>",
+          "<ol class=\"list-decimal list-outside space-y-2 mb-4 ml-6 pl-4\">",
+          "<li class=\"text-gray-700 dark:text-gray-300 mb-4\">Voor iedere methode om data te verzamelen wordt in de eerste 3 kolommen (Groen) een relatie gelegd met het onderzoeksmodel en daarmee met je onderzoek. Dit doe je door de methode van data verzamelen te relateren aan:",
+          "<ol class=\"list-lower-alpha list-outside space-y-2 mb-2 ml-6 pl-4 mt-2\">",
+          "<li class=\"text-gray-700 dark:text-gray-300\">Je hoofdvraag</li>",
+          "<li class=\"text-gray-700 dark:text-gray-300\">De deelvraag waar je deze dataverzamelingsmethode voor in gaat zetten</li>",
+          "<li class=\"text-gray-700 dark:text-gray-300\">Het type onderzoek dat deze datamethode typeert</li>",
+          "</ol>",
+          "</li>",
+          "<li class=\"text-gray-700 dark:text-gray-300 mb-4\">In de kolommen 4-9 (Blauw) ga je beschrijven wat, waarom en hoe je de metingen wilt gaan opzetten</li>",
+          "<li class=\"text-gray-700 dark:text-gray-300 mb-4\">In de laatste kolommen (Oranje) reflecteer je kritisch op de validiteit en betrouwbaarheid van de opzet van je dataverzamelingsmethode. Houd hier ook rekening mee dat jij, omwille van tijd, meestal niet in staat bent om iedere methode op zichzelf staand tot een hoge mate van betrouwbaarheid en validiteit te ontwerpen. Hier kritisch op reflecteren en handvatten benoemen voor het eventueel verhogen van de dataverzamelingsmethode is dan wel gewenst.</li>",
+          "</ol>",
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Met de kennis die je nu hebt, is het natuurlijk van groot (onderzoeks) belang dat je bij het inrichten van je onderzoek bewust stil gaat staan op welke wijze jij er voor gaat zorgen dat je onderzoek valide en betrouwbaar is.</p>",
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Succes met jullie laatste loodjes</p>"
+        ]
       }
     ]
   },

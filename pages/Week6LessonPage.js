@@ -754,6 +754,60 @@ class Week6LessonPage extends BaseLessonPage {
         document.body.innerHTML = this.render();
         this.attachEventListeners();
         
+        // Handle hash in URL after content is loaded and rendered
+        // Wait longer to ensure all content is fully rendered, especially for dynamic content
+        const hash = window.location.hash;
+        if (hash && hash !== '#' && hash.trim() !== '') {
+            console.log(`[Week6LessonPage] Hash detected in URL: ${hash}`);
+            
+            // Multiple attempts with increasing delays to handle async rendering
+            const attemptScroll = (attempt = 1, maxAttempts = 5) => {
+                setTimeout(() => {
+                    const element = document.querySelector(hash);
+                    if (element) {
+                        console.log(`[Week6LessonPage] ✅ Element found for ${hash} (attempt ${attempt})`);
+                        const mainContent = document.getElementById('main-content');
+                        const headerOffset = 100;
+                        
+                        if (mainContent) {
+                            // Calculate scroll position relative to main-content
+                            let scrollPosition = 0;
+                            let currentElement = element;
+                            
+                            while (currentElement && currentElement !== mainContent && currentElement !== document.body) {
+                                scrollPosition += currentElement.offsetTop;
+                                currentElement = currentElement.offsetParent;
+                            }
+                            
+                            const targetScroll = Math.max(0, scrollPosition - headerOffset);
+                            
+                            mainContent.scrollTo({
+                                top: targetScroll,
+                                behavior: 'smooth'
+                            });
+                        } else {
+                            // Fallback to window scroll
+                            const elementRect = element.getBoundingClientRect();
+                            const offsetPosition = elementRect.top + window.pageYOffset - headerOffset;
+                            
+                            window.scrollTo({
+                                top: Math.max(0, offsetPosition),
+                                behavior: 'smooth'
+                            });
+                        }
+                    } else if (attempt < maxAttempts) {
+                        console.log(`[Week6LessonPage] Element not found for ${hash}, retrying (attempt ${attempt}/${maxAttempts})...`);
+                        attemptScroll(attempt + 1, maxAttempts);
+                    } else {
+                        console.warn(`[Week6LessonPage] ⚠️ Element with hash ${hash} not found after ${maxAttempts} attempts`);
+                    }
+                }, 300 * attempt); // Increasing delay: 300ms, 600ms, 900ms, etc.
+            };
+            
+            // Start attempting to scroll after initial render
+            attemptScroll(1);
+        }
+        
         // MC questions are now generated on button click (not automatically)
         // This saves API tokens
     }

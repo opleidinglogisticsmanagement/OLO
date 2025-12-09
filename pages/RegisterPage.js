@@ -58,12 +58,6 @@ class RegisterPage extends BaseLessonPage {
                         <p class="text-gray-600 dark:text-gray-300 mb-4">
                             Hier vind je alle <strong id="term-count">${this.terms.length}</strong> belangrijke begrippen uit de e-learning. Klik op een begrip om direct naar de sectie te navigeren waar dit concept wordt uitgelegd.
                         </p>
-                        <div class="bg-yellow-50 dark:bg-yellow-900/20 border-l-4 border-yellow-500 dark:border-yellow-400 p-3 rounded-r-lg mb-4">
-                            <p class="text-sm text-yellow-800 dark:text-yellow-300">
-                                <i class="fas fa-info-circle mr-2"></i>
-                                <strong>Let op:</strong> Er worden nog begrippen van week 6 en week 7 aan deze lijst toegevoegd.
-                            </p>
-                        </div>
                     </div>
                 </div>
             </section>
@@ -227,12 +221,25 @@ class RegisterPage extends BaseLessonPage {
             });
         });
 
-        // Search input
+        // Search input - ensure it works properly
         const searchInput = document.getElementById('term-search');
         if (searchInput) {
-            searchInput.addEventListener('input', (e) => {
-                this.filterTerms(this.activeLetter, e.target.value);
+            // Store reference to 'this' for use in event handler
+            const self = this;
+            
+            // Remove any existing event listeners by cloning and replacing
+            const newSearchInput = searchInput.cloneNode(true);
+            if (searchInput.parentNode) {
+                searchInput.parentNode.replaceChild(newSearchInput, searchInput);
+            }
+            
+            // Add event listener - filter on every input change
+            newSearchInput.addEventListener('input', function(e) {
+                const searchValue = e.target.value.trim();
+                self.filterTerms(self.activeLetter, searchValue);
             });
+        } else {
+            console.error('Search input element (term-search) not found!');
         }
     }
 

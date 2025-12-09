@@ -376,6 +376,294 @@
       "anchor": "#slim-bronnen-beheren",
       "week": "Week 5"
     }
+  },
+  {
+    "term": "Betrouwbaarheid",
+    "description": "De mate waarin een onderzoek reproduceerbare en consistente resultaten oplevert. Een betrouwbaar onderzoek levert bij herhaling onder dezelfde omstandigheden vergelijkbare uitkomsten op. Dit is een belangrijk criterium bij het opstellen van een dataverzamelingsplan.",
+    "location": {
+      "page": "week6.html",
+      "anchor": "#dataverzamelingsplan",
+      "week": "Week 6"
+    }
+  },
+  {
+    "term": "Bureauonderzoek",
+    "description": "Een onderzoeksmethode waarbij gebruik wordt gemaakt van bestaande bronnen en documenten om informatie te verzamelen en analyseren. Er is geen direct contact met het onderzoeksobject. Ook bekend als literatuuronderzoek, documentanalyse of desk research. Geschikt voor kostenefficiënte informatieverzameling en het leggen van een solide basis voor verdere analyse.",
+    "location": {
+      "page": "week6.html",
+      "anchor": "#onderzoekstrategie",
+      "week": "Week 6"
+    }
+  },
+  {
+    "term": "Casestudy",
+    "description": "Een onderzoeksstrategie waarbij getracht wordt om diepgaand en integraal inzicht te krijgen in één of enkele objecten of processen. Dit kan een groep werknemers zijn, verschillende transporttrajecten, de locatiekeuze van producten in een warehouse of een productielijn. In meerdere opzichten de tegenpool van het survey-onderzoek, met focus op diepgang in plaats van breedte.",
+    "location": {
+      "page": "week6.html",
+      "anchor": "#onderzoekstrategie",
+      "week": "Week 6"
+    }
+  },
+  {
+    "term": "Dataverzamelingsplan",
+    "description": "Een plan dat beschrijft hoe data wordt verzameld, waarbij rekening wordt gehouden met validiteit en betrouwbaarheid. Het plan heeft twee doelen: als onderzoeker goed nadenken over de wijze van dataverzameling voor een onderbouwd onderzoek, en de opdrachtgever exact laten zien wat het plan is inclusief de impact op personen en functionarissen in het bedrijf.",
+    "location": {
+      "page": "week6.html",
+      "anchor": "#dataverzamelingsplan",
+      "week": "Week 6"
+    }
+  },
+  {
+    "term": "Documentanalyse",
+    "description": "Een dataverzamelingsmethode waarbij rapporten, procedures, handleidingen en contracten worden geanalyseerd. Geschikt voor het begrijpen van formele processen en afspraken. Wordt vaak gebruikt bij casestudies en bureauonderzoek.",
+    "location": {
+      "page": "week6.html",
+      "anchor": "#onderzoekstrategie",
+      "week": "Week 6"
+    }
+  },
+  {
+    "term": "Empirisch onderzoek",
+    "description": "Onderzoek waarbij direct contact is met het onderzoeksobject. Dit staat tegenover bureauonderzoek waarbij geen direct contact is. Empirisch onderzoek biedt vaak meer diepgang en maakt het mogelijk om directe observaties en metingen te verrichten.",
+    "location": {
+      "page": "week6.html",
+      "anchor": "#kernbeslissingen",
+      "week": "Week 6"
+    }
+  },
+  {
+    "term": "Experiment",
+    "description": "Een experimentele onderzoeksstrategie die gebruikt kan worden in evaluatieonderzoek. Bijvoorbeeld om de effectiviteit van bepaald beleid vast te stellen, de effecten van een reorganisatie op de productiviteit van werknemers te onderzoeken, of om erachter te komen wat de meest geschikte werkprocedures in een organisatie zijn.",
+    "location": {
+      "page": "week6.html",
+      "anchor": "#onderzoekstrategie",
+      "week": "Week 6"
+    }
+  },
+  {
+    "term": "Experimentele metingen",
+    "description": "Dataverzamelingsmethoden die gebruikt worden bij experimenten, zoals voor- en nametingen, vergelijking tussen groepen en pilot testen. Geschikt voor het meten van effecten en causaliteit.",
+    "location": {
+      "page": "week6.html",
+      "anchor": "#onderzoekstrategie",
+      "week": "Week 6"
+    }
+  },
+  {
+    "term": "Focusgroep",
+    "description": "Een dataverzamelingsmethode waarbij een gestructureerde discussie of brainstormsessie wordt gehouden in groepsverband. Geschikt voor het verkennen van meningen en attitudes in groepsverband. Wordt vaak gebruikt bij casestudies en de gefundeerde theoriebenadering.",
+    "location": {
+      "page": "week6.html",
+      "anchor": "#onderzoekstrategie",
+      "week": "Week 6"
+    }
+  },
+  {
+    "term": "Gefundeerde theoriebenadering",
+    "description": "Een kwalitatieve onderzoeksmethodologie die gericht is op het systematisch ontwikkelen van theorieën in plaats van gebruik te maken van bestaande theoretische kaders. Ook bekend als Grounded Theory. Biedt een flexibele en krachtige methode om verregaande inzichten te verkrijgen in complexe sociale fenomenen en processen binnen organisaties.",
+    "location": {
+      "page": "week6.html",
+      "anchor": "#onderzoekstrategie",
+      "week": "Week 6"
+    }
+  },
+  {
+    "term": "Interview",
+    "description": "Een dataverzamelingsmethode die kan worden uitgevoerd als (semi)gestructureerd interview met vragenlijst of als ongestructureerd interview. Geschikt voor het verkennen van procesverloop of het inventariseren van factoren die van invloed zijn op de procesprestatie. Wordt gebruikt bij verschillende onderzoeksstrategieën.",
+    "location": {
+      "page": "week6.html",
+      "anchor": "#onderzoekstrategie",
+      "week": "Week 6"
+    }
+  },
+  {
+    "term": "Kernbeslissingen",
+    "description": "Drie beslissingen die in hoofdlijnen genomen worden om de onderzoeksstrategie te bepalen: de keuze tussen breedte of diepgang, tussen kwantitatief of kwalitatief onderzoek, en tussen bureauonderzoek of empirisch onderzoek. Deze beslissingen helpen om het onderzoek meer vorm te geven voordat een specifieke onderzoeksstrategie wordt gekozen.",
+    "location": {
+      "page": "week6.html",
+      "anchor": "#kernbeslissingen",
+      "week": "Week 6"
+    }
+  },
+  {
+    "term": "Kwalitatief onderzoek",
+    "description": "Onderzoek waarbij tekstuele data wordt verzameld en interpretatief wordt geanalyseerd. Focus ligt op diepgang, betekenis en context. Vaak gebruikt bij casestudies en de gefundeerde theoriebenadering. Staat tegenover kwantitatief onderzoek.",
+    "location": {
+      "page": "week6.html",
+      "anchor": "#kernbeslissingen",
+      "week": "Week 6"
+    }
+  },
+  {
+    "term": "Kwantitatief onderzoek",
+    "description": "Onderzoek waarbij numerieke data wordt verzameld en statistisch wordt geanalyseerd. Focus ligt op meetbaarheid, generaliseerbaarheid en objectiviteit. Vaak gebruikt bij survey-onderzoek en experimenten. Staat tegenover kwalitatief onderzoek.",
+    "location": {
+      "page": "week6.html",
+      "anchor": "#kernbeslissingen",
+      "week": "Week 6"
+    }
+  },
+  {
+    "term": "Observatie",
+    "description": "Een dataverzamelingsmethode die kan worden uitgevoerd als Gemba walk of procesobservatie met formulier. Geschikt voor het in kaart brengen van het procesverloop en de current state. Wordt vaak gebruikt bij casestudies en empirisch onderzoek.",
+    "location": {
+      "page": "week6.html",
+      "anchor": "#onderzoekstrategie",
+      "week": "Week 6"
+    }
+  },
+  {
+    "term": "Onderzoekstrategie",
+    "description": "De specifieke strategie die gekozen wordt na het maken van de drie kernbeslissingen. Er zijn vijf algemene strategieën: survey-onderzoek (focus op breedte), casestudy (focus op diepgang), experiment (voor evaluatieonderzoek), gefundeerde theoriebenadering (kwalitatieve theorieontwikkeling) en bureauonderzoek (gebruik van bestaande bronnen).",
+    "location": {
+      "page": "week6.html",
+      "anchor": "#onderzoekstrategie",
+      "week": "Week 6"
+    }
+  },
+  {
+    "term": "Secundaire data",
+    "description": "Data die al beschikbaar is vanuit een systeem, zoals cijfers over procesprestaties, standaardtijden voor handelingen of klantenreviews. Geschikt voor bureauonderzoek en kostenefficiënte dataverzameling zonder direct contact met het onderzoeksobject.",
+    "location": {
+      "page": "week6.html",
+      "anchor": "#onderzoekstrategie",
+      "week": "Week 6"
+    }
+  },
+  {
+    "term": "Survey-onderzoek",
+    "description": "Een onderzoeksstrategie die ingezet kan worden bij grote aantallen willekeurig gekozen onderzoekseenheden waarbij een breed overzicht wordt vereist. Focus ligt op breedte en generaliseerbaarheid. Vaak worden verkregen resultaten kwantitatief verwerkt. Varianten zijn cross-sectioneel onderzoek, panelonderzoek en tijdsreeksonderzoek (longitudinaal onderzoek).",
+    "location": {
+      "page": "week6.html",
+      "anchor": "#onderzoekstrategie",
+      "week": "Week 6"
+    }
+  },
+  {
+    "term": "Validiteit",
+    "description": "De mate waarin een onderzoek meet wat het beoogt te meten. Een valide onderzoek onderzoekt daadwerkelijk het beoogde fenomeen en niet iets anders. Dit is een belangrijk criterium bij het opstellen van een dataverzamelingsplan en het kritisch reflecteren op de opzet van dataverzamelingsmethoden.",
+    "location": {
+      "page": "week6.html",
+      "anchor": "#dataverzamelingsplan",
+      "week": "Week 6"
+    }
+  },
+  {
+    "term": "Vragenlijst",
+    "description": "Een dataverzamelingsmethode die kan worden uitgevoerd als online survey, papieren vragenlijst of telefonische enquête. Geschikt voor het verzamelen van kwantitatieve data bij grote groepen respondenten. Wordt vooral gebruikt bij survey-onderzoek.",
+    "location": {
+      "page": "week6.html",
+      "anchor": "#onderzoekstrategie",
+      "week": "Week 6"
+    }
+  },
+  {
+    "term": "Cross-sectioneel onderzoek",
+    "description": "Een variant van survey-onderzoek waarbij data op één moment in de tijd wordt verzameld van verschillende onderzoekseenheden. Geschikt voor het verkrijgen van een momentopname van een situatie of fenomeen zonder veranderingen over tijd te meten.",
+    "location": {
+      "page": "week6.html",
+      "anchor": "#onderzoekstrategie",
+      "week": "Week 6"
+    }
+  },
+  {
+    "term": "Deskresearch",
+    "description": "Een onderzoeksmethode waarbij gebruik wordt gemaakt van bestaande bronnen en documenten zonder direct contact met het onderzoeksobject. Ook bekend als bureauonderzoek, literatuuronderzoek of documentanalyse. Geschikt voor kostenefficiënte informatieverzameling en het leggen van een solide basis voor verdere analyse.",
+    "location": {
+      "page": "week6.html",
+      "anchor": "#onderzoekstrategie",
+      "week": "Week 6"
+    }
+  },
+  {
+    "term": "Enkelvoudige casestudy",
+    "description": "Een variant van de casestudy waarbij één onderzoeksobject of proces diepgaand wordt onderzocht. Geschikt voor het verkrijgen van integraal inzicht in een specifiek fenomeen zonder vergelijking met andere objecten.",
+    "location": {
+      "page": "week6.html",
+      "anchor": "#onderzoekstrategie",
+      "week": "Week 6"
+    }
+  },
+  {
+    "term": "Google Scholar",
+    "description": "Een zoekmachine die specifiek gericht is op het vinden van wetenschappelijke literatuur, artikelen, theses en boeken. Biedt vaak toegang tot full-text artikelen en kan worden gekoppeld aan Windesearch voor uitgebreidere toegang tot databanken. Essentieel voor literatuuronderzoek.",
+    "location": {
+      "page": "week4.html",
+      "anchor": "#literatuuronderzoek",
+      "week": "Week 4"
+    }
+  },
+  {
+    "term": "Itereren",
+    "description": "Het proces van het aanpassen en verbeteren van het onderzoeksplan op basis van voortschrijdend inzicht. Tijdens het onderzoek kunnen nieuwe inzichten leiden tot wijzigingen in het onderzoeksmodel, onderzoeksvragen, begripsbepaling of theoretisch kader. Dit is een normaal en belangrijk onderdeel van onderzoek.",
+    "location": {
+      "page": "week6.html",
+      "anchor": "#kernbeslissingen",
+      "week": "Week 6"
+    }
+  },
+  {
+    "term": "Longitudinaal onderzoek",
+    "description": "Een variant van survey-onderzoek waarbij data over een langere periode wordt verzameld om veranderingen en ontwikkelingen in de tijd te meten. Ook bekend als tijdsreeksonderzoek. Geschikt voor het bestuderen van trends en effecten op langere termijn.",
+    "location": {
+      "page": "week6.html",
+      "anchor": "#onderzoekstrategie",
+      "week": "Week 6"
+    }
+  },
+  {
+    "term": "Open Access",
+    "description": "Een publicatiemodel waarbij wetenschappelijke literatuur vrij toegankelijk is zonder betaalmuur of abonnement. Publicaties zijn direct beschikbaar voor lezers zonder financiële barrières, wat de verspreiding van kennis bevordert en de toegankelijkheid van onderzoeksresultaten vergroot.",
+    "location": {
+      "page": "week4.html",
+      "anchor": "#literatuuronderzoek",
+      "week": "Week 4"
+    }
+  },
+  {
+    "term": "Panelonderzoek",
+    "description": "Een variant van survey-onderzoek waarbij dezelfde groep respondenten meerdere keren wordt bevraagd over een bepaalde periode. Geschikt voor het meten van veranderingen in attitudes, gedrag of meningen bij dezelfde personen in de tijd.",
+    "location": {
+      "page": "week6.html",
+      "anchor": "#onderzoekstrategie",
+      "week": "Week 6"
+    }
+  },
+  {
+    "term": "(Semi)wetenschappelijke literatuur",
+    "description": "Literatuur die wetenschappelijke kenmerken heeft maar niet altijd peer-reviewed is. Deze bronnen zijn betrouwbaarder dan nieuwsartikelen of algemene websites en worden gebruikt bij literatuuronderzoek. Wordt beoordeeld aan de hand van de 1e en 2e check voor kwaliteit en relevantie.",
+    "location": {
+      "page": "week4.html",
+      "anchor": "#literatuuronderzoek",
+      "week": "Week 4"
+    }
+  },
+  {
+    "term": "Vergelijkende casestudy",
+    "description": "Een variant van de casestudy waarbij meerdere onderzoeksobjecten of processen worden vergeleken om diepgaand inzicht te krijgen. Kan hiërarchisch zijn (vergelijking op verschillende niveaus) of sequentieel (vergelijking in tijd). Geschikt voor het identificeren van overeenkomsten en verschillen tussen cases.",
+    "location": {
+      "page": "week6.html",
+      "anchor": "#onderzoekstrategie",
+      "week": "Week 6"
+    }
+  },
+  {
+    "term": "Zoekplan",
+    "description": "Een gestructureerd plan voor het uitvoeren van literatuuronderzoek waarin de zoektermen, zoekstrategieën, databanken en selectiecriteria worden vastgelegd. Helpt om het literatuuronderzoek systematisch en reproduceerbaar uit te voeren en voorkomt dat belangrijke bronnen worden gemist.",
+    "location": {
+      "page": "week5.html",
+      "anchor": "#selecteren-beoordelen",
+      "week": "Week 5"
+    }
+  },
+  {
+    "term": "Zoektermen",
+    "description": "Termen die worden gebruikt bij literatuuronderzoek om relevante bronnen te vinden. Deze termen worden vaak ontwikkeld met behulp van de bouwsteenmethode en gecombineerd met Booleaanse operatoren. Goede zoektermen leiden tot betere en gerichtere zoekresultaten.",
+    "location": {
+      "page": "week4.html",
+      "anchor": "#literatuuronderzoek",
+      "week": "Week 4"
+    }
   }
 ]
 

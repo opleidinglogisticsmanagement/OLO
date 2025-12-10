@@ -575,7 +575,6 @@ class InteractiveRenderer {
                      ondragover="InteractiveRenderer.allowDrop(event)"
                      style="word-wrap: break-word; overflow-wrap: break-word;">
                     <h4 class="font-semibold text-gray-900 dark:text-white mb-2 text-sm break-words">${category.name}</h4>
-                    <p class="text-xs text-gray-600 dark:text-gray-400 mb-2 break-words">${category.description || ''}</p>
                     <div class="dropped-items space-y-2 break-words" id="${categoryId}-items" style="word-wrap: break-word; overflow-wrap: break-word;"></div>
                 </div>
             `;
@@ -589,6 +588,7 @@ class InteractiveRenderer {
                     id="${itemId}"
                     draggable="true"
                     ondragstart="InteractiveRenderer.handleDragStart(event, '${exerciseId}', ${itemObj.originalIndex})"
+                    ondragend="InteractiveRenderer.handleDragEnd(event)"
                     data-item-index="${itemObj.originalIndex}"
                     data-correct-category="${itemObj.correctCategory}"
                     style="word-wrap: break-word; overflow-wrap: break-word; max-width: 100%;"
@@ -629,7 +629,7 @@ class InteractiveRenderer {
         `;
         
         return `
-            <div class="matching-exercise mb-6 bg-white dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700" id="${exerciseId}">
+            <div class="matching-exercise mb-6 px-6 py-4" id="${exerciseId}">
                 <style>${gridStyle}</style>
                 <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">${item.title || 'Matching Oefening'}</h3>
                 <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">${item.instruction || 'Sleep de omschrijvingen naar de juiste categorie:'}</p>
@@ -664,6 +664,25 @@ class InteractiveRenderer {
         event.dataTransfer.setData('text/plain', JSON.stringify({ exerciseId, itemIndex }));
         event.dataTransfer.effectAllowed = 'move';
         event.currentTarget.style.opacity = '0.5';
+        // Store the dragged element for potential dragend handling
+        event.dataTransfer.setData('dragged-element-id', event.currentTarget.id);
+    }
+
+    /**
+     * Handle drag end - reset opacity if drag was cancelled
+     */
+    static handleDragEnd(event) {
+        // Reset opacity - the drop handler will handle successful drops
+        // If drag was cancelled, this will reset the opacity
+        if (event.currentTarget) {
+            // Only reset if we're not in a successful drop (drop handler sets opacity to 1)
+            // Small delay to check if drop was successful
+            setTimeout(() => {
+                if (event.currentTarget.style.opacity === '0.5') {
+                    event.currentTarget.style.opacity = '1';
+                }
+            }, 100);
+        }
     }
 
     /**
@@ -722,12 +741,31 @@ class InteractiveRenderer {
         // Reset opacity
         itemElement.style.opacity = '1';
         
+        // Ensure item remains draggable and has the correct event handlers
+        itemElement.setAttribute('draggable', 'true');
+        
+        // Re-attach drag handlers to ensure they work after moving
+        // Use inline handlers (ondragstart) so they work even after DOM manipulation
+        const itemIndex = itemElement.getAttribute('data-item-index');
+        if (itemIndex !== null) {
+            // Set inline handlers as attributes so they persist after DOM moves
+            itemElement.setAttribute('ondragstart', `InteractiveRenderer.handleDragStart(event, '${exerciseId}', ${itemIndex})`);
+            itemElement.setAttribute('ondragend', `InteractiveRenderer.handleDragEnd(event)`);
+            
+            // Also set as properties for immediate use
+            itemElement.ondragstart = (e) => {
+                InteractiveRenderer.handleDragStart(e, exerciseId, parseInt(itemIndex));
+            };
+            itemElement.ondragend = (e) => {
+                InteractiveRenderer.handleDragEnd(e);
+            };
+        }
+        
         // Move item to new category
         categoryItemsContainer.appendChild(itemElement);
         
-        // Update item styling
-        itemElement.classList.remove('cursor-move', 'hover:bg-blue-50');
-        itemElement.classList.add('cursor-default');
+        // Keep item draggable and interactive so it can be moved again
+        // Don't change cursor or styling - item should remain interactive
     }
 
     /**
@@ -775,10 +813,7 @@ class InteractiveRenderer {
                     item.classList.add('border-red-500', 'dark:border-red-400', 'bg-red-50', 'dark:bg-red-900/20');
                     const itemText = item.textContent.trim();
                     
-                    const currentCategoryName = categoryNames[catIndex] || `Categorie ${catIndex}`;
-                    const correctCategoryName = categoryNames[correctCategory] || `Categorie ${correctCategory}`;
-                    
-                    feedback.push(`"${itemText}" hoort bij <strong>${correctCategoryName}</strong>, niet bij ${currentCategoryName}.`);
+                    feedback.push(`"${itemText}" is nog niet op de juiste plek geplaatst. Kijk nog even goed naar de criteria.`);
                 }
             });
         });

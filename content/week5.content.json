@@ -154,6 +154,94 @@
         ]
       },
       {
+        "type": "paragraph",
+        "text": [
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Test je kennis van de CRAP-test criteria door de onderstaande oefening te maken. Let op: deze oefening werkt mogelijk niet goed op mobiele apparaten. Gebruik bij voorkeur een desktop of tablet voor de beste ervaring.</p>"
+        ]
+      },
+      {
+        "type": "accordion",
+        "usePlusIcon": true,
+        "defaultOpen": false,
+        "items": [
+          {
+            "title": "Oefening: CRAP-test criteria matchen",
+            "defaultOpen": false,
+            "content": [
+              {
+                "type": "matchingExercise",
+                "title": "CRAP-test criteria",
+                "instruction": "Sleep de vragen naar de juiste CRAP-test criteria om te testen of je de criteria goed begrijpt:",
+                "categories": [
+                  {
+                    "name": "Currency"
+                  },
+                  {
+                    "name": "Reliability"
+                  },
+                  {
+                    "name": "Authority"
+                  },
+                  {
+                    "name": "Purpose"
+                  }
+                ],
+                "items": [
+                  {
+                    "text": "Wanneer is de pagina geschreven?",
+                    "correctCategory": 0
+                  },
+                  {
+                    "text": "Is de informatie nog actueel voor het onderzoek?",
+                    "correctCategory": 0
+                  },
+                  {
+                    "text": "Wordt er een specifieke mening verkondigd?",
+                    "correctCategory": 1
+                  },
+                  {
+                    "text": "Worden er ook referenties gebruikt?",
+                    "correctCategory": 1
+                  },
+                  {
+                    "text": "Wie heeft het geschreven?",
+                    "correctCategory": 2
+                  },
+                  {
+                    "text": "Waaruit blijkt deskundigheid?",
+                    "correctCategory": 2
+                  },
+                  {
+                    "text": "Klopt de URL?",
+                    "correctCategory": 2
+                  },
+                  {
+                    "text": "Kun je contact opnemen?",
+                    "correctCategory": 2
+                  },
+                  {
+                    "text": "Wat is het doel van de auteur/organisatie?",
+                    "correctCategory": 3
+                  },
+                  {
+                    "text": "Waarvoor is de informatie bedoeld?",
+                    "correctCategory": 3
+                  },
+                  {
+                    "text": "Hoe objectief is het?",
+                    "correctCategory": 3
+                  },
+                  {
+                    "text": "Is de publicatiedatum recent genoeg voor mijn onderzoek?",
+                    "correctCategory": 0
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
         "type": "heading",
         "text": "Slim bronnen beheren",
         "level": 2,

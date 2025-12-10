@@ -54,6 +54,8 @@ class ContentRenderer {
                     return this.renderMatchingExercise(item);
                 case 'trueFalseExercise':
                     return this.renderTrueFalseExercise(item);
+                case 'sourceEvaluationExercise':
+                    return this.renderSourceEvaluationExercise(item);
                 case 'steps':
                     return this.renderSteps(item);
                 case 'clickableSteps':
@@ -538,6 +540,17 @@ class ContentRenderer {
             return InteractiveRenderer.renderTrueFalseExercise(item);
         }
         console.warn('InteractiveRenderer not loaded. True/false exercise will not render.');
+        return '';
+    }
+
+    /**
+     * Render een bronbeoordelingsoefening
+     */
+    static renderSourceEvaluationExercise(item) {
+        if (typeof window.InteractiveRenderer !== 'undefined') {
+            return InteractiveRenderer.renderSourceEvaluationExercise(item);
+        }
+        console.warn('InteractiveRenderer not loaded. Source evaluation exercise will not render.');
         return '';
     }
 

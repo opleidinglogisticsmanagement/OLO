@@ -1572,7 +1572,7 @@ app.get(/\.json$/, (req, res, next) => {
 });
 
 // Expliciete route voor afbeeldingen en andere assets - NA static middleware als fallback
-app.get(/\.(png|jpg|jpeg|gif|svg|ico|woff|woff2|ttf|eot|docx)$/i, (req, res, next) => {
+app.get(/\.(png|jpg|jpeg|gif|svg|ico|woff|woff2|ttf|eot|docx|pdf)$/i, (req, res, next) => {
     const fileName = req.path.replace(/^\//, ''); // bijv. assets/images/Praktijkprobleem.png
     const filePath = path.join(rootDir, fileName);
     
@@ -1606,7 +1606,8 @@ app.get(/\.(png|jpg|jpeg|gif|svg|ico|woff|woff2|ttf|eot|docx)$/i, (req, res, nex
             '.woff2': 'font/woff2',
             '.ttf': 'font/ttf',
             '.eot': 'application/vnd.ms-fontobject',
-            '.docx': 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+            '.docx': 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+            '.pdf': 'application/pdf'
         };
         const contentType = contentTypes[ext] || 'application/octet-stream';
         

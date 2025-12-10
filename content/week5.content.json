@@ -22,7 +22,7 @@
       {
         "type": "paragraph",
         "text": [
-          "Van Informatieberg naar Theoretisch Kader<br><br>Vorige week heb je geleerd hoe je moet zoeken. De kans is groot dat je nu een flinke lijst met zoekresultaten hebt. Maar let op: niet alles wat je vindt, is goud.<br><br>Deze week maken we de vertaalslag van zoeken naar verwerken. We focussen op drie essentiële stappen die het verschil maken tussen een \"verslagje\" en een gedegen theoretisch kader.<br><br><strong>Selecteren en Beoordelen:</strong> Hoe scheid je het kaf van het koren? Je leert werken met een 1e en 2e check voor literatuur en de CRAP-test voor internetbronnen. Zo voorkom je dat je je onderzoek bouwt op onbetrouwbare funderingen.<br><br><strong>Slim Opslaan:</strong> Stop met het handmatig typen van bronvermeldingen. We introduceren tools zoals Zotero. De tijd die je nu investeert in het inrichten van zo'n reference organizer, verdien je later dubbel en dwars terug bij het maken van je literatuurlijst (volgens de laatste APA-richtlijnen).<br><br><strong>Het Theoretisch Kader Schrijven:</strong> Dit is vaak het lastigste stuk. Een theoretisch kader is geen opsomming van feitjes of een uitleg van standaardmodellen (zoals een Pareto-analyse). Het is een samenhangend geheel waarmee je aantoont waar de knowledge gap zit."
+          "Van Informatieberg naar Theoretisch Kader<br><br>Vorige week heb je geleerd hoe je moet zoeken. De kans is groot dat je nu een flinke lijst met zoekresultaten hebt. Maar let op: niet alles wat je vindt, is goud.<br><br>Deze week maken we de vertaalslag van zoeken naar verwerken. We focussen op drie essentiële stappen die het verschil maken tussen een \"verslagje\" en een gedegen theoretisch kader.<br><br><div class=\"ml-6 pl-4\"><strong>Selecteren en Beoordelen:</strong> Hoe scheid je het kaf van het koren? Je leert werken met een 1e en 2e check voor literatuur en de CRAP-test voor internetbronnen. Zo voorkom je dat je je onderzoek bouwt op onbetrouwbare funderingen.<br><br><strong>Slim bronnen beheren:</strong> Stop met het handmatig typen van bronvermeldingen. We introduceren tools zoals Zotero. De tijd die je nu investeert in het inrichten van zo'n reference organizer, verdien je later dubbel en dwars terug bij het maken van je literatuurlijst (volgens de laatste APA-richtlijnen).<br><br><strong>Het Theoretisch Kader Schrijven:</strong> Dit is vaak het lastigste stuk. Een theoretisch kader is geen opsomming van feitjes of een uitleg van standaardmodellen (zoals een Pareto-analyse). Het is een samenhangend geheel waarmee je aantoont waar de knowledge gap zit.</div><br><br>Deze drie onderwerpen worden hieronder één voor één behandeld."
         ]
       },
       {
@@ -43,6 +43,56 @@
         "url": "https://www.youtube.com/embed/DprvcWYcIyQ"
       },
       {
+        "type": "accordion",
+        "usePlusIcon": true,
+        "defaultOpen": false,
+        "items": [
+          {
+            "title": "Belangrijkste punten van de 1e en 2e check",
+            "defaultOpen": false,
+            "content": [
+              {
+                "type": "paragraph",
+                "text": [
+                  "<h4 class=\"text-lg font-semibold text-gray-900 dark:text-white mb-3\">1e Check</h4>",
+                  "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">De 1e check bestaat uit drie criteria waarmee je bepaalt of een bron relevant is voor je onderzoek:</p>",
+                  "<ol class=\"list-decimal list-outside space-y-2 mb-4 ml-6 pl-4\">",
+                  "<li class=\"text-gray-700 dark:text-gray-300\"><strong>Relevantie:</strong> Sluit het onderzoek aan op je hoofdvraag/doelstelling? Is de bron relevant voor je onderzoek?</li>",
+                  "<li class=\"text-gray-700 dark:text-gray-300\"><strong>Doel:</strong> Wat is het doel van het artikel? Is het bedoeld om te vermaken, informeren of te overtuigen?</li>",
+                  "<li class=\"text-gray-700 dark:text-gray-300\"><strong>Kwaliteit:</strong> Hoe is de kwaliteit? Hoe is de structuur? Welke argumenten worden er gegeven en is er een bronnenlijst?</li>",
+                  "</ol>",
+                  "<h4 class=\"text-lg font-semibold text-gray-900 dark:text-white mb-3\">2e Check</h4>",
+                  "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">De 2e check wordt uitgevoerd op (semi)wetenschappelijke literatuur die de 1e check heeft doorstaan. Je beoordeelt de bron aan de hand van vier criteria in een tabel:</p>",
+                  "<div class=\"overflow-x-auto mb-4\">",
+                  "<table class=\"min-w-full border border-gray-300 rounded-lg\">",
+                  "<thead class=\"bg-gray-100\">",
+                  "<tr>",
+                  "<th class=\"border border-gray-300 dark:border-gray-600 px-4 py-3 text-left text-sm font-semibold text-gray-900 dark:text-white\">Criteria</th>",
+                  "<th class=\"border border-gray-300 dark:border-gray-600 px-4 py-3 text-left text-sm font-semibold text-gray-900 dark:text-white\">Autoriteit</th>",
+                  "<th class=\"border border-gray-300 dark:border-gray-600 px-4 py-3 text-left text-sm font-semibold text-gray-900 dark:text-white\">Actualiteit</th>",
+                  "<th class=\"border border-gray-300 dark:border-gray-600 px-4 py-3 text-left text-sm font-semibold text-gray-900 dark:text-white\">Objectiviteit</th>",
+                  "<th class=\"border border-gray-300 dark:border-gray-600 px-4 py-3 text-left text-sm font-semibold text-gray-900 dark:text-white\">Nauwkeurigheid</th>",
+                  "</tr>",
+                  "</thead>",
+                  "<tbody>",
+                  "<tr>",
+                  "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700 dark:text-gray-300 font-medium\">Titel + bron</td>",
+                  "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700 dark:text-gray-300\">Wat kun je zeggen over de auteur?</td>",
+                  "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700 dark:text-gray-300\">Is het actueel genoeg?</td>",
+                  "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700 dark:text-gray-300\">Is de informatie objectief?</td>",
+                  "<td class=\"border border-gray-300 px-4 py-3 text-sm text-gray-700 dark:text-gray-300\">Hoe nauwkeurig is de informatie?</td>",
+                  "</tr>",
+                  "</tbody>",
+                  "</table>",
+                  "</div>",
+                  "<p class=\"text-gray-700 dark:text-gray-300 mb-0\">Voor elke bron die de 1e check doorkomt, vul je deze tabel in met de titel en bron in de eerste kolom, en je beoordeling per criterium in de overige kolommen.</p>"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
         "type": "paragraph",
         "text": [
           "<strong>LET OP:</strong> In de video gaat het over de 3e versie van de herziene American Psychological Association (APA)-richtlijnen. Die richtlijnen vind je op <a href=\"https://auteursrechten.nl/bronvermelding/handleiding-de-apa-richtlijnen-uitgelegd/\" target=\"_blank\" class=\"text-blue-600 hover:text-blue-800 underline\">deze website</a>. Als je de digitale richtlijnen gebruikt kun je heel eenvoudig zoeken (gebruik de knoppen CTRL + F op Windows of CMD + F op Mac) als je bijvoorbeeld wilt weten hoe je nou een interview moet verwerken als referentie in de tekst EN in de literatuurlijst."
@@ -58,7 +108,7 @@
       {
         "type": "paragraph",
         "text": [
-          "<h3 class=\"text-xl font-semibold text-gray-900 dark:text-white mb-4\">(Semi)wetenschappelijke literatuur</h3>",
+          "<h3 class=\"text-xl font-semibold text-gray-900 dark:text-white mb-4\">2e check: (Semi)wetenschappelijke literatuur</h3>",
           "<div class=\"overflow-x-auto mb-6\">",
           "<table class=\"min-w-full border border-gray-300 rounded-lg\">",
           "<thead class=\"bg-gray-100\">",
@@ -107,7 +157,7 @@
       {
         "type": "paragraph",
         "text": [
-          "<h3 class=\"text-xl font-semibold text-gray-900 dark:text-white mb-4\">Internetbronnen</h3>",
+          "<h3 class=\"text-xl font-semibold text-gray-900 dark:text-white mb-4\">CRAP-test: internetbronnen</h3>",
           "<div class=\"overflow-x-auto mb-6\">",
           "<table class=\"min-w-full border border-gray-300 rounded-lg\">",
           "<thead class=\"bg-gray-100\">",
@@ -165,7 +215,7 @@
         "defaultOpen": false,
         "items": [
           {
-            "title": "Oefening: CRAP-test criteria matchen",
+            "title": "Oefening 1: CRAP-test criteria matchen",
             "defaultOpen": false,
             "content": [
               {
@@ -234,6 +284,407 @@
                   {
                     "text": "Is de publicatiedatum recent genoeg voor mijn onderzoek?",
                     "correctCategory": 0
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Oefen nu met het beoordelen van een bron. Vul de 1e/2e check of CRAP-test in en krijg directe feedback op je beoordeling.</p>"
+        ]
+      },
+      {
+        "type": "accordion",
+        "usePlusIcon": true,
+        "defaultOpen": false,
+        "items": [
+          {
+            "title": "Oefening 2: Beoordeel een bron",
+            "defaultOpen": false,
+            "content": [
+              {
+                "type": "sourceEvaluationExercise",
+                "title": "",
+                "instruction": "Gebruik de doelstelling en hoofdvraag hieronder om de bronnen te beoordelen. Kies eerst een bron, dan een beoordelingsmethode (1e check, 2e check of CRAP-test), en vul de criteria in. Klik daarna op 'Toon antwoordmodel' om de voorbeeldantwoorden te zien.",
+                "context": {
+                  "objective": "Het adviseren van het management van Organisatie X over de herinrichting van het magazijn vóór 1 juni 2026 met een terugverdientijd van < 5 jaar door een kwantitatieve analyse uit te voeren naar de optimale bezettingsgraad van alle artikelen in het magazijn en de effecten hiervan op de interne rijafstanden te berekenen.",
+                  "mainQuestion": "Welke mogelijke herinrichtingen van het magazijn van Organisatie X zorgen voor een geoptimaliseerde bezettingsgraad van 90% waarmee de interne rijafstanden geminimaliseerd worden?"
+                },
+                "sources": [
+                  {
+                    "title": "Case-study analysis of warehouse process optimization",
+                    "author": "Margareta Živičnjak, Kristijan Rogić, Ivona Bajor",
+                    "year": "2022",
+                    "link": "https://www.sciencedirect.com/science/article/pii/S2352146522006408",
+                    "type": "wetenschappelijk",
+                    "firstCheck": {
+                      "conclusion": "Het artikel doorstaat de 1e check met vlag en wimpel. Het is relevant voor het PBU-vraagstuk bij Organisatie X, het doel is informatief en de kwaliteit is wetenschappelijk. Volgende stap: Nu gaan we door naar de 2e Check om de diepgang te beoordelen.",
+                      "status": "green",
+                      "criteria": [
+                        {
+                          "name": "Relevantie",
+                          "question": "Voor je onderzoek, sluit het onderzoek aan op je hoofdvraag/doelstelling?",
+                          "correctAnswer": [
+                            "Ja, de titel 'Case-study analysis of warehouse process optimization' geeft direct een match aan",
+                            "Ja, een case-study analyseert vaak een AS-IS (huidige) en TO-BE (toekomstige) situatie, precies wat nodig is",
+                            "Ja, het artikel biedt methoden om processen zoals loop- en rijafstanden te meten en te verbeteren",
+                            "Ja, het biedt theoretische onderbouwing voor het type optimalisatie dat nodig is",
+                            "Hoog relevant, sluit aan op onderzoek naar magazijnindelingen en rijafstandreductie"
+                          ],
+                          "feedback": "De titel 'Case-study analysis of warehouse process optimization' geeft direct een match aan. Een case-study analyseert vaak een AS-IS (huidige) en TO-BE (toekomstige) situatie, precies wat nodig is om inefficiëntie aan te tonen en op te lossen. Het artikel biedt waarschijnlijk methoden om die processen (zoals loop- en rijafstanden) te meten en te verbeteren. Het biedt de theoretische onderbouwing voor het type optimalisatie dat nodig is."
+                        },
+                        {
+                          "name": "Doel",
+                          "question": "Wat is het doel van het artikel. Is het bedoeld om te vermaken, informeren of te overtuigen?",
+                          "correctAnswer": [
+                            "Het doel is primair informeren over onderzoeksresultaten en methodologieën",
+                            "Wetenschappelijk artikel (ScienceDirect) met als doel kennisoverdracht",
+                            "Doel is informeren en overtuigen van de validiteit van de gebruikte optimalisatiemethode",
+                            "Niet bedoeld als vermaak, maar om kennis te delen",
+                            "Geschikt doel: kennisoverdracht past bij behoefte aan gedegen aanpak"
+                          ],
+                          "feedback": "Dit is een wetenschappelijk artikel (ScienceDirect). Het doel van dergelijke artikelen is primair informeren over onderzoeksresultaten en methodologieën. Daarnaast probeert het de lezer te overtuigen van de validiteit van de gebruikte optimalisatiemethode door middel van bewijs (data). Het is zeker niet bedoeld als vermaak. Het doel (kennisoverdracht) past bij de behoefte aan een gedegen aanpak."
+                        },
+                        {
+                          "name": "Kwaliteit",
+                          "question": "Hoe is de kwaliteit? Hoe is de structuur? Welke argumenten worden er gegeven en is er een bronnenlijst?",
+                          "correctAnswer": [
+                            "Goede structuur: volgt wetenschappelijke structuur (Abstract, Introductie, Methodologie, Resultaten, Conclusie)",
+                            "Gepubliceerd in Transportation Research Procedia, wat duidt op kwaliteit",
+                            "Argumenten zijn gebaseerd op case-study, onderbouwd met data uit de praktijk, niet slechts meningen",
+                            "Wetenschappelijke artikelen bevatten altijd referenties (bronnenlijst), waarmee je verder kunt zoeken",
+                            "Goede kwaliteit, voldoende voor HBO-onderzoek"
+                          ],
+                          "feedback": "Als publicatie in Transportation Research Procedia volgt het een vaste wetenschappelijke structuur (Abstract, Introductie, Methodologie, Resultaten, Conclusie). Dit helpt om structuur in je eigen onderzoek aan te brengen. De argumenten zijn gebaseerd op een 'Case-study', wat betekent dat ze onderbouwd zijn met data uit de praktijk, niet slechts meningen. Wetenschappelijke artikelen bevatten altijd referenties, waarmee je weer verder kunt zoeken (sneeuwbalmethode). De kwaliteit is voldoende voor een HBO-onderzoek."
+                        }
+                      ]
+                    },
+                    "secondCheck": {
+                      "conclusion": "Dit artikel is een blijvertje. Het scoort hoog op alle criteria van de 2e check. Het biedt precies de methodologische handvatten die je nodig hebt om de doelstelling (20% reductie in rijafstanden) te onderbouwen. Wil je doorgaan met de CRAP-test?",
+                      "status": "green",
+                      "criteria": [
+                        {
+                          "name": "Autoriteit",
+                          "question": "Wat kun je zeggen over de auteur?",
+                          "correctAnswer": [
+                            "Auteurs zijn onderzoekers verbonden aan een universiteit (Faculteit Transport en Verkeerswetenschappen, Universiteit van Zagreb)",
+                            "Academische deskundigheid door universiteitsverbinding",
+                            "Gepubliceerd in Transportation Research Procedia (Elsevier), een gerenommeerde wetenschappelijke uitgever",
+                            "Wetenschappelijke auteurs met academische achtergrond",
+                            "Auteurs hebben autoriteit binnen het vakgebied logistiek"
+                          ],
+                          "feedback": "De auteurs zijn onderzoekers verbonden aan de Universiteit van Zagreb en het artikel is gepubliceerd bij Elsevier, een gerenommeerde wetenschappelijke uitgever. Dit wijst op academische deskundigheid en autoriteit binnen het vakgebied."
+                        },
+                        {
+                          "name": "Actualiteit",
+                          "question": "Is het actueel genoeg?",
+                          "correctAnswer": [
+                            "Ja, 2022 is zeer recent",
+                            "Ja, informatie van 1 à 2 jaar oud is zeer recent voor logistiek onderzoek",
+                            "Ja, actueel genoeg voor huidige vraagstukken",
+                            "Ja, recent genoeg voor warehouse-optimalisatie onderzoek",
+                            "2022 is recent voor logistiek onderzoek"
+                          ],
+                          "feedback": "Het artikel is gepubliceerd in 2022. In de snel veranderende wereld van logistiek en warehouse-optimalisatie is informatie van 1 à 2 jaar oud zeer recent en relevant voor huidige vraagstukken."
+                        },
+                        {
+                          "name": "Objectiviteit",
+                          "question": "Is de informatie objectief?",
+                          "correctAnswer": [
+                            "Ja, wetenschappelijk artikel met onderzoeksmethodologie",
+                            "Ja, doel is niet om product te verkopen maar om analyse te delen",
+                            "Ja, case-study methodiek impliceert feitelijke procesverbeteringen",
+                            "Ja, objectieve onderzoeksdoeleinden",
+                            "Wetenschappelijk artikel met objectieve onderzoeksdoeleinden"
+                          ],
+                          "feedback": "Dit is een wetenschappelijk artikel (conference paper) waarin een onderzoeksmethodologie wordt gevolgd. Het doel is niet om een specifiek product te verkopen, maar om een analyse te delen van een optimalisatieproces. De case-study methodiek impliceert dat er gekeken wordt naar feitelijke procesverbeteringen."
+                        },
+                        {
+                          "name": "Nauwkeurigheid",
+                          "question": "Hoe nauwkeurig is de informatie?",
+                          "correctAnswer": [
+                            "Hoog, case-study analyse geeft specifieke en diepgaande data",
+                            "Nauwkeurig, behandelt specifieke fasen zoals current state analyse",
+                            "Gedegen aanpak met concrete procesoptimalisatie",
+                            "Hoge nauwkeurigheid door specifieke case-study methodiek",
+                            "Nauwkeurig door diepgaande analyse van concrete gevallen"
+                          ],
+                          "feedback": "De titel 'Case-study analysis...' geeft direct aan dat het gaat om een specifieke, diepgaande analyse van één of enkele gevallen, wat vaak gedetailleerde (nauwkeurige) data oplevert. Het artikel behandelt specifieke fasen zoals analyse van de huidige staat (current state) en voorstellen voor optimalisatie."
+                        }
+                      ]
+                    },
+                    "crapTest": {
+                      "criteria": []
+                    }
+                  },
+                  {
+                    "title": "Optimize Warehouse Operations (10 Easy Steps)",
+                    "author": "Jazva Inc.",
+                    "year": "Onbekend",
+                    "link": "https://cdn2.hubspot.net/hubfs/2659049/eBooks%20and%20Whitepapers/Optimize_Warehouse_Operations_ebook.pdf",
+                    "type": "commercieel",
+                    "firstCheck": {
+                      "conclusion": "Dit is een heel ander type bron dan het wetenschappelijke artikel van bron 1. Deze bron is twijfelachtig voor je theoretisch kader, maar nuttig voor je praktische inspiratie. Het gevaar: Als je je hele onderzoek ophangt aan dit document, zal je beoordelaar zeggen: 'Je baseert je advies op een reclamefolder.' De kans: De tips over Picking Paths en Zones zijn goede zoektermen. Je kunt deze termen gebruiken om betere (wetenschappelijke) bronnen te zoeken die hetzelfde zeggen.",
+                      "status": "orange",
+                      "criteria": [
+                        {
+                          "name": "Relevantie",
+                          "question": "Voor je onderzoek, sluit het onderzoek aan op je hoofdvraag/doelstelling?",
+                          "correctAnswer": [
+                            "Ja, directe hit op het probleem: pickers spend most of their time walking between locations",
+                            "Ja, specifieke oplossingen zoals 'Organize Efficient Picking Paths' en 'Designate Zones for Specific Inventory'",
+                            "Ja, gaat exact over magazijninrichting en looproutes",
+                            "Ja, noemt specifiek dat efficient warehouse design kan leiden tot reductie in travel time",
+                            "Hoog relevant, de inhoud gaat exact over het onderwerp: magazijninrichting en looproutes"
+                          ],
+                          "feedback": "Directe hit op het probleem: het document stelt dat 'pickers spend most of their time walking between locations'. Dit is precies het probleem bij Organisatie X. Specifieke oplossingen zoals 'Organize Efficient Picking Paths' en 'Designate Zones for Specific Inventory' (snellopers op makkelijke plekken leggen) zijn exact de maatregelen die nodig zijn voor een nieuwe magazijnindeling. Ze noemen zelfs specifiek dat 'More efficient warehouse design... can significantly reduce the time and cost wasted traveling'."
+                        },
+                        {
+                          "name": "Doel",
+                          "question": "Wat is het doel van het artikel. Is het bedoeld om te vermaken, informeren of te overtuigen?",
+                          "correctAnswer": [
+                            "Het doel is content marketing: informeren om uiteindelijk te overtuigen software te kopen",
+                            "Commercieel doel: de afzender is Jazva Inc, een bedrijf dat software verkoopt",
+                            "Vanaf pagina 6-7 wordt het een verkoopverhaal over hun warehouse management system",
+                            "Pas op: de tips zijn nuttig, maar het uiteindelijke doel is commercieel, niet wetenschappelijk objectief",
+                            "Doel is overtuigen: content marketing om software te verkopen"
+                          ],
+                          "feedback": "De titel '10 Easy Steps' klinkt informatief en praktisch. Echter, de afzender is Jazva Inc, een commercieel bedrijf dat software verkoopt. Vanaf pagina 6 en 7 wordt het document een verkoopverhaal: 'Invest in an integrated warehouse management system' en 'Jazva eliminates the need for another software'. Het doel is Content Marketing: jou informeren om je uiteindelijk te overtuigen hun software te kopen. Pas op: de tips zijn nuttig, maar het uiteindelijke doel is commercieel, niet wetenschappelijk objectief."
+                        },
+                        {
+                          "name": "Kwaliteit",
+                          "question": "Hoe is de kwaliteit? Hoe is de structuur? Welke argumenten worden er gegeven en is er een bronnenlijst?",
+                          "correctAnswer": [
+                            "Structuur is helder en laagdrempelig (10 stappen), leest makkelijk weg",
+                            "Er worden claims gemaakt zoals '55% of warehouse hours is spent on order picking' verwijzend naar een 'UPS study', maar er is geen bronnenlijst",
+                            "Geen formele referenties of bronnenlijst aanwezig",
+                            "Niveau: Whitepaper/E-book, versimpeld en mist nuance en diepgang van academisch paper",
+                            "Matig tot laag voor HBO-onderzoek: praktische inspiratie, maar geen sterk theoretisch bewijs"
+                          ],
+                          "feedback": "De structuur is helder en laagdrempelig (10 stappen). Het leest makkelijk weg. Er worden claims gemaakt zoals '55% of warehouse hours is spent on order picking', verwijzend naar een 'UPS study'. Echter, er is geen bronnenlijst of formele referentie naar waar die studie te vinden is. Het is een 'Whitepaper/E-book'. De informatie is vaak versimpeld ('10 Easy Steps') en mist de nuance en diepgang van een academisch paper. Matig tot laag (voor HBO-onderzoek): het is praktische inspiratie, maar geen sterk theoretisch bewijs."
+                        }
+                      ]
+                    },
+                    "secondCheck": {
+                      "conclusion": "Conclusie van OLO: AFGEKEURD VOOR THEORETISCH KADER. Waarom? Deze bron faalt op de 2e Check. Het is niet objectief (het is reclame). Het is niet controleerbaar (geen bronnenlijst voor de data). Het is verouderd (data van voor 2020). Mag je dit dan nooit gebruiken? Jawel, maar niet als fundament voor je theorie of methodologie. Je mag het wel gebruiken als 'aanleiding' in je inleiding (bijv: 'In de praktijk wordt vaak gesteld dat orderpicking 55% van de tijd kost, al varieert dit per bron...'). Je mag het wel gebruiken om op ideeën te komen (zoals 'Picking Paths' of 'Lean Inventory'). Wil je doorgaan met de CRAP-test?",
+                      "status": "red",
+                      "criteria": [
+                        {
+                          "name": "Autoriteit",
+                          "question": "Wat kun je zeggen over de auteur?",
+                          "correctAnswer": [
+                            "De auteur is Jazva Inc., een commercieel softwarebedrijf, geen onderzoeksinstituut of universiteit",
+                            "Ze zijn expert in hun eigen product, maar hebben geen wetenschappelijke autoriteit op het gebied van logistieke theorie",
+                            "Geen wetenschappelijke autoriteit, maar wel praktijkexpertise",
+                            "Commerciële auteur zonder academische achtergrond",
+                            "Geen wetenschappelijke autoriteit voor theoretisch kader"
+                          ],
+                          "feedback": "De auteur is Jazva Inc.. Dit is geen onderzoeksinstituut of universiteit, maar een commercieel softwarebedrijf. Ze zijn expert in hun eigen product, maar hebben geen wetenschappelijke autoriteit op het gebied van logistieke theorie."
+                        },
+                        {
+                          "name": "Actualiteit",
+                          "question": "Is het actueel genoeg?",
+                          "correctAnswer": [
+                            "Het document is verouderd: '75% plan to implement one by 2020' betekent dat de tekst geschreven is vóór 2020",
+                            "Data van vóór 2020 is te oud voor onderzoek dat kijkt naar een oplossing in 2026",
+                            "In de snelle wereld van e-commerce logistiek is data van vóór 2020 vaak te oud",
+                            "Verouderd: geschreven vóór 2020",
+                            "Niet actueel genoeg voor huidig onderzoek"
+                          ],
+                          "feedback": "Het document is verouderd. Op pagina 6 staat: '75% plan to implement one by 2020'. Dit betekent dat de tekst geschreven is vóór 2020. Voor onderzoek bij Organisatie X, dat kijkt naar een oplossing in 2026, is data van vóór 2020 in de snelle wereld van e-commerce logistiek vaak te oud."
+                        },
+                        {
+                          "name": "Objectiviteit",
+                          "question": "Is de informatie objectief?",
+                          "correctAnswer": [
+                            "Nee, het doel van dit document is marketing (Content Marketing)",
+                            "Nee, ze beschrijven problemen die toevallig precies worden opgelost door hun software",
+                            "Nee, de '10 stappen' leiden de lezer subtiel naar de conclusie om klant te worden",
+                            "Nee, dit is gekleurde informatie met commercieel doel",
+                            "Niet objectief: reclame en marketing"
+                          ],
+                          "feedback": "Nee. Het doel van dit document is marketing (Content Marketing). Ze beschrijven problemen die toevallig precies worden opgelost door hun software: 'Jazva eliminates the need for another software'. De '10 stappen' leiden de lezer subtiel naar de conclusie om klant te worden. Dit is gekleurde informatie."
+                        },
+                        {
+                          "name": "Nauwkeurigheid",
+                          "question": "Hoe nauwkeurig is de informatie?",
+                          "correctAnswer": [
+                            "Matig tot slecht: grote claims zoals '55% of warehouse hours is spent on order picking' verwijzend naar een 'UPS study'",
+                            "Geen bronvermelding, jaartal of link naar de studie, dus niet controleerbaar",
+                            "Cijfers kunnen niet gecontroleerd of wetenschappelijk verantwoord worden in scriptie",
+                            "Matig tot slecht: claims zonder verifieerbare bronnen",
+                            "Niet nauwkeurig genoeg: geen controleerbare bronnen"
+                          ],
+                          "feedback": "Matig tot slecht. Er worden grote claims gemaakt, zoals '55% of warehouse hours is spent on order picking', verwijzend naar een 'UPS study'. Echter, er is geen bronvermelding, jaartal of link naar deze studie. Je kunt deze cijfers dus niet controleren of wetenschappelijk verantwoorden in je scriptie."
+                        }
+                      ]
+                    },
+                    "crapTest": {
+                      "conclusion": "Deze bron scoort een onvoldoende op de CRAP-test. Je kunt met dit artikel hooguit wat ideeën opdoen. Termen als 'Efficient Picking Paths' en 'Designate Zones' zijn perfecte zoektermen om wél goede, wetenschappelijke bronnen mee te vinden via Windesearch of Google Scholar.",
+                      "status": "red",
+                      "criteria": [
+                        {
+                          "name": "Currency (Actualiteit)",
+                          "question": "Wanneer is de pagina geschreven? Is de informatie nog actueel?",
+                          "correctAnswer": [
+                            "Matig/Verouderd: het document noemt toekomstplannen voor het jaar 2020",
+                            "Geschreven vóór 2020: 'plan to implement one by 2020'",
+                            "Meer dan 5 jaar oud en in de e-commerce wereld dus gedateerd",
+                            "Niet actueel genoeg voor onderzoek dat kijkt naar een oplossing in 2026",
+                            "Verouderd: informatie van vóór 2020"
+                          ],
+                          "feedback": "Matig/Verouderd. Het document noemt toekomstplannen voor het jaar 2020: 'plan to implement one by 2020'. Dit betekent dat de tekst geschreven is vóór 2020. Voor onderzoek bij Organisatie X, die kijkt naar een oplossing in 2026, is deze informatie meer dan 5 jaar oud en in de e-commerce wereld dus gedateerd."
+                        },
+                        {
+                          "name": "Reliability (Nauwkeurigheid)",
+                          "question": "Wordt er een mening verkondigd? Worden er referenties gebruikt?",
+                          "correctAnswer": [
+                            "Slecht: er worden claims gemaakt zoals '55% of warehouse hours is spent on order picking' verwijzend naar een 'recent UPS study'",
+                            "Er ontbreekt een jaartal, link of bronvermelding naar deze studie",
+                            "Je kunt de feiten niet controleren, dit maakt de betrouwbaarheid laag",
+                            "Geen verifieerbare referenties, claims zonder bronvermelding",
+                            "Slecht: niet controleerbaar, geen referenties"
+                          ],
+                          "feedback": "Slecht. Er worden claims gemaakt zoals '55% of warehouse hours is spent on order picking', verwijzend naar een 'recent UPS study'. Er ontbreekt echter een jaartal, link of bronvermelding naar deze studie. Je kunt de feiten niet controleren. Dit maakt de betrouwbaarheid laag."
+                        },
+                        {
+                          "name": "Authority (Autoriteit)",
+                          "question": "Wie heeft het geschreven? Waaruit blijkt deskundigheid?",
+                          "correctAnswer": [
+                            "Commercieel: de auteur is Jazva Inc., een aanbieder van cloud-based ecommerce management software",
+                            "Hun deskundigheid ligt in het bouwen en verkopen van software, niet in onafhankelijk logistiek onderzoek",
+                            "Geen wetenschappelijke autoriteit, maar wel praktijkexpertise",
+                            "Commerciële auteur zonder academische achtergrond",
+                            "Commercieel: geen onafhankelijke deskundigheid"
+                          ],
+                          "feedback": "Commercieel. De auteur is Jazva Inc., een aanbieder van 'cloud-based ecommerce management software'. Hun deskundigheid ligt in het bouwen en verkopen van software, niet in onafhankelijk logistiek onderzoek."
+                        },
+                        {
+                          "name": "Purpose (Objectiviteit)",
+                          "question": "Wat is het doel? Waarvoor is de informatie bedoeld?",
+                          "correctAnswer": [
+                            "Subjectief (Verkoop): het doel is marketing",
+                            "De tekst stelt expliciet: 'Jazva eliminates the need for another software'",
+                            "De '10 stappen' zijn een middel om je uiteindelijk te overtuigen hun product te kopen",
+                            "Het is geen objectieve analyse van magazijnoptimalisatie",
+                            "Subjectief: marketing en verkoop, niet objectief"
+                          ],
+                          "feedback": "Subjectief (Verkoop). Het doel is marketing. De tekst stelt expliciet: 'Jazva eliminates the need for another software'. De '10 stappen' zijn een middel om je uiteindelijk te overtuigen hun product te kopen. Het is geen objectieve analyse van magazijnoptimalisatie."
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "title": "Warehouse Optimization with ABC Analysis: Improve Your Inventory Management",
+                    "author": "Rackbeat",
+                    "year": "Onbekend",
+                    "link": "https://rackbeat.com/en/warehouse-optimization-with-abc-analysis-improve-your-inventory-management/",
+                    "type": "commercieel",
+                    "firstCheck": {
+                      "conclusion": "Deze bron zit in dezelfde categorie: Gevaarlijk voor je theorie, goud voor je methode. Niet doen: Deze blogpost gebruiken als enige bron voor je theoretisch kader over ABC-analyse. Je beoordelaar wil een leerboek of artikel zien, geen software-blog. Wel doen: De term 'ABC Analysis' en 'Pareto Principle (80/20 rule)' gebruiken als zoekterm in Windesearch of Google Scholar. Daar vind je de oorspronkelijke theorie die je wél mag citeren. Advies: Sla de 2e check (wetenschappelijke criteria) over, want daar gaat deze bron falen op 'Autoriteit' en 'Objectiviteit'. Gebruik de term ABC-analyse om een betere bron te vinden.",
+                      "status": "orange",
+                      "criteria": [
+                        {
+                          "name": "Relevantie",
+                          "question": "Voor je onderzoek, sluit het onderzoek aan op je hoofdvraag/doelstelling?",
+                          "correctAnswer": [
+                            "Ja, het artikel legt de ABC-analyse uit, een bekende methode om artikelen in te delen op basis van belang",
+                            "Ja, specifieke link: 'Consider giving them [A-items] prime warehouse placement for easier picking and packing'",
+                            "Ja, dit is precies wat nodig is om rijafstanden te reduceren: de hardlopers (A-artikelen) vooraan leggen",
+                            "Ja, de ABC-analyse is een essentiële techniek voor kwantitatieve beoordeling van magazijnindelingen",
+                            "Hoog relevant: ABC-analyse is essentieel voor de doelstelling"
+                          ],
+                          "feedback": "Het artikel legt de ABC-analyse uit. Dit is een bekende methode om artikelen in te delen op basis van belang (vaak omloopsnelheid of waarde). Het artikel stelt specifiek: 'Consider giving them [A-items] prime warehouse placement for easier picking and packing.' Dit is precies wat je nodig hebt om rijafstanden te reduceren: de hardlopers (A-artikelen) vooraan leggen. De ABC-analyse is een essentiële techniek voor jouw doelstelling ('kwantitatieve beoordeling van magazijnindelingen')."
+                        },
+                        {
+                          "name": "Doel",
+                          "question": "Wat is het doel van het artikel. Is het bedoeld om te vermaken, informeren of te overtuigen?",
+                          "correctAnswer": [
+                            "Commercieel: Rackbeat is een leverancier van WMS-software (Warehouse Management Systems)",
+                            "Het artikel is informatief ('How to Perform an ABC Analysis'), maar het uiteindelijke doel is marketing",
+                            "Ze adviseren bijvoorbeeld: 'Automate the process: Use a warehouse management system (WMS)...'",
+                            "De pagina staat vol met knoppen als 'Book a Demo' en 'Free Trial'",
+                            "Commercieel: informeren om uiteindelijk te verkopen"
+                          ],
+                          "feedback": "Rackbeat is een leverancier van WMS-software (Warehouse Management Systems). Het artikel is informatief ('How to Perform an ABC Analysis'), maar het uiteindelijke doel is marketing. Ze adviseren bijvoorbeeld: 'Automate the process: Use a warehouse management system (WMS)...' en de pagina staat vol met knoppen als 'Book a Demo' en 'Free Trial'. Het doel is informeren om uiteindelijk te verkopen."
+                        },
+                        {
+                          "name": "Kwaliteit",
+                          "question": "Hoe is de kwaliteit? Hoe is de structuur? Welke argumenten worden er gegeven en is er een bronnenlijst?",
+                          "correctAnswer": [
+                            "Structuur is helder: Wat is het? Waarom belangrijk? Stappenplan 1-4",
+                            "Er is geen bronnenlijst, er wordt verwezen naar de 'classic 80/20 rule' (Pareto) maar zonder wetenschappelijke referentie",
+                            "Niveau: blogpost, de informatie is correct (ABC-analyse is standaard theorie) maar de diepgang is beperkt",
+                            "Geen wetenschappelijke onderbouwing, mist bronnenlijst",
+                            "Matig voor HBO-onderzoek: legt de basis goed uit, maar mist wetenschappelijke onderbouwing"
+                          ],
+                          "feedback": "De structuur is helder (Wat is het? Waarom belangrijk? Stappenplan 1-4). Er is geen bronnenlijst. Er wordt verwezen naar de 'classic 80/20 rule' (Pareto), maar zonder wetenschappelijke referentie. Het is een blogpost. De informatie is correct (ABC-analyse is standaard theorie), maar de diepgang is beperkt. Matig voor HBO-onderzoek: het legt de basis goed uit, maar mist wetenschappelijke onderbouwing."
+                        }
+                      ]
+                    },
+                    "secondCheck": {
+                      "conclusion": "Deze check wordt overgeslagen op basis van de 1e check. Deze bron is niet geschikt voor de 2e check (wetenschappelijke criteria). Argumenten uit de 1e check: 1) Doel: Het doel is commercieel - Rackbeat is een WMS-software leverancier, het doel is informeren om uiteindelijk software te verkopen. De pagina staat vol met 'Book a Demo' en 'Free Trial' knoppen. 2) Kwaliteit: Er is geen bronnenlijst. Er wordt verwezen naar de 'classic 80/20 rule' (Pareto) maar zonder wetenschappelijke referentie. Het is een blogpost niveau, mist wetenschappelijke onderbouwing. Gebruik de termen uit de 1e check (zoals 'ABC-analyse' en 'Pareto Principle') om betere, wetenschappelijke bronnen te vinden via Windesearch of Google Scholar.",
+                      "status": "orange",
+                      "criteria": []
+                    },
+                    "crapTest": {
+                      "conclusion": "BRUIKBAAR ALS STARTPUNT, NIET ALS FUNDAMENT. Deze bron is een klassiek voorbeeld van een 'instapper'. Het goede nieuws: De methode die ze beschrijven (ABC-analyse) is precies wat jij nodig hebt voor Organisatie X. Door artikelen te classificeren op basis van omloopsnelheid (A-artikelen), kun je deze vooraan in het PBU-magazijn leggen om die 20% reductie in rijafstanden te halen. Het slechte nieuws: Je kunt dit blogartikel niet opvoeren als je belangrijkste theoretische bron. Een HBO-docent zal zeggen: 'Waarom citeer je een softwareblog voor een theorie die al 100 jaar bestaat?'",
+                      "status": "orange",
+                      "criteria": [
+                        {
+                          "name": "Currency (Actualiteit)",
+                          "question": "Wanneer is de pagina geschreven? Is de informatie nog actueel?",
+                          "correctAnswer": [
+                            "Zeer goed: het artikel is gepubliceerd op 24 januari 2025",
+                            "Minder dan een jaar oud, zeer actueel",
+                            "ABC-analyse is een tijdloze methode, maar de context van dit artikel is zeer actueel",
+                            "Zeer actueel: recent gepubliceerd",
+                            "Goed: informatie is recent en actueel"
+                          ],
+                          "feedback": "Zeer goed. Het artikel is gepubliceerd op 24 januari 2025. Gezien het 'nu' december 2025 is, is de informatie minder dan een jaar oud. ABC-analyse is een tijdloze methode, maar de context van dit artikel is zeer actueel."
+                        },
+                        {
+                          "name": "Reliability (Nauwkeurigheid)",
+                          "question": "Wordt er een mening verkondigd? Worden er referenties gebruikt?",
+                          "correctAnswer": [
+                            "Matig: de uitleg over ABC-analyse (A=80% omzet, B=15%, C=5%) is inhoudelijk correct volgens de standaard theorie",
+                            "Er worden geen bronnen of referenties genoemd",
+                            "Er staat 'based on the classic 80/20 rule', maar er wordt niet verwezen naar Vilfredo Pareto (de grondlegger)",
+                            "Je kunt de beweringen in dit artikel dus niet verifiëren via een literatuurlijst",
+                            "Matig: correcte informatie maar zonder verifieerbare bronnen"
+                          ],
+                          "feedback": "Matig. De uitleg over ABC-analyse (A=80% omzet, B=15%, C=5%) is inhoudelijk correct volgens de standaard theorie. Echter, er worden geen bronnen of referenties genoemd. Er staat bijvoorbeeld 'based on the classic 80/20 rule', maar er wordt niet verwezen naar Vilfredo Pareto (de grondlegger). Je kunt de beweringen in dit artikel dus niet verifiëren via een literatuurlijst."
+                        },
+                        {
+                          "name": "Authority (Autoriteit)",
+                          "question": "Wie heeft het geschreven? Waaruit blijkt deskundigheid?",
+                          "correctAnswer": [
+                            "Commercieel: de auteur is Rackbeat, een bedrijf dat WMS-software verkoopt",
+                            "Hun expertise is praktisch en commercieel, niet wetenschappelijk",
+                            "Ze zijn geen onafhankelijk onderzoeksinstituut",
+                            "Commerciële auteur zonder wetenschappelijke autoriteit",
+                            "Commercieel: geen wetenschappelijke deskundigheid"
+                          ],
+                          "feedback": "Commercieel. De auteur is Rackbeat, een bedrijf dat WMS-software verkoopt. Hun expertise is praktisch en commercieel, niet wetenschappelijk. Ze zijn geen onafhankelijk onderzoeksinstituut."
+                        },
+                        {
+                          "name": "Purpose (Objectiviteit)",
+                          "question": "Wat is het doel? Waarvoor is de informatie bedoeld?",
+                          "correctAnswer": [
+                            "Subjectief (Marketing): het doel is duidelijk potentiële klanten informeren om software te verkopen",
+                            "Dit blijkt uit tips als 'Automate the process: Use a warehouse management system (WMS)'",
+                            "De vele 'Book a Demo'-knoppen tonen het commerciële doel",
+                            "Het is Content Marketing, niet objectieve informatie",
+                            "Subjectief: marketing en verkoop, niet objectief"
+                          ],
+                          "feedback": "Subjectief (Marketing). Het doel is duidelijk: potentiële klanten informeren over voorraadproblemen om ze vervolgens software te verkopen. Dit blijkt uit tips als 'Automate the process: Use a warehouse management system (WMS)' en de vele 'Book a Demo'-knoppen. Het is Content Marketing."
+                        }
+                      ]
+                    }
                   }
                 ]
               }
@@ -351,7 +802,7 @@
             "title": "Opdracht 4: Artikel Careful with that warehouse",
             "defaultOpen": false,
             "content": [
-              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Zorg dat je de kern van het artikel <a href=\"assets/Documents/Careful with that warehouse.pdf\" target=\"_blank\" class=\"text-blue-600 hover:text-blue-800 underline font-medium\">Careful with that warehouse</a> hebt begrepen.</p>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Zorg dat je de kern van het artikel <a href=\"assets/Documents/Careful%20with%20that%20warehouse.pdf\" target=\"_blank\" class=\"text-blue-600 hover:text-blue-800 underline font-medium\">Careful with that warehouse</a> hebt begrepen.</p>",
               "<p class=\"text-gray-700 dark:text-gray-300 mb-0\">Voer de 1e check uit op het artikel en beschrijf kort je bevinding.</p>"
             ]
           },

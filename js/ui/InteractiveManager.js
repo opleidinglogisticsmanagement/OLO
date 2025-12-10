@@ -20,6 +20,7 @@ class InteractiveManager {
         this.setupInteractiveComponents();
         this.setupMCQuestionAndNavigationHandlers();
         this.setupDragAndDropHandlers();
+        this.setupSourceEvaluationHandlers();
     }
 
     /**
@@ -494,6 +495,52 @@ class InteractiveManager {
                 }
             }
         }, true); // Use capture phase
+    }
+
+    /**
+     * Setup event listeners for source evaluation exercise buttons
+     */
+    setupSourceEvaluationHandlers() {
+        // Use event delegation for source evaluation buttons
+        document.addEventListener('click', (e) => {
+            // Source selection buttons
+            const sourceButton = e.target.closest('.source-select-btn');
+            if (sourceButton) {
+                e.preventDefault();
+                e.stopPropagation();
+                const exerciseId = sourceButton.getAttribute('data-exercise-id');
+                const sourceIndex = parseInt(sourceButton.getAttribute('data-source-index') || '0');
+                if (exerciseId && typeof InteractiveRenderer !== 'undefined') {
+                    InteractiveRenderer.selectSource(exerciseId, sourceIndex);
+                }
+                return;
+            }
+
+            // Check type selection buttons (alleen als niet disabled)
+            const checkTypeButton = e.target.closest('.check-type-btn');
+            if (checkTypeButton && !checkTypeButton.disabled) {
+                e.preventDefault();
+                e.stopPropagation();
+                const exerciseId = checkTypeButton.getAttribute('data-exercise-id');
+                const checkType = checkTypeButton.getAttribute('data-check-type');
+                if (exerciseId && checkType && typeof InteractiveRenderer !== 'undefined') {
+                    InteractiveRenderer.selectCheckType(exerciseId, checkType);
+                }
+                return;
+            }
+
+            // Answer model button
+            const answerModelButton = e.target.closest('.source-eval-check-btn');
+            if (answerModelButton) {
+                e.preventDefault();
+                e.stopPropagation();
+                const exerciseId = answerModelButton.getAttribute('data-exercise-id');
+                if (exerciseId && typeof InteractiveRenderer !== 'undefined') {
+                    InteractiveRenderer.checkAllSourceCriteria(exerciseId);
+                }
+                return;
+            }
+        });
     }
 }
 

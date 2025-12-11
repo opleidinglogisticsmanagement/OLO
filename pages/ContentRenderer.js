@@ -56,6 +56,8 @@ class ContentRenderer {
                     return this.renderTrueFalseExercise(item);
                 case 'sourceEvaluationExercise':
                     return this.renderSourceEvaluationExercise(item);
+                case 'sequenceExercise':
+                    return this.renderSequenceExercise(item);
                 case 'steps':
                     return this.renderSteps(item);
                 case 'clickableSteps':
@@ -551,6 +553,17 @@ class ContentRenderer {
             return InteractiveRenderer.renderSourceEvaluationExercise(item);
         }
         console.warn('InteractiveRenderer not loaded. Source evaluation exercise will not render.');
+        return '';
+    }
+
+    /**
+     * Render een sequence oefening
+     */
+    static renderSequenceExercise(item) {
+        if (typeof window.InteractiveRenderer !== 'undefined') {
+            return InteractiveRenderer.renderSequenceExercise(item);
+        }
+        console.warn('InteractiveRenderer not loaded. Sequence exercise will not render.');
         return '';
     }
 

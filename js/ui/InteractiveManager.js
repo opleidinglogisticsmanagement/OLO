@@ -21,6 +21,7 @@ class InteractiveManager {
         this.setupMCQuestionAndNavigationHandlers();
         this.setupDragAndDropHandlers();
         this.setupSourceEvaluationHandlers();
+        this.setupSequenceExerciseHandlers();
     }
 
     /**
@@ -367,6 +368,79 @@ class InteractiveManager {
         }, false);
     }
     
+    /**
+     * Setup event delegation for sequence exercise (sortable list)
+     */
+    setupSequenceExerciseHandlers() {
+        // Use a global flag to prevent multiple event listeners
+        if (window._sequenceHandlersSetup) {
+            return;
+        }
+        window._sequenceHandlersSetup = true;
+        
+        // Handle drag start for sequence items
+        document.addEventListener('dragstart', (e) => {
+            const item = e.target.closest('.sequence-item');
+            if (!item) return;
+            
+            const exerciseId = item.getAttribute('data-exercise-id');
+            if (!exerciseId) return;
+            
+            if (typeof InteractiveRenderer !== 'undefined' && InteractiveRenderer.handleSequenceDragStart) {
+                InteractiveRenderer.handleSequenceDragStart(e, exerciseId);
+            }
+        }, true);
+        
+        // Handle drag over for sortable container
+        document.addEventListener('dragover', (e) => {
+            const item = e.target.closest('.sequence-item');
+            if (!item) {
+                const container = e.target.closest('.sequence-sortable-container');
+                if (container) {
+                    const exerciseId = container.id.replace('-sortable-container', '');
+                    if (exerciseId && typeof InteractiveRenderer !== 'undefined' && InteractiveRenderer.handleSequenceDragOver) {
+                        InteractiveRenderer.handleSequenceDragOver(e, exerciseId);
+                    }
+                }
+                return;
+            }
+            
+            const exerciseId = item.getAttribute('data-exercise-id');
+            if (!exerciseId) return;
+            
+            const container = item.closest('.sequence-sortable-container');
+            if (container && typeof InteractiveRenderer !== 'undefined' && InteractiveRenderer.handleSequenceDragOver) {
+                InteractiveRenderer.handleSequenceDragOver(e, exerciseId);
+            }
+        }, true);
+        
+        // Handle drag end
+        document.addEventListener('dragend', (e) => {
+            const item = e.target.closest('.sequence-item');
+            if (!item) return;
+            
+            const exerciseId = item.getAttribute('data-exercise-id');
+            if (!exerciseId) return;
+            
+            if (typeof InteractiveRenderer !== 'undefined' && InteractiveRenderer.handleSequenceDragEnd) {
+                InteractiveRenderer.handleSequenceDragEnd(e, exerciseId);
+            }
+        }, true);
+        
+        // Handle check button click
+        document.addEventListener('click', (e) => {
+            const button = e.target.closest('.sequence-check-btn');
+            if (!button) return;
+            
+            const exerciseId = button.getAttribute('data-exercise-id');
+            if (exerciseId && typeof InteractiveRenderer !== 'undefined' && InteractiveRenderer.checkSequenceOrder) {
+                e.preventDefault();
+                e.stopPropagation();
+                InteractiveRenderer.checkSequenceOrder(exerciseId);
+            }
+        }, true);
+    }
+
     /**
      * Setup event delegation for drag-and-drop in matching exercises
      * This ensures drag-and-drop works even when content is dynamically rendered (e.g., in accordions)

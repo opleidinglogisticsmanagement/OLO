@@ -123,45 +123,109 @@ class ContentRenderer {
             return html;
         }
         
-        // Pattern to match: <h3...>title</h3> followed by <div...overflow-x-auto...><table...>
-        // This pattern handles whitespace, newlines, and attributes flexibly
-        // The pattern looks for h3, then optional whitespace, then div with overflow-x-auto class, then table
-        const pattern = /<h3([^>]*)>([^<]+)<\/h3>[\s\n]*(<div[^>]*class="[^"]*overflow-x-auto[^"]*"[^>]*>[\s\n]*<table([^>]*)>)/gi;
-        
+        // Use a more robust approach: find all h3 elements, then find the complete table structure after each
+        // This ensures we always match the correct table for each h3
+        const h3Pattern = /<h3([^>]*)>([^<]+)<\/h3>/gi;
         let processedHtml = html;
-        let match;
+        let h3Match;
         let tableCounter = 0;
         const replacements = [];
+        const h3Matches = [];
         
-        // Find all matches and collect replacement data
-        while ((match = pattern.exec(html)) !== null) {
-            tableCounter++;
-            const tableId = `copyable-table-${Date.now()}-${tableCounter}`;
-            const fullMatch = match[0];
-            const h3Attrs = match[1];
-            const h3Text = match[2];
-            const divAndTable = match[3];
-            const tableAttrs = match[4];
-            
-            // Create replacement with flex container for h3 and button
-            // Note: h3Attrs already contains the classes, so we keep them
-            const replacement = `<div class="flex items-center justify-between mb-4">
-                    <h3${h3Attrs}>${h3Text}</h3>
-                    <button 
-                        class="copy-table-btn ml-4 px-4 py-2 bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300 rounded-md text-sm font-medium transition-colors flex items-center space-x-2 flex-shrink-0" 
-                        data-table-id="${tableId}"
-                        aria-label="Kopieer tabel"
-                        title="Kopieer tabel naar klembord">
-                        <i class="fas fa-copy"></i>
-                        <span class="hidden sm:inline">Kopieer tabel</span>
-                    </button>
-                </div>
-                ${divAndTable.replace(/<table([^>]*)>/, `<table$1 id="${tableId}">`)}`;
-            
-            replacements.push({
-                original: fullMatch,
-                replacement: replacement
+        // First, collect all h3 matches with their positions
+        while ((h3Match = h3Pattern.exec(html)) !== null) {
+            h3Matches.push({
+                index: h3Match.index,
+                fullMatch: h3Match[0],
+                attrs: h3Match[1],
+                text: h3Match[2],
+                endIndex: h3Match.index + h3Match[0].length
             });
+        }
+        
+        // Process each h3 and find its associated table
+        for (let i = 0; i < h3Matches.length; i++) {
+            const h3 = h3Matches[i];
+            const searchStart = h3.endIndex;
+            const searchEnd = i < h3Matches.length - 1 ? h3Matches[i + 1].index : html.length;
+            const searchArea = html.substring(searchStart, searchEnd);
+            
+            // Find the div with overflow-x-auto that contains a table
+            const divStartPattern = /<div[^>]*class="[^"]*overflow-x-auto[^"]*"[^>]*>/;
+            const divMatch = searchArea.match(divStartPattern);
+            
+            if (divMatch) {
+                const divStartInSearch = divMatch.index;
+                const divStartInHtml = searchStart + divStartInSearch;
+                
+                // Find the matching closing </div> tag for this div
+                // We need to count opening and closing div tags to find the right closing tag
+                let divDepth = 1;
+                let pos = divStartInSearch + divMatch[0].length;
+                let closingDivIndex = -1;
+                
+                while (pos < searchArea.length && divDepth > 0) {
+                    const nextOpenDiv = searchArea.indexOf('<div', pos);
+                    const nextCloseDiv = searchArea.indexOf('</div>', pos);
+                    
+                    if (nextCloseDiv === -1) break;
+                    
+                    if (nextOpenDiv !== -1 && nextOpenDiv < nextCloseDiv) {
+                        divDepth++;
+                        pos = nextOpenDiv + 4;
+                    } else {
+                        divDepth--;
+                        if (divDepth === 0) {
+                            closingDivIndex = nextCloseDiv;
+                            break;
+                        }
+                        pos = nextCloseDiv + 6;
+                    }
+                }
+                
+                if (closingDivIndex !== -1) {
+                    // Found the complete div structure
+                    const divEndInHtml = searchStart + closingDivIndex + 6; // +6 for </div>
+                    const fullDivContent = html.substring(divStartInHtml, divEndInHtml);
+                    
+                    // Check if this div contains a table
+                    if (fullDivContent.includes('<table')) {
+                        tableCounter++;
+                        // Use a more unique ID that includes timestamp and counter, plus a random component
+                        const uniqueId = `${Date.now()}-${tableCounter}-${Math.random().toString(36).substr(2, 9)}`;
+                        const tableId = `copyable-table-${uniqueId}`;
+                        
+                        // Find the table tag within the div and add the ID
+                        const tableTagPattern = /<table([^>]*)>/;
+                        const tableWithId = fullDivContent.replace(tableTagPattern, `<table$1 id="${tableId}">`);
+                        
+                        // Get the whitespace/content between h3 and div to preserve it
+                        const whitespaceBetween = html.substring(h3.endIndex, divStartInHtml);
+                        
+                        // Create the full match from h3 to end of div
+                        const fullMatch = html.substring(h3.index, divEndInHtml);
+                        
+                        // Create replacement with flex container for h3 and button, then whitespace, then the table with ID
+                        const replacement = `<div class="flex items-center justify-between mb-4">
+                                <h3${h3.attrs}>${h3.text}</h3>
+                                <button 
+                                    class="copy-table-btn ml-4 px-4 py-2 bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300 rounded-md text-sm font-medium transition-colors flex items-center space-x-2 flex-shrink-0" 
+                                    data-table-id="${tableId}"
+                                    aria-label="Kopieer tabel"
+                                    title="Kopieer tabel naar klembord">
+                                    <i class="fas fa-copy"></i>
+                                    <span class="hidden sm:inline">Kopieer tabel</span>
+                                </button>
+                            </div>
+                            ${whitespaceBetween}${tableWithId}`;
+                        
+                        replacements.push({
+                            original: fullMatch,
+                            replacement: replacement
+                        });
+                    }
+                }
+            }
         }
         
         // Apply replacements in reverse order to maintain string indices

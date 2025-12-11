@@ -455,22 +455,38 @@ class InteractiveManager {
         // Handle dragstart events for matching exercise items
         // Use capture phase to ensure we catch events before inline handlers
         document.addEventListener('dragstart', (e) => {
-            const target = e.target;
+            const target = e.target.closest('.matching-item') || e.target;
             // Check if this is a draggable matching item
-            if (target.draggable === true && target.classList.contains('matching-item')) {
+            if (target && target.draggable === true && target.classList.contains('matching-item')) {
                 const ondragstartAttr = target.getAttribute('ondragstart');
                 if (ondragstartAttr && ondragstartAttr.includes('handleDragStart')) {
                     // Extract exerciseId and itemIndex from the ondragstart attribute
                     const match = ondragstartAttr.match(/handleDragStart\(event,\s*['"]([^'"]+)['"],\s*(\d+)\)/);
                     if (match && typeof window.InteractiveRenderer !== 'undefined' && window.InteractiveRenderer.handleDragStart) {
-                        // Remove the inline handler to prevent double execution
-                        target.removeAttribute('ondragstart');
+                        e.stopPropagation();
                         try {
                             const exerciseId = match[1];
                             const itemIndex = parseInt(match[2]);
                             window.InteractiveRenderer.handleDragStart(e, exerciseId, itemIndex);
                         } catch (err) {
                             console.error('Error handling drag start:', err);
+                        }
+                    }
+                } else {
+                    // Fallback: try to extract from data attributes if inline handler was removed
+                    const itemIndex = target.getAttribute('data-item-index');
+                    if (itemIndex !== null) {
+                        const exerciseContainer = target.closest('.matching-exercise');
+                        if (exerciseContainer) {
+                            const exerciseId = exerciseContainer.id;
+                            if (exerciseId && typeof window.InteractiveRenderer !== 'undefined' && window.InteractiveRenderer.handleDragStart) {
+                                e.stopPropagation();
+                                try {
+                                    window.InteractiveRenderer.handleDragStart(e, exerciseId, parseInt(itemIndex));
+                                } catch (err) {
+                                    console.error('Error handling drag start (fallback):', err);
+                                }
+                            }
                         }
                     }
                 }

@@ -138,6 +138,94 @@
       {
         "type": "paragraph",
         "text": [
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Test je kennis van de verschillende onderzoeksstrategieën door de onderstaande oefening te maken. Let op: deze oefening werkt mogelijk niet goed op mobiele apparaten. Gebruik bij voorkeur een desktop of tablet voor de beste ervaring.</p>"
+        ]
+      },
+      {
+        "type": "accordion",
+        "usePlusIcon": true,
+        "defaultOpen": false,
+        "items": [
+          {
+            "title": "Oefening: Onderzoeksstrategie Matching Game",
+            "defaultOpen": false,
+            "content": [
+              {
+                "type": "matchingExercise",
+                "title": "Match onderzoeksscenario's met de juiste onderzoeksstrategie",
+                "instruction": "Sleep de onderzoeksscenario's naar de juiste onderzoeksstrategie. Elke strategie kan meerdere scenario's hebben die erbij passen:",
+                "categories": [
+                  {
+                    "name": "Survey-onderzoek",
+                    "description": "Breed onderzoek bij grote aantallen onderzoekseenheden, vaak kwantitatief"
+                  },
+                  {
+                    "name": "Casestudy",
+                    "description": "Diepgaand en integraal inzicht in één of enkele objecten of processen"
+                  },
+                  {
+                    "name": "Experiment",
+                    "description": "Geschikt voor evaluatieonderzoek om effectiviteit of effecten te meten"
+                  },
+                  {
+                    "name": "Gefundeerde theoriebenadering",
+                    "description": "Systematisch ontwikkelen van theorieën op basis van kwalitatieve data"
+                  },
+                  {
+                    "name": "Bureauonderzoek",
+                    "description": "Gebruik van bestaande bronnen en documenten, geen direct contact met onderzoeksobject"
+                  }
+                ],
+                "items": [
+                  {
+                    "text": "Je wilt de tevredenheid van 500 klanten meten over een nieuwe bezorgservice die het bedrijf heeft geïntroduceerd",
+                    "correctCategory": 0
+                  },
+                  {
+                    "text": "Je wilt diepgaand begrijpen waarom een specifiek magazijn inefficiënt is door het proces volledig te analyseren",
+                    "correctCategory": 1
+                  },
+                  {
+                    "text": "Je wilt testen of een nieuwe pickingmethode sneller is dan de huidige methode door beide methoden te vergelijken",
+                    "correctCategory": 2
+                  },
+                  {
+                    "text": "Je wilt onderzoeken welke factoren de medewerkerstevredenheid beïnvloeden door interviews te houden en nieuwe inzichten te ontwikkelen",
+                    "correctCategory": 3
+                  },
+                  {
+                    "text": "Je wilt best practices identificeren voor voorraadbeheer door wetenschappelijke artikelen en industriële rapporten te analyseren",
+                    "correctCategory": 4
+                  },
+                  {
+                    "text": "Je wilt een algemeen beeld krijgen van de leverprestaties van alle leveranciers over de afgelopen 6 maanden",
+                    "correctCategory": 0
+                  },
+                  {
+                    "text": "Je wilt begrijpen hoe een succesvolle reorganisatie in een distributiecentrum tot stand is gekomen door het proces integraal te bestuderen",
+                    "correctCategory": 1
+                  },
+                  {
+                    "text": "Je wilt vaststellen wat de effectiviteit is van een nieuw trainingsprogramma door productiviteit voor en na de training te meten",
+                    "correctCategory": 2
+                  },
+                  {
+                    "text": "Je wilt nieuwe theoretische inzichten ontwikkelen over magazijnoperaties door interviews met medewerkers en managers te analyseren",
+                    "correctCategory": 3
+                  },
+                  {
+                    "text": "Je wilt de globale inhoud van een Service Level Agreement vaststellen door literatuur en bestaande contracten te raadplegen",
+                    "correctCategory": 4
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": [
           "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Nu je een kernbeslissing kunt nemen en ook je onderzoeksstrategie kunt kiezen, is het mogelijk om te beginnen met je dataverzamelingsplan. Daarover gaat het volgende stuk.</p>",
           "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Hieronder zie je in een tabel welke methoden bij Procesmanagement en Project Procesverbetering zijn behandeld. Deze keuzes werden vastgelegd in een dataverzamelingsplan of een meetplan.</p>"
         ]

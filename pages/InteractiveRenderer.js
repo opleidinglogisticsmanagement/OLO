@@ -572,12 +572,13 @@ class InteractiveRenderer {
         const categoriesHtml = item.categories.map((category, catIndex) => {
             const categoryId = `${exerciseId}-category-${catIndex}`;
             return `
-                <div class="border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-lg p-4 min-h-[120px] bg-gray-50 dark:bg-gray-800 overflow-hidden" id="${categoryId}" 
+                <div class="border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-lg p-4 min-h-[120px] bg-gray-50 dark:bg-gray-800" id="${categoryId}" 
                      ondrop="InteractiveRenderer.handleDrop(event, '${exerciseId}', ${catIndex})" 
                      ondragover="InteractiveRenderer.allowDrop(event)"
-                     style="word-wrap: break-word; overflow-wrap: break-word;">
+                     style="word-wrap: break-word; overflow-wrap: break-word; overflow: visible;">
                     <h4 class="font-semibold text-gray-900 dark:text-white mb-2 text-sm break-words">${category.name}</h4>
-                    <div class="dropped-items space-y-2 break-words" id="${categoryId}-items" style="word-wrap: break-word; overflow-wrap: break-word;"></div>
+                    ${category.description ? `<p class="text-xs text-gray-600 dark:text-gray-400 mb-3 italic">${category.description}</p>` : ''}
+                    <div class="dropped-items space-y-2 break-words" id="${categoryId}-items" style="word-wrap: break-word; overflow-wrap: break-word; min-height: 60px;"></div>
                 </div>
             `;
         }).join('');
@@ -593,9 +594,9 @@ class InteractiveRenderer {
                     ondragend="InteractiveRenderer.handleDragEnd(event)"
                     data-item-index="${itemObj.originalIndex}"
                     data-correct-category="${itemObj.correctCategory}"
-                    style="word-wrap: break-word; overflow-wrap: break-word; max-width: 100%;"
+                    style="word-wrap: break-word; overflow-wrap: break-word; max-width: 100%; min-height: auto; height: auto; user-select: none; -webkit-user-select: none;"
                 >
-                    <p class="text-sm text-gray-800 dark:text-gray-200 break-words" style="word-wrap: break-word; overflow-wrap: break-word; hyphens: auto;">${itemObj.text}</p>
+                    <p class="text-sm text-gray-800 dark:text-gray-200 break-words leading-relaxed" style="word-wrap: break-word; overflow-wrap: break-word; hyphens: auto; margin: 0; display: block; user-select: none; -webkit-user-select: none; pointer-events: none;">${itemObj.text}</p>
                 </div>
             `;
         }).join('');
@@ -607,12 +608,25 @@ class InteractiveRenderer {
                 overflow-wrap: break-word;
                 max-width: 100%;
                 box-sizing: border-box;
+                min-height: auto;
+                height: auto;
+                user-select: none;
+                -webkit-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
             }
             #${exerciseId} .matching-item p {
                 word-wrap: break-word;
                 overflow-wrap: break-word;
                 hyphens: auto;
                 margin: 0;
+                line-height: 1.5;
+                display: block;
+                user-select: none;
+                -webkit-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                pointer-events: none;
             }
             #${exerciseId} .dropped-items {
                 word-wrap: break-word;
@@ -622,10 +636,15 @@ class InteractiveRenderer {
             #${exerciseId} .dropped-items .matching-item {
                 max-width: 100%;
                 box-sizing: border-box;
+                min-height: auto;
+                height: auto;
             }
-            @media (min-width: 768px) {
+            #${exerciseId} .categories-grid {
+                grid-template-columns: repeat(1, minmax(0, 1fr)) !important;
+            }
+            @media (min-width: 640px) {
                 #${exerciseId} .categories-grid {
-                    grid-template-columns: repeat(${item.categories.length}, minmax(0, 1fr)) !important;
+                    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
                 }
             }
         `;
@@ -642,7 +661,7 @@ class InteractiveRenderer {
                 
                 <div class="border-t-2 border-gray-200 dark:border-gray-700 pt-4">
                     <h4 class="font-semibold text-gray-900 dark:text-white mb-3 text-sm">Sleep deze items naar de juiste categorie:</h4>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3" id="${exerciseId}-items-container" style="word-wrap: break-word; overflow-wrap: break-word;">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3" id="${exerciseId}-items-container" style="word-wrap: break-word; overflow-wrap: break-word;">
                         ${itemsHtml}
                     </div>
                 </div>
@@ -663,11 +682,21 @@ class InteractiveRenderer {
      * Handle drag start
      */
     static handleDragStart(event, exerciseId, itemIndex) {
-        event.dataTransfer.setData('text/plain', JSON.stringify({ exerciseId, itemIndex }));
+        // Prevent default to ensure drag works
+        event.stopPropagation();
+        
+        // Set data for drop handling
+        const data = JSON.stringify({ exerciseId, itemIndex });
+        event.dataTransfer.setData('text/plain', data);
         event.dataTransfer.effectAllowed = 'move';
-        event.currentTarget.style.opacity = '0.5';
-        // Store the dragged element for potential dragend handling
-        event.dataTransfer.setData('dragged-element-id', event.currentTarget.id);
+        
+        // Visual feedback
+        const target = event.currentTarget || event.target.closest('.matching-item');
+        if (target) {
+            target.style.opacity = '0.5';
+            // Store the dragged element for potential dragend handling
+            event.dataTransfer.setData('dragged-element-id', target.id);
+        }
     }
 
     /**
@@ -745,6 +774,7 @@ class InteractiveRenderer {
         
         // Ensure item remains draggable and has the correct event handlers
         itemElement.setAttribute('draggable', 'true');
+        itemElement.draggable = true;
         
         // Re-attach drag handlers to ensure they work after moving
         // Use inline handlers (ondragstart) so they work even after DOM manipulation
@@ -761,6 +791,13 @@ class InteractiveRenderer {
             itemElement.ondragend = (e) => {
                 InteractiveRenderer.handleDragEnd(e);
             };
+        }
+        
+        // Ensure child elements don't interfere with dragging
+        const childP = itemElement.querySelector('p');
+        if (childP) {
+            childP.style.pointerEvents = 'none';
+            childP.style.userSelect = 'none';
         }
         
         // Move item to new category

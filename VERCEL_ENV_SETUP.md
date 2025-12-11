@@ -1,4 +1,4 @@
-# Vercel Environment Variables Setup
+K# Vercel Environment Variables Setup
 
 ## Probleem
 Je krijgt de foutmelding: `GEMINI_API_KEY is not set in server environment` of `GEMINI_API_KEY is not set in environment variables`

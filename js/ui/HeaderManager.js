@@ -241,3 +241,4 @@ if (typeof module !== 'undefined' && module.exports) {
 } else {
     window.HeaderManager = HeaderManager;
 }
+

@@ -48,3 +48,4 @@ if (typeof module !== 'undefined' && module.exports) {
 } else {
     window.NavigationService = NavigationService;
 }
+

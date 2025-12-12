@@ -185,6 +185,13 @@ class ScrollManager {
         const anchorId = anchor.startsWith('#') ? anchor : '#' + anchor;
         console.log('[ScrollManager] scrollToAnchor called with:', anchorId, 'on module:', this.moduleId);
         
+        // Prevent multiple simultaneous scroll attempts for the same anchor
+        if (this._scrollingToAnchor === anchorId) {
+            console.log('[ScrollManager] ⏭️ Already scrolling to', anchorId, '- skipping duplicate call');
+            return;
+        }
+        this._scrollingToAnchor = anchorId;
+        
         // Try multiple times in case content is still loading
         // Week 2, 3, and 6 may need more retries due to async content loading
         const maxAttempts = (this.moduleId === 'week-2' || this.moduleId === 'week-3' || this.moduleId === 'week-6') ? 20 : 15;
@@ -199,56 +206,257 @@ class ScrollManager {
             if (element && mainContent) {
                 console.log('[ScrollManager] ✅ Element found:', element.id || anchorId);
                 
-                // Calculate scroll position: find element's offsetTop relative to main-content
-                let scrollPosition = 0;
-                let currentElement = element;
+                // Find the actual scrollable container
+                // Check if main-content is scrollable, otherwise find parent or use window
+                let scrollContainer = mainContent;
+                let isElementContainer = true; // Track if we're using an element or window
+                let isMainContentScrollable = mainContent.scrollHeight > mainContent.clientHeight;
                 
-                // Walk up the DOM tree until we reach main-content
-                while (currentElement && currentElement !== mainContent && currentElement !== document.body) {
-                    scrollPosition += currentElement.offsetTop;
-                    currentElement = currentElement.offsetParent;
+                // If main-content is not scrollable, find the scrollable parent
+                if (!isMainContentScrollable) {
+                    let parent = mainContent.parentElement;
+                    while (parent && parent !== document.body && parent !== document.documentElement) {
+                        // Check if parent is scrollable by checking computed style
+                        const computedStyle = window.getComputedStyle(parent);
+                        const isOverflowScrollable = computedStyle.overflowY === 'auto' || 
+                                                     computedStyle.overflowY === 'scroll' ||
+                                                     computedStyle.overflow === 'auto' || 
+                                                     computedStyle.overflow === 'scroll';
+                        
+                        // Only accept if it's actually scrollable (scrollHeight > clientHeight)
+                        // Don't just check CSS, verify it can actually scroll
+                        if (isOverflowScrollable && parent.scrollHeight > parent.clientHeight) {
+                            scrollContainer = parent;
+                            isMainContentScrollable = true;
+                            console.log('[ScrollManager] Found scrollable parent container:', parent.id || parent.className || 'unnamed div', 'scrollHeight:', parent.scrollHeight, 'clientHeight:', parent.clientHeight);
+                            break;
+                        }
+                        parent = parent.parentElement;
+                    }
+                    
+                    // If still no scrollable container found, use window
+                    if (!isMainContentScrollable) {
+                        scrollContainer = window;
+                        isElementContainer = false;
+                        console.log('[ScrollManager] No scrollable parent found, using window as scroll container');
+                    }
                 }
                 
-                // Subtract header offset
-                const targetScroll = Math.max(0, scrollPosition - headerOffset);
+                // Calculate target scroll position based on container type
+                let elementTopRelativeToContainer;
+                let targetScroll;
+                let currentScroll;
                 
-                console.log('[ScrollManager] Calculated scroll position:', targetScroll, 'Current scroll:', mainContent.scrollTop);
+                if (isElementContainer) {
+                    // For element container, use getBoundingClientRect
+                    const elementRect = element.getBoundingClientRect();
+                    const containerRect = scrollContainer.getBoundingClientRect();
+                    elementTopRelativeToContainer = elementRect.top - containerRect.top + scrollContainer.scrollTop;
+                    targetScroll = Math.max(0, elementTopRelativeToContainer - headerOffset);
+                    currentScroll = scrollContainer.scrollTop;
+                } else {
+                    // For window, use pageYOffset and element position relative to viewport
+                    elementTopRelativeToContainer = element.getBoundingClientRect().top + window.pageYOffset;
+                    targetScroll = Math.max(0, elementTopRelativeToContainer - headerOffset);
+                    currentScroll = window.pageYOffset || document.documentElement.scrollTop || 0;
+                }
+                
+                console.log('[ScrollManager] Calculated scroll position:', targetScroll, 'Current scroll:', currentScroll, 'Element top relative:', elementTopRelativeToContainer, 'Container scrollable:', isMainContentScrollable, 'Using window:', !isElementContainer);
                 
                 // Scroll the container
-                mainContent.scrollTo({
-                    top: targetScroll,
-                    behavior: 'smooth'
-                });
+                if (isElementContainer) {
+                    scrollContainer.scrollTo({
+                        top: targetScroll,
+                        behavior: 'smooth'
+                    });
+                } else {
+                    window.scrollTo({
+                        top: targetScroll,
+                        behavior: 'smooth'
+                    });
+                }
                 
-                // Verify scroll worked after a delay
-                setTimeout(() => {
-                    const elementRect = element.getBoundingClientRect();
-                    const containerRect = mainContent.getBoundingClientRect();
-                    const elementTopRelative = elementRect.top - containerRect.top;
-                    
-                    console.log('[ScrollManager] Element position after scroll:', elementTopRelative, 'Expected offset:', headerOffset);
-                    
-                    // If element is not at the right position, use scrollIntoView as fallback
-                    if (Math.abs(elementTopRelative - headerOffset) > 50) {
-                        console.log('[ScrollManager] Scroll position incorrect, using scrollIntoView fallback');
-                        element.scrollIntoView({
-                            behavior: 'smooth',
-                            block: 'start',
-                            inline: 'nearest'
-                        });
-                        
-                        // Adjust for header after scrollIntoView
-                        setTimeout(() => {
-                            const currentScroll = mainContent.scrollTop;
-                            mainContent.scrollTo({
-                                top: Math.max(0, currentScroll - headerOffset),
-                                behavior: 'smooth'
-                            });
-                        }, 400);
-                    } else {
-                        console.log('[ScrollManager] ✅ Scroll successful!');
+                // Log immediately after scroll call to verify it was called
+                if (isElementContainer) {
+                    console.log('[ScrollManager] Scroll command executed. Target:', targetScroll, 'Container scrollTop:', scrollContainer.scrollTop, 'Container height:', scrollContainer.clientHeight, 'Scroll height:', scrollContainer.scrollHeight);
+                } else {
+                    console.log('[ScrollManager] Scroll command executed. Target:', targetScroll, 'Window scrollTop:', window.pageYOffset || document.documentElement.scrollTop);
+                }
+                
+                // Verify scroll worked after smooth scroll completes
+                // Use a combination of scroll event listener and timeout for better reliability
+                const verificationDelay = 2000; // Increased delay for large scroll distances
+                let fallbackUsed = false;
+                let scrollStarted = false;
+                let lastScrollTop = scrollContainer.scrollTop;
+                
+                // Listen for scroll events to detect when scrolling actually starts
+                const scrollCheckInterval = setInterval(() => {
+                    const currentScrollValue = isElementContainer 
+                        ? scrollContainer.scrollTop 
+                        : (window.pageYOffset || document.documentElement.scrollTop || 0);
+                    if (currentScrollValue !== lastScrollTop) {
+                        scrollStarted = true;
+                        lastScrollTop = currentScrollValue;
+                        console.log('[ScrollManager] Scroll detected. Current position:', currentScrollValue);
                     }
-                }, 600);
+                }, 100);
+                
+                // Clear interval after verification delay
+                setTimeout(() => clearInterval(scrollCheckInterval), verificationDelay + 500);
+                
+                setTimeout(() => {
+                    // Clear the scroll check interval
+                    clearInterval(scrollCheckInterval);
+                    
+                    // Primary check: verify scroll position matches what we expected
+                    const currentScrollTop = isElementContainer 
+                        ? scrollContainer.scrollTop 
+                        : (window.pageYOffset || document.documentElement.scrollTop || 0);
+                    const scrollDifference = Math.abs(currentScrollTop - targetScroll);
+                    
+                    console.log('[ScrollManager] Verification after delay - ScrollTop:', currentScrollTop, 'Expected:', targetScroll, 'Diff:', scrollDifference, 'Scroll started:', scrollStarted);
+                    
+                    // Secondary check: verify element is visible within container viewport
+                    const newElementRect = element.getBoundingClientRect();
+                    let elementTopRelative;
+                    let containerHeight;
+                    
+                    if (isElementContainer) {
+                        const newContainerRect = scrollContainer.getBoundingClientRect();
+                        elementTopRelative = newElementRect.top - newContainerRect.top;
+                        containerHeight = scrollContainer.clientHeight;
+                    } else {
+                        // For window, element position is relative to viewport
+                        elementTopRelative = newElementRect.top;
+                        containerHeight = window.innerHeight;
+                    }
+                    
+                    // Check if element is visible in the container's viewport
+                    // Element should be within the visible area (with some tolerance for header)
+                    const isElementVisible = elementTopRelative >= -100 && elementTopRelative < containerHeight + 100;
+                    const isElementNearExpectedPosition = elementTopRelative >= -50 && elementTopRelative < headerOffset + 150;
+                    
+                    console.log('[ScrollManager] Verification - ScrollTop:', currentScrollTop, 'Expected:', targetScroll, 'Diff:', scrollDifference);
+                    console.log('[ScrollManager] Verification - Element relative to viewport:', elementTopRelative, 'Expected offset:', headerOffset);
+                    console.log('[ScrollManager] Verification - Element visible:', isElementVisible, 'Near expected:', isElementNearExpectedPosition);
+                    
+                    // Success criteria:
+                    // 1. Scroll position is close to target (within 100px tolerance for smooth scroll)
+                    // 2. Element is visible in the container
+                    // 3. Element is near the expected position (within reasonable range)
+                    const isScrollPositionCorrect = scrollDifference < 100;
+                    const isSuccess = isScrollPositionCorrect && isElementVisible && isElementNearExpectedPosition;
+                    
+                    if (isSuccess && !fallbackUsed) {
+                        console.log('[ScrollManager] ✅ Scroll successful! Position verified.');
+                        // Clear the scrolling flag
+                        setTimeout(() => {
+                            this._scrollingToAnchor = null;
+                        }, 200);
+                    } else if (!fallbackUsed) {
+                        // Only use fallback if:
+                        // 1. Scroll didn't start AND element is not visible/near expected
+                        // 2. OR scroll position is way off AND element is not visible AND scroll didn't start
+                        // Don't use fallback if scroll is in progress (scrollStarted = true) or element is already visible
+                        const shouldUseFallback = (!scrollStarted && !isElementVisible && !isElementNearExpectedPosition) || 
+                                                  (scrollDifference > 200 && !isElementVisible && !scrollStarted);
+                        
+                        if (shouldUseFallback) {
+                            fallbackUsed = true;
+                            console.log('[ScrollManager] Scroll verification failed (scroll diff:', scrollDifference, 'px, visible:', isElementVisible, 'scroll started:', scrollStarted, '), using scrollIntoView fallback');
+                            
+                            // Use scrollIntoView with better positioning
+                            element.scrollIntoView({
+                                behavior: 'smooth',
+                                block: 'start',
+                                inline: 'nearest'
+                            });
+                            
+                            // Adjust for header after scrollIntoView completes
+                            setTimeout(() => {
+                                const finalElementRect = element.getBoundingClientRect();
+                                let finalElementTop;
+                                let currentScroll;
+                                
+                                if (isElementContainer) {
+                                    const finalContainerRect = scrollContainer.getBoundingClientRect();
+                                    finalElementTop = finalElementRect.top - finalContainerRect.top;
+                                    currentScroll = scrollContainer.scrollTop;
+                                } else {
+                                    finalElementTop = finalElementRect.top;
+                                    currentScroll = window.pageYOffset || document.documentElement.scrollTop || 0;
+                                }
+                                
+                                // Only adjust if still not at correct position
+                                if (Math.abs(finalElementTop - headerOffset) > 20) {
+                                    const adjustment = finalElementTop - headerOffset;
+                                    if (isElementContainer) {
+                                        scrollContainer.scrollTo({
+                                            top: Math.max(0, currentScroll - adjustment),
+                                            behavior: 'smooth'
+                                        });
+                                    } else {
+                                        window.scrollTo({
+                                            top: Math.max(0, currentScroll - adjustment),
+                                            behavior: 'smooth'
+                                        });
+                                    }
+                                }
+                                
+                                // Clear the scrolling flag after a delay
+                                setTimeout(() => {
+                                    this._scrollingToAnchor = null;
+                                }, 500);
+                            }, 600);
+                        } else if (scrollStarted || isElementVisible) {
+                            // Scroll is in progress or element is already visible
+                            // Wait a bit longer for scroll to complete, don't trigger fallback
+                            if (scrollStarted && scrollDifference > 200) {
+                                console.log('[ScrollManager] ⏳ Scroll is in progress, waiting for completion...');
+                                setTimeout(() => {
+                                    const finalScrollTop = isElementContainer 
+                                        ? scrollContainer.scrollTop 
+                                        : (window.pageYOffset || document.documentElement.scrollTop || 0);
+                                    const finalDiff = Math.abs(finalScrollTop - targetScroll);
+                                    const finalElementRect = element.getBoundingClientRect();
+                                    let finalElementTop;
+                                    let finalIsVisible;
+                                    
+                                    if (isElementContainer) {
+                                        const finalContainerRect = scrollContainer.getBoundingClientRect();
+                                        finalElementTop = finalElementRect.top - finalContainerRect.top;
+                                        finalIsVisible = finalElementTop >= -100 && finalElementTop < scrollContainer.clientHeight + 100;
+                                    } else {
+                                        finalElementTop = finalElementRect.top;
+                                        finalIsVisible = finalElementTop >= -100 && finalElementTop < window.innerHeight + 100;
+                                    }
+                                    
+                                    if (finalDiff < 100 || finalIsVisible) {
+                                        console.log('[ScrollManager] ✅ Scroll completed successfully after additional wait');
+                                        this._scrollingToAnchor = null;
+                                    } else {
+                                        console.log('[ScrollManager] ⚠️ Scroll completed but position not perfect, accepting result to avoid double scroll');
+                                        this._scrollingToAnchor = null;
+                                    }
+                                }, 1000);
+                            } else {
+                                // Element is visible or scroll position is close enough
+                                console.log('[ScrollManager] ✅ Element visible or scroll in progress, accepting result (measurement may be inaccurate)');
+                                setTimeout(() => {
+                                    this._scrollingToAnchor = null;
+                                }, 200);
+                            }
+                        } else {
+                            // Scroll position is correct, but element position measurement might be off
+                            // This is likely a measurement issue, not an actual scroll problem
+                            console.log('[ScrollManager] ✅ Scroll position correct, accepting result (measurement may be inaccurate)');
+                            setTimeout(() => {
+                                this._scrollingToAnchor = null;
+                            }, 200);
+                        }
+                    }
+                }, verificationDelay);
                 
             } else if (element && !mainContent) {
                 // Fallback: scroll window if no main-content container
@@ -266,6 +474,11 @@ class ScrollManager {
                         top: Math.max(0, offsetPosition),
                         behavior: 'smooth'
                     });
+                    
+                    // Clear the scrolling flag
+                    setTimeout(() => {
+                        this._scrollingToAnchor = null;
+                    }, 500);
                 }, 100);
                 
             } else if (attempts < maxAttempts) {
@@ -277,6 +490,9 @@ class ScrollManager {
                 setTimeout(() => attemptScroll(attempts + 1), delay);
             } else {
                 console.warn(`[ScrollManager] ⚠️ Element with anchor ${anchorId} not found after ${attempts} attempts.`);
+                // Clear the scrolling flag
+                this._scrollingToAnchor = null;
+                
                 // List available IDs for debugging
                 const availableIds = Array.from(document.querySelectorAll('[id]')).map(el => el.id);
                 const relevantIds = availableIds.filter(id => 

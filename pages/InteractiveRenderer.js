@@ -998,6 +998,7 @@ class InteractiveRenderer {
                     id="${paraId}"
                     class="sequence-item bg-white dark:bg-gray-800 border-2 border-blue-300 dark:border-blue-600 rounded-lg p-4 mb-3 cursor-move hover:bg-blue-50 dark:hover:bg-gray-700 transition-colors"
                     draggable="true"
+                    style="user-select: none; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none;"
                     data-correct-order="${para.correctOrder}"
                     data-original-index="${para.originalIndex}"
                     data-shuffled-index="${shuffledIndex}"
@@ -1008,7 +1009,7 @@ class InteractiveRenderer {
                             <i class="fas fa-grip-vertical text-gray-400 dark:text-gray-500"></i>
                         </div>
                         <div class="flex-1">
-                            <p class="text-sm text-gray-700 dark:text-gray-300">${this.escapeHtml(para.text)}</p>
+                            <p class="text-sm text-gray-700 dark:text-gray-300" style="user-select: none; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; pointer-events: none; margin: 0;">${this.escapeHtml(para.text)}</p>
                         </div>
                     </div>
                 </div>
@@ -1199,48 +1200,26 @@ class InteractiveRenderer {
             `;
         } else {
             resultDiv.className = 'mt-4 p-4 rounded-lg border-2 border-yellow-500 dark:border-yellow-400 bg-yellow-50 dark:bg-yellow-900/20';
-            const incorrectMessage = exerciseElement.getAttribute('data-incorrect-feedback') || 'Niet helemaal correct. Denk na over hoe de alinea\'s logisch op elkaar volgen.';
             
-            // Generate hints based on correct order
-            const hints = [];
-            items.forEach((item, index) => {
-                const currentPosition = index + 1;
-                const correctOrder = parseInt(item.getAttribute('data-correct-order'));
-                const isCorrect = correctOrder === currentPosition;
-                
-                if (!isCorrect) {
-                    // Provide hints based on the correct order
-                    let hint = '';
-                    switch(correctOrder) {
-                        case 1:
-                            hint = `Alinea ${currentPosition} gaat over het probleem (disbalans door gebrek aan data-gestuurd model).`;
-                            break;
-                        case 2:
-                            hint = `Alinea ${currentPosition} beschrijft de oplossing (EOQ-model).`;
-                            break;
-                        case 3:
-                            hint = `Alinea ${currentPosition} legt de methode uit (kwantitatieve analyse).`;
-                            break;
-                        case 4:
-                            hint = `Alinea ${currentPosition} benoemt de knowledge gap (onbekende kostvariabelen en besparingspotentieel).`;
-                            break;
-                        default:
-                            hint = `Alinea ${currentPosition}: Denk na over de logische volgorde van deze alinea.`;
-                    }
-                    hints.push(`<li class="mb-2">${hint}</li>`);
-                }
-            });
+            // Fixed feedback message and hints
+            const feedbackMessage = 'Helaas nog niet alle alinea\'s staan goed. Gebruik de hint hieronder om de alinea\'s goed te structureren.';
+            const hints = [
+                'Alinea 1 gaat over het probleem (disbalans door gebrek aan data-gestuurd model).',
+                'Alinea 2 legt de methode uit waarmee het probleem opgelost kan worden (kwantitatieve analyse).',
+                'Alinea 3 beschrijft de oplossing (EOQ-model).',
+                'Alinea 4 benoemt de knowledge gap (onbekende kostvariabelen en besparingspotentieel).'
+            ];
             
             resultDiv.innerHTML = `
                 <div class="flex items-start">
                     <i class="fas fa-exclamation-triangle text-yellow-600 dark:text-yellow-400 text-xl mt-0.5 mr-3"></i>
                     <div class="flex-1">
                         <h4 class="font-semibold text-yellow-900 dark:text-yellow-300 mb-2">Niet helemaal correct</h4>
-                        <p class="text-sm text-yellow-800 dark:text-yellow-400 mb-3">${this.escapeHtml(incorrectMessage)}</p>
+                        <p class="text-sm text-yellow-800 dark:text-yellow-400 mb-3">${this.escapeHtml(feedbackMessage)}</p>
                         <div class="text-sm text-yellow-800 dark:text-yellow-400">
-                            <p class="font-medium mb-2">Hints:</p>
+                            <p class="font-medium mb-2">Hint:</p>
                             <ul class="list-disc list-inside space-y-1">
-                                ${hints.join('')}
+                                ${hints.map(hint => `<li class="mb-2">${this.escapeHtml(hint)}</li>`).join('')}
                             </ul>
                         </div>
                     </div>

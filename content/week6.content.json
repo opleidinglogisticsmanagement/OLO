@@ -357,21 +357,58 @@
         "type": "paragraph",
         "text": [
           "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Vanuit het doen van goed onderzoek is het dataverzamelingsplan wat je in eerdere modules hebt geleerd aangepast. Zie hiervoor ook het template dataverzamelingsplan welke hieronder is weergegeven.</p>",
-          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\"><b>Template Dataverzamelingsplan</b> <i>(verschijnt binnenkort)</i></p>",
-          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Wat zijn de belangrijkste aanpassingen die hierin zijn ten opzichte van eerdere dataverzamelingsplannen?</p>",
-          "<ol class=\"list-decimal list-outside space-y-2 mb-4 ml-6 pl-4\">",
-          "<li class=\"text-gray-700 dark:text-gray-300 mb-4\">Voor iedere methode om data te verzamelen wordt in de eerste 3 kolommen (Groen) een relatie gelegd met het onderzoeksmodel en daarmee met je onderzoek. Dit doe je door de methode van data verzamelen te relateren aan:",
-          "<ol class=\"list-lower-alpha list-outside space-y-2 mb-2 ml-6 pl-4 mt-2\">",
-          "<li class=\"text-gray-700 dark:text-gray-300\">Je hoofdvraag</li>",
-          "<li class=\"text-gray-700 dark:text-gray-300\">De deelvraag waar je deze dataverzamelingsmethode voor in gaat zetten</li>",
-          "<li class=\"text-gray-700 dark:text-gray-300\">Het type onderzoek dat deze datamethode typeert</li>",
-          "</ol>",
-          "</li>",
-          "<li class=\"text-gray-700 dark:text-gray-300 mb-4\">In de kolommen 4-9 (Blauw) ga je beschrijven wat, waarom en hoe je de metingen wilt gaan opzetten</li>",
-          "<li class=\"text-gray-700 dark:text-gray-300 mb-4\">In de laatste kolommen (Oranje) reflecteer je kritisch op de validiteit en betrouwbaarheid van de opzet van je dataverzamelingsmethode. Houd hier ook rekening mee dat jij, omwille van tijd, meestal niet in staat bent om iedere methode op zichzelf staand tot een hoge mate van betrouwbaarheid en validiteit te ontwerpen. Hier kritisch op reflecteren en handvatten benoemen voor het eventueel verhogen van de dataverzamelingsmethode is dan wel gewenst.</li>",
-          "</ol>",
-          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Met de kennis die je nu hebt, is het natuurlijk van groot (onderzoeks) belang dat je bij het inrichten van je onderzoek bewust stil gaat staan op welke wijze jij er voor gaat zorgen dat je onderzoek valide en betrouwbaar is.</p>",
-          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Succes met jullie laatste loodjes</p>"
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\"><b>Template Dataverzamelingsplan</b> - <a href=\"assets/Documents/Dataverzamelingsplan 25-26 (Template).xlsx\" download class=\"text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 underline font-semibold\">Download template</a></p>",
+          "<h3 class=\"text-lg font-semibold text-gray-900 dark:text-white mb-4\">Instructie Dataverzamelingsplan</h3>",
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">In dit plan werk je stap voor stap uit hoe je jouw onderzoek concreet gaat uitvoeren. Het plan bestaat uit 3 delen die hieronder elk in een tab zijn weergegeven. Deze drie gekleurde secties hangen logisch met elkaar samen. Wat zijn de belangrijkste aanpassingen die hierin zijn ten opzichte van eerdere dataverzamelingsplannen?</p>"
+        ]
+      },
+      {
+        "type": "tabs",
+        "defaultTab": 0,
+        "tabs": [
+          {
+            "title": "1. Relatie onderzoeksmodel (Groen)",
+            "content": [
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">In de eerste drie kolommen leg je de basis. Hier borg je de <strong>constructive alignment</strong>: je controleert of je dataverzamelingsmethode écht past bij je vraagstelling.</p>",
+              "<ul class=\"list-disc list-outside space-y-2 mb-4 ml-6 pl-4\">",
+              "<li class=\"text-gray-700 dark:text-gray-300 mb-2\">Hoofdvraag & Deelvraag: Aan welke vraag draagt deze meting bij?</li>",
+              "<li class=\"text-gray-700 dark:text-gray-300 mb-2\">Type onderzoek: Welke methode kies je (bijv. interview, enquête, observatie, ...)?</li>",
+              "</ul>"
+            ]
+          },
+          {
+            "title": "2. Onderzoekstechnisch ontwerp (Blauw)",
+            "content": [
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">In de kolommen 4 t/m 9 werk je de <strong>operationalisatie</strong> uit. Hier beschrijf je niet alleen <em>wat</em> je gaat doen, maar vooral de <em>technische specificaties</em> van je meting.</p>",
+              "<ul class=\"list-disc list-outside space-y-2 mb-4 ml-6 pl-4\">",
+              "<li class=\"text-gray-700 dark:text-gray-300 mb-2\">Wat & Waarom: Wat meet je precies en welk doel dient dit?</li>",
+              "<li class=\"text-gray-700 dark:text-gray-300 mb-2\">Standaardisatie (Hoe): Hoe zorg je dat gegevens zorgvuldig en uniform worden vastgelegd? (Bijv. scripts, protocollen).</li>",
+              "<li class=\"text-gray-700 dark:text-gray-300 mb-2\">Saturatie of Steekproefgrootte (Hoeveel): Wanneer heb je genoeg data verzameld voor een compleet beeld?</li>",
+              "<li class=\"text-gray-700 dark:text-gray-300 mb-2\">Analysemethode: Hoe ga je de verzamelde data verwerken? (Bijv. transcriberen, thematisch cluseren, descriptive statistics).</li>",
+              "</ul>"
+            ]
+          },
+          {
+            "title": "3. Reflectie op kwaliteit (Oranje)",
+            "content": [
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">In de laatste twee kolommen beargumenteer je <strong>hoe je de kwaliteit hebt geborgd</strong>. Gebruik hierbij de keuzes die je in het blauwe deel hebt gemaakt als bewijs.</p>",
+              "<ul class=\"list-disc list-outside space-y-2 mb-4 ml-6 pl-4\">",
+              "<li class=\"text-gray-700 dark:text-gray-300 mb-2\">Validiteit & Representativiteit: Heb je gemeten wat je wilde meten en is je beeld compleet?</li>",
+              "<li class=\"text-gray-700 dark:text-gray-300 mb-2\">Betrouwbaarheid & Consistentie: Is je meting vrij van toeval en herhaalbaar door een ander?</li>",
+              "</ul>",
+              "<div class=\"bg-blue-50 dark:bg-blue-900/20 border-l-4 border-blue-500 dark:border-blue-400 p-4 rounded-r-lg mt-4 mb-4\">",
+              "<p class=\"text-blue-900 dark:text-blue-200 font-semibold mb-2\">Let op</p>",
+              "<p class=\"text-blue-800 dark:text-blue-300 text-sm\">Het gaat er niet om dat je onderzoek perfect is, maar dat je transparant bent over hoe je de risico's op fouten (ruis en bias) zo klein mogelijk hebt gemaakt binnen de tijd die je hebt.</p>",
+              "</div>"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Je hebt nu alle kennis en tools in handen om een goed doordacht dataverzamelingsplan op te stellen. Door de drie secties systematisch door te lopen - van de relatie met je onderzoeksmodel tot de reflectie op kwaliteit - zorg je ervoor dat je onderzoek solide is opgezet en uitvoerbaar binnen de beschikbare tijd. Gebruik het template om je plan gestructureerd uit te werken en wees transparant over je keuzes en eventuele beperkingen.</p>",
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Succes met het opstellen van je dataverzamelingsplan!</p>"
         ]
       }
     ]

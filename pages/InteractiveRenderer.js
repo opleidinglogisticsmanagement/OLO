@@ -2341,19 +2341,45 @@ class InteractiveRenderer {
         const tabsId = `tabs-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
         const defaultTab = item.defaultTab || 0;
         
+        // Bepaal kleur per tab op basis van index
+        const getTabColor = (index) => {
+            if (index === 0) {
+                // Tab 1: Groen
+                return {
+                    active: 'bg-white dark:bg-gray-800 text-green-600 dark:text-green-400',
+                    inactive: 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
+                };
+            } else if (index === 1) {
+                // Tab 2: Blauw
+                return {
+                    active: 'bg-white dark:bg-gray-800 text-blue-600 dark:text-blue-400',
+                    inactive: 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
+                };
+            } else {
+                // Tab 3: Oranje
+                return {
+                    active: 'bg-white dark:bg-gray-800 text-orange-600 dark:text-orange-400',
+                    inactive: 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
+                };
+            }
+        };
+        
         const tabsButtons = item.tabs.map((tab, index) => {
             const tabId = `${tabsId}-tab-${index}`;
             const contentId = `${tabsId}-content-${index}`;
             const isActive = index === defaultTab;
+            const colors = getTabColor(index);
             
             return `
                 <button
-                    class="tabs-button flex-1 md:flex-1 px-3 md:px-6 py-3 md:py-4 font-semibold text-sm md:text-lg transition-colors duration-200 ${isActive ? 'bg-white dark:bg-gray-800 text-green-600 dark:text-green-400' : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'} text-center md:text-left cursor-pointer touch-manipulation active:bg-gray-200 dark:active:bg-gray-600 whitespace-normal md:whitespace-nowrap"
+                    class="tabs-button flex-1 px-2 sm:px-3 md:px-4 py-2 sm:py-3 font-semibold text-xs sm:text-sm md:text-base transition-colors duration-200 ${isActive ? colors.active : colors.inactive} text-center cursor-pointer touch-manipulation active:bg-gray-200 dark:active:bg-gray-600 whitespace-normal break-words min-w-0"
                     onclick="InteractiveRenderer.switchTab('${tabsId}', ${index})"
                     aria-selected="${isActive}"
                     aria-controls="${contentId}"
                     id="${tabId}"
                     role="tab"
+                    data-tab-index="${index}"
+                    style="word-break: break-word; overflow-wrap: break-word;"
                 >
                     ${tab.title}
                 </button>
@@ -2393,7 +2419,7 @@ class InteractiveRenderer {
 
         return `
             <div class="tabs-container mb-6 border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden bg-white dark:bg-gray-800 transition-colors duration-200" id="${tabsId}">
-                <div class="flex overflow-x-auto scrollbar-hide -mb-px" role="tablist" style="scrollbar-width: none; -ms-overflow-style: none;">
+                <div class="flex flex-nowrap overflow-hidden -mb-px" role="tablist">
                     ${tabsButtons}
                 </div>
                 <div class="tab-content-container bg-white dark:bg-gray-800 transition-colors duration-200">
@@ -2401,61 +2427,51 @@ class InteractiveRenderer {
                 </div>
             </div>
             <style>
-                /* Hide scrollbar for tablist but keep scrolling functionality */
-                .tabs-container [role="tablist"]::-webkit-scrollbar {
-                    display: none;
+                /* Zorg dat tabs altijd binnen de breedte passen */
+                .tabs-container {
+                    width: 100%;
+                    max-width: 100%;
+                    overflow: hidden;
                 }
                 
-                /* Mobile responsive tabs - voor alle mobiele apparaten */
-                @media (max-width: 768px) {
-                    .tabs-container [role="tablist"] {
-                        display: flex;
-                        flex-wrap: nowrap;
-                        overflow-x: auto;
-                        -webkit-overflow-scrolling: touch;
-                        scrollbar-width: none;
-                        -ms-overflow-style: none;
-                        width: 100%;
-                    }
-                    
-                    .tabs-container [role="tab"],
+                .tabs-container [role="tablist"] {
+                    display: flex;
+                    width: 100%;
+                    max-width: 100%;
+                    overflow: hidden;
+                }
+                
+                .tabs-container .tabs-button {
+                    flex: 1 1 0;
+                    min-width: 0;
+                    max-width: 100%;
+                    word-break: break-word;
+                    overflow-wrap: break-word;
+                    hyphens: auto;
+                }
+                
+                /* Mobile responsive tabs */
+                @media (max-width: 640px) {
                     .tabs-container .tabs-button {
-                        flex: 1 1 0;
-                        min-width: 0;
-                        max-width: none;
-                        white-space: normal !important;
-                        word-wrap: break-word !important;
-                        overflow-wrap: break-word !important;
-                        hyphens: auto;
-                        line-height: 1.4;
-                        text-align: center;
-                        padding: 0.75rem 0.5rem;
-                        font-size: 0.875rem;
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-                    }
-                    
-                    /* Gelijk verdeelde tabs - zorg dat alle tabs even breed zijn */
-                    .tabs-container [role="tablist"] {
-                        gap: 0;
-                    }
-                    
-                    /* Eerste en laatste tab hebben iets meer padding voor visuele balans */
-                    .tabs-container [role="tab"]:first-child {
-                        padding-left: 0.75rem;
-                    }
-                    
-                    .tabs-container [role="tab"]:last-child {
-                        padding-right: 0.75rem;
+                        padding: 0.5rem 0.375rem;
+                        font-size: 0.75rem;
+                        line-height: 1.3;
                     }
                 }
                 
                 /* Tablet optimalisatie */
                 @media (min-width: 641px) and (max-width: 1023px) {
-                    .tabs-container [role="tab"],
                     .tabs-container .tabs-button {
-                        padding: 0.875rem 1rem;
+                        padding: 0.75rem 0.5rem;
+                        font-size: 0.875rem;
+                    }
+                }
+                
+                /* Desktop - kleinere padding en font voor lange teksten */
+                @media (min-width: 1024px) {
+                    .tabs-container .tabs-button {
+                        padding: 0.875rem 0.75rem;
+                        font-size: 0.9375rem;
                     }
                 }
             </style>
@@ -2482,17 +2498,50 @@ class InteractiveRenderer {
             return;
         }
 
+        // Helper functie om kleuren per tab te bepalen
+        const getTabColorClasses = (index) => {
+            if (index === 0) {
+                // Tab 1: Groen
+                return {
+                    active: ['bg-white', 'dark:bg-gray-800', 'text-green-600', 'dark:text-green-400'],
+                    inactive: ['bg-gray-100', 'dark:bg-gray-700', 'text-gray-600', 'dark:text-gray-300', 'hover:bg-gray-200', 'dark:hover:bg-gray-600']
+                };
+            } else if (index === 1) {
+                // Tab 2: Blauw
+                return {
+                    active: ['bg-white', 'dark:bg-gray-800', 'text-blue-600', 'dark:text-blue-400'],
+                    inactive: ['bg-gray-100', 'dark:bg-gray-700', 'text-gray-600', 'dark:text-gray-300', 'hover:bg-gray-200', 'dark:hover:bg-gray-600']
+                };
+            } else {
+                // Tab 3: Oranje
+                return {
+                    active: ['bg-white', 'dark:bg-gray-800', 'text-orange-600', 'dark:text-orange-400'],
+                    inactive: ['bg-gray-100', 'dark:bg-gray-700', 'text-gray-600', 'dark:text-gray-300', 'hover:bg-gray-200', 'dark:hover:bg-gray-600']
+                };
+            }
+        };
+        
         // Update all tabs
         tabs.forEach((tab, index) => {
             const isActive = index === tabIndex;
             tab.setAttribute('aria-selected', isActive);
+            const colors = getTabColorClasses(index);
+            
+            // Verwijder alle mogelijke kleur classes
+            tab.classList.remove(
+                'bg-white', 'dark:bg-gray-800', 
+                'text-green-600', 'dark:text-green-400',
+                'text-blue-600', 'dark:text-blue-400',
+                'text-orange-600', 'dark:text-orange-400',
+                'bg-gray-100', 'dark:bg-gray-700', 
+                'text-gray-600', 'dark:text-gray-300', 
+                'hover:bg-gray-200', 'dark:hover:bg-gray-600'
+            );
             
             if (isActive) {
-                tab.classList.remove('bg-gray-100', 'dark:bg-gray-700', 'text-gray-600', 'dark:text-gray-300', 'hover:bg-gray-200', 'dark:hover:bg-gray-600');
-                tab.classList.add('bg-white', 'dark:bg-gray-800', 'text-green-600', 'dark:text-green-400');
+                tab.classList.add(...colors.active);
             } else {
-                tab.classList.remove('bg-white', 'dark:bg-gray-800', 'text-green-600', 'dark:text-green-400');
-                tab.classList.add('bg-gray-100', 'dark:bg-gray-700', 'text-gray-600', 'dark:text-gray-300', 'hover:bg-gray-200', 'dark:hover:bg-gray-600');
+                tab.classList.add(...colors.inactive);
             }
         });
 

@@ -1471,6 +1471,48 @@ app.get('/config.js', (req, res, next) => {
     }
 });
 
+// Expliciete route voor JSON bestanden (content files) - VOOR static middleware om caching te voorkomen
+app.get(/\.json$/, (req, res, next) => {
+    const fileName = req.path.replace(/^\//, ''); // bijv. content/week2.content.json
+    const filePath = path.join(rootDir, fileName);
+    
+    // Set no-cache headers om te voorkomen dat browser oude versies cached
+    res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+    res.setHeader('Pragma', 'no-cache');
+    res.setHeader('Expires', '0');
+    res.removeHeader('ETag'); // Verwijder ETag om 304 responses te voorkomen
+    res.removeHeader('Last-Modified'); // Verwijder Last-Modified om 304 responses te voorkomen
+    
+    // Probeer verschillende paden
+    const possiblePaths = [
+        filePath,
+        path.join('/var/task', fileName),
+        path.join(process.cwd(), fileName),
+        path.join(__dirname, fileName),
+    ];
+    
+    let foundPath = null;
+    for (const possiblePath of possiblePaths) {
+        if (fs.existsSync(possiblePath)) {
+            foundPath = possiblePath;
+            break;
+        }
+    }
+    
+    if (foundPath) {
+        res.setHeader('Content-Type', 'application/json; charset=utf-8');
+        res.sendFile(foundPath, (err) => {
+            if (err) {
+                console.error(`Error serving JSON file ${fileName}:`, err);
+                next(err);
+            }
+        });
+    } else {
+        console.error(`❌ JSON file not found: ${fileName}`);
+        res.status(404).json({ error: `File not found: ${fileName}` });
+    }
+});
+
 // Serve static files (CSS, JS, images, JSON, etc.) - maar NIET HTML (die handlen we hierboven)
 // Belangrijk: JavaScript bestanden moeten beschikbaar zijn voor de HTML pagina's
 app.use(express.static(rootDir, { 
@@ -1521,7 +1563,7 @@ app.get(/\.js$/, (req, res, next) => {
     }
 });
 
-// Serve static files (CSS, JS, images, JSON, etc.) - maar NIET HTML (die handlen we hierboven)
+// Serve static files (CSS, JS, images, etc.) - maar NIET HTML en NIET JSON (die handlen we hierboven)
 // Belangrijk: JavaScript bestanden moeten beschikbaar zijn voor de HTML pagina's
 app.use(express.static(rootDir, { 
     index: false, // We handlen index.html expliciet
@@ -1531,48 +1573,8 @@ app.use(express.static(rootDir, {
     maxAge: '1y' // Cache static files for 1 year
 }));
 
-// Expliciete route voor JSON bestanden (content files) - NA static middleware als fallback
-app.get(/\.json$/, (req, res, next) => {
-    const fileName = req.path.replace(/^\//, ''); // bijv. content/week2.content.json
-    const filePath = path.join(rootDir, fileName);
-    
-    // Set no-cache headers
-    res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
-    res.setHeader('Pragma', 'no-cache');
-    res.setHeader('Expires', '0');
-    
-    // Probeer verschillende paden
-    const possiblePaths = [
-        filePath,
-        path.join('/var/task', fileName),
-        path.join(process.cwd(), fileName),
-        path.join(__dirname, fileName),
-    ];
-    
-    let foundPath = null;
-    for (const possiblePath of possiblePaths) {
-        if (fs.existsSync(possiblePath)) {
-            foundPath = possiblePath;
-            break;
-        }
-    }
-    
-    if (foundPath) {
-        res.setHeader('Content-Type', 'application/json; charset=utf-8');
-        res.sendFile(foundPath, (err) => {
-            if (err) {
-                console.error(`Error serving JSON file ${fileName}:`, err);
-                next(err);
-            }
-        });
-    } else {
-        console.error(`❌ JSON file not found: ${fileName}`);
-        res.status(404).json({ error: `File not found: ${fileName}` });
-    }
-});
-
 // Expliciete route voor afbeeldingen en andere assets - NA static middleware als fallback
-app.get(/\.(png|jpg|jpeg|gif|svg|ico|woff|woff2|ttf|eot|docx|pdf)$/i, (req, res, next) => {
+app.get(/\.(png|jpg|jpeg|gif|svg|ico|woff|woff2|ttf|eot|docx|pdf|xlsx|vsdx)$/i, (req, res, next) => {
     const fileName = req.path.replace(/^\//, ''); // bijv. assets/images/Praktijkprobleem.png
     const filePath = path.join(rootDir, fileName);
     
@@ -1607,7 +1609,9 @@ app.get(/\.(png|jpg|jpeg|gif|svg|ico|woff|woff2|ttf|eot|docx|pdf)$/i, (req, res,
             '.ttf': 'font/ttf',
             '.eot': 'application/vnd.ms-fontobject',
             '.docx': 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-            '.pdf': 'application/pdf'
+            '.pdf': 'application/pdf',
+            '.xlsx': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+            '.vsdx': 'application/vnd.ms-visio.drawing.main+xml'
         };
         const contentType = contentTypes[ext] || 'application/octet-stream';
         

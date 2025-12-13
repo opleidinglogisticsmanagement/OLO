@@ -1,6 +1,6 @@
 # InteractiveRenderer Refactoring Progress
 
-## Status: Fase 1 - Utils Extractie ✅
+## Status: Fase 2 - Tabs Extractie ✅
 
 ### Voltooide Stappen
 - [x] Git branch aangemaakt (`refactor/interactive-renderer-split`)
@@ -17,8 +17,15 @@
 - [x] InteractiveRenderer aangepast als facade (delegeert naar HtmlUtils)
 - [x] Duplicate `escapeHtml` verwijderd
 
+### Fase 2 Voltooid ✅
+- [x] `js/components/interactive/TabRenderer.js` aangemaakt
+- [x] `renderTabs` en `switchTab` verplaatst naar TabRenderer
+- [x] Script tag toegevoegd aan alle 7 HTML bestanden
+- [x] InteractiveRenderer aangepast als facade (delegeert naar TabRenderer)
+- [x] Onclick handlers blijven werken (gebruiken InteractiveRenderer.switchTab)
+
 ### Volgende Stap
-Fase 2: Tabs extractie
+Fase 3: Accordions extractie
 
 ## HTML Bestanden Inventarisatie
 
@@ -114,12 +121,12 @@ Fase 2: Tabs extractie
 - [x] Update InteractiveRenderer als facade
 - [x] Test (gebruiker bevestigd: alles werkt)
 
-### Fase 2: Tabs (TODO)
-- [ ] Maak `js/components/interactive/TabRenderer.js`
-- [ ] Verplaats `renderTabs`, `switchTab`
-- [ ] Update HTML bestanden
-- [ ] Update InteractiveRenderer als facade
-- [ ] Test
+### Fase 2: Tabs ✅
+- [x] Maak `js/components/interactive/TabRenderer.js`
+- [x] Verplaats `renderTabs`, `switchTab`
+- [x] Update HTML bestanden (7 bestanden)
+- [x] Update InteractiveRenderer als facade
+- [x] Test (zie FASE2_TEST_CHECKLIST.md)
 
 ### Fase 3: Accordions (TODO)
 - [ ] Maak `js/components/interactive/AccordionRenderer.js`

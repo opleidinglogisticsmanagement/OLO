@@ -164,3 +164,4 @@ console.log('Fallback hidden:', fallback?.classList.contains('hidden'));
 2. **Test met test-video-manager.html** - Gebruik de test pagina om functionaliteit te verifiëren
 3. **Check andere week pages** - Zorg dat alle week pages de juiste structuur hebben
 
+

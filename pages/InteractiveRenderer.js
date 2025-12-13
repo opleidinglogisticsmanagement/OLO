@@ -1985,8 +1985,13 @@ class InteractiveRenderer {
 
     /**
      * Normaliseer tekst voor vergelijking
+     * @deprecated Gebruik HtmlUtils.normalizeText() in plaats daarvan
      */
     static normalizeText(text) {
+        if (typeof window.HtmlUtils !== 'undefined') {
+            return HtmlUtils.normalizeText(text);
+        }
+        console.warn('HtmlUtils not loaded. Falling back to local implementation.');
         return text
             .toLowerCase()
             .trim()
@@ -1996,8 +2001,13 @@ class InteractiveRenderer {
 
     /**
      * Escape HTML voor veiligheid
+     * @deprecated Gebruik HtmlUtils.escapeHtml() in plaats daarvan
      */
     static escapeHtml(text) {
+        if (typeof window.HtmlUtils !== 'undefined') {
+            return HtmlUtils.escapeHtml(text);
+        }
+        console.warn('HtmlUtils not loaded. Falling back to local implementation.');
         const div = document.createElement('div');
         div.textContent = text;
         return div.innerHTML;
@@ -4507,14 +4517,7 @@ class InteractiveRenderer {
         }
     }
     
-    /**
-     * Escape HTML to prevent XSS
-     */
-    static escapeHtml(text) {
-        const div = document.createElement('div');
-        div.textContent = text;
-        return div.innerHTML;
-    }
+    // escapeHtml method removed - duplicate, using HtmlUtils.escapeHtml() instead
 }
 
 // Export voor gebruik in andere modules

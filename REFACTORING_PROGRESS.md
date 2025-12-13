@@ -1,17 +1,24 @@
 # InteractiveRenderer Refactoring Progress
 
-## Status: Fase 0 - Voorbereiding ✅
+## Status: Fase 1 - Utils Extractie ✅
 
 ### Voltooide Stappen
 - [x] Git branch aangemaakt (`refactor/interactive-renderer-split`)
 - [x] Directory structuur aangemaakt (`js/components/interactive/` en `js/components/interactive/utils/`)
 - [x] Huidige structuur gedocumenteerd (`REFACTORING_NOTES.md`)
 - [x] HTML bestanden geïnventariseerd (7 bestanden gevonden)
-- [ ] Baseline tests uitgevoerd (TODO: handmatig testen)
-- [ ] Backup gemaakt (TODO: git commit)
+- [x] Baseline tests uitgevoerd (gebruiker bevestigd: alles werkt)
+- [x] Backup gemaakt (git commit)
+
+### Fase 1 Voltooid ✅
+- [x] `js/components/interactive/utils/HtmlUtils.js` aangemaakt
+- [x] `escapeHtml` en `normalizeText` verplaatst naar HtmlUtils
+- [x] Script tag toegevoegd aan alle 7 HTML bestanden
+- [x] InteractiveRenderer aangepast als facade (delegeert naar HtmlUtils)
+- [x] Duplicate `escapeHtml` verwijderd
 
 ### Volgende Stap
-Fase 1: Utils extractie
+Fase 2: Tabs extractie
 
 ## HTML Bestanden Inventarisatie
 
@@ -100,12 +107,12 @@ Fase 1: Utils extractie
 - [ ] Baseline tests (handmatig)
 - [ ] Git commit baseline
 
-### Fase 1: Utils (TODO)
-- [ ] Maak `js/components/interactive/utils/HtmlUtils.js`
-- [ ] Verplaats `escapeHtml`, `normalizeText`
-- [ ] Update HTML bestanden
-- [ ] Update InteractiveRenderer als facade
-- [ ] Test
+### Fase 1: Utils ✅
+- [x] Maak `js/components/interactive/utils/HtmlUtils.js`
+- [x] Verplaats `escapeHtml`, `normalizeText`
+- [x] Update HTML bestanden (7 bestanden)
+- [x] Update InteractiveRenderer als facade
+- [x] Test (gebruiker bevestigd: alles werkt)
 
 ### Fase 2: Tabs (TODO)
 - [ ] Maak `js/components/interactive/TabRenderer.js`

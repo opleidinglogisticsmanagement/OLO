@@ -356,3 +356,4 @@ De voorgestelde interactieve oefeningen sluiten aan bij de leerdoelen van week 6
 - ✅ Herhaalbaar voor verschillende casussen
 - ✅ Integreert alle leerdoelen
 
+

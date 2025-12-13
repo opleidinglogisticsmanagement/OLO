@@ -148,9 +148,14 @@ class Week1LessonPage extends BaseLessonPage {
 
         // Render theorie content
         let theorieHtml = '';
-        if (this.content.theorie && this.content.theorie.content) {
-            theorieHtml = ContentRenderer.renderContentItems(this.content.theorie.content);
+        const theorie = this.content.theorie;
+        
+        if (theorie && theorie.content && Array.isArray(theorie.content)) {
+            theorieHtml = ContentRenderer.renderContentItems(theorie.content);
         }
+
+        // Check of theorie bestaat en een title heeft
+        const theorieTitle = (theorie && theorie.title) ? theorie.title : 'Theorie';
 
         return `
             <!-- Theorie Sectie -->
@@ -160,7 +165,7 @@ class Week1LessonPage extends BaseLessonPage {
                         <i class="fas fa-file-alt text-purple-600 dark:text-purple-400 text-lg"></i>
                     </div>
                     <div class="flex-1 min-w-0 w-full sm:w-auto">
-                        <h2 class="text-lg sm:text-xl font-semibold text-gray-900 dark:text-white mb-2">${this.content.theorie ? this.content.theorie.title : 'Theorie'}</h2>
+                        <h2 class="text-lg sm:text-xl font-semibold text-gray-900 dark:text-white mb-2">${theorieTitle}</h2>
                     </div>
                 </div>
                 <div class="prose max-w-none">
@@ -194,9 +199,27 @@ class Week1LessonPage extends BaseLessonPage {
      * Initialiseer de pagina met content loading
      */
     async init() {
-        await this.loadContent();
-        document.body.innerHTML = this.render();
-        this.attachEventListeners();
+        try {
+            await this.loadContent();
+            
+            // Check of content correct is geladen
+            if (!this.content || !this.contentLoaded) {
+                console.error('[Week1LessonPage] ❌ Content not loaded properly');
+                document.body.innerHTML = this.renderErrorState();
+                return;
+            }
+            
+            // Check of theorie sectie bestaat
+            if (!this.content.theorie) {
+                console.warn('[Week1LessonPage] ⚠️ Theorie section missing in content');
+            }
+            
+            document.body.innerHTML = this.render();
+            this.attachEventListeners();
+        } catch (error) {
+            console.error('[Week1LessonPage] ❌ Error during initialization:', error);
+            document.body.innerHTML = this.renderErrorState();
+        }
     }
 }
 

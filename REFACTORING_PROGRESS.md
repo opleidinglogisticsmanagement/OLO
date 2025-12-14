@@ -1,6 +1,6 @@
 # InteractiveRenderer Refactoring Progress
 
-## Status: Fase 3 - Accordions Extractie ✅
+## Status: Fase 4 - ClickableSteps Extractie ✅
 
 ### Voltooide Stappen
 - [x] Git branch aangemaakt (`refactor/interactive-renderer-split`)
@@ -32,8 +32,17 @@
 - [x] Geneste accordions ondersteund (recursieve calls werken)
 - [x] Onclick handlers blijven werken (gebruiken InteractiveRenderer.toggleAccordion)
 
+### Fase 4 Voltooid ✅
+- [x] `js/components/interactive/ClickableStepsRenderer.js` aangemaakt
+- [x] `renderClickableSteps` en `toggleClickableStep` verplaatst naar ClickableStepsRenderer
+- [x] Script tag toegevoegd aan alle 7 HTML bestanden
+- [x] InteractiveRenderer aangepast als facade (delegeert naar ClickableStepsRenderer)
+- [x] Geneste content items ondersteund (ContentRenderer integratie)
+- [x] allowMultiple functionaliteit behouden
+- [x] Onclick handlers blijven werken (gebruiken InteractiveRenderer.toggleClickableStep)
+
 ### Volgende Stap
-Fase 4: ClickableSteps extractie
+Fase 5: Checklists extractie
 
 ## HTML Bestanden Inventarisatie
 
@@ -144,12 +153,12 @@ Fase 4: ClickableSteps extractie
 - [x] Geneste accordions ondersteund
 - [x] Test (zie FASE3_TEST_CHECKLIST.md)
 
-### Fase 4: ClickableSteps (TODO)
-- [ ] Maak `js/components/interactive/ClickableStepsRenderer.js`
-- [ ] Verplaats `renderClickableSteps`, `toggleClickableStep`
-- [ ] Update HTML bestanden
-- [ ] Update InteractiveRenderer als facade
-- [ ] Test
+### Fase 4: ClickableSteps ✅
+- [x] Maak `js/components/interactive/ClickableStepsRenderer.js`
+- [x] Verplaats `renderClickableSteps`, `toggleClickableStep`
+- [x] Update HTML bestanden (7 bestanden)
+- [x] Update InteractiveRenderer als facade
+- [x] Test (zie FASE4_TEST_CHECKLIST.md)
 
 ### Fase 5: Checklists (TODO)
 - [ ] Maak `js/components/interactive/ChecklistRenderer.js`

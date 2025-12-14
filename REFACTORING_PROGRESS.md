@@ -73,8 +73,17 @@
   - [ ] `selectCheckType` - TODO: Verplaats naar ExerciseRenderer.js
   - [ ] `checkAllSourceCriteria` - TODO: Verplaats naar ExerciseRenderer.js
 
+### Fase 8 Voltooid ✅
+- [x] `js/components/interactive/AIRenderer.js` aangemaakt met Boolean Operator Exercise logica
+- [x] Boolean Operator Exercise methoden verplaatst (`renderBooleanOperatorExercise`, `setupBooleanExerciseListeners`, `addToQuery`, `updateQueryDisplay`, `clearQuery`, `validateQuery`)
+- [x] AI Query Exercise methoden verplaatst (`renderAIQueryExercise`, `setupAIQueryExerciseListeners`, `loadNewAIQueryScenario`, `extractTheoryContent`, `validateAIQuery`, `addToAIQuery`, `clearAIQuery`)
+- [x] AI Bouwsteen Generator methoden verplaatst (`renderAIBouwsteenGenerator`, `setupAIBouwsteenGeneratorListeners`, `generateBouwsteenTabel`, `renderBouwsteenTabel`, `copyBouwsteenTabel`)
+- [x] Script tag toegevoegd aan alle 7 HTML bestanden
+- [x] InteractiveRenderer aangepast als facade voor alle AI Tools
+- [x] Oude AI Tools implementaties verwijderd
+
 ### Volgende Stap
-Fase 8: AI Tools (Boolean Operator, AI Query, AI Bouwsteen Generator)
+Fase 9: Opruimen & Facade Check - Controleer of InteractiveRenderer nu echt "leeg" is van logica en alleen nog maar fungeert als doorgeefluik.
 
 ## HTML Bestanden Inventarisatie
 

@@ -1,6 +1,6 @@
 # InteractiveRenderer Refactoring Progress
 
-## Status: Fase 2 - Tabs Extractie ✅
+## Status: Fase 3 - Accordions Extractie ✅
 
 ### Voltooide Stappen
 - [x] Git branch aangemaakt (`refactor/interactive-renderer-split`)
@@ -24,8 +24,16 @@
 - [x] InteractiveRenderer aangepast als facade (delegeert naar TabRenderer)
 - [x] Onclick handlers blijven werken (gebruiken InteractiveRenderer.switchTab)
 
+### Fase 3 Voltooid ✅
+- [x] `js/components/interactive/AccordionRenderer.js` aangemaakt
+- [x] `renderAccordion` en `toggleAccordion` verplaatst naar AccordionRenderer
+- [x] Script tag toegevoegd aan alle 7 HTML bestanden
+- [x] InteractiveRenderer aangepast als facade (delegeert naar AccordionRenderer)
+- [x] Geneste accordions ondersteund (recursieve calls werken)
+- [x] Onclick handlers blijven werken (gebruiken InteractiveRenderer.toggleAccordion)
+
 ### Volgende Stap
-Fase 3: Accordions extractie
+Fase 4: ClickableSteps extractie
 
 ## HTML Bestanden Inventarisatie
 
@@ -128,12 +136,13 @@ Fase 3: Accordions extractie
 - [x] Update InteractiveRenderer als facade
 - [x] Test (zie FASE2_TEST_CHECKLIST.md)
 
-### Fase 3: Accordions (TODO)
-- [ ] Maak `js/components/interactive/AccordionRenderer.js`
-- [ ] Verplaats `renderAccordion`, `toggleAccordion`
-- [ ] Update HTML bestanden
-- [ ] Update InteractiveRenderer als facade
-- [ ] Test (let op: geneste accordions!)
+### Fase 3: Accordions ✅
+- [x] Maak `js/components/interactive/AccordionRenderer.js`
+- [x] Verplaats `renderAccordion`, `toggleAccordion`
+- [x] Update HTML bestanden (7 bestanden)
+- [x] Update InteractiveRenderer als facade
+- [x] Geneste accordions ondersteund
+- [x] Test (zie FASE3_TEST_CHECKLIST.md)
 
 ### Fase 4: ClickableSteps (TODO)
 - [ ] Maak `js/components/interactive/ClickableStepsRenderer.js`

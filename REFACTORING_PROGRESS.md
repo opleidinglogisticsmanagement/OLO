@@ -1,6 +1,6 @@
 # InteractiveRenderer Refactoring Progress
 
-## Status: Fase 6 - Basis Oefeningen Extractie ✅
+## Status: Fase 7 - Complexe Oefeningen Extractie (Deels) ✅
 
 ### Voltooide Stappen
 - [x] Git branch aangemaakt (`refactor/interactive-renderer-split`)
@@ -61,8 +61,20 @@
 - [x] Drag & drop functionaliteit behouden
 - [x] Onclick handlers blijven werken (gebruiken InteractiveRenderer methoden)
 
+### Fase 7 Voltooid (Deels) ✅
+- [x] `js/components/interactive/ExerciseRenderer.js` uitgebreid met Sequence Exercise logica
+- [x] Sequence Exercise methoden verplaatst (`renderSequenceExercise`, `handleSequenceDragStart`, `handleSequenceDragOver`, `getDragAfterElement`, `handleSequenceDragEnd`, `checkSequenceOrder`)
+- [x] `fuzzyMatchSourceAnswer` toegevoegd aan ExerciseRenderer.js
+- [x] InteractiveRenderer aangepast als facade voor Sequence Exercise
+- [x] Oude Sequence Exercise implementaties verwijderd
+- [ ] **Source Evaluation Exercise methoden** - TODO: Zeer groot (>700 regels), blijven voorlopig in InteractiveRenderer
+  - [ ] `renderSourceEvaluationExercise` - TODO: Verplaats naar ExerciseRenderer.js
+  - [ ] `selectSource` - TODO: Verplaats naar ExerciseRenderer.js
+  - [ ] `selectCheckType` - TODO: Verplaats naar ExerciseRenderer.js
+  - [ ] `checkAllSourceCriteria` - TODO: Verplaats naar ExerciseRenderer.js
+
 ### Volgende Stap
-Fase 7: Complexe Oefeningen (Sequence & Source Evaluation)
+Fase 8: AI Tools (Boolean Operator, AI Query, AI Bouwsteen Generator)
 
 ## HTML Bestanden Inventarisatie
 

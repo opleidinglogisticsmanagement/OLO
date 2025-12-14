@@ -333,6 +333,7 @@ class InteractiveRenderer {
 
     /**
      * Render een bronbeoordelingsoefening met gelaagde structuur
+     * @deprecated TODO: Verplaats naar ExerciseRenderer.js (zeer groot, >700 regels)
      * Laat studenten eerst een bron kiezen, dan een checktype, en daarna de criteria invullen
      * @param {Object} item - Source evaluation exercise item met sources array
      * @returns {string} HTML string
@@ -503,6 +504,9 @@ class InteractiveRenderer {
 
     /**
      * Selecteer een bron
+     * @deprecated TODO: Verplaats naar ExerciseRenderer.js (deel van Source Evaluation Exercise)
+     * @param {string} exerciseId - ID of the exercise container
+     * @param {number} sourceIndex - Index of the source to select
      */
     static selectSource(exerciseId, sourceIndex) {
         const exerciseElement = document.getElementById(exerciseId);
@@ -622,6 +626,9 @@ class InteractiveRenderer {
 
     /**
      * Selecteer een checktype (1e check, 2e check, of CRAP-test)
+     * @deprecated TODO: Verplaats naar ExerciseRenderer.js (deel van Source Evaluation Exercise)
+     * @param {string} exerciseId - ID of the exercise container
+     * @param {string} checkType - Type of check ('1eCheck', '2eCheck', or 'crapTest')
      */
     static selectCheckType(exerciseId, checkType) {
         const exerciseElement = document.getElementById(exerciseId);
@@ -877,7 +884,9 @@ class InteractiveRenderer {
 
     /**
      * Toon antwoordmodel voor alle criteria
+     * @deprecated TODO: Verplaats naar ExerciseRenderer.js (deel van Source Evaluation Exercise)
      * Gebruikers kunnen dan zelf beoordelen of hun antwoord correct was
+     * @param {string} exerciseId - ID of the exercise container
      */
     static checkAllSourceCriteria(exerciseId) {
         console.log('[InteractiveRenderer] checkAllSourceCriteria called with:', exerciseId);

@@ -41,200 +41,32 @@ class InteractiveRenderer {
      * @param {Object} item - SMART checklist item met doelstelling en criteria
      * @returns {string} HTML string
      */
+    /**
+     * Render een SMART checklist
+     * @deprecated Gebruik ChecklistRenderer.renderSMARTChecklist() in plaats daarvan
+     * @param {Object} item - SMART checklist item met doelstelling
+     * @returns {string} HTML string
+     */
     static renderSMARTChecklist(item) {
-        if (!item.doelstelling) {
-            console.warn('SMART checklist missing doelstelling:', item);
-            return '';
+        if (typeof window.ChecklistRenderer !== 'undefined') {
+            return ChecklistRenderer.renderSMARTChecklist(item);
         }
-
-        const checklistId = `smart-checklist-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
-        const criteria = item.criteria || [
-            { letter: 'S', name: 'Specifiek', description: 'De doelstelling is duidelijk en concreet geformuleerd', question: 'Wat precies wil je bereiken?' },
-            { letter: 'M', name: 'Meetbaar', description: 'Je kunt vaststellen of de doelstelling is behaald', question: 'Hoe meet je succes?' },
-            { letter: 'A', name: 'Acceptabel/Haalbaar', description: 'De doelstelling is realistisch en uitvoerbaar', question: 'Is dit haalbaar binnen de tijd en middelen?' },
-            { letter: 'R', name: 'Relevant', description: 'De doelstelling draagt bij aan het oplossen van het probleem', question: 'Helpt dit het praktijkprobleem op te lossen?' },
-            { letter: 'T', name: 'Tijdgebonden', description: 'Er is een duidelijk tijdsbestek voor de doelstelling', question: 'Wanneer moet dit zijn afgerond?' }
-        ];
-
-        const criteriaHtml = criteria.map((criterion, index) => {
-            const criterionId = `${checklistId}-${criterion.letter.toLowerCase()}`;
-            return `
-                <div class="border border-gray-200 dark:border-gray-700 rounded p-2 mb-1.5 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
-                    <div class="flex items-center justify-between gap-2">
-                        <div class="flex items-center space-x-2 flex-1 min-w-0">
-                            <div class="flex-shrink-0">
-                                <div class="w-7 h-7 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center">
-                                    <span class="font-bold text-blue-700 dark:text-blue-300 text-xs">${criterion.letter}</span>
-                                </div>
-                            </div>
-                            <div class="flex-1 min-w-0">
-                                <h4 class="font-semibold text-gray-900 dark:text-white text-xs leading-tight">${criterion.name}</h4>
-                                <p class="text-xs text-gray-600 dark:text-gray-400 leading-tight mt-0.5">${criterion.description}</p>
-                            </div>
-                        </div>
-                        <label class="flex items-center cursor-pointer ml-2 flex-shrink-0">
-                            <input 
-                                type="checkbox" 
-                                id="${criterionId}"
-                                class="smart-checkbox w-4 h-4 text-blue-600 dark:text-blue-400 border-gray-300 dark:border-gray-600 rounded focus:ring-blue-500"
-                                data-criterion="${criterion.letter}"
-                            />
-                            <span class="ml-1.5 text-xs text-gray-600 dark:text-gray-400 whitespace-nowrap">Aanwezig</span>
-                        </label>
-                    </div>
-                    <div id="${criterionId}-feedback" class="mt-1.5 hidden">
-                        <div class="text-xs p-1.5 rounded" id="${criterionId}-feedback-content"></div>
-                    </div>
-                </div>
-            `;
-        }).join('');
-
-        const resultHtml = `
-            <div id="${checklistId}-result" class="hidden mt-2.5 p-2.5 rounded-lg border-2">
-                <h4 class="font-semibold mb-1.5 text-sm" id="${checklistId}-result-title"></h4>
-                <p class="text-xs" id="${checklistId}-result-text"></p>
-                <ul class="mt-1.5 space-y-0.5 text-xs" id="${checklistId}-result-list"></ul>
-            </div>
-        `;
-
-        return `
-            <div class="smart-checklist-container mb-6 bg-gray-50 dark:bg-gray-800 rounded-lg p-3 border border-gray-200 dark:border-gray-700" id="${checklistId}">
-                <h3 class="text-base font-semibold text-gray-900 dark:text-white mb-2">Analyseer deze doelstelling op SMART-criteria:</h3>
-                <div class="bg-white dark:bg-gray-800 border-l-4 border-blue-500 dark:border-blue-400 p-2.5 mb-2.5 rounded-r-lg">
-                    <p class="text-gray-800 dark:text-gray-200 text-sm font-medium leading-snug">${item.doelstelling}</p>
-                </div>
-                <div class="space-y-1">
-                    ${criteriaHtml}
-                </div>
-                ${resultHtml}
-                <button 
-                    onclick="InteractiveRenderer.showSMARTResult('${checklistId}')"
-                    class="mt-2.5 px-4 py-1.5 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium text-sm"
-                >
-                    Bekijk analyse
-                </button>
-            </div>
-        `;
+        console.warn('ChecklistRenderer not loaded. SMART checklist will not render.');
+        return '';
     }
 
     /**
      * Show overall SMART analysis result with per-criterion feedback
-     * Based on actual analysis of the goal statement
+     * @deprecated Gebruik ChecklistRenderer.showSMARTResult() in plaats daarvan
+     * @param {string} checklistId - ID of the checklist container
      */
     static showSMARTResult(checklistId) {
-        const checkboxes = document.querySelectorAll(`#${checklistId} .smart-checkbox`);
-        const resultDiv = document.getElementById(`${checklistId}-result`);
-        const resultTitle = document.getElementById(`${checklistId}-result-title`);
-        const resultText = document.getElementById(`${checklistId}-result-text`);
-        const resultList = document.getElementById(`${checklistId}-result-list`);
-
-        if (!resultDiv || !resultTitle || !resultText || !resultList) return;
-
-        // Initialize variables
-        let checkedCount = 0;
-        const checkedCriteria = [];
-        const uncheckedCriteria = [];
-
-        // Clear result div first
-        resultDiv.classList.add('hidden');
-        resultDiv.className = 'hidden mt-2.5 p-2.5 rounded-lg border-2';
-        resultList.innerHTML = '';
-
-        // Count checked criteria and show per-criterion feedback
-        checkboxes.forEach(checkbox => {
-            const criterion = checkbox.getAttribute('data-criterion');
-            const criterionElement = checkbox.closest('.border');
-            const criterionName = criterionElement.querySelector('h4').textContent;
-            const criterionId = `${checklistId}-${criterion.toLowerCase()}`;
-            const feedbackDiv = document.getElementById(`${criterionId}-feedback`);
-            const feedbackContent = document.getElementById(`${criterionId}-feedback-content`);
-            
-            if (checkbox.checked) {
-                checkedCount++;
-                checkedCriteria.push({ letter: criterion, name: criterionName });
-                
-                // Show specific feedback per criterion
-                if (feedbackDiv && feedbackContent) {
-                    feedbackDiv.classList.remove('hidden');
-                    
-                    if (criterion === 'S') {
-                        // Specifiek - is aanwezig
-                        feedbackContent.className = 'text-xs p-1.5 rounded bg-green-50 dark:bg-green-900/20 text-green-800 dark:text-green-200 border border-green-200 dark:border-green-800';
-                        feedbackContent.textContent = '✓ Correct! De doelstelling is specifiek: duidelijk wat (communicatie verbeteren), waar (logistieke dienstverlener), en hoe (analyseren processen, ontwikkelen aanbevelingen).';
-                    } else if (criterion === 'M') {
-                        // Meetbaar - is NIET aanwezig volgens analyse
-                        feedbackContent.className = 'text-xs p-1.5 rounded bg-yellow-50 dark:bg-yellow-900/20 text-yellow-800 dark:text-yellow-200 border border-yellow-200 dark:border-yellow-800';
-                        feedbackContent.textContent = '⚠ Let op: Dit criterium is eigenlijk niet volledig aanwezig. "Verbeteren" is vaag - hoe meet je verbetering? Voeg concrete indicatoren toe (bijv. reductie conflicten, tevredenheidsscore).';
-                    } else if (criterion === 'A') {
-                        // Acceptabel/Haalbaar - is aanwezig
-                        feedbackContent.className = 'text-xs p-1.5 rounded bg-green-50 dark:bg-green-900/20 text-green-800 dark:text-green-200 border border-green-200 dark:border-green-800';
-                        feedbackContent.textContent = '✓ Correct! De doelstelling is haalbaar binnen de beschikbare tijd en middelen voor een studentenonderzoek.';
-                    } else if (criterion === 'R') {
-                        // Relevant - is aanwezig
-                        feedbackContent.className = 'text-xs p-1.5 rounded bg-green-50 dark:bg-green-900/20 text-green-800 dark:text-green-200 border border-green-200 dark:border-green-800';
-                        feedbackContent.textContent = '✓ Correct! De doelstelling draagt direct bij aan het oplossen van het praktijkprobleem (communicatieproblemen).';
-                    } else if (criterion === 'T') {
-                        // Tijdgebonden - is aanwezig
-                        feedbackContent.className = 'text-xs p-1.5 rounded bg-green-50 dark:bg-green-900/20 text-green-800 dark:text-green-200 border border-green-200 dark:border-green-800';
-                        feedbackContent.textContent = '✓ Correct! Er is een duidelijk tijdsbestek: "binnen een periode van 3 maanden".';
-                    }
-                }
-            } else {
-                uncheckedCriteria.push({ letter: criterion, name: criterionName });
-                
-                // Show feedback for unchecked criteria
-                if (feedbackDiv && feedbackContent) {
-                    feedbackDiv.classList.remove('hidden');
-                    
-                    if (criterion === 'M') {
-                        // Meetbaar - ontbreekt inderdaad
-                        feedbackContent.className = 'text-xs p-1.5 rounded bg-yellow-50 dark:bg-yellow-900/20 text-yellow-800 dark:text-yellow-200 border border-yellow-200 dark:border-yellow-800';
-                        feedbackContent.textContent = '⚠ Goed opgemerkt! Dit criterium ontbreekt inderdaad. "Verbeteren" is niet meetbaar - voeg concrete indicatoren toe (bijv. reductie conflicten met 30%, verhoging tevredenheidsscore met minimaal 1 punt).';
-                    } else {
-                        // Andere criteria zijn wel aanwezig
-                        feedbackContent.className = 'text-xs p-1.5 rounded bg-blue-50 text-blue-800 border border-blue-200';
-                        if (criterion === 'S') {
-                            feedbackContent.textContent = '💡 Overweeg: Dit criterium (Specifiek) is wel aanwezig in de doelstelling. De doelstelling is duidelijk over wat, waar en hoe.';
-                        } else if (criterion === 'A') {
-                            feedbackContent.textContent = '💡 Overweeg: Dit criterium (Acceptabel/Haalbaar) is wel aanwezig. De doelstelling is realistisch voor een studentenonderzoek.';
-                        } else if (criterion === 'R') {
-                            feedbackContent.textContent = '💡 Overweeg: Dit criterium (Relevant) is wel aanwezig. De doelstelling draagt bij aan het oplossen van het praktijkprobleem.';
-                        } else if (criterion === 'T') {
-                            feedbackContent.textContent = '💡 Overweeg: Dit criterium (Tijdgebonden) is wel aanwezig. Er is een duidelijk tijdsbestek: "binnen een periode van 3 maanden".';
-                        }
-                    }
-                }
-            }
-        });
-
-        // Show overall result
-        resultDiv.classList.remove('hidden');
-
-        if (checkedCount === 5) {
-            resultDiv.className = 'mt-2.5 p-2.5 rounded-lg border-2 border-green-500 dark:border-green-400 bg-green-50 dark:bg-green-900/20';
-            resultTitle.textContent = '✓ Uitstekend!';
-            resultTitle.className = 'font-semibold mb-1.5 text-green-800 text-sm';
-            resultText.textContent = 'Je hebt geïdentificeerd dat alle SMART-criteria aanwezig zijn. Let wel op: het criterium "Meetbaar" is eigenlijk niet volledig aanwezig - overweeg dit te verbeteren.';
-            resultText.className = 'text-xs text-green-800';
-            resultList.innerHTML = '';
-        } else if (checkedCount >= 3) {
-            resultDiv.className = 'mt-2.5 p-2.5 rounded-lg border-2 border-yellow-500 dark:border-yellow-400 bg-yellow-50 dark:bg-yellow-900/20';
-            resultTitle.textContent = '⚠ Goed bezig';
-            resultTitle.className = 'font-semibold mb-1.5 text-yellow-800 dark:text-yellow-200 text-sm';
-            resultText.textContent = `Je hebt ${checkedCount} van de 5 SMART-criteria geïdentificeerd. Bekijk de feedback bij elk criterium hierboven voor meer details.`;
-            resultText.className = 'text-xs text-yellow-800 dark:text-yellow-200';
-            resultList.className = 'mt-1.5 space-y-0.5 text-xs text-yellow-800 dark:text-yellow-200';
-            resultList.innerHTML = uncheckedCriteria.map(c => `<li>• ${c.letter}: ${c.name}</li>`).join('');
-        } else {
-            resultDiv.className = 'mt-2.5 p-2.5 rounded-lg border-2 border-blue-500 bg-blue-50';
-            resultTitle.textContent = '💡 Reflectie';
-            resultTitle.className = 'font-semibold mb-1.5 text-blue-800 text-sm';
-            resultText.textContent = `Je hebt ${checkedCount} criterium${checkedCount === 1 ? '' : 'a'} geïdentificeerd. Bekijk de feedback bij elk criterium hierboven voor meer details.`;
-            resultText.className = 'text-xs text-blue-800';
-            resultList.className = 'mt-1.5 space-y-0.5 text-xs text-blue-800';
-            resultList.innerHTML = uncheckedCriteria.map(c => `<li>• ${c.letter}: ${c.name}</li>`).join('');
+        if (typeof window.ChecklistRenderer !== 'undefined') {
+            return ChecklistRenderer.showSMARTResult(checklistId);
         }
+        console.warn('ChecklistRenderer not loaded. SMART result will not show.');
     }
+
 
     /**
      * Render een interactieve leerdoelen checklist
@@ -327,8 +159,23 @@ class InteractiveRenderer {
 
     /**
      * Load learning objectives state from localStorage
+     * @deprecated Gebruik ChecklistRenderer.loadLearningObjectivesState() in plaats daarvan
+     * @param {string} storageKey - Key for localStorage
+     * @returns {Array} Array of boolean values
      */
     static loadLearningObjectivesState(storageKey) {
+        if (typeof window.ChecklistRenderer !== 'undefined') {
+            return ChecklistRenderer.loadLearningObjectivesState(storageKey);
+        }
+        console.warn('ChecklistRenderer not loaded. Learning objectives state will not load.');
+        return [];
+    }
+
+    /**
+     * @deprecated Deze methode is verplaatst naar ChecklistRenderer
+     * Gebruik ChecklistRenderer.loadLearningObjectivesState() in plaats daarvan
+     */
+    static _old_loadLearningObjectivesState(storageKey) {
         try {
             const saved = localStorage.getItem(storageKey);
             return saved ? JSON.parse(saved) : [];
@@ -339,8 +186,23 @@ class InteractiveRenderer {
 
     /**
      * Update learning objective checkbox state
+     * @deprecated Gebruik ChecklistRenderer.updateLearningObjective() in plaats daarvan
+     * @param {string} checklistId - ID of the checklist container
+     * @param {string} storageKey - Key for localStorage
+     * @param {number} index - Index of the objective
      */
     static updateLearningObjective(checklistId, storageKey, index) {
+        if (typeof window.ChecklistRenderer !== 'undefined') {
+            return ChecklistRenderer.updateLearningObjective(checklistId, storageKey, index);
+        }
+        console.warn('ChecklistRenderer not loaded. Learning objective update will not work.');
+    }
+
+    /**
+     * @deprecated Deze methode is verplaatst naar ChecklistRenderer
+     * Gebruik ChecklistRenderer.updateLearningObjective() in plaats daarvan
+     */
+    static _old_updateLearningObjective(checklistId, storageKey, index) {
         const checkbox = document.getElementById(`${checklistId}-${index}`);
         const objectiveText = checkbox.closest('label').querySelector('span');
         const savedState = this.loadLearningObjectivesState(storageKey);
@@ -363,8 +225,22 @@ class InteractiveRenderer {
 
     /**
      * Update progress indicator
+     * @deprecated Gebruik ChecklistRenderer.updateLearningObjectivesProgress() in plaats daarvan
+     * @param {string} checklistId - ID of the checklist container
+     * @param {string} storageKey - Key for localStorage
      */
     static updateLearningObjectivesProgress(checklistId, storageKey) {
+        if (typeof window.ChecklistRenderer !== 'undefined') {
+            return ChecklistRenderer.updateLearningObjectivesProgress(checklistId, storageKey);
+        }
+        console.warn('ChecklistRenderer not loaded. Learning objectives progress will not update.');
+    }
+
+    /**
+     * @deprecated Deze methode is verplaatst naar ChecklistRenderer
+     * Gebruik ChecklistRenderer.updateLearningObjectivesProgress() in plaats daarvan
+     */
+    static _old_updateLearningObjectivesProgress(checklistId, storageKey) {
         const checklist = document.getElementById(checklistId);
         if (!checklist) return;
         
@@ -2132,8 +2008,23 @@ class InteractiveRenderer {
 
     /**
      * Check if definition contains time and place
+     * @deprecated Gebruik ChecklistRenderer.checkAfbakening() in plaats daarvan
+     * @param {string} definition - Definition text to check
+     * @returns {Object} Object with hasPlace, hasTime, and bothPresent
      */
     static checkAfbakening(definition) {
+        if (typeof window.ChecklistRenderer !== 'undefined') {
+            return ChecklistRenderer.checkAfbakening(definition);
+        }
+        console.warn('ChecklistRenderer not loaded. Afbakening check will not work.');
+        return { hasPlace: false, hasTime: false, bothPresent: false };
+    }
+
+    /**
+     * @deprecated Deze methode is verplaatst naar ChecklistRenderer
+     * Gebruik ChecklistRenderer.checkAfbakening() in plaats daarvan
+     */
+    static _old_checkAfbakening(definition) {
         const definitionLower = definition.toLowerCase();
         
         // Check for place indicators - must be specific location, not just generic words
@@ -2169,8 +2060,23 @@ class InteractiveRenderer {
 
     /**
      * Check if definition contains observable/measurable indicators
+     * @deprecated Gebruik ChecklistRenderer.checkOperationalisatie() in plaats daarvan
+     * @param {string} definition - Definition text to check
+     * @returns {Object} Object with hasMeasurable, hasObservable, and hasIndicators
      */
     static checkOperationalisatie(definition) {
+        if (typeof window.ChecklistRenderer !== 'undefined') {
+            return ChecklistRenderer.checkOperationalisatie(definition);
+        }
+        console.warn('ChecklistRenderer not loaded. Operationalisatie check will not work.');
+        return { hasMeasurable: false, hasObservable: false, hasIndicators: false };
+    }
+
+    /**
+     * @deprecated Deze methode is verplaatst naar ChecklistRenderer
+     * Gebruik ChecklistRenderer.checkOperationalisatie() in plaats daarvan
+     */
+    static _old_checkOperationalisatie(definition) {
         const definitionLower = definition.toLowerCase();
         
         // Check for measurable indicators (quantitative)
@@ -2208,8 +2114,22 @@ class InteractiveRenderer {
 
     /**
      * Update concept quality status and show feedback
+     * @deprecated Gebruik ChecklistRenderer.updateConceptQualityStatus() in plaats daarvan
+     * @param {string} checklistId - ID of the checklist container
+     * @param {string} criterionLetter - Letter of the criterion (A, O, S)
      */
     static updateConceptQualityStatus(checklistId, criterionLetter) {
+        if (typeof window.ChecklistRenderer !== 'undefined') {
+            return ChecklistRenderer.updateConceptQualityStatus(checklistId, criterionLetter);
+        }
+        console.warn('ChecklistRenderer not loaded. Concept quality status update will not work.');
+    }
+
+    /**
+     * @deprecated Deze methode is verplaatst naar ChecklistRenderer
+     * Gebruik ChecklistRenderer.updateConceptQualityStatus() in plaats daarvan
+     */
+    static _old_updateConceptQualityStatus(checklistId, criterionLetter) {
         const criterionId = `${checklistId}-${criterionLetter.toLowerCase()}`;
         const aanwezigRadio = document.getElementById(`${criterionId}-aanwezig`);
         const afwezigRadio = document.getElementById(`${criterionId}-afwezig`);
@@ -2305,9 +2225,21 @@ class InteractiveRenderer {
 
     /**
      * Show concept quality checklist result
-     * Based on actual analysis of the definition
+     * @deprecated Gebruik ChecklistRenderer.showConceptQualityResult() in plaats daarvan
+     * @param {string} checklistId - ID of the checklist container
      */
     static showConceptQualityResult(checklistId) {
+        if (typeof window.ChecklistRenderer !== 'undefined') {
+            return ChecklistRenderer.showConceptQualityResult(checklistId);
+        }
+        console.warn('ChecklistRenderer not loaded. Concept quality result will not show.');
+    }
+
+    /**
+     * @deprecated Deze methode is verplaatst naar ChecklistRenderer
+     * Gebruik ChecklistRenderer.showConceptQualityResult() in plaats daarvan
+     */
+    static _old_showConceptQualityResult(checklistId) {
         const radios = document.querySelectorAll(`#${checklistId} .concept-quality-radio`);
         const resultDiv = document.getElementById(`${checklistId}-result`);
         const resultTitle = document.getElementById(`${checklistId}-result-title`);

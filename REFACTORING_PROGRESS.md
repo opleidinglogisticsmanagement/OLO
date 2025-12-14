@@ -1,6 +1,6 @@
 # InteractiveRenderer Refactoring Progress
 
-## Status: Fase 4 - ClickableSteps Extractie ✅
+## Status: Fase 5 - Checklists Extractie ✅
 
 ### Voltooide Stappen
 - [x] Git branch aangemaakt (`refactor/interactive-renderer-split`)
@@ -41,8 +41,19 @@
 - [x] allowMultiple functionaliteit behouden
 - [x] Onclick handlers blijven werken (gebruiken InteractiveRenderer.toggleClickableStep)
 
+### Fase 5 Voltooid ✅
+- [x] `js/components/interactive/ChecklistRenderer.js` aangemaakt
+- [x] Alle checklist logica verplaatst:
+  - [x] SMART Checklist (`renderSMARTChecklist`, `showSMARTResult`)
+  - [x] Learning Objectives Checklist (`renderLearningObjectivesChecklist`, `loadLearningObjectivesState`, `updateLearningObjective`, `updateLearningObjectivesProgress`)
+  - [x] Concept Quality Checklist (`renderConceptQualityChecklist`, `checkAfbakening`, `checkOperationalisatie`, `updateConceptQualityStatus`, `showConceptQualityResult`)
+- [x] Script tag toegevoegd aan alle 7 HTML bestanden
+- [x] InteractiveRenderer aangepast als facade (delegeert naar ChecklistRenderer)
+- [x] localStorage functionaliteit behouden (Learning Objectives)
+- [x] Onclick handlers blijven werken (gebruiken InteractiveRenderer methoden)
+
 ### Volgende Stap
-Fase 5: Checklists extractie
+Fase 6: Basis Oefeningen (True/False en Matching)
 
 ## HTML Bestanden Inventarisatie
 
@@ -160,12 +171,12 @@ Fase 5: Checklists extractie
 - [x] Update InteractiveRenderer als facade
 - [x] Test (zie FASE4_TEST_CHECKLIST.md)
 
-### Fase 5: Checklists (TODO)
-- [ ] Maak `js/components/interactive/ChecklistRenderer.js`
-- [ ] Verplaats alle checklist logica
-- [ ] Update HTML bestanden
-- [ ] Update InteractiveRenderer als facade
-- [ ] Test
+### Fase 5: Checklists ✅
+- [x] Maak `js/components/interactive/ChecklistRenderer.js`
+- [x] Verplaats alle checklist logica (SMART, LearningObjectives, ConceptQuality)
+- [x] Update HTML bestanden (7 bestanden)
+- [x] Update InteractiveRenderer als facade
+- [x] Test (zie FASE5_TEST_CHECKLIST.md)
 
 ### Fase 6: Basis Oefeningen (TODO)
 - [ ] Maak/breid `js/components/interactive/ExerciseRenderer.js` uit

@@ -247,274 +247,89 @@ class InteractiveRenderer {
 
     /**
      * Render een sequence oefening (volgorde oefening)
-     * Laat studenten alinea's in de juiste volgorde zetten
+     * @deprecated Gebruik ExerciseRenderer.renderSequenceExercise() in plaats daarvan
      * @param {Object} item - Sequence exercise item met paragraphs array
      * @returns {string} HTML string
      */
     static renderSequenceExercise(item) {
-        if (!item.paragraphs || !Array.isArray(item.paragraphs)) {
-            console.warn('Sequence exercise missing paragraphs:', item);
-            return '';
+        if (typeof window.ExerciseRenderer !== 'undefined') {
+            return ExerciseRenderer.renderSequenceExercise(item);
         }
-
-        const exerciseId = `sequence-exercise-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
-        
-        // Shuffle paragraphs but keep track of correct order
-        const paragraphsWithOrder = item.paragraphs.map((para, index) => ({
-            ...para,
-            originalIndex: index,
-            correctOrder: para.correctOrder || (index + 1)
-        }));
-        
-        const shuffledParagraphs = [...paragraphsWithOrder].sort(() => Math.random() - 0.5);
-        
-        // Context section
-        const contextHtml = item.context ? `
-            <div class="mb-6 p-4 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg">
-                <h4 class="font-semibold text-blue-900 dark:text-blue-300 text-sm mb-2">Context</h4>
-                <p class="text-sm text-blue-800 dark:text-blue-400">${this.escapeHtml(item.context)}</p>
-            </div>
-        ` : '';
-        
-        // Render shuffled paragraphs as sortable items (no drop zones, direct sorting)
-        const paragraphsHtml = shuffledParagraphs.map((para, shuffledIndex) => {
-            const paraId = `${exerciseId}-para-${shuffledIndex}`;
-            return `
-                <div 
-                    id="${paraId}"
-                    class="sequence-item bg-white dark:bg-gray-800 border-2 border-blue-300 dark:border-blue-600 rounded-lg p-4 mb-3 cursor-move hover:bg-blue-50 dark:hover:bg-gray-700 transition-colors"
-                    draggable="true"
-                    style="user-select: none; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none;"
-                    data-correct-order="${para.correctOrder}"
-                    data-original-index="${para.originalIndex}"
-                    data-shuffled-index="${shuffledIndex}"
-                    data-exercise-id="${exerciseId}"
-                >
-                    <div class="flex items-start">
-                        <div class="flex-shrink-0 mr-3 mt-1">
-                            <i class="fas fa-grip-vertical text-gray-400 dark:text-gray-500"></i>
-                        </div>
-                        <div class="flex-1">
-                            <p class="text-sm text-gray-700 dark:text-gray-300" style="user-select: none; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; pointer-events: none; margin: 0;">${this.escapeHtml(para.text)}</p>
-                        </div>
-                    </div>
-                </div>
-            `;
-        }).join('');
-        
-        // Store exercise data in data attributes for feedback
-        const exerciseData = {
-            explanation: item.explanation || '',
-            sources: item.sources || [],
-            feedback: item.feedback || {}
-        };
-        
-        // Only show title if it's not empty
-        const titleHtml = item.title && item.title.trim() !== '' ? `<h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">${item.title}</h3>` : '';
-        
-        return `
-            <div class="sequence-exercise w-full" id="${exerciseId}"
-                 data-explanation="${this.escapeHtml(exerciseData.explanation)}"
-                 data-sources="${encodeURIComponent(JSON.stringify(exerciseData.sources))}"
-                 data-incorrect-feedback="${this.escapeHtml(exerciseData.feedback.incorrect || '')}">
-                ${titleHtml}
-                <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">${item.instruction || 'Sleep de alinea\'s om ze in de juiste volgorde te zetten:'}</p>
-                
-                ${contextHtml}
-                
-                <div class="mb-4">
-                    <h4 class="font-semibold text-gray-900 dark:text-white mb-3">Alinea's (sleep om te herordenen):</h4>
-                    <div id="${exerciseId}-sortable-container" class="sequence-sortable-container">
-                        ${paragraphsHtml}
-                    </div>
-                </div>
-                
-                <div class="mt-6 pt-4 border-t border-gray-200 dark:border-gray-600">
-                    <button 
-                        class="sequence-check-btn px-5 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium text-sm"
-                        type="button"
-                        data-exercise-id="${exerciseId}"
-                    >
-                        Controleer volgorde
-                    </button>
-                    <div id="${exerciseId}-result" class="hidden mt-4"></div>
-                </div>
-            </div>
-        `;
+        console.warn('ExerciseRenderer not loaded. Sequence exercise will not render.');
+        return '';
     }
+
 
     /**
      * Handle drag start for sequence exercise (sortable list)
+     * @deprecated Gebruik ExerciseRenderer.handleSequenceDragStart() in plaats daarvan
+     * @param {Event} event - Drag event
+     * @param {string} exerciseId - ID of the exercise container
      */
     static handleSequenceDragStart(event, exerciseId) {
-        const item = event.target.closest('.sequence-item');
-        if (!item) return;
-        
-        event.dataTransfer.effectAllowed = 'move';
-        event.dataTransfer.setData('text/plain', JSON.stringify({
-            exerciseId,
-            itemId: item.id
-        }));
-        
-        item.style.opacity = '0.5';
-        item.classList.add('dragging');
+        if (typeof window.ExerciseRenderer !== 'undefined') {
+            return ExerciseRenderer.handleSequenceDragStart(event, exerciseId);
+        }
+        console.warn('ExerciseRenderer not loaded. Sequence drag start will not work.');
     }
+
 
     /**
      * Handle drag over for sequence exercise (sortable list)
+     * @deprecated Gebruik ExerciseRenderer.handleSequenceDragOver() in plaats daarvan
+     * @param {Event} event - Drag event
+     * @param {string} exerciseId - ID of the exercise container
      */
     static handleSequenceDragOver(event, exerciseId) {
-        event.preventDefault();
-        event.dataTransfer.dropEffect = 'move';
-        
-        const container = document.getElementById(`${exerciseId}-sortable-container`);
-        if (!container) return;
-        
-        const dragging = container.querySelector('.dragging');
-        if (!dragging) return;
-        
-        const afterElement = this.getDragAfterElement(container, event.clientY);
-        
-        if (afterElement == null) {
-            container.appendChild(dragging);
-        } else {
-            container.insertBefore(dragging, afterElement);
+        if (typeof window.ExerciseRenderer !== 'undefined') {
+            return ExerciseRenderer.handleSequenceDragOver(event, exerciseId);
         }
+        console.warn('ExerciseRenderer not loaded. Sequence drag over will not work.');
     }
+
 
     /**
      * Get element after which to insert dragged item
+     * @deprecated Gebruik ExerciseRenderer.getDragAfterElement() in plaats daarvan
+     * @param {HTMLElement} container - Container element
+     * @param {number} y - Y coordinate of mouse
+     * @returns {HTMLElement|null} Element after which to insert, or null
      */
     static getDragAfterElement(container, y) {
-        const draggableElements = [...container.querySelectorAll('.sequence-item:not(.dragging)')];
-        
-        return draggableElements.reduce((closest, child) => {
-            const box = child.getBoundingClientRect();
-            const offset = y - box.top - box.height / 2;
-            
-            if (offset < 0 && offset > closest.offset) {
-                return { offset: offset, element: child };
-            } else {
-                return closest;
-            }
-        }, { offset: Number.NEGATIVE_INFINITY }).element;
+        if (typeof window.ExerciseRenderer !== 'undefined') {
+            return ExerciseRenderer.getDragAfterElement(container, y);
+        }
+        console.warn('ExerciseRenderer not loaded. getDragAfterElement will not work.');
+        return null;
     }
+
 
     /**
      * Handle drag end for sequence exercise
+     * @deprecated Gebruik ExerciseRenderer.handleSequenceDragEnd() in plaats daarvan
+     * @param {Event} event - Drag event
+     * @param {string} exerciseId - ID of the exercise container
      */
     static handleSequenceDragEnd(event, exerciseId) {
-        const item = event.target.closest('.sequence-item');
-        if (!item) return;
-        
-        item.style.opacity = '1';
-        item.classList.remove('dragging');
+        if (typeof window.ExerciseRenderer !== 'undefined') {
+            return ExerciseRenderer.handleSequenceDragEnd(event, exerciseId);
+        }
+        console.warn('ExerciseRenderer not loaded. Sequence drag end will not work.');
     }
+
 
     /**
      * Check sequence order (for sortable list)
+     * @deprecated Gebruik ExerciseRenderer.checkSequenceOrder() in plaats daarvan
+     * @param {string} exerciseId - ID of the exercise container
      */
     static checkSequenceOrder(exerciseId) {
-        const exercise = document.getElementById(exerciseId);
-        if (!exercise) return;
-        
-        const container = document.getElementById(`${exerciseId}-sortable-container`);
-        if (!container) return;
-        
-        const items = container.querySelectorAll('.sequence-item');
-        const resultDiv = document.getElementById(`${exerciseId}-result`);
-        
-        if (!resultDiv) return;
-        
-        let allCorrect = true;
-        const results = [];
-        
-        items.forEach((item, index) => {
-            const currentPosition = index + 1;
-            const correctOrder = parseInt(item.getAttribute('data-correct-order'));
-            const isCorrect = correctOrder === currentPosition;
-            
-            if (isCorrect) {
-                item.classList.add('border-green-500', 'dark:border-green-400');
-                item.classList.remove('border-blue-300', 'dark:border-blue-600', 'border-red-500', 'dark:border-red-400');
-                results.push({ position: currentPosition, correct: true, message: 'Correct' });
-            } else {
-                allCorrect = false;
-                item.classList.add('border-red-500', 'dark:border-red-400');
-                item.classList.remove('border-blue-300', 'dark:border-blue-600', 'border-green-500', 'dark:border-green-400');
-                results.push({ position: currentPosition, correct: false, message: `Moet op positie ${correctOrder} staan` });
-            }
-        });
-        
-        // Get exercise item data for feedback
-        const exerciseElement = exercise;
-        
-        // Show result
-        if (allCorrect) {
-            resultDiv.className = 'mt-4 p-4 rounded-lg border-2 border-green-500 dark:border-green-400 bg-green-50 dark:bg-green-900/20';
-            
-            // Get explanation and sources from data attributes
-            const explanation = exerciseElement.getAttribute('data-explanation') || 'Je hebt de alinea\'s in de juiste logische volgorde gezet.';
-            const sources = exerciseElement.getAttribute('data-sources');
-            
-            let sourcesHtml = '';
-            if (sources) {
-                try {
-                    const sourcesArray = JSON.parse(decodeURIComponent(sources));
-                    sourcesHtml = `
-                        <div class="mt-3 p-3 bg-white dark:bg-gray-800 rounded border border-green-200 dark:border-green-800">
-                            <p class="text-sm font-medium text-green-900 dark:text-green-300 mb-2">Gebruikte bronnen:</p>
-                            <ul class="text-sm text-green-800 dark:text-green-400 list-disc list-inside space-y-1">
-                                ${sourcesArray.map(source => `<li>${this.escapeHtml(source)}</li>`).join('')}
-                            </ul>
-                        </div>
-                    `;
-                } catch (e) {
-                    console.error('Error parsing sources:', e);
-                }
-            }
-            
-            resultDiv.innerHTML = `
-                <div class="flex items-start">
-                    <i class="fas fa-check-circle text-green-600 dark:text-green-400 text-xl mt-0.5 mr-3"></i>
-                    <div class="flex-1">
-                        <h4 class="font-semibold text-green-900 dark:text-green-300 mb-2">Uitstekend! De volgorde is correct.</h4>
-                        <p class="text-sm text-green-800 dark:text-green-400 mb-3">${this.escapeHtml(explanation)}</p>
-                        ${sourcesHtml}
-                    </div>
-                </div>
-            `;
-        } else {
-            resultDiv.className = 'mt-4 p-4 rounded-lg border-2 border-yellow-500 dark:border-yellow-400 bg-yellow-50 dark:bg-yellow-900/20';
-            
-            // Fixed feedback message and hints
-            const feedbackMessage = 'Helaas nog niet alle alinea\'s staan goed. Gebruik de hint hieronder om de alinea\'s goed te structureren.';
-            const hints = [
-                'Alinea 1 gaat over het probleem (disbalans door gebrek aan data-gestuurd model).',
-                'Alinea 2 legt de methode uit waarmee het probleem opgelost kan worden (kwantitatieve analyse).',
-                'Alinea 3 beschrijft de oplossing (EOQ-model).',
-                'Alinea 4 benoemt de knowledge gap (onbekende kostvariabelen en besparingspotentieel).'
-            ];
-            
-            resultDiv.innerHTML = `
-                <div class="flex items-start">
-                    <i class="fas fa-exclamation-triangle text-yellow-600 dark:text-yellow-400 text-xl mt-0.5 mr-3"></i>
-                    <div class="flex-1">
-                        <h4 class="font-semibold text-yellow-900 dark:text-yellow-300 mb-2">Niet helemaal correct</h4>
-                        <p class="text-sm text-yellow-800 dark:text-yellow-400 mb-3">${this.escapeHtml(feedbackMessage)}</p>
-                        <div class="text-sm text-yellow-800 dark:text-yellow-400">
-                            <p class="font-medium mb-2">Hint:</p>
-                            <ul class="list-disc list-inside space-y-1">
-                                ${hints.map(hint => `<li class="mb-2">${this.escapeHtml(hint)}</li>`).join('')}
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            `;
+        if (typeof window.ExerciseRenderer !== 'undefined') {
+            return ExerciseRenderer.checkSequenceOrder(exerciseId);
         }
-        
-        resultDiv.classList.remove('hidden');
+        console.warn('ExerciseRenderer not loaded. Sequence order check will not work.');
     }
+
 
     /**
      * Render een bronbeoordelingsoefening met gelaagde structuur

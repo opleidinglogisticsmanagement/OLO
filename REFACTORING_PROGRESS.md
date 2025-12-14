@@ -1,6 +1,6 @@
 # InteractiveRenderer Refactoring Progress
 
-## Status: Fase 5 - Checklists Extractie ✅
+## Status: Fase 6 - Basis Oefeningen Extractie ✅
 
 ### Voltooide Stappen
 - [x] Git branch aangemaakt (`refactor/interactive-renderer-split`)
@@ -52,8 +52,17 @@
 - [x] localStorage functionaliteit behouden (Learning Objectives)
 - [x] Onclick handlers blijven werken (gebruiken InteractiveRenderer methoden)
 
+### Fase 6 Voltooid ✅
+- [x] `js/components/interactive/ExerciseRenderer.js` aangemaakt
+- [x] True/False Exercise logica verplaatst (`renderTrueFalseExercise`, `updateTrueFalseAnswer`, `checkTrueFalseExercise`)
+- [x] Matching Exercise logica verplaatst (`renderMatchingExercise`, `handleDragStart`, `handleDragEnd`, `allowDrop`, `handleDrop`, `checkMatchingExercise`)
+- [x] Script tag toegevoegd aan alle 7 HTML bestanden
+- [x] InteractiveRenderer aangepast als facade (delegeert naar ExerciseRenderer)
+- [x] Drag & drop functionaliteit behouden
+- [x] Onclick handlers blijven werken (gebruiken InteractiveRenderer methoden)
+
 ### Volgende Stap
-Fase 6: Basis Oefeningen (True/False en Matching)
+Fase 7: Complexe Oefeningen (Sequence & Source Evaluation)
 
 ## HTML Bestanden Inventarisatie
 
@@ -178,12 +187,12 @@ Fase 6: Basis Oefeningen (True/False en Matching)
 - [x] Update InteractiveRenderer als facade
 - [x] Test (zie FASE5_TEST_CHECKLIST.md)
 
-### Fase 6: Basis Oefeningen (TODO)
-- [ ] Maak/breid `js/components/interactive/ExerciseRenderer.js` uit
-- [ ] Verplaats True/False en Matching exercises
-- [ ] Update HTML bestanden
-- [ ] Update InteractiveRenderer als facade
-- [ ] Test
+### Fase 6: Basis Oefeningen ✅
+- [x] Maak `js/components/interactive/ExerciseRenderer.js`
+- [x] Verplaats True/False en Matching exercises
+- [x] Update HTML bestanden (7 bestanden)
+- [x] Update InteractiveRenderer als facade
+- [x] Test (zie FASE6_TEST_CHECKLIST.md)
 
 ### Fase 7: Complexe Oefeningen (TODO)
 - [ ] Breid `ExerciseRenderer.js` uit OF maak aparte files

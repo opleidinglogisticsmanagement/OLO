@@ -16,7 +16,7 @@ class LayoutRenderer {
      */
     renderSidebar() {
         return `
-            <aside id="sidebar" class="w-full sm:w-80 bg-white dark:bg-gray-800 shadow-lg transform -translate-x-full lg:translate-x-0 transition-transform duration-300 ease-in-out fixed inset-y-0 z-40" aria-label="Navigatie menu">
+            <aside id="sidebar" class="w-full sm:w-80 bg-white dark:bg-gray-800 shadow-lg transform -translate-x-full lg:translate-x-0 transition-transform duration-300 ease-in-out fixed inset-y-0 z-40" aria-label="Navigatie menu" style="view-transition-name: sidebar;">
                 <div class="h-full flex flex-col">
                     ${this.renderSidebarHeader()}
                     ${this.renderModuleNavigation()}
@@ -205,7 +205,7 @@ class LayoutRenderer {
      */
     renderHeader() {
         return `
-            <header class="fixed top-0 z-40 bg-white dark:bg-gray-800 shadow-sm border-b border-gray-200 dark:border-gray-700 lg:left-80 left-0 right-0" id="main-header">
+            <header class="fixed top-0 z-40 bg-white dark:bg-gray-800 shadow-sm border-b border-gray-200 dark:border-gray-700 lg:left-80 left-0 right-0" id="main-header" style="view-transition-name: main-header;">
                 <div class="px-4 sm:px-6 h-[56px] sm:h-[64px] transition-colors duration-200 flex items-center">
                     <div class="flex items-center justify-between relative z-10 bg-white dark:bg-gray-800 transition-colors duration-200 w-full">
                     <!-- Left section: Mobile menu & Breadcrumbs -->

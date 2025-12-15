@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="view-transition" content="same-origin" />
     <title>Week 3 - E-Learning Platform</title>
     <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
     <script src="https://cdn.tailwindcss.com"></script>
@@ -444,6 +445,11 @@
             .space-y-6 > * + * {
                 margin-top: 1.5rem;
             }
+        }
+        
+        /* View Transitions API */
+        @view-transition {
+            navigation: auto;
         }
     </style>
 </head>

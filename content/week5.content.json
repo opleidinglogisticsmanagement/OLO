@@ -783,7 +783,7 @@
                   "correct": "Goed gedaan! Je hebt de alinea's in de juiste logische volgorde gezet.",
                   "incorrect": "Niet helemaal correct. Denk na over hoe de alinea's logisch op elkaar volgen."
                 },
-                "explanation": "Uitstekend! De volgorde is correct. Alinea 1 gaat over het probleem (disbalans door gebrek aan data-gestuurd model). Alinea 2 beschrijft de oplossing (EOQ-model). Alinea 3 legt de methode uit (kwantitatieve analyse). Alinea 4 benoemt de knowledge gap (onbekende kostvariabelen en besparingspotentieel). Met een dergelijke opbouw van het theoretisch kader is er een mooie volgorde waarin ook wordt getrechterd van breed naar smal.",
+                "explanation": "Uitstekend! De volgorde is correct. Alinea 1 gaat over het probleem. Alinea 2 beschrijft de oplossing. Alinea 3 legt de methode uit. Alinea 4 benoemt de knowledge gap. Met een dergelijke opbouw van het theoretisch kader is er een mooie volgorde waarin ook wordt getrechterd van breed naar smal.",
                 "sources": [
                   "Van Weele, A. J. (2018). Purchasing and supply chain management. Cengage Learning.",
                   "Silver, E. A., Pyke, D. F., & Thomas, D. J. (2017). Inventory and production management in supply chains. CRC Press.",

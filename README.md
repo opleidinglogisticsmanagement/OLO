@@ -631,6 +631,33 @@ ContentRenderer.renderContentItems(contentArray, { enableModal: true })
 - ✅ **Testability** - Componenten kunnen onafhankelijk getest worden
 - ✅ **Backward Compatibility** - Bestaande code blijft werken via de facade
 - ✅ **Clean Code** - Geen duplicate code, duidelijke structuur
+- ✅ **No God Class** - Geen god class anti-pattern meer; elke renderer heeft één verantwoordelijkheid
+
+**Belangrijk: Nieuwe Oefeningen/Componenten**
+
+⚠️ **Voor nieuwe types oefeningen of interactieve componenten:**
+- **Maak een nieuwe gespecialiseerde renderer** (bijv. `NewExerciseRenderer.js`)
+- **Voeg een facade method toe** aan `InteractiveRenderer` die delegeert naar de nieuwe renderer
+- **Voeg NIET** de implementatie direct toe aan `InteractiveRenderer` - dit voorkomt dat het weer een god class wordt
+
+**Voorbeeld voor nieuwe oefening:**
+```javascript
+// 1. Maak nieuwe renderer: js/components/interactive/NewExerciseRenderer.js
+class NewExerciseRenderer {
+    static renderNewExercise(item) {
+        // Implementatie hier
+    }
+}
+
+// 2. Voeg facade method toe aan InteractiveRenderer.js
+static renderNewExercise(item) {
+    if (typeof window.NewExerciseRenderer !== 'undefined') {
+        return NewExerciseRenderer.renderNewExercise(item);
+    }
+    console.warn('NewExerciseRenderer not loaded.');
+    return '';
+}
+```
 
 **Gebruik:**
 ```javascript

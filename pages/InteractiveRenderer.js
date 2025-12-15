@@ -1,8 +1,28 @@
 /**
  * InteractiveRenderer
  * 
- * Utility voor het renderen van interactieve content elementen
- * Ondersteunt: accordion, smartChecklist, learningObjectivesChecklist, matchingExercise, trueFalseExercise
+ * Facade voor het renderen van interactieve content elementen.
+ * Delegeert alle functionaliteit naar gespecialiseerde renderers.
+ * 
+ * ⚠️ BELANGRIJK: Dit is een FACADE, geen god class!
+ * 
+ * Voor nieuwe oefeningen/componenten:
+ * 1. Maak een nieuwe gespecialiseerde renderer (bijv. NewExerciseRenderer.js)
+ * 2. Voeg een facade method toe aan InteractiveRenderer die delegeert
+ * 3. Voeg NIET de implementatie direct toe aan InteractiveRenderer
+ * 
+ * Gespecialiseerde Renderers:
+ * - AccordionRenderer - Accordion componenten
+ * - TabRenderer - Tab componenten
+ * - ClickableStepsRenderer - Klikbare stappen
+ * - ChecklistRenderer - Checklists
+ * - ExerciseRenderer - Oefeningen (True/False, Matching, Sequence)
+ * - AIRenderer - AI Tools
+ * - HtmlUtils - HTML utilities
+ * 
+ * Uitzondering:
+ * Source Evaluation Exercise blijft nog in InteractiveRenderer (~700 regels)
+ * TODO: Verplaats naar ExerciseRenderer.js in de toekomst
  */
 
 class InteractiveRenderer {

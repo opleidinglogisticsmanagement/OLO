@@ -1096,31 +1096,19 @@ class InteractiveRenderer {
     /**
      * Normaliseer tekst voor vergelijking
      * @deprecated Gebruik HtmlUtils.normalizeText() in plaats daarvan
+     * Facade method - delegeert naar HtmlUtils
      */
     static normalizeText(text) {
-        if (typeof window.HtmlUtils !== 'undefined') {
-            return HtmlUtils.normalizeText(text);
-        }
-        console.warn('HtmlUtils not loaded. Falling back to local implementation.');
-        return text
-            .toLowerCase()
-            .trim()
-            .replace(/[^\w\s]/g, '') // Remove punctuation
-            .replace(/\s+/g, ' ');   // Normalize whitespace
+        return HtmlUtils.normalizeText(text);
     }
 
     /**
      * Escape HTML voor veiligheid
      * @deprecated Gebruik HtmlUtils.escapeHtml() in plaats daarvan
+     * Facade method - delegeert naar HtmlUtils
      */
     static escapeHtml(text) {
-        if (typeof window.HtmlUtils !== 'undefined') {
-            return HtmlUtils.escapeHtml(text);
-        }
-        console.warn('HtmlUtils not loaded. Falling back to local implementation.');
-        const div = document.createElement('div');
-        div.textContent = text;
-        return div.innerHTML;
+        return HtmlUtils.escapeHtml(text);
     }
 
     /**

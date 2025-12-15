@@ -50,21 +50,299 @@ OLO/
 
 ## 🚀 Installatie & Gebruik
 
-### Lokale Ontwikkeling
+### Snelle Start (Zonder Server)
+
 1. Clone de repository
 2. Open `index.html` in een moderne browser
-3. Voor lokale server: `python -m http.server 8000`
+3. **Let op:** Voor AI-functionaliteit (MC vragen genereren, AI tools) is een server nodig (zie hieronder)
 
-### Productie Deployment
-1. Upload alle bestanden naar webserver
-2. Zorg voor HTTPS voor localStorage functionaliteit
-3. Configureer caching headers voor assets
+### Server Setup (Voor AI-functionaliteit)
 
-### Snelstart
-1. **Open `index.html`** in je browser voor het dashboard
-2. **Klik op een week** om naar die pagina te gaan
-3. **Bewerk JSON bestanden** om content toe te voegen
-4. **Refresh de pagina** om wijzigingen te zien
+Het platform gebruikt een Node.js server voor AI-functionaliteit (Gemini API). De server handelt API calls af om CORS-problemen te voorkomen en API keys veilig te beheren.
+
+#### ✅ Snelle Start
+
+1. **Dependencies installeren** (eenmalig):
+   ```bash
+   npm install
+   ```
+
+2. **Server starten**:
+   ```bash
+   npm start
+   ```
+
+3. **Open in browser**: `http://localhost:3000/week2.html`
+
+#### 📋 Stap-voor-stap Setup
+
+**Stap 1: Node.js installeren**
+
+Als je Node.js nog niet hebt:
+1. Ga naar https://nodejs.org/
+2. Download de LTS versie
+3. Installeer Node.js
+4. Controleer installatie: `node --version` en `npm --version`
+
+**Stap 2: Dependencies installeren**
+
+In de terminal, navigeer naar de project folder en run:
+```bash
+npm install
+```
+
+Dit installeert:
+- Express (web server)
+- CORS (voor cross-origin requests)
+- dotenv (voor environment variables)
+- @google/generative-ai (voor Gemini API)
+- node-fetch (voor API calls)
+
+**Stap 3: .env bestand aanmaken**
+
+Maak een `.env` bestand in de root directory met deze inhoud:
+
+```env
+# Google Gemini API Key
+# Verkrijg een API key op: https://makersuite.google.com/app/apikey
+GEMINI_API_KEY=your_api_key_here
+
+# Server Port (standaard: 3000)
+PORT=3000
+
+# Toegestane CORS origins (gescheiden door komma's)
+# Voor development: http://localhost:3000,http://localhost:5500
+# Voor productie: https://jouw-domein.nl
+ALLOWED_ORIGINS=http://localhost:3000,http://localhost:5500
+
+# Node Environment (development of production)
+NODE_ENV=development
+```
+
+**BELANGRIJK:** 
+- Vervang `your_api_key_here` met je eigen Google Gemini API key
+- Het `.env` bestand staat in `.gitignore` en wordt niet gecommit naar Git
+- Voor productie: pas `ALLOWED_ORIGINS` aan naar je eigen domein
+
+**Stap 4: Server starten**
+
+**Optie 1: Via npm (aanbevolen)**
+```bash
+npm start
+```
+
+**Optie 2: Via PowerShell script**
+```bash
+.\start-server.ps1
+```
+
+**Optie 3: Voor development met auto-reload**
+```bash
+npm run dev
+```
+
+Je zou moeten zien:
+```
+🚀 Server running on http://localhost:3000
+📝 API Key configured: ✅ Yes
+📚 E-Learning template is available at: http://localhost:3000
+🔧 API endpoint: http://localhost:3000/api/generate-questions
+```
+
+**Stap 5: Testen**
+
+1. Open je browser en ga naar: `http://localhost:3000/week2.html`
+2. De MC vragen zouden nu automatisch gegenereerd moeten worden
+3. Check de console (F12) voor eventuele errors
+
+#### 🔧 Automatisch opstarten
+
+De server start automatisch wanneer je Cursor opent (via `.vscode/tasks.json`).
+
+**Als de server niet automatisch start:**
+- Herstart Cursor volledig
+- Of start handmatig: `npm start`
+- Of gebruik het PowerShell script: `.\start-server.ps1`
+
+#### 🛠️ Handige Scripts
+
+**Server starten:**
+```bash
+.\start-server.ps1
+```
+Controleert eerst of de server al draait en start alleen als nodig.
+
+**Server stoppen:**
+```bash
+.\stop-server.ps1
+```
+Stopt de server die op poort 3000 draait.
+
+#### 📡 API Endpoints
+
+**POST /api/generate-questions**
+Genereer MC vragen op basis van theorie content.
+
+**Request body:**
+```json
+{
+  "theoryContent": "De theorie tekst hier...",
+  "numberOfQuestions": 3
+}
+```
+
+**Response:**
+```json
+{
+  "success": true,
+  "vragen": [
+    {
+      "id": "vraag1",
+      "vraag": "Vraag tekst...",
+      "antwoorden": [...],
+      "feedbackGoed": "...",
+      "feedbackFout": "..."
+    }
+  ]
+}
+```
+
+**GET /api/health**
+Health check endpoint om te controleren of de server draait.
+
+#### 🚀 Vercel Deployment
+
+Voor deployment op Vercel moet je de environment variables instellen in het Vercel dashboard:
+
+1. **Ga naar je Vercel project:**
+   - Open https://vercel.com/dashboard
+   - Selecteer je project
+
+2. **Voeg environment variable toe:**
+   - Ga naar **Settings** → **Environment Variables**
+   - Klik op **Add New**
+   - **Name:** `GEMINI_API_KEY`
+   - **Value:** Je Google Gemini API key (bijv. `AIzaSy...`)
+   - Selecteer alle environments (Production, Preview, Development)
+   - Klik op **Save**
+
+3. **Redeploy je applicatie:**
+   - Na het toevoegen van de environment variable, moet je een nieuwe deployment maken
+   - Ga naar **Deployments** tab
+   - Klik op de drie puntjes (⋯) bij de laatste deployment
+   - Kies **Redeploy**
+   - Of push een nieuwe commit naar je repository
+
+**Belangrijk:** 
+- De `.env` file wordt **niet** geüpload naar Vercel (om veiligheidsredenen)
+- Environment variables moeten altijd via het Vercel dashboard worden ingesteld
+- Na het toevoegen van een nieuwe environment variable is een redeploy nodig
+
+#### ⚠️ Troubleshooting
+
+**Port 3000 al in gebruik?**
+
+**Optie 1: Stop de andere server**
+```bash
+.\stop-server.ps1
+```
+
+**Optie 2: Wijzig poort**
+Wijzig `PORT=3001` (of een ander getal) in je `.env` bestand.
+
+**Optie 3: Zoek en stop het proces handmatig**
+```powershell
+# Zoek welk proces poort 3000 gebruikt
+netstat -ano | findstr :3000
+
+# Stop het proces (vervang PID met het juiste nummer)
+Stop-Process -Id <PID> -Force
+```
+
+**"Cannot find module" errors?**
+
+Run opnieuw:
+```bash
+npm install
+```
+
+**Server start niet?**
+
+1. Check of Node.js correct geïnstalleerd is: `node --version`
+2. Check of npm werkt: `npm --version`
+3. Check of dependencies geïnstalleerd zijn: `npm list`
+4. Check de console voor error messages
+
+**Meerdere server instanties?**
+
+De server is geconfigureerd om te voorkomen dat meerdere instanties draaien. Als je toch meerdere instanties ziet:
+
+1. Stop alle Node processen:
+   ```powershell
+   Get-Process -Name node | Stop-Process -Force
+   ```
+
+2. Start opnieuw:
+   ```bash
+   npm start
+   ```
+
+**API calls werken niet?**
+
+1. **Check of de server draait:**
+   ```bash
+   curl http://localhost:3000/api/health
+   ```
+   Je zou moeten zien: `{"status":"ok","apiKeyConfigured":true,...}`
+
+2. **Check of `.env` bestand bestaat en `GEMINI_API_KEY` bevat**
+
+3. **Check de server console voor errors**
+
+4. **Open de pagina via `http://localhost:3000/week2.html`** (niet via Live Server op poort 5500!)
+
+**Live Server conflicteert?**
+
+**Gebruik Live Server NIET meer!** De Node server serveert alle statische bestanden.
+
+- Schakel Live Server uit in Cursor extensies
+- Of gebruik alleen de Node server
+- **Gebruik altijd `http://localhost:3000/week2.html`** (niet poort 5500!)
+
+**API Key niet gevonden (lokaal):**
+Zorg ervoor dat `.env` bestand bestaat en `GEMINI_API_KEY` bevat
+
+**API Key niet gevonden (Vercel):**
+- Controleer of `GEMINI_API_KEY` is ingesteld in Vercel dashboard (Settings → Environment Variables)
+- Zorg ervoor dat je een redeploy hebt gedaan na het toevoegen van de variable
+- Controleer of de variable beschikbaar is voor alle environments (Production, Preview, Development)
+
+**CORS errors:**
+De server heeft CORS enabled voor alle origins
+
+#### 🔍 Server Status Controleren
+
+**Health Check:**
+```bash
+curl http://localhost:3000/api/health
+```
+
+**Welke poorten zijn in gebruik?**
+```bash
+netstat -ano | findstr :3000
+```
+
+**Welke Node processen draaien?**
+```powershell
+Get-Process -Name node
+```
+
+#### 📝 Belangrijke Notities
+
+- **Gebruik altijd poort 3000**: `http://localhost:3000/week2.html`
+- **Niet via Live Server**: Live Server op poort 5500 werkt niet met de AI API
+- **Automatisch opstarten**: De server start automatisch bij het openen van Cursor
+- **Meerdere instanties voorkomen**: De server detecteert automatisch als poort 3000 al in gebruik is
 
 ---
 
@@ -334,6 +612,42 @@ ContentRenderer.renderContentItems(contentArray, { enableModal: true })
 **Opties:**
 - `enableModal`: Boolean - Enable image modal voor laatste image (default: true)
 
+### InteractiveRenderer (Facade Pattern)
+
+`InteractiveRenderer` fungeert als een **facade** voor alle interactieve componenten. Het delegeert alle functionaliteit naar gespecialiseerde renderers:
+
+**Gespecialiseerde Renderers:**
+- `AccordionRenderer` - Accordion componenten
+- `TabRenderer` - Tab componenten
+- `ClickableStepsRenderer` - Klikbare stappen
+- `ChecklistRenderer` - Checklists (SMART, Learning Objectives, Concept Quality)
+- `ExerciseRenderer` - Oefeningen (True/False, Matching, Sequence)
+- `AIRenderer` - AI Tools (Boolean Operator, AI Query, Bouwsteen Generator)
+- `HtmlUtils` - HTML utility functies (escapeHtml, normalizeText)
+
+**Voordelen van deze architectuur:**
+- ✅ **Separation of Concerns** - Elke renderer heeft één verantwoordelijkheid
+- ✅ **Maintainability** - Makkelijker om individuele componenten te onderhouden
+- ✅ **Testability** - Componenten kunnen onafhankelijk getest worden
+- ✅ **Backward Compatibility** - Bestaande code blijft werken via de facade
+- ✅ **Clean Code** - Geen duplicate code, duidelijke structuur
+
+**Gebruik:**
+```javascript
+// Via facade (aanbevolen voor backward compatibility)
+InteractiveRenderer.renderAccordion(item);
+InteractiveRenderer.renderTabs(item);
+InteractiveRenderer.renderMatchingExercise(item);
+
+// Direct via gespecialiseerde renderers (voor nieuwe code)
+AccordionRenderer.renderAccordion(item);
+TabRenderer.renderTabs(item);
+ExerciseRenderer.renderMatchingExercise(item);
+```
+
+**Uitzondering:**
+Source Evaluation Exercise methoden blijven nog in `InteractiveRenderer` (zeer groot, ~700 regels). Deze kunnen in de toekomst verplaatst worden naar `ExerciseRenderer`.
+
 ### Week Lesson Pages
 
 Elke week heeft een eigen klasse die `BaseLessonPage` extend:
@@ -602,6 +916,42 @@ Gebruik Font Awesome iconen:
 - Controleer JSON bestand voor syntax fouten
 - Verify dat content types correct zijn (paragraph, image, url, etc.)
 - Check browser console voor errors
+
+**Video's worden niet getoond of geblokkeerd**
+
+Het platform gebruikt `VideoManager` om video's te detecteren en fallback berichten te tonen als video's geblokkeerd zijn.
+
+**VideoManager vereisten:**
+- Video iframes moeten het `data-video-url` attribuut hebben
+- Video containers moeten een ID hebben die eindigt op `-container`
+- Fallback elementen moeten een ID hebben die eindigt op `-fallback`
+
+**Test VideoManager:**
+```javascript
+// Check hoeveel iframes VideoManager kan vinden
+document.querySelectorAll('iframe[data-video-url]').length
+
+// Check of VideoManager geïnitialiseerd is
+window._videoErrorDetectionSetup
+
+// Check alle video containers
+document.querySelectorAll('[id$="-container"]')
+
+// Check alle fallback elements
+document.querySelectorAll('[id$="-fallback"]')
+
+// Manueel een iframe checken
+const iframe = document.querySelector('iframe[data-video-url]');
+const container = iframe?.closest('[id$="-container"]');
+const fallback = container?.querySelector('[id$="-fallback"]');
+console.log('Container:', container?.id);
+console.log('Fallback:', fallback?.id);
+console.log('Fallback hidden:', fallback?.classList.contains('hidden'));
+```
+
+**Bekende problemen:**
+- Als VideoManager iframes niet detecteert, controleer of ze het `data-video-url` attribuut hebben
+- Als fallback berichten niet verschijnen, controleer of de juiste HTML structuur aanwezig is (container en fallback elementen)
 
 ### Debug Mode
 ```javascript

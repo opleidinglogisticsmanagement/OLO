@@ -32,6 +32,30 @@ class AppRouter {
      * Initialiseer de router
      */
     init() {
+        // Detect hard refresh en redirect naar index
+        const isHardRefresh = (() => {
+            // Moderne browsers: gebruik Performance Navigation API
+            const navigationEntry = performance.getEntriesByType('navigation')[0];
+            if (navigationEntry) {
+                return navigationEntry.type === 'reload';
+            }
+            // Fallback voor oudere browsers: gebruik performance.navigation (deprecated maar werkt)
+            if (performance.navigation) {
+                return performance.navigation.type === 1; // TYPE_RELOAD
+            }
+            return false;
+        })();
+        
+        // Als het een hard refresh is en we niet al op index.html zijn, redirect
+        const currentPath = window.location.pathname;
+        const isIndexPage = currentPath.endsWith('index.html') || currentPath === '/' || currentPath.endsWith('/');
+        
+        if (isHardRefresh && !isIndexPage) {
+            console.log('[AppRouter] 🔄 Hard refresh detected, redirecting to index.html');
+            window.location.href = 'index.html';
+            return; // Stop verdere initialisatie
+        }
+        
         console.log('[AppRouter] 🚀 Initializing router');
         console.log('[AppRouter] Current path:', window.location.pathname);
         console.log('[AppRouter] Available routes:', Object.keys(this.routes));

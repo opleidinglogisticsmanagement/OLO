@@ -453,6 +453,29 @@
     <script src="pages/MCQuestionRenderer.js"></script>
     <script src="pages/Week2LessonPage.js"></script>
     <script>
+        // Hard refresh detectie - redirect naar index bij hard refresh
+        (function() {
+            const isHardRefresh = (() => {
+                const navigationEntry = performance.getEntriesByType('navigation')[0];
+                if (navigationEntry) {
+                    return navigationEntry.type === 'reload';
+                }
+                if (performance.navigation) {
+                    return performance.navigation.type === 1; // TYPE_RELOAD
+                }
+                return false;
+            })();
+            
+            const currentPath = window.location.pathname;
+            const isIndexPage = currentPath.endsWith('index.html') || currentPath === '/' || currentPath.endsWith('/');
+            
+            if (isHardRefresh && !isIndexPage) {
+                console.log('[week2.html] 🔄 Hard refresh detected, redirecting to index.html');
+                window.location.href = 'index.html';
+                return; // Stop verdere uitvoering
+            }
+        })();
+        
         // Initialize Week 2 page
         document.addEventListener('DOMContentLoaded', () => {
             const week2Page = new Week2LessonPage();

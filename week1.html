@@ -422,6 +422,29 @@
     <script src="pages/ContentRenderer.js"></script>
     <script src="pages/Week1LessonPage.js"></script>
     <script>
+        // Hard refresh detectie - redirect naar index bij hard refresh
+        (function() {
+            const isHardRefresh = (() => {
+                const navigationEntry = performance.getEntriesByType('navigation')[0];
+                if (navigationEntry) {
+                    return navigationEntry.type === 'reload';
+                }
+                if (performance.navigation) {
+                    return performance.navigation.type === 1; // TYPE_RELOAD
+                }
+                return false;
+            })();
+            
+            const currentPath = window.location.pathname;
+            const isIndexPage = currentPath.endsWith('index.html') || currentPath === '/' || currentPath.endsWith('/');
+            
+            if (isHardRefresh && !isIndexPage) {
+                console.log('[week1.html] 🔄 Hard refresh detected, redirecting to index.html');
+                window.location.href = 'index.html';
+                return; // Stop verdere uitvoering
+            }
+        })();
+        
         // Initialize Week 1 page (fallback for direct access)
         // If accessed via index.html, the router will handle it
         document.addEventListener('DOMContentLoaded', () => {

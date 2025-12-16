@@ -89,6 +89,7 @@ class SidebarManager {
         }
         
         // Toggle submenu only when clicking the chevron icon
+        // Use capture phase to ensure this runs before AppRouter's link interceptor
         chevron.addEventListener('click', (e) => {
             e.preventDefault();
             e.stopPropagation();
@@ -101,17 +102,33 @@ class SidebarManager {
                 subItemsContainer.classList.add('hidden');
                 chevron.classList.remove('rotate-180');
             }
-        });
+        }, true); // Use capture phase to run before AppRouter
         
-        // Allow normal navigation when clicking the link (not chevron)
+        // Handle chevron clicks on the link itself (in capture phase to run before AppRouter)
         week2Link.addEventListener('click', (e) => {
-            // Only prevent if clicking the chevron (handled above)
-            if (e.target === chevron || chevron.contains(e.target)) {
+            // Check if click is on chevron or within chevron
+            const target = e.target;
+            const isChevronClick = target === chevron || 
+                                   chevron.contains(target) ||
+                                   (target.id && target.id.endsWith('-chevron')) ||
+                                   (target.tagName === 'I' && target.classList && target.classList.contains('fa-chevron-down'));
+            
+            if (isChevronClick) {
                 e.preventDefault();
                 e.stopPropagation();
+                
+                // Toggle submenu
+                const isHidden = subItemsContainer.classList.contains('hidden');
+                if (isHidden) {
+                    subItemsContainer.classList.remove('hidden');
+                    chevron.classList.add('rotate-180');
+                } else {
+                    subItemsContainer.classList.add('hidden');
+                    chevron.classList.remove('rotate-180');
+                }
             }
-            // Otherwise, allow normal navigation
-        });
+            // Otherwise, allow normal navigation (AppRouter will handle it)
+        }, true); // Use capture phase to run before AppRouter
     }
 
     /**
@@ -135,6 +152,7 @@ class SidebarManager {
         }
         
         // Toggle submenu only when clicking the chevron icon
+        // Use capture phase to ensure this runs before AppRouter's link interceptor
         chevron.addEventListener('click', (e) => {
             e.preventDefault();
             e.stopPropagation();
@@ -147,17 +165,32 @@ class SidebarManager {
                 subItemsContainer.classList.add('hidden');
                 chevron.classList.remove('rotate-180');
             }
-        });
+        }, true); // Use capture phase to run before AppRouter
         
-        // Allow normal navigation when clicking the link (not chevron)
+        // Handle chevron clicks on the link itself (in capture phase to run before AppRouter)
         week3Link.addEventListener('click', (e) => {
-            // Only prevent if clicking the chevron (handled above)
-            if (e.target === chevron || chevron.contains(e.target)) {
+            // Check if click is on chevron or within chevron
+            const isChevronClick = e.target === chevron || 
+                                   chevron.contains(e.target) ||
+                                   (e.target.id && e.target.id.endsWith('-chevron')) ||
+                                   (e.target.tagName === 'I' && e.target.classList && e.target.classList.contains('fa-chevron-down'));
+            
+            if (isChevronClick) {
                 e.preventDefault();
                 e.stopPropagation();
+                
+                // Toggle submenu
+                const isHidden = subItemsContainer.classList.contains('hidden');
+                if (isHidden) {
+                    subItemsContainer.classList.remove('hidden');
+                    chevron.classList.add('rotate-180');
+                } else {
+                    subItemsContainer.classList.add('hidden');
+                    chevron.classList.remove('rotate-180');
+                }
             }
-            // Otherwise, allow normal navigation
-        });
+            // Otherwise, allow normal navigation (AppRouter will handle it)
+        }, true); // Use capture phase to run before AppRouter
     }
 
     /**
@@ -181,6 +214,7 @@ class SidebarManager {
         }
         
         // Toggle submenu only when clicking the chevron icon
+        // Use capture phase to ensure this runs before AppRouter's link interceptor
         chevron.addEventListener('click', (e) => {
             e.preventDefault();
             e.stopPropagation();
@@ -193,17 +227,32 @@ class SidebarManager {
                 subItemsContainer.classList.add('hidden');
                 chevron.classList.remove('rotate-180');
             }
-        });
+        }, true); // Use capture phase to run before AppRouter
         
-        // Allow normal navigation when clicking the link (not chevron)
+        // Handle chevron clicks on the link itself (in capture phase to run before AppRouter)
         week4Link.addEventListener('click', (e) => {
-            // Only prevent if clicking the chevron (handled above)
-            if (e.target === chevron || chevron.contains(e.target)) {
+            // Check if click is on chevron or within chevron
+            const isChevronClick = e.target === chevron || 
+                                   chevron.contains(e.target) ||
+                                   (e.target.id && e.target.id.endsWith('-chevron')) ||
+                                   (e.target.tagName === 'I' && e.target.classList && e.target.classList.contains('fa-chevron-down'));
+            
+            if (isChevronClick) {
                 e.preventDefault();
                 e.stopPropagation();
+                
+                // Toggle submenu
+                const isHidden = subItemsContainer.classList.contains('hidden');
+                if (isHidden) {
+                    subItemsContainer.classList.remove('hidden');
+                    chevron.classList.add('rotate-180');
+                } else {
+                    subItemsContainer.classList.add('hidden');
+                    chevron.classList.remove('rotate-180');
+                }
             }
-            // Otherwise, allow normal navigation
-        });
+            // Otherwise, allow normal navigation (AppRouter will handle it)
+        }, true); // Use capture phase to run before AppRouter
     }
 
     /**
@@ -227,6 +276,7 @@ class SidebarManager {
         }
         
         // Toggle submenu only when clicking the chevron icon
+        // Use capture phase to ensure this runs before AppRouter's link interceptor
         chevron.addEventListener('click', (e) => {
             e.preventDefault();
             e.stopPropagation();
@@ -239,17 +289,32 @@ class SidebarManager {
                 subItemsContainer.classList.add('hidden');
                 chevron.classList.remove('rotate-180');
             }
-        });
+        }, true); // Use capture phase to run before AppRouter
         
-        // Allow normal navigation when clicking the link (not chevron)
+        // Handle chevron clicks on the link itself (in capture phase to run before AppRouter)
         week5Link.addEventListener('click', (e) => {
-            // Only prevent if clicking the chevron (handled above)
-            if (e.target === chevron || chevron.contains(e.target)) {
+            // Check if click is on chevron or within chevron
+            const isChevronClick = e.target === chevron || 
+                                   chevron.contains(e.target) ||
+                                   (e.target.id && e.target.id.endsWith('-chevron')) ||
+                                   (e.target.tagName === 'I' && e.target.classList && e.target.classList.contains('fa-chevron-down'));
+            
+            if (isChevronClick) {
                 e.preventDefault();
                 e.stopPropagation();
+                
+                // Toggle submenu
+                const isHidden = subItemsContainer.classList.contains('hidden');
+                if (isHidden) {
+                    subItemsContainer.classList.remove('hidden');
+                    chevron.classList.add('rotate-180');
+                } else {
+                    subItemsContainer.classList.add('hidden');
+                    chevron.classList.remove('rotate-180');
+                }
             }
-            // Otherwise, allow normal navigation
-        });
+            // Otherwise, allow normal navigation (AppRouter will handle it)
+        }, true); // Use capture phase to run before AppRouter
     }
 
     /**
@@ -273,6 +338,7 @@ class SidebarManager {
         }
         
         // Toggle submenu only when clicking the chevron icon
+        // Use capture phase to ensure this runs before AppRouter's link interceptor
         chevron.addEventListener('click', (e) => {
             e.preventDefault();
             e.stopPropagation();
@@ -285,21 +351,32 @@ class SidebarManager {
                 subItemsContainer.classList.add('hidden');
                 chevron.classList.remove('rotate-180');
             }
-        });
+        }, true); // Use capture phase to run before AppRouter
         
-        // Prevent navigation when clicking the chevron, allow normal navigation otherwise
+        // Handle chevron clicks on the link itself (in capture phase to run before AppRouter)
         week6Link.addEventListener('click', (e) => {
-            // Check if click is on chevron (the <i> element with fa-chevron-down class)
-            const clickedChevron = e.target === chevron || 
-                                   (e.target.tagName === 'I' && e.target.id === 'week-6-chevron') ||
-                                   (e.target.classList && e.target.classList.contains('fa-chevron-down'));
+            // Check if click is on chevron or within chevron
+            const isChevronClick = e.target === chevron || 
+                                   chevron.contains(e.target) ||
+                                   (e.target.id && e.target.id.endsWith('-chevron')) ||
+                                   (e.target.tagName === 'I' && e.target.classList && e.target.classList.contains('fa-chevron-down'));
             
-            if (clickedChevron) {
+            if (isChevronClick) {
                 e.preventDefault();
                 e.stopPropagation();
+                
+                // Toggle submenu
+                const isHidden = subItemsContainer.classList.contains('hidden');
+                if (isHidden) {
+                    subItemsContainer.classList.remove('hidden');
+                    chevron.classList.add('rotate-180');
+                } else {
+                    subItemsContainer.classList.add('hidden');
+                    chevron.classList.remove('rotate-180');
+                }
             }
-            // Otherwise, allow normal navigation
-        });
+            // Otherwise, allow normal navigation (AppRouter will handle it)
+        }, true); // Use capture phase to run before AppRouter
     }
 }
 

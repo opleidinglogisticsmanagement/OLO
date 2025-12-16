@@ -80,6 +80,23 @@ class AppRouter {
      */
     interceptLinks() {
         document.addEventListener('click', (e) => {
+            // Check if click is on a chevron icon (for sidebar submenu expansion)
+            // Chevrons have IDs like 'week-2-chevron', 'week-3-chevron', etc.
+            // or have class 'fa-chevron-down'
+            const target = e.target;
+            const isChevronElement = target.id && target.id.endsWith('-chevron') ||
+                                    (target.tagName === 'I' && target.classList && target.classList.contains('fa-chevron-down')) ||
+                                    (target.tagName === 'I' && target.id && target.id.endsWith('-chevron'));
+            
+            // Also check if the click is within a chevron element
+            const chevronElement = target.closest('[id$="-chevron"]') || 
+                                   (target.closest('i') && target.closest('i').classList && target.closest('i').classList.contains('fa-chevron-down'));
+            
+            if (isChevronElement || chevronElement) {
+                // Don't intercept chevron clicks - let SidebarManager handle them
+                return;
+            }
+            
             const link = e.target.closest('a[href]');
             if (!link) return;
             

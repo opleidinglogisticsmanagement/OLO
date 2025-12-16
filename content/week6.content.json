@@ -70,6 +70,25 @@
         ]
       },
       {
+        "type": "accordion",
+        "usePlusIcon": true,
+        "defaultOpen": false,
+        "items": [
+          {
+            "title": "Opdracht 2: Drie kernbeslissingen maken",
+            "defaultOpen": false,
+            "content": [
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Maak voor de casus magazijnoptimalisatie bij Organisatie X de drie kernbeslissingen. Gebruik hiervoor de volgende context:</p>",
+              "<div class=\"bg-gray-50 dark:bg-gray-800 border-l-4 border-blue-500 dark:border-blue-400 p-4 rounded-r-lg mb-4\">",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-2\"><strong>Doelstelling:</strong> Het adviseren van het management van Organisatie X over de herinrichting van het magazijn vóór 1 juni 2026 met een terugverdientijd van &lt; 5 jaar door een kwantitatieve analyse uit te voeren naar de optimale bezettingsgraad van alle artikelen in het magazijn en de effecten hiervan op de interne rijafstanden te berekenen.</p>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-0\"><strong>Hoofdvraag:</strong> Welke mogelijke herinrichtingen van het magazijn van Organisatie X zorgen voor een geoptimaliseerde bezettingsgraad van 90% waarmee de interne rijafstanden geminimaliseerd worden?</p>",
+              "</div>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Neem voor deze casus de drie kernbeslissingen en documenteer je keuzes. Onderbouw kort waarom je voor deze keuzes hebt gekozen op basis van de doelstelling en hoofdvraag.</p>"
+            ]
+          }
+        ]
+      },
+      {
         "type": "heading",
         "text": "Onderzoeksstrategie",
         "level": 2,
@@ -219,6 +238,21 @@
                   }
                 ]
               }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "accordion",
+        "usePlusIcon": true,
+        "defaultOpen": false,
+        "items": [
+          {
+            "title": "Opdracht 3: Onderzoeksstrategie kiezen",
+            "defaultOpen": false,
+            "content": [
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Kies voor de casus magazijnoptimalisatie bij Organisatie X een geschikte onderzoeksstrategie. Welke strategie past het beste volgens jou bij deze casus?</p>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Gebruik hiervoor de context uit Opdracht 2 (doelstelling en hoofdvraag) en de kernbeslissingen die je daar hebt gemaakt. Leg in maximaal één alinea uit waarom deze onderzoeksstrategie het beste past bij het onderzoek naar de magazijnoptimalisatie.</p>"
             ]
           }
         ]
@@ -407,8 +441,37 @@
       {
         "type": "paragraph",
         "text": [
-          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Je hebt nu alle kennis en tools in handen om een goed doordacht dataverzamelingsplan op te stellen. Door de drie secties systematisch door te lopen - van de relatie met je onderzoeksmodel tot de reflectie op kwaliteit - zorg je ervoor dat je onderzoek solide is opgezet en uitvoerbaar binnen de beschikbare tijd. Gebruik het template om je plan gestructureerd uit te werken en wees transparant over je keuzes en eventuele beperkingen.</p>",
-          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Succes met het opstellen van je dataverzamelingsplan!</p>"
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Je hebt nu alle kennis en tools in handen om een goed doordacht dataverzamelingsplan op te stellen. Door de drie secties systematisch door te lopen - van de relatie met je onderzoeksmodel tot de reflectie op kwaliteit - zorg je ervoor dat je onderzoek solide is opgezet en uitvoerbaar binnen de beschikbare tijd. Gebruik het template om je plan gestructureerd uit te werken en wees transparant over je keuzes en eventuele beperkingen.</p>"
+        ]
+      },
+      {
+        "type": "accordion",
+        "usePlusIcon": true,
+        "defaultOpen": false,
+        "items": [
+          {
+            "title": "Opdracht 4: Dataverzamelingsplan downloaden en globaal invullen",
+            "defaultOpen": false,
+            "content": [
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Download het template dataverzamelingsplan voor je eigen praktijkonderzoek.</p>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Voor de casus magazijnoptimalisatie bij Organisatie X kun je alvast oefenen met het globaal invullen van het dataverzamelingsplan. Vul voor de volgende deelvraag het dataverzamelingsplan globaal in:</p>",
+              "<div class=\"bg-gray-50 dark:bg-gray-800 border-l-4 border-blue-500 dark:border-blue-400 p-4 rounded-r-lg mb-4\">",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-0\"><strong>Deelvraag:</strong> Welke artikelen zijn hardlopers en welke zijn slowmovers, en staan deze artikelen op de juiste plek in het magazijn?</p>",
+              "</div>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Probeer eens te bedenken hoe je dit zou kunnen onderzoeken. Vul dit globaal in het template in. Je hoeft het nog niet volledig uit te werken, maar denk na over:</p>",
+              "<ul class=\"list-disc list-outside space-y-2 mb-4 ml-6 pl-4\">",
+              "<li class=\"text-gray-700 dark:text-gray-300\">Welke dataverzamelingsmethode past bij deze deelvraag?</li>",
+              "<li class=\"text-gray-700 dark:text-gray-300\">Wat ga je precies meten en waarom?</li>",
+              "<li class=\"text-gray-700 dark:text-gray-300\">Hoe zou je dit kunnen onderzoeken?</li>",
+              "</ul>"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Succes met het bepalen van je onderzoeksstrategie en het opstellen van je dataverzamelingsplan!</p>"
         ]
       }
     ]

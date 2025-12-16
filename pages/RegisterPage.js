@@ -14,32 +14,28 @@ class RegisterPage extends BaseLessonPage {
     }
 
     /**
+     * Laad content (compatibel met AppRouter)
+     * AppRouter verwacht loadContent() method
+     */
+    async loadContent() {
+        await this.loadTerms();
+    }
+
+    /**
      * Laad begrippen uit JSON bestand
      */
     async loadTerms() {
-        // #region agent log
-        fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'RegisterPage.js:19',message:'loadTerms() called',data:{termsBefore:this.terms.length},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'})}).catch(()=>{});
-        // #endregion
         try {
             // Voeg timestamp toe om caching te voorkomen
             const timestamp = new Date().getTime();
             const url = `./content/register.json?v=${timestamp}`;
-            // #region agent log
-            fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'RegisterPage.js:23',message:'Before fetch',data:{url},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'})}).catch(()=>{});
-            // #endregion
             const response = await fetch(url);
-            // #region agent log
-            fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'RegisterPage.js:26',message:'After fetch',data:{ok:response.ok,status:response.status,statusText:response.statusText},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'})}).catch(()=>{});
-            // #endregion
             
             if (!response.ok) {
                 throw new Error(`HTTP fout: ${response.status} ${response.statusText} bij laden van register.json`);
             }
             
             const data = await response.json();
-            // #region agent log
-            fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'RegisterPage.js:32',message:'After JSON parse',data:{isArray:Array.isArray(data),dataLength:Array.isArray(data)?data.length:'N/A',dataType:typeof data},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'B'})}).catch(()=>{});
-            // #endregion
             
             if (!Array.isArray(data)) {
                 throw new Error('Ongeldig data formaat: verwacht een array');
@@ -48,13 +44,7 @@ class RegisterPage extends BaseLessonPage {
             // Sorteer alfabetisch
             this.terms = data.sort((a, b) => a.term.localeCompare(b.term, 'nl'));
             this.filteredTerms = this.terms;
-            // #region agent log
-            fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'RegisterPage.js:38',message:'After sorting',data:{termsCount:this.terms.length,filteredTermsCount:this.filteredTerms.length},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'C'})}).catch(()=>{});
-            // #endregion
         } catch (error) {
-            // #region agent log
-            fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'RegisterPage.js:40',message:'Error caught in loadTerms',data:{errorMessage:error.message,errorName:error.name,termsAfterError:this.terms.length},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'D'})}).catch(()=>{});
-            // #endregion
             console.error('Fout bij laden begrippenlijst:', error);
             this.error = error.message; // Sla error op voor weergave
             this.terms = [];
@@ -81,6 +71,39 @@ class RegisterPage extends BaseLessonPage {
                 </div>
             </section>
         `;
+    }
+
+    /**
+     * Override renderContent to call renderTermsList after content is rendered
+     */
+    renderContent() {
+        console.log('[RegisterPage] 🎨 renderContent() called, terms count:', this.terms.length);
+        const content = super.renderContent();
+        console.log('[RegisterPage] ✅ Content rendered, scheduling renderTermsList()');
+        // Schedule renderTermsList to run after DOM is updated
+        // AppRouter updates the DOM with a fade animation, so we need to wait
+        // Use a longer timeout to ensure DOM is ready and fade animation has started
+        setTimeout(() => {
+            console.log('[RegisterPage] ⏰ Calling renderTermsList() after timeout');
+            const container = document.getElementById('terms-list');
+            if (container) {
+                console.log('[RegisterPage] ✅ Container found, calling renderTermsList()');
+                this.renderTermsList();
+            } else {
+                console.warn('[RegisterPage] ⚠️ Container not found yet, retrying...');
+                // Retry after another delay
+                setTimeout(() => {
+                    const retryContainer = document.getElementById('terms-list');
+                    if (retryContainer) {
+                        console.log('[RegisterPage] ✅ Container found on retry, calling renderTermsList()');
+                        this.renderTermsList();
+                    } else {
+                        console.error('[RegisterPage] ❌ Container still not found after retry');
+                    }
+                }, 300);
+            }
+        }, 250); // Wait for fade-out to complete (200ms) + some buffer
+        return content;
     }
 
     /**
@@ -131,13 +154,7 @@ class RegisterPage extends BaseLessonPage {
      * Render de lijst met begrippen
      */
     renderTermsList() {
-        // #region agent log
-        fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'RegisterPage.js:117',message:'renderTermsList() called',data:{termsCount:this.terms.length,filteredTermsCount:this.filteredTerms.length,hasError:!!this.error},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'E'})}).catch(()=>{});
-        // #endregion
         const container = document.getElementById('terms-list');
-        // #region agent log
-        fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'RegisterPage.js:120',message:'Container check',data:{containerExists:!!container},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'E'})}).catch(()=>{});
-        // #endregion
         if (!container) return;
 
         // Toon foutmelding als die er is
@@ -266,29 +283,18 @@ class RegisterPage extends BaseLessonPage {
         } else {
             console.error('Search input element (term-search) not found!');
         }
+        
     }
 
     /**
      * Initialiseer de pagina
      */
     async init() {
-        // #region agent log
-        fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'RegisterPage.js:252',message:'init() called',data:{termsBeforeLoad:this.terms.length},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'F'})}).catch(()=>{});
-        // #endregion
         await this.loadTerms();
-        // #region agent log
-        fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'RegisterPage.js:254',message:'After loadTerms() in init',data:{termsAfterLoad:this.terms.length,filteredTermsAfterLoad:this.filteredTerms.length,hasError:!!this.error,errorMessage:this.error||'none'},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'F'})}).catch(()=>{});
-        // #endregion
         document.body.innerHTML = this.render();
-        // #region agent log
-        fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'RegisterPage.js:256',message:'After render() in init',data:{termsCount:this.terms.length,bodyInnerHTMLLength:document.body.innerHTML.length},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'F'})}).catch(()=>{});
-        // #endregion
         this.attachEventListeners();
         // Initial render of the list
         this.renderTermsList();
-        // #region agent log
-        fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'RegisterPage.js:260',message:'After renderTermsList() in init',data:{termsCount:this.terms.length,containerExists:!!document.getElementById('terms-list')},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'F'})}).catch(()=>{});
-        // #endregion
     }
 }
 

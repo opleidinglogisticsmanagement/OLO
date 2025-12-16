@@ -332,12 +332,10 @@ class AppRouter {
         this.updateContent(content);
         
         // Attach event listeners (but skip layout managers - they're already initialized)
-        if (pageInstance.attachEventListeners) {
-            console.log('[AppRouter] 🔌 Attaching content listeners');
-            // Only attach content-specific listeners, not layout managers
-            // Layout managers (sidebar, header) are already initialized in index.html
-            this.attachContentListeners(pageInstance);
-        }
+        console.log('[AppRouter] 🔌 Attaching content listeners');
+        // Always call attachContentListeners to initialize managers
+        // It will also call pageInstance.attachEventListeners() if it exists
+        this.attachContentListeners(pageInstance);
         
         // Cache the content
         this.pageCache.set(cacheKey, content);
@@ -534,6 +532,12 @@ class AppRouter {
         }
         if (pageInstance.tableCopyManager) {
             pageInstance.tableCopyManager.init();
+        }
+        
+        // Call page-specific attachEventListeners to attach content-specific listeners
+        // This is important for pages like RegisterPage that need to populate content after rendering
+        if (pageInstance.attachEventListeners) {
+            pageInstance.attachEventListeners();
         }
     }
 

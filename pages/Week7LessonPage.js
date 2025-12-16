@@ -5,6 +5,7 @@
  * Basis template voor collega's om content toe te voegen
  */
 
+// Export will be set immediately after class definition
 class Week7LessonPage extends BaseLessonPage {
     constructor() {
         super('week-7', 'Week 7', 'Rapportage');
@@ -708,7 +709,21 @@ class Week7LessonPage extends BaseLessonPage {
     }
 }
 
-// Export voor gebruik in andere modules
-if (typeof module !== 'undefined' && module.exports) {
-    module.exports = Week7LessonPage;
-}
+// Export immediately after class definition
+(function() {
+    try {
+        if (typeof module !== 'undefined' && module.exports) {
+            module.exports = Week7LessonPage;
+        } else {
+            window.Week7LessonPage = Week7LessonPage;
+        }
+        console.log('[Week7LessonPage] ✅ Exported to window');
+    } catch (error) {
+        console.error('[Week7LessonPage] ❌ Error exporting:', error);
+        try {
+            window.Week7LessonPage = Week7LessonPage;
+        } catch (e) {
+            console.error('[Week7LessonPage] ❌ Failed to force export:', e);
+        }
+    }
+})();

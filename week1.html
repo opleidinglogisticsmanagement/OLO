@@ -422,10 +422,14 @@
     <script src="pages/ContentRenderer.js"></script>
     <script src="pages/Week1LessonPage.js"></script>
     <script>
-        // Initialize Week 1 page
+        // Initialize Week 1 page (fallback for direct access)
+        // If accessed via index.html, the router will handle it
         document.addEventListener('DOMContentLoaded', () => {
-            const week1Page = new Week1LessonPage();
-            week1Page.init();
+            // Only initialize if we're not in SPA mode (i.e., router not active)
+            if (!window.appRouter) {
+                const week1Page = new Week1LessonPage();
+                week1Page.init();
+            }
         });
     </script>
 </body>

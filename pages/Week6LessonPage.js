@@ -5,6 +5,11 @@
  * Basis template voor collega's om content toe te voegen
  */
 
+// #region agent log
+console.log('[DEBUG Week6] Script started, BaseLessonPage available:', !!window.BaseLessonPage);
+fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'Week6LessonPage.js:9',message:'Script started loading',data:{baseLessonPageAvailable:!!window.BaseLessonPage},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'})}).catch(()=>{});
+// #endregion
+
 class Week6LessonPage extends BaseLessonPage {
     constructor() {
         super('week-6', 'Week 6', 'Onderzoeksstrategie + dataverzamelingsplan');
@@ -813,7 +818,32 @@ class Week6LessonPage extends BaseLessonPage {
     }
 }
 
-// Export voor gebruik in andere modules
-if (typeof module !== 'undefined' && module.exports) {
-    module.exports = Week6LessonPage;
-}
+// Export immediately after class definition
+(function() {
+    // #region agent log
+    console.log('[DEBUG Week6] Reached export IIFE, class defined:', typeof Week6LessonPage !== 'undefined');
+    fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'Week6LessonPage.js:823',message:'Reached export IIFE',data:{classDefined:typeof Week6LessonPage!=='undefined'},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'B'})}).catch(()=>{});
+    // #endregion
+    try {
+        if (typeof module !== 'undefined' && module.exports) {
+            module.exports = Week6LessonPage;
+        } else {
+            window.Week6LessonPage = Week6LessonPage;
+        }
+        // #region agent log
+        console.log('[DEBUG Week6] Export successful, window.Week6LessonPage:', !!window.Week6LessonPage);
+        fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'Week6LessonPage.js:834',message:'Export successful',data:{exported:!!window.Week6LessonPage},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'B'})}).catch(()=>{});
+        // #endregion
+        console.log('[Week6LessonPage] ✅ Exported to window');
+    } catch (error) {
+        // #region agent log
+        fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'Week6LessonPage.js:827',message:'Export error',data:{error:error.message,stack:error.stack},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'B'})}).catch(()=>{});
+        // #endregion
+        console.error('[Week6LessonPage] ❌ Error exporting:', error);
+        try {
+            window.Week6LessonPage = Week6LessonPage;
+        } catch (e) {
+            console.error('[Week6LessonPage] ❌ Failed to force export:', e);
+        }
+    }
+})();

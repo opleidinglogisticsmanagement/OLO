@@ -4,6 +4,10 @@
  * Specifieke pagina voor Afsluiting: Eindbeoordeling & Certificering
  */
 
+// #region agent log
+fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'AfsluitingLessonPage.js:8',message:'Script started loading',data:{baseLessonPageAvailable:!!window.BaseLessonPage},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'})}).catch(()=>{});
+// #endregion
+
 class AfsluitingLessonPage extends BaseLessonPage {
     constructor() {
         super('afsluiting', 'Afsluiting', 'Eindbeoordeling & Certificering');
@@ -714,7 +718,30 @@ class AfsluitingLessonPage extends BaseLessonPage {
     }
 }
 
-// Export voor gebruik in andere modules
-if (typeof module !== 'undefined' && module.exports) {
-    module.exports = AfsluitingLessonPage;
-}
+// Export immediately after class definition
+(function() {
+    // #region agent log
+    fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'AfsluitingLessonPage.js:719',message:'Reached export IIFE',data:{classDefined:typeof AfsluitingLessonPage!=='undefined'},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'B'})}).catch(()=>{});
+    // #endregion
+    try {
+        if (typeof module !== 'undefined' && module.exports) {
+            module.exports = AfsluitingLessonPage;
+        } else {
+            window.AfsluitingLessonPage = AfsluitingLessonPage;
+        }
+        // #region agent log
+        fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'AfsluitingLessonPage.js:726',message:'Export successful',data:{exported:!!window.AfsluitingLessonPage},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'B'})}).catch(()=>{});
+        // #endregion
+        console.log('[AfsluitingLessonPage] ✅ Exported to window');
+    } catch (error) {
+        // #region agent log
+        fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'AfsluitingLessonPage.js:728',message:'Export error',data:{error:error.message,stack:error.stack},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'B'})}).catch(()=>{});
+        // #endregion
+        console.error('[AfsluitingLessonPage] ❌ Error exporting:', error);
+        try {
+            window.AfsluitingLessonPage = AfsluitingLessonPage;
+        } catch (e) {
+            console.error('[AfsluitingLessonPage] ❌ Failed to force export:', e);
+        }
+    }
+})();

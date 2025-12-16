@@ -35,7 +35,8 @@ class BaseLessonPage {
     }
 
     /**
-     * Render de complete pagina
+     * Render de complete pagina (voor backward compatibility)
+     * @deprecated Gebruik renderContent() voor SPA mode
      */
     render() {
         return `
@@ -65,6 +66,26 @@ class BaseLessonPage {
                 title="Naar boven">
                 <i class="fas fa-arrow-up text-xl"></i>
             </button>
+        `;
+    }
+
+    /**
+     * Render alleen de content (voor SPA mode)
+     * Sidebar en header worden niet opnieuw gerenderd
+     */
+    renderContent() {
+        // Return only the inner content, not the main wrapper
+        // The main wrapper is already in index.html
+        return `
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 py-4 sm:py-6 lg:py-8">
+                ${this.renderModuleIntro()}
+                <div class="h-6 sm:h-8"></div>
+                <article class="space-y-6 sm:space-y-8 fade-in">
+                    ${this.renderContentSections()}
+                </article>
+
+                ${this.renderNavigation()}
+            </div>
         `;
     }
 

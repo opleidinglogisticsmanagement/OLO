@@ -407,6 +407,45 @@
         @view-transition {
             navigation: auto;
         }
+        
+        /* Ensure main-content always has background to prevent white flash */
+        #main-content {
+            background-color: rgb(249, 250, 251); /* bg-gray-50 */
+            min-height: 100vh;
+            transition: opacity 0.2s ease;
+            /* Ensure content stays above background during transitions */
+            position: relative;
+            z-index: 1;
+        }
+        
+        .dark #main-content {
+            background-color: rgb(17, 24, 39); /* dark:bg-gray-900 */
+        }
+        
+        /* Ensure sidebar and header stay fixed and don't flicker */
+        #sidebar,
+        #main-header {
+            /* Prevent any visual changes during content transitions */
+            will-change: auto;
+            transform: translateZ(0); /* Force hardware acceleration */
+        }
+        
+        /* Prevent white flash during transitions - overlay background */
+        #main-content::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgb(249, 250, 251);
+            z-index: -1;
+            pointer-events: none;
+        }
+        
+        .dark #main-content::before {
+            background-color: rgb(17, 24, 39);
+        }
     </style>
 </head>
 <body class="bg-gray-50 dark:bg-gray-900 transition-colors duration-200">
@@ -415,6 +454,94 @@
     <!-- PDF Exporter -->
     <script src="js/PDFExporter.js"></script>
     <script src="js/SearchService.js"></script>
+    
+    <!-- SPA Router - Load early -->
+    <script src="js/core/AppRouter.js"></script>
+    
+    <!-- Week Page Scripts - Load all for SPA router -->
+    <!-- Config (if exists) -->
+    <script src="config.js"></script>
+    <!-- Core dependencies -->
+    <script src="js/components/LayoutRenderer.js"></script>
+    <script src="js/ui/SidebarManager.js"></script>
+    <script src="js/ui/HeaderManager.js"></script>
+    <script src="js/ui/ScrollManager.js"></script>
+    <script src="js/ui/ImageModalManager.js"></script>
+    <script src="js/ui/InteractiveManager.js"></script>
+    <script src="js/ui/VideoManager.js"></script>
+    <script src="js/ui/TableCopyManager.js"></script>
+    <script src="js/services/NavigationService.js"></script>
+    <script src="js/components/NavigationRenderer.js"></script>
+    <script src="js/components/ContentTemplateRenderer.js"></script>
+    <script src="pages/BaseLessonPage.js"></script>
+    <script src="pages/ContentRenderer.js"></script>
+    
+    <!-- Interactive components -->
+    <script src="js/components/interactive/utils/HtmlUtils.js"></script>
+    <script src="js/components/interactive/TabRenderer.js"></script>
+    <script src="js/components/interactive/AccordionRenderer.js"></script>
+    <script src="js/components/interactive/ClickableStepsRenderer.js"></script>
+    <script src="js/components/interactive/ChecklistRenderer.js"></script>
+    <script src="js/components/interactive/ExerciseRenderer.js"></script>
+    <script src="js/components/interactive/AIRenderer.js"></script>
+    <script src="pages/InteractiveRenderer.js"></script>
+    <script src="pages/AIGenerator.js"></script>
+    <script src="pages/MCQuestionRenderer.js"></script>
+    
+    <!-- Week Page Classes - Load all for SPA router -->
+    <script src="pages/Week1LessonPage.js" onerror="fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'index.html:492',message:'Week1LessonPage.js failed to load',data:{},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'C'})}).catch(()=>{});console.error('[Script] Failed to load Week1LessonPage.js')"></script>
+    <script src="pages/Week2LessonPage.js" onerror="console.error('[Script] Failed to load Week2LessonPage.js')"></script>
+    <script src="pages/Week3LessonPage.js" onerror="fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'index.html:494',message:'Week3LessonPage.js failed to load',data:{},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'C'})}).catch(()=>{});console.error('[Script] Failed to load Week3LessonPage.js')"></script>
+    <script src="pages/Week4LessonPage.js" onerror="console.error('[Script] Failed to load Week4LessonPage.js')"></script>
+    <script src="pages/Week5LessonPage.js" onerror="fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'index.html:496',message:'Week5LessonPage.js failed to load',data:{},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'C'})}).catch(()=>{});console.error('[Script] Failed to load Week5LessonPage.js')"></script>
+    <script src="pages/Week6LessonPage.js" onerror="fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'index.html:497',message:'Week6LessonPage.js failed to load',data:{},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'C'})}).catch(()=>{});console.error('[Script] Failed to load Week6LessonPage.js')"></script>
+    <script src="pages/Week7LessonPage.js" onerror="console.error('[Script] Failed to load Week7LessonPage.js')"></script>
+    <script src="pages/RegisterPage.js" onerror="console.error('[Script] Failed to load RegisterPage.js')"></script>
+    <script src="pages/AfsluitingLessonPage.js" onerror="fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'index.html:500',message:'AfsluitingLessonPage.js failed to load',data:{},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'C'})}).catch(()=>{});console.error('[Script] Failed to load AfsluitingLessonPage.js')"></script>
+    
+    <!-- Verify all classes are loaded with detailed logging -->
+    <script>
+        (function() {
+            // Wait a bit for all scripts to execute
+            setTimeout(() => {
+                console.log('[Script Loader] ⏰ Verification started at:', new Date().toISOString());
+                const expectedClasses = [
+                    'Week1LessonPage', 'Week2LessonPage', 'Week3LessonPage', 
+                    'Week4LessonPage', 'Week5LessonPage', 'Week6LessonPage', 
+                    'Week7LessonPage', 'RegisterPage', 'AfsluitingLessonPage'
+                ];
+                
+                console.log('[Script Loader] 🔍 Checking for page classes...');
+                console.log('[Script Loader] BaseLessonPage available:', !!window.BaseLessonPage);
+                console.log('[Script Loader] Week1LessonPage available:', !!window.Week1LessonPage);
+                console.log('[Script Loader] Week3LessonPage available:', !!window.Week3LessonPage);
+                console.log('[Script Loader] Week5LessonPage available:', !!window.Week5LessonPage);
+                console.log('[Script Loader] Week6LessonPage available:', !!window.Week6LessonPage);
+                
+                const availableClasses = expectedClasses.filter(cls => window[cls]);
+                const missingClasses = expectedClasses.filter(cls => !window[cls]);
+                
+                console.log('[Script Loader] ✅ Available classes (' + availableClasses.length + '/' + expectedClasses.length + '):', availableClasses);
+                
+                if (missingClasses.length > 0) {
+                    console.error('[Script Loader] ❌ Missing classes (' + missingClasses.length + '):', missingClasses);
+                    console.error('[Script Loader] ⚠️ Check browser console for JavaScript errors in these files');
+                    
+                    // Check if scripts failed to load
+                    missingClasses.forEach(cls => {
+                        const scriptTag = document.querySelector(`script[src*="${cls}.js"]`);
+                        if (scriptTag) {
+                            console.warn(`[Script Loader] Script tag found for ${cls}, but class not available. Possible syntax error or script crash.`);
+                        } else {
+                            console.error(`[Script Loader] Script tag NOT found for ${cls}!`);
+                        }
+                    });
+                } else {
+                    console.log('[Script Loader] ✅ All page classes are available!');
+                }
+            }, 100); // Wait 100ms for all scripts to execute
+        })();
+    </script>
     
     <!-- Skip to content link for accessibility -->
     <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-blue-600 text-white px-4 py-2 rounded-md z-50 focus-ring">
@@ -1451,6 +1578,99 @@
         };
         
         setupSearch();
+        
+        // Initialize SPA Router - Wait for all scripts to load
+        const initializeRouter = () => {
+            console.log('[Index] Checking for AppRouter:', !!window.AppRouter);
+            console.log('[Index] ⏰ Router initialization started at:', new Date().toISOString());
+            
+            // Check which page classes are available
+            const availableClasses = Object.keys(window).filter(k => 
+                k.includes('LessonPage') || k === 'RegisterPage'
+            );
+            console.log('[Index] Available page classes:', availableClasses);
+            console.log('[Index] Week1LessonPage available:', !!window.Week1LessonPage);
+            console.log('[Index] Week3LessonPage available:', !!window.Week3LessonPage);
+            console.log('[Index] Week5LessonPage available:', !!window.Week5LessonPage);
+            console.log('[Index] Week6LessonPage available:', !!window.Week6LessonPage);
+            
+            // Expected classes
+            const expectedClasses = [
+                'Week1LessonPage', 'Week2LessonPage', 'Week3LessonPage', 
+                'Week4LessonPage', 'Week5LessonPage', 'Week6LessonPage', 
+                'Week7LessonPage', 'RegisterPage', 'AfsluitingLessonPage'
+            ];
+            
+            const missingClasses = expectedClasses.filter(cls => !availableClasses.includes(cls));
+            if (missingClasses.length > 0) {
+                console.warn('[Index] ⚠️ Missing page classes:', missingClasses);
+                console.warn('[Index] This might cause navigation issues. Check if scripts are loaded correctly.');
+            } else {
+                console.log('[Index] ✅ All expected page classes are available');
+            }
+            
+            if (window.AppRouter) {
+                console.log('[Index] ✅ AppRouter found, initializing...');
+                const router = new AppRouter();
+                router.init();
+                window.appRouter = router; // Store globally for debugging
+                console.log('[Index] ✅ Router initialized and stored in window.appRouter');
+            } else {
+                console.error('[Index] ❌ AppRouter not found! Check if js/core/AppRouter.js is loaded.');
+            }
+        };
+        
+        // Wait for all scripts to load before initializing router
+        // Scripts are loaded synchronously, but we need to wait for all exports to complete
+        let checkAttempts = 0;
+        const maxAttempts = 40; // 40 * 50ms = 2 seconds max wait
+        const waitForAllScripts = () => {
+            checkAttempts++;
+            const expectedClasses = [
+                'Week1LessonPage', 'Week2LessonPage', 'Week3LessonPage', 
+                'Week4LessonPage', 'Week5LessonPage', 'Week6LessonPage', 
+                'Week7LessonPage', 'RegisterPage', 'AfsluitingLessonPage'
+            ];
+            
+            const allAvailable = expectedClasses.every(cls => window[cls]);
+            
+            if (allAvailable) {
+                console.log('[Index] ✅ All scripts loaded, initializing router');
+                initializeRouter();
+            } else if (checkAttempts < maxAttempts) {
+                const missing = expectedClasses.filter(cls => !window[cls]);
+                console.log(`[Index] ⏳ Waiting for scripts... (attempt ${checkAttempts}/${maxAttempts}) Missing:`, missing);
+                // Check again in 50ms
+                setTimeout(waitForAllScripts, 50);
+            } else {
+                // Timeout reached, initialize anyway with what we have
+                console.warn('[Index] ⚠️ Timeout waiting for all scripts, initializing router with available classes');
+                const missing = expectedClasses.filter(cls => !window[cls]);
+                console.warn('[Index] Missing classes:', missing);
+                initializeRouter();
+            }
+        };
+        
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', () => {
+                // Start checking for all scripts
+                setTimeout(waitForAllScripts, 100);
+            });
+        } else {
+            // DOM already loaded, start checking
+            setTimeout(waitForAllScripts, 100);
+        }
+        
+        // Debug: Log all link clicks for week pages
+        document.addEventListener('click', (e) => {
+            const link = e.target.closest('a[href]');
+            if (link && (link.href.includes('week') || link.href.includes('register') || link.href.includes('afsluiting'))) {
+                console.log('[DEBUG] 🔗 Link clicked:', link.href);
+                console.log('[DEBUG] Router active:', !!window.appRouter);
+                console.log('[DEBUG] Will navigate normally:', !window.appRouter);
+                console.log('[DEBUG] Link element:', link);
+            }
+        }, true);
     </script>
 </body>
 </html>

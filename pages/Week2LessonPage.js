@@ -965,6 +965,19 @@ class Week2LessonPage extends BaseLessonPage {
 }
 
 // Export voor gebruik in andere modules
-if (typeof module !== 'undefined' && module.exports) {
-    module.exports = Week2LessonPage;
+try {
+    if (typeof module !== 'undefined' && module.exports) {
+        module.exports = Week2LessonPage;
+    } else {
+        window.Week2LessonPage = Week2LessonPage;
+    }
+    console.log('[Week2LessonPage] ✅ Exported to window');
+} catch (error) {
+    console.error('[Week2LessonPage] ❌ Error exporting:', error);
+    // Force export even if there was an error
+    try {
+        window.Week2LessonPage = Week2LessonPage;
+    } catch (e) {
+        console.error('[Week2LessonPage] ❌ Failed to force export:', e);
+    }
 }

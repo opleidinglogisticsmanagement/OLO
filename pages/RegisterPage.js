@@ -256,9 +256,20 @@ class RegisterPage extends BaseLessonPage {
 }
 
 // Export voor gebruik in andere modules
-if (typeof module !== 'undefined' && module.exports) {
-    module.exports = RegisterPage;
-} else {
-    window.RegisterPage = RegisterPage;
+try {
+    if (typeof module !== 'undefined' && module.exports) {
+        module.exports = RegisterPage;
+    } else {
+        window.RegisterPage = RegisterPage;
+    }
+    console.log('[RegisterPage] ✅ Exported to window');
+} catch (error) {
+    console.error('[RegisterPage] ❌ Error exporting:', error);
+    // Force export even if there was an error
+    try {
+        window.RegisterPage = RegisterPage;
+    } catch (e) {
+        console.error('[RegisterPage] ❌ Failed to force export:', e);
+    }
 }
 

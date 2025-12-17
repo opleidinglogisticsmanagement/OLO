@@ -5,11 +5,6 @@
  * Basis template voor collega's om content toe te voegen
  */
 
-// #region agent log
-console.log('[DEBUG Week5] Script started, BaseLessonPage available:', !!window.BaseLessonPage);
-fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'Week5LessonPage.js:8',message:'Script started loading',data:{baseLessonPageAvailable:!!window.BaseLessonPage},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'})}).catch(()=>{});
-// #endregion
-
 class Week5LessonPage extends BaseLessonPage {
     constructor() {
         super('week-5', 'Week 5', 'Uitvoeren literatuuronderzoek + Theoretisch kader');
@@ -195,17 +190,17 @@ class Week5LessonPage extends BaseLessonPage {
             </section>
 
             <!-- Theorie Sectie met subsecties -->
-            <section class="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-4 sm:p-6 md:pr-[70px] hover-lift transition-colors duration-200">
-                <div class="flex flex-col sm:flex-row items-start mb-6">
+            <section class="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-4 sm:p-6 sm:pr-[70px] hover-lift transition-colors duration-200">
+                <div class="flex flex-col sm:flex-row items-start">
                     <div class="w-10 h-10 sm:w-12 sm:h-12 bg-purple-100 dark:bg-purple-900/30 rounded-lg flex items-center justify-center flex-shrink-0 mb-3 sm:mb-0 sm:mr-4">
                         <i class="fas fa-book text-purple-600 dark:text-purple-400 text-lg"></i>
                     </div>
                     <div class="flex-1 min-w-0 w-full sm:w-auto">
-                        <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">${this.content.theorie.title}</h2>
+                        <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">${this.content.theorie.title}</h2>
+                        <div class="prose max-w-none">
+                            ${this.renderTheorieContentWithSections()}
+                        </div>
                     </div>
-                </div>
-                <div class="prose max-w-none">
-                    ${this.renderTheorieContentWithSections()}
                 </div>
             </section>
 
@@ -835,32 +830,20 @@ class Week5LessonPage extends BaseLessonPage {
     }
 }
 
-// Export immediately after class definition
-(function() {
-    // #region agent log
-    console.log('[DEBUG Week5] Reached export IIFE, class defined:', typeof Week5LessonPage !== 'undefined');
-    fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'Week5LessonPage.js:840',message:'Reached export IIFE',data:{classDefined:typeof Week5LessonPage!=='undefined'},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'B'})}).catch(()=>{});
-    // #endregion
-    try {
-        if (typeof module !== 'undefined' && module.exports) {
-            module.exports = Week5LessonPage;
-        } else {
-            window.Week5LessonPage = Week5LessonPage;
-        }
-        // #region agent log
-        console.log('[DEBUG Week5] Export successful, window.Week5LessonPage:', !!window.Week5LessonPage);
-        fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'Week5LessonPage.js:851',message:'Export successful',data:{exported:!!window.Week5LessonPage},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'B'})}).catch(()=>{});
-        // #endregion
-        console.log('[Week5LessonPage] ✅ Exported to window');
-    } catch (error) {
-        // #region agent log
-        fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'Week5LessonPage.js:843',message:'Export error',data:{error:error.message,stack:error.stack},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'B'})}).catch(()=>{});
-        // #endregion
-        console.error('[Week5LessonPage] ❌ Error exporting:', error);
-        try {
-            window.Week5LessonPage = Week5LessonPage;
-        } catch (e) {
-            console.error('[Week5LessonPage] ❌ Failed to force export:', e);
-        }
+// Export voor gebruik in andere modules
+try {
+    if (typeof module !== 'undefined' && module.exports) {
+        module.exports = Week5LessonPage;
+    } else {
+        window.Week5LessonPage = Week5LessonPage;
     }
-})();
+    console.log('[Week5LessonPage] ✅ Exported to window');
+} catch (error) {
+    console.error('[Week5LessonPage] ❌ Error exporting:', error);
+    // Force export even if there was an error
+    try {
+        window.Week5LessonPage = Week5LessonPage;
+    } catch (e) {
+        console.error('[Week5LessonPage] ❌ Failed to force export:', e);
+    }
+}

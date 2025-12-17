@@ -197,7 +197,7 @@ class Week7LessonPage extends BaseLessonPage {
                         <i class="fas fa-book text-purple-600 dark:text-purple-400 text-lg"></i>
                     </div>
                     <div class="flex-1 min-w-0 w-full sm:w-auto">
-                        <h2 class="text-lg sm:text-xl font-semibold text-gray-900 dark:text-white mb-4">${this.content.theorie.title}</h2>
+                        <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">${this.content.theorie.title}</h2>
                         <div class="prose max-w-none">
                             ${this.content.theorie.content 
                                 ? ContentRenderer.renderContentItems(this.content.theorie.content, { enableModal: true })

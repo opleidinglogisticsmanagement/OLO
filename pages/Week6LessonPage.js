@@ -5,11 +5,6 @@
  * Basis template voor collega's om content toe te voegen
  */
 
-// #region agent log
-console.log('[DEBUG Week6] Script started, BaseLessonPage available:', !!window.BaseLessonPage);
-fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'Week6LessonPage.js:9',message:'Script started loading',data:{baseLessonPageAvailable:!!window.BaseLessonPage},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'})}).catch(()=>{});
-// #endregion
-
 class Week6LessonPage extends BaseLessonPage {
     constructor() {
         super('week-6', 'Week 6', 'Onderzoeksstrategie + dataverzamelingsplan');
@@ -195,22 +190,22 @@ class Week6LessonPage extends BaseLessonPage {
             </section>
 
             <!-- Theorie Sectie -->
-            <section class="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-4 sm:p-6 md:pr-[70px] hover-lift transition-colors duration-200">
-                <div class="flex flex-col sm:flex-row items-start mb-6">
+            <section class="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-4 sm:p-6 sm:pr-[70px] hover-lift transition-colors duration-200">
+                <div class="flex flex-col sm:flex-row items-start">
                     <div class="w-10 h-10 sm:w-12 sm:h-12 bg-purple-100 dark:bg-purple-900/30 rounded-lg flex items-center justify-center flex-shrink-0 mb-3 sm:mb-0 sm:mr-4">
                         <i class="fas fa-book text-purple-600 dark:text-purple-400 text-lg"></i>
                     </div>
                     <div class="flex-1 min-w-0 w-full sm:w-auto">
-                        <h2 class="text-lg sm:text-xl font-semibold text-gray-900 dark:text-white mb-2">${this.content.theorie.title}</h2>
+                        <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">${this.content.theorie.title}</h2>
+                        <div class="prose max-w-none">
+                            ${this.content.theorie.content 
+                                ? ContentRenderer.renderContentItems(this.content.theorie.content, { enableModal: true })
+                                : (this.content.theorie.paragraphs ? this.content.theorie.paragraphs.map(paragraph => `
+                                    <p class="text-gray-700 dark:text-gray-300 mb-4">${paragraph}</p>
+                                `).join('') : '')
+                            }
+                        </div>
                     </div>
-                </div>
-                <div class="prose max-w-none">
-                    ${this.content.theorie.content 
-                        ? ContentRenderer.renderContentItems(this.content.theorie.content, { enableModal: true })
-                        : (this.content.theorie.paragraphs ? this.content.theorie.paragraphs.map(paragraph => `
-                            <p class="text-gray-700 dark:text-gray-300 mb-4">${paragraph}</p>
-                        `).join('') : '')
-                    }
                 </div>
             </section>
 
@@ -818,32 +813,20 @@ class Week6LessonPage extends BaseLessonPage {
     }
 }
 
-// Export immediately after class definition
-(function() {
-    // #region agent log
-    console.log('[DEBUG Week6] Reached export IIFE, class defined:', typeof Week6LessonPage !== 'undefined');
-    fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'Week6LessonPage.js:823',message:'Reached export IIFE',data:{classDefined:typeof Week6LessonPage!=='undefined'},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'B'})}).catch(()=>{});
-    // #endregion
-    try {
-        if (typeof module !== 'undefined' && module.exports) {
-            module.exports = Week6LessonPage;
-        } else {
-            window.Week6LessonPage = Week6LessonPage;
-        }
-        // #region agent log
-        console.log('[DEBUG Week6] Export successful, window.Week6LessonPage:', !!window.Week6LessonPage);
-        fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'Week6LessonPage.js:834',message:'Export successful',data:{exported:!!window.Week6LessonPage},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'B'})}).catch(()=>{});
-        // #endregion
-        console.log('[Week6LessonPage] ✅ Exported to window');
-    } catch (error) {
-        // #region agent log
-        fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'Week6LessonPage.js:827',message:'Export error',data:{error:error.message,stack:error.stack},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'B'})}).catch(()=>{});
-        // #endregion
-        console.error('[Week6LessonPage] ❌ Error exporting:', error);
-        try {
-            window.Week6LessonPage = Week6LessonPage;
-        } catch (e) {
-            console.error('[Week6LessonPage] ❌ Failed to force export:', e);
-        }
+// Export voor gebruik in andere modules
+try {
+    if (typeof module !== 'undefined' && module.exports) {
+        module.exports = Week6LessonPage;
+    } else {
+        window.Week6LessonPage = Week6LessonPage;
     }
-})();
+    console.log('[Week6LessonPage] ✅ Exported to window');
+} catch (error) {
+    console.error('[Week6LessonPage] ❌ Error exporting:', error);
+    // Force export even if there was an error
+    try {
+        window.Week6LessonPage = Week6LessonPage;
+    } catch (e) {
+        console.error('[Week6LessonPage] ❌ Failed to force export:', e);
+    }
+}

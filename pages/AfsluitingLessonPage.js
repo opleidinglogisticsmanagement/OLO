@@ -4,10 +4,6 @@
  * Specifieke pagina voor Afsluiting: Eindbeoordeling & Certificering
  */
 
-// #region agent log
-fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'AfsluitingLessonPage.js:8',message:'Script started loading',data:{baseLessonPageAvailable:!!window.BaseLessonPage},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'})}).catch(()=>{});
-// #endregion
-
 class AfsluitingLessonPage extends BaseLessonPage {
     constructor() {
         super('afsluiting', 'Afsluiting', 'Eindbeoordeling & Certificering');
@@ -205,7 +201,7 @@ class AfsluitingLessonPage extends BaseLessonPage {
                         <i class="fas fa-book text-purple-600 dark:text-purple-400 text-lg"></i>
                     </div>
                     <div class="flex-1 min-w-0 w-full sm:w-auto">
-                        <h2 class="text-lg sm:text-xl font-semibold text-gray-900 dark:text-white mb-4">${this.content.theorie.title}</h2>
+                        <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">${this.content.theorie.title}</h2>
                         <div class="prose max-w-none">
                             ${this.content.theorie.content 
                                 ? ContentRenderer.renderContentItems(this.content.theorie.content, { enableModal: true })
@@ -718,30 +714,20 @@ class AfsluitingLessonPage extends BaseLessonPage {
     }
 }
 
-// Export immediately after class definition
-(function() {
-    // #region agent log
-    fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'AfsluitingLessonPage.js:719',message:'Reached export IIFE',data:{classDefined:typeof AfsluitingLessonPage!=='undefined'},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'B'})}).catch(()=>{});
-    // #endregion
-    try {
-        if (typeof module !== 'undefined' && module.exports) {
-            module.exports = AfsluitingLessonPage;
-        } else {
-            window.AfsluitingLessonPage = AfsluitingLessonPage;
-        }
-        // #region agent log
-        fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'AfsluitingLessonPage.js:726',message:'Export successful',data:{exported:!!window.AfsluitingLessonPage},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'B'})}).catch(()=>{});
-        // #endregion
-        console.log('[AfsluitingLessonPage] ✅ Exported to window');
-    } catch (error) {
-        // #region agent log
-        fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'AfsluitingLessonPage.js:728',message:'Export error',data:{error:error.message,stack:error.stack},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'B'})}).catch(()=>{});
-        // #endregion
-        console.error('[AfsluitingLessonPage] ❌ Error exporting:', error);
-        try {
-            window.AfsluitingLessonPage = AfsluitingLessonPage;
-        } catch (e) {
-            console.error('[AfsluitingLessonPage] ❌ Failed to force export:', e);
-        }
+// Export voor gebruik in andere modules
+try {
+    if (typeof module !== 'undefined' && module.exports) {
+        module.exports = AfsluitingLessonPage;
+    } else {
+        window.AfsluitingLessonPage = AfsluitingLessonPage;
     }
-})();
+    console.log('[AfsluitingLessonPage] ✅ Exported to window');
+} catch (error) {
+    console.error('[AfsluitingLessonPage] ❌ Error exporting:', error);
+    // Force export even if there was an error
+    try {
+        window.AfsluitingLessonPage = AfsluitingLessonPage;
+    } catch (e) {
+        console.error('[AfsluitingLessonPage] ❌ Failed to force export:', e);
+    }
+}

@@ -235,6 +235,13 @@ class AppRouter {
             }
         }
         
+        // Initialize SidebarManager for index page (sidebar is persistent, but listeners need to be attached)
+        // Create a minimal page instance just for the managers
+        if (window.SidebarManager) {
+            const sidebarManager = new window.SidebarManager('start');
+            sidebarManager.init();
+        }
+        
         // Re-initialize any scripts needed for index page
         this.attachIndexPageScripts();
     }
@@ -251,6 +258,25 @@ class AppRouter {
             console.log('[AppRouter] 💾 Using cached content');
             const cachedContent = this.pageCache.get(cacheKey);
             this.updateContent(cachedContent);
+            
+            // Still need to create page instance and attach listeners
+            // Load page class dynamically
+            let PageClass = window[pageClassName];
+            if (!PageClass) {
+                console.warn(`[AppRouter] ⚠️ Page class ${pageClassName} not found for cached content`);
+                return;
+            }
+            
+            // Create page instance for event listeners
+            const pageInstance = new PageClass();
+            console.log('[AppRouter] ✅ Page instance created for cached content');
+            
+            // Attach event listeners even for cached content
+            console.log('[AppRouter] 🔌 Attaching content listeners for cached content');
+            this.attachContentListeners(pageInstance);
+            
+            // Store instance
+            this.currentPageInstance = pageInstance;
             return;
         }
         

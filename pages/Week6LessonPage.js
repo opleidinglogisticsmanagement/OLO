@@ -195,22 +195,22 @@ class Week6LessonPage extends BaseLessonPage {
             </section>
 
             <!-- Theorie Sectie -->
-            <section class="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-4 sm:p-6 sm:pr-[70px] hover-lift transition-colors duration-200">
-                <div class="flex flex-col sm:flex-row items-start">
+            <section class="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-4 sm:p-6 md:pr-[70px] hover-lift transition-colors duration-200">
+                <div class="flex flex-col sm:flex-row items-start mb-6">
                     <div class="w-10 h-10 sm:w-12 sm:h-12 bg-purple-100 dark:bg-purple-900/30 rounded-lg flex items-center justify-center flex-shrink-0 mb-3 sm:mb-0 sm:mr-4">
                         <i class="fas fa-book text-purple-600 dark:text-purple-400 text-lg"></i>
                     </div>
                     <div class="flex-1 min-w-0 w-full sm:w-auto">
-                        <h2 class="text-lg sm:text-xl font-semibold text-gray-900 dark:text-white mb-4">${this.content.theorie.title}</h2>
-                        <div class="prose max-w-none">
-                            ${this.content.theorie.content 
-                                ? ContentRenderer.renderContentItems(this.content.theorie.content, { enableModal: true })
-                                : (this.content.theorie.paragraphs ? this.content.theorie.paragraphs.map(paragraph => `
-                                    <p class="text-gray-700 dark:text-gray-300 mb-4">${paragraph}</p>
-                                `).join('') : '')
-                            }
-                        </div>
+                        <h2 class="text-lg sm:text-xl font-semibold text-gray-900 dark:text-white mb-2">${this.content.theorie.title}</h2>
                     </div>
+                </div>
+                <div class="prose max-w-none">
+                    ${this.content.theorie.content 
+                        ? ContentRenderer.renderContentItems(this.content.theorie.content, { enableModal: true })
+                        : (this.content.theorie.paragraphs ? this.content.theorie.paragraphs.map(paragraph => `
+                            <p class="text-gray-700 dark:text-gray-300 mb-4">${paragraph}</p>
+                        `).join('') : '')
+                    }
                 </div>
             </section>
 

@@ -276,8 +276,16 @@
             
             /* Sidebar should take full width on mobile */
             #sidebar {
-                width: 100%;
-                max-width: 100%;
+                width: 100% !important;
+                max-width: 100% !important;
+            }
+            
+            /* Ensure sidebar doesn't exceed 330px on desktop */
+            @media (min-width: 1024px) {
+                #sidebar {
+                    width: 320px !important;
+                    max-width: 330px !important;
+                }
             }
             
             /* Reduce icon sizes on mobile */
@@ -550,7 +558,7 @@
 
     <div id="app" class="min-h-screen flex">
         <!-- Sidebar -->
-        <aside id="sidebar" class="w-80 bg-white dark:bg-gray-800 shadow-lg transform -translate-x-full lg:translate-x-0 transition-transform duration-300 ease-in-out fixed inset-y-0 z-40" aria-label="Navigatie menu" style="view-transition-name: sidebar;">
+        <aside id="sidebar" class="w-full lg:w-80 lg:max-w-[330px] bg-white dark:bg-gray-800 shadow-lg transform -translate-x-full lg:translate-x-0 transition-transform duration-300 ease-in-out fixed inset-y-0 z-40" aria-label="Navigatie menu" style="view-transition-name: sidebar;">
             <div class="h-full flex flex-col">
                 <!-- Sidebar Header -->
                 <div class="px-4 sm:px-6 h-[56px] sm:h-[64px] border-b border-gray-200 dark:border-gray-700 flex items-center">
@@ -1088,21 +1096,20 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // Mobile menu functionality
-            const mobileMenuButton = document.getElementById('mobile-menu-button');
-            const sidebar = document.getElementById('sidebar');
-            const overlay = document.getElementById('overlay');
+            // Mobile menu functionality - DISABLED: SidebarManager handles this now
+            // This code is kept for backward compatibility but should not run when SidebarManager is active
+            // SidebarManager will be initialized by AppRouter for SPA navigation
+            // Only initialize here if we're NOT in SPA mode (hard refresh on index.html)
+            if (!window.appRouter && window.SidebarManager) {
+                const mobileMenuButton = document.getElementById('mobile-menu-button');
+                const sidebar = document.getElementById('sidebar');
+                const overlay = document.getElementById('overlay');
 
-            if (mobileMenuButton && sidebar && overlay) {
-                mobileMenuButton.addEventListener('click', () => {
-                    sidebar.classList.toggle('-translate-x-full');
-                    overlay.classList.toggle('hidden');
-                });
-
-                overlay.addEventListener('click', () => {
-                    sidebar.classList.add('-translate-x-full');
-                    overlay.classList.add('hidden');
-                });
+                if (mobileMenuButton && sidebar && overlay) {
+                    // Initialize SidebarManager for initial page load (hard refresh)
+                    const sidebarManager = new window.SidebarManager('start');
+                    sidebarManager.init();
+                }
             }
 
             // Word count for reflection (if element exists)

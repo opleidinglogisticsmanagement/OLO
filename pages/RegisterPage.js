@@ -86,9 +86,19 @@ class RegisterPage extends BaseLessonPage {
         setTimeout(() => {
             console.log('[RegisterPage] ⏰ Calling renderTermsList() after timeout');
             const container = document.getElementById('terms-list');
+            const searchInput = document.getElementById('term-search');
+            console.log('[RegisterPage] 🔍 DOM check - container:', !!container, 'searchInput:', !!searchInput);
+            
             if (container) {
                 console.log('[RegisterPage] ✅ Container found, calling renderTermsList()');
                 this.renderTermsList();
+                // Also attach event listeners after DOM is ready
+                // This ensures search input listeners are attached after content is in DOM
+                setTimeout(() => {
+                    console.log('[RegisterPage] 🔌 Attaching event listeners after DOM update');
+                    this.attachLetterFilters();
+                    this.attachSearchInputListener();
+                }, 100); // Increased timeout to ensure DOM is fully ready
             } else {
                 console.warn('[RegisterPage] ⚠️ Container not found yet, retrying...');
                 // Retry after another delay
@@ -97,6 +107,12 @@ class RegisterPage extends BaseLessonPage {
                     if (retryContainer) {
                         console.log('[RegisterPage] ✅ Container found on retry, calling renderTermsList()');
                         this.renderTermsList();
+                        // Also attach event listeners after DOM is ready
+                        setTimeout(() => {
+                            console.log('[RegisterPage] 🔌 Attaching event listeners after DOM update (retry)');
+                            this.attachLetterFilters();
+                            this.attachSearchInputListener();
+                        }, 100);
                     } else {
                         console.error('[RegisterPage] ❌ Container still not found after retry');
                     }
@@ -232,7 +248,7 @@ class RegisterPage extends BaseLessonPage {
     filterTerms(letter, searchQuery = '') {
         this.filteredTerms = this.terms.filter(item => {
             const matchesLetter = letter === 'ALL' || item.term.toUpperCase().startsWith(letter);
-            const matchesSearch = item.term.toLowerCase().includes(searchQuery.toLowerCase()) || 
+            const matchesSearch = searchQuery === '' || item.term.toLowerCase().includes(searchQuery.toLowerCase()) || 
                                 item.description.toLowerCase().includes(searchQuery.toLowerCase());
             return matchesLetter && matchesSearch;
         });
@@ -244,10 +260,26 @@ class RegisterPage extends BaseLessonPage {
      */
     attachEventListeners() {
         super.attachEventListeners();
-
-        // Letter filters
-        document.querySelectorAll('.letter-filter').forEach(btn => {
+        // Note: Letter filters and search input are attached separately after DOM is ready
+        // See attachLetterFilters() and attachSearchInputListener()
+    }
+    
+    /**
+     * Attach letter filter listeners (separate method so it can be called after DOM is ready)
+     */
+    attachLetterFilters() {
+        console.log('[RegisterPage] 🔍 Looking for letter filter buttons...');
+        const letterFilters = document.querySelectorAll('.letter-filter');
+        console.log('[RegisterPage] 📊 Found', letterFilters.length, 'letter filter buttons');
+        
+        if (letterFilters.length === 0) {
+            console.warn('[RegisterPage] ⚠️ No letter filter buttons found!');
+            return;
+        }
+        
+        letterFilters.forEach(btn => {
             btn.addEventListener('click', (e) => {
+                console.log('[RegisterPage] 🔤 Letter filter clicked:', e.target.dataset.letter);
                 // Update active state
                 document.querySelectorAll('.letter-filter').forEach(b => {
                     b.classList.remove('bg-blue-600', 'text-white');
@@ -259,13 +291,21 @@ class RegisterPage extends BaseLessonPage {
                 this.activeLetter = e.target.dataset.letter;
                 const searchInput = document.getElementById('term-search');
                 const searchValue = searchInput ? searchInput.value : '';
+                console.log('[RegisterPage] 🔤 Filtering by letter:', this.activeLetter, 'with search:', searchValue);
                 this.filterTerms(this.activeLetter, searchValue);
             });
         });
-
-        // Search input - ensure it works properly
+        console.log('[RegisterPage] ✅ Letter filter listeners attached');
+    }
+    
+    /**
+     * Attach search input listener (separate method so it can be called multiple times)
+     */
+    attachSearchInputListener() {
+        console.log('[RegisterPage] 🔍 Looking for search input element...');
         const searchInput = document.getElementById('term-search');
         if (searchInput) {
+            console.log('[RegisterPage] ✅ Search input found, attaching listener');
             // Store reference to 'this' for use in event handler
             const self = this;
             
@@ -278,12 +318,13 @@ class RegisterPage extends BaseLessonPage {
             // Add event listener - filter on every input change
             newSearchInput.addEventListener('input', function(e) {
                 const searchValue = e.target.value.trim();
+                console.log('[RegisterPage] 🔍 Search input changed:', searchValue, 'Active letter:', self.activeLetter);
                 self.filterTerms(self.activeLetter, searchValue);
             });
+            console.log('[RegisterPage] ✅ Search input event listener attached');
         } else {
-            console.error('Search input element (term-search) not found!');
+            console.warn('[RegisterPage] ⚠️ Search input element (term-search) not found! Will retry...');
         }
-        
     }
 
     /**

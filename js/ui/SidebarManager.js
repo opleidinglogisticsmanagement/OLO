@@ -10,6 +10,11 @@
 class SidebarManager {
     constructor(moduleId) {
         this.moduleId = moduleId;
+        this.mobileMenuHandlers = {
+            openSidebar: null,
+            closeSidebar: null,
+            navLinkClose: []
+        };
     }
 
     /**
@@ -29,42 +34,158 @@ class SidebarManager {
      * Setup mobile menu open/close functionaliteit
      */
     setupMobileMenu() {
+        // #region agent log
+        console.log('[SidebarManager] setupMobileMenu called', {moduleId:this.moduleId,windowWidth:window.innerWidth});
+        // #endregion
         const mobileMenuButton = document.getElementById('mobile-menu-button');
         const sidebar = document.getElementById('sidebar');
         const overlay = document.getElementById('overlay');
 
-        if (!mobileMenuButton || !sidebar || !overlay) return;
+        // #region agent log
+        console.log('[SidebarManager] DOM elements check', {mobileMenuButton:!!mobileMenuButton,sidebar:!!sidebar,overlay:!!overlay,sidebarClasses:sidebar?Array.from(sidebar.classList):null,hasTranslateX:sidebar?.classList.contains('-translate-x-full'),overlayHidden:overlay?.classList.contains('hidden')});
+        // #endregion
+
+        if (!mobileMenuButton || !sidebar || !overlay) {
+            // #region agent log
+            console.warn('[SidebarManager] Early return - missing elements', {mobileMenuButton:!!mobileMenuButton,sidebar:!!sidebar,overlay:!!overlay});
+            // #endregion
+            return;
+        }
+        
+        // Ensure sidebar is closed on mobile after navigation
+        if (window.innerWidth < 1024) {
+            // #region agent log
+            const beforeTransform = window.getComputedStyle(sidebar).transform;
+            const beforeDisplay = window.getComputedStyle(sidebar).display;
+            const beforeVisibility = window.getComputedStyle(sidebar).visibility;
+            const beforeClasses = Array.from(sidebar.classList);
+            console.log('[SidebarManager] Ensuring sidebar is closed on mobile', {
+                currentHasTranslateX:sidebar.classList.contains('-translate-x-full'),
+                hasLgTranslateX0:sidebar.classList.contains('lg:translate-x-0'),
+                computedTransform:beforeTransform,
+                computedDisplay:beforeDisplay,
+                computedVisibility:beforeVisibility,
+                sidebarRect:sidebar.getBoundingClientRect(),
+                allClasses:beforeClasses
+            });
+            // #endregion
+            
+            // Remove lg:translate-x-0 if present (it might be overriding on mobile)
+            sidebar.classList.remove('lg:translate-x-0');
+            sidebar.classList.add('-translate-x-full');
+            
+            // Force transform via inline style as fallback
+            const sidebarWidth = sidebar.offsetWidth || window.innerWidth;
+            sidebar.style.transform = `translateX(-100%)`;
+            
+            overlay.classList.add('hidden');
+            document.body.style.overflow = '';
+            
+            // #region agent log
+            const afterTransform = window.getComputedStyle(sidebar).transform;
+            const afterRect = sidebar.getBoundingClientRect();
+            console.log('[SidebarManager] After closing sidebar', {
+                hasTranslateX:sidebar.classList.contains('-translate-x-full'),
+                hasLgTranslateX0:sidebar.classList.contains('lg:translate-x-0'),
+                computedTransform:afterTransform,
+                inlineStyle:sidebar.style.transform,
+                sidebarRect:afterRect,
+                sidebarLeft:afterRect.left
+            });
+            // #endregion
+        }
+
+        // Remove old event listeners if they exist (prevent duplicate listeners)
+        if (this.mobileMenuHandlers.openSidebar) {
+            mobileMenuButton.removeEventListener('click', this.mobileMenuHandlers.openSidebar);
+        }
+        if (this.mobileMenuHandlers.closeSidebar) {
+            overlay.removeEventListener('click', this.mobileMenuHandlers.closeSidebar);
+        }
+        // Remove old nav link listeners
+        this.mobileMenuHandlers.navLinkClose.forEach(({link, handler}) => {
+            link.removeEventListener('click', handler);
+        });
+        this.mobileMenuHandlers.navLinkClose = [];
 
         const openSidebar = () => {
+            // #region agent log
+            console.log('[SidebarManager] openSidebar called', {sidebarClassesBefore:Array.from(sidebar.classList),overlayClassesBefore:Array.from(overlay.classList)});
+            // #endregion
             sidebar.classList.remove('-translate-x-full');
+            // Remove inline transform to allow CSS classes to work
+            sidebar.style.transform = '';
             overlay.classList.remove('hidden');
             document.body.style.overflow = 'hidden'; // Prevent body scroll when sidebar is open
+            // #region agent log
+            console.log('[SidebarManager] openSidebar after', {sidebarClassesAfter:Array.from(sidebar.classList),overlayClassesAfter:Array.from(overlay.classList),hasTranslateX:sidebar.classList.contains('-translate-x-full'),computedTransform:window.getComputedStyle(sidebar).transform,inlineStyle:sidebar.style.transform});
+            // #endregion
         };
 
         const closeSidebar = () => {
+            sidebar.classList.remove('lg:translate-x-0'); // Remove desktop class if present
             sidebar.classList.add('-translate-x-full');
+            // Force transform via inline style as fallback
+            if (window.innerWidth < 1024) {
+                sidebar.style.transform = `translateX(-100%)`;
+            }
             overlay.classList.add('hidden');
             document.body.style.overflow = ''; // Restore body scroll
         };
 
-        mobileMenuButton.addEventListener('click', openSidebar);
+        // Store handlers for cleanup
+        this.mobileMenuHandlers.openSidebar = openSidebar;
+        this.mobileMenuHandlers.closeSidebar = closeSidebar;
+
+        // #region agent log
+        console.log('[SidebarManager] Attaching event listeners', {mobileMenuButtonExists:!!mobileMenuButton,overlayExists:!!overlay});
+        // #endregion
+        
+        // Wrap openSidebar to add logging and ensure it runs
+        const wrappedOpenSidebar = (e) => {
+            // #region agent log
+            console.log('[SidebarManager] mobileMenuButton clicked!', {event:e,button:mobileMenuButton,target:e.target,currentTarget:e.currentTarget});
+            // #endregion
+            e.stopPropagation(); // Prevent event from bubbling to AppRouter
+            openSidebar();
+        };
+        
+        // Use capture phase to run BEFORE AppRouter's click handler
+        mobileMenuButton.addEventListener('click', wrappedOpenSidebar, true);
+        this.mobileMenuHandlers.openSidebar = wrappedOpenSidebar;
+        
+        // Also add a direct click test
+        mobileMenuButton.onclick = (e) => {
+            console.log('[SidebarManager] Direct onclick handler triggered!', e);
+        }; // Update stored handler
+        
         overlay.addEventListener('click', closeSidebar);
+        
+        // #region agent log
+        console.log('[SidebarManager] Event listeners attached', {hasClickHandler:mobileMenuButton.onclick !== null});
+        // #endregion
 
         // Close button in sidebar
         const sidebarCloseButton = document.getElementById('sidebar-close-button');
         if (sidebarCloseButton) {
+            if (this.mobileMenuHandlers.sidebarCloseButton) {
+                sidebarCloseButton.removeEventListener('click', this.mobileMenuHandlers.sidebarCloseButton);
+            }
+            this.mobileMenuHandlers.sidebarCloseButton = closeSidebar;
             sidebarCloseButton.addEventListener('click', closeSidebar);
         }
 
         // Close sidebar when clicking a navigation link on mobile
         const navLinks = sidebar.querySelectorAll('a');
         navLinks.forEach(link => {
-            link.addEventListener('click', () => {
+            const navLinkHandler = () => {
                 // Only close on mobile (when sidebar is overlay)
                 if (window.innerWidth < 1024) {
                     closeSidebar();
                 }
-            });
+            };
+            this.mobileMenuHandlers.navLinkClose.push({link, handler: navLinkHandler});
+            link.addEventListener('click', navLinkHandler);
         });
     }
 

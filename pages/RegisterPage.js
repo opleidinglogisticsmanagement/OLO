@@ -79,47 +79,38 @@ class RegisterPage extends BaseLessonPage {
     renderContent() {
         console.log('[RegisterPage] 🎨 renderContent() called, terms count:', this.terms.length);
         const content = super.renderContent();
-        console.log('[RegisterPage] ✅ Content rendered, scheduling renderTermsList()');
-        // Schedule renderTermsList to run after DOM is updated
-        // AppRouter updates the DOM with a fade animation, so we need to wait
-        // Use a longer timeout to ensure DOM is ready and fade animation has started
-        setTimeout(() => {
-            console.log('[RegisterPage] ⏰ Calling renderTermsList() after timeout');
-            const container = document.getElementById('terms-list');
-            const searchInput = document.getElementById('term-search');
-            console.log('[RegisterPage] 🔍 DOM check - container:', !!container, 'searchInput:', !!searchInput);
-            
-            if (container) {
-                console.log('[RegisterPage] ✅ Container found, calling renderTermsList()');
-                this.renderTermsList();
-                // Also attach event listeners after DOM is ready
-                // This ensures search input listeners are attached after content is in DOM
-                setTimeout(() => {
-                    console.log('[RegisterPage] 🔌 Attaching event listeners after DOM update');
-                    this.attachLetterFilters();
-                    this.attachSearchInputListener();
-                }, 100); // Increased timeout to ensure DOM is fully ready
-            } else {
-                console.warn('[RegisterPage] ⚠️ Container not found yet, retrying...');
-                // Retry after another delay
-                setTimeout(() => {
-                    const retryContainer = document.getElementById('terms-list');
-                    if (retryContainer) {
-                        console.log('[RegisterPage] ✅ Container found on retry, calling renderTermsList()');
-                        this.renderTermsList();
-                        // Also attach event listeners after DOM is ready
-                        setTimeout(() => {
-                            console.log('[RegisterPage] 🔌 Attaching event listeners after DOM update (retry)');
-                            this.attachLetterFilters();
-                            this.attachSearchInputListener();
-                        }, 100);
-                    } else {
-                        console.error('[RegisterPage] ❌ Container still not found after retry');
-                    }
-                }, 300);
-            }
-        }, 250); // Wait for fade-out to complete (200ms) + some buffer
+        
+        // Use a more robust way to ensure DOM is ready
+        // Instead of one-time setTimeout, we'll try to initialize when the container becomes available
+        this.initContentWhenReady();
+        
         return content;
+    }
+
+    /**
+     * Periodically check if DOM is ready and initialize content
+     */
+    initContentWhenReady(attempts = 0) {
+        if (attempts > 20) { // Stop after 5 seconds (20 * 250ms)
+            console.error('[RegisterPage] ❌ Failed to initialize content after 20 attempts');
+            return;
+        }
+
+        const container = document.getElementById('terms-list');
+        const searchInput = document.getElementById('term-search');
+
+        if (container && searchInput) {
+            console.log(`[RegisterPage] ✅ DOM ready (attempt ${attempts}), initializing...`);
+            this.renderTermsList();
+            this.attachLetterFilters();
+            this.attachSearchInputListener();
+        } else {
+            // Only log every 4 attempts to avoid spam (once per second)
+            if (attempts % 4 === 0) {
+                console.log(`[RegisterPage] ⏳ DOM not ready (attempt ${attempts}), retrying...`);
+            }
+            setTimeout(() => this.initContentWhenReady(attempts + 1), 250);
+        }
     }
 
     /**
@@ -277,21 +268,28 @@ class RegisterPage extends BaseLessonPage {
             return;
         }
         
+        // Remove existing listeners by cloning buttons if necessary, 
+        // but here we'll just ensure we don't double-attach if possible
         letterFilters.forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                console.log('[RegisterPage] 🔤 Letter filter clicked:', e.target.dataset.letter);
+            // Clone to remove old listeners
+            const newBtn = btn.cloneNode(true);
+            btn.parentNode.replaceChild(newBtn, btn);
+            
+            newBtn.addEventListener('click', (e) => {
+                const letter = e.target.dataset.letter;
+                console.log('[RegisterPage] 🔤 Letter filter clicked:', letter);
+                
                 // Update active state
                 document.querySelectorAll('.letter-filter').forEach(b => {
                     b.classList.remove('bg-blue-600', 'text-white');
                     b.classList.add('bg-gray-100', 'dark:bg-gray-700', 'text-gray-600', 'dark:text-gray-300');
                 });
-                e.target.classList.remove('bg-gray-100', 'dark:bg-gray-700', 'text-gray-600', 'dark:text-gray-300');
-                e.target.classList.add('bg-blue-600', 'text-white');
+                newBtn.classList.remove('bg-gray-100', 'dark:bg-gray-700', 'text-gray-600', 'dark:text-gray-300');
+                newBtn.classList.add('bg-blue-600', 'text-white');
 
-                this.activeLetter = e.target.dataset.letter;
+                this.activeLetter = letter;
                 const searchInput = document.getElementById('term-search');
                 const searchValue = searchInput ? searchInput.value : '';
-                console.log('[RegisterPage] 🔤 Filtering by letter:', this.activeLetter, 'with search:', searchValue);
                 this.filterTerms(this.activeLetter, searchValue);
             });
         });

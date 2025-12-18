@@ -1,7 +1,7 @@
 /**
  * Week1LessonPage
  * 
- * Specifieke pagina voor Week 1: Neuro-psycho-immunologie
+ * Specifieke pagina voor Week 1
  * Basis template voor collega's om content toe te voegen
  */
 

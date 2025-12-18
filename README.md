@@ -1,4 +1,4 @@
-# E-Learning Platform - HBO Onderwijs
+# E-learning Opzetten van een Logistiek Onderzoek
 
 Een moderne, toegankelijke e-learning omgeving ontwikkeld voor HBO onderwijs met focus op duurzaamheid, logistiek en management vakken.
 

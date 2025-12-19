@@ -8,8 +8,7 @@
 class Week5LessonPage extends BaseLessonPage {
     constructor() {
         super('week-5', 'Week 5', 'Uitvoeren literatuuronderzoek + Theoretisch kader');
-        this.content = null;
-        this.contentLoaded = false;
+        // content and contentLoaded are now initialized in BaseLessonPage
         // API key is no longer needed on client-side (handled by server)
         // Keeping for backward compatibility but not required
         this.apiKey = (window.AppConfig && window.AppConfig.geminiApiKey) || null;
@@ -25,102 +24,8 @@ class Week5LessonPage extends BaseLessonPage {
         this.totalSegments = null; // Cache total number of segments
     }
 
-    /**
-     * Laad content uit JSON bestand met retry logica
-     */
-    async loadContent(retries = 3) {
-        for (let attempt = 1; attempt <= retries; attempt++) {
-            try {
-                // Probeer verschillende paden
-                const paths = [
-                    './content/week5.content.json',
-                    'content/week5.content.json',
-                    '/content/week5.content.json'
-                ];
-                
-                let lastError = null;
-                for (const contentPath of paths) {
-                    try {
-                        console.log(`[Week5LessonPage] Loading content from: ${contentPath} (attempt ${attempt}/${retries})`);
-                        const response = await fetch(contentPath, {
-                            cache: 'no-cache',
-                            headers: {
-                                'Accept': 'application/json'
-                            }
-                        });
-                        
-                        if (!response.ok) {
-                            throw new Error(`HTTP error! status: ${response.status} for path: ${contentPath}`);
-                        }
-                        
-                        const contentType = response.headers.get('content-type');
-                        if (!contentType || !contentType.includes('application/json')) {
-                            console.warn(`[Week5LessonPage] Unexpected content-type: ${contentType}`);
-                        }
-                        
-                        this.content = await response.json();
-                        this.contentLoaded = true;
-                        console.log('[Week5LessonPage] ✅ Content loaded successfully');
-                        return; // Success, exit function
-                    } catch (pathError) {
-                        console.warn(`[Week5LessonPage] Failed to load from ${contentPath}:`, pathError.message);
-                        lastError = pathError;
-                        // Try next path
-                    }
-                }
-                
-                // All paths failed, throw last error
-                throw lastError || new Error('All content paths failed');
-            } catch (error) {
-                console.error(`[Week5LessonPage] Error loading content (attempt ${attempt}/${retries}):`, error);
-                
-                if (attempt === retries) {
-                    // Last attempt failed, use fallback
-                    console.error('[Week5LessonPage] ❌ All attempts failed, using fallback content');
-                    this.contentLoaded = false;
-                    this.content = this.getFallbackContent();
-                } else {
-                    // Wait before retry (exponential backoff)
-                    const delay = Math.min(1000 * Math.pow(2, attempt - 1), 5000);
-                    console.log(`[Week5LessonPage] Retrying in ${delay}ms...`);
-                    await new Promise(resolve => setTimeout(resolve, delay));
-                }
-            }
-        }
-    }
+    // loadContent(), getFallbackContent(), and renderErrorState() are now in BaseLessonPage
 
-    /**
-     * Fallback content als JSON niet kan worden geladen
-     */
-    getFallbackContent() {
-        return {
-            intro: {
-                title: "Week 5",
-                subtitle: "Uitvoeren literatuuronderzoek + Theoretisch kader",
-                description: "De content voor deze module kon niet correct worden geladen. Controleer of het bestand week5.content.json bestaat en toegankelijk is."
-            },
-            leerdoelen: {
-                title: "Leerdoelen",
-                description: "Content kon niet worden geladen",
-                items: [
-                    "Het bestand week5.content.json kon niet worden geladen",
-                    "Controleer of het bestand bestaat in de content folder",
-                    "Controleer of er geen fouten zijn in de JSON structuur"
-                ]
-            },
-            theorie: {
-                title: "Theorie",
-                content: [
-                    {
-                        type: "paragraph",
-                        text: [
-                            "Er is een probleem opgetreden bij het laden van de content. De pagina kon niet correct worden geladen."
-                        ]
-                    }
-                ]
-            }
-        };
-    }
 
     /**
      * Render module introductie met content uit JSON
@@ -258,21 +163,7 @@ class Week5LessonPage extends BaseLessonPage {
     /**
      * Render error state als content niet kan worden geladen
      */
-    renderErrorState() {
-        return `
-            <section class="bg-red-50 dark:bg-red-900/20 border-l-4 border-red-500 dark:border-red-400 p-6 rounded-r-lg">
-                <div class="flex items-start space-x-3">
-                    <i class="fas fa-exclamation-triangle text-red-600 dark:text-red-400 mt-1"></i>
-                    <div>
-                        <h3 class="font-semibold text-red-900 dark:text-red-200 mb-1">Content Kon Niet Worden Geladen</h3>
-                        <p class="text-red-800 dark:text-red-300 text-sm">
-                            Het bestand week5.content.json kon niet worden geladen. Controleer of het bestand bestaat en toegankelijk is.
-                        </p>
-                    </div>
-                </div>
-            </section>
-        `;
-    }
+    // renderErrorState() is now in BaseLessonPage
 
     /**
      * Render MC vragen sectie - ONE QUESTION AT A TIME MODE
@@ -760,18 +651,50 @@ class Week5LessonPage extends BaseLessonPage {
 
     /**
      * Attach event listeners (override base class)
-     * Image modal functionality is now in BaseLessonPage
      */
     attachEventListeners() {
         super.attachEventListeners();
         
-        // Setup button to generate MC questions (instead of auto-generating)
+        // Listen for "next question" event (global event, can be set up immediately)
+        window.addEventListener('loadNextMCQuestion', () => {
+            this.loadNextQuestion();
+        });
+        
+        // Setup button to generate MC questions - use setTimeout to ensure DOM is ready
+        // This is especially important when content is loaded via AppRouter (SPA mode)
+        setTimeout(() => {
+            this.setupMCQuestionButton();
+        }, 100);
+    }
+
+    /**
+     * Setup MC question generator button
+     * Separated into its own method so it can be called after DOM is ready
+     * Uses retry mechanism to handle async DOM updates in SPA mode
+     */
+    setupMCQuestionButton(retries = 5) {
         const generateBtn = document.getElementById('generate-mc-question-btn');
         if (generateBtn) {
-            generateBtn.addEventListener('click', () => {
+            // Check if button already has event listener (prevent duplicates)
+            if (generateBtn.dataset.listenerAttached === 'true') {
+                console.log('[Week5LessonPage] MC question button already has listener');
+                return;
+            }
+            
+            // Remove any existing listeners to prevent duplicates
+            const newBtn = generateBtn.cloneNode(true);
+            generateBtn.parentNode.replaceChild(newBtn, generateBtn);
+            
+            // Mark as having listener attached
+            newBtn.dataset.listenerAttached = 'true';
+            
+            newBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                
                 // Disable button and show loading state
-                generateBtn.disabled = true;
-                generateBtn.innerHTML = `
+                newBtn.disabled = true;
+                newBtn.innerHTML = `
                     <div class="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
                     <span>Genereren...</span>
                 `;
@@ -779,21 +702,29 @@ class Week5LessonPage extends BaseLessonPage {
                 // Generate the question
                 this.generateMCQuestions();
             });
+            
+            console.log('[Week5LessonPage] ✅ MC question button setup complete');
+        } else if (retries > 0) {
+            // Retry if button not found yet (DOM might still be updating)
+            console.log(`[Week5LessonPage] ⏳ MC question button not found, retrying... (${retries} attempts left)`);
+            setTimeout(() => {
+                this.setupMCQuestionButton(retries - 1);
+            }, 100);
+        } else {
+            console.warn('[Week5LessonPage] ⚠️ MC question button not found in DOM after all retries');
         }
-        
-        // Listen for "next question" event
-        window.addEventListener('loadNextMCQuestion', () => {
-            this.loadNextQuestion();
-        });
     }
 
     /**
-     * Initialiseer de pagina met content loading
+     * Lifecycle hook: Called after event listeners are attached
+     * Handles hash navigation and MC question setup
      */
-    async init() {
-        await this.loadContent();
-        document.body.innerHTML = this.render();
-        this.attachEventListeners();
+    async afterEventListeners() {
+        // Ensure MC question button is setup (backup in case attachEventListeners was called too early)
+        // This is especially important in SPA mode where DOM updates happen asynchronously
+        setTimeout(() => {
+            this.setupMCQuestionButton();
+        }, 200);
         
         // Handle hash in URL after content is loaded
         if (window.location.hash) {
@@ -822,7 +753,7 @@ class Week5LessonPage extends BaseLessonPage {
                         });
                     }
                 }
-            }, 500);
+            }, 500); // Delay to ensure content is fully rendered
         }
         
         // MC questions are now generated on button click (not automatically)

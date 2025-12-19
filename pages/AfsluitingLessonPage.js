@@ -7,8 +7,7 @@
 class AfsluitingLessonPage extends BaseLessonPage {
     constructor() {
         super('afsluiting', 'Afsluiting', 'Eindbeoordeling & Certificering');
-        this.content = null;
-        this.contentLoaded = false;
+        // content and contentLoaded are now initialized in BaseLessonPage
         // API key is no longer needed on client-side (handled by server)
         // Keeping for backward compatibility but not required
         this.apiKey = (window.AppConfig && window.AppConfig.geminiApiKey) || null;
@@ -24,105 +23,7 @@ class AfsluitingLessonPage extends BaseLessonPage {
         this.totalSegments = null; // Cache total number of segments
     }
 
-    /**
-     * Laad content uit JSON bestand met retry logica (optioneel - als bestand bestaat)
-     */
-    async loadContent(retries = 3) {
-        for (let attempt = 1; attempt <= retries; attempt++) {
-            try {
-                // Probeer verschillende paden
-                const paths = [
-                    './content/afsluiting.content.json',
-                    'content/afsluiting.content.json',
-                    '/content/afsluiting.content.json'
-                ];
-                
-                let lastError = null;
-                for (const contentPath of paths) {
-                    try {
-                        console.log(`[AfsluitingLessonPage] Loading content from: ${contentPath} (attempt ${attempt}/${retries})`);
-                        const response = await fetch(contentPath, {
-                            cache: 'no-cache',
-                            headers: {
-                                'Accept': 'application/json'
-                            }
-                        });
-                        
-                        if (!response.ok) {
-                            // Bestand bestaat niet - gebruik fallback (dit is OK voor Afsluiting)
-                            console.log(`[AfsluitingLessonPage] File not found at ${contentPath}, using fallback content`);
-                            this.content = this.getFallbackContent();
-                            this.contentLoaded = true;
-                            return;
-                        }
-                        
-                        const contentType = response.headers.get('content-type');
-                        if (!contentType || !contentType.includes('application/json')) {
-                            console.warn(`[AfsluitingLessonPage] Unexpected content-type: ${contentType}`);
-                        }
-                        
-                        this.content = await response.json();
-                        this.contentLoaded = true;
-                        console.log('[AfsluitingLessonPage] ✅ Content loaded successfully');
-                        return; // Success, exit function
-                    } catch (pathError) {
-                        console.warn(`[AfsluitingLessonPage] Failed to load from ${contentPath}:`, pathError.message);
-                        lastError = pathError;
-                        // Try next path
-                    }
-                }
-                
-                // All paths failed - voor Afsluiting is dit OK, gebruik fallback
-                console.log('[AfsluitingLessonPage] Content file not found, using fallback content');
-                this.content = this.getFallbackContent();
-                this.contentLoaded = true;
-                return;
-            } catch (error) {
-                console.error(`[AfsluitingLessonPage] Error loading content (attempt ${attempt}/${retries}):`, error);
-                
-                if (attempt === retries) {
-                    // Last attempt failed - voor Afsluiting is dit OK
-                    console.log('[AfsluitingLessonPage] Using fallback content');
-                    this.contentLoaded = true;
-                    this.content = this.getFallbackContent();
-                } else {
-                    // Wait before retry (exponential backoff)
-                    const delay = Math.min(1000 * Math.pow(2, attempt - 1), 5000);
-                    console.log(`[AfsluitingLessonPage] Retrying in ${delay}ms...`);
-                    await new Promise(resolve => setTimeout(resolve, delay));
-                }
-            }
-        }
-    }
-
-    /**
-     * Fallback content als JSON niet bestaat
-     */
-    getFallbackContent() {
-        return {
-            intro: {
-                title: "Afsluiting",
-                subtitle: "Eindbeoordeling & Certificering",
-                description: "Welkom bij de afsluiting van deze module."
-            },
-            leerdoelen: {
-                title: "Leerdoelen",
-                description: "",
-                items: []
-            },
-            theorie: {
-                title: "Theorie",
-                content: [
-                    {
-                        type: "paragraph",
-                        text: [
-                            "Content voor de afsluiting kan hier worden toegevoegd."
-                        ]
-                    }
-                ]
-            }
-        };
-    }
+    // loadContent(), getFallbackContent(), and renderErrorState() are now in BaseLessonPage
 
     /**
      * Render module introductie met content uit JSON
@@ -223,21 +124,7 @@ class AfsluitingLessonPage extends BaseLessonPage {
     /**
      * Render error state als content niet kan worden geladen
      */
-    renderErrorState() {
-        return `
-            <section class="bg-red-50 dark:bg-red-900/20 border-l-4 border-red-500 dark:border-red-400 p-6 rounded-r-lg">
-                <div class="flex items-start space-x-3">
-                    <i class="fas fa-exclamation-triangle text-red-600 dark:text-red-400 mt-1"></i>
-                    <div>
-                        <h3 class="font-semibold text-red-900 dark:text-red-200 mb-1">Content Kon Niet Worden Geladen</h3>
-                        <p class="text-red-800 dark:text-red-300 text-sm">
-                            Er is een probleem opgetreden bij het laden van de content.
-                        </p>
-                    </div>
-                </div>
-            </section>
-        `;
-    }
+    // renderErrorState() is now in BaseLessonPage
 
     /**
      * Render MC vragen sectie - ONE QUESTION AT A TIME MODE
@@ -682,28 +569,23 @@ class AfsluitingLessonPage extends BaseLessonPage {
      * Attach event listeners (override base class)
      * Image modal functionality is now in BaseLessonPage
      */
+    /**
+     * Attach event listeners (override base class)
+     */
     attachEventListeners() {
         super.attachEventListeners();
         
-        // Generate MC questions after content is loaded
-        if (this.content && this.content.mcVragen) {
-            this.generateMCQuestions();
-        }
-        
-        // Listen for "next question" event
+        // Listen for "next question" event (global event, can be set up immediately)
         window.addEventListener('loadNextMCQuestion', () => {
             this.loadNextQuestion();
         });
     }
 
     /**
-     * Initialiseer de pagina met content loading
+     * Lifecycle hook: Called after event listeners are attached
+     * Handles auto-generation of MC questions if configured
      */
-    async init() {
-        await this.loadContent();
-        document.body.innerHTML = this.render();
-        this.attachEventListeners();
-        
+    async afterEventListeners() {
         // Generate MC questions if needed (after DOM is ready)
         if (this.content && this.content.mcVragen && this.content.mcVragen.generateFromTheory) {
             // Small delay to ensure DOM is ready

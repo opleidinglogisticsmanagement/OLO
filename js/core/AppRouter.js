@@ -273,7 +273,7 @@ class AppRouter {
             
             // Attach event listeners even for cached content
             console.log('[AppRouter] 🔌 Attaching content listeners for cached content');
-            this.attachContentListeners(pageInstance);
+            await this.attachContentListeners(pageInstance);
             
             // Store instance
             this.currentPageInstance = pageInstance;
@@ -361,7 +361,7 @@ class AppRouter {
         console.log('[AppRouter] 🔌 Attaching content listeners');
         // Always call attachContentListeners to initialize managers
         // It will also call pageInstance.attachEventListeners() if it exists
-        this.attachContentListeners(pageInstance);
+        await this.attachContentListeners(pageInstance);
         
         // Cache the content
         this.pageCache.set(cacheKey, content);
@@ -531,7 +531,7 @@ class AppRouter {
      * Note: Sidebar and header are persistent, but their event listeners need to be re-attached
      * because each page creates a new manager instance
      */
-    attachContentListeners(pageInstance) {
+    async attachContentListeners(pageInstance) {
         // Re-initialize all managers
         // Even though sidebar/header are persistent, their event listeners need to be re-attached
         // because each page instance creates new manager instances
@@ -564,6 +564,13 @@ class AppRouter {
         // This is important for pages like RegisterPage that need to populate content after rendering
         if (pageInstance.attachEventListeners) {
             pageInstance.attachEventListeners();
+        }
+        
+        // Call lifecycle hook after event listeners are attached
+        // This is used for hash navigation, MC question generation, etc.
+        if (typeof pageInstance.afterEventListeners === 'function') {
+            console.log('[AppRouter] 🔗 Calling afterEventListeners() lifecycle hook');
+            await pageInstance.afterEventListeners();
         }
     }
 

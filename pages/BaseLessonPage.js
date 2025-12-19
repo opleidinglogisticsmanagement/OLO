@@ -21,6 +21,11 @@ class BaseLessonPage {
         this.moduleId = moduleId;
         this.moduleTitle = moduleTitle;
         this.moduleSubtitle = moduleSubtitle;
+        
+        // Initialize content properties
+        this.content = null;
+        this.contentLoaded = false;
+        
         this.layoutRenderer = new LayoutRenderer(moduleId, moduleTitle);
         this.sidebarManager = new SidebarManager(moduleId);
         this.headerManager = new HeaderManager();
@@ -32,6 +37,177 @@ class BaseLessonPage {
         this.navigationService = new NavigationService();
         this.contentTemplateRenderer = new ContentTemplateRenderer();
         this.navigationRenderer = new NavigationRenderer(this.navigationService, moduleId);
+    }
+
+    /**
+     * Map moduleId to content filename
+     * @returns {string} Content filename
+     */
+    getContentFileName() {
+        // Special cases
+        if (this.moduleId === 'afsluiting') {
+            return 'afsluiting.content.json';
+        }
+        if (this.moduleId === 'register') {
+            return 'register.json';
+        }
+        
+        // Standard week pages: week-1 -> week1.content.json
+        if (this.moduleId.startsWith('week-')) {
+            const weekNumber = this.moduleId.replace('week-', '');
+            return `week${weekNumber}.content.json`;
+        }
+        
+        // Fallback: use moduleId directly
+        return `${this.moduleId}.content.json`;
+    }
+
+    /**
+     * Laad content uit JSON bestand met retry logica
+     * @param {number} retries - Aantal retry pogingen
+     */
+    async loadContent(retries = 3) {
+        const contentFileName = this.getContentFileName();
+        
+        // Build paths based on current location
+        const currentPath = window.location.pathname;
+        const basePath = currentPath.substring(0, currentPath.lastIndexOf('/') + 1);
+        
+        for (let attempt = 1; attempt <= retries; attempt++) {
+            try {
+                // Probeer verschillende paden (relatief, absoluut, en vanaf root)
+                const paths = [
+                    `./content/${contentFileName}`,
+                    `content/${contentFileName}`,
+                    `${basePath}content/${contentFileName}`,
+                    `/content/${contentFileName}`,
+                    // Try with current origin for absolute URLs
+                    `${window.location.origin}/content/${contentFileName}`,
+                    `${window.location.origin}${basePath}content/${contentFileName}`
+                ];
+                
+                let lastError = null;
+                for (const contentPath of paths) {
+                    try {
+                        console.log(`[${this.constructor.name}] Loading content from: ${contentPath} (attempt ${attempt}/${retries})`);
+                        
+                        // Add timeout to prevent hanging
+                        const controller = new AbortController();
+                        const timeoutId = setTimeout(() => controller.abort(), 5000); // 5 second timeout
+                        
+                        const response = await fetch(contentPath, {
+                            cache: 'no-cache',
+                            headers: {
+                                'Accept': 'application/json'
+                            },
+                            signal: controller.signal
+                        });
+                        
+                        clearTimeout(timeoutId);
+                        
+                        if (!response.ok) {
+                            throw new Error(`HTTP error! status: ${response.status} for path: ${contentPath}`);
+                        }
+                        
+                        const contentType = response.headers.get('content-type');
+                        if (!contentType || !contentType.includes('application/json')) {
+                            console.warn(`[${this.constructor.name}] Unexpected content-type: ${contentType}`);
+                        }
+                        
+                        this.content = await response.json();
+                        this.contentLoaded = true;
+                        console.log(`[${this.constructor.name}] ✅ Content loaded successfully from: ${contentPath}`);
+                        return; // Success, exit function
+                    } catch (pathError) {
+                        if (pathError.name === 'AbortError') {
+                            console.warn(`[${this.constructor.name}] Timeout loading from ${contentPath}`);
+                            lastError = new Error(`Timeout: ${contentPath}`);
+                        } else {
+                            console.warn(`[${this.constructor.name}] Failed to load from ${contentPath}:`, pathError.message);
+                            lastError = pathError;
+                        }
+                        // Try next path
+                    }
+                }
+                
+                // All paths failed, throw last error
+                throw lastError || new Error('All content paths failed');
+            } catch (error) {
+                console.error(`[${this.constructor.name}] Error loading content (attempt ${attempt}/${retries}):`, error);
+                
+                if (attempt === retries) {
+                    // Last attempt failed, use fallback
+                    console.error(`[${this.constructor.name}] ❌ All attempts failed, using fallback content`);
+                    this.contentLoaded = false;
+                    this.content = this.getFallbackContent();
+                } else {
+                    // Wait before retry (exponential backoff)
+                    const delay = Math.min(1000 * Math.pow(2, attempt - 1), 5000);
+                    console.log(`[${this.constructor.name}] Retrying in ${delay}ms...`);
+                    await new Promise(resolve => setTimeout(resolve, delay));
+                }
+            }
+        }
+    }
+
+    /**
+     * Fallback content als JSON niet kan worden geladen
+     * @returns {Object} Fallback content object
+     */
+    getFallbackContent() {
+        return {
+            intro: {
+                title: this.moduleTitle,
+                subtitle: this.moduleSubtitle,
+                description: `De content voor deze module kon niet correct worden geladen. Controleer of het bestand ${this.getContentFileName()} bestaat en toegankelijk is.`
+            },
+            leerdoelen: {
+                title: "Leerdoelen",
+                description: "Content kon niet worden geladen",
+                items: [
+                    `Het bestand ${this.getContentFileName()} kon niet worden geladen`,
+                    "Controleer of het bestand bestaat in de content folder",
+                    "Controleer of er geen fouten zijn in de JSON structuur"
+                ]
+            },
+            theorie: {
+                title: "Theorie",
+                content: [
+                    {
+                        type: "paragraph",
+                        text: [
+                            "Er is een probleem opgetreden bij het laden van de content. De pagina kon niet correct worden geladen."
+                        ]
+                    }
+                ]
+            },
+            video: {
+                title: "Video",
+                description: "Video content kon niet worden geladen",
+                url: "",
+                info: "Content kon niet worden geladen. Controleer het JSON bestand."
+            }
+        };
+    }
+
+    /**
+     * Render error state als content niet kan worden geladen
+     * @returns {string} HTML string
+     */
+    renderErrorState() {
+        return `
+            <section class="bg-red-50 dark:bg-red-900/20 border-l-4 border-red-500 dark:border-red-400 p-6 rounded-r-lg">
+                <div class="flex items-start space-x-3">
+                    <i class="fas fa-exclamation-triangle text-red-600 dark:text-red-400 mt-1"></i>
+                    <div>
+                        <h3 class="font-semibold text-red-900 dark:text-red-200 mb-1">Content Kon Niet Worden Geladen</h3>
+                        <p class="text-red-800 dark:text-red-300 text-sm">
+                            Het bestand ${this.getContentFileName()} kon niet worden geladen. Controleer of het bestand bestaat en toegankelijk is.
+                        </p>
+                    </div>
+                </div>
+            </section>
+        `;
     }
 
     /**
@@ -132,11 +308,35 @@ class BaseLessonPage {
 
 
     /**
-     * Initialiseer de pagina
+     * Initialiseer de pagina met content loading en lifecycle hooks
      */
-    init() {
-        document.body.innerHTML = this.render();
-        this.attachEventListeners();
+    async init() {
+        try {
+            // Load content
+            await this.loadContent();
+            
+            // Hook: afterContentLoaded - voor validatie of extra checks
+            if (typeof this.afterContentLoaded === 'function') {
+                const shouldContinue = await this.afterContentLoaded();
+                if (shouldContinue === false) {
+                    return; // Stop initialization if hook returns false
+                }
+            }
+            
+            // Render page
+            document.body.innerHTML = this.render();
+            
+            // Attach event listeners
+            this.attachEventListeners();
+            
+            // Hook: afterEventListeners - voor hash handling, MC generation, etc.
+            if (typeof this.afterEventListeners === 'function') {
+                await this.afterEventListeners();
+            }
+        } catch (error) {
+            console.error(`[${this.constructor.name}] ❌ Error during initialization:`, error);
+            document.body.innerHTML = this.renderErrorState();
+        }
     }
 
     /**

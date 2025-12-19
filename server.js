@@ -121,7 +121,7 @@ if (!GEMINI_API_KEY) {
 // Cache voor beschikbare Gemini modellen
 let cachedAvailableModels = [];
 let modelCacheTimestamp = null;
-const MODEL_CACHE_TTL = 60 * 60 * 1000; // 1 uur cache
+const MODEL_CACHE_TTL = 24 * 60 * 60 * 1000; // 24 uur cache (Free Tier rechten veranderen niet per uur)
 
 /**
  * Haal beschikbare Gemini modellen op en cache ze
@@ -319,58 +319,39 @@ ${theoryContent.substring(0, 8000)}`; // Limit to 8000 chars
         // Use Google Generative AI SDK
         const genAI = new GoogleGenerativeAI(GEMINI_API_KEY);
         
-        // OPTIE 3: Use fastest model from cache (gemini-1.5-flash preferred)
+        // Use Free Tier compatible models: gemini-2.5-flash and gemini-2.5-flash-lite
         // Get cached available models (sorted with flash first)
         let availableModels = await getAvailableModels();
         
-        // Filter out preview/experimental/2.0 models that might not be stable
-        // Only allow known stable models: gemini-1.5-flash, gemini-1.5-pro
-        const stableModels = availableModels.filter(m => {
+        // Filter for Free Tier compatible models: gemini-2.5-flash and gemini-2.5-flash-lite
+        const freeTierModels = availableModels.filter(m => {
             const modelLower = m.toLowerCase();
-            // Exclude preview, experimental, and 2.0 models
-            if (modelLower.includes('-preview') || 
-                modelLower.includes('-experimental') ||
-                modelLower.includes('2.5-flash-preview') ||
-                modelLower.includes('2.5-pro-preview') ||
-                modelLower.includes('2.0-flash') ||  // Exclude 2.0 models (quota issues)
-                modelLower.includes('2.0-pro') ||
-                modelLower.includes('lite-preview') ||
-                modelLower.includes('embedding')) {
-                return false;
-            }
-            // Only allow stable 1.5 models (explicitly exclude -latest variants that might not exist)
-            // Allow gemini-1.5-flash and gemini-1.5-pro (with or without -latest suffix)
-            if (modelLower.includes('1.5-flash') || modelLower.includes('1.5-pro')) {
-                // But exclude if it's a problematic variant
-                if (modelLower.includes('gemini-flash-latest') && !modelLower.includes('1.5')) {
-                    return false; // Exclude gemini-flash-latest (not gemini-1.5-flash-latest)
+            // Only allow 2.5-flash models (Free Tier compatible)
+            if (modelLower.includes('2.5-flash')) {
+                // Exclude preview variants
+                if (modelLower.includes('-preview') || 
+                    modelLower.includes('-experimental')) {
+                    return false;
                 }
                 return true;
             }
-            // Exclude everything else
             return false;
         });
         
-        // If no stable models in cache, try fallback models first
-        // Only fetch fresh if we really have no options
+        // If no free tier models in cache, use default Free Tier models
         let models;
-        if (stableModels.length > 0) {
-            models = stableModels.slice(0, 3); // Use first 3 stable models (flash will be first)
-        } else if (availableModels.length > 0) {
-            // If no stable models but we have some models, try them anyway
-            // Filter out only the most problematic ones
-            const filteredModels = availableModels.filter(m => 
-                !m.includes('-preview-') && 
-                !m.includes('lite-preview')
-            );
-            models = filteredModels.length > 0 
-                ? filteredModels.slice(0, 3)
-                : availableModels.slice(0, 3); // Last resort: try any model
+        if (freeTierModels.length > 0) {
+            // Sort: flash first, then flash-lite
+            models = freeTierModels.sort((a, b) => {
+                if (a.includes('flash-lite') && !b.includes('flash-lite')) return 1;
+                if (b.includes('flash-lite') && !a.includes('flash-lite')) return -1;
+                return 0;
+            }).slice(0, 2);
         } else {
-            // No models in cache at all, use known working models (only stable 1.5 models)
+            // Default Free Tier models
             models = [
-                'gemini-1.5-flash',  // Fastest model - try first
-                'gemini-1.5-pro'     // Fallback if flash fails
+                'gemini-2.5-flash',      // Primary Free Tier model
+                'gemini-2.5-flash-lite'  // Fallback Free Tier model
             ];
         }
         
@@ -392,7 +373,19 @@ ${theoryContent.substring(0, 8000)}`; // Limit to 8000 chars
                 break;
             } catch (error) {
                 const errorMsg = error.message || error.toString();
+                const statusCode = error.status || error.statusCode || (error.response ? error.response.status : null);
                 console.error(`[Gemini Proxy] ❌ Model ${modelName} failed:`, errorMsg);
+                
+                // Check for 429 Rate Limit error
+                if (statusCode === 429 || errorMsg.includes('429') || errorMsg.includes('quota') || errorMsg.includes('Quota') || errorMsg.includes('rate limit')) {
+                    console.error(`[Gemini Proxy] ⚠️ Rate limit (429) exceeded for model ${modelName}`);
+                    // Return QUOTA_EXCEEDED error immediately
+                    return res.status(429).json({
+                        success: false,
+                        error: 'QUOTA_EXCEEDED',
+                        message: 'API quota exceeded. Please try again tomorrow or continue working with the theory content.'
+                    });
+                }
                 
                 // If model not found (404), mark cache as potentially invalid
                 if (errorMsg.includes('404') || errorMsg.includes('not found') || errorMsg.includes('not supported')) {
@@ -400,16 +393,11 @@ ${theoryContent.substring(0, 8000)}`; // Limit to 8000 chars
                     modelCacheInvalid = true;
                 }
                 
-                // If quota exceeded (429), provide helpful error message
-                if (errorMsg.includes('429') || errorMsg.includes('quota') || errorMsg.includes('Quota')) {
-                    console.error(`[Gemini Proxy] ⚠️ Quota exceeded for model ${modelName}`);
-                    // Don't mark cache as invalid for quota errors, just try next model
-                }
-                
                 lastError = {
                     model: modelName,
                     message: errorMsg,
-                    error: error
+                    error: error,
+                    statusCode: statusCode
                 };
             }
         }
@@ -421,27 +409,22 @@ ${theoryContent.substring(0, 8000)}`; // Limit to 8000 chars
             modelCacheTimestamp = null;
             const freshModels = await fetchAndCacheAvailableModels();
             
-            // Try known working models first (only stable 1.5 models)
-            const knownWorkingModels = [
-                'gemini-1.5-flash',
-                'gemini-1.5-pro'
+            // Try Free Tier models first
+            const freeTierFallback = [
+                'gemini-2.5-flash',
+                'gemini-2.5-flash-lite'
             ];
             
-            // Also try fresh models that look stable (only 1.5 models, exclude -latest variants)
-            const freshStableModels = freshModels.filter(m => {
+            // Also try fresh models that are Free Tier compatible
+            const freshFreeTierModels = freshModels.filter(m => {
                 const modelLower = m.toLowerCase();
-                // Only allow 1.5 models, exclude 2.0, preview, experimental
-                if ((modelLower.includes('1.5-flash') || modelLower.includes('1.5-pro')) &&
-                    !modelLower.includes('2.0') &&
-                    !modelLower.includes('-preview') &&
-                    !modelLower.includes('-experimental')) {
-                    return true;
-                }
-                return !m.includes('-preview-') && !m.includes('lite-preview');
+                return modelLower.includes('2.5-flash') && 
+                       !modelLower.includes('-preview') &&
+                       !modelLower.includes('-experimental');
             });
             
-            // Combine known working with fresh stable models
-            const retryModels = [...knownWorkingModels, ...freshStableModels.slice(0, 3)];
+            // Combine Free Tier fallback with fresh Free Tier models
+            const retryModels = [...freeTierFallback, ...freshFreeTierModels.slice(0, 2)];
             
             console.log(`[Gemini Proxy] Retrying with models:`, retryModels);
             for (const modelName of retryModels) {
@@ -454,7 +437,19 @@ ${theoryContent.substring(0, 8000)}`; // Limit to 8000 chars
                     console.log(`[Gemini Proxy] ✅ Success with model: ${modelName}`);
                     break;
                 } catch (retryError) {
-                    console.error(`[Gemini Proxy] ❌ Model ${modelName} also failed:`, retryError.message);
+                    const retryStatus = retryError.status || retryError.statusCode || (retryError.response ? retryError.response.status : null);
+                    const retryMsg = retryError.message || retryError.toString();
+                    
+                    // Check for 429 in retry
+                    if (retryStatus === 429 || retryMsg.includes('429') || retryMsg.includes('quota') || retryMsg.includes('Quota') || retryMsg.includes('rate limit')) {
+                        console.error(`[Gemini Proxy] ⚠️ Rate limit (429) exceeded during retry`);
+                        return res.status(429).json({
+                            success: false,
+                            error: 'QUOTA_EXCEEDED',
+                            message: 'API quota exceeded. Please try again tomorrow or continue working with the theory content.'
+                        });
+                    }
+                    console.error(`[Gemini Proxy] ❌ Model ${modelName} also failed:`, retryMsg);
                 }
             }
         }
@@ -462,12 +457,23 @@ ${theoryContent.substring(0, 8000)}`; // Limit to 8000 chars
         if (!responseText) {
             console.error('[Gemini Proxy] All models failed');
             
+            // Check if last error was a 429
+            if (lastError?.statusCode === 429 || 
+                lastError?.message?.includes('429') || 
+                lastError?.message?.includes('quota') || 
+                lastError?.message?.includes('Quota') ||
+                lastError?.message?.includes('rate limit')) {
+                return res.status(429).json({
+                    success: false,
+                    error: 'QUOTA_EXCEEDED',
+                    message: 'API quota exceeded. Please try again tomorrow or continue working with the theory content.'
+                });
+            }
+            
             // Provide more helpful error messages for common issues
             let errorMessage = lastError?.message || 'Could not generate content';
             if (lastError?.message) {
-                if (lastError.message.includes('429') || lastError.message.includes('quota') || lastError.message.includes('Quota')) {
-                    errorMessage = 'API quota exceeded. Please check your Google AI Studio quota limits or wait before trying again.';
-                } else if (lastError.message.includes('404') || lastError.message.includes('not found')) {
+                if (lastError.message.includes('404') || lastError.message.includes('not found')) {
                     errorMessage = 'Model not found. The selected AI model is not available. Please try again later.';
                 }
             }
@@ -1079,57 +1085,43 @@ Zorg ervoor dat:
 - Geen duplicaten voorkomen
 - De suggesties in het Nederlands zijn, tenzij het vertalingen zijn`;
 
-        // Get available models
-        let models = ['gemini-1.5-flash', 'gemini-1.5-pro'];
+        // Get available models - use Free Tier compatible models
+        let models = ['gemini-2.5-flash', 'gemini-2.5-flash-lite'];
         try {
             const availableModels = await getAvailableModels();
             if (availableModels && availableModels.length > 0) {
-                // Filter for working models (exclude -latest, preview, experimental, 2.0 models, and old gemini-pro)
-                const preferred = availableModels.filter(m => {
+                // Filter for Free Tier compatible models: gemini-2.5-flash and gemini-2.5-flash-lite
+                const freeTierModels = availableModels.filter(m => {
                     const modelLower = m.toLowerCase();
-                    // Exclude preview, experimental, 2.0 models, and problematic models
-                    if (modelLower.includes('-preview') || 
-                        modelLower.includes('-experimental') ||
-                        modelLower.includes('2.5-flash-preview') ||
-                        modelLower.includes('2.5-pro-preview') ||
-                        modelLower.includes('2.0-flash') ||  // Exclude 2.0 models (often have quota issues)
-                        modelLower.includes('2.0-pro') ||
-                        modelLower.includes('lite-preview') ||
-                        modelLower.includes('-latest') ||
-                        modelLower.includes('embedding')) {
-                        return false;
+                    // Only allow 2.5-flash models (Free Tier compatible)
+                    if (modelLower.includes('2.5-flash')) {
+                        // Exclude preview variants
+                        if (modelLower.includes('-preview') || 
+                            modelLower.includes('-experimental') ||
+                            modelLower.includes('embedding')) {
+                            return false;
+                        }
+                        return true;
                     }
-                    // Only include stable 1.5 models
-                    return (modelLower.includes('1.5-flash') || modelLower.includes('1.5-pro')) &&
-                           !modelLower.includes('gemini-pro'); // Exclude old gemini-pro
+                    return false;
                 });
                 
-                if (preferred.length > 0) {
-                    // Sort: flash first (faster), then pro
-                    models = preferred.sort((a, b) => {
-                        if (a.includes('flash') && !b.includes('flash')) return -1;
-                        if (b.includes('flash') && !a.includes('flash')) return 1;
+                if (freeTierModels.length > 0) {
+                    // Sort: flash first, then flash-lite
+                    models = freeTierModels.sort((a, b) => {
+                        if (a.includes('flash-lite') && !b.includes('flash-lite')) return 1;
+                        if (b.includes('flash-lite') && !a.includes('flash-lite')) return -1;
                         return 0;
                     });
                 } else {
-                    // Fallback: filter out preview/experimental models and use first stable ones
-                    const stableFallback = availableModels.filter(m => {
-                        const modelLower = m.toLowerCase();
-                        return !modelLower.includes('-preview') && 
-                               !modelLower.includes('-experimental') &&
-                               !modelLower.includes('embedding') &&
-                               !modelLower.includes('2.5-flash-preview') &&
-                               !modelLower.includes('2.5-pro-preview') &&
-                               !modelLower.includes('2.0-flash') &&  // Exclude 2.0 models
-                               !modelLower.includes('2.0-pro');
-                    });
-                    models = stableFallback.length > 0 ? stableFallback.slice(0, 3) : ['gemini-1.5-flash'];
+                    // Fallback: use default Free Tier models
+                    models = ['gemini-2.5-flash', 'gemini-2.5-flash-lite'];
                 }
             }
         } catch (modelError) {
             console.warn('[generate-bouwsteen-tabel] Error getting models, using defaults:', modelError.message);
-            // Use only flash as fallback (most reliable)
-            models = ['gemini-1.5-flash'];
+            // Use default Free Tier models as fallback
+            models = ['gemini-2.5-flash', 'gemini-2.5-flash-lite'];
         }
 
         // Remove any -latest suffix and normalize model names
@@ -1162,15 +1154,12 @@ Zorg ervoor dat:
                 // Explicitly remove preview and experimental suffixes
                 normalizedModel = normalizedModel.replace(/-preview.*$/i, '').replace(/-experimental.*$/i, '');
                 
-                // Final check: don't use preview, experimental, or 2.0 models
+                // Final check: only use 2.5-flash models (Free Tier compatible)
                 const modelLower = normalizedModel.toLowerCase();
-                if (modelLower.includes('-preview') || 
-                    modelLower.includes('-experimental') ||
-                    modelLower.includes('2.5-flash-preview') ||
-                    modelLower.includes('2.5-pro-preview') ||
-                    modelLower.includes('2.0-flash') ||  // Exclude 2.0 models (quota issues)
-                    modelLower.includes('2.0-pro')) {
-                    console.warn(`[generate-bouwsteen-tabel] Skipping preview/experimental/2.0 model: ${normalizedModel}`);
+                if (!modelLower.includes('2.5-flash') || 
+                    modelLower.includes('-preview') || 
+                    modelLower.includes('-experimental')) {
+                    console.warn(`[generate-bouwsteen-tabel] Skipping non-Free-Tier or preview model: ${normalizedModel}`);
                     continue;
                 }
                 
@@ -1212,13 +1201,46 @@ Zorg ervoor dat:
                     throw new Error('No JSON found in response');
                 }
             } catch (error) {
-                console.error(`[generate-bouwsteen-tabel] Error with model ${modelName}:`, error.message);
-                lastError = error;
+                const errorMsg = error.message || error.toString();
+                const statusCode = error.status || error.statusCode || (error.response ? error.response.status : null);
+                console.error(`[generate-bouwsteen-tabel] Error with model ${modelName}:`, errorMsg);
+                
+                // Check for 429 Rate Limit error
+                if (statusCode === 429 || errorMsg.includes('429') || errorMsg.includes('quota') || errorMsg.includes('Quota') || errorMsg.includes('rate limit')) {
+                    console.error(`[generate-bouwsteen-tabel] ⚠️ Rate limit (429) exceeded for model ${modelName}`);
+                    // Return QUOTA_EXCEEDED error immediately
+                    return res.status(429).json({
+                        success: false,
+                        error: 'QUOTA_EXCEEDED',
+                        message: 'API quota exceeded. Please try again tomorrow or continue working with the theory content.'
+                    });
+                }
+                
+                lastError = {
+                    model: modelName,
+                    message: errorMsg,
+                    error: error,
+                    statusCode: statusCode
+                };
                 continue;
             }
         }
 
         console.error('[generate-bouwsteen-tabel] All models failed');
+        
+        // Check if last error was a 429
+        if (lastError?.statusCode === 429 || 
+            lastError?.message?.includes('429') || 
+            lastError?.message?.includes('quota') || 
+            lastError?.message?.includes('Quota') ||
+            lastError?.message?.includes('rate limit')) {
+            return res.status(429).json({
+                success: false,
+                error: 'QUOTA_EXCEEDED',
+                message: 'API quota exceeded. Please try again tomorrow or continue working with the theory content.'
+            });
+        }
+        
         throw lastError || new Error('All models failed');
 
     } catch (error) {

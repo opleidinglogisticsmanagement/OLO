@@ -384,6 +384,27 @@ class BaseLessonPage {
         this.videoManager.init();
         this.tableCopyManager.init();
     }
+
+    /**
+     * Show quota exceeded message with friendly orange styling
+     * Can be used by all lesson pages
+     */
+    showQuotaExceededMessage() {
+        const container = document.getElementById('mc-questions-container');
+        if (container) {
+            container.innerHTML = `
+                <div class="border border-orange-200 dark:border-orange-800 rounded-lg p-5 bg-orange-50 dark:bg-orange-900/20">
+                    <div class="flex items-start space-x-3">
+                        <i class="fas fa-info-circle text-orange-600 dark:text-orange-400 mt-1"></i>
+                        <div class="flex-1">
+                            <h3 class="font-semibold text-orange-900 dark:text-orange-200 mb-1">AI-coach daglimiet bereikt</h3>
+                            <p class="text-orange-800 dark:text-orange-300 text-sm mb-3">De AI-coach heeft zijn daglimiet bereikt. Probeer het morgen opnieuw of ga zelf aan de slag met de theorie.</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+    }
 }
 
 // Export voor gebruik in andere modules

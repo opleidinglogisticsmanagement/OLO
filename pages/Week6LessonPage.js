@@ -272,8 +272,14 @@ class Week6LessonPage extends BaseLessonPage {
             }
         } catch (error) {
             console.error('Error generating MC questions:', error);
-            const errorMessage = error.message || 'Er is een fout opgetreden bij het genereren van vragen. Probeer de pagina te verversen.';
-            this.showErrorInContainer(errorMessage);
+            
+            // Check for QUOTA_EXCEEDED error
+            if (error.quotaExceeded || error.message === 'QUOTA_EXCEEDED' || error.message.includes('QUOTA_EXCEEDED')) {
+                this.showQuotaExceededMessage();
+            } else {
+                const errorMessage = error.message || 'Er is een fout opgetreden bij het genereren van vragen. Probeer de pagina te verversen.';
+                this.showErrorInContainer(errorMessage);
+            }
             
             // Re-enable the generate button if it exists
             const generateBtn = document.getElementById('generate-mc-question-btn');

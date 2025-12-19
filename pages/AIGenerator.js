@@ -89,6 +89,14 @@ class AIGenerator {
                 console.error('[AIGenerator] Response statusText:', response.statusText);
                 console.error('[AIGenerator] Request URL:', this.proxyUrl);
                 console.error('[AIGenerator] Hostname:', window.location.hostname);
+                
+                // Check for QUOTA_EXCEEDED error
+                if (response.status === 429 || (errorData && errorData.error === 'QUOTA_EXCEEDED')) {
+                    const quotaError = new Error('QUOTA_EXCEEDED');
+                    quotaError.quotaExceeded = true;
+                    throw quotaError;
+                }
+                
                 throw new Error(`Server error: ${response.status} - ${errorData.message || errorData.error || 'Unknown error'}`);
             }
 
@@ -97,6 +105,12 @@ class AIGenerator {
 
             // Check if response is successful
             if (!data.success) {
+                // Check if it's a QUOTA_EXCEEDED error
+                if (data.error === 'QUOTA_EXCEEDED') {
+                    const quotaError = new Error('QUOTA_EXCEEDED');
+                    quotaError.quotaExceeded = true;
+                    throw quotaError;
+                }
                 throw new Error(data.message || 'Server returned unsuccessful response');
             }
 

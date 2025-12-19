@@ -255,8 +255,14 @@ class Week3LessonPage extends BaseLessonPage {
                 hostname: window.location.hostname,
                 isVercel: window.location.hostname.includes('vercel.app')
             });
-            const errorMessage = error.message || 'Er is een fout opgetreden bij het genereren van vragen. Probeer de pagina te verversen.';
-            this.showErrorInContainer(errorMessage);
+            
+            // Check for QUOTA_EXCEEDED error
+            if (error.quotaExceeded || error.message === 'QUOTA_EXCEEDED' || error.message.includes('QUOTA_EXCEEDED')) {
+                this.showQuotaExceededMessage();
+            } else {
+                const errorMessage = error.message || 'Er is een fout opgetreden bij het genereren van vragen. Probeer de pagina te verversen.';
+                this.showErrorInContainer(errorMessage);
+            }
             
             // Re-enable the generate button if it exists
             const generateBtn = document.getElementById('generate-mc-question-btn');
@@ -480,8 +486,14 @@ class Week3LessonPage extends BaseLessonPage {
             }
         } catch (error) {
             console.error('Error generating next question:', error);
-            const errorMessage = error.message || 'Er is een fout opgetreden bij het genereren van de volgende vraag.';
-            this.showErrorInContainer(errorMessage);
+            
+            // Check for QUOTA_EXCEEDED error
+            if (error.quotaExceeded || error.message === 'QUOTA_EXCEEDED' || error.message.includes('QUOTA_EXCEEDED')) {
+                this.showQuotaExceededMessage();
+            } else {
+                const errorMessage = error.message || 'Er is een fout opgetreden bij het genereren van de volgende vraag.';
+                this.showErrorInContainer(errorMessage);
+            }
         }
     }
 

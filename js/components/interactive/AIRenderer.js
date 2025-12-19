@@ -1337,8 +1337,9 @@ class AIRenderer {
             if (!response.ok) {
                 // Try to get error message from response
                 let errorMessage = `Server error: ${response.status}`;
+                let errorData = null;
                 try {
-                    const errorData = await response.json();
+                    errorData = await response.json();
                     errorMessage = errorData.message || errorData.error || errorMessage;
                     if (errorData.details) {
                         console.error('[AIRenderer] Server error details:', errorData.details);
@@ -1347,12 +1348,50 @@ class AIRenderer {
                     // If response is not JSON, use status text
                     errorMessage = `Server error: ${response.status} ${response.statusText}`;
                 }
+                
+                // Check for QUOTA_EXCEEDED error
+                if (response.status === 429 || (errorData && errorData.error === 'QUOTA_EXCEEDED')) {
+                    // Show friendly quota exceeded message with orange styling
+                    loadingEl.classList.add('hidden');
+                    resultEl.classList.remove('hidden');
+                    resultTableEl.innerHTML = `
+                        <div class="border border-orange-200 dark:border-orange-800 rounded-lg p-4 bg-orange-50 dark:bg-orange-900/20">
+                            <div class="flex items-start space-x-3">
+                                <i class="fas fa-info-circle text-orange-600 dark:text-orange-400 mt-1"></i>
+                                <div>
+                                    <h3 class="font-semibold text-orange-900 dark:text-orange-200 mb-1">AI-coach daglimiet bereikt</h3>
+                                    <p class="text-orange-800 dark:text-orange-300 text-sm">De AI-coach heeft zijn daglimiet bereikt. Probeer het morgen opnieuw of ga zelf aan de slag met de theorie.</p>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    return;
+                }
+                
                 throw new Error(errorMessage);
             }
             
             const data = await response.json();
             
             if (!data.success || !data.table) {
+                // Check if it's a QUOTA_EXCEEDED error
+                if (data.error === 'QUOTA_EXCEEDED') {
+                    // Show friendly quota exceeded message with orange styling
+                    loadingEl.classList.add('hidden');
+                    resultEl.classList.remove('hidden');
+                    resultTableEl.innerHTML = `
+                        <div class="border border-orange-200 dark:border-orange-800 rounded-lg p-4 bg-orange-50 dark:bg-orange-900/20">
+                            <div class="flex items-start space-x-3">
+                                <i class="fas fa-info-circle text-orange-600 dark:text-orange-400 mt-1"></i>
+                                <div>
+                                    <h3 class="font-semibold text-orange-900 dark:text-orange-200 mb-1">AI-coach daglimiet bereikt</h3>
+                                    <p class="text-orange-800 dark:text-orange-300 text-sm">De AI-coach heeft zijn daglimiet bereikt. Probeer het morgen opnieuw of ga zelf aan de slag met de theorie.</p>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    return;
+                }
                 throw new Error(data.message || 'Failed to generate table');
             }
             
@@ -1370,6 +1409,24 @@ class AIRenderer {
             // #endregion
             console.error('[AIRenderer] Error generating bouwsteen tabel:', error);
             loadingEl.classList.add('hidden');
+            
+            // Check if it's a QUOTA_EXCEEDED error
+            if (error.message.includes('QUOTA_EXCEEDED') || error.message.includes('429') || error.message.includes('quota exceeded')) {
+                // Show friendly quota exceeded message with orange styling
+                resultEl.classList.remove('hidden');
+                resultTableEl.innerHTML = `
+                    <div class="border border-orange-200 dark:border-orange-800 rounded-lg p-4 bg-orange-50 dark:bg-orange-900/20">
+                        <div class="flex items-start space-x-3">
+                            <i class="fas fa-info-circle text-orange-600 dark:text-orange-400 mt-1"></i>
+                            <div>
+                                <h3 class="font-semibold text-orange-900 dark:text-orange-200 mb-1">AI-coach daglimiet bereikt</h3>
+                                <p class="text-orange-800 dark:text-orange-300 text-sm">De AI-coach heeft zijn daglimiet bereikt. Probeer het morgen opnieuw of ga zelf aan de slag met de theorie.</p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                return;
+            }
             
             // Get more detailed error message
             const isVercel = window.location.hostname.includes('vercel.app');

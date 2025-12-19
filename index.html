@@ -1522,27 +1522,33 @@
             window.addEventListener('darkModeChange', updateDarkModeIcons);
         }
 
-        // PDF Export functionality
-        const exportPdfBtn = document.getElementById('export-pdf-btn');
-        if (exportPdfBtn) {
-            exportPdfBtn.addEventListener('click', async () => {
-                // Disable button tijdens export
-                exportPdfBtn.disabled = true;
-                    exportPdfBtn.innerHTML = '<i class="fas fa-spinner fa-spin text-xl"></i><span class="font-semibold">Exporteren...</span>';
+        // PDF Export functionality for Index Page
+        window.setupPDFExport = function() {
+            const exportPdfBtn = document.getElementById('export-pdf-btn');
+            if (exportPdfBtn) {
+                // Remove existing event listener by cloning (prevents duplicates)
+                const newBtn = exportPdfBtn.cloneNode(true);
+                exportPdfBtn.parentNode.replaceChild(newBtn, exportPdfBtn);
                 
-                try {
-                    const exporter = new PDFExporter();
-                    await exporter.exportAllContentToPDF();
-                } catch (error) {
-                    console.error('PDF export error:', error);
-                    alert('Er is een fout opgetreden bij het exporteren. Probeer het opnieuw.');
-                } finally {
-                    // Re-enable button
-                    exportPdfBtn.disabled = false;
-                    exportPdfBtn.innerHTML = '<i class="fas fa-file-pdf text-xl"></i><span class="font-semibold">Exporteer alle content naar PDF</span>';
-                }
-            });
-        }
+                newBtn.addEventListener('click', async () => {
+                    // Disable button tijdens export
+                    newBtn.disabled = true;
+                    newBtn.innerHTML = '<i class="fas fa-spinner fa-spin text-xl"></i><span class="font-semibold">Exporteren...</span>';
+                    
+                    try {
+                        const exporter = new PDFExporter();
+                        await exporter.exportAllContentToPDF();
+                    } catch (error) {
+                        console.error('PDF export error:', error);
+                        alert('Er is een fout opgetreden bij het exporteren. Probeer het opnieuw.');
+                    } finally {
+                        // Re-enable button
+                        newBtn.disabled = false;
+                        newBtn.innerHTML = '<i class="fas fa-file-pdf text-xl"></i><span class="font-semibold">Exporteer alle content naar PDF</span>';
+                    }
+                });
+            }
+        };
 
         // Search Functionality for Index Page
         const setupSearch = async () => {
@@ -1677,6 +1683,12 @@
         };
         
         setupSearch();
+        // Call setupPDFExport on initial load
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', window.setupPDFExport);
+        } else {
+            window.setupPDFExport();
+        }
         
         // Initialize SPA Router - Wait for all scripts to load
         const initializeRouter = () => {

@@ -637,6 +637,10 @@ class AppRouter {
         if (window.SearchService && typeof setupSearch === 'function') {
             setupSearch();
         }
+        // Re-initialize PDF export if needed
+        if (typeof window.setupPDFExport === 'function') {
+            window.setupPDFExport();
+        }
     }
     
     /**

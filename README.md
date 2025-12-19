@@ -403,16 +403,129 @@ Elke week pagina gebruikt de `BaseLessonPage` als basis. Deze bevat:
 
 ### Nieuwe Week Toevoegen
 
-1. Maak een nieuwe HTML file (bijv. `week3.html`)
-2. Maak een nieuwe JavaScript file (bijv. `Week3LessonPage.js`)
-3. Maak een content JSON file (bijv. `content/week3.content.json`)
-4. Voeg de module toe aan `config/moduleConfig.js`
+Met `BaseLessonPage` is het toevoegen van een nieuwe week nu zeer eenvoudig:
+
+1. **Maak een nieuwe JavaScript file** (bijv. `pages/Week8LessonPage.js`):
+   ```javascript
+   class Week8LessonPage extends BaseLessonPage {
+       constructor() {
+           super('week-8', 'Week 8', 'Titel van Week 8');
+           // content en contentLoaded worden automatisch geïnitialiseerd
+       }
+       
+       // loadContent() wordt automatisch aangeroepen door BaseLessonPage
+       // getFallbackContent() en renderErrorState() zijn beschikbaar
+       
+       renderContentSections() {
+           if (!this.content) {
+               return this.renderErrorState();
+           }
+           
+           // Render theorie content
+           const theorieContent = this.content.theorie.content 
+               ? ContentRenderer.renderContentItems(this.content.theorie.content, { enableModal: true })
+               : '';
+           const theorieTitle = this.content.theorie?.title || 'Theorie';
+           
+           return this.contentTemplateRenderer.renderSection(
+               theorieTitle,
+               theorieContent,
+               'book',
+               'purple'
+           );
+       }
+   }
+   ```
+
+2. **Maak een content JSON file** (bijv. `content/week8.content.json`):
+   ```json
+   {
+     "intro": {
+       "title": "Week 8",
+       "subtitle": "Titel van Week 8",
+       "description": "Beschrijving van de week"
+     },
+     "theorie": {
+       "title": "Theorie",
+       "content": [
+         {
+           "type": "paragraph",
+           "text": ["Je content hier..."]
+         }
+       ]
+     }
+   }
+   ```
+
+3. **Voeg route toe aan `js/core/AppRouter.js`**:
+   ```javascript
+   'week8.html': () => this.loadWeekPage('week-8', 'Week8LessonPage')
+   ```
+
+4. **Voeg script tag toe aan `index.html`** (indien nodig voor standalone pagina):
+   ```html
+   <script src="pages/Week8LessonPage.js"></script>
+   ```
+
+**Wat gebeurt automatisch:**
+- ✅ `loadContent()` laadt automatisch `content/week8.content.json`
+- ✅ `init()` flow wordt automatisch uitgevoerd
+- ✅ JSON validatie via `ContentValidator`
+- ✅ Error handling en fallback content
+- ✅ Module intro rendering via `ContentTemplateRenderer`
+- ✅ Event listeners worden automatisch geattached
 
 ---
 
 ## 🎨 Content Types Referentie
 
 Het platform ondersteunt de volgende content types binnen de `theorie.content` array in JSON bestanden:
+
+| Type | Gebruik | Belangrijkste Properties |
+| --- | --- | --- |
+| `paragraph` | Tekst blokken | `text` (string of array) |
+| `heading` | Headings (h1-h6) | `text`, `level` (optioneel), `id` (optioneel) |
+| `image` | Afbeeldingen | `src`, `alt` (required) |
+| `url` | Links | `url`, `text` (required) |
+| `video` | Embedded video's | `url` (required) |
+| `document` | Document links | `src`, `text` (required) |
+| `highlight` | Info boxen / Waarschuwingen | `title` (optioneel), `content` (required) |
+| `html` | Raw HTML | `html` (required) |
+| `accordion` | Accordion componenten | `items` (array, required) |
+| `tabs` | Tab componenten | `tabs` (array, required) |
+| `clickableSteps` | Klikbare stappen | `steps` (array, required) |
+| `smartChecklist` | SMART checklist | `doelstelling` (required) |
+| `learningObjectivesChecklist` | Leerdoelen checklist | `items` (array, required) |
+| `matchingExercise` | Matching oefening | `categories`, `items` (arrays, required) |
+| `trueFalseExercise` | True/False oefening | `statements` (array, required) |
+| `sequenceExercise` | Sequence oefening | `paragraphs` (array, required) |
+| `conceptQualityChecklist` | Concept kwaliteit checklist | `concept`, `definition` (required) |
+| `booleanOperatorExercise` | Boolean operator oefening | Configuratie object |
+| `aiQueryExercise` | AI query oefening | Configuratie object |
+| `aiBouwsteenGenerator` | AI bouwsteen generator | Configuratie object |
+
+| Type | Gebruik | Belangrijkste Properties |
+| --- | --- | --- |
+| `paragraph` | Tekst blokken | `text` (string of array) |
+| `heading` | Headings (h1-h6) | `text`, `level` (optioneel), `id` (optioneel) |
+| `image` | Afbeeldingen | `src`, `alt` (required) |
+| `url` | Links | `url`, `text` (required) |
+| `video` | Embedded video's | `url` (required) |
+| `document` | Document links | `src`, `text` (required) |
+| `highlight` | Info boxen / Waarschuwingen | `title` (optioneel), `content` (required) |
+| `html` | Raw HTML | `html` (required) |
+| `accordion` | Accordion componenten | `items` (array, required) |
+| `tabs` | Tab componenten | `tabs` (array, required) |
+| `clickableSteps` | Klikbare stappen | `steps` (array, required) |
+| `smartChecklist` | SMART checklist | `doelstelling` (required) |
+| `learningObjectivesChecklist` | Leerdoelen checklist | `items` (array, required) |
+| `matchingExercise` | Matching oefening | `categories`, `items` (arrays, required) |
+| `trueFalseExercise` | True/False oefening | `statements` (array, required) |
+| `sequenceExercise` | Sequence oefening | `paragraphs` (array, required) |
+| `conceptQualityChecklist` | Concept kwaliteit checklist | `concept`, `definition` (required) |
+| `booleanOperatorExercise` | Boolean operator oefening | Configuratie object |
+| `aiQueryExercise` | AI query oefening | Configuratie object |
+| `aiBouwsteenGenerator` | AI bouwsteen generator | Configuratie object |
 
 ### 1. Paragraph
 
@@ -803,10 +916,10 @@ Validatie gebeurt automatisch bij het laden van content. Controleer de browser c
 - ✅ Consistente rendering via `ContentRenderer.renderContentItems()`
 
 **Praktisch advies:**
-- ✅ Gebruik nieuwe content types voor **nieuwe** content
-- ✅ Bestaande content met `paragraphs` blijft werken (backward compatible)
-- ✅ Laat bestaande content (Week1-2) zoals het is (werkt prima)
-- ✅ Migreer bestaande content alleen bij grote updates
+- ✅ **Gebruik voor nieuwe content uitsluitend de `content` array** met content types (paragraph, image, etc.)
+- ⚠️ **De `paragraphs` fallback is alleen bedoeld voor legacy support** en zal in toekomstige versies mogelijk verdwijnen
+- ✅ Alle weken (Week1-7 + Afsluiting) zijn nu volledig gemigreerd naar de `ContentRenderer` structuur
+- ✅ Bestaande content met `paragraphs` blijft werken (backward compatible), maar migreer naar `content` array bij updates
 
 ---
 

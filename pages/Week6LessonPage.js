@@ -73,6 +73,7 @@ class Week6LessonPage extends BaseLessonPage {
             : (this.content.theorie.paragraphs ? this.content.theorie.paragraphs.map(paragraph => `
                 <p class="text-gray-700 dark:text-gray-300 mb-4">${paragraph}</p>
             `).join('') : '');
+        const theorieTitle = this.content.theorie?.title || 'Theorie';
 
         // Build sections - if interactive checklist, we need to render it differently
         let leerdoelenSection = '';

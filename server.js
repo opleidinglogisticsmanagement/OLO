@@ -31,7 +31,7 @@ app.use(helmet({
             styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com", "https://cdnjs.cloudflare.com"],
             fontSrc: ["'self'", "https://fonts.gstatic.com", "https://cdnjs.cloudflare.com"],
             imgSrc: ["'self'", "data:", "https:"],
-            connectSrc: ["'self'", "https://*.vercel.app", "https://generativelanguage.googleapis.com"],
+            connectSrc: ["'self'", "https://*.vercel.app", "https://generativelanguage.googleapis.com", "http://127.0.0.1:7242", "http://localhost:7242"],
             frameSrc: ["'self'", "https://www.youtube.com", "https://media.windesheim.nl", "https://sts.windesheim.nl"]
         }
     },

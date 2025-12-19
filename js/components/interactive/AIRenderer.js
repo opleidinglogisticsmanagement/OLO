@@ -1200,7 +1200,16 @@ class AIRenderer {
         fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'AIRenderer.js:1190',message:'Container lookup result',data:{containerFound:!!generatorContainer,generatorId},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'})}).catch(()=>{});
         // #endregion
         if (!generatorContainer) {
-            console.warn('[AIRenderer] AI Bouwsteen Generator container not found:', generatorId);
+            console.warn('[AIRenderer] ⚠️ AI Bouwsteen Generator container not found:', generatorId);
+            console.warn('[AIRenderer] Available elements with "ai-bouwsteen" in ID:', 
+                Array.from(document.querySelectorAll('[id*="ai-bouwsteen"]')).map(el => el.id));
+            console.warn('[AIRenderer] Document ready state:', document.readyState);
+            console.warn('[AIRenderer] Will retry in 500ms...');
+            // Retry after a delay - DOM might not be ready yet
+            setTimeout(() => {
+                console.log('[AIRenderer] Retrying setupAIBouwsteenGeneratorListeners for:', generatorId);
+                AIRenderer.setupAIBouwsteenGeneratorListeners(generatorId);
+            }, 500);
             return;
         }
         

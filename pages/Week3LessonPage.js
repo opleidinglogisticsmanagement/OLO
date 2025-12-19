@@ -211,8 +211,9 @@ class Week3LessonPage extends BaseLessonPage {
             console.log('[Week3LessonPage] Theory segment length:', theorySegment.length);
             console.log('[Week3LessonPage] Theory segment preview:', theorySegment.substring(0, 100) + '...');
             
+            console.log('[Week3LessonPage] Calling AIGenerator.generateMCQuestions...');
             const generatedQuestions = await this.aiGenerator.generateMCQuestions(theorySegment, 1, nextSegmentIndex);
-            console.log('Generated question:', generatedQuestions);
+            console.log('[Week3LessonPage] ✅ Generated question received:', generatedQuestions);
             
             if (generatedQuestions && generatedQuestions.length > 0) {
                 // Track this segment as used
@@ -246,7 +247,14 @@ class Week3LessonPage extends BaseLessonPage {
                 throw new Error('No question generated');
             }
         } catch (error) {
-            console.error('Error generating MC questions:', error);
+            console.error('[Week3LessonPage] ❌ Error generating MC questions:', error);
+            console.error('[Week3LessonPage] Error details:', {
+                message: error.message,
+                name: error.name,
+                stack: error.stack?.substring(0, 500),
+                hostname: window.location.hostname,
+                isVercel: window.location.hostname.includes('vercel.app')
+            });
             const errorMessage = error.message || 'Er is een fout opgetreden bij het genereren van vragen. Probeer de pagina te verversen.';
             this.showErrorInContainer(errorMessage);
             

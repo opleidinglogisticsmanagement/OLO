@@ -84,7 +84,11 @@ class AIGenerator {
                     const errorText = await responseClone.text();
                     errorData = { message: errorText };
                 }
-                console.error('[AIGenerator] Server error:', errorData);
+                console.error('[AIGenerator] ❌ Server error:', errorData);
+                console.error('[AIGenerator] Response status:', response.status);
+                console.error('[AIGenerator] Response statusText:', response.statusText);
+                console.error('[AIGenerator] Request URL:', this.proxyUrl);
+                console.error('[AIGenerator] Hostname:', window.location.hostname);
                 throw new Error(`Server error: ${response.status} - ${errorData.message || errorData.error || 'Unknown error'}`);
             }
 
@@ -105,18 +109,24 @@ class AIGenerator {
             }
             
         } catch (error) {
-            // #region agent log
-            fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'AIGenerator.js:98',message:'Error in generateMCQuestions',data:{errorMessage:error.message,errorName:error.name,errorStack:error.stack?.substring(0,200),isVercel:window.location.hostname.includes('vercel.app')},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'C'})}).catch(()=>{});
-            // #endregion
-            console.error('[AIGenerator] Error generating MC questions:', error);
+            console.error('[AIGenerator] ❌ Error generating MC questions:', error);
+            console.error('[AIGenerator] Error details:', {
+                message: error.message,
+                name: error.name,
+                stack: error.stack?.substring(0, 500),
+                hostname: window.location.hostname,
+                isVercel: window.location.hostname.includes('vercel.app'),
+                proxyUrl: this.proxyUrl
+            });
             
             // Provide user-friendly error messages
-            if (error.message.includes('fetch') || error.message.includes('Failed to fetch') || error.message.includes('NetworkError')) {
+            if (error.message.includes('fetch') || error.message.includes('Failed to fetch') || error.message.includes('NetworkError') || error.message.includes('CORS')) {
                 const isVercel = window.location.hostname.includes('vercel.app');
+                console.error('[AIGenerator] Network/CORS error detected');
                 if (isVercel) {
-                    throw new Error('Kan niet verbinden met de API server. Controleer of GEMINI_API_KEY is ingesteld in Vercel environment variables.');
+                    throw new Error('Kan niet verbinden met de API server. Controleer of GEMINI_API_KEY is ingesteld in Vercel environment variables. Fout: ' + error.message);
                 } else {
-                    throw new Error('Kan niet verbinden met de server. Zorg ervoor dat de server draait op http://localhost:3000');
+                    throw new Error('Kan niet verbinden met de server. Zorg ervoor dat de server draait op http://localhost:3000. Fout: ' + error.message);
                 }
             } else if (error.message.includes('Server error')) {
                 throw error; // Already formatted

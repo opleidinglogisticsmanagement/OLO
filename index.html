@@ -1608,9 +1608,17 @@
                     }
                 });
             } else {
-                // #region agent log
-                fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'index.html:1590',message:'PDF export button not found',data:{},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'})}).catch(()=>{});
-                // #endregion
+                console.warn('[Index] ⚠️ PDF export button not found in DOM');
+                console.warn('[Index] Available buttons:', Array.from(document.querySelectorAll('button')).map(btn => ({
+                    id: btn.id,
+                    text: btn.textContent?.trim().substring(0, 50),
+                    classes: btn.className
+                })).filter(btn => btn.text?.toLowerCase().includes('pdf') || btn.text?.toLowerCase().includes('export')));
+                // Retry after a delay - button might not be rendered yet
+                setTimeout(() => {
+                    console.log('[Index] Retrying PDF export button setup...');
+                    window.setupPDFExport();
+                }, 1000);
             }
         };
 
@@ -1749,21 +1757,30 @@
         setupSearch();
         // Call setupPDFExport after libraries are loaded
         const initializePDFExport = async () => {
+            console.log('[Index] 🔄 Initializing PDF export...');
+            console.log('[Index] Document ready state:', document.readyState);
+            console.log('[Index] PDF export button exists:', !!document.getElementById('export-pdf-btn'));
             try {
                 // Wacht tot bibliotheken geladen zijn (max 10 seconden)
                 await window.waitForPDFLibraries(100, 100);
-                console.log('[Index] PDF bibliotheken geladen, initialiseren export functie');
+                console.log('[Index] ✅ PDF bibliotheken geladen, initialiseren export functie');
                 window.setupPDFExport();
             } catch (error) {
-                console.error('[Index] PDF bibliotheken konden niet worden geladen:', error);
+                console.error('[Index] ❌ PDF bibliotheken konden niet worden geladen:', error);
+                console.error('[Index] Setting up PDF export anyway (user will see error on click)');
                 // Setup export functie toch, zodat gebruiker een error message krijgt bij klikken
                 window.setupPDFExport();
             }
         };
         
         if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', initializePDFExport);
+            console.log('[Index] Document still loading, waiting for DOMContentLoaded...');
+            document.addEventListener('DOMContentLoaded', () => {
+                console.log('[Index] DOMContentLoaded fired, initializing PDF export...');
+                initializePDFExport();
+            });
         } else {
+            console.log('[Index] Document already loaded, initializing PDF export immediately...');
             initializePDFExport();
         }
         

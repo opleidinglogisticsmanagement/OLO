@@ -22,9 +22,19 @@ class PDFExporter {
         this.isExporting = true;
 
         try {
-            // Check of bibliotheken geladen zijn
-            if (typeof window.jspdf === 'undefined' || typeof html2canvas === 'undefined') {
-                alert('PDF bibliotheken zijn niet geladen. Herlaad de pagina en probeer het opnieuw.');
+            // Check of bibliotheken geladen zijn met betere error messages
+            if (typeof window.jspdf === 'undefined') {
+                console.error('[PDFExporter] jspdf bibliotheek niet gevonden');
+                console.error('[PDFExporter] window.jspdf:', typeof window.jspdf);
+                alert('PDF bibliotheek (jsPDF) is niet geladen. Controleer je internetverbinding en herlaad de pagina. Als het probleem aanhoudt, controleer de browser console voor meer details.');
+                this.isExporting = false;
+                return;
+            }
+            
+            if (typeof html2canvas === 'undefined') {
+                console.error('[PDFExporter] html2canvas bibliotheek niet gevonden');
+                console.error('[PDFExporter] html2canvas:', typeof html2canvas);
+                alert('PDF bibliotheek (html2canvas) is niet geladen. Controleer je internetverbinding en herlaad de pagina. Als het probleem aanhoudt, controleer de browser console voor meer details.');
                 this.isExporting = false;
                 return;
             }

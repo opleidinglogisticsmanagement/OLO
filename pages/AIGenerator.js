@@ -8,15 +8,23 @@
 class AIGenerator {
     constructor(apiKey = null) {
         // Use server-side proxy instead of direct API calls
-        // Detect if we're on a different port (like Live Server on 5500) and use absolute URL
+        // Detect environment (Vercel vs localhost)
+        const hostname = window.location.hostname;
         const currentPort = window.location.port;
-        if (currentPort && currentPort !== '3000') {
+        const isVercel = hostname.includes('vercel.app') || hostname.includes('vercel.com');
+        
+        if (isVercel) {
+            // On Vercel, always use relative URL (same origin)
+            this.proxyUrl = '/api/generate-questions';
+            console.log('[AIGenerator] Detected Vercel environment, using relative URL');
+        } else if (currentPort && currentPort !== '3000') {
             // We're on a different port (e.g., Live Server on 5500), use absolute URL to port 3000
             this.proxyUrl = 'http://localhost:3000/api/generate-questions';
             console.log('[AIGenerator] Detected different port (' + currentPort + '), using absolute URL to port 3000');
         } else {
-            // Use relative URL (works when served from port 3000)
+            // Use relative URL (works when served from port 3000 or same origin)
             this.proxyUrl = '/api/generate-questions';
+            console.log('[AIGenerator] Using relative URL for API calls');
         }
         // API key is not needed on client-side anymore (handled by server)
         this.apiKey = apiKey;
@@ -91,8 +99,13 @@ class AIGenerator {
             console.error('[AIGenerator] Error generating MC questions:', error);
             
             // Provide user-friendly error messages
-            if (error.message.includes('fetch')) {
-                throw new Error('Kan niet verbinden met de server. Zorg ervoor dat de server draait op http://localhost:3000');
+            if (error.message.includes('fetch') || error.message.includes('Failed to fetch') || error.message.includes('NetworkError')) {
+                const isVercel = window.location.hostname.includes('vercel.app');
+                if (isVercel) {
+                    throw new Error('Kan niet verbinden met de API server. Controleer of GEMINI_API_KEY is ingesteld in Vercel environment variables.');
+                } else {
+                    throw new Error('Kan niet verbinden met de server. Zorg ervoor dat de server draait op http://localhost:3000');
+                }
             } else if (error.message.includes('Server error')) {
                 throw error; // Already formatted
             } else {

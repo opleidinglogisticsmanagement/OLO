@@ -27,11 +27,11 @@ app.use(helmet({
     contentSecurityPolicy: {
         directives: {
             defaultSrc: ["'self'"],
-            scriptSrc: ["'self'", "'unsafe-inline'", "https://cdn.tailwindcss.com", "https://cdnjs.cloudflare.com"],
+            scriptSrc: ["'self'", "'unsafe-inline'", "https://cdn.tailwindcss.com", "https://cdnjs.cloudflare.com", "https://*.vercel.app"],
             styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com", "https://cdnjs.cloudflare.com"],
             fontSrc: ["'self'", "https://fonts.gstatic.com", "https://cdnjs.cloudflare.com"],
             imgSrc: ["'self'", "data:", "https:"],
-            connectSrc: ["'self'"],
+            connectSrc: ["'self'", "https://*.vercel.app", "https://generativelanguage.googleapis.com"],
             frameSrc: ["'self'", "https://www.youtube.com", "https://media.windesheim.nl", "https://sts.windesheim.nl"]
         }
     },
@@ -46,32 +46,50 @@ const allowedOrigins = process.env.ALLOWED_ORIGINS
 app.use(cors({
     origin: function (origin, callback) {
         // Allow requests with no origin (like mobile apps, Postman, curl, or same-origin requests)
-        if (!origin) return callback(null, true);
+        if (!origin) {
+            console.log('[CORS] Allowing request with no origin (same-origin or server-to-server)');
+            return callback(null, true);
+        }
+        
+        console.log(`[CORS] Checking origin: ${origin}`);
         
         // On Vercel, allow requests from vercel.app domains (for production and preview deployments)
         if (process.env.VERCEL) {
             // Allow all vercel.app domains (includes production and preview deployments)
             if (origin.includes('.vercel.app') || origin.includes('vercel.app')) {
+                console.log(`[CORS] ✅ Allowing Vercel domain: ${origin}`);
                 return callback(null, true);
             }
             // Allow the specific Vercel deployment URL if set
             if (process.env.VERCEL_URL) {
                 const vercelUrl = `https://${process.env.VERCEL_URL}`;
                 if (origin === vercelUrl) {
+                    console.log(`[CORS] ✅ Allowing specific Vercel URL: ${origin}`);
                     return callback(null, true);
                 }
+            }
+            // Also allow custom domains if VERCEL_ENV is set
+            if (process.env.VERCEL_ENV === 'production' || process.env.VERCEL_ENV === 'preview') {
+                console.log(`[CORS] ✅ Allowing Vercel ${process.env.VERCEL_ENV} environment: ${origin}`);
+                return callback(null, true);
             }
         }
         
         // Check against allowed origins list (for local development)
         if (allowedOrigins.indexOf(origin) !== -1) {
+            console.log(`[CORS] ✅ Allowing origin from allowed list: ${origin}`);
             callback(null, true);
         } else {
-            console.warn(`[Security] CORS blocked origin: ${origin}`);
+            console.warn(`[CORS] ❌ Blocked origin: ${origin}`);
+            console.warn(`[CORS] Allowed origins: ${allowedOrigins.join(', ')}`);
+            console.warn(`[CORS] VERCEL env: ${process.env.VERCEL}`);
+            console.warn(`[CORS] VERCEL_URL: ${process.env.VERCEL_URL}`);
             callback(new Error('Deze origin is niet toegestaan'));
         }
     },
-    credentials: true
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
 // 3. Request size limits (prevent DoS)

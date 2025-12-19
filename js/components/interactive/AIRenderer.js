@@ -1279,7 +1279,14 @@ class AIRenderer {
         resultEl.classList.add('hidden');
         
         try {
-            const response = await fetch('/api/generate-bouwsteen-tabel', {
+            // Detect environment for better error messages
+            const isVercel = window.location.hostname.includes('vercel.app');
+            const apiUrl = '/api/generate-bouwsteen-tabel';
+            
+            console.log('[AIRenderer] Generating bouwsteen tabel, environment:', isVercel ? 'Vercel' : 'Local');
+            console.log('[AIRenderer] API URL:', apiUrl);
+            
+            const response = await fetch(apiUrl, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ keyword, context })
@@ -1320,11 +1327,32 @@ class AIRenderer {
             loadingEl.classList.add('hidden');
             
             // Get more detailed error message
+            const isVercel = window.location.hostname.includes('vercel.app');
             let errorMessage = 'Er is een fout opgetreden bij het genereren van de tabel.';
-            if (error.message) {
+            
+            if (error.message.includes('fetch') || error.message.includes('Failed to fetch') || error.message.includes('NetworkError')) {
+                if (isVercel) {
+                    errorMessage = 'Kan niet verbinden met de API server. Controleer of GEMINI_API_KEY is ingesteld in Vercel environment variables.';
+                } else {
+                    errorMessage = 'Kan niet verbinden met de server. Zorg ervoor dat de server draait op http://localhost:3000';
+                }
+            } else if (error.message) {
                 errorMessage += `\n\nFout: ${error.message}`;
             }
-            alert(errorMessage);
+            
+            // Show error in UI instead of alert
+            resultEl.classList.remove('hidden');
+            resultTableEl.innerHTML = `
+                <div class="border border-red-200 dark:border-red-800 rounded-lg p-4 bg-red-50 dark:bg-red-900/20">
+                    <div class="flex items-start space-x-3">
+                        <i class="fas fa-exclamation-triangle text-red-600 dark:text-red-400 mt-1"></i>
+                        <div>
+                            <h3 class="font-semibold text-red-900 dark:text-red-200 mb-1">Fout bij genereren</h3>
+                            <p class="text-red-800 dark:text-red-300 text-sm">${errorMessage}</p>
+                        </div>
+                    </div>
+                </div>
+            `;
         }
     }
     

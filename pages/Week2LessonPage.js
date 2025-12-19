@@ -726,7 +726,13 @@ class Week2LessonPage extends BaseLessonPage {
      * Uses retry mechanism to handle async DOM updates in SPA mode
      */
     setupMCQuestionButton(retries = 5) {
+        // #region agent log
+        fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'Week2LessonPage.js:728',message:'setupMCQuestionButton called',data:{retries,hostname:window.location.hostname,isVercel:window.location.hostname.includes('vercel.app')},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'})}).catch(()=>{});
+        // #endregion
         const generateBtn = document.getElementById('generate-mc-question-btn');
+        // #region agent log
+        fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'Week2LessonPage.js:729',message:'Button lookup result',data:{buttonFound:!!generateBtn,buttonId:generateBtn?.id},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'})}).catch(()=>{});
+        // #endregion
         if (generateBtn) {
             // Check if button already has event listener (prevent duplicates)
             if (generateBtn.dataset.listenerAttached === 'true') {

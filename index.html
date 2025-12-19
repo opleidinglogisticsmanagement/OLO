@@ -1554,18 +1554,33 @@
 
         // PDF Export functionality for Index Page
         window.setupPDFExport = function() {
+            // #region agent log
+            fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'index.html:1556',message:'setupPDFExport called',data:{hostname:window.location.hostname,isVercel:window.location.hostname.includes('vercel.app')},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'})}).catch(()=>{});
+            // #endregion
             const exportPdfBtn = document.getElementById('export-pdf-btn');
+            // #region agent log
+            fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'index.html:1558',message:'PDF export button lookup',data:{buttonFound:!!exportPdfBtn,buttonId:exportPdfBtn?.id},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'})}).catch(()=>{});
+            // #endregion
             if (exportPdfBtn) {
                 // Remove existing event listener by cloning (prevents duplicates)
                 const newBtn = exportPdfBtn.cloneNode(true);
                 exportPdfBtn.parentNode.replaceChild(newBtn, exportPdfBtn);
                 
+                // #region agent log
+                fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'index.html:1563',message:'Adding click listener to PDF export button',data:{},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'})}).catch(()=>{});
+                // #endregion
                 newBtn.addEventListener('click', async () => {
+                    // #region agent log
+                    fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'index.html:1564',message:'PDF export button clicked',data:{},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'D'})}).catch(()=>{});
+                    // #endregion
                     // Disable button tijdens export
                     newBtn.disabled = true;
                     newBtn.innerHTML = '<i class="fas fa-spinner fa-spin text-xl"></i><span class="font-semibold">Exporteren...</span>';
                     
                     try {
+                        // #region agent log
+                        fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'index.html:1570',message:'Waiting for PDF libraries',data:{jspdf:typeof window.jspdf,html2canvas:typeof html2canvas},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'C'})}).catch(()=>{});
+                        // #endregion
                         // Wacht tot bibliotheken geladen zijn
                         await window.waitForPDFLibraries();
                         
@@ -1574,9 +1589,15 @@
                             throw new Error('PDF bibliotheken zijn niet beschikbaar. Herlaad de pagina en probeer het opnieuw.');
                         }
                         
+                        // #region agent log
+                        fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'index.html:1577',message:'Calling PDFExporter',data:{},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'C'})}).catch(()=>{});
+                        // #endregion
                         const exporter = new PDFExporter();
                         await exporter.exportAllContentToPDF();
                     } catch (error) {
+                        // #region agent log
+                        fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'index.html:1579',message:'PDF export error',data:{errorMessage:error.message,errorName:error.name},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'C'})}).catch(()=>{});
+                        // #endregion
                         console.error('PDF export error:', error);
                         const errorMessage = error.message || 'Er is een fout opgetreden bij het exporteren. Probeer het opnieuw.';
                         alert(errorMessage);
@@ -1586,6 +1607,10 @@
                         newBtn.innerHTML = '<i class="fas fa-file-pdf text-xl"></i><span class="font-semibold">Exporteer alle content naar PDF</span>';
                     }
                 });
+            } else {
+                // #region agent log
+                fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'index.html:1590',message:'PDF export button not found',data:{},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'})}).catch(()=>{});
+                // #endregion
             }
         };
 

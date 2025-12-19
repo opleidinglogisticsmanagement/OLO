@@ -1126,8 +1126,14 @@ class AIRenderer {
         
         // Setup event listeners after DOM is ready
         // Use requestAnimationFrame to ensure DOM is fully rendered
+        // #region agent log
+        fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'AIRenderer.js:1129',message:'Scheduling setupAIBouwsteenGeneratorListeners',data:{generatorId,hostname:window.location.hostname},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'})}).catch(()=>{});
+        // #endregion
         requestAnimationFrame(() => {
             setTimeout(() => {
+                // #region agent log
+                fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'AIRenderer.js:1131',message:'Calling setupAIBouwsteenGeneratorListeners',data:{generatorId},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'})}).catch(()=>{});
+                // #endregion
                 AIRenderer.setupAIBouwsteenGeneratorListeners(generatorId);
                 
                 // Ensure inputs are focusable and clickable

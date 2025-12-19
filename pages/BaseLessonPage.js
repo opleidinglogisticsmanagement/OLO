@@ -114,7 +114,17 @@ class BaseLessonPage {
                             console.warn(`[${this.constructor.name}] Unexpected content-type: ${contentType}`);
                         }
                         
-                        this.content = await response.json();
+                        const jsonData = await response.json();
+                        
+                        // Validate JSON structure if ContentValidator is available
+                        if (typeof window.ContentValidator !== 'undefined') {
+                            const isValid = ContentValidator.validateAndLog(jsonData, this.moduleId, false);
+                            if (!isValid) {
+                                console.warn(`[${this.constructor.name}] ⚠️ Content validation found issues, but continuing...`);
+                            }
+                        }
+                        
+                        this.content = jsonData;
                         this.contentLoaded = true;
                         console.log(`[${this.constructor.name}] ✅ Content loaded successfully from: ${contentPath}`);
                         return; // Success, exit function
@@ -133,11 +143,31 @@ class BaseLessonPage {
                 // All paths failed, throw last error
                 throw lastError || new Error('All content paths failed');
             } catch (error) {
-                console.error(`[${this.constructor.name}] Error loading content (attempt ${attempt}/${retries}):`, error);
+                const errorDetails = {
+                    moduleId: this.moduleId,
+                    attempt: `${attempt}/${retries}`,
+                    fileName: contentFileName,
+                    errorType: error.name || 'Unknown',
+                    errorMessage: error.message || 'Unknown error',
+                    stack: error.stack
+                };
+                
+                console.error(`[${this.constructor.name}] Error loading content (attempt ${attempt}/${retries}):`, errorDetails);
                 
                 if (attempt === retries) {
                     // Last attempt failed, use fallback
                     console.error(`[${this.constructor.name}] ❌ All attempts failed, using fallback content`);
+                    console.error(`[${this.constructor.name}] Error details:`, {
+                        moduleId: this.moduleId,
+                        fileName: contentFileName,
+                        lastError: error.message,
+                        triedPaths: [
+                            `./content/${contentFileName}`,
+                            `content/${contentFileName}`,
+                            `${basePath}content/${contentFileName}`,
+                            `/content/${contentFileName}`
+                        ]
+                    });
                     this.contentLoaded = false;
                     this.content = this.getFallbackContent();
                 } else {

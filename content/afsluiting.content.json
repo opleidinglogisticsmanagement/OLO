@@ -1,0 +1,25 @@
+{
+  "intro": {
+    "title": "Afsluiting",
+    "subtitle": "Eindbeoordeling & Certificering",
+    "description": "Deze module sluit af met een eindbeoordeling en certificering."
+  },
+  "leerdoelen": {
+    "title": "Leerdoelen",
+    "description": "Na het voltooien van deze module kun je:",
+    "items": [],
+    "interactive": false
+  },
+  "theorie": {
+    "title": "Theorie",
+    "content": [
+      {
+        "type": "paragraph",
+        "text": [
+          "[Theorie content komt hier]"
+        ]
+      }
+    ]
+  }
+}
+

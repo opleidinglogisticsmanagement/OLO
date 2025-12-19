@@ -9,12 +9,25 @@ class ContentRenderer {
     /**
      * Render een array van content items
      * @param {Array} contentItems - Array van content items uit JSON
-     * @param {Object} options - Opties voor rendering (bijv. modal support)
+     * @param {Object} options - Opties voor rendering (bijv. modal support, validate)
      * @returns {string} HTML string
      */
     static renderContentItems(contentItems, options = {}) {
         if (!contentItems || !Array.isArray(contentItems)) {
+            if (options.validate !== false && typeof window.ContentValidator !== 'undefined') {
+                console.warn('[ContentRenderer] renderContentItems: contentItems is not an array', contentItems);
+            }
             return '';
+        }
+        
+        // Validate content items if validator is available and validation is enabled
+        if (options.validate !== false && typeof window.ContentValidator !== 'undefined') {
+            contentItems.forEach((item, index) => {
+                const validation = ContentValidator.validateContentItem(item, `contentItems[${index}]`);
+                if (!validation.valid) {
+                    console.warn(`[ContentRenderer] Validation issues in item ${index}:`, validation.errors);
+                }
+            });
         }
 
         const imageItems = contentItems.filter(item => item.type === 'image');
@@ -264,7 +277,10 @@ class ContentRenderer {
         const { isLastImage = false, enableModal = false } = options;
 
         if (!item.src || !item.alt) {
-            console.warn('Image item missing src or alt:', item);
+            const missing = [];
+            if (!item.src) missing.push('src');
+            if (!item.alt) missing.push('alt');
+            console.warn(`[ContentRenderer] Image item missing required properties: ${missing.join(', ')}`, item);
             return '';
         }
 
@@ -365,7 +381,10 @@ class ContentRenderer {
      */
     static renderUrl(item) {
         if (!item.url || !item.text) {
-            console.warn('URL item missing url or text:', item);
+            const missing = [];
+            if (!item.url) missing.push('url');
+            if (!item.text) missing.push('text');
+            console.warn(`[ContentRenderer] URL item missing required properties: ${missing.join(', ')}`, item);
             return '';
         }
 

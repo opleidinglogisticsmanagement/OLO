@@ -2,6 +2,8 @@
 
 Een moderne, toegankelijke e-learning omgeving ontwikkeld voor HBO onderwijs met focus op duurzaamheid, logistiek en management vakken.
 
+> ⚠️ **Let op:** Zonder actieve Node.js server werken de AI-functies (zoals automatische MC-vragen generatie) niet. Zie [Server Setup](#server-setup-voor-ai-functionaliteit) voor instructies.
+
 ## 🎯 Overzicht
 
 Dit platform biedt een complete leerervaring met:
@@ -601,6 +603,14 @@ De oude structuur gebruikte inline HTML binnen paragrafen. Dit werkt nog steeds,
 
 Basis klasse voor alle week pagina's. Bevat standaard layout, sidebar, header en navigatie.
 
+**Gemeenschappelijke functionaliteit:**
+- ✅ Automatisch laden van JSON content (`loadContent()`)
+- ✅ Fallback content bij fouten (`getFallbackContent()`)
+- ✅ Error state rendering (`renderErrorState()`)
+- ✅ Module intro rendering via `ContentTemplateRenderer`
+- ✅ Automatische JSON validatie via `ContentValidator`
+- ✅ Lifecycle hooks: `afterContentLoaded()`, `afterEventListeners()`
+
 ### ContentRenderer
 
 Rendert content items uit JSON bestanden. Automatisch gebruikt door WeekLessonPage classes:
@@ -683,19 +693,32 @@ Elke week heeft een eigen klasse die `BaseLessonPage` extend:
 class Week1LessonPage extends BaseLessonPage {
     constructor() {
         super('week-1', 'Week 1', 'Titel');
-        this.content = null;
-        this.contentLoaded = false;
+        // content en contentLoaded worden automatisch geïnitialiseerd in BaseLessonPage
     }
     
-    async loadContent() {
-        // Laadt content/week1.content.json
-    }
+    // loadContent() wordt automatisch aangeroepen door BaseLessonPage
+    // getFallbackContent() en renderErrorState() zijn beschikbaar in BaseLessonPage
     
     renderContentSections() {
-        // Gebruikt ContentRenderer voor rendering
+        // Gebruikt ContentRenderer.renderContentItems() voor rendering
+        const theorieContent = this.content.theorie.content 
+            ? ContentRenderer.renderContentItems(this.content.theorie.content, { enableModal: true })
+            : '';
+        return this.contentTemplateRenderer.renderSection(
+            this.content.theorie.title,
+            theorieContent,
+            'book',
+            'purple'
+        );
     }
 }
 ```
+
+**Alle week pagina's (Week1-7 + Afsluiting) gebruiken nu:**
+- ✅ `BaseLessonPage` voor gemeenschappelijke functionaliteit
+- ✅ `ContentRenderer.renderContentItems()` voor content rendering
+- ✅ `ContentTemplateRenderer` voor consistente sectie styling
+- ✅ Automatische JSON validatie via `ContentValidator`
 
 ---
 
@@ -736,67 +759,52 @@ const progress = Utils.storage.get('progress', {});
 
 ---
 
-## ✨ Optionele Verbeteringen
+## ✨ Voltooide Verbeteringen
 
-### 1. Week3-7 migreren naar ContentRenderer
+### ✅ 1. Week3-7 migratie naar ContentRenderer - VOLTOOID
 
-**Huidige situatie:**
-- Week1 en Week2 gebruiken al de nieuwe `ContentRenderer`
-- Week3-7 gebruiken nog de standaard `BaseLessonPage.renderContentSections()` met placeholder content
+**Status:**
+- ✅ Alle week pagina's (Week1-7) gebruiken nu de nieuwe `ContentRenderer`
+- ✅ Alle pagina's gebruiken `ContentRenderer.renderContentItems()` voor consistente rendering
+- ✅ `renderTheorieContentWithSections()` methoden zijn verwijderd en vervangen door direct gebruik van `ContentRenderer`
+- ✅ Consistente fallback naar `paragraphs` voor backward compatibility
 
-**Wanneer uitvoeren:**
-- Wanneer Week3-7 content krijgen
-- Bij het toevoegen van content voor deze pagina's
+**Resultaat:**
+- Consistente rendering logica across alle pagina's
+- Minder duplicate code
+- Eenvoudiger onderhoud
 
-**Hoe te migreren:**
-1. Kopieer de `loadContent()` en `renderContentSections()` methods uit Week2LessonPage
-2. Pas de JSON file path aan naar `week3.content.json`
-3. Voeg `<script src="pages/ContentRenderer.js"></script>` toe aan week3.html
-4. Herhaal voor Week4-7
+### ✅ 2. JSON Schema Validatie - GEÏMPLEMENTEERD
 
-### 2. JSON Schema Validatie
+**Status:**
+- ✅ `ContentValidator.js` geïmplementeerd met volledige validatie voor alle content types
+- ✅ Automatische validatie bij het laden van JSON content
+- ✅ Type checking voor alle content properties
+- ✅ Duidelijke error messages en warnings in console
+- ✅ Non-blocking validatie (blokkeert niet het laden van content)
 
-**Waarom:**
-- Vroege detectie van typos en ontbrekende velden
-- Duidelijke error messages in plaats van stilzwijgend falen
-- Zelf-documenterend (schema toont wat toegestaan is)
+**Gebruik:**
+Validatie gebeurt automatisch bij het laden van content. Controleer de browser console voor:
+- ✅ `[ContentValidator] ✅ Content structure valid` - Success
+- ⚠️ `[ContentValidator] ⚠️ Validation warnings` - Warnings (niet kritiek)
+- ❌ `[ContentValidator] ❌ Validation errors` - Errors (moeten opgelost worden)
 
-**Wanneer uitvoeren:**
-- Bij schaalvergroting (meerdere content creators)
-- Wanneer je merkt dat er veel fouten zijn in JSON bestanden
-- Voor automatisering (CI/CD checks)
+**Validatie omvat:**
+- Content item types (paragraph, image, url, accordion, tabs, etc.)
+- Required properties per type
+- Type checking (arrays, strings, numbers, booleans)
+- Volledige JSON structuur (intro, leerdoelen, theorie, video, mcVragen)
 
-**Minimale implementatie:**
-Voeg eenvoudige runtime validatie toe aan `ContentRenderer`:
-```javascript
-static renderContentItems(contentItems, options = {}) {
-    if (!contentItems || !Array.isArray(contentItems)) {
-        console.warn('ContentRenderer: contentItems is not an array');
-        return '';
-    }
-    
-    return contentItems.map(item => {
-        if (!item.type) {
-            console.error('ContentRenderer: item missing type', item);
-            return '';
-        }
-        // ... rest van rendering
-    });
-}
-```
+### ✅ 3. Content Migratie - VOLTOOID
 
-### 3. Bestaande Content Migreren naar Nieuwe Structuur
-
-**Huidige situatie:**
-Sommige content gebruikt nog inline HTML binnen paragraph items.
-
-**Wanneer uitvoeren:**
-- Bij grote content updates
-- Wanneer nieuwe content wordt toegevoegd (gebruik dan direct nieuwe structuur)
-- Voor nieuwe pagina's (gebruik vanaf het begin de nieuwe structuur)
+**Status:**
+- ✅ Alle week pagina's gebruiken de nieuwe content structuur met `content` array
+- ✅ Fallback naar `paragraphs` blijft behouden voor backward compatibility
+- ✅ Consistente rendering via `ContentRenderer.renderContentItems()`
 
 **Praktisch advies:**
-- ✅ Gebruik nieuwe content types voor **nieuwe** content (Week3+)
+- ✅ Gebruik nieuwe content types voor **nieuwe** content
+- ✅ Bestaande content met `paragraphs` blijft werken (backward compatible)
 - ✅ Laat bestaande content (Week1-2) zoals het is (werkt prima)
 - ✅ Migreer bestaande content alleen bij grote updates
 

@@ -65,7 +65,12 @@ class Week4LessonPage extends BaseLessonPage {
         }
 
         // Render theorie sectie
-        const theorieContent = this.renderTheorieContentWithSections();
+        const theorieContent = this.content.theorie.content 
+            ? ContentRenderer.renderContentItems(this.content.theorie.content, { enableModal: true })
+            : (this.content.theorie.paragraphs ? this.content.theorie.paragraphs.map(paragraph => `
+                <p class="text-gray-700 dark:text-gray-300 mb-4">${paragraph}</p>
+            `).join('') : '');
+        const theorieTitle = this.content.theorie?.title || 'Theorie';
 
         // Build sections - if interactive checklist, we need to render it differently
         let leerdoelenSection = '';
@@ -86,7 +91,7 @@ class Week4LessonPage extends BaseLessonPage {
         return `
             ${leerdoelenSection}
             ${this.contentTemplateRenderer.renderSection(
-                this.content.theorie.title,
+                theorieTitle,
                 theorieContent,
                 'book',
                 'purple'
@@ -95,51 +100,6 @@ class Week4LessonPage extends BaseLessonPage {
         `;
     }
 
-    /**
-     * Render theorie content met sectie IDs voor navigatie
-     */
-    renderTheorieContentWithSections() {
-        if (!this.content || !this.content.theorie || !this.content.theorie.content) {
-            return '';
-        }
-        
-        const content = this.content.theorie.content;
-        let html = '';
-        let currentSection = null;
-        let sectionContent = [];
-        
-        // Process content items and group into sections based on heading items with IDs
-        for (let i = 0; i < content.length; i++) {
-            const item = content[i];
-            
-            // Check if this is a heading with an ID (section marker)
-            if (item.type === 'heading' && item.id) {
-                // Close previous section
-                if (currentSection && sectionContent.length > 0) {
-                    html += ContentRenderer.renderContentItems(sectionContent, { enableModal: true });
-                    sectionContent = [];
-                }
-                // Start new section - render the heading (which has the ID)
-                html += ContentRenderer.renderContentItems([item], { enableModal: true });
-                currentSection = item.id;
-            } else {
-                // Add item to current section (or render intro content before first section)
-                if (currentSection) {
-                    sectionContent.push(item);
-                } else {
-                    // This is intro content before first section, render it directly
-                    html += ContentRenderer.renderContentItems([item], { enableModal: true });
-                }
-            }
-        }
-        
-        // Close last section if there is one
-        if (currentSection && sectionContent.length > 0) {
-            html += ContentRenderer.renderContentItems(sectionContent, { enableModal: true });
-        }
-        
-        return html;
-    }
 
     // renderErrorState() is now in BaseLessonPage
 

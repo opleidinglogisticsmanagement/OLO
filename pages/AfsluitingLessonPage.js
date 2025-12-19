@@ -98,11 +98,12 @@ class AfsluitingLessonPage extends BaseLessonPage {
             );
         }
 
+        // Add MC questions section if available
+        if (this.content.mcVragen) {
+            sections += this.renderMCQuestionsSection();
+        }
+
         return sections;
-
-            ${this.content.mcVragen ? this.renderMCQuestionsSection() : ''}
-
-        `;
     }
 
     /**

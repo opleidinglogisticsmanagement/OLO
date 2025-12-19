@@ -93,7 +93,7 @@ class Week6LessonPage extends BaseLessonPage {
         return `
             ${leerdoelenSection}
             ${this.contentTemplateRenderer.renderSection(
-                this.content.theorie.title,
+                theorieTitle,
                 theorieContent,
                 'book',
                 'purple'

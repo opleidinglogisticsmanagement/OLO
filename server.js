@@ -323,23 +323,32 @@ ${theoryContent.substring(0, 8000)}`; // Limit to 8000 chars
         // Get cached available models (sorted with flash first)
         let availableModels = await getAvailableModels();
         
-        // Filter out preview/experimental models that might not be stable
-        // But keep stable models like gemini-1.5-flash, gemini-flash-latest, etc.
+        // Filter out preview/experimental/2.0 models that might not be stable
+        // Only allow known stable models: gemini-1.5-flash, gemini-1.5-pro
         const stableModels = availableModels.filter(m => {
-            // Exclude preview models (but allow -latest models)
-            if (m.includes('-preview-') || m.includes('-experimental-')) {
+            const modelLower = m.toLowerCase();
+            // Exclude preview, experimental, and 2.0 models
+            if (modelLower.includes('-preview') || 
+                modelLower.includes('-experimental') ||
+                modelLower.includes('2.5-flash-preview') ||
+                modelLower.includes('2.5-pro-preview') ||
+                modelLower.includes('2.0-flash') ||  // Exclude 2.0 models (quota issues)
+                modelLower.includes('2.0-pro') ||
+                modelLower.includes('lite-preview') ||
+                modelLower.includes('embedding')) {
                 return false;
             }
-            // Exclude specific problematic preview models
-            if (m.includes('lite-preview') || m.includes('2.5-flash-lite-preview')) {
-                return false;
-            }
-            // Prefer models with known stable names
-            if (m.includes('1.5-flash') || m.includes('1.5-pro') || m.includes('-latest') || m.includes('gemini-pro')) {
+            // Only allow stable 1.5 models (explicitly exclude -latest variants that might not exist)
+            // Allow gemini-1.5-flash and gemini-1.5-pro (with or without -latest suffix)
+            if (modelLower.includes('1.5-flash') || modelLower.includes('1.5-pro')) {
+                // But exclude if it's a problematic variant
+                if (modelLower.includes('gemini-flash-latest') && !modelLower.includes('1.5')) {
+                    return false; // Exclude gemini-flash-latest (not gemini-1.5-flash-latest)
+                }
                 return true;
             }
-            // Allow other models that don't have preview in the name
-            return !m.includes('preview') && !m.includes('experimental');
+            // Exclude everything else
+            return false;
         });
         
         // If no stable models in cache, try fallback models first
@@ -358,11 +367,10 @@ ${theoryContent.substring(0, 8000)}`; // Limit to 8000 chars
                 ? filteredModels.slice(0, 3)
                 : availableModels.slice(0, 3); // Last resort: try any model
         } else {
-            // No models in cache at all, use known working models
+            // No models in cache at all, use known working models (only stable 1.5 models)
             models = [
                 'gemini-1.5-flash',  // Fastest model - try first
-                'gemini-1.5-pro',    // Fallback if flash fails
-                'gemini-pro'          // Last resort
+                'gemini-1.5-pro'     // Fallback if flash fails
             ];
         }
         
@@ -392,6 +400,12 @@ ${theoryContent.substring(0, 8000)}`; // Limit to 8000 chars
                     modelCacheInvalid = true;
                 }
                 
+                // If quota exceeded (429), provide helpful error message
+                if (errorMsg.includes('429') || errorMsg.includes('quota') || errorMsg.includes('Quota')) {
+                    console.error(`[Gemini Proxy] ⚠️ Quota exceeded for model ${modelName}`);
+                    // Don't mark cache as invalid for quota errors, just try next model
+                }
+                
                 lastError = {
                     model: modelName,
                     message: errorMsg,
@@ -407,16 +421,20 @@ ${theoryContent.substring(0, 8000)}`; // Limit to 8000 chars
             modelCacheTimestamp = null;
             const freshModels = await fetchAndCacheAvailableModels();
             
-            // Try known working models first
+            // Try known working models first (only stable 1.5 models)
             const knownWorkingModels = [
                 'gemini-1.5-flash',
-                'gemini-1.5-pro',
-                'gemini-pro'
+                'gemini-1.5-pro'
             ];
             
-            // Also try fresh models that look stable
+            // Also try fresh models that look stable (only 1.5 models, exclude -latest variants)
             const freshStableModels = freshModels.filter(m => {
-                if (m.includes('1.5-flash') || m.includes('1.5-pro') || m.includes('-latest')) {
+                const modelLower = m.toLowerCase();
+                // Only allow 1.5 models, exclude 2.0, preview, experimental
+                if ((modelLower.includes('1.5-flash') || modelLower.includes('1.5-pro')) &&
+                    !modelLower.includes('2.0') &&
+                    !modelLower.includes('-preview') &&
+                    !modelLower.includes('-experimental')) {
                     return true;
                 }
                 return !m.includes('-preview-') && !m.includes('lite-preview');
@@ -443,9 +461,20 @@ ${theoryContent.substring(0, 8000)}`; // Limit to 8000 chars
         
         if (!responseText) {
             console.error('[Gemini Proxy] All models failed');
+            
+            // Provide more helpful error messages for common issues
+            let errorMessage = lastError?.message || 'Could not generate content';
+            if (lastError?.message) {
+                if (lastError.message.includes('429') || lastError.message.includes('quota') || lastError.message.includes('Quota')) {
+                    errorMessage = 'API quota exceeded. Please check your Google AI Studio quota limits or wait before trying again.';
+                } else if (lastError.message.includes('404') || lastError.message.includes('not found')) {
+                    errorMessage = 'Model not found. The selected AI model is not available. Please try again later.';
+                }
+            }
+            
             return res.status(502).json({
                 error: 'All Gemini models failed',
-                message: lastError?.message || 'Could not generate content',
+                message: errorMessage,
                 details: lastError
             });
         }

@@ -7,7 +7,9 @@
   "leerdoelen": {
     "title": "Leerdoelen",
     "description": "Na het voltooien van deze module kun je:",
-    "items": [],
+    "items": [
+      "De student is als individu of onderdeel van een duo in staat om een gefundeerd onderzoeksplan op te stellen waarin een knowledge gap wordt beschreven en gemaakte keuzes in de onderzoeksstrategie kunnen worden onderbouwd aan de hand van een vraagstuk binnen de logistieke context."
+    ],
     "interactive": false
   },
   "theorie": {

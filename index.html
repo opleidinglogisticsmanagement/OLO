@@ -337,10 +337,7 @@
                 margin-top: 1.5rem;
             }
             
-            /* Better padding for sections */
-            section {
-                margin-bottom: 1rem;
-            }
+            /* Better padding for sections - removed to avoid conflicts with #main-content section rules */
             
             /* Ensure text wraps properly */
             h1, h2, h3 {
@@ -436,6 +433,89 @@
             /* Ensure content stays above background during transitions */
             position: relative;
             z-index: 1;
+            /* Prevent overflow */
+            width: 100%;
+            max-width: 100%;
+            box-sizing: border-box;
+            overflow-x: hidden;
+        }
+        
+        /* Ensure all sections within main-content respect width constraints and have spacing */
+        #main-content section {
+            width: 100% !important;
+            max-width: 100% !important;
+            box-sizing: border-box !important;
+            margin-bottom: 1.5rem !important;
+        }
+        
+        @media (min-width: 640px) {
+            #main-content section {
+                margin-bottom: 2rem !important;
+            }
+        }
+        
+        /* Ensure sticky sections also have margin-bottom (sticky positioning can sometimes reset margins) */
+        /* Chrome-specific fix: sticky elements need explicit margin-bottom */
+        #main-content section.sticky {
+            margin-bottom: 1.5rem !important;
+        }
+        
+        @media (min-width: 640px) {
+            #main-content section.sticky {
+                margin-bottom: 2rem !important;
+            }
+        }
+        
+        /* Consistent spacing for all sections in article */
+        /* Override space-y-* to ensure consistent spacing between all sections */
+        #main-content article.space-y-6 > * + * {
+            margin-top: 1.5rem !important;
+        }
+        
+        #main-content article.space-y-8 > * + * {
+            margin-top: 2rem !important;
+        }
+        
+        /* Chrome fix: Ensure first sticky section wrapper in article has proper spacing */
+        /* The sticky section is wrapped in a div to work around Chrome's margin-bottom bug */
+        #main-content article .intro-section-wrapper {
+            margin-bottom: 0 !important;
+            margin-top: 0 !important;
+        }
+        
+        /* First section after intro wrapper should have consistent spacing */
+        #main-content article .intro-section-wrapper + section,
+        #main-content article .intro-section-wrapper + div > section {
+            margin-top: 1.5rem !important;
+        }
+        
+        @media (min-width: 640px) {
+            #main-content article .intro-section-wrapper + section,
+            #main-content article .intro-section-wrapper + div > section {
+                margin-top: 2rem !important;
+            }
+        }
+        
+        /* Ensure all sections have consistent bottom margin */
+        #main-content article section {
+            margin-bottom: 0 !important;
+        }
+        
+        /* Except for the last section */
+        #main-content article section:last-child {
+            margin-bottom: 0 !important;
+        }
+        
+        /* Ensure max-w-4xl containers respect width constraints but keep max-width limit */
+        #main-content .max-w-4xl {
+            max-width: 56rem !important; /* Keep Tailwind's max-w-4xl value (896px) */
+            box-sizing: border-box !important;
+        }
+        
+        /* Ensure article doesn't break out of max-w-4xl container */
+        #main-content article {
+            max-width: 100% !important;
+            box-sizing: border-box !important;
         }
         
         .dark #main-content {

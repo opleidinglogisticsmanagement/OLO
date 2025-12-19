@@ -27,90 +27,72 @@ class Week5LessonPage extends BaseLessonPage {
     // loadContent(), getFallbackContent(), and renderErrorState() are now in BaseLessonPage
 
 
-    /**
-     * Render module introductie met content uit JSON
-     */
-    renderModuleIntro() {
-        if (!this.content) {
-            return this.renderErrorState();
-        }
-
-        return `
-            <section class="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-4 sm:p-6 sm:pr-[70px] hover-lift transition-colors duration-200 sticky top-[56px] sm:top-[64px] z-30 mb-6 sm:mb-8">
-                <div class="flex flex-col sm:flex-row items-start">
-                    <div class="w-10 h-10 sm:w-12 sm:h-12 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center flex-shrink-0 mb-3 sm:mb-0 sm:mr-4">
-                        <i class="fas fa-book text-blue-600 dark:text-blue-400 text-lg"></i>
-                    </div>
-                    <div class="flex-1 min-w-0 w-full sm:w-auto">
-                        <h1 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">${this.content.intro.title}: ${this.content.intro.subtitle}</h1>
-                        <p class="text-gray-600 dark:text-gray-300 mb-4">${this.content.intro.description}</p>
-                    </div>
-                </div>
-            </section>
-        `;
-    }
+    // renderModuleIntro() is now handled by BaseLessonPage using ContentTemplateRenderer
 
     /**
      * Render content secties met content uit JSON
+     * Uses ContentTemplateRenderer for consistent styling
      */
     renderContentSections() {
         if (!this.content) {
             return this.renderErrorState();
         }
 
+        // Render leerdoelen sectie (with support for interactive checklist)
+        let leerdoelenContent = '';
+        if (this.content.leerdoelen.interactive && this.content.leerdoelen.items && this.content.leerdoelen.items.length > 0) {
+            // Use interactive checklist
+            leerdoelenContent = ContentRenderer.renderLearningObjectivesChecklist({
+                title: this.content.leerdoelen.title,
+                description: this.content.leerdoelen.description,
+                items: this.content.leerdoelen.items,
+                storageKey: 'week5-learning-objectives'
+            });
+        } else {
+            // Use standard list
+            leerdoelenContent = `
+                ${this.content.leerdoelen.description ? `<p class="text-gray-600 dark:text-gray-300 mb-4">${this.content.leerdoelen.description}</p>` : ''}
+                ${this.content.leerdoelen.items && this.content.leerdoelen.items.length > 0 ? `
+                    <ul class="space-y-2">
+                        ${this.content.leerdoelen.items.map(item => `
+                            <li class="flex items-start space-x-3">
+                                <i class="fas fa-check text-green-500 dark:text-green-400 mt-1"></i>
+                                <span class="text-gray-700 dark:text-gray-300">${item}</span>
+                            </li>
+                        `).join('')}
+                    </ul>
+                ` : ''}
+            `;
+        }
+
+        // Render theorie sectie
+        const theorieContent = this.renderTheorieContentWithSections();
+
+        // Build sections - if interactive checklist, we need to render it differently
+        let leerdoelenSection = '';
+        if (this.content.leerdoelen.interactive && this.content.leerdoelen.items && this.content.leerdoelen.items.length > 0) {
+            // Interactive checklist already includes the section wrapper, so we use it directly
+            leerdoelenSection = leerdoelenContent;
+        } else {
+            // Use ContentTemplateRenderer for standard section
+            leerdoelenSection = this.contentTemplateRenderer.renderSection(
+                this.content.leerdoelen.title,
+                leerdoelenContent,
+                'bullseye',
+                'green',
+                { headingSize: 'text-lg sm:text-xl' }
+            );
+        }
+
         return `
-            <!-- Leerdoelen Sectie -->
-            <section class="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-4 sm:p-6 sm:pr-[70px] hover-lift transition-colors duration-200">
-                <div class="flex flex-col sm:flex-row items-start">
-                    <div class="w-10 h-10 sm:w-12 sm:h-12 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center flex-shrink-0 mb-3 sm:mb-0 sm:mr-4">
-                        <i class="fas fa-bullseye text-green-600 dark:text-green-400 text-lg"></i>
-                    </div>
-                    <div class="flex-1 min-w-0 w-full sm:w-auto">
-                        ${this.content.leerdoelen.interactive && this.content.leerdoelen.items && this.content.leerdoelen.items.length > 0
-                            ? ContentRenderer.renderLearningObjectivesChecklist({
-                                title: this.content.leerdoelen.title,
-                                description: this.content.leerdoelen.description,
-                                items: this.content.leerdoelen.items,
-                                storageKey: 'week5-learning-objectives'
-                            })
-                            : `
-                                <h2 class="text-lg sm:text-xl font-semibold text-gray-900 dark:text-white mb-4">${this.content.leerdoelen.title}</h2>
-                                <div class="prose max-w-none">
-                                    ${this.content.leerdoelen.description ? `<p class="text-gray-600 dark:text-gray-300 mb-4">${this.content.leerdoelen.description}</p>` : ''}
-                                    ${this.content.leerdoelen.items && this.content.leerdoelen.items.length > 0 ? `
-                                        <ul class="space-y-2">
-                                            ${this.content.leerdoelen.items.map(item => `
-                                                <li class="flex items-start space-x-3">
-                                                    <i class="fas fa-check text-green-500 dark:text-green-400 mt-1"></i>
-                                                    <span class="text-gray-700 dark:text-gray-300">${item}</span>
-                                                </li>
-                                            `).join('')}
-                                        </ul>
-                                    ` : ''}
-                                </div>
-                            `
-                        }
-                    </div>
-                </div>
-            </section>
-
-            <!-- Theorie Sectie met subsecties -->
-            <section class="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-4 sm:p-6 sm:pr-[70px] hover-lift transition-colors duration-200">
-                <div class="flex flex-col sm:flex-row items-start">
-                    <div class="w-10 h-10 sm:w-12 sm:h-12 bg-purple-100 dark:bg-purple-900/30 rounded-lg flex items-center justify-center flex-shrink-0 mb-3 sm:mb-0 sm:mr-4">
-                        <i class="fas fa-book text-purple-600 dark:text-purple-400 text-lg"></i>
-                    </div>
-                    <div class="flex-1 min-w-0 w-full sm:w-auto">
-                        <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">${this.content.theorie.title}</h2>
-                        <div class="prose max-w-none">
-                            ${this.renderTheorieContentWithSections()}
-                        </div>
-                    </div>
-                </div>
-            </section>
-
+            ${leerdoelenSection}
+            ${this.contentTemplateRenderer.renderSection(
+                this.content.theorie.title,
+                theorieContent,
+                'book',
+                'purple'
+            )}
             ${this.content.mcVragen ? this.renderMCQuestionsSection() : ''}
-
         `;
     }
 
@@ -179,30 +161,29 @@ class Week5LessonPage extends BaseLessonPage {
         }
         
         // Anders toon een knop om de vraag te genereren (bespaart API tokens)
-        return `
-            <section class="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-4 sm:p-6 sm:pr-[70px] hover-lift mt-8 transition-colors duration-200">
-                <div class="flex flex-col sm:flex-row items-start">
-                    <div class="w-10 h-10 sm:w-12 sm:h-12 bg-indigo-100 dark:bg-indigo-900/30 rounded-lg flex items-center justify-center flex-shrink-0 mb-3 sm:mb-0 sm:mr-4">
-                        <i class="fas fa-question-circle text-indigo-600 dark:text-indigo-400 text-lg"></i>
-                    </div>
-                    <div class="flex-1 min-w-0 w-full sm:w-auto">
-                        <h2 class="text-lg sm:text-xl font-semibold text-gray-900 dark:text-white mb-4">${mcConfig.title || 'Test je kennis'}</h2>
-                        <div id="mc-questions-container" class="space-y-6">
-                            <div class="border border-gray-200 dark:border-gray-700 rounded-lg p-6 bg-gray-50 dark:bg-gray-900/50 text-center">
-                                <p class="text-gray-600 dark:text-gray-300 mb-4">Klik op de knop hieronder om een AI-gegenereerde vraag te maken op basis van de theorie.</p>
-                                <button 
-                                    id="generate-mc-question-btn" 
-                                    class="px-6 py-3 bg-indigo-600 dark:bg-indigo-700 text-white rounded-lg hover:bg-indigo-700 dark:hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-400 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition-colors font-medium flex items-center justify-center space-x-2 mx-auto"
-                                    aria-label="Genereer MC vraag">
-                                    <i class="fas fa-magic"></i>
-                                    <span>Genereer vraag</span>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
+        // Use ContentTemplateRenderer for consistent styling
+        const mcContent = `
+            <div id="mc-questions-container" class="space-y-6">
+                <div class="border border-gray-200 dark:border-gray-700 rounded-lg p-6 bg-gray-50 dark:bg-gray-900/50 text-center">
+                    <p class="text-gray-600 dark:text-gray-300 mb-4">Klik op de knop hieronder om een AI-gegenereerde vraag te maken op basis van de theorie.</p>
+                    <button 
+                        id="generate-mc-question-btn" 
+                        class="px-6 py-3 bg-indigo-600 dark:bg-indigo-700 text-white rounded-lg hover:bg-indigo-700 dark:hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-400 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition-colors font-medium flex items-center justify-center space-x-2 mx-auto"
+                        aria-label="Genereer MC vraag">
+                        <i class="fas fa-magic"></i>
+                        <span>Genereer vraag</span>
+                    </button>
                 </div>
-            </section>
+            </div>
         `;
+        
+        return this.contentTemplateRenderer.renderSection(
+            mcConfig.title || 'Test je kennis',
+            mcContent,
+            'question-circle',
+            'indigo',
+            { marginTop: 'mt-8', headingSize: 'text-lg sm:text-xl' }
+        );
     }
 
     /**

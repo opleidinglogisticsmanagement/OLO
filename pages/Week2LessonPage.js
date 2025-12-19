@@ -26,134 +26,106 @@ class Week2LessonPage extends BaseLessonPage {
 
     // loadContent(), getFallbackContent(), and renderErrorState() are now in BaseLessonPage
 
-    /**
-     * Render module introductie met content uit JSON
-     */
-    renderModuleIntro() {
-        if (!this.content) {
-            return this.renderErrorState();
-        }
-
-        return `
-            <section class="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-4 sm:p-6 sm:pr-[70px] hover-lift transition-colors duration-200 sticky top-[56px] sm:top-[64px] z-30 mb-6 sm:mb-8">
-                <div class="flex flex-col sm:flex-row items-start">
-                    <div class="w-10 h-10 sm:w-12 sm:h-12 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center flex-shrink-0 mb-3 sm:mb-0 sm:mr-4">
-                        <i class="fas fa-book text-blue-600 dark:text-blue-400 text-lg"></i>
-                    </div>
-                    <div class="flex-1 min-w-0 w-full sm:w-auto">
-                        <h1 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">${this.content.intro.title}: ${this.content.intro.subtitle}</h1>
-                        <p class="text-gray-600 dark:text-gray-300 mb-4">${this.content.intro.description}</p>
-                    </div>
-                </div>
-            </section>
-        `;
-    }
+    // renderModuleIntro() is now handled by BaseLessonPage using ContentTemplateRenderer
 
     /**
      * Render content secties met content uit JSON
+     * Uses ContentTemplateRenderer for consistent styling
      */
     renderContentSections() {
         if (!this.content) {
             return this.renderErrorState();
         }
 
-        return `
-            <!-- Leerdoelen Sectie -->
-            <section class="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-4 sm:p-6 sm:pr-[70px] hover-lift transition-colors duration-200">
-                <div class="flex flex-col sm:flex-row items-start">
-                    <div class="w-10 h-10 sm:w-12 sm:h-12 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center flex-shrink-0 mb-3 sm:mb-0 sm:mr-4">
-                        <i class="fas fa-bullseye text-green-600 dark:text-green-400 text-lg"></i>
-                    </div>
-                    <div class="flex-1 min-w-0 w-full sm:w-auto">
-                        <h2 class="text-lg sm:text-xl font-semibold text-gray-900 dark:text-white mb-4">${this.content.leerdoelen.title}</h2>
-                        <div class="prose max-w-none">
-                            ${this.content.leerdoelen.description ? `<p class="text-gray-600 dark:text-gray-300 mb-4">${this.content.leerdoelen.description}</p>` : ''}
-                                    ${this.content.leerdoelen.items && this.content.leerdoelen.items.length > 0 ? `
-                                        <ul class="space-y-2">
-                                            ${this.content.leerdoelen.items.map(item => `
-                                                <li class="flex items-start space-x-3">
-                                                    <i class="fas fa-check text-green-500 dark:text-green-400 mt-1"></i>
-                                                    <span class="text-gray-700 dark:text-gray-300">${item}</span>
-                                                </li>
-                                            `).join('')}
-                                        </ul>
-                                    ` : ''}
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Theorie Sectie met subsecties -->
-            <section class="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-4 sm:p-6 sm:pr-[70px] hover-lift transition-colors duration-200">
-                <div class="flex flex-col sm:flex-row items-start">
-                    <div class="w-10 h-10 sm:w-12 sm:h-12 bg-purple-100 dark:bg-purple-900/30 rounded-lg flex items-center justify-center flex-shrink-0 mb-3 sm:mb-0 sm:mr-4">
-                        <i class="fas fa-book text-purple-600 dark:text-purple-400 text-lg"></i>
-                    </div>
-                    <div class="flex-1 min-w-0 w-full sm:w-auto">
-                        <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">${this.content.theorie.title}</h2>
-                        <div class="prose max-w-none">
-                            ${this.renderTheorieContentWithSections()}
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            ${this.content.mcVragen ? this.renderMCQuestionsSection() : ''}
-
-            ${this.content.video.url ? `
-            <!-- Video Sectie -->
-            <section class="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-4 sm:p-6 sm:pr-[70px] hover-lift transition-colors duration-200">
-                <div class="flex flex-col sm:flex-row items-start">
-                    <div class="w-10 h-10 sm:w-12 sm:h-12 bg-red-100 dark:bg-red-900/30 rounded-lg flex items-center justify-center flex-shrink-0 mb-3 sm:mb-0 sm:mr-4">
-                        <i class="fas fa-play text-red-600 dark:text-red-400 text-lg"></i>
-                    </div>
-                    <div class="flex-1 min-w-0 w-full sm:w-auto">
-                        <h2 class="text-lg sm:text-xl font-semibold text-gray-900 dark:text-white mb-4">${this.content.video.title}</h2>
-                        <div class="rounded-lg overflow-hidden mb-4 relative bg-black dark:bg-black w-full video-responsive-container" style="max-width: 100%;">
-                            <div class="video-responsive-wrapper" style="position: relative; width: 100%; padding-bottom: 56.25%; height: 0; overflow: hidden; background-color: #000;">
-                                <iframe 
-                                    src="${this.content.video.url}" 
-                                    title="Video player" 
-                                    frameborder="0" 
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                                    referrerpolicy="strict-origin-when-cross-origin"
-                                    allowfullscreen
-                                    class="video-responsive-iframe"
-                                    style="position: absolute !important; top: 0 !important; left: 0 !important; width: 100% !important; height: 100% !important; border: 0 !important; margin: 0 !important; padding: 0 !important; background-color: #000;"
-                                    loading="lazy">
-                                </iframe>
-                            </div>
-                        </div>
-                        <style>
-                            .video-responsive-container iframe.video-responsive-iframe {
-                                position: absolute !important;
-                                top: 0 !important;
-                                left: 0 !important;
-                                width: 100% !important;
-                                height: 100% !important;
-                                border: 0 !important;
-                                margin: 0 !important;
-                                padding: 0 !important;
-                            }
-                            .video-responsive-wrapper {
-                                position: relative !important;
-                                width: 100% !important;
-                                padding-bottom: 56.25% !important;
-                                height: 0 !important;
-                                overflow: hidden !important;
-                            }
-                        </style>
-                        ${this.content.video.info ? `
-                            <p class="text-sm text-gray-600 dark:text-gray-300">
-                                <i class="fas fa-info-circle mr-1"></i>
-                                ${this.content.video.info}
-                            </p>
-                        ` : ''}
-                    </div>
-                </div>
-            </section>
+        // Render leerdoelen sectie
+        const leerdoelenContent = `
+            ${this.content.leerdoelen.description ? `<p class="text-gray-600 dark:text-gray-300 mb-4">${this.content.leerdoelen.description}</p>` : ''}
+            ${this.content.leerdoelen.items && this.content.leerdoelen.items.length > 0 ? `
+                <ul class="space-y-2">
+                    ${this.content.leerdoelen.items.map(item => `
+                        <li class="flex items-start space-x-3">
+                            <i class="fas fa-check text-green-500 dark:text-green-400 mt-1"></i>
+                            <span class="text-gray-700 dark:text-gray-300">${item}</span>
+                        </li>
+                    `).join('')}
+                </ul>
             ` : ''}
+        `;
 
+        // Render theorie sectie
+        const theorieContent = this.renderTheorieContentWithSections();
+        const theorieTitle = this.content.theorie?.title || 'Theorie';
+
+        // Render video sectie (if available)
+        let videoSection = '';
+        if (this.content.video?.url) {
+            const videoContent = `
+                <div class="rounded-lg overflow-hidden mb-4 relative bg-black dark:bg-black w-full video-responsive-container" style="max-width: 100%;">
+                    <div class="video-responsive-wrapper" style="position: relative; width: 100%; padding-bottom: 56.25%; height: 0; overflow: hidden; background-color: #000;">
+                        <iframe 
+                            src="${this.content.video.url}" 
+                            title="Video player" 
+                            frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                            referrerpolicy="strict-origin-when-cross-origin"
+                            allowfullscreen
+                            class="video-responsive-iframe"
+                            style="position: absolute !important; top: 0 !important; left: 0 !important; width: 100% !important; height: 100% !important; border: 0 !important; margin: 0 !important; padding: 0 !important; background-color: #000;"
+                            loading="lazy">
+                        </iframe>
+                    </div>
+                </div>
+                <style>
+                    .video-responsive-container iframe.video-responsive-iframe {
+                        position: absolute !important;
+                        top: 0 !important;
+                        left: 0 !important;
+                        width: 100% !important;
+                        height: 100% !important;
+                        border: 0 !important;
+                        margin: 0 !important;
+                        padding: 0 !important;
+                    }
+                    .video-responsive-wrapper {
+                        position: relative !important;
+                        width: 100% !important;
+                        padding-bottom: 56.25% !important;
+                        height: 0 !important;
+                        overflow: hidden !important;
+                    }
+                </style>
+                ${this.content.video.info ? `
+                    <p class="text-sm text-gray-600 dark:text-gray-300">
+                        <i class="fas fa-info-circle mr-1"></i>
+                        ${this.content.video.info}
+                    </p>
+                ` : ''}
+            `;
+            videoSection = this.contentTemplateRenderer.renderSection(
+                this.content.video.title,
+                videoContent,
+                'play',
+                'red',
+                { headingSize: 'text-lg sm:text-xl' }
+            );
+        }
+
+        return `
+            ${this.contentTemplateRenderer.renderSection(
+                this.content.leerdoelen.title,
+                leerdoelenContent,
+                'bullseye',
+                'green',
+                { headingSize: 'text-lg sm:text-xl' }
+            )}
+            ${this.contentTemplateRenderer.renderSection(
+                theorieTitle,
+                theorieContent,
+                'book',
+                'purple'
+            )}
+            ${this.content.mcVragen ? this.renderMCQuestionsSection() : ''}
+            ${videoSection}
         `;
     }
     
@@ -220,30 +192,29 @@ class Week2LessonPage extends BaseLessonPage {
         }
         
         // Anders toon een knop om de vraag te genereren (bespaart API tokens)
-        return `
-            <section class="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-4 sm:p-6 sm:pr-[70px] hover-lift mt-8 transition-colors duration-200">
-                <div class="flex flex-col sm:flex-row items-start">
-                    <div class="w-10 h-10 sm:w-12 sm:h-12 bg-indigo-100 dark:bg-indigo-900/30 rounded-lg flex items-center justify-center flex-shrink-0 mb-3 sm:mb-0 sm:mr-4">
-                        <i class="fas fa-question-circle text-indigo-600 dark:text-indigo-400 text-lg"></i>
-                    </div>
-                    <div class="flex-1 min-w-0 w-full sm:w-auto">
-                        <h2 class="text-lg sm:text-xl font-semibold text-gray-900 dark:text-white mb-4">${mcConfig.title || 'Test je kennis'}</h2>
-                        <div id="mc-questions-container" class="space-y-6">
-                            <div class="border border-gray-200 dark:border-gray-700 rounded-lg p-6 bg-gray-50 dark:bg-gray-900/50 text-center">
-                                <p class="text-gray-600 dark:text-gray-300 mb-4">Klik op de knop hieronder om een AI-gegenereerde vraag te maken op basis van de theorie.</p>
-                                <button 
-                                    id="generate-mc-question-btn" 
-                                    class="px-6 py-3 bg-indigo-600 dark:bg-indigo-700 text-white rounded-lg hover:bg-indigo-700 dark:hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-400 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition-colors font-medium flex items-center justify-center space-x-2 mx-auto"
-                                    aria-label="Genereer MC vraag">
-                                    <i class="fas fa-magic"></i>
-                                    <span>Genereer vraag</span>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
+        // Use ContentTemplateRenderer for consistent styling
+        const mcContent = `
+            <div id="mc-questions-container" class="space-y-6">
+                <div class="border border-gray-200 dark:border-gray-700 rounded-lg p-6 bg-gray-50 dark:bg-gray-900/50 text-center">
+                    <p class="text-gray-600 dark:text-gray-300 mb-4">Klik op de knop hieronder om een AI-gegenereerde vraag te maken op basis van de theorie.</p>
+                    <button 
+                        id="generate-mc-question-btn" 
+                        class="px-6 py-3 bg-indigo-600 dark:bg-indigo-700 text-white rounded-lg hover:bg-indigo-700 dark:hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-400 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition-colors font-medium flex items-center justify-center space-x-2 mx-auto"
+                        aria-label="Genereer MC vraag">
+                        <i class="fas fa-magic"></i>
+                        <span>Genereer vraag</span>
+                    </button>
                 </div>
-            </section>
+            </div>
         `;
+        
+        return this.contentTemplateRenderer.renderSection(
+            mcConfig.title || 'Test je kennis',
+            mcContent,
+            'question-circle',
+            'indigo',
+            { marginTop: 'mt-8', headingSize: 'text-lg sm:text-xl' }
+        );
     }
 
     /**

@@ -252,12 +252,13 @@ class BaseLessonPage {
     renderContent() {
         // Return only the inner content, not the main wrapper
         // The main wrapper is already in index.html
+        const contentSections = this.renderContentSections();
+        
         return `
-            <div class="max-w-4xl mx-auto px-4 sm:px-6 py-4 sm:py-6 lg:py-8">
-                ${this.renderModuleIntro()}
-                <div class="h-6 sm:h-8"></div>
-                <article class="space-y-6 sm:space-y-8 fade-in">
-                    ${this.renderContentSections()}
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 py-4 sm:py-6 lg:py-8 box-border overflow-x-hidden">
+                <article class="space-y-6 sm:space-y-8 fade-in box-border overflow-x-hidden">
+                    ${this.renderModuleIntro()}
+                    ${contentSections}
                 </article>
 
                 ${this.renderNavigation()}
@@ -286,9 +287,10 @@ class BaseLessonPage {
 
     /**
      * Render module introductie
+     * Uses ContentTemplateRenderer with content data if available
      */
     renderModuleIntro() {
-        return this.contentTemplateRenderer.renderModuleIntro(this.moduleTitle, this.moduleSubtitle);
+        return this.contentTemplateRenderer.renderModuleIntro(this.moduleTitle, this.moduleSubtitle, this.content);
     }
 
     /**

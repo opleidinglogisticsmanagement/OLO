@@ -415,6 +415,12 @@ class AppRouter {
             // Ensure background persists after content replacement
             contentContainer.style.backgroundColor = targetBg;
             
+            // Force width constraints on main-content
+            contentContainer.style.width = '100%';
+            contentContainer.style.maxWidth = '100%';
+            contentContainer.style.boxSizing = 'border-box';
+            contentContainer.style.overflowX = 'hidden';
+            
             // Scroll to top immediately (while invisible)
             const scrollContainer = contentContainer.closest('.overflow-y-auto') || window;
             if (scrollContainer.scrollTo) {
@@ -423,6 +429,55 @@ class AppRouter {
             
             // Force reflow to ensure new content is rendered
             void contentContainer.offsetHeight;
+            
+            // Normalize spacing and width constraints after rendering
+            setTimeout(() => {
+                // Force width constraints on all sections
+                const sections = contentContainer.querySelectorAll('section');
+                sections.forEach((section) => {
+                    section.style.width = '100%';
+                    section.style.maxWidth = '100%';
+                    section.style.boxSizing = 'border-box';
+                });
+                
+                // Normalize spacing: Remove all margins from sections and let space-y handle it
+                const article = contentContainer.querySelector('article');
+                if (article) {
+                    // Remove margin-bottom from all sections
+                    sections.forEach((section) => {
+                        section.style.marginBottom = '0';
+                    });
+                    
+                    // Ensure intro wrapper has no margins
+                    const introWrapper = contentContainer.querySelector('.intro-section-wrapper');
+                    if (introWrapper) {
+                        introWrapper.style.marginBottom = '0';
+                        introWrapper.style.marginTop = '0';
+                    }
+                    
+                    // Force spacing on first section after intro wrapper
+                    const firstSectionAfterIntro = introWrapper?.nextElementSibling;
+                    if (firstSectionAfterIntro && firstSectionAfterIntro.tagName === 'SECTION') {
+                        firstSectionAfterIntro.style.marginTop = window.innerWidth >= 640 ? '2rem' : '1.5rem';
+                    }
+                }
+                
+                // Force width constraints on max-w-4xl container but keep max-width limit
+                const maxWidthContainer = contentContainer.querySelector('.max-w-4xl');
+                if (maxWidthContainer) {
+                    // Don't force width: 100%, let it be auto so max-width works correctly
+                    maxWidthContainer.style.maxWidth = '56rem'; // Keep Tailwind's max-w-4xl value
+                    maxWidthContainer.style.boxSizing = 'border-box';
+                    maxWidthContainer.style.marginLeft = 'auto';
+                    maxWidthContainer.style.marginRight = 'auto';
+                }
+                
+                // Ensure article doesn't break out of container
+                if (article) {
+                    article.style.maxWidth = '100%';
+                    article.style.boxSizing = 'border-box';
+                }
+            }, 100);
             
             // Fade in with slight delay to ensure content is ready
             setTimeout(() => {

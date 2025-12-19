@@ -33,7 +33,6 @@
         }
       ]
     },
-  "headers": [
     {
       "source": "/(.*)\\.js$",
       "headers": [

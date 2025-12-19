@@ -30,9 +30,6 @@ class Week6LessonPage extends BaseLessonPage {
 
     /**
      * Render content secties met content uit JSON
-     */
-    /**
-     * Render content secties met content uit JSON
      * Uses ContentTemplateRenderer for consistent styling
      */
     renderContentSections() {

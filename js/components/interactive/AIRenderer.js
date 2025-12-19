@@ -1186,7 +1186,13 @@ class AIRenderer {
      * Setup event listeners for AI Bouwsteen Generator
      */
     static setupAIBouwsteenGeneratorListeners(generatorId) {
+        // #region agent log
+        fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'AIRenderer.js:1188',message:'setupAIBouwsteenGeneratorListeners called',data:{generatorId,hostname:window.location.hostname,isVercel:window.location.hostname.includes('vercel.app')},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'})}).catch(()=>{});
+        // #endregion
         const generatorContainer = document.getElementById(generatorId);
+        // #region agent log
+        fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'AIRenderer.js:1190',message:'Container lookup result',data:{containerFound:!!generatorContainer,generatorId},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'})}).catch(()=>{});
+        // #endregion
         if (!generatorContainer) {
             console.warn('[AIRenderer] AI Bouwsteen Generator container not found:', generatorId);
             return;
@@ -1194,8 +1200,17 @@ class AIRenderer {
         
         // Generate button
         const generateBtn = generatorContainer.querySelector('.ai-bouwsteen-generate-btn');
+        // #region agent log
+        fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'AIRenderer.js:1196',message:'Generate button lookup',data:{buttonFound:!!generateBtn,buttonClass:generateBtn?.className},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'})}).catch(()=>{});
+        // #endregion
         if (generateBtn) {
+            // #region agent log
+            fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'AIRenderer.js:1198',message:'Adding click listener to generate button',data:{generatorId},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'})}).catch(()=>{});
+            // #endregion
             generateBtn.addEventListener('click', () => {
+                // #region agent log
+                fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'AIRenderer.js:1199',message:'Generate table button clicked',data:{generatorId},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'D'})}).catch(()=>{});
+                // #endregion
                 AIRenderer.generateBouwsteenTabel(generatorId);
             });
         }
@@ -1254,6 +1269,9 @@ class AIRenderer {
      * Generate bouwsteen tabel using AI
      */
     static async generateBouwsteenTabel(generatorId) {
+        // #region agent log
+        fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'AIRenderer.js:1256',message:'generateBouwsteenTabel called',data:{generatorId,hostname:window.location.hostname,isVercel:window.location.hostname.includes('vercel.app')},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'C'})}).catch(()=>{});
+        // #endregion
         const keywordInput = document.getElementById(`${generatorId}-keyword`);
         const contextInput = document.getElementById(`${generatorId}-context`);
         const loadingEl = document.getElementById(`${generatorId}-loading`);
@@ -1261,6 +1279,9 @@ class AIRenderer {
         const resultTableEl = document.getElementById(`${generatorId}-result-table`);
         
         if (!keywordInput || !loadingEl || !resultEl || !resultTableEl) {
+            // #region agent log
+            fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'AIRenderer.js:1263',message:'Elements not found',data:{keywordInput:!!keywordInput,loadingEl:!!loadingEl,resultEl:!!resultEl,resultTableEl:!!resultTableEl},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'B'})}).catch(()=>{});
+            // #endregion
             console.warn('[AIRenderer] AI Bouwsteen Generator elements not found');
             return;
         }
@@ -1283,6 +1304,9 @@ class AIRenderer {
             const isVercel = window.location.hostname.includes('vercel.app');
             const apiUrl = '/api/generate-bouwsteen-tabel';
             
+            // #region agent log
+            fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'AIRenderer.js:1289',message:'Fetch API call starting',data:{apiUrl,isVercel,keyword:keyword.substring(0,20)},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'C'})}).catch(()=>{});
+            // #endregion
             console.log('[AIRenderer] Generating bouwsteen tabel, environment:', isVercel ? 'Vercel' : 'Local');
             console.log('[AIRenderer] API URL:', apiUrl);
             
@@ -1292,6 +1316,9 @@ class AIRenderer {
                 body: JSON.stringify({ keyword, context })
             });
             
+            // #region agent log
+            fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'AIRenderer.js:1295',message:'Fetch response received',data:{status:response.status,statusText:response.statusText,ok:response.ok},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'C'})}).catch(()=>{});
+            // #endregion
             if (!response.ok) {
                 // Try to get error message from response
                 let errorMessage = `Server error: ${response.status}`;
@@ -1323,6 +1350,9 @@ class AIRenderer {
             resultEl.classList.remove('hidden');
             
         } catch (error) {
+            // #region agent log
+            fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'AIRenderer.js:1325',message:'Error in generateBouwsteenTabel',data:{errorMessage:error.message,errorName:error.name,errorStack:error.stack?.substring(0,200),isVercel:window.location.hostname.includes('vercel.app')},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'C'})}).catch(()=>{});
+            // #endregion
             console.error('[AIRenderer] Error generating bouwsteen tabel:', error);
             loadingEl.classList.add('hidden');
             

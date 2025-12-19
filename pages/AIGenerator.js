@@ -43,12 +43,18 @@ class AIGenerator {
         }
 
         try {
+            // #region agent log
+            fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'AIGenerator.js:45',message:'generateMCQuestions called',data:{proxyUrl:this.proxyUrl,hostname:window.location.hostname,isVercel:window.location.hostname.includes('vercel.app'),theoryLength:theoryContent.length,numberOfQuestions,segmentIndex},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'C'})}).catch(()=>{});
+            // #endregion
             console.log('[AIGenerator] Generating questions via server-side proxy...');
             console.log('[AIGenerator] Theory content length:', theoryContent.length);
             console.log('[AIGenerator] Number of questions:', numberOfQuestions);
             console.log('[AIGenerator] Using segment index:', segmentIndex);
 
             // Call server-side proxy
+            // #region agent log
+            fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'AIGenerator.js:52',message:'Fetch API call starting',data:{url:this.proxyUrl,method:'POST'},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'C'})}).catch(()=>{});
+            // #endregion
             const response = await fetch(this.proxyUrl, {
                 method: 'POST',
                 headers: {
@@ -61,6 +67,9 @@ class AIGenerator {
                 })
             });
 
+            // #region agent log
+            fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'AIGenerator.js:64',message:'Fetch response received',data:{status:response.status,statusText:response.statusText,ok:response.ok,url:response.url},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'C'})}).catch(()=>{});
+            // #endregion
             console.log('[AIGenerator] Response status:', response.status);
 
             // Clone response to read it multiple times if needed
@@ -96,6 +105,9 @@ class AIGenerator {
             }
             
         } catch (error) {
+            // #region agent log
+            fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'AIGenerator.js:98',message:'Error in generateMCQuestions',data:{errorMessage:error.message,errorName:error.name,errorStack:error.stack?.substring(0,200),isVercel:window.location.hostname.includes('vercel.app')},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'C'})}).catch(()=>{});
+            // #endregion
             console.error('[AIGenerator] Error generating MC questions:', error);
             
             // Provide user-friendly error messages

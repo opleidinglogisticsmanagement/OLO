@@ -590,6 +590,9 @@ class Week4LessonPage extends BaseLessonPage {
      * Attach event listeners (override base class)
      */
     attachEventListeners() {
+        // #region agent log
+        fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'Week4LessonPage.js:592',message:'attachEventListeners called',data:{hostname:window.location.hostname,isVercel:window.location.hostname.includes('vercel.app'),documentReady:document.readyState},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'E'})}).catch(()=>{});
+        // #endregion
         super.attachEventListeners();
         
         // Listen for "next question" event (global event, can be set up immediately)
@@ -610,10 +613,19 @@ class Week4LessonPage extends BaseLessonPage {
      * Uses retry mechanism to handle async DOM updates in SPA mode
      */
     setupMCQuestionButton(retries = 5) {
+        // #region agent log
+        fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'Week4LessonPage.js:612',message:'setupMCQuestionButton called',data:{retries,hostname:window.location.hostname,isVercel:window.location.hostname.includes('vercel.app')},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'})}).catch(()=>{});
+        // #endregion
         const generateBtn = document.getElementById('generate-mc-question-btn');
+        // #region agent log
+        fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'Week4LessonPage.js:614',message:'Button lookup result',data:{buttonFound:!!generateBtn,buttonId:generateBtn?.id,buttonExists:!!document.getElementById('generate-mc-question-btn')},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'})}).catch(()=>{});
+        // #endregion
         if (generateBtn) {
             // Check if button already has event listener (prevent duplicates)
             if (generateBtn.dataset.listenerAttached === 'true') {
+                // #region agent log
+                fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'Week4LessonPage.js:617',message:'Listener already attached',data:{},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'})}).catch(()=>{});
+                // #endregion
                 console.log('[Week4LessonPage] MC question button already has listener');
                 return;
             }
@@ -625,7 +637,13 @@ class Week4LessonPage extends BaseLessonPage {
             // Mark as having listener attached
             newBtn.dataset.listenerAttached = 'true';
             
+            // #region agent log
+            fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'Week4LessonPage.js:628',message:'Adding click listener',data:{buttonId:newBtn.id,buttonText:newBtn.textContent?.trim()},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'})}).catch(()=>{});
+            // #endregion
             newBtn.addEventListener('click', (e) => {
+                // #region agent log
+                fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'Week4LessonPage.js:629',message:'Button clicked',data:{eventType:e.type,defaultPrevented:e.defaultPrevented},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'D'})}).catch(()=>{});
+                // #endregion
                 e.preventDefault();
                 e.stopPropagation();
                 
@@ -637,17 +655,29 @@ class Week4LessonPage extends BaseLessonPage {
                 `;
                 
                 // Generate the question
+                // #region agent log
+                fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'Week4LessonPage.js:640',message:'Calling generateMCQuestions',data:{},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'C'})}).catch(()=>{});
+                // #endregion
                 this.generateMCQuestions();
             });
             
+            // #region agent log
+            fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'Week4LessonPage.js:643',message:'Button setup complete',data:{listenerAttached:newBtn.dataset.listenerAttached},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'})}).catch(()=>{});
+            // #endregion
             console.log('[Week4LessonPage] ✅ MC question button setup complete');
         } else if (retries > 0) {
             // Retry if button not found yet (DOM might still be updating)
+            // #region agent log
+            fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'Week4LessonPage.js:645',message:'Button not found, retrying',data:{retriesLeft:retries-1},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'})}).catch(()=>{});
+            // #endregion
             console.log(`[Week4LessonPage] ⏳ MC question button not found, retrying... (${retries} attempts left)`);
             setTimeout(() => {
                 this.setupMCQuestionButton(retries - 1);
             }, 100);
         } else {
+            // #region agent log
+            fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'Week4LessonPage.js:651',message:'Button not found after all retries',data:{},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'})}).catch(()=>{});
+            // #endregion
             console.warn('[Week4LessonPage] ⚠️ MC question button not found in DOM after all retries');
         }
     }

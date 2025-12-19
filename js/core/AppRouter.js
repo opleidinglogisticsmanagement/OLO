@@ -243,7 +243,10 @@ class AppRouter {
         }
         
         // Re-initialize any scripts needed for index page
-        this.attachIndexPageScripts();
+        // Small delay to ensure DOM is updated after innerHTML replacement
+        setTimeout(() => {
+            this.attachIndexPageScripts();
+        }, 100);
     }
 
     /**
@@ -633,10 +636,14 @@ class AppRouter {
      * Attach scripts for index page
      */
     attachIndexPageScripts() {
+        console.log('[AppRouter] attachIndexPageScripts called');
+        console.log('[AppRouter] Checking for export-pdf-btn:', !!document.getElementById('export-pdf-btn'));
+        
         // Re-initialize search if needed
         if (window.SearchService && typeof setupSearch === 'function') {
             setupSearch();
         }
+        
         // Re-initialize PDF export if needed
         // Use the same initialization logic as initial page load
         if (typeof window.setupPDFExport === 'function' && typeof window.waitForPDFLibraries === 'function') {
@@ -646,24 +653,26 @@ class AppRouter {
                     // Wait for libraries to be loaded (max 10 seconds)
                     await window.waitForPDFLibraries(100, 100);
                     console.log('[AppRouter] ✅ PDF libraries loaded, setting up export function');
-                    window.setupPDFExport();
+                    window.setupPDFExport(3); // Pass retries parameter
                 } catch (error) {
                     console.error('[AppRouter] ❌ PDF libraries could not be loaded:', error);
                     console.error('[AppRouter] Setting up PDF export anyway (user will see error on click)');
                     // Setup export function anyway, so user gets error message on click
-                    window.setupPDFExport();
+                    window.setupPDFExport(3); // Pass retries parameter
                 }
             };
             // Small delay to ensure DOM is ready after SPA navigation
             setTimeout(() => {
                 initializePDFExport();
-            }, 100);
+            }, 200);
         } else if (typeof window.setupPDFExport === 'function') {
             // Fallback if waitForPDFLibraries is not available
             console.log('[AppRouter] Setting up PDF export (libraries check not available)');
             setTimeout(() => {
-                window.setupPDFExport();
-            }, 100);
+                window.setupPDFExport(3); // Pass retries parameter
+            }, 200);
+        } else {
+            console.warn('[AppRouter] setupPDFExport function not available');
         }
     }
     

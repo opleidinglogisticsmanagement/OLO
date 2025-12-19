@@ -1055,14 +1055,16 @@ Zorg ervoor dat:
         try {
             const availableModels = await getAvailableModels();
             if (availableModels && availableModels.length > 0) {
-                // Filter for working models (exclude -latest, preview, experimental, and old gemini-pro)
+                // Filter for working models (exclude -latest, preview, experimental, 2.0 models, and old gemini-pro)
                 const preferred = availableModels.filter(m => {
                     const modelLower = m.toLowerCase();
-                    // Exclude preview, experimental, and problematic models
+                    // Exclude preview, experimental, 2.0 models, and problematic models
                     if (modelLower.includes('-preview') || 
                         modelLower.includes('-experimental') ||
                         modelLower.includes('2.5-flash-preview') ||
                         modelLower.includes('2.5-pro-preview') ||
+                        modelLower.includes('2.0-flash') ||  // Exclude 2.0 models (often have quota issues)
+                        modelLower.includes('2.0-pro') ||
                         modelLower.includes('lite-preview') ||
                         modelLower.includes('-latest') ||
                         modelLower.includes('embedding')) {
@@ -1088,7 +1090,9 @@ Zorg ervoor dat:
                                !modelLower.includes('-experimental') &&
                                !modelLower.includes('embedding') &&
                                !modelLower.includes('2.5-flash-preview') &&
-                               !modelLower.includes('2.5-pro-preview');
+                               !modelLower.includes('2.5-pro-preview') &&
+                               !modelLower.includes('2.0-flash') &&  // Exclude 2.0 models
+                               !modelLower.includes('2.0-pro');
                     });
                     models = stableFallback.length > 0 ? stableFallback.slice(0, 3) : ['gemini-1.5-flash'];
                 }
@@ -1129,12 +1133,15 @@ Zorg ervoor dat:
                 // Explicitly remove preview and experimental suffixes
                 normalizedModel = normalizedModel.replace(/-preview.*$/i, '').replace(/-experimental.*$/i, '');
                 
-                // Final check: don't use preview models
-                if (normalizedModel.toLowerCase().includes('-preview') || 
-                    normalizedModel.toLowerCase().includes('-experimental') ||
-                    normalizedModel.toLowerCase().includes('2.5-flash-preview') ||
-                    normalizedModel.toLowerCase().includes('2.5-pro-preview')) {
-                    console.warn(`[generate-bouwsteen-tabel] Skipping preview/experimental model: ${normalizedModel}`);
+                // Final check: don't use preview, experimental, or 2.0 models
+                const modelLower = normalizedModel.toLowerCase();
+                if (modelLower.includes('-preview') || 
+                    modelLower.includes('-experimental') ||
+                    modelLower.includes('2.5-flash-preview') ||
+                    modelLower.includes('2.5-pro-preview') ||
+                    modelLower.includes('2.0-flash') ||  // Exclude 2.0 models (quota issues)
+                    modelLower.includes('2.0-pro')) {
+                    console.warn(`[generate-bouwsteen-tabel] Skipping preview/experimental/2.0 model: ${normalizedModel}`);
                     continue;
                 }
                 

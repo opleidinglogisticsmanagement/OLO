@@ -147,7 +147,7 @@ class AIRenderer {
         }).join('');
 
         const html = `
-            <div class="boolean-operator-exercise mb-6 bg-white dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700" id="${exerciseId}">
+            <div class="boolean-operator-exercise mb-6 sm:mb-8 bg-white dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700" id="${exerciseId}">
                 <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">${title}</h3>
                 <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">${instruction}</p>
                 
@@ -411,7 +411,7 @@ class AIRenderer {
         const availableTermsStr = JSON.stringify(availableTerms);
 
         const html = `
-            <div class="ai-query-exercise mb-6 bg-white dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700" id="${exerciseId}" data-generate-from-theory="${generateFromTheory}" data-available-terms='${availableTermsStr}' data-scenario-count="0">
+            <div class="ai-query-exercise mb-6 sm:mb-8 bg-white dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700" id="${exerciseId}" data-generate-from-theory="${generateFromTheory}" data-available-terms='${availableTermsStr}' data-scenario-count="0">
                 <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">${title}</h3>
                 <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">${instruction}</p>
                 
@@ -1022,7 +1022,7 @@ class AIRenderer {
         const generatorId = `ai-bouwsteen-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
         
         const html = `
-            <div class="ai-bouwsteen-generator mb-6 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 overflow-hidden" id="${generatorId}" style="pointer-events: auto;">
+            <div class="ai-bouwsteen-generator mb-6 sm:mb-8 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 overflow-hidden" id="${generatorId}" style="pointer-events: auto;">
                 <!-- Tool Header -->
                 <div class="bg-gray-50 dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700 px-4 py-3 flex items-center justify-between">
                     <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Tool: AI Bouwsteen Generator</h3>

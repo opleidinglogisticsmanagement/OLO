@@ -77,16 +77,19 @@ class AccordionRenderer {
                 ? `fas fa-plus transform transition-transform duration-200 ${isOpen ? 'rotate-45' : ''} text-gray-600 dark:text-gray-300`
                 : `fas fa-chevron-down transform transition-transform duration-200 ${isOpen ? 'rotate-180' : ''} text-gray-600 dark:text-gray-300`;
 
-            // Different styling for nested accordions (like clickable steps - no border, seamless)
+            // Standardized styling for accordion items
+            // Nested accordions (like clickable steps - no border, seamless)
             const containerClass = isNested 
                 ? `mb-3 overflow-hidden` 
                 : `border border-gray-200 dark:border-gray-700 rounded-lg mb-3 overflow-hidden transition-colors duration-200`;
+            
+            // Standardized button classes: px-6 py-4, consistent hover/active states
             const buttonClass = isNested
                 ? `w-full px-6 py-4 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 active:bg-gray-300 dark:active:bg-gray-600 transition-colors duration-200 flex items-center justify-between text-left font-semibold text-lg text-gray-600 dark:text-gray-300 cursor-pointer touch-manipulation`
                 : `w-full px-6 py-4 bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 active:bg-gray-200 dark:active:bg-gray-600 transition-colors duration-200 flex items-center justify-between text-left cursor-pointer touch-manipulation`;
-            const contentBgClass = isNested
-                ? `bg-white dark:bg-gray-800`
-                : `bg-white dark:bg-gray-800`;
+            
+            // Standardized content background
+            const contentBgClass = `bg-white dark:bg-gray-800`;
 
             return `
                 <div class="${containerClass}">
@@ -115,7 +118,7 @@ class AccordionRenderer {
         }).join('');
 
         return `
-            <div class="accordion-container mb-6" id="${accordionId}">
+            <div class="accordion-container mb-6 sm:mb-8" id="${accordionId}">
                 ${accordionItems}
             </div>
         `;

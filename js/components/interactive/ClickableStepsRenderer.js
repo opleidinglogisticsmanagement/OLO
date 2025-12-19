@@ -105,7 +105,7 @@ class ClickableStepsRenderer {
             
             const buttonHtml = `
                 <button
-                    class="w-full px-6 py-4 font-semibold text-lg transition-colors duration-200 ${isOpen ? 'bg-white dark:bg-gray-800 text-green-600 dark:text-green-400' : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'} text-left"
+                    class="w-full px-6 py-4 font-semibold text-lg transition-colors duration-200 ${isOpen ? 'bg-white dark:bg-gray-800 text-green-600 dark:text-green-400' : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600 active:bg-gray-300 dark:active:bg-gray-500'} text-left cursor-pointer touch-manipulation"
                     ${hasContent ? `onclick="InteractiveRenderer.toggleClickableStep('${stepsId}', ${index}, ${allowMultiple})"` : ''}
                     ${!hasContent ? 'disabled' : ''}
                     id="${stepId}-button"
@@ -134,7 +134,7 @@ class ClickableStepsRenderer {
                             style="${isOpen ? 'display: block;' : 'display: none;'}"
                             aria-hidden="${!isOpen}"
                         >
-                            <div class="p-6">
+                            <div class="px-6 py-4">
                                 ${stepContentHtml}
                             </div>
                         </div>
@@ -146,7 +146,7 @@ class ClickableStepsRenderer {
         }).join('');
 
         return `
-            <div class="clickable-steps-container mb-6 border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden bg-white dark:bg-gray-800 transition-colors duration-200" id="${stepsId}">
+            <div class="clickable-steps-container mb-6 sm:mb-8 border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden bg-white dark:bg-gray-800 transition-colors duration-200" id="${stepsId}">
                 <div class="space-y-0">
                     ${stepButtons}
                 </div>

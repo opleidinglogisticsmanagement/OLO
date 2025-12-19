@@ -89,7 +89,7 @@ class TabRenderer {
                     role="tabpanel"
                     aria-labelledby="${tabsId}-tab-${index}"
                 >
-                    <div class="p-6">
+                    <div class="px-6 py-4">
                         ${contentHtml}
                     </div>
                 </div>
@@ -97,7 +97,7 @@ class TabRenderer {
         }).join('');
 
         return `
-            <div class="tabs-container mb-6 border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden bg-white dark:bg-gray-800 transition-colors duration-200" id="${tabsId}">
+            <div class="tabs-container mb-6 sm:mb-8 border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden bg-white dark:bg-gray-800 transition-colors duration-200" id="${tabsId}">
                 <div class="flex flex-nowrap overflow-hidden -mb-px" role="tablist">
                     ${tabsButtons}
                 </div>

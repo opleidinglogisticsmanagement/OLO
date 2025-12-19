@@ -62,7 +62,7 @@ class ExerciseRenderer {
         }).join('');
 
         return `
-            <div class="true-false-exercise mb-4 bg-white dark:bg-gray-800 rounded-lg p-3 border border-gray-200 dark:border-gray-700" id="${exerciseId}">
+            <div class="true-false-exercise mb-6 sm:mb-8 bg-white dark:bg-gray-800 rounded-lg p-3 border border-gray-200 dark:border-gray-700" id="${exerciseId}">
                 <h3 class="text-base font-semibold text-gray-900 dark:text-white mb-1.5">${item.title || 'Waar of Onwaar?'}</h3>
                 <p class="text-xs text-gray-600 dark:text-gray-400 mb-2.5">${item.instruction || 'Bepaal of de volgende stellingen waar of onwaar zijn:'}</p>
                 
@@ -278,7 +278,7 @@ class ExerciseRenderer {
         `;
         
         return `
-            <div class="matching-exercise mb-6 px-6 py-4" id="${exerciseId}">
+            <div class="matching-exercise mb-6 sm:mb-8 px-6 py-4" id="${exerciseId}">
                 <style>${gridStyle}</style>
                 <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">${item.title || 'Matching Oefening'}</h3>
                 <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">${item.instruction || 'Sleep de omschrijvingen naar de juiste categorie:'}</p>
@@ -589,7 +589,7 @@ class ExerciseRenderer {
         const titleHtml = item.title && item.title.trim() !== '' ? `<h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">${item.title}</h3>` : '';
         
         return `
-            <div class="sequence-exercise w-full" id="${exerciseId}"
+            <div class="sequence-exercise w-full mb-6 sm:mb-8" id="${exerciseId}"
                  data-explanation="${HtmlUtils.escapeHtml(exerciseData.explanation)}"
                  data-sources="${encodeURIComponent(JSON.stringify(exerciseData.sources))}"
                  data-incorrect-feedback="${HtmlUtils.escapeHtml(exerciseData.feedback.incorrect || '')}">

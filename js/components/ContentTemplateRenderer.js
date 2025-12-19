@@ -76,8 +76,9 @@ class ContentTemplateRenderer {
         const iconClass = iconMap[icon] || iconMap.book;
         const headingSize = options.headingSize || 'text-2xl';
         
-        // Note: Extra padding (sm:pr-[70px]) removed to prevent overflow
-        // The scroll-to-top button should be positioned absolutely and not require content padding
+        // Add extra right padding on desktop for scroll-to-top button space
+        // Applied to content div, not section wrapper, to prevent overflow
+        const extraPadding = (options.hasExtraPadding !== false) ? ' sm:pr-[70px]' : '';
         
         return `
             <section class="${classes}" style="width: 100%; max-width: 100%; box-sizing: border-box;">
@@ -85,7 +86,7 @@ class ContentTemplateRenderer {
                     <div class="${this.getIconContainerClasses(colorScheme)} flex-shrink-0">
                         <i class="fas ${iconClass} text-lg"></i>
                     </div>
-                    <div class="flex-1 min-w-0 box-border" style="width: 0; max-width: 100%; box-sizing: border-box;">
+                    <div class="flex-1 min-w-0 box-border${extraPadding}" style="width: 0; max-width: 100%; box-sizing: border-box;">
                         <h2 class="${headingSize} font-bold text-gray-900 dark:text-white mb-4">${title}</h2>
                         <div class="prose prose-sm sm:prose-base box-border overflow-hidden" style="max-width: 100%; box-sizing: border-box; word-wrap: break-word; overflow-wrap: break-word;">
                             <style>
@@ -142,14 +143,17 @@ class ContentTemplateRenderer {
         // Chrome fix: Wrap sticky section in a div to ensure margin-bottom works
         // Chrome sometimes ignores margin-bottom on sticky elements, so we use a wrapper div
         // Use inline style with !important to override any conflicting styles
+        // Add extra right padding on desktop for scroll-to-top button space
+        const extraPadding = ' sm:pr-[70px]';
+        
         return `
             <div class="intro-section-wrapper" style="margin-bottom: 1.5rem !important; margin-top: 0 !important; box-sizing: border-box;">
                 <section class="${classes}" style="margin-bottom: 0 !important; box-sizing: border-box;">
-                    <div class="flex flex-col sm:flex-row items-start">
-                        <div class="${this.getIconContainerClasses('blue')}">
+                    <div class="flex flex-col sm:flex-row items-start box-border" style="width: 100%; max-width: 100%; box-sizing: border-box;">
+                        <div class="${this.getIconContainerClasses('blue')} flex-shrink-0">
                             <i class="fas fa-book text-lg"></i>
                         </div>
-                        <div class="flex-1 min-w-0 w-full sm:w-auto">
+                        <div class="flex-1 min-w-0 box-border${extraPadding}" style="width: 0; max-width: 100%; box-sizing: border-box;">
                             <h1 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">${title}: ${subtitle}</h1>
                             <p class="text-gray-600 dark:text-gray-300 mb-4">${description}</p>
                         </div>
@@ -164,6 +168,48 @@ class ContentTemplateRenderer {
                 }
             </style>
         `;
+    }
+
+    /**
+     * Get standard interactive component container classes
+     * Centralized styling for all interactive components (accordions, tabs, etc.)
+     * @returns {string} Tailwind classes
+     */
+    getInteractiveContainerClasses() {
+        return 'mb-6 sm:mb-8 border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden bg-white dark:bg-gray-800 transition-colors duration-200';
+    }
+
+    /**
+     * Get standard interactive component button classes
+     * Centralized styling for interactive component buttons
+     * @param {Object} options - Options object
+     * @param {boolean} options.isNested - Whether this is a nested component (default: false)
+     * @param {boolean} options.isActive - Whether button is active/selected (default: false)
+     * @returns {string} Tailwind classes
+     */
+    getInteractiveButtonClasses(options = {}) {
+        const { isNested = false, isActive = false } = options;
+        
+        const base = 'w-full px-6 py-4 transition-colors duration-200 flex items-center justify-between text-left cursor-pointer touch-manipulation';
+        
+        if (isNested) {
+            return `${base} bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 active:bg-gray-300 dark:active:bg-gray-600 font-semibold text-lg text-gray-600 dark:text-gray-300`;
+        }
+        
+        if (isActive) {
+            return `${base} bg-white dark:bg-gray-800 text-green-600 dark:text-green-400`;
+        }
+        
+        return `${base} bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 active:bg-gray-200 dark:active:bg-gray-600`;
+    }
+
+    /**
+     * Get standard interactive component content padding
+     * Centralized padding for interactive component content areas
+     * @returns {string} Tailwind classes
+     */
+    getInteractiveContentPadding() {
+        return 'px-6 py-4';
     }
 
     /**

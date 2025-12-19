@@ -70,7 +70,7 @@ class ChecklistRenderer {
         `;
 
         return `
-            <div class="smart-checklist-container mb-6 bg-gray-50 dark:bg-gray-800 rounded-lg p-3 border border-gray-200 dark:border-gray-700" id="${checklistId}">
+            <div class="smart-checklist-container mb-6 sm:mb-8 bg-gray-50 dark:bg-gray-800 rounded-lg p-3 border border-gray-200 dark:border-gray-700" id="${checklistId}">
                 <h3 class="text-base font-semibold text-gray-900 dark:text-white mb-2">Analyseer deze doelstelling op SMART-criteria:</h3>
                 <div class="bg-white dark:bg-gray-800 border-l-4 border-blue-500 dark:border-blue-400 p-2.5 mb-2.5 rounded-r-lg">
                     <p class="text-gray-800 dark:text-gray-200 text-sm font-medium leading-snug">${item.doelstelling}</p>
@@ -255,7 +255,7 @@ class ChecklistRenderer {
         const percentage = Math.round((checkedCount / totalCount) * 100);
 
         return `
-            <div class="learning-objectives-checklist mb-6 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-lg p-3 border border-blue-200" id="${checklistId}">
+            <div class="learning-objectives-checklist mb-6 sm:mb-8 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-lg p-3 border border-blue-200" id="${checklistId}">
                 <div class="flex items-center justify-between mb-2.5">
                     <h3 class="text-base font-semibold text-gray-900">${item.title || 'Leerdoelen'}</h3>
                     <div class="flex items-center space-x-2">
@@ -485,7 +485,7 @@ class ChecklistRenderer {
         const definitionEscaped = item.definition.replace(/"/g, '&quot;');
         
         return `
-            <div class="concept-quality-checklist-container mb-6 bg-gray-50 rounded-lg p-3" id="${checklistId}" data-definition="${definitionEscaped}">
+            <div class="concept-quality-checklist-container mb-6 sm:mb-8 bg-gray-50 rounded-lg p-3" id="${checklistId}" data-definition="${definitionEscaped}">
                 <h3 class="text-base font-semibold text-gray-900 mb-2">${item.title || 'Analyseer deze begripsdefinitie op kwaliteitscriteria:'}</h3>
                 <div class="bg-white border-l-4 border-blue-500 p-2.5 mb-2.5 rounded-r-lg">
                     <p class="text-xs text-gray-600 dark:text-gray-400 mb-1"><strong>Begrip:</strong> ${item.concept}</p>

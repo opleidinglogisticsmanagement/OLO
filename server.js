@@ -1055,14 +1055,22 @@ Zorg ervoor dat:
         try {
             const availableModels = await getAvailableModels();
             if (availableModels && availableModels.length > 0) {
-                // Filter for working models (exclude -latest and old gemini-pro)
+                // Filter for working models (exclude -latest, preview, experimental, and old gemini-pro)
                 const preferred = availableModels.filter(m => {
                     const modelLower = m.toLowerCase();
-                    // Only include 1.5 models, exclude -latest variants and old gemini-pro
+                    // Exclude preview, experimental, and problematic models
+                    if (modelLower.includes('-preview') || 
+                        modelLower.includes('-experimental') ||
+                        modelLower.includes('2.5-flash-preview') ||
+                        modelLower.includes('2.5-pro-preview') ||
+                        modelLower.includes('lite-preview') ||
+                        modelLower.includes('-latest') ||
+                        modelLower.includes('embedding')) {
+                        return false;
+                    }
+                    // Only include stable 1.5 models
                     return (modelLower.includes('1.5-flash') || modelLower.includes('1.5-pro')) &&
-                           !modelLower.includes('-latest') &&
-                           !modelLower.includes('gemini-pro') && // Exclude old gemini-pro
-                           !modelLower.includes('embedding'); // Exclude embedding models
+                           !modelLower.includes('gemini-pro'); // Exclude old gemini-pro
                 });
                 
                 if (preferred.length > 0) {
@@ -1073,8 +1081,16 @@ Zorg ervoor dat:
                         return 0;
                     });
                 } else {
-                    // Fallback: use first available models (max 3)
-                    models = availableModels.slice(0, 3);
+                    // Fallback: filter out preview/experimental models and use first stable ones
+                    const stableFallback = availableModels.filter(m => {
+                        const modelLower = m.toLowerCase();
+                        return !modelLower.includes('-preview') && 
+                               !modelLower.includes('-experimental') &&
+                               !modelLower.includes('embedding') &&
+                               !modelLower.includes('2.5-flash-preview') &&
+                               !modelLower.includes('2.5-pro-preview');
+                    });
+                    models = stableFallback.length > 0 ? stableFallback.slice(0, 3) : ['gemini-1.5-flash'];
                 }
             }
         } catch (modelError) {
@@ -1108,8 +1124,21 @@ Zorg ervoor dat:
         for (const modelName of models) {
             try {
                 console.log(`[generate-bouwsteen-tabel] Trying model: ${modelName}`);
-                // Normalize model name one more time before use
-                const normalizedModel = modelName.replace(/-latest$/i, '').replace('models/', '');
+                // Normalize model name one more time before use - remove preview, experimental, latest suffixes
+                let normalizedModel = modelName.replace(/-latest$/i, '').replace('models/', '');
+                // Explicitly remove preview and experimental suffixes
+                normalizedModel = normalizedModel.replace(/-preview.*$/i, '').replace(/-experimental.*$/i, '');
+                
+                // Final check: don't use preview models
+                if (normalizedModel.toLowerCase().includes('-preview') || 
+                    normalizedModel.toLowerCase().includes('-experimental') ||
+                    normalizedModel.toLowerCase().includes('2.5-flash-preview') ||
+                    normalizedModel.toLowerCase().includes('2.5-pro-preview')) {
+                    console.warn(`[generate-bouwsteen-tabel] Skipping preview/experimental model: ${normalizedModel}`);
+                    continue;
+                }
+                
+                console.log(`[generate-bouwsteen-tabel] Using normalized model: ${normalizedModel}`);
                 const model = genAI.getGenerativeModel({ model: normalizedModel });
                 const result = await model.generateContent(prompt);
                 const response = await result.response;

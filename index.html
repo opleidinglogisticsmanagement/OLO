@@ -1553,14 +1553,12 @@
         };
 
         // PDF Export functionality for Index Page
-        window.setupPDFExport = function() {
-            // #region agent log
-            fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'index.html:1556',message:'setupPDFExport called',data:{hostname:window.location.hostname,isVercel:window.location.hostname.includes('vercel.app')},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'})}).catch(()=>{});
-            // #endregion
+        window.setupPDFExport = function(retries = 3) {
+            console.log('[setupPDFExport] Called, retries left:', retries);
+            console.log('[setupPDFExport] Document ready state:', document.readyState);
             const exportPdfBtn = document.getElementById('export-pdf-btn');
-            // #region agent log
-            fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'index.html:1558',message:'PDF export button lookup',data:{buttonFound:!!exportPdfBtn,buttonId:exportPdfBtn?.id},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'})}).catch(()=>{});
-            // #endregion
+            console.log('[setupPDFExport] Button found:', !!exportPdfBtn);
+            
             if (exportPdfBtn) {
                 // Remove existing event listener by cloning (prevents duplicates)
                 const newBtn = exportPdfBtn.cloneNode(true);
@@ -1607,18 +1605,21 @@
                         newBtn.innerHTML = '<i class="fas fa-file-pdf text-xl"></i><span class="font-semibold">Exporteer alle content naar PDF</span>';
                     }
                 });
+            } else if (retries > 0) {
+                console.warn('[setupPDFExport] ⚠️ PDF export button not found in DOM, retrying... (', retries, 'attempts left)');
+                console.warn('[setupPDFExport] Available buttons with IDs:', Array.from(document.querySelectorAll('button[id]')).map(btn => btn.id));
+                // Retry after a delay - button might not be rendered yet (especially in SPA mode)
+                setTimeout(() => {
+                    console.log('[setupPDFExport] Retrying...');
+                    window.setupPDFExport(retries - 1);
+                }, 500);
             } else {
-                console.warn('[Index] ⚠️ PDF export button not found in DOM');
-                console.warn('[Index] Available buttons:', Array.from(document.querySelectorAll('button')).map(btn => ({
+                console.error('[setupPDFExport] ❌ PDF export button not found after all retries');
+                console.error('[setupPDFExport] Available buttons:', Array.from(document.querySelectorAll('button')).map(btn => ({
                     id: btn.id,
                     text: btn.textContent?.trim().substring(0, 50),
                     classes: btn.className
                 })).filter(btn => btn.text?.toLowerCase().includes('pdf') || btn.text?.toLowerCase().includes('export')));
-                // Retry after a delay - button might not be rendered yet
-                setTimeout(() => {
-                    console.log('[Index] Retrying PDF export button setup...');
-                    window.setupPDFExport();
-                }, 1000);
             }
         };
 

@@ -638,8 +638,32 @@ class AppRouter {
             setupSearch();
         }
         // Re-initialize PDF export if needed
-        if (typeof window.setupPDFExport === 'function') {
-            window.setupPDFExport();
+        // Use the same initialization logic as initial page load
+        if (typeof window.setupPDFExport === 'function' && typeof window.waitForPDFLibraries === 'function') {
+            console.log('[AppRouter] Initializing PDF export for index page...');
+            const initializePDFExport = async () => {
+                try {
+                    // Wait for libraries to be loaded (max 10 seconds)
+                    await window.waitForPDFLibraries(100, 100);
+                    console.log('[AppRouter] ✅ PDF libraries loaded, setting up export function');
+                    window.setupPDFExport();
+                } catch (error) {
+                    console.error('[AppRouter] ❌ PDF libraries could not be loaded:', error);
+                    console.error('[AppRouter] Setting up PDF export anyway (user will see error on click)');
+                    // Setup export function anyway, so user gets error message on click
+                    window.setupPDFExport();
+                }
+            };
+            // Small delay to ensure DOM is ready after SPA navigation
+            setTimeout(() => {
+                initializePDFExport();
+            }, 100);
+        } else if (typeof window.setupPDFExport === 'function') {
+            // Fallback if waitForPDFLibraries is not available
+            console.log('[AppRouter] Setting up PDF export (libraries check not available)');
+            setTimeout(() => {
+                window.setupPDFExport();
+            }, 100);
         }
     }
     

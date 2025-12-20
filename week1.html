@@ -205,6 +205,28 @@
             max-width: 100%;
         }
         
+        /* Sidebar width control - applies to all screen sizes */
+        /* Sidebar should never exceed 330px on any screen size */
+        #sidebar {
+            max-width: 330px !important;
+        }
+        
+        /* Sidebar width: full width on mobile (but max 330px), fixed 320px on larger screens */
+        @media (max-width: 640px) {
+            #sidebar {
+                width: 100% !important;
+                max-width: 330px !important;
+            }
+        }
+        
+        /* Ensure sidebar has fixed width on desktop/tablet (641px and above) */
+        @media (min-width: 641px) {
+            #sidebar {
+                width: 320px !important;
+                max-width: 330px !important;
+            }
+        }
+        
         /* Mobile-specific improvements */
         @media (max-width: 640px) {
             /* Ensure content doesn't overflow */
@@ -212,9 +234,22 @@
                 overflow-x: hidden;
             }
             
-            /* Prevent any element from causing horizontal scroll */
-            * {
+            /* Prevent specific elements from causing horizontal scroll */
+            /* Only apply to block-level and media elements, not text/inline elements */
+            div, section, article, header, footer, nav, aside, main, 
+            img, video, iframe, canvas, svg, object, embed,
+            table, pre, blockquote {
                 max-width: 100%;
+                box-sizing: border-box;
+            }
+            
+            /* Ensure text elements wrap properly */
+            p, span, a, strong, em, b, i, u, code, small, mark, del, ins, 
+            sub, sup, abbr, kbd, samp, var, time, label, li, td, th {
+                word-wrap: break-word;
+                overflow-wrap: break-word;
+                word-break: normal;
+                hyphens: auto;
             }
             
             /* Specific fixes for common offenders */
@@ -256,12 +291,6 @@
             button, a {
                 min-height: 44px;
                 min-width: 44px;
-            }
-            
-            /* Sidebar should take full width on mobile */
-            #sidebar {
-                width: 100%;
-                max-width: 100%;
             }
             
             /* Reduce icon sizes on mobile */

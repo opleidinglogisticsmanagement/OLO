@@ -86,13 +86,29 @@ class ContentTemplateRenderer {
                     <div class="${this.getIconContainerClasses(colorScheme)} flex-shrink-0">
                         <i class="fas ${iconClass} text-lg"></i>
                     </div>
-                    <div class="flex-1 min-w-0 box-border${extraPadding}" style="width: 0; max-width: 100%; box-sizing: border-box;">
+                    <div class="flex-1 min-w-0 box-border${extraPadding}" style="min-width: 0; max-width: 100%; box-sizing: border-box;">
                         <h2 class="${headingSize} font-bold text-gray-900 dark:text-white mb-4">${title}</h2>
                         <div class="prose prose-sm sm:prose-base box-border overflow-hidden" style="max-width: 100%; box-sizing: border-box; word-wrap: break-word; overflow-wrap: break-word;">
                             <style>
-                                .prose * {
+                                /* Only apply max-width to block elements, not inline text elements */
+                                .prose div, .prose section, .prose article, .prose header, .prose footer,
+                                .prose nav, .prose aside, .prose main, .prose img, .prose video,
+                                .prose iframe, .prose canvas, .prose svg, .prose object, .prose embed,
+                                .prose table, .prose pre, .prose blockquote {
                                     max-width: 100% !important;
                                     box-sizing: border-box !important;
+                                }
+                                
+                                /* Ensure text elements wrap properly, not break per character */
+                                .prose p, .prose span, .prose a, .prose strong, .prose em, .prose b,
+                                .prose i, .prose u, .prose code, .prose small, .prose mark, .prose del,
+                                .prose ins, .prose sub, .prose sup, .prose abbr, .prose kbd, .prose samp,
+                                .prose var, .prose time, .prose label, .prose li, .prose td, .prose th {
+                                    word-wrap: break-word !important;
+                                    overflow-wrap: break-word !important;
+                                    word-break: normal !important;
+                                    hyphens: auto !important;
+                                    max-width: 100% !important;
                                 }
                                 .prose table {
                                     width: 100% !important;
@@ -153,7 +169,7 @@ class ContentTemplateRenderer {
                         <div class="${this.getIconContainerClasses('blue')} flex-shrink-0">
                             <i class="fas fa-book text-lg"></i>
                         </div>
-                        <div class="flex-1 min-w-0 box-border${extraPadding}" style="width: 0; max-width: 100%; box-sizing: border-box;">
+                        <div class="flex-1 min-w-0 box-border${extraPadding}" style="min-width: 0; max-width: 100%; box-sizing: border-box;">
                             <h1 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">${title}: ${subtitle}</h1>
                             <p class="text-gray-600 dark:text-gray-300 mb-4">${description}</p>
                         </div>

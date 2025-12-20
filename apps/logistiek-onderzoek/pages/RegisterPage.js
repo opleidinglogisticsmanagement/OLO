@@ -80,8 +80,9 @@ class RegisterPage extends BaseLessonPage {
         console.log('[RegisterPage] 🎨 renderContent() called, terms count:', this.terms.length);
         const content = super.renderContent();
         
-        // Use a more robust way to ensure DOM is ready
-        // Instead of one-time setTimeout, we'll try to initialize when the container becomes available
+        // Note: Event listeners (letter filters, search) are now attached in attachEventListeners()
+        // which is called by AppRouter after content is rendered. This ensures DOM is ready.
+        // We still use initContentWhenReady as a fallback for direct page loads (not via router)
         this.initContentWhenReady();
         
         return content;
@@ -251,8 +252,12 @@ class RegisterPage extends BaseLessonPage {
      */
     attachEventListeners() {
         super.attachEventListeners();
-        // Note: Letter filters and search input are attached separately after DOM is ready
-        // See attachLetterFilters() and attachSearchInputListener()
+        // Initialize letter filters and search input after a short delay to ensure DOM is ready
+        // This is called by AppRouter after content is rendered
+        setTimeout(() => {
+            this.attachLetterFilters();
+            this.attachSearchInputListener();
+        }, 100);
     }
     
     /**

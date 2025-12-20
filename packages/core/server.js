@@ -5,14 +5,25 @@
  * en API keys veilig te beheren.
  */
 
-require('dotenv').config();
+// Load .env from monorepo root (not from packages/core)
+const path = require('path');
+const fs = require('fs');
+// Determine monorepo root (go up from packages/core)
+const monorepoRoot = path.resolve(__dirname, '..', '..');
+const envPath = path.join(monorepoRoot, '.env');
+// Try to load .env from root, fallback to local .env
+if (fs.existsSync(envPath)) {
+    require('dotenv').config({ path: envPath });
+    console.log(`[Monorepo] ✅ Loaded .env from: ${envPath}`);
+} else {
+    require('dotenv').config(); // Fallback to local .env
+    console.log(`[Monorepo] ⚠️  .env not found at ${envPath}, using local .env`);
+}
 const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
 const { body, validationResult } = require('express-validator');
-const path = require('path');
-const fs = require('fs');
 const { GoogleGenerativeAI } = require('@google/generative-ai');
 
 const app = express();
@@ -1338,8 +1349,7 @@ app.get('/api/test-gemini', async (req, res) => {
 // ============================================
 // MONOREPO DIRECTORY STRUCTURE
 // ============================================
-// Bepaal monorepo root (2 levels omhoog van packages/core)
-const monorepoRoot = path.resolve(__dirname, '../..');
+// monorepoRoot is al gedeclareerd bovenaan (regel 12)
 const coreDir = __dirname; // packages/core
 let appDir = process.env.APP_DIR || path.join(monorepoRoot, 'apps/logistiek-onderzoek');
 const gameDir = path.join(monorepoRoot, 'game');
@@ -1859,7 +1869,7 @@ module.exports = app;
 
 // Start server alleen lokaal (niet op Vercel)
 if (require.main === module) {
-    app.listen(PORT, async () => {
+    const server = app.listen(PORT, async () => {
         console.log(`🚀 Server running on http://localhost:${PORT}`);
         console.log(`📝 API Key configured: ${!!GEMINI_API_KEY ? '✅ Yes' : '❌ No'}`);
         console.log(`🔒 Security: Helmet, Rate Limiting, CORS, Input Validation enabled`);
@@ -1875,6 +1885,23 @@ if (require.main === module) {
             console.log('[Gemini Proxy] Pre-loading available models cache...');
             await fetchAndCacheAvailableModels();
         }
+    });
+
+    // Graceful shutdown voor nodemon herstart
+    process.on('SIGTERM', () => {
+        console.log('\n🛑 SIGTERM received, shutting down gracefully...');
+        server.close(() => {
+            console.log('✅ Server closed');
+            process.exit(0);
+        });
+    });
+
+    process.on('SIGINT', () => {
+        console.log('\n🛑 SIGINT received, shutting down gracefully...');
+        server.close(() => {
+            console.log('✅ Server closed');
+            process.exit(0);
+        });
     });
 }
 

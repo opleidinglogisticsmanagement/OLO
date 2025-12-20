@@ -2,13 +2,16 @@
   "intro": {
     "title": "Week 7",
     "subtitle": "Rapportage 1",
-    "description": "[Beschrijving komt hier]"
+    "description": "In deze week ga je alle onderdelen die je de afgelopen weken hebt voorbereid samenvoegen tot één professioneel onderzoeksplan. Je leert hoe je een plan schrijft dat direct de aandacht trekt, hoe je zorgt voor een logische rode draad door je hele document, en hoe je je tekst systematisch herschrijft tot een professioneel eindresultaat."
   },
   "leerdoelen": {
     "title": "Leerdoelen",
-    "description": "Formuleer hier de leerdoelen voor deze week. Leerdoelen beschrijven wat studenten na het doorlopen van deze module kunnen doen. Wacht met het formuleren van leerdoelen totdat alle theoriecontent is toegevoegd, zodat je kunt controleren of de leerdoelen de complete theorie beslaan.",
+    "description": "Na het lezen van de theorie kun je:",
     "instruction": "Voeg hier leerdoelen toe die de complete theorie van deze week beslaan. Formuleer leerdoelen pas wanneer alle content is toegevoegd.",
-    "items": [],
+    "items": [
+      "Een professioneel onderzoeksplan schrijven met een duidelijke structuur, sterke visuals en scannable content die direct de aandacht trekt",
+      "De consistentie en logische rode draad in je onderzoeksplan controleren en systematisch je tekst herschrijven volgens de vijf stappen"
+    ],
     "interactive": false
   },
   "theorie": {
@@ -17,7 +20,94 @@
       {
         "type": "paragraph",
         "text": [
-          "[Theorie content komt hier]"
+          "Stel je voor: je opdrachtgever, de logistiek manager, heeft tien minuten tussen twee vergaderingen door. Hij krijgt twee documenten op zijn bureau. Het eerste plan begint met een drie pagina's tellende, wollige inleiding over de geschiedenis van de wereldwijde logistiek, zonder dat duidelijk wordt wat er nu echt aan de hand is. Het tweede plan heeft een krachtige, pakkende titel en een inleiding die direct de vinger op de zere plek legt: \"Door een inefficiënt orderpickproces verliest de organisatie momenteel €2.500,- per week\". Welk plan wordt gelezen en welk plan belandt onderop de stapel?"
+        ]
+      },
+      {
+        "type": "heading",
+        "text": "Schrijven en visualiseren",
+        "level": 2
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "Een plan dat direct de aandacht trekt, ontstaat niet in één keer. Zoals eerder aangegeven is het van belang dat je gewoon begint met schrijven, maar daarna is herschrijven essentieel. Een eerste versie is altijd een ruwe versie; pas door meerdere herschrijfrondes bereik je de professionaliteit die je opdrachtgever verwacht. Herschrijf je tekst systematisch in vijf stappen:<br><ol class='list-decimal list-outside ml-8 mt-2 space-y-2'><li class='text-gray-700 dark:text-gray-300'>Breng eerst inhoudelijke verbeteringen aan.</li><li class='text-gray-700 dark:text-gray-300'>Verbeter vervolgens de logische lijn in je argumentatie.</li><li class='text-gray-700 dark:text-gray-300'>Corrigeer daarna grammatica, interpunctie en spelling (gebruik hiervoor ook de editor functie in Word, te bereiken via F7).</li><li class='text-gray-700 dark:text-gray-300'>Pas daarna de lay-out aan zodat deze voldoet aan de vormvoorschriften.</li><li class='text-gray-700 dark:text-gray-300'>Vraag ten slotte iemand om feedback te geven op de concepteindversie van je tekst.</li></ol><br>"
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "Voor extra ondersteuning bij het schrijven en herschrijven kun je <a href='https://xerte.windesheim.nl/play.php?template_id=474#page1' target='_blank' class='text-blue-600 hover:text-blue-800 underline'>Schrijven voor je studie</a> raadplegen. Sla deze link op en gebruik hem als naslagwerk tijdens het schrijfproces."
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "Jouw onderzoeksplan is geen schoolopdracht, maar een professioneel voorstel voor een bedrijf. Dit vraagt om scannability: de lezer moet in één oogopslag de essentie kunnen vatten. Dit bereik je niet door de tekst vol te zetten met dikgedrukte woorden, dat zou je in de optionele managementsamenvatting kunnen doen, maar door een strakke structuur. Gebruik informatieve kopjes die de lading dekken en werk met sterke 'topzinnen'. De eerste zin van elke alinea moet de kern bevatten, zodat de manager door alleen de eerste zinnen te lezen al begrijpt wat je voorstelt."
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "Een goed logistiek plan kan ook niet zonder sterke visuals. Je hebt de afgelopen weken hard gewerkt aan je onderzoeksmodel; zorg ervoor dat dit er nu perfect uitziet. Een wazige screenshot uit PowerPoint is een gemiste kans; gebruik scherpe exports van je diagrammen zodat ze autoriteit uitstralen. Het onderzoeksmodel is het hart van je plan en maakt in één keer duidelijk hoe jouw onderzoek in elkaar zit."
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "Denk daarnaast kritisch na over welke andere afbeeldingen echt waarde toevoegen aan je verhaal. Schrijf je over stadslogistiek? Voeg dan een figuur toe die de Zero-Emissie zone of de exacte locatie van de huidige hub laat zien. Doe je onderzoek naar een Autonomous Mobile Robot (AMR)? Plaats dan bijvoorbeeld een afbeelding van het type AMR dat je wilt implementeren. Goede visuals fungeren als bewijslast voor je probleemstelling en maken je theoretische concepten tastbaar. Bovendien kunnen figuren en tabellen helpen met de woordlimiet: een tabel of figuur zegt vaak meer dan honderd woorden."
+        ]
+      },
+      {
+        "type": "heading",
+        "text": "De rode draad",
+        "level": 2
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "Een onderzoeksplan is geen verzameling losse wekelijkse opdrachten, maar één integraal en samenhangend ontwerp. Alle onderdelen die je de afgelopen weken hebt voorbereid, van de eerste probleemverkenning tot het dataverzamelingsplan, moeten nu naadloos op elkaar aansluiten. Als de lezer van hoofdstuk naar hoofdstuk gaat, moet er een logische lijn zichtbaar zijn waarbij elk onderdeel voortbouwt op het vorige."
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "Om te controleren of jouw plan \"staat als een huis\", moet je een aantal kritische checks uitvoeren op de consistentie. Kijk bijvoorbeeld of de begrippen uit je doelstelling ook daadwerkelijk terugkomen in je begrippenlijst en je theoretisch kader. Controleer of de deelvragen die je stelt ook echt beantwoord kunnen worden met de methoden die je in je dataverzamelingsplan hebt beschreven. Stem je onderzoeksstrategie (bijvoorbeeld breedte versus diepgang) nauwkeurig af op de aard van je hoofdvraag."
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "Een \"rammelend\" plan herken je vaak aan tegenstrijdigheden in deze rode draad. Stel dat je in je strategie kiest voor een breed survey-onderzoek om de leveranciersprestaties te meten, maar in je dataverzamelingsplan vervolgens alleen diepte-interviews met drie inkopers opneemt. Of je beschrijft een complex probleem over magazijnoptimalisatie, maar je theoretisch kader behandelt alleen algemene Lean-principes zonder in te gaan op specifieke magazijnmodellen. Dergelijke inconsistenties maken je onderzoeksvoorstel kwetsbaar en onprofessioneel."
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "Als je merkt dat de onderdelen niet op elkaar aansluiten, is het tijd voor voortschrijdend inzicht: durf terug te gaan naar je hoofdvraag of je model om deze aan te scherpen. Pas als de probleemverkenning, de doelstelling, het onderzoeksmodel en de gekozen methodiek één gesloten logische cirkel vormen, is je onderzoeksplan klaar voor uitvoering."
+        ]
+      },
+      {
+        "type": "heading",
+        "text": "Schrijfvaardigheidseisen en rubric",
+        "level": 2
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "Zorg ervoor dat je onderzoeksplan voldoet aan de schrijfvaardigheideisen die de opleiding hanteert. Deze eisen zijn opgesteld om ervoor te zorgen dat je verslag professioneel, duidelijk en consistent is. Download het document met de schrijfvaardigheideisen hieronder en controleer of jouw plan aan alle eisen voldoet."
+        ]
+      },
+      {
+        "type": "document",
+        "src": "assets/Documents/Schrijfvaardigheidseisen voor verslagen LM studentenversie 25-26.docx",
+        "text": "Download de schrijfvaardigheideisen voor verslagen",
+        "icon": "fa-file-word"
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "Voordat je je onderzoeksplan inlevert, is het belangrijk om jezelf te beoordelen aan de hand van de rubric. Dit helpt je om te identificeren waar je plan nog verbetering nodig heeft en zorgt ervoor dat je alle belangrijke aspecten hebt meegenomen. Een handige tip: je kunt de rubric in je onderzoeksassistent (GenAI) plaatsen en daarmee ook jezelf beoordelen, mits je erop let dat je geen gevoelige informatie deelt. De rubric kan je helpen om objectief naar je eigen werk te kijken en gerichte verbeteringen aan te brengen voordat je het plan indient."
         ]
       }
     ]

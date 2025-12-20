@@ -1,10 +1,10 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="nl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="view-transition" content="same-origin" />
-    <title>Week 4 - Opzetten van een Logistiek Onderzoek</title>
+    <title>Week 3 - Opzetten van een Logistiek Onderzoek</title>
     <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -144,6 +144,57 @@
         .dark ol.list-decimal li,
         .dark ul.list-disc li {
             color: rgb(209, 213, 219); /* dark:text-gray-300 */
+        }
+        
+        /* Dark mode support voor alle genummerde lijsten in prose */
+        .dark .prose ol li,
+        .dark .prose ul li {
+            color: rgb(209, 213, 219); /* dark:text-gray-300 */
+        }
+        
+        /* Dark mode support voor alle genummerde lijsten (ol) en bullet lijsten (ul) */
+        .dark ol li,
+        .dark ul li {
+            color: rgb(209, 213, 219); /* dark:text-gray-300 */
+        }
+        
+        /* Dark mode support voor genummerde lijsten met list-decimal class */
+        .dark ol.list-decimal li {
+            color: rgb(209, 213, 219); /* dark:text-gray-300 */
+        }
+        
+        /* Dark mode support voor tekst in clickable steps content */
+        .dark .clickable-step-content p,
+        .dark .clickable-step-content li,
+        .dark .clickable-step-content ol li,
+        .dark .clickable-step-content ul li {
+            color: rgb(209, 213, 219); /* dark:text-gray-300 */
+        }
+        
+        /* Dark mode support voor text-gray-600 en text-gray-700 classes in content */
+        .dark .text-gray-600,
+        .dark .text-gray-700 {
+            color: rgb(209, 213, 219) !important; /* dark:text-gray-300 */
+        }
+        
+        /* Dark mode support voor text-gray-900 (headings) */
+        .dark .text-gray-900 {
+            color: rgb(255, 255, 255) !important; /* dark:text-white */
+        }
+        
+        /* Dark mode support voor alle paragrafen in clickable steps */
+        .dark .clickable-step-content p {
+            color: rgb(209, 213, 219) !important; /* dark:text-gray-300 */
+        }
+        
+        /* Dark mode support voor strong tags in content */
+        .dark .clickable-step-content strong {
+            color: rgb(255, 255, 255) !important; /* dark:text-white */
+        }
+        
+        /* Dark mode support voor em tags */
+        .dark .clickable-step-content em {
+            color: rgb(209, 213, 219) !important; /* dark:text-gray-300 */
         }
         
         /* Tabellen dark mode support */
@@ -440,34 +491,34 @@
     </div>
 
     <!-- Dark Mode Utility - MOET EERST GELADEN WORDEN -->
-    <script src="js/DarkMode.js"></script>
+    <script src="/core/js/DarkMode.js"></script>
     
     <script src="config.js"></script>
     <script src="js/SearchService.js"></script>
-    <script src="js/components/LayoutRenderer.js"></script>
-    <script src="js/ui/SidebarManager.js"></script>
-    <script src="js/ui/HeaderManager.js"></script>
-    <script src="js/ui/ScrollManager.js"></script>
-    <script src="js/ui/ImageModalManager.js"></script>
-    <script src="js/ui/InteractiveManager.js"></script>
-    <script src="js/ui/VideoManager.js"></script>
-    <script src="js/ui/TableCopyManager.js"></script>
-    <script src="js/services/NavigationService.js"></script>
-    <script src="js/components/NavigationRenderer.js"></script>
-    <script src="js/components/ContentTemplateRenderer.js"></script>
-    <script src="pages/BaseLessonPage.js"></script>
-    <script src="pages/ContentRenderer.js"></script>
-    <script src="js/components/interactive/utils/HtmlUtils.js"></script>
-    <script src="js/components/interactive/TabRenderer.js"></script>
-    <script src="js/components/interactive/AccordionRenderer.js"></script>
-    <script src="js/components/interactive/ClickableStepsRenderer.js"></script>
-    <script src="js/components/interactive/ChecklistRenderer.js"></script>
-    <script src="js/components/interactive/ExerciseRenderer.js"></script>
-    <script src="js/components/interactive/AIRenderer.js"></script>
-    <script src="pages/InteractiveRenderer.js"></script>
-    <script src="pages/AIGenerator.js"></script>
-    <script src="pages/MCQuestionRenderer.js"></script>
-    <script src="pages/Week4LessonPage.js"></script>
+    <script src="/core/js/components/LayoutRenderer.js"></script>
+    <script src="/core/js/ui/SidebarManager.js"></script>
+    <script src="/core/js/ui/HeaderManager.js"></script>
+    <script src="/core/js/ui/ScrollManager.js"></script>
+    <script src="/core/js/ui/ImageModalManager.js"></script>
+    <script src="/core/js/ui/InteractiveManager.js"></script>
+    <script src="/core/js/ui/VideoManager.js"></script>
+    <script src="/core/js/ui/TableCopyManager.js"></script>
+    <script src="/core/js/services/NavigationService.js"></script>
+    <script src="/core/js/components/NavigationRenderer.js"></script>
+    <script src="/core/js/components/ContentTemplateRenderer.js"></script>
+    <script src="/core/pages/BaseLessonPage.js"></script>
+    <script src="/core/pages/ContentRenderer.js"></script>
+    <script src="/core/js/components/interactive/utils/HtmlUtils.js"></script>
+    <script src="/core/js/components/interactive/TabRenderer.js"></script>
+    <script src="/core/js/components/interactive/AccordionRenderer.js"></script>
+    <script src="/core/js/components/interactive/ClickableStepsRenderer.js"></script>
+    <script src="/core/js/components/interactive/ChecklistRenderer.js"></script>
+    <script src="/core/js/components/interactive/ExerciseRenderer.js"></script>
+    <script src="/core/js/components/interactive/AIRenderer.js"></script>
+    <script src="/core/pages/InteractiveRenderer.js"></script>
+    <script src="/core/pages/AIGenerator.js"></script>
+    <script src="/core/pages/MCQuestionRenderer.js"></script>
+    <script src="pages/Week3LessonPage.js"></script>
     <script>
         // Hard refresh detectie - redirect naar index bij hard refresh
         (function() {
@@ -486,16 +537,16 @@
             const isIndexPage = currentPath.endsWith('index.html') || currentPath === '/' || currentPath.endsWith('/');
             
             if (isHardRefresh && !isIndexPage) {
-                console.log('[week4.html] 🔄 Hard refresh detected, redirecting to index.html');
+                console.log('[week3.html] 🔄 Hard refresh detected, redirecting to index.html');
                 window.location.href = 'index.html';
                 return; // Stop verdere uitvoering
             }
         })();
         
-        // Initialize Week 4 page
+        // Initialize Week 3 page
         document.addEventListener('DOMContentLoaded', () => {
-            const week4Page = new Week4LessonPage();
-            week4Page.init();
+            const week3Page = new Week3LessonPage();
+            week3Page.init();
         });
     </script>
 </body>

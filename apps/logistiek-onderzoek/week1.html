@@ -1,10 +1,10 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="nl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="view-transition" content="same-origin" />
-    <title>Week 7 - Opzetten van een Logistiek Onderzoek</title>
+    <title>Week 1 - Opzetten van een Logistiek Onderzoek</title>
     <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -75,15 +75,6 @@
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .slide-in {
-            animation: slideIn 0.3s ease-out;
-        }
-        
-        @keyframes slideIn {
-            from { transform: translateX(-100%); }
-            to { transform: translateX(0); }
         }
         
         .hover-lift:hover {
@@ -431,43 +422,34 @@
         }
     </style>
 </head>
-<body class="bg-gray-50 dark:bg-gray-900 transition-colors duration-200">
-    <div id="loading" class="min-h-screen flex items-center justify-center">
+<body class="bg-gray-50">
+    <!-- Content wordt geladen door JavaScript -->
+    <div class="flex-1 flex items-center justify-center min-h-screen">
         <div class="text-center">
-            <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 dark:border-blue-400 mx-auto mb-4"></div>
-            <p class="text-gray-600 dark:text-gray-300">Laden...</p>
+            <div class="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-600 mx-auto mb-4"></div>
+            <p class="text-gray-600 dark:text-gray-300">Week 1 wordt geladen...</p>
         </div>
     </div>
 
+    <!-- Load scripts -->
     <!-- Dark Mode Utility - MOET EERST GELADEN WORDEN -->
-    <script src="js/DarkMode.js"></script>
+    <script src="/core/js/DarkMode.js"></script>
     
-    <script src="config.js"></script>
     <script src="js/SearchService.js"></script>
-    <script src="js/components/LayoutRenderer.js"></script>
-    <script src="js/ui/SidebarManager.js"></script>
-    <script src="js/ui/HeaderManager.js"></script>
-    <script src="js/ui/ScrollManager.js"></script>
-    <script src="js/ui/ImageModalManager.js"></script>
-    <script src="js/ui/InteractiveManager.js"></script>
-    <script src="js/ui/VideoManager.js"></script>
-    <script src="js/ui/TableCopyManager.js"></script>
-    <script src="js/services/NavigationService.js"></script>
-    <script src="js/components/NavigationRenderer.js"></script>
-    <script src="js/components/ContentTemplateRenderer.js"></script>
-    <script src="pages/BaseLessonPage.js"></script>
-    <script src="pages/ContentRenderer.js"></script>
-    <script src="js/components/interactive/utils/HtmlUtils.js"></script>
-    <script src="js/components/interactive/TabRenderer.js"></script>
-    <script src="js/components/interactive/AccordionRenderer.js"></script>
-    <script src="js/components/interactive/ClickableStepsRenderer.js"></script>
-    <script src="js/components/interactive/ChecklistRenderer.js"></script>
-    <script src="js/components/interactive/ExerciseRenderer.js"></script>
-    <script src="js/components/interactive/AIRenderer.js"></script>
-    <script src="pages/InteractiveRenderer.js"></script>
-    <script src="pages/AIGenerator.js"></script>
-    <script src="pages/MCQuestionRenderer.js"></script>
-    <script src="pages/Week7LessonPage.js"></script>
+    <script src="/core/js/components/LayoutRenderer.js"></script>
+    <script src="/core/js/ui/SidebarManager.js"></script>
+    <script src="/core/js/ui/HeaderManager.js"></script>
+    <script src="/core/js/ui/ScrollManager.js"></script>
+    <script src="/core/js/ui/ImageModalManager.js"></script>
+    <script src="/core/js/ui/InteractiveManager.js"></script>
+    <script src="/core/js/ui/VideoManager.js"></script>
+    <script src="/core/js/ui/TableCopyManager.js"></script>
+    <script src="/core/js/services/NavigationService.js"></script>
+    <script src="/core/js/components/NavigationRenderer.js"></script>
+    <script src="/core/js/components/ContentTemplateRenderer.js"></script>
+    <script src="/core/pages/BaseLessonPage.js"></script>
+    <script src="/core/pages/ContentRenderer.js"></script>
+    <script src="pages/Week1LessonPage.js"></script>
     <script>
         // Hard refresh detectie - redirect naar index bij hard refresh
         (function() {
@@ -486,16 +468,20 @@
             const isIndexPage = currentPath.endsWith('index.html') || currentPath === '/' || currentPath.endsWith('/');
             
             if (isHardRefresh && !isIndexPage) {
-                console.log('[week7.html] 🔄 Hard refresh detected, redirecting to index.html');
+                console.log('[week1.html] 🔄 Hard refresh detected, redirecting to index.html');
                 window.location.href = 'index.html';
                 return; // Stop verdere uitvoering
             }
         })();
         
-        // Initialize Week 7 page
+        // Initialize Week 1 page (fallback for direct access)
+        // If accessed via index.html, the router will handle it
         document.addEventListener('DOMContentLoaded', () => {
-            const week7Page = new Week7LessonPage();
-            week7Page.init();
+            // Only initialize if we're not in SPA mode (i.e., router not active)
+            if (!window.appRouter) {
+                const week1Page = new Week1LessonPage();
+                week1Page.init();
+            }
         });
     </script>
 </body>

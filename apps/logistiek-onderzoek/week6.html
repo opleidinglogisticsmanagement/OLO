@@ -1,10 +1,10 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="nl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="view-transition" content="same-origin" />
-    <title>Week 5 - Opzetten van een Logistiek Onderzoek</title>
+    <title>Week 6 - Opzetten van een Logistiek Onderzoek</title>
     <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -440,34 +440,34 @@
     </div>
 
     <!-- Dark Mode Utility - MOET EERST GELADEN WORDEN -->
-    <script src="js/DarkMode.js"></script>
+    <script src="/core/js/DarkMode.js"></script>
     
     <script src="config.js"></script>
     <script src="js/SearchService.js"></script>
-    <script src="js/components/LayoutRenderer.js"></script>
-    <script src="js/ui/SidebarManager.js"></script>
-    <script src="js/ui/HeaderManager.js"></script>
-    <script src="js/ui/ScrollManager.js"></script>
-    <script src="js/ui/ImageModalManager.js"></script>
-    <script src="js/ui/InteractiveManager.js"></script>
-    <script src="js/ui/VideoManager.js"></script>
-    <script src="js/ui/TableCopyManager.js"></script>
-    <script src="js/services/NavigationService.js"></script>
-    <script src="js/components/NavigationRenderer.js"></script>
-    <script src="js/components/ContentTemplateRenderer.js"></script>
-    <script src="pages/BaseLessonPage.js"></script>
-    <script src="pages/ContentRenderer.js"></script>
-    <script src="js/components/interactive/utils/HtmlUtils.js"></script>
-    <script src="js/components/interactive/TabRenderer.js"></script>
-    <script src="js/components/interactive/AccordionRenderer.js"></script>
-    <script src="js/components/interactive/ClickableStepsRenderer.js"></script>
-    <script src="js/components/interactive/ChecklistRenderer.js"></script>
-    <script src="js/components/interactive/ExerciseRenderer.js"></script>
-    <script src="js/components/interactive/AIRenderer.js"></script>
-    <script src="pages/InteractiveRenderer.js"></script>
-    <script src="pages/AIGenerator.js"></script>
-    <script src="pages/MCQuestionRenderer.js"></script>
-    <script src="pages/Week5LessonPage.js"></script>
+    <script src="/core/js/components/LayoutRenderer.js"></script>
+    <script src="/core/js/ui/SidebarManager.js"></script>
+    <script src="/core/js/ui/HeaderManager.js"></script>
+    <script src="/core/js/ui/ScrollManager.js"></script>
+    <script src="/core/js/ui/ImageModalManager.js"></script>
+    <script src="/core/js/ui/InteractiveManager.js"></script>
+    <script src="/core/js/ui/VideoManager.js"></script>
+    <script src="/core/js/ui/TableCopyManager.js"></script>
+    <script src="/core/js/services/NavigationService.js"></script>
+    <script src="/core/js/components/NavigationRenderer.js"></script>
+    <script src="/core/js/components/ContentTemplateRenderer.js"></script>
+    <script src="/core/pages/BaseLessonPage.js"></script>
+    <script src="/core/pages/ContentRenderer.js"></script>
+    <script src="/core/js/components/interactive/utils/HtmlUtils.js"></script>
+    <script src="/core/js/components/interactive/TabRenderer.js"></script>
+    <script src="/core/js/components/interactive/AccordionRenderer.js"></script>
+    <script src="/core/js/components/interactive/ClickableStepsRenderer.js"></script>
+    <script src="/core/js/components/interactive/ChecklistRenderer.js"></script>
+    <script src="/core/js/components/interactive/ExerciseRenderer.js"></script>
+    <script src="/core/js/components/interactive/AIRenderer.js"></script>
+    <script src="/core/pages/InteractiveRenderer.js"></script>
+    <script src="/core/pages/AIGenerator.js"></script>
+    <script src="/core/pages/MCQuestionRenderer.js"></script>
+    <script src="pages/Week6LessonPage.js"></script>
     <script>
         // Hard refresh detectie - redirect naar index bij hard refresh
         (function() {
@@ -486,16 +486,16 @@
             const isIndexPage = currentPath.endsWith('index.html') || currentPath === '/' || currentPath.endsWith('/');
             
             if (isHardRefresh && !isIndexPage) {
-                console.log('[week5.html] 🔄 Hard refresh detected, redirecting to index.html');
+                console.log('[week6.html] 🔄 Hard refresh detected, redirecting to index.html');
                 window.location.href = 'index.html';
                 return; // Stop verdere uitvoering
             }
         })();
         
-        // Initialize Week 5 page
+        // Initialize Week 6 page
         document.addEventListener('DOMContentLoaded', () => {
-            const week5Page = new Week5LessonPage();
-            week5Page.init();
+            const week6Page = new Week6LessonPage();
+            week6Page.init();
         });
     </script>
 </body>

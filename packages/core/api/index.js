@@ -13,22 +13,37 @@ process.env.VERCEL = '1';
 const path = require('path');
 const fs = require('fs');
 
+// Monorepo structuur: bepaal directories
+// api/index.js staat in packages/core/api/
+const monorepoRoot = path.resolve(__dirname, '../..'); // 2 levels omhoog
+const coreDir = path.resolve(__dirname, '..'); // packages/core
+const appDir = process.env.APP_DIR || path.join(monorepoRoot, 'apps/logistiek-onderzoek');
+
 // Probeer verschillende paden om de root directory te vinden
 // Op Vercel serverless worden alle bestanden in /var/task/ geplaatst
 const possibleRoots = [
     '/var/task', // Vercel default - waar alle bestanden zijn (probeer dit eerst!)
-    path.join(__dirname, '..'), // Parent van api/ (waar server.js staat)
+    monorepoRoot, // Monorepo root
+    path.join(monorepoRoot, 'apps', 'logistiek-onderzoek'), // App directory
+    path.join(__dirname, '../..'), // 2 levels omhoog van api/
     process.cwd(), // Current working directory
 ];
 
 let rootDir = null;
 
-// Zoek waar index.html daadwerkelijk staat
+// Zoek waar index.html daadwerkelijk staat (in app directory)
 for (const possibleRoot of possibleRoots) {
     const testFile = path.join(possibleRoot, 'index.html');
     if (fs.existsSync(testFile)) {
         rootDir = possibleRoot;
         console.log(`✅ Found root directory: ${rootDir}`);
+        break;
+    }
+    // Ook checken in apps/logistiek-onderzoek subdirectory
+    const appTestFile = path.join(possibleRoot, 'apps', 'logistiek-onderzoek', 'index.html');
+    if (fs.existsSync(appTestFile)) {
+        rootDir = path.join(possibleRoot, 'apps', 'logistiek-onderzoek');
+        console.log(`✅ Found app directory: ${rootDir}`);
         break;
     }
 }
@@ -67,12 +82,19 @@ try {
 }
 
 // Pre-load HTML files into memory so they're available in serverless environment
+// HTML bestanden staan in app directory
 const htmlFiles = {};
 const htmlFileNames = ['index.html', 'week1.html', 'week2.html', 'week3.html', 'week4.html', 'week5.html', 'week6.html', 'week7.html', 'instructies.html', 'afsluiting.html'];
 
 console.log('=== Pre-loading HTML files ===');
+console.log(`[Monorepo] App directory: ${appDir}`);
+console.log(`[Monorepo] Root directory: ${rootDir}`);
 for (const fileName of htmlFileNames) {
-    const filePath = path.join(rootDir, fileName);
+    // Probeer eerst app directory, dan root directory
+    let filePath = path.join(appDir, fileName);
+    if (!fs.existsSync(filePath)) {
+        filePath = path.join(rootDir, fileName);
+    }
     try {
         if (fs.existsSync(filePath)) {
             htmlFiles[fileName] = fs.readFileSync(filePath, 'utf8');

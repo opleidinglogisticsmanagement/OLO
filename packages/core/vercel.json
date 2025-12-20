@@ -1,29 +1,13 @@
 {
   "version": 2,
-  "buildCommand": "npm install",
-  "installCommand": "npm install",
   "functions": {
-    "packages/core/api/index.js": {
-      "includeFiles": "packages/core/**",
-      "memory": 1024,
-      "maxDuration": 30
+    "api/index.js": {
+      "includeFiles": "**/*.{html,js,json,png,jpg,jpeg,gif,svg,ico,woff,woff2,ttf,eot,docx,pdf,xlsx,vsdx}"
     }
   },
   "rewrites": [
     {
       "source": "/api/(.*)",
-      "destination": "/api/index.js"
-    },
-    {
-      "source": "/core/(.*)",
-      "destination": "/core/$1"
-    },
-    {
-      "source": "/game/(.*)",
-      "destination": "/game/$1"
-    },
-    {
-      "source": "/(.*)",
       "destination": "/api/index.js"
     }
   ],

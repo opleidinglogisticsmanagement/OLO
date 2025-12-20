@@ -1,0 +1,97 @@
+# E-Learning: Opzetten van een Logistiek Onderzoek
+
+## Context
+Je werkt aan de e-learning in deze app folder (`apps/logistiek-onderzoek`). 
+Deze app gebruikt het gedeelde framework uit `packages/core`.
+
+## Focus & Scope
+
+### ✅ WEL doen:
+- **Content bestanden**: Werk alleen met JSON bestanden in `content/` folder
+- **App-specifieke pagina's**: Maak/werk aan pagina's in `pages/` die `BaseLessonPage` extenden
+- **Assets**: Voeg afbeeldingen en documenten toe aan `assets/`
+- **Configuratie**: Pas `config.js` of app-specifieke config aan
+- **HTML bestanden**: Pas HTML aan voor app-specifieke aanpassingen
+
+### ❌ NIET doen:
+- **Core framework wijzigen**: Wijzig GEEN bestanden in `packages/core/`
+- **Andere apps**: Verwijs niet naar of wijzig content van andere apps in `apps/`
+- **Gedeelde componenten**: Als je een nieuwe component nodig hebt, vraag de beheerder om deze toe te voegen aan `packages/core`
+
+## Code Patterns
+
+### Nieuwe Week Pagina Toevoegen:
+```javascript
+// pages/WeekXLessonPage.js
+class WeekXLessonPage extends BaseLessonPage {
+    constructor() {
+        super('week-X', 'Week X', 'Titel van Week X');
+    }
+    
+    renderContentSections() {
+        // Gebruik ContentRenderer uit core
+        const theorieContent = this.content.theorie?.content 
+            ? ContentRenderer.renderContentItems(this.content.theorie.content, { enableModal: true })
+            : '';
+        return this.contentTemplateRenderer.renderSection(
+            this.content.theorie?.title || 'Theorie',
+            theorieContent,
+            'book',
+            'purple'
+        );
+    }
+}
+```
+
+### Content JSON Structuur:
+Gebruik de standaard content types uit het framework:
+- `paragraph`, `image`, `url`, `document`, `highlight`
+- `accordion`, `tabs`, `clickableSteps`
+- `matchingExercise`, `trueFalseExercise`, etc.
+
+Zie `../../packages/core/pages/ContentRenderer.js` voor alle beschikbare types.
+
+## Best Practices
+
+1. **Content alleen in JSON**: Plaats alle content in `content/*.content.json` bestanden
+2. **Hergebruik core**: Gebruik altijd componenten uit `packages/core`, maak geen duplicates
+3. **Validatie**: Controleer JSON met `ContentValidator` (automatisch bij laden)
+4. **Naming**: Gebruik consistente naming: `week1.content.json`, `week2.content.json`, etc.
+
+## Als je een nieuwe feature nodig hebt:
+
+Als je een nieuwe interactieve component of functionaliteit nodig hebt:
+1. **Beschrijf het probleem** in een issue of vraag het aan de beheerder
+2. **Wacht op implementatie** in `packages/core`
+3. **Gebruik de nieuwe feature** in je content JSON
+
+## File Paths
+
+- Core framework: `../../packages/core/` (relatief vanaf app)
+- Andere apps: `../[andere-app]/` (alleen lezen, niet wijzigen)
+- Eigen content: `./content/`
+- Eigen assets: `./assets/`
+- Eigen pages: `./pages/`
+
+## Testing
+
+Test altijd lokaal met:
+```bash
+cd ../../packages/core
+npm run dev
+```
+
+Open dan je HTML bestanden via `http://localhost:3000`
+
+## Content Types
+
+Deze e-learning gebruikt:
+- Week 1-7: Basis logistiek onderzoek
+- Afsluiting: Reflectie opdracht
+- Register: Begrippenlijst
+
+## Specifieke Features
+- Custom matching exercise in week 3
+- AI query tool in week 5
+- Research Architect Game (linkt naar `/game/index.html`)
+

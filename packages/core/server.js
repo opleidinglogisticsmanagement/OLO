@@ -28,6 +28,7 @@ app.use(helmet({
         directives: {
             defaultSrc: ["'self'"],
             scriptSrc: ["'self'", "'unsafe-inline'", "https://cdn.tailwindcss.com", "https://cdnjs.cloudflare.com", "https://*.vercel.app"],
+            scriptSrcAttr: ["'unsafe-inline'"], // Toestaan van inline event handlers (onerror, onload)
             styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com", "https://cdnjs.cloudflare.com"],
             fontSrc: ["'self'", "https://fonts.gstatic.com", "https://cdnjs.cloudflare.com"],
             imgSrc: ["'self'", "data:", "https:"],
@@ -1334,31 +1335,79 @@ app.get('/api/test-gemini', async (req, res) => {
     }
 });
 
-// Static files moeten NA API routes worden geladen
-// Anders worden API routes overschreven door static file serving
-// Op Vercel: __dirname in server.js is altijd de root directory waar server.js staat
-// Maar op Vercel serverless kunnen bestanden op een andere locatie staan
-let rootDir = __dirname;
+// ============================================
+// MONOREPO DIRECTORY STRUCTURE
+// ============================================
+// Bepaal monorepo root (2 levels omhoog van packages/core)
+const monorepoRoot = path.resolve(__dirname, '../..');
+const coreDir = __dirname; // packages/core
+let appDir = process.env.APP_DIR || path.join(monorepoRoot, 'apps/logistiek-onderzoek');
+const gameDir = path.join(monorepoRoot, 'game');
 
-// Als we op Vercel draaien en er is een VERCEL_ROOT_DIR environment variable, gebruik die
+// Fallback voor Vercel: probeer verschillende locaties
+let rootDir = monorepoRoot;
 if (process.env.VERCEL && process.env.VERCEL_ROOT_DIR) {
     rootDir = process.env.VERCEL_ROOT_DIR;
-    console.log(`Using Vercel root directory: ${rootDir}`);
-} else if (process.env.VERCEL) {
-    // Op Vercel serverless is __dirname /var/task/, maar bestanden staan in de root
-    // Probeer parent directory
-    const parentDir = path.join(__dirname, '..');
-    if (fs.existsSync(path.join(parentDir, 'index.html'))) {
-        rootDir = parentDir;
-        console.log(`Found root directory on Vercel: ${rootDir}`);
-    } else {
-        // Laatste redmiddel: gebruik __dirname en log voor debugging
-        console.log(`Warning: Could not find root directory. Using __dirname: ${__dirname}`);
-        rootDir = __dirname;
+    console.log(`[Monorepo] Using Vercel root directory: ${rootDir}`);
+    // Probeer app directory te vinden
+    const possibleAppDirs = [
+        path.join(rootDir, 'apps', 'logistiek-onderzoek'),
+        path.join(rootDir, 'apps', fs.readdirSync(path.join(rootDir, 'apps')).find(d => d !== 'core' && fs.statSync(path.join(rootDir, 'apps', d)).isDirectory()) || 'logistiek-onderzoek')
+    ];
+    for (const possibleAppDir of possibleAppDirs) {
+        if (fs.existsSync(possibleAppDir)) {
+            appDir = possibleAppDir;
+            break;
+        }
+    }
+} else {
+    console.log(`[Monorepo] Root: ${monorepoRoot}`);
+    console.log(`[Monorepo] Core: ${coreDir}`);
+    console.log(`[Monorepo] App: ${appDir}`);
+    console.log(`[Monorepo] Game: ${gameDir}`);
+}
+
+// Verifieer dat directories bestaan
+if (!fs.existsSync(appDir)) {
+    console.warn(`[Monorepo] ⚠️ App directory not found: ${appDir}`);
+    console.warn(`[Monorepo] Looking for apps in: ${path.join(monorepoRoot, 'apps')}`);
+    if (fs.existsSync(path.join(monorepoRoot, 'apps'))) {
+        const apps = fs.readdirSync(path.join(monorepoRoot, 'apps')).filter(f => 
+            fs.statSync(path.join(monorepoRoot, 'apps', f)).isDirectory()
+        );
+        console.warn(`[Monorepo] Available apps: ${apps.join(', ')}`);
+        if (apps.length > 0) {
+            appDir = path.join(monorepoRoot, 'apps', apps[0]);
+            console.log(`[Monorepo] Using first available app: ${appDir}`);
+        }
     }
 }
 
-// Serveer index.html voor root route
+// ============================================
+// STATIC FILE SERVING - MONOREPO STRUCTURE
+// ============================================
+
+// Serveer /core/* routes vanuit packages/core/
+app.use('/core', express.static(coreDir, {
+    index: false,
+    dotfiles: 'ignore',
+    etag: true,
+    lastModified: true,
+    maxAge: '1y'
+}));
+
+// Serveer /game/* routes vanuit game/ (root)
+if (fs.existsSync(gameDir)) {
+    app.use('/game', express.static(gameDir, {
+        index: false,
+        dotfiles: 'ignore',
+        etag: true,
+        lastModified: true,
+        maxAge: '1y'
+    }));
+}
+
+// Serveer index.html voor root route (vanuit app directory)
 app.get('/', (req, res, next) => {
     // Set no-cache headers
     res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
@@ -1372,20 +1421,36 @@ app.get('/', (req, res, next) => {
         return res.send(global.htmlFilesCache['index.html']);
     }
     
-    // Fallback: probeer bestand van disk te lezen
-    const indexPath = path.join(rootDir, 'index.html');
+    // Serveer vanuit app directory
+    const indexPath = path.join(appDir, 'index.html');
+    console.log(`[Monorepo] Serving index.html from: ${indexPath}`);
+    console.log(`[Monorepo] appDir exists: ${fs.existsSync(appDir)}`);
+    console.log(`[Monorepo] index.html exists: ${fs.existsSync(indexPath)}`);
+    
+    if (!fs.existsSync(indexPath)) {
+        console.error(`[Monorepo] ❌ index.html not found at: ${indexPath}`);
+        console.error(`[Monorepo] appDir: ${appDir}`);
+        console.error(`[Monorepo] monorepoRoot: ${monorepoRoot}`);
+        return res.status(404).json({ 
+            error: 'index.html not found',
+            appDir: appDir,
+            indexPath: indexPath,
+            appDirExists: fs.existsSync(appDir)
+        });
+    }
+    
     res.sendFile(indexPath, (err) => {
         if (err) {
-            console.error('Error serving index.html:', err);
+            console.error('[Monorepo] Error serving index.html:', err);
             next(err);
         }
     });
 });
 
-// Serveer game/index.html expliciet
+// Serveer game/index.html expliciet (vanuit game directory)
 app.get('/game/index.html', (req, res, next) => {
-    const filePath = path.join(rootDir, 'game', 'index.html');
-    console.log(`Attempting to serve game/index.html from: ${filePath}`);
+    const filePath = path.join(gameDir, 'index.html');
+    console.log(`[Monorepo] Attempting to serve game/index.html from: ${filePath}`);
     
     if (fs.existsSync(filePath)) {
         res.sendFile(filePath, (err) => {
@@ -1412,7 +1477,7 @@ app.get('/game/assets/:filename', (req, res, next) => {
         return res.status(400).send('Invalid asset path');
     }
 
-    const filePath = path.join(rootDir, 'game', 'assets', filename);
+    const filePath = path.join(gameDir, 'assets', filename);
     console.log(`Attempting to serve game asset: ${filename} from ${filePath}`);
     
     if (fs.existsSync(filePath)) {
@@ -1444,7 +1509,7 @@ app.get('/game/assets/:filename', (req, res, next) => {
 
 // Serveer game vite.svg
 app.get('/game/vite.svg', (req, res, next) => {
-    const filePath = path.join(rootDir, 'game', 'vite.svg');
+    const filePath = path.join(gameDir, 'vite.svg');
     if (fs.existsSync(filePath)) {
         res.setHeader('Content-Type', 'image/svg+xml');
         res.sendFile(filePath, (err) => {
@@ -1475,10 +1540,10 @@ app.get(/\.html$/, (req, res, next) => {
         return res.send(global.htmlFilesCache[fileName]);
     }
     
-    // Fallback: probeer bestand van disk te lezen
-    const filePath = path.join(rootDir, fileName);
-    console.log(`Attempting to serve from disk: ${fileName}`);
-    console.log(`filePath: ${filePath}`);
+    // Fallback: probeer bestand van disk te lezen (vanuit app directory)
+    const filePath = path.join(appDir, fileName);
+    console.log(`[Monorepo] Attempting to serve from disk: ${fileName}`);
+    console.log(`[Monorepo] filePath: ${filePath}`);
     
     // Probeer verschillende paden
     const possiblePaths = [
@@ -1545,6 +1610,7 @@ if (typeof console !== 'undefined') {
 // Op Vercel wordt config.js dynamisch gegenereerd op basis van environment variables
 app.get('/config.js', (req, res, next) => {
     const possiblePaths = [
+        path.join(appDir, 'config.js'),
         path.join(rootDir, 'config.js'),
         path.join('/var/task', 'config.js'),
         path.join(process.cwd(), 'config.js'),
@@ -1579,7 +1645,8 @@ app.get('/config.js', (req, res, next) => {
 // Expliciete route voor JSON bestanden (content files) - VOOR static middleware om caching te voorkomen
 app.get(/\.json$/, (req, res, next) => {
     const fileName = req.path.replace(/^\//, ''); // bijv. content/week2.content.json
-    const filePath = path.join(rootDir, fileName);
+    // Content bestanden staan in app directory
+    const filePath = path.join(appDir, fileName);
     
     // Set no-cache headers om te voorkomen dat browser oude versies cached
     res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
@@ -1588,10 +1655,11 @@ app.get(/\.json$/, (req, res, next) => {
     res.removeHeader('ETag'); // Verwijder ETag om 304 responses te voorkomen
     res.removeHeader('Last-Modified'); // Verwijder Last-Modified om 304 responses te voorkomen
     
-    // Probeer verschillende paden
+    // Probeer verschillende paden (app directory eerst, dan fallbacks)
     const possiblePaths = [
-        filePath,
-        path.join('/var/task', fileName),
+        filePath, // App directory (monorepo)
+        path.join(rootDir, fileName), // Fallback: root directory
+        path.join('/var/task', fileName), // Vercel fallback
         path.join(process.cwd(), fileName),
         path.join(__dirname, fileName),
     ];
@@ -1618,9 +1686,9 @@ app.get(/\.json$/, (req, res, next) => {
     }
 });
 
-// Serve static files (CSS, JS, images, JSON, etc.) - maar NIET HTML (die handlen we hierboven)
+// Serve static files vanuit app directory (assets, etc.)
 // Belangrijk: JavaScript bestanden moeten beschikbaar zijn voor de HTML pagina's
-app.use(express.static(rootDir, { 
+app.use(express.static(appDir, { 
     index: false, // We handlen index.html expliciet
     dotfiles: 'ignore',
     etag: true,
@@ -1629,19 +1697,27 @@ app.use(express.static(rootDir, {
 }));
 
 // Expliciete route voor JavaScript bestanden (fallback als static middleware faalt)
+// App-specifieke JS bestanden (pages/Week*LessonPage.js, js/PDFExporter.js, etc.)
 app.get(/\.js$/, (req, res, next) => {
+    // Skip /core/ routes (die worden al gehandeld door /core static middleware)
+    if (req.path.startsWith('/core/')) {
+        return next();
+    }
+    
     const fileName = req.path.replace(/^\//, ''); // bijv. pages/Week2LessonPage.js
-    const filePath = path.join(rootDir, fileName);
+    // App-specifieke JS bestanden staan in app directory
+    const filePath = path.join(appDir, fileName);
     
     // Set no-cache headers
     res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
     res.setHeader('Pragma', 'no-cache');
     res.setHeader('Expires', '0');
     
-    // Probeer verschillende paden
+    // Probeer verschillende paden (app directory eerst)
     const possiblePaths = [
-        filePath,
-        path.join('/var/task', fileName),
+        filePath, // App directory (monorepo)
+        path.join(rootDir, fileName), // Fallback: root directory
+        path.join('/var/task', fileName), // Vercel fallback
         path.join(process.cwd(), fileName),
         path.join(__dirname, fileName),
     ];
@@ -1668,9 +1744,9 @@ app.get(/\.js$/, (req, res, next) => {
     }
 });
 
-// Serve static files (CSS, JS, images, etc.) - maar NIET HTML en NIET JSON (die handlen we hierboven)
+// Serve static files vanuit app directory (CSS, images, etc.) - maar NIET HTML en NIET JSON (die handlen we hierboven)
 // Belangrijk: JavaScript bestanden moeten beschikbaar zijn voor de HTML pagina's
-app.use(express.static(rootDir, { 
+app.use(express.static(appDir, { 
     index: false, // We handlen index.html expliciet
     dotfiles: 'ignore',
     etag: true,
@@ -1681,12 +1757,14 @@ app.use(express.static(rootDir, {
 // Expliciete route voor afbeeldingen en andere assets - NA static middleware als fallback
 app.get(/\.(png|jpg|jpeg|gif|svg|ico|woff|woff2|ttf|eot|docx|pdf|xlsx|vsdx)$/i, (req, res, next) => {
     const fileName = req.path.replace(/^\//, ''); // bijv. assets/images/Praktijkprobleem.png
-    const filePath = path.join(rootDir, fileName);
+    // Assets staan in app directory
+    const filePath = path.join(appDir, fileName);
     
-    // Probeer verschillende paden
+    // Probeer verschillende paden (app directory eerst)
     const possiblePaths = [
-        filePath,
-        path.join('/var/task', fileName),
+        filePath, // App directory (monorepo)
+        path.join(rootDir, fileName), // Fallback: root directory
+        path.join('/var/task', fileName), // Vercel fallback
         path.join(process.cwd(), fileName),
         path.join(__dirname, fileName),
     ];

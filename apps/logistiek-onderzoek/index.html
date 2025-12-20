@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="nl">
 <head>
     <meta charset="UTF-8">
@@ -587,44 +587,44 @@
 </head>
 <body class="bg-gray-50 dark:bg-gray-900 transition-colors duration-200">
     <!-- Dark Mode Utility - MOET EERST GELADEN WORDEN -->
-    <script src="js/DarkMode.js"></script>
+    <script src="/core/js/DarkMode.js"></script>
     <!-- PDF Exporter -->
     <script src="js/PDFExporter.js"></script>
     <script src="js/SearchService.js"></script>
     
     <!-- SPA Router - Load early -->
-    <script src="js/core/AppRouter.js"></script>
+    <script src="/core/js/core/AppRouter.js"></script>
     
     <!-- Week Page Scripts - Load all for SPA router -->
     <!-- Config (if exists) -->
     <script src="config.js"></script>
     <!-- Core dependencies -->
-    <script src="js/components/LayoutRenderer.js"></script>
-    <script src="js/ui/SidebarManager.js"></script>
-    <script src="js/ui/HeaderManager.js"></script>
-    <script src="js/ui/ScrollManager.js"></script>
-    <script src="js/ui/ImageModalManager.js"></script>
-    <script src="js/ui/InteractiveManager.js"></script>
-    <script src="js/ui/VideoManager.js"></script>
-    <script src="js/ui/TableCopyManager.js"></script>
-    <script src="js/services/NavigationService.js"></script>
-    <script src="js/components/NavigationRenderer.js"></script>
-    <script src="js/components/ContentTemplateRenderer.js"></script>
-    <script src="pages/BaseLessonPage.js"></script>
-    <script src="pages/ContentRenderer.js"></script>
-    <script src="js/utils/ContentValidator.js"></script>
+    <script src="/core/js/components/LayoutRenderer.js"></script>
+    <script src="/core/js/ui/SidebarManager.js"></script>
+    <script src="/core/js/ui/HeaderManager.js"></script>
+    <script src="/core/js/ui/ScrollManager.js"></script>
+    <script src="/core/js/ui/ImageModalManager.js"></script>
+    <script src="/core/js/ui/InteractiveManager.js"></script>
+    <script src="/core/js/ui/VideoManager.js"></script>
+    <script src="/core/js/ui/TableCopyManager.js"></script>
+    <script src="/core/js/services/NavigationService.js"></script>
+    <script src="/core/js/components/NavigationRenderer.js"></script>
+    <script src="/core/js/components/ContentTemplateRenderer.js"></script>
+    <script src="/core/pages/BaseLessonPage.js"></script>
+    <script src="/core/pages/ContentRenderer.js"></script>
+    <script src="/core/js/utils/ContentValidator.js"></script>
     
     <!-- Interactive components -->
-    <script src="js/components/interactive/utils/HtmlUtils.js"></script>
-    <script src="js/components/interactive/TabRenderer.js"></script>
-    <script src="js/components/interactive/AccordionRenderer.js"></script>
-    <script src="js/components/interactive/ClickableStepsRenderer.js"></script>
-    <script src="js/components/interactive/ChecklistRenderer.js"></script>
-    <script src="js/components/interactive/ExerciseRenderer.js"></script>
-    <script src="js/components/interactive/AIRenderer.js"></script>
-    <script src="pages/InteractiveRenderer.js"></script>
-    <script src="pages/AIGenerator.js"></script>
-    <script src="pages/MCQuestionRenderer.js"></script>
+    <script src="/core/js/components/interactive/utils/HtmlUtils.js"></script>
+    <script src="/core/js/components/interactive/TabRenderer.js"></script>
+    <script src="/core/js/components/interactive/AccordionRenderer.js"></script>
+    <script src="/core/js/components/interactive/ClickableStepsRenderer.js"></script>
+    <script src="/core/js/components/interactive/ChecklistRenderer.js"></script>
+    <script src="/core/js/components/interactive/ExerciseRenderer.js"></script>
+    <script src="/core/js/components/interactive/AIRenderer.js"></script>
+    <script src="/core/pages/InteractiveRenderer.js"></script>
+    <script src="/core/pages/AIGenerator.js"></script>
+    <script src="/core/pages/MCQuestionRenderer.js"></script>
     
     <!-- Week Page Classes - Load all for SPA router -->
     <script src="pages/Week1LessonPage.js" onerror="fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'index.html:492',message:'Week1LessonPage.js failed to load',data:{},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'C'})}).catch(()=>{});console.error('[Script] Failed to load Week1LessonPage.js')"></script>

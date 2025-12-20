@@ -1,0 +1,87 @@
+# E-Learning Monorepo Rules
+
+## Structuur
+- `/packages/core` - Gedeelde framework code (wijzig alleen via PR)
+- `/apps/*` - Individuele e-learning apps (elke docent werkt in eigen app)
+- `/game` - Research Architect game (blijft in root)
+- `/research-architect` - Game source code (blijft in root)
+
+## Best Practices
+
+### Core Framework (`/packages/core`)
+- **NIET wijzigen** tenzij je beheerder bent of een Pull Request maakt
+- Core bevat: BaseLessonPage, ContentRenderer, alle managers, server.js, API
+- Als je nieuwe functionaliteit nodig hebt in core, vraag een PR aan
+
+### App Development (`/apps/*`)
+- **Werk altijd in je eigen app folder** (bijv. `/apps/logistiek-onderzoek`)
+- Wijzig alleen: content JSON bestanden, app-specifieke pagina's, assets
+- Gebruik core functionaliteit via `/core/` paths in HTML
+
+### File Paths
+- Core JavaScript: `/core/js/...` (absolute path vanaf root)
+- Core pages: `/core/pages/...` (absolute path vanaf root)
+- App content: `content/...` (relatief vanaf app root)
+- App assets: `assets/...` (relatief vanaf app root)
+- App pages: `pages/Week*LessonPage.js` (relatief vanaf app root)
+
+### Content Development
+- Alle content staat in `content/*.content.json` bestanden
+- Gebruik de standaard content types: paragraph, image, url, document, highlight, accordion, tabs, etc.
+- Zie `packages/core/pages/ContentRenderer.js` voor alle beschikbare types
+
+### Nieuwe Features
+Als je een nieuwe interactieve component of functionaliteit nodig hebt:
+1. **Beschrijf het probleem** in een issue of vraag het aan de beheerder
+2. **Wacht op implementatie** in `packages/core`
+3. **Gebruik de nieuwe feature** in je content JSON
+
+### Testing
+- Test altijd lokaal met: `cd packages/core && npm run dev`
+- Open dan: `http://localhost:3000`
+- Check browser console voor errors
+
+## Code Patterns
+
+### Nieuwe Week Pagina Toevoegen:
+```javascript
+// apps/[app-naam]/pages/WeekXLessonPage.js
+class WeekXLessonPage extends BaseLessonPage {
+    constructor() {
+        super('week-X', 'Week X', 'Titel van Week X');
+    }
+    
+    renderContentSections() {
+        // Gebruik ContentRenderer uit core
+        const theorieContent = this.content.theorie?.content 
+            ? ContentRenderer.renderContentItems(this.content.theorie.content, { enableModal: true })
+            : '';
+        return this.contentTemplateRenderer.renderSection(
+            this.content.theorie?.title || 'Theorie',
+            theorieContent,
+            'book',
+            'purple'
+        );
+    }
+}
+```
+
+### Content JSON Structuur:
+Gebruik de standaard content types uit het framework:
+- `paragraph`, `image`, `url`, `document`, `highlight`
+- `accordion`, `tabs`, `clickableSteps`
+- `matchingExercise`, `trueFalseExercise`, etc.
+
+Zie `packages/core/pages/ContentRenderer.js` voor alle beschikbare types.
+
+## Git Workflow
+- Werk op je eigen branch: `onderwijs/docent-[naam]-[vak]`
+- Wijzig alleen bestanden in je eigen app folder
+- Core wijzigingen: maak een Pull Request
+- Commit messages: gebruik duidelijke beschrijvingen
+
+## Troubleshooting
+- **Scripts laden niet?** Check of paths beginnen met `/core/` voor core bestanden
+- **Content laadt niet?** Check of JSON bestand in `content/` folder staat
+- **Server werkt niet?** Check of je in `packages/core` directory bent en `npm run dev` gebruikt
+

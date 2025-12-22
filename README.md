@@ -18,27 +18,40 @@ Dit platform biedt een complete leerervaring met:
 
 ## 🏗️ Architectuur & Technologie
 
-### Component Structuur
+### Monorepo Structuur
 ```
 OLO/
-├── index.html                  # Dashboard (hoofdpagina)
-├── week1.html                  # Week 1 pagina
-├── week2.html                  # Week 2 pagina
-├── week3-7.html                # Week 3-7 pagina's
-├── afsluiting.html             # Afsluiting pagina
-├── pages/
-│   ├── BaseLessonPage.js       # Basis template voor alle weeks
-│   ├── Week1LessonPage.js     # Week 1 specifiek (voorbeeld)
-│   ├── Week2LessonPage.js     # Week 2 specifiek (voorbeeld)
-│   ├── ContentRenderer.js      # Content rendering engine
-│   └── OtherWeekPages.js       # Week 3-7 + Afsluiting
-├── content/
-│   ├── week1.content.json      # Week 1 content data
-│   ├── week2.content.json      # Week 2 content data
-│   └── week*.content.json      # Overige week content
-└── config/
-    └── moduleConfig.js         # Module configuratie
+├── packages/
+│   └── core/                   # Gedeelde engine (BaseLessonPage, ContentRenderer, server, API)
+│       ├── js/                 # Core JavaScript (managers, services, components)
+│       ├── pages/              # BaseLessonPage, ContentRenderer
+│       ├── api/                # Vercel serverless handler
+│       └── server.js           # Express server voor lokale development
+├── apps/
+│   └── logistiek-onderzoek/    # E-learning app (deze app)
+│       ├── index.html          # Dashboard (hoofdpagina)
+│       ├── week1.html          # Week 1 pagina
+│       ├── week2.html          # Week 2 pagina
+│       ├── week3-7.html        # Week 3-7 pagina's
+│       ├── afsluiting.html     # Afsluiting pagina
+│       ├── pages/              # App-specifieke pagina classes
+│       │   ├── Week1LessonPage.js
+│       │   ├── Week2LessonPage.js
+│       │   └── ...
+│       ├── content/            # Content JSON bestanden
+│       │   ├── week1.content.json
+│       │   ├── week2.content.json
+│       │   └── ...
+│       ├── assets/             # Afbeeldingen, documenten
+│       ├── api/                # Vercel serverless entry point
+│       └── vercel.json         # Vercel configuratie voor deze app
+└── game/                       # Research Architect game
 ```
+
+**Belangrijk:**
+- `/packages/core` - Gedeelde framework code (wijzig alleen via PR)
+- `/apps/*` - Individuele e-learning apps (elke docent werkt in eigen app)
+- Elke app heeft eigen `vercel.json` en `api/index.js`
 
 ### Technologie Stack
 - **HTML5** - Semantische markup
@@ -214,31 +227,120 @@ Health check endpoint om te controleren of de server draait.
 
 #### 🚀 Vercel Deployment
 
-Voor deployment op Vercel moet je de environment variables instellen in het Vercel dashboard:
+**Belangrijk:** Deze repository gebruikt een **monorepo structuur**. Elke e-learning app krijgt een eigen Vercel project.
 
-1. **Ga naar je Vercel project:**
+##### 📦 Stap 1: Nieuw Vercel Project Aanmaken
+
+1. **Ga naar Vercel Dashboard:**
    - Open https://vercel.com/dashboard
-   - Selecteer je project
+   - Klik op **Add New** → **Project**
 
-2. **Voeg environment variable toe:**
-   - Ga naar **Settings** → **Environment Variables**
+2. **Import Repository:**
+   - Selecteer je GitHub repository
+   - **Project Name:** Bijv. "Opzetten van een Logistiek Onderzoek"
+   - **Framework Preset:** Other (of leeg laten)
+
+3. **⚠️ BELANGRIJK: Root Directory instellen:**
+   - Klik op **Edit** naast **Root Directory**
+   - Vul in: `apps/logistiek-onderzoek` (of `apps/[jouw-app-naam]`)
+   - Dit vertelt Vercel waar je app begint in de monorepo
+   - **Zonder deze instelling werkt de deployment niet!**
+
+4. **Build Settings:**
+   - **Build Command:** Laat leeg (of `npm install`)
+   - **Output Directory:** Laat leeg (of `.`)
+   - Vercel gebruikt automatisch `apps/logistiek-onderzoek/vercel.json`
+
+##### 🔑 Stap 2: Environment Variables
+
+1. **Ga naar Settings:**
+   - Klik op je project → **Settings** → **Environment Variables**
+
+2. **Voeg API Key toe:**
    - Klik op **Add New**
    - **Name:** `GEMINI_API_KEY`
    - **Value:** Je Google Gemini API key (bijv. `AIzaSy...`)
    - Selecteer alle environments (Production, Preview, Development)
    - Klik op **Save**
 
-3. **Redeploy je applicatie:**
-   - Na het toevoegen van de environment variable, moet je een nieuwe deployment maken
-   - Ga naar **Deployments** tab
-   - Klik op de drie puntjes (⋯) bij de laatste deployment
-   - Kies **Redeploy**
-   - Of push een nieuwe commit naar je repository
+##### 🚀 Stap 3: Deploy
+
+1. **Klik op Deploy:**
+   - Vercel gebruikt automatisch `apps/logistiek-onderzoek/vercel.json`
+   - De `includeFiles` configuratie zorgt ervoor dat `packages/core` en `game` worden meegenomen
+
+2. **Check Deployment:**
+   - Wacht tot de build klaar is
+   - Test de live URL
+   - Controleer of alle functionaliteit werkt
+
+##### ✅ Belangrijke Configuratie Details
+
+**Root Directory:**
+- ✅ Moet `apps/[app-naam]` zijn (bijv. `apps/logistiek-onderzoek`)
+- ✅ Elke app krijgt een eigen Vercel project
+- ✅ `vercel.json` staat in elke app directory
+
+**vercel.json Structuur:**
+```json
+{
+  "functions": {
+    "api/index.js": {
+      "includeFiles": "../**/*.{html,js,json,png,jpg,jpeg,gif,svg,ico,woff,woff2,ttf,eot,docx,pdf,xlsx,vsdx}",
+      "memory": 1024,
+      "maxDuration": 30
+    }
+  }
+}
+```
+
+**⚠️ Belangrijk:**
+- `includeFiles` moet een **string** zijn (niet een array!)
+- Het pattern `../**/*` gaat omhoog naar de monorepo root
+- Dit zorgt ervoor dat `packages/core` en `game` worden meegenomen
+
+##### 📝 Nieuwe App Toevoegen
+
+Wanneer je een nieuwe e-learning app toevoegt:
+
+1. **Kopieer app folder:**
+   ```bash
+   cp -r apps/logistiek-onderzoek apps/[nieuwe-app-naam]
+   ```
+
+2. **Pas content aan:**
+   - Wijzig `content/*.content.json` bestanden
+   - Update app-specifieke configuratie
+
+3. **Maak nieuw Vercel project:**
+   - Project Name: "[Nieuwe App Naam]"
+   - Root Directory: `apps/[nieuwe-app-naam]`
+   - Environment Variables: zelfde `GEMINI_API_KEY`
+
+4. **Deploy:**
+   - Elke app heeft nu zijn eigen URL en deployment
+
+##### 🔄 Redeploy na Core Wijzigingen
+
+Wanneer je wijzigingen maakt in `packages/core`:
+
+1. **Commit en push:**
+   ```bash
+   git add packages/core/
+   git commit -m "Update: core improvements"
+   git push
+   ```
+
+2. **Redeploy alle apps:**
+   - Ga naar elk Vercel project
+   - Klik op **Deployments** → **Redeploy**
+   - Of push een kleine wijziging naar elke app
 
 **Belangrijk:** 
 - De `.env` file wordt **niet** geüpload naar Vercel (om veiligheidsredenen)
 - Environment variables moeten altijd via het Vercel dashboard worden ingesteld
 - Na het toevoegen van een nieuwe environment variable is een redeploy nodig
+- Core wijzigingen worden automatisch meegenomen bij de volgende deployment (via `includeFiles`)
 
 #### ⚠️ Troubleshooting
 

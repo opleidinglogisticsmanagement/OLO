@@ -1401,9 +1401,9 @@ if (!fs.existsSync(appDir)) {
 // Dit zorgt ervoor dat bestanden correct worden geserveerd met juiste content-type
 // Deze route moet VOOR de static middleware komen
 app.get('/core/*', (req, res, next) => {
-    console.log(`[Core Route] Request for: ${req.path}`);
+    console.log(`[Core Route] ✅ Route matched for: ${req.path}`);
     const filePath = req.path.replace(/^\/core\//, ''); // Verwijder /core/ prefix
-    console.log(`[Core Route] File path: ${filePath}`);
+    console.log(`[Core Route] Extracted file path: ${filePath}`);
     
     // Set no-cache headers voor JS bestanden
     if (filePath.endsWith('.js')) {
@@ -1424,24 +1424,28 @@ app.get('/core/*', (req, res, next) => {
     
     let foundPath = null;
     for (const possiblePath of possiblePaths) {
+        console.log(`[Core Route] Checking path: ${possiblePath}`);
         if (fs.existsSync(possiblePath)) {
-            foundPath = possiblePath;
-            console.log(`✅ Serving /core/${filePath} from: ${foundPath}`);
-            
             // Extra check: lees eerste regel om te verifiëren dat het geen server.js is
             try {
-                const firstLine = fs.readFileSync(foundPath, 'utf8').split('\n')[0];
+                const firstLine = fs.readFileSync(possiblePath, 'utf8').split('\n')[0];
+                console.log(`[Core Route] First line of ${possiblePath}: ${firstLine.substring(0, 100)}`);
                 if (firstLine.includes('const path = require') || firstLine.includes('const express = require')) {
-                    console.error(`⚠️ WARNING: File appears to be server-side code: ${foundPath}`);
+                    console.error(`⚠️ WARNING: File appears to be server-side code: ${possiblePath}`);
                     console.error(`First line: ${firstLine.substring(0, 100)}`);
                     // Skip dit pad en probeer volgende
                     continue;
                 }
             } catch (e) {
-                // Kan bestand niet lezen, skip check
+                console.error(`⚠️ Could not read file for check: ${possiblePath}`, e.message);
+                // Kan bestand niet lezen, skip check maar gebruik het pad wel
             }
             
+            foundPath = possiblePath;
+            console.log(`✅ Found file at: ${foundPath}`);
             break;
+        } else {
+            console.log(`❌ Path does not exist: ${possiblePath}`);
         }
     }
     
@@ -1473,6 +1477,11 @@ app.get('/core/*', (req, res, next) => {
             }
             
             console.log(`✅ Verified client-side JavaScript: /core/${filePath} (${fileContent.length} chars)`);
+            console.log(`First 3 lines of file:`);
+            const firstLines = fileContent.split('\n').slice(0, 3);
+            firstLines.forEach((line, idx) => {
+                console.log(`  Line ${idx + 1}: ${line.substring(0, 100)}`);
+            });
             
             // Serveer bestand als string (niet via sendFile om controle te hebben)
             res.send(fileContent);

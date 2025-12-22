@@ -1397,7 +1397,53 @@ if (!fs.existsSync(appDir)) {
 // STATIC FILE SERVING - MONOREPO STRUCTURE
 // ============================================
 
-// Serveer /core/* routes vanuit packages/core/
+// Expliciete route voor /core/* bestanden (voor Vercel serverless)
+// Dit zorgt ervoor dat bestanden correct worden geserveerd met juiste content-type
+// Deze route moet VOOR de static middleware komen
+app.get('/core/*', (req, res, next) => {
+    const filePath = req.path.replace(/^\/core\//, ''); // Verwijder /core/ prefix
+    const fullPath = path.join(coreDir, filePath);
+    
+    // Set no-cache headers voor JS bestanden
+    if (filePath.endsWith('.js')) {
+        res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+        res.setHeader('Pragma', 'no-cache');
+        res.setHeader('Expires', '0');
+        res.setHeader('Content-Type', 'application/javascript; charset=utf-8');
+    }
+    
+    // Probeer verschillende paden (voor Vercel serverless)
+    const possiblePaths = [
+        fullPath, // coreDir (packages/core)
+        path.join('/var/task', 'packages', 'core', filePath), // Vercel default
+        path.join(rootDir, 'packages', 'core', filePath), // Vercel rootDir
+        path.join(monorepoRoot, 'packages', 'core', filePath), // Monorepo root
+    ];
+    
+    let foundPath = null;
+    for (const possiblePath of possiblePaths) {
+        if (fs.existsSync(possiblePath)) {
+            foundPath = possiblePath;
+            console.log(`✅ Serving /core/${filePath} from: ${foundPath}`);
+            break;
+        }
+    }
+    
+    if (foundPath) {
+        res.sendFile(foundPath, (err) => {
+            if (err) {
+                console.error(`Error serving /core/${filePath}:`, err);
+                next(err);
+            }
+        });
+    } else {
+        console.error(`❌ /core/${filePath} not found. Tried:`, possiblePaths);
+        console.error(`coreDir: ${coreDir}, rootDir: ${rootDir}, monorepoRoot: ${monorepoRoot}`);
+        res.status(404).send(`File not found: /core/${filePath}`);
+    }
+});
+
+// Serveer /core/* routes vanuit packages/core/ (fallback voor lokale development)
 app.use('/core', express.static(coreDir, {
     index: false,
     dotfiles: 'ignore',

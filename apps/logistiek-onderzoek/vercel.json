@@ -15,11 +15,11 @@
     },
     {
       "source": "/core/(.*)",
-      "destination": "/core/$1"
+      "destination": "/api/index.js"
     },
     {
       "source": "/game/(.*)",
-      "destination": "/game/$1"
+      "destination": "/api/index.js"
     },
     {
       "source": "/(.*)\\.html$",

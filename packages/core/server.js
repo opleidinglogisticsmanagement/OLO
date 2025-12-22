@@ -105,6 +105,14 @@ app.use(cors({
 }));
 
 // 3. Request size limits (prevent DoS)
+// Request logging middleware (voor debugging)
+app.use((req, res, next) => {
+    if (req.path.startsWith('/core/')) {
+        console.log(`[Request Logger] ${req.method} ${req.path} - Will be handled by /core/* route`);
+    }
+    next();
+});
+
 app.use(express.json({ limit: '1mb' })); // Max 1MB voor JSON bodies
 app.use(express.urlencoded({ extended: true, limit: '1mb' }));
 
@@ -1400,10 +1408,17 @@ if (!fs.existsSync(appDir)) {
 // Expliciete route voor /core/* bestanden (voor Vercel serverless)
 // Dit zorgt ervoor dat bestanden correct worden geserveerd met juiste content-type
 // Deze route moet VOOR de static middleware komen
-app.get('/core/*', (req, res, next) => {
-    console.log(`[Core Route] ✅ Route matched for: ${req.path}`);
+// Express ondersteunt /core/* niet direct - gebruik regex of parameter
+// Regex pattern: /^\/core\/.*$/ matcht alle paden die beginnen met /core/
+app.get(/^\/core\/.*$/, (req, res, next) => {
+    console.log(`[Core Route] ✅✅✅ Route matched for: ${req.path}`);
+    console.log(`[Core Route] Request method: ${req.method}`);
+    console.log(`[Core Route] Full URL: ${req.protocol}://${req.get('host')}${req.originalUrl}`);
     const filePath = req.path.replace(/^\/core\//, ''); // Verwijder /core/ prefix
     console.log(`[Core Route] Extracted file path: ${filePath}`);
+    console.log(`[Core Route] coreDir: ${coreDir}`);
+    console.log(`[Core Route] rootDir: ${rootDir}`);
+    console.log(`[Core Route] monorepoRoot: ${monorepoRoot}`);
     
     // Set no-cache headers voor JS bestanden
     if (filePath.endsWith('.js')) {
@@ -1977,10 +1992,26 @@ app.use((err, req, res, next) => {
 
 // 404 handler voor onbekende routes
 app.use((req, res) => {
-    res.status(404).json({
-        error: 'Not found',
-        message: `Route ${req.method} ${req.path} niet gevonden`
-    });
+    // Log alle 404 requests voor debugging
+    if (req.path.startsWith('/core/')) {
+        console.error(`[404 Handler] ❌ /core/* request reached 404 handler: ${req.method} ${req.path}`);
+        console.error(`[404 Handler] This means the /core/* route was NOT matched!`);
+        console.error(`[404 Handler] Request details:`, {
+            method: req.method,
+            path: req.path,
+            originalUrl: req.originalUrl,
+            baseUrl: req.baseUrl
+        });
+        // Geef JS-comment response om browser executie te voorkomen
+        res.status(404)
+           .setHeader('Content-Type', 'application/javascript; charset=utf-8')
+           .send(`// Error: /core/* route not matched for ${req.path}\n// Check Vercel deployment logs for route matching issues.`);
+    } else {
+        res.status(404).json({
+            error: 'Not found',
+            message: `Route ${req.method} ${req.path} niet gevonden`
+        });
+    }
 });
 
 // Export voor Vercel serverless

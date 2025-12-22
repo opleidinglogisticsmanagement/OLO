@@ -1402,7 +1402,6 @@ if (!fs.existsSync(appDir)) {
 // Deze route moet VOOR de static middleware komen
 app.get('/core/*', (req, res, next) => {
     const filePath = req.path.replace(/^\/core\//, ''); // Verwijder /core/ prefix
-    const fullPath = path.join(coreDir, filePath);
     
     // Set no-cache headers voor JS bestanden
     if (filePath.endsWith('.js')) {
@@ -1413,8 +1412,9 @@ app.get('/core/*', (req, res, next) => {
     }
     
     // Probeer verschillende paden (voor Vercel serverless)
+    // Belangrijk: coreDir is packages/core, dus filePath moet relatief zijn vanaf daar
     const possiblePaths = [
-        fullPath, // coreDir (packages/core)
+        path.join(coreDir, filePath), // coreDir (packages/core) + filePath
         path.join('/var/task', 'packages', 'core', filePath), // Vercel default
         path.join(rootDir, 'packages', 'core', filePath), // Vercel rootDir
         path.join(monorepoRoot, 'packages', 'core', filePath), // Monorepo root
@@ -1425,17 +1425,50 @@ app.get('/core/*', (req, res, next) => {
         if (fs.existsSync(possiblePath)) {
             foundPath = possiblePath;
             console.log(`✅ Serving /core/${filePath} from: ${foundPath}`);
+            
+            // Extra check: lees eerste regel om te verifiëren dat het geen server.js is
+            try {
+                const firstLine = fs.readFileSync(foundPath, 'utf8').split('\n')[0];
+                if (firstLine.includes('const path = require') || firstLine.includes('const express = require')) {
+                    console.error(`⚠️ WARNING: File appears to be server-side code: ${foundPath}`);
+                    console.error(`First line: ${firstLine.substring(0, 100)}`);
+                    // Skip dit pad en probeer volgende
+                    continue;
+                }
+            } catch (e) {
+                // Kan bestand niet lezen, skip check
+            }
+            
             break;
         }
     }
     
     if (foundPath) {
-        res.sendFile(foundPath, (err) => {
-            if (err) {
-                console.error(`Error serving /core/${filePath}:`, err);
-                next(err);
+        // Lees bestand en controleer of het client-side JavaScript is
+        try {
+            const fileContent = fs.readFileSync(foundPath, 'utf8');
+            
+            // Check of bestand server-side code bevat (mag niet in browser)
+            if (fileContent.includes('const path = require') || 
+                fileContent.includes('const express = require') ||
+                fileContent.includes('module.exports') && !fileContent.includes('if (typeof module')) {
+                console.error(`❌ ERROR: File contains server-side code: ${foundPath}`);
+                console.error(`First 200 chars: ${fileContent.substring(0, 200)}`);
+                return res.status(500).send(`// Error: File contains server-side code and cannot be served to browser`);
             }
-        });
+            
+            // Serveer bestand als string (niet via sendFile om controle te hebben)
+            res.send(fileContent);
+        } catch (readError) {
+            console.error(`Error reading /core/${filePath}:`, readError);
+            // Fallback naar sendFile
+            res.sendFile(foundPath, (err) => {
+                if (err) {
+                    console.error(`Error serving /core/${filePath}:`, err);
+                    next(err);
+                }
+            });
+        }
     } else {
         console.error(`❌ /core/${filePath} not found. Tried:`, possiblePaths);
         console.error(`coreDir: ${coreDir}, rootDir: ${rootDir}, monorepoRoot: ${monorepoRoot}`);
@@ -1444,13 +1477,17 @@ app.get('/core/*', (req, res, next) => {
 });
 
 // Serveer /core/* routes vanuit packages/core/ (fallback voor lokale development)
-app.use('/core', express.static(coreDir, {
-    index: false,
-    dotfiles: 'ignore',
-    etag: true,
-    lastModified: true,
-    maxAge: '1y'
-}));
+// BELANGRIJK: In Vercel serverless wordt de expliciete route hierboven gebruikt
+// Deze static middleware is alleen voor lokale development
+if (!process.env.VERCEL) {
+    app.use('/core', express.static(coreDir, {
+        index: false,
+        dotfiles: 'ignore',
+        etag: true,
+        lastModified: true,
+        maxAge: '1y'
+    }));
+}
 
 // Serveer /game/* routes vanuit game/ (root)
 if (fs.existsSync(gameDir)) {

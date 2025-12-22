@@ -1473,7 +1473,10 @@ app.get('/core/*', (req, res, next) => {
                 console.error(`File size: ${fileContent.length} chars`);
                 console.error(`First 500 chars: ${fileContent.substring(0, 500)}`);
                 console.error(`Has Node require: ${hasNodeRequire}, Has Express: ${hasExpress}, Has Path: ${hasPathRequire}`);
-                return res.status(500).send(`// Error: File contains server-side code and cannot be served to browser\n// File: ${foundPath}\n// This file should only contain client-side JavaScript`);
+                // Expliciete error met JS comment om te voorkomen dat browser server-code uitvoert
+                return res.status(500)
+                          .setHeader('Content-Type', 'application/javascript; charset=utf-8')
+                          .send(`// Error: File contains server-side code and cannot be served to browser\n// File: ${foundPath}\n// This file should only contain client-side JavaScript\n// Check Vercel deployment logs for details.`);
             }
             
             console.log(`✅ Verified client-side JavaScript: /core/${filePath} (${fileContent.length} chars)`);
@@ -1487,18 +1490,25 @@ app.get('/core/*', (req, res, next) => {
             res.send(fileContent);
         } catch (readError) {
             console.error(`Error reading /core/${filePath}:`, readError);
-            // Fallback naar sendFile
+            console.error(`Error details:`, readError.message, readError.stack);
+            // Fallback naar sendFile met error handling
             res.sendFile(foundPath, (err) => {
                 if (err) {
-                    console.error(`Error serving /core/${filePath}:`, err);
-                    next(err);
+                    console.error(`Error serving /core/${filePath} via sendFile:`, err);
+                    // Expliciete error response om browser executie te voorkomen
+                    res.status(500)
+                       .setHeader('Content-Type', 'application/javascript; charset=utf-8')
+                       .send(`// Error: Could not serve file /core/${filePath}\n// Error: ${err.message}\n// Check Vercel deployment logs for details.`);
                 }
             });
         }
     } else {
         console.error(`❌ /core/${filePath} not found. Tried:`, possiblePaths);
         console.error(`coreDir: ${coreDir}, rootDir: ${rootDir}, monorepoRoot: ${monorepoRoot}`);
-        res.status(404).send(`File not found: /core/${filePath}`);
+        // Expliciete 404 met JS comment om te voorkomen dat browser server-code probeert uit te voeren
+        res.status(404)
+           .setHeader('Content-Type', 'application/javascript; charset=utf-8')
+           .send(`// Error: Core file not found: /core/${filePath}\n// This file should be in packages/core/${filePath}\n// Check Vercel deployment logs for path resolution details.`);
     }
 });
 

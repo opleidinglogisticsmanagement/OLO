@@ -576,7 +576,7 @@ Met `BaseLessonPage` is het toevoegen van een nieuwe week nu zeer eenvoudig:
 - ✅ Error handling en fallback content
 - ✅ Module intro rendering via `ContentTemplateRenderer`
 - ✅ Event listeners worden automatisch geattached
-Deze e-learning is gemaakt door Luuk
+
 ---
 
 ## 🎨 Content Types Referentie

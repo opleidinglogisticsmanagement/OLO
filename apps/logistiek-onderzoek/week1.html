@@ -437,19 +437,19 @@
     
     <script src="js/SearchService.js"></script>
     <script src="/core/js/components/LayoutRenderer.js"></script>
-    <script src="/core/js/ui/SidebarManager.js"></script>
-    <script src="/core/js/ui/HeaderManager.js"></script>
-    <script src="/core/js/ui/ScrollManager.js"></script>
-    <script src="/core/js/ui/ImageModalManager.js"></script>
-    <script src="/core/js/ui/InteractiveManager.js"></script>
+    <script src="/core/js/ui/SidebarManager.js" onload="fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'week1.html:440',message:'SidebarManager.js loaded',data:{hasPath:typeof path!=='undefined'},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'})}).catch(()=>{})"></script>
+    <script src="/core/js/ui/HeaderManager.js" onload="fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'week1.html:441',message:'HeaderManager.js loaded',data:{hasPath:typeof path!=='undefined'},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'})}).catch(()=>{})"></script>
+    <script src="/core/js/ui/ScrollManager.js" onload="fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'week1.html:442',message:'ScrollManager.js loaded',data:{hasPath:typeof path!=='undefined'},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'})}).catch(()=>{})"></script>
+    <script src="/core/js/ui/ImageModalManager.js" onload="fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'week1.html:443',message:'ImageModalManager.js loaded',data:{hasPath:typeof path!=='undefined'},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'})}).catch(()=>{})"></script>
+    <script src="/core/js/ui/InteractiveManager.js" onload="fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'week1.html:444',message:'InteractiveManager.js loaded',data:{hasPath:typeof path!=='undefined'},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'})}).catch(()=>{})"></script>
     <script src="/core/js/ui/VideoManager.js"></script>
     <script src="/core/js/ui/TableCopyManager.js"></script>
     <script src="/core/js/services/NavigationService.js"></script>
     <script src="/core/js/components/NavigationRenderer.js"></script>
     <script src="/core/js/components/ContentTemplateRenderer.js"></script>
-    <script src="/core/pages/BaseLessonPage.js"></script>
-    <script src="/core/pages/ContentRenderer.js"></script>
-    <script src="pages/Week1LessonPage.js"></script>
+    <script src="/core/pages/BaseLessonPage.js" onload="fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'week1.html:450',message:'BaseLessonPage.js loaded',data:{hasPath:typeof path!=='undefined',baseLessonPageDefined:typeof BaseLessonPage!=='undefined'},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'})}).catch(()=>{})"></script>
+    <script src="/core/pages/ContentRenderer.js" onload="fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'week1.html:451',message:'ContentRenderer.js loaded',data:{hasPath:typeof path!=='undefined'},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'})}).catch(()=>{})"></script>
+    <script src="pages/Week1LessonPage.js" onload="fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'week1.html:452',message:'Week1LessonPage.js loaded',data:{hasPath:typeof path!=='undefined',baseLessonPageDefined:typeof BaseLessonPage!=='undefined',week1LessonPageDefined:typeof Week1LessonPage!=='undefined'},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'})}).catch(()=>{})"></script>
     <script>
         // Hard refresh detectie - redirect naar index bij hard refresh
         (function() {
@@ -477,10 +477,20 @@
         // Initialize Week 1 page (fallback for direct access)
         // If accessed via index.html, the router will handle it
         document.addEventListener('DOMContentLoaded', () => {
+            // #region agent log
+            fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'week1.html:479',message:'DOMContentLoaded fired',data:{hasAppRouter:typeof window.appRouter!=='undefined',hasBaseLessonPage:typeof BaseLessonPage!=='undefined',hasWeek1LessonPage:typeof Week1LessonPage!=='undefined',hasPath:typeof path!=='undefined'},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'})}).catch(()=>{});
+            // #endregion
             // Only initialize if we're not in SPA mode (i.e., router not active)
             if (!window.appRouter) {
-                const week1Page = new Week1LessonPage();
-                week1Page.init();
+                try {
+                    const week1Page = new Week1LessonPage();
+                    week1Page.init();
+                } catch (e) {
+                    // #region agent log
+                    fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'week1.html:485',message:'Week1LessonPage initialization failed',data:{error:e.message,stack:e.stack},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'})}).catch(()=>{});
+                    // #endregion
+                    console.error('[week1.html] Failed to initialize Week1LessonPage:', e);
+                }
             }
         });
     </script>

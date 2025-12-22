@@ -16,6 +16,10 @@
  * - VideoManager: Video error detection
  */
 
+// #region agent log
+(function(){try{const _d={location:'BaseLessonPage.js:1',message:'BaseLessonPage.js loading started',data:{hasPath:typeof path!=='undefined',hasModule:typeof module!=='undefined',hasRequire:typeof require!=='function',alreadyDefined:typeof BaseLessonPage!=='undefined'},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'};fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(_d)}).catch(()=>{});}catch(e){}})();
+// #endregion
+
 class BaseLessonPage {
     constructor(moduleId, moduleTitle, moduleSubtitle) {
         this.moduleId = moduleId;
@@ -408,6 +412,9 @@ class BaseLessonPage {
 }
 
 // Export voor gebruik in andere modules
+// #region agent log
+(function(){try{const _d={location:'BaseLessonPage.js:411',message:'BaseLessonPage.js export',data:{hasModule:typeof module!=='undefined',hasWindow:typeof window!=='undefined',classDefined:typeof BaseLessonPage!=='undefined'},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'};fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(_d)}).catch(()=>{});}catch(e){}})();
+// #endregion
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = BaseLessonPage;
 } else {

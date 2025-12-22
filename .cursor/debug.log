@@ -461,3 +461,5 @@
 {"location":"AIGenerator.js:45","message":"generateMCQuestions called","data":{"proxyUrl":"/api/generate-questions","hostname":"localhost","isVercel":false,"theoryLength":1036,"numberOfQuestions":1,"segmentIndex":7},"timestamp":1766259233030,"sessionId":"debug-session","runId":"run1","hypothesisId":"C"}
 {"location":"AIGenerator.js:52","message":"Fetch API call starting","data":{"url":"/api/generate-questions","method":"POST"},"timestamp":1766259233031,"sessionId":"debug-session","runId":"run1","hypothesisId":"C"}
 {"location":"AIGenerator.js:64","message":"Fetch response received","data":{"status":429,"statusText":"Too Many Requests","ok":false,"url":"http://localhost:3000/api/generate-questions"},"timestamp":1766259233152,"sessionId":"debug-session","runId":"run1","hypothesisId":"C"}
+{"location":"index.html:1563","message":"Adding click listener to PDF export button","data":{},"timestamp":1766384885567,"sessionId":"debug-session","runId":"run1","hypothesisId":"A"}
+{"location":"index.html:1563","message":"Adding click listener to PDF export button","data":{},"timestamp":1766384886035,"sessionId":"debug-session","runId":"run1","hypothesisId":"A"}

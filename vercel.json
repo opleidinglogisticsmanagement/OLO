@@ -5,7 +5,6 @@
   "functions": {
     "api/index.js": {
       "includeFiles": "**/*.{html,js,json,png,jpg,jpeg,gif,svg,ico,woff,woff2,ttf,eot,docx,pdf,xlsx,vsdx}",
-      "memory": 1024,
       "maxDuration": 30
     }
   },

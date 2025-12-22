@@ -1401,7 +1401,9 @@ if (!fs.existsSync(appDir)) {
 // Dit zorgt ervoor dat bestanden correct worden geserveerd met juiste content-type
 // Deze route moet VOOR de static middleware komen
 app.get('/core/*', (req, res, next) => {
+    console.log(`[Core Route] Request for: ${req.path}`);
     const filePath = req.path.replace(/^\/core\//, ''); // Verwijder /core/ prefix
+    console.log(`[Core Route] File path: ${filePath}`);
     
     // Set no-cache headers voor JS bestanden
     if (filePath.endsWith('.js')) {
@@ -1449,13 +1451,28 @@ app.get('/core/*', (req, res, next) => {
             const fileContent = fs.readFileSync(foundPath, 'utf8');
             
             // Check of bestand server-side code bevat (mag niet in browser)
-            if (fileContent.includes('const path = require') || 
-                fileContent.includes('const express = require') ||
-                fileContent.includes('module.exports') && !fileContent.includes('if (typeof module')) {
+            // Check voor Node.js require statements (zonder browser check)
+            const hasNodeRequire = /const\s+\w+\s*=\s*require\s*\(/.test(fileContent) && 
+                                   !fileContent.includes('if (typeof require') &&
+                                   !fileContent.includes('typeof require');
+            
+            // Check voor express (server-side only)
+            const hasExpress = fileContent.includes('const express = require') || 
+                              fileContent.includes('require(\'express\')');
+            
+            // Check voor path module (server-side only, tenzij het een browser-compatibele check heeft)
+            const hasPathRequire = fileContent.includes('require(\'path\')') || 
+                                  fileContent.includes('require("path")');
+            
+            if (hasNodeRequire || hasExpress || hasPathRequire) {
                 console.error(`❌ ERROR: File contains server-side code: ${foundPath}`);
-                console.error(`First 200 chars: ${fileContent.substring(0, 200)}`);
-                return res.status(500).send(`// Error: File contains server-side code and cannot be served to browser`);
+                console.error(`File size: ${fileContent.length} chars`);
+                console.error(`First 500 chars: ${fileContent.substring(0, 500)}`);
+                console.error(`Has Node require: ${hasNodeRequire}, Has Express: ${hasExpress}, Has Path: ${hasPathRequire}`);
+                return res.status(500).send(`// Error: File contains server-side code and cannot be served to browser\n// File: ${foundPath}\n// This file should only contain client-side JavaScript`);
             }
+            
+            console.log(`✅ Verified client-side JavaScript: /core/${filePath} (${fileContent.length} chars)`);
             
             // Serveer bestand als string (niet via sendFile om controle te hebben)
             res.send(fileContent);

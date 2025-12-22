@@ -1294,6 +1294,57 @@ app.get('/api/health', (req, res) => {
     });
 });
 
+// Test endpoint om te zien wat er wordt geserveerd voor /core/* requests
+app.get('/api/test-core-file', (req, res) => {
+    const testFilePath = req.query.file || 'js/DarkMode.js';
+    const filePath = path.join(coreDir, testFilePath);
+    
+    console.log(`[Test Core File] Requested file: ${testFilePath}`);
+    console.log(`[Test Core File] coreDir: ${coreDir}`);
+    console.log(`[Test Core File] Full path: ${filePath}`);
+    console.log(`[Test Core File] File exists: ${fs.existsSync(filePath)}`);
+    
+    if (fs.existsSync(filePath)) {
+        try {
+            const content = fs.readFileSync(filePath, 'utf8');
+            const firstLines = content.split('\n').slice(0, 5);
+            const hasServerCode = content.includes('require(') || content.includes('const path = require');
+            
+            res.json({
+                success: true,
+                file: testFilePath,
+                path: filePath,
+                exists: true,
+                firstLines: firstLines,
+                hasServerCode: hasServerCode,
+                contentLength: content.length,
+                preview: content.substring(0, 200)
+            });
+        } catch (e) {
+            res.json({
+                success: false,
+                error: e.message,
+                file: testFilePath,
+                path: filePath
+            });
+        }
+    } else {
+        res.json({
+            success: false,
+            file: testFilePath,
+            path: filePath,
+            exists: false,
+            coreDir: coreDir,
+            possiblePaths: [
+                path.join(coreDir, testFilePath),
+                path.join('/var/task', 'packages', 'core', testFilePath),
+                path.join(rootDir, 'packages', 'core', testFilePath),
+                path.join(monorepoRoot, 'packages', 'core', testFilePath),
+            ]
+        });
+    }
+});
+
 /**
  * Test Gemini API connection and list available models
  * GET /api/test-gemini

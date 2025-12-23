@@ -1,76 +1,57 @@
 /**
  * Vercel Serverless Handler voor App
  * 
- * Dit bestand fungeert als entry point voor Vercel serverless deployment.
- * Het importeert de Express app uit packages/core/api/index.js
- * 
- * Vercel verwacht dat serverless functions in een api/ directory staan
- * in de root van het project (of app root als root directory is ingesteld).
+ * CRITICAL: Deze functie MOET altijd werken, zelfs als dependencies falen.
+ * Als deze functie crasht tijdens module loading, serveert Vercel de source code.
  */
 
-// BELANGRIJK: Vercel moet een functie exporteren, niet alleen een Express app
-// We maken een wrapper functie die altijd werkt, zelfs als de core API niet laadt
-
-// Zet VERCEL environment variable
-process.env.VERCEL = '1';
-
-// Stel de APP_DIR in voor de server.js om de juiste app-specifieke bestanden te vinden
-process.env.APP_DIR = process.cwd();
-
-// Importeer dependencies
-const path = require('path');
-const fs = require('fs');
-
-// Bepaal het pad naar de core API
-const coreApiPath = path.resolve(__dirname, '../../packages/core/api/index.js');
-
-// Laad de core API (lazy loading in de handler)
-let coreApp = null;
-let loadError = null;
-
-function loadCoreApp() {
-    if (coreApp !== null) {
-        return coreApp; // Al geladen
-    }
-    
-    if (loadError !== null) {
-        throw loadError; // Al geprobeerd en gefaald
-    }
-    
-    try {
-        console.log('[App API Handler] Loading core API from:', coreApiPath);
-        console.log('[App API Handler] File exists:', fs.existsSync(coreApiPath));
-        coreApp = require(coreApiPath);
-        console.log('[App API Handler] ✅ Core API loaded successfully');
-        return coreApp;
-    } catch (error) {
-        loadError = error;
-        console.error('[App API Handler] ❌ Error loading core API:', error.message);
-        console.error('[App API Handler] Error stack:', error.stack);
-        throw error;
-    }
-}
-
-// Export een handler functie die Vercel kan uitvoeren
-// Deze functie wordt aangeroepen voor elke request
+// Exporteer EERST een minimale handler functie die altijd werkt
+// Dit voorkomt dat Vercel de source code serveert als er een error is tijdens loading
 module.exports = function handler(req, res) {
-    console.log('[App API Handler] Handler called for:', req.method, req.path);
+    // Log onmiddellijk om te bevestigen dat de functie wordt uitgevoerd
+    console.log('[App API Handler] ✅ Handler function is being executed!');
+    console.log('[App API Handler] Request:', req.method, req.path);
     console.log('[App API Handler] Timestamp:', new Date().toISOString());
     
+    // Zet environment variables (binnen de handler, niet tijdens module loading)
+    process.env.VERCEL = '1';
+    process.env.APP_DIR = process.env.APP_DIR || process.cwd();
+    
+    // Laad dependencies en core API binnen de handler (lazy loading)
+    // Dit voorkomt crashes tijdens module loading
     try {
-        // Laad de core app (lazy loading)
-        const app = loadCoreApp();
+        const path = require('path');
+        const fs = require('fs');
+        
+        // Bepaal het pad naar de core API
+        const coreApiPath = path.resolve(__dirname, '../../packages/core/api/index.js');
+        
+        console.log('[App API Handler] Loading core API from:', coreApiPath);
+        console.log('[App API Handler] File exists:', fs.existsSync(coreApiPath));
+        console.log('[App API Handler] __dirname:', __dirname);
+        console.log('[App API Handler] process.cwd():', process.cwd());
+        
+        // Laad de core API
+        const coreApp = require(coreApiPath);
+        
+        console.log('[App API Handler] ✅ Core API loaded successfully');
+        console.log('[App API Handler] Core app type:', typeof coreApp);
         
         // De Express app handelt de request af
-        app(req, res);
+        coreApp(req, res);
     } catch (error) {
-        console.error('[App API Handler] Error in handler:', error.message);
+        console.error('[App API Handler] ❌ Error:', error.message);
+        console.error('[App API Handler] Error stack:', error.stack);
+        
+        // Geef een error response
         res.status(500).json({
             error: 'Serverless function error',
             message: error.message,
             path: req.path,
             method: req.method,
-            timestamp: new Date().toISOString()
+            timestamp: new Date().toISOString(),
+            __dirname: __dirname,
+            cwd: process.cwd()
         });
     }
 };

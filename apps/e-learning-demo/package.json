@@ -1,0 +1,14 @@
+{
+  "name": "@e-learning/e-learning-demo",
+  "version": "1.0.0",
+  "private": true,
+  "description": "E-Learning Demo: Wat is mogelijk in de e-learning en handleiding voor collega's",
+  "dependencies": {
+    "@e-learning/core": "*"
+  },
+  "scripts": {
+    "dev": "cd ../../packages/core && npm run dev",
+    "start": "cd ../../packages/core && npm start"
+  }
+}
+

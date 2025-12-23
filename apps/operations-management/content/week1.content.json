@@ -1,0 +1,54 @@
+{
+  "intro": {
+    "title": "Week 1",
+    "subtitle": "Operations Management - Introductie",
+    "description": "Welkom bij Operations Management! Deze module behandelt de belangrijkste concepten en praktijken van operations management."
+  },
+  "theorie": {
+    "title": "Introductie Operations Management",
+    "content": [
+      {
+        "type": "paragraph",
+        "text": [
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Welkom bij de module <strong>Operations Management</strong>! Deze module behandelt de belangrijkste concepten en praktijken van operations management in moderne organisaties.</p>",
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Operations Management richt zich op het effectief en efficiënt beheren van processen, systemen en middelen om waarde te creëren voor klanten en stakeholders.</p>"
+        ]
+      },
+      {
+        "type": "heading",
+        "text": "Wat is Operations Management?",
+        "level": 3
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Operations Management omvat het ontwerpen, plannen, uitvoeren en verbeteren van bedrijfsprocessen. Het richt zich op:</p>"
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "<ul class=\"list-disc list-outside space-y-2 mb-4 ml-6 pl-4 text-gray-700 dark:text-gray-300\">",
+          "<li class=\"mb-2\">Het optimaliseren van productie- en serviceprocessen</li>",
+          "<li class=\"mb-2\">Supply chain management</li>",
+          "<li class=\"mb-2\">Kwaliteitsmanagement</li>",
+          "<li class=\"mb-2\">Procesverbetering en innovatie</li>",
+          "<li class=\"mb-2\">Resource planning en allocatie</li>",
+          "</ul>"
+        ]
+      },
+      {
+        "type": "highlight",
+        "title": "Tip",
+        "content": [
+          "Gedurende deze module leer je de belangrijkste concepten en tools van Operations Management kennen en hoe je deze kunt toepassen in praktijksituaties."
+        ],
+        "bgColor": "bg-blue-50 dark:bg-blue-900/20",
+        "borderColor": "border-blue-500 dark:border-blue-400",
+        "titleColor": "text-blue-900 dark:text-blue-200",
+        "contentColor": "text-blue-800 dark:text-blue-300"
+      }
+    ]
+  }
+}
+

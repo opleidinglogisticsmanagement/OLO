@@ -22,10 +22,10 @@ const coreDir = path.resolve(__dirname, '..'); // packages/core = /var/task/pack
 // monorepoRoot is 3 levels omhoog van packages/core/api (niet 2!)
 const monorepoRoot = path.resolve(__dirname, '../../..'); // 3 levels omhoog = /var/task
 
-// BELANGRIJK: In Vercel met Root Directory "apps/logistiek-onderzoek":
+// BELANGRIJK: In Vercel met Root Directory "apps/[app-naam]":
 // - /var/task = app directory (waar index.html staat)
 // - /var/task/packages/core = core directory
-// - appDir moet /var/task zijn, NIET /var/task/apps/logistiek-onderzoek
+// - appDir moet /var/task zijn, NIET /var/task/apps/[app-naam]
 let appDir = process.env.APP_DIR;
 if (!appDir) {
     // Probeer eerst /var/task (Vercel default met Root Directory)
@@ -34,14 +34,23 @@ if (!appDir) {
     } else if (fs.existsSync(path.join(monorepoRoot, 'index.html'))) {
         appDir = monorepoRoot;
     } else {
-        // Fallback: probeer apps/logistiek-onderzoek (lokale development)
-        appDir = path.join(monorepoRoot, 'apps', 'logistiek-onderzoek');
+        // Fallback: zoek eerste beschikbare app in apps directory
+        const appsDir = path.join(monorepoRoot, 'apps');
+        if (fs.existsSync(appsDir)) {
+            const apps = fs.readdirSync(appsDir).filter(d => 
+                d !== 'core' && fs.statSync(path.join(appsDir, d)).isDirectory()
+            );
+            if (apps.length > 0) {
+                appDir = path.join(appsDir, apps[0]);
+                console.log(`[Monorepo] Using first available app: ${appDir}`);
+            }
+        }
     }
 }
 
-// BELANGRIJK: In Vercel met Root Directory "apps/logistiek-onderzoek":
+// BELANGRIJK: In Vercel met Root Directory "apps/[app-naam]":
 // - /var/task = monorepo root (waar packages/ en apps/ staan)
-// - /var/task/apps/logistiek-onderzoek = app directory (waar index.html staat)
+// - /var/task/apps/[app-naam] = app directory (waar index.html staat)
 // - rootDir moet /var/task zijn (monorepo root), NIET de app directory!
 // - packages/core/server.js verwacht dat rootDir de monorepo root is
 let rootDir = null;
@@ -97,61 +106,18 @@ try {
     console.log(`Cannot read /var/task:`, e.message);
 }
 
-// #region agent log - Hypothesis A, B, C, D, E: Check if pages directory exists
+// Verify pages directory exists (for debugging)
 try {
     const pagesDirPath = path.join(coreDir, 'pages');
-    const pagesDirExists = fs.existsSync(pagesDirPath);
-    
-    // Check alternative locations (Hypothesis C, E)
-    const altPaths = [
-        path.join('/var/task', 'packages', 'core', 'pages'),
-        path.join(rootDir, 'packages', 'core', 'pages'),
-        path.join(monorepoRoot, 'packages', 'core', 'pages'),
-    ];
-    const altPathResults = {};
-    for (const altPath of altPaths) {
-        altPathResults[altPath] = fs.existsSync(altPath);
-    }
-    
-    console.log(`[DEBUG HYPOTHESIS A,B,C,D,E] Checking pages directory: ${pagesDirPath}, exists: ${pagesDirExists}, altPaths:`, altPathResults);
-    
-    if (pagesDirExists) {
+    if (fs.existsSync(pagesDirPath)) {
         const pagesFiles = fs.readdirSync(pagesDirPath);
-        console.log(`[DEBUG HYPOTHESIS C] Pages directory exists: ${pagesDirPath}, files:`, pagesFiles);
-        console.log(`✅ Pages directory exists: ${pagesDirPath}`);
-        console.log(`   Files in pages directory:`, pagesFiles);
+        console.log(`✅ Pages directory exists: ${pagesDirPath} (${pagesFiles.length} files)`);
     } else {
-        // Check if pages exists in alternative locations
-        let foundAltPath = null;
-        for (const [altPath, exists] of Object.entries(altPathResults)) {
-            if (exists) {
-                foundAltPath = altPath;
-                const altPagesFiles = fs.readdirSync(altPath);
-                console.log(`[DEBUG HYPOTHESIS C,E] Pages directory found in alternative location: ${foundAltPath}, files:`, altPagesFiles);
-                console.log(`✅ Pages directory found in alternative location: ${foundAltPath}`);
-                console.log(`   Files:`, altPagesFiles);
-                break;
-            }
-        }
-        
-        if (!foundAltPath) {
-            console.log(`[DEBUG HYPOTHESIS A,B,D] Pages directory does NOT exist anywhere. Checked: ${pagesDirPath}, altPaths:`, altPathResults);
-            console.log(`❌ Pages directory does NOT exist: ${pagesDirPath}`);
-            console.log(`   Checked alternative paths:`, altPathResults);
-            
-            // Check what directories DO exist in coreDir
-            if (fs.existsSync(coreDir)) {
-                const coreDirContents = fs.readdirSync(coreDir);
-                console.log(`[DEBUG HYPOTHESIS A,B,D] Core directory contents:`, coreDirContents);
-                console.log(`   Available directories in coreDir:`, coreDirContents);
-            }
-        }
+        console.warn(`⚠️  Pages directory not found: ${pagesDirPath}`);
     }
 } catch (e) {
-    console.error(`[DEBUG HYPOTHESIS A,B,C,D,E] Error checking pages directory:`, e.message, e.stack);
     console.error(`Error checking pages directory:`, e.message);
 }
-// #endregion
 
 // Pre-load HTML files into memory so they're available in serverless environment
 // HTML bestanden staan in app directory

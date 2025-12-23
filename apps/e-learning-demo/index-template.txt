@@ -1,0 +1,1000 @@
+﻿<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="view-transition" content="same-origin" />
+    <title>E-learning Opzetten van een Logistiek Onderzoek</title>
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://oloelearning.vercel.app/">
+    <meta property="og:title" content="E-learning Opzetten van een Logistiek Onderzoek">
+    <meta property="og:description" content="E-learning platform voor het opzetten van een logistiek onderzoek.">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary">
+    <meta property="twitter:url" content="https://oloelearning.vercel.app/">
+    <meta property="twitter:title" content="E-learning Opzetten van een Logistiek Onderzoek">
+    <meta property="twitter:description" content="E-learning platform voor het opzetten van een logistiek onderzoek.">
+
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+      }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- PDF Export Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" 
+            onerror="console.error('Fout bij laden jspdf bibliotheek')"
+            onload="console.log('jsPDF bibliotheek geladen')"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"
+            onerror="console.error('Fout bij laden html2canvas bibliotheek')"
+            onload="console.log('html2canvas bibliotheek geladen')"></script>
+    <style>
+        :root {
+            --primary-blue: #0077b6;
+            --success-green: #90be6d;
+            --neutral-bg: #f8f9fa;
+            --text-dark: #212529;
+            --text-light: #6c757d;
+        }
+        
+        /* Dark mode custom properties */
+        .dark {
+            --primary-blue: #4a9eff;
+            --success-green: #a8d977;
+            --neutral-bg: #1a1a1a;
+            --text-dark: #f5f5f5;
+            --text-light: #a0a0a0;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--neutral-bg);
+            color: var(--text-dark);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        
+        .dark .custom-scrollbar::-webkit-scrollbar-track {
+            background: #2a2a2a;
+        }
+        
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #c1c1c1;
+            border-radius: 3px;
+        }
+        
+        .dark .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #4a4a4a;
+        }
+        
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #a8a8a8;
+        }
+        
+        .dark .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #5a5a5a;
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.5s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .slide-in {
+            animation: slideIn 0.3s ease-out;
+        }
+        
+        @keyframes slideIn {
+            from { transform: translateX(-100%); }
+            to { transform: translateX(0); }
+        }
+        
+        .progress-animation {
+            transition: width 0.5s ease-in-out;
+        }
+        
+        .hover-lift:hover {
+            transform: translateY(-2px);
+            transition: transform 0.2s ease;
+        }
+        
+        .focus-ring:focus {
+            outline: 2px solid var(--primary-blue);
+            outline-offset: 2px;
+        }
+        
+        /* Globale inspringing voor alle lijsten */
+        .prose ul,
+        .prose ol {
+            margin-left: 1rem;
+            padding-left: 0;
+        }
+        
+        /* Zorg dat lijsten in content ook inspringing hebben */
+        ul.list-disc,
+        ol.list-decimal {
+            margin-left: 1rem;
+        }
+        
+        /* Lijsten met list-inside: zorg voor correcte inspringing tweede regel */
+        ul.list-disc.list-inside,
+        ol.list-decimal.list-inside {
+            padding-left: 1.5rem;
+        }
+        
+        /* Lijstitems met list-inside: zorg dat tweede regel correct inspringt */
+        ul.list-disc.list-inside li,
+        ol.list-decimal.list-inside li {
+            padding-left: 1.5em;
+            text-indent: -1.5em;
+        }
+        
+        /* Genummerde lijsten zonder list-inside: nummer buiten, tekst uitgelijnd */
+        ol.list-decimal:not(.list-inside) {
+            list-style-position: outside;
+            padding-left: 1.5rem;
+        }
+        
+        /* Bullet lijsten zonder list-inside: bullet buiten voor betere inspringing */
+        ul.list-disc:not(.list-inside) {
+            list-style-position: outside;
+            padding-left: 1.5rem;
+        }
+        
+        /* Lijstitems hebben dezelfde grijze kleur als paragrafen */
+        ol.list-decimal li,
+        ul.list-disc li {
+            color: rgb(55, 65, 81); /* text-gray-700 */
+        }
+        
+        /* Dark mode support voor lijstitems */
+        .dark ol.list-decimal li,
+        .dark ul.list-disc li {
+            color: rgb(209, 213, 219); /* dark:text-gray-300 */
+        }
+        
+        /* Tabellen dark mode support */
+        .dark table {
+            background-color: rgb(31, 41, 55); /* dark:bg-gray-800 */
+            border-color: rgb(75, 85, 99); /* dark:border-gray-600 */
+        }
+        
+        .dark table th {
+            background-color: rgb(55, 65, 81); /* dark:bg-gray-700 */
+            color: rgb(255, 255, 255); /* dark:text-white */
+            border-color: rgb(75, 85, 99); /* dark:border-gray-600 */
+        }
+        
+        .dark table td {
+            background-color: rgb(31, 41, 55); /* dark:bg-gray-800 */
+            color: rgb(209, 213, 219); /* dark:text-gray-300 */
+            border-color: rgb(75, 85, 99); /* dark:border-gray-600 */
+        }
+        
+        table {
+            background-color: rgb(255, 255, 255);
+            border-collapse: collapse;
+            width: 100%;
+        }
+        
+        table th,
+        table td {
+            border: 1px solid rgb(209, 213, 219); /* border-gray-300 */
+        }
+        
+        /* Toekomstbestendigheid: Automatische dark mode support voor alle kopjes */
+        .dark h1, .dark h2, .dark h3, .dark h4, .dark h5, .dark h6 {
+            color: rgb(255, 255, 255); /* dark:text-white */
+        }
+        
+        /* Toekomstbestendigheid: Automatische dark mode support voor gekleurde containers */
+        .dark .bg-blue-50, .dark .bg-green-50, .dark .bg-yellow-50, 
+        .dark .bg-red-50, .dark .bg-purple-50, .dark .bg-gray-50 {
+            background-color: rgb(17, 24, 39); /* dark:bg-gray-900 */
+        }
+        
+        /* Toekomstbestendigheid: Automatische dark mode support voor tekst in gekleurde containers */
+        .dark .text-blue-900, .dark .text-green-900, .dark .text-yellow-900,
+        .dark .text-red-900, .dark .text-purple-900 {
+            color: rgb(209, 213, 219); /* dark:text-gray-300 */
+        }
+        
+        .dark .text-blue-800, .dark .text-green-800, .dark .text-yellow-800,
+        .dark .text-red-800, .dark .text-purple-800 {
+            color: rgb(209, 213, 219); /* dark:text-gray-300 */
+        }
+
+        /* Geen regelafstand tussen h2 en h3 kopjes en tekst eronder (standaard voor alle weken) */
+        .prose h2,
+        .prose h3 {
+            margin-bottom: 0;
+        }
+
+        /* Prevent horizontal scrolling globally */
+        html, body {
+            overflow-x: hidden;
+            max-width: 100%;
+        }
+        
+        #app {
+            overflow-x: hidden;
+            max-width: 100%;
+        }
+        
+        /* Sidebar width control - applies to all screen sizes */
+        /* Sidebar should never exceed 330px on any screen size */
+        #sidebar {
+            max-width: 330px !important;
+        }
+        
+        /* Prevent text breaking per character in sidebar */
+        #sidebar p, #sidebar span, #sidebar a, #sidebar li {
+            word-break: normal !important;
+            overflow-wrap: break-word !important;
+            word-wrap: break-word !important;
+        }
+        
+        /* Ensure sidebar flex containers don't cause text breaking */
+        #sidebar .min-w-0 {
+            min-width: 0;
+        }
+        
+        /* Sidebar width: full width on mobile (but max 330px), fixed 320px on larger screens */
+        @media (max-width: 640px) {
+            #sidebar {
+                width: 100% !important;
+                max-width: 330px !important;
+            }
+        }
+        
+        /* Ensure sidebar has fixed width on desktop/tablet (641px and above) */
+        @media (min-width: 641px) {
+            #sidebar {
+                width: 320px !important;
+                max-width: 330px !important;
+            }
+        }
+        
+        /* Mobile-specific improvements */
+        @media (max-width: 640px) {
+            /* Ensure content doesn't overflow */
+            body {
+                overflow-x: hidden;
+            }
+            
+            /* Prevent specific elements from causing horizontal scroll */
+            /* Only apply to block-level and media elements, not text/inline elements */
+            div, section, article, header, footer, nav, aside, main, 
+            img, video, iframe, canvas, svg, object, embed,
+            table, pre, blockquote {
+                max-width: 100%;
+                box-sizing: border-box;
+            }
+            
+            /* Ensure text elements wrap properly */
+            p, span, a, strong, em, b, i, u, code, small, mark, del, ins, 
+            sub, sup, abbr, kbd, samp, var, time, label, li, td, th {
+                word-wrap: break-word;
+                overflow-wrap: break-word;
+                word-break: normal;
+                hyphens: auto;
+            }
+            
+            /* Specific fixes for common offenders */
+            img, video, iframe {
+                max-width: 100% !important;
+                width: 100% !important;
+                height: auto !important;
+            }
+            
+            /* Exception for responsive video containers */
+            .video-responsive-container iframe,
+            .video-responsive-wrapper iframe {
+                height: 100% !important;
+                width: 100% !important;
+                position: absolute !important;
+            }
+            
+            /* Ensure all images are responsive */
+            .image-modal-container img,
+            img[style*="max-width"] {
+                max-width: 100% !important;
+                width: 100% !important;
+                height: auto !important;
+            }
+            
+            /* Responsive image containers */
+            .responsive-image-container {
+                max-width: 100% !important;
+                width: 100% !important;
+            }
+            
+            table {
+                display: block;
+                overflow-x: auto;
+                width: 100%;
+            }
+            
+            /* Better touch targets */
+            button, a {
+                min-height: 44px;
+                min-width: 44px;
+            }
+            
+            /* Reduce icon sizes on mobile */
+            .text-6xl {
+                font-size: 3rem;
+            }
+            
+            /* Better spacing for lists */
+            .prose ul, .prose ol {
+                margin-left: 0.75rem;
+                padding-left: 0.5rem;
+            }
+            
+            /* Scroll to top button */
+            #scroll-to-top-btn {
+                bottom: 1rem;
+                right: 1rem;
+                padding: 0.75rem;
+                width: 44px;
+                height: 44px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            
+            /* Prevent text from being too small */
+            .text-sm {
+                font-size: 0.875rem;
+            }
+            
+            /* Better spacing for sections */
+            .space-y-6 > * + * {
+                margin-top: 1.25rem;
+            }
+            
+            .space-y-8 > * + * {
+                margin-top: 1.5rem;
+            }
+            
+            /* Better padding for sections - removed to avoid conflicts with #main-content section rules */
+            
+            /* Ensure text wraps properly */
+            h1, h2, h3 {
+                word-wrap: break-word;
+                overflow-wrap: break-word;
+            }
+            
+            /* Better spacing for flex containers */
+            .flex.flex-col {
+                gap: 0.75rem;
+            }
+            
+            /* Ensure interactive elements are clickable on mobile */
+            button, [onclick], [role="tab"], [role="button"] {
+                cursor: pointer;
+                touch-action: manipulation;
+                -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
+            }
+            
+            /* Prevent text selection on buttons */
+            button {
+                -webkit-user-select: none;
+                user-select: none;
+            }
+            
+            /* Disable image modal clicks on mobile - use native pinch-to-zoom */
+            .image-modal-container {
+                cursor: default !important;
+                pointer-events: none;
+            }
+            
+            .image-modal-container img {
+                pointer-events: auto;
+            }
+            
+            /* Disable hover effects on mobile */
+            .desktop-only-hover {
+                transition: none !important;
+            }
+            
+            .image-modal-container .group-hover\:scale-110 {
+                transform: none !important;
+            }
+            
+            .image-modal-container .group-hover\:bg-opacity-10 {
+                background-color: transparent !important;
+            }
+            
+            .image-modal-container .group-hover\:opacity-100 {
+                opacity: 0 !important;
+            }
+        }
+        
+        /* Desktop: enable hover effects and clickable images */
+        @media (min-width: 768px) {
+            .desktop-only-hover {
+                transition: transform 0.3s ease, opacity 0.3s ease, background-color 0.3s ease;
+            }
+            
+            .image-modal-container {
+                cursor: pointer;
+                pointer-events: auto;
+            }
+        }
+        
+        /* Global: Ensure all images are responsive on all screen sizes */
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+        
+        .responsive-image-container {
+            max-width: 100%;
+        }
+        
+        /* Tablet improvements */
+        @media (min-width: 641px) and (max-width: 1023px) {
+            .space-y-6 > * + * {
+                margin-top: 1.5rem;
+            }
+        }
+        
+        /* View Transitions API */
+        @view-transition {
+            navigation: auto;
+        }
+        
+        /* Ensure main-content always has background to prevent white flash */
+        #main-content {
+            background-color: rgb(249, 250, 251); /* bg-gray-50 */
+            min-height: 100vh;
+            transition: opacity 0.2s ease;
+            /* Ensure content stays above background during transitions */
+            position: relative;
+            z-index: 1;
+            /* Prevent overflow */
+            width: 100%;
+            max-width: 100%;
+            box-sizing: border-box;
+            overflow-x: hidden;
+        }
+        
+        /* Ensure all sections within main-content respect width constraints and have spacing */
+        #main-content section {
+            width: 100% !important;
+            max-width: 100% !important;
+            box-sizing: border-box !important;
+            margin-bottom: 1.5rem !important;
+        }
+        
+        @media (min-width: 640px) {
+            #main-content section {
+                margin-bottom: 2rem !important;
+            }
+        }
+        
+        /* Ensure sticky sections also have margin-bottom (sticky positioning can sometimes reset margins) */
+        /* Chrome-specific fix: sticky elements need explicit margin-bottom */
+        #main-content section.sticky {
+            margin-bottom: 1.5rem !important;
+        }
+        
+        @media (min-width: 640px) {
+            #main-content section.sticky {
+                margin-bottom: 2rem !important;
+            }
+        }
+        
+        /* Consistent spacing for all sections in article */
+        /* Override space-y-* to ensure consistent spacing between all sections */
+        #main-content article.space-y-6 > * + * {
+            margin-top: 1.5rem !important;
+        }
+        
+        #main-content article.space-y-8 > * + * {
+            margin-top: 2rem !important;
+        }
+        
+        /* Chrome fix: Ensure first sticky section wrapper in article has proper spacing */
+        /* The sticky section is wrapped in a div to work around Chrome's margin-bottom bug */
+        #main-content article .intro-section-wrapper {
+            margin-bottom: 0 !important;
+            margin-top: 0 !important;
+        }
+        
+        /* First section after intro wrapper should have consistent spacing */
+        #main-content article .intro-section-wrapper + section,
+        #main-content article .intro-section-wrapper + div > section {
+            margin-top: 1.5rem !important;
+        }
+        
+        @media (min-width: 640px) {
+            #main-content article .intro-section-wrapper + section,
+            #main-content article .intro-section-wrapper + div > section {
+                margin-top: 2rem !important;
+            }
+        }
+        
+        /* Ensure all sections have consistent bottom margin */
+        #main-content article section {
+            margin-bottom: 0 !important;
+        }
+        
+        /* Except for the last section */
+        #main-content article section:last-child {
+            margin-bottom: 0 !important;
+        }
+        
+        /* Ensure max-w-4xl containers respect width constraints but keep max-width limit */
+        #main-content .max-w-4xl {
+            max-width: 56rem !important; /* Keep Tailwind's max-w-4xl value (896px) */
+            box-sizing: border-box !important;
+        }
+        
+        /* Ensure article doesn't break out of max-w-4xl container */
+        #main-content article {
+            max-width: 100% !important;
+            box-sizing: border-box !important;
+        }
+        
+        .dark #main-content {
+            background-color: rgb(17, 24, 39); /* dark:bg-gray-900 */
+        }
+        
+        /* Ensure sidebar and header stay fixed and don't flicker */
+        #sidebar,
+        #main-header {
+            /* Prevent any visual changes during content transitions */
+            will-change: auto;
+            transform: translateZ(0); /* Force hardware acceleration */
+        }
+        
+        /* Prevent white flash during transitions - overlay background */
+        #main-content::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgb(249, 250, 251);
+            z-index: -1;
+            pointer-events: none;
+        }
+        
+        .dark #main-content::before {
+            background-color: rgb(17, 24, 39);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 transition-colors duration-200">
+    <!-- Dark Mode Utility - MOET EERST GELADEN WORDEN -->
+    <script src="/core/js/DarkMode.js"></script>
+    <!-- PDF Exporter -->
+    <script src="js/PDFExporter.js"></script>
+    <script src="js/SearchService.js"></script>
+    
+    <!-- SPA Router - Load early -->
+    <script src="/core/js/core/AppRouter.js"></script>
+    
+    <!-- Week Page Scripts - Load all for SPA router -->
+    <!-- Config (if exists) -->
+    <script src="config.js"></script>
+    <!-- Core dependencies -->
+    <script src="/core/js/components/LayoutRenderer.js"></script>
+    <script src="/core/js/ui/SidebarManager.js"></script>
+    <script src="/core/js/ui/HeaderManager.js"></script>
+    <script src="/core/js/ui/ScrollManager.js"></script>
+    <script src="/core/js/ui/ImageModalManager.js"></script>
+    <script src="/core/js/ui/InteractiveManager.js"></script>
+    <script src="/core/js/ui/VideoManager.js"></script>
+    <script src="/core/js/ui/TableCopyManager.js"></script>
+    <script src="/core/js/services/NavigationService.js"></script>
+    <script src="/core/js/components/NavigationRenderer.js"></script>
+    <script src="/core/js/components/ContentTemplateRenderer.js"></script>
+    <script src="/core/pages/BaseLessonPage.js"></script>
+    <script src="/core/pages/ContentRenderer.js"></script>
+    <script src="/core/js/utils/ContentValidator.js"></script>
+    
+    <!-- Interactive components -->
+    <script src="/core/js/components/interactive/utils/HtmlUtils.js"></script>
+    <script src="/core/js/components/interactive/TabRenderer.js"></script>
+    <script src="/core/js/components/interactive/AccordionRenderer.js"></script>
+    <script src="/core/js/components/interactive/ClickableStepsRenderer.js"></script>
+    <script src="/core/js/components/interactive/ChecklistRenderer.js"></script>
+    <script src="/core/js/components/interactive/ExerciseRenderer.js"></script>
+    <script src="/core/js/components/interactive/AIRenderer.js"></script>
+    <script src="/core/pages/InteractiveRenderer.js"></script>
+    <script src="/core/pages/AIGenerator.js"></script>
+    <script src="/core/pages/MCQuestionRenderer.js"></script>
+    
+    <!-- Week Page Classes - Load all for SPA router -->
+    <script src="pages/Week1LessonPage.js" onerror="fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'index.html:492',message:'Week1LessonPage.js failed to load',data:{},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'C'})}).catch(()=>{});console.error('[Script] Failed to load Week1LessonPage.js')"></script>
+    <script src="pages/Week2LessonPage.js" onerror="console.error('[Script] Failed to load Week2LessonPage.js')"></script>
+    <script src="pages/Week3LessonPage.js" onerror="fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'index.html:494',message:'Week3LessonPage.js failed to load',data:{},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'C'})}).catch(()=>{});console.error('[Script] Failed to load Week3LessonPage.js')"></script>
+    <script src="pages/Week4LessonPage.js" onerror="console.error('[Script] Failed to load Week4LessonPage.js')"></script>
+    <script src="pages/Week5LessonPage.js" onerror="fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'index.html:496',message:'Week5LessonPage.js failed to load',data:{},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'C'})}).catch(()=>{});console.error('[Script] Failed to load Week5LessonPage.js')"></script>
+    <script src="pages/Week6LessonPage.js" onerror="fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'index.html:497',message:'Week6LessonPage.js failed to load',data:{},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'C'})}).catch(()=>{});console.error('[Script] Failed to load Week6LessonPage.js')"></script>
+    <script src="pages/Week7LessonPage.js" onerror="console.error('[Script] Failed to load Week7LessonPage.js')"></script>
+    <script src="pages/RegisterPage.js" onerror="console.error('[Script] Failed to load RegisterPage.js')"></script>
+    <script src="pages/AfsluitingLessonPage.js" onerror="fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'index.html:500',message:'AfsluitingLessonPage.js failed to load',data:{},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'C'})}).catch(()=>{});console.error('[Script] Failed to load AfsluitingLessonPage.js')"></script>
+    
+    <!-- Verify all classes are loaded with detailed logging -->
+    <script>
+        (function() {
+            // Wait a bit for all scripts to execute
+            setTimeout(() => {
+                console.log('[Script Loader] ⏰ Verification started at:', new Date().toISOString());
+                const expectedClasses = [
+                    'Week1LessonPage', 'Week2LessonPage', 'Week3LessonPage', 
+                    'Week4LessonPage', 'Week5LessonPage', 'Week6LessonPage', 
+                    'Week7LessonPage', 'RegisterPage', 'AfsluitingLessonPage'
+                ];
+                
+                console.log('[Script Loader] 🔍 Checking for page classes...');
+                console.log('[Script Loader] BaseLessonPage available:', !!window.BaseLessonPage);
+                console.log('[Script Loader] Week1LessonPage available:', !!window.Week1LessonPage);
+                console.log('[Script Loader] Week3LessonPage available:', !!window.Week3LessonPage);
+                console.log('[Script Loader] Week5LessonPage available:', !!window.Week5LessonPage);
+                console.log('[Script Loader] Week6LessonPage available:', !!window.Week6LessonPage);
+                
+                const availableClasses = expectedClasses.filter(cls => window[cls]);
+                const missingClasses = expectedClasses.filter(cls => !window[cls]);
+                
+                console.log('[Script Loader] ✅ Available classes (' + availableClasses.length + '/' + expectedClasses.length + '):', availableClasses);
+                
+                if (missingClasses.length > 0) {
+                    console.error('[Script Loader] ❌ Missing classes (' + missingClasses.length + '):', missingClasses);
+                    console.error('[Script Loader] ⚠️ Check browser console for JavaScript errors in these files');
+                    
+                    // Check if scripts failed to load
+                    missingClasses.forEach(cls => {
+                        const scriptTag = document.querySelector(`script[src*="${cls}.js"]`);
+                        if (scriptTag) {
+                            console.warn(`[Script Loader] Script tag found for ${cls}, but class not available. Possible syntax error or script crash.`);
+                        } else {
+                            console.error(`[Script Loader] Script tag NOT found for ${cls}!`);
+                        }
+                    });
+                } else {
+                    console.log('[Script Loader] ✅ All page classes are available!');
+                }
+            }, 100); // Wait 100ms for all scripts to execute
+        })();
+    </script>
+    
+    <!-- Skip to content link for accessibility -->
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-blue-600 text-white px-4 py-2 rounded-md z-50 focus-ring">
+        Spring naar hoofdinhoud
+    </a>
+
+    <div id="app" class="min-h-screen flex">
+        <!-- Sidebar -->
+        <aside id="sidebar" class="w-full lg:w-80 lg:max-w-[330px] bg-white dark:bg-gray-800 shadow-lg transform -translate-x-full lg:translate-x-0 transition-transform duration-300 ease-in-out fixed inset-y-0 z-40" aria-label="Navigatie menu" style="view-transition-name: sidebar;">
+            <div class="h-full flex flex-col">
+                <!-- Sidebar Header -->
+                <div class="px-4 sm:px-6 h-[56px] sm:h-[64px] border-b border-gray-200 dark:border-gray-700 flex items-center">
+                    <div class="flex items-center space-x-3 w-full">
+                        <div class="w-10 h-10 bg-gradient-to-r from-blue-600 to-blue-700 rounded-lg flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-graduation-cap text-white text-lg"></i>
+                        </div>
+                        <div class="min-w-0 flex-1" style="min-width: 0;">
+                            <p class="text-xs sm:text-sm text-gray-500 dark:text-gray-400 break-words leading-tight m-0 font-bold" style="word-break: normal; overflow-wrap: break-word; word-wrap: break-word;">Opzetten van Logistieke Onderzoeken (OLO)</p>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- Module Navigation -->
+                <nav class="flex-1 overflow-y-auto custom-scrollbar p-6" aria-label="Module navigatie">
+                    <div class="space-y-2">
+                        <div class="px-3 py-2 mb-2">
+                            <span class="text-sm font-semibold text-gray-700 dark:text-gray-300">E-Learning</span>
+                        </div>
+                        <a href="index.html" class="block p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 focus-ring transition-colors">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-8 h-8 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center">
+                                    <i class="fas fa-home text-blue-600 dark:text-blue-400 text-sm"></i>
+                                </div>
+                                <span class="font-medium text-gray-900 dark:text-white">Start</span>
+                            </div>
+                        </a>
+                        
+                        <a href="week1.html" class="block p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 focus-ring transition-colors">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-8 h-8 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center">
+                                    <i class="fas fa-book text-green-600 dark:text-green-400 text-sm"></i>
+                                </div>
+                                <span class="font-medium text-gray-900 dark:text-white">Week 1</span>
+                            </div>
+                        </a>
+                        
+                        <div class="week-2-nav-item">
+                            <a href="week2.html" class="block p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 focus-ring transition-colors">
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-8 h-8 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center">
+                                        <i class="fas fa-book text-blue-600 dark:text-blue-400 text-sm"></i>
+                                    </div>
+                                    <span class="font-medium text-gray-900 dark:text-white flex-1">Week 2</span>
+                                    <i class="fas fa-chevron-down text-xs text-gray-400 dark:text-gray-500 transition-transform duration-200" id="week-2-chevron-index"></i>
+                                </div>
+                            </a>
+                            <div class="week-2-subitems hidden" id="week-2-subitems-index">
+                                <a href="week2.html#probleem-verkennen" class="nav-sub-item flex items-center space-x-3 pl-11 pr-3 py-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 focus-ring transition-colors text-gray-600 dark:text-gray-300" data-anchor="#probleem-verkennen">
+                                    <div class="w-6 h-6 bg-gray-100 dark:bg-gray-700 rounded flex items-center justify-center flex-shrink-0">
+                                        <i class="fas fa-circle text-xs text-gray-400 dark:text-gray-500"></i>
+                                    </div>
+                                    <span class="text-sm font-medium">Probleem verkennen</span>
+                                </a>
+                                <a href="week2.html#doelstelling-opstellen" class="nav-sub-item flex items-center space-x-3 pl-11 pr-3 py-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 focus-ring transition-colors text-gray-600 dark:text-gray-300" data-anchor="#doelstelling-opstellen">
+                                    <div class="w-6 h-6 bg-gray-100 dark:bg-gray-700 rounded flex items-center justify-center flex-shrink-0">
+                                        <i class="fas fa-circle text-xs text-gray-400 dark:text-gray-500"></i>
+                                    </div>
+                                    <span class="text-sm font-medium">Doelstelling opstellen</span>
+                                </a>
+                                <a href="week2.html#opdrachtgever-onderzoeker" class="nav-sub-item flex items-center space-x-3 pl-11 pr-3 py-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 focus-ring transition-colors text-gray-600 dark:text-gray-300" data-anchor="#opdrachtgever-onderzoeker">
+                                    <div class="w-6 h-6 bg-gray-100 dark:bg-gray-700 rounded flex items-center justify-center flex-shrink-0">
+                                        <i class="fas fa-circle text-xs text-gray-400 dark:text-gray-500"></i>
+                                    </div>
+                                    <span class="text-sm font-medium">Opdrachtgever-onderzoeker relatie</span>
+                                </a>
+                                <a href="week2.html#vormen-praktijkgericht" class="nav-sub-item flex items-center space-x-3 pl-11 pr-3 py-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 focus-ring transition-colors text-gray-600 dark:text-gray-300" data-anchor="#vormen-praktijkgericht">
+                                    <div class="w-6 h-6 bg-gray-100 dark:bg-gray-700 rounded flex items-center justify-center flex-shrink-0">
+                                        <i class="fas fa-circle text-xs text-gray-400 dark:text-gray-500"></i>
+                                    </div>
+                                    <span class="text-sm font-medium">Vormen van praktijkgericht onderzoek</span>
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <div class="week-3-nav-item">
+                            <a href="week3.html" class="block p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 focus-ring transition-colors">
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-8 h-8 bg-purple-100 dark:bg-purple-900/30 rounded-lg flex items-center justify-center">
+                                        <i class="fas fa-book text-purple-600 dark:text-purple-400 text-sm"></i>
+                                    </div>
+                                    <span class="font-medium text-gray-900 dark:text-white flex-1">Week 3</span>
+                                    <i class="fas fa-chevron-down text-xs text-gray-400 dark:text-gray-500 transition-transform duration-200" id="week-3-chevron-index"></i>
+                                </div>
+                            </a>
+                            <div class="week-3-subitems hidden" id="week-3-subitems-index">
+                                <a href="week3.html#onderzoeksmodel" class="nav-sub-item flex items-center space-x-3 pl-11 pr-3 py-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 focus-ring transition-colors text-gray-600 dark:text-gray-300" data-anchor="#onderzoeksmodel">
+                                    <div class="w-6 h-6 bg-gray-100 dark:bg-gray-700 rounded flex items-center justify-center flex-shrink-0">
+                                        <i class="fas fa-circle text-xs text-gray-400 dark:text-gray-500"></i>
+                                    </div>
+                                    <span class="text-sm font-medium">Onderzoeksmodel</span>
+                                </a>
+                                <a href="week3.html#onderzoeksmodel-why" class="nav-sub-item flex items-center space-x-3 pl-11 pr-3 py-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 focus-ring transition-colors text-gray-600 dark:text-gray-300" data-anchor="#onderzoeksmodel-why">
+                                    <div class="w-6 h-6 bg-gray-100 dark:bg-gray-700 rounded flex items-center justify-center flex-shrink-0">
+                                        <i class="fas fa-circle text-xs text-gray-400 dark:text-gray-500"></i>
+                                    </div>
+                                    <span class="text-sm font-medium">Onderzoeksmodel, why?</span>
+                                </a>
+                                <a href="week3.html#onderzoeksvragen" class="nav-sub-item flex items-center space-x-3 pl-11 pr-3 py-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 focus-ring transition-colors text-gray-600 dark:text-gray-300" data-anchor="#onderzoeksvragen">
+                                    <div class="w-6 h-6 bg-gray-100 dark:bg-gray-700 rounded flex items-center justify-center flex-shrink-0">
+                                        <i class="fas fa-circle text-xs text-gray-400 dark:text-gray-500"></i>
+                                    </div>
+                                    <span class="text-sm font-medium">Onderzoeksvragen</span>
+                                </a>
+                                <a href="week3.html#ai-onderzoeksassistent" class="nav-sub-item flex items-center space-x-3 pl-11 pr-3 py-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 focus-ring transition-colors text-gray-600 dark:text-gray-300" data-anchor="#ai-onderzoeksassistent">
+                                    <div class="w-6 h-6 bg-gray-100 dark:bg-gray-700 rounded flex items-center justify-center flex-shrink-0">
+                                        <i class="fas fa-circle text-xs text-gray-400 dark:text-gray-500"></i>
+                                    </div>
+                                    <span class="text-sm font-medium">AI-Onderzoeksassistent</span>
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <div class="week-4-nav-item">
+                            <a href="week4.html" class="block p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 focus-ring transition-colors">
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-8 h-8 bg-orange-100 dark:bg-orange-900/30 rounded-lg flex items-center justify-center">
+                                        <i class="fas fa-book text-orange-600 dark:text-orange-400 text-sm"></i>
+                                    </div>
+                                    <span class="font-medium text-gray-900 dark:text-white flex-1">Week 4</span>
+                                    <i class="fas fa-chevron-down text-xs text-gray-400 dark:text-gray-500 transition-transform duration-200" id="week-4-chevron-index"></i>
+                                </div>
+                            </a>
+                            <div class="week-4-subitems hidden" id="week-4-subitems-index">
+                                <a href="week4.html#definieren-begrippen" class="nav-sub-item flex items-center space-x-3 pl-11 pr-3 py-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 focus-ring transition-colors text-gray-600 dark:text-gray-300" data-anchor="#definieren-begrippen">
+                                    <div class="w-6 h-6 bg-gray-100 dark:bg-gray-700 rounded flex items-center justify-center flex-shrink-0">
+                                        <i class="fas fa-circle text-xs text-gray-400 dark:text-gray-500"></i>
+                                    </div>
+                                    <span class="text-sm font-medium">Definiëren van begrippen</span>
+                                </a>
+                                <a href="week4.html#literatuuronderzoek" class="nav-sub-item flex items-center space-x-3 pl-11 pr-3 py-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 focus-ring transition-colors text-gray-600 dark:text-gray-300" data-anchor="#literatuuronderzoek">
+                                    <div class="w-6 h-6 bg-gray-100 dark:bg-gray-700 rounded flex items-center justify-center flex-shrink-0">
+                                        <i class="fas fa-circle text-xs text-gray-400 dark:text-gray-500"></i>
+                                    </div>
+                                    <span class="text-sm font-medium">Het uitvoeren van literatuuronderzoek</span>
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <div class="week-5-nav-item">
+                            <a href="week5.html" class="block p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 focus-ring transition-colors">
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-8 h-8 bg-red-100 dark:bg-red-900/30 rounded-lg flex items-center justify-center">
+                                        <i class="fas fa-book text-red-600 dark:text-red-400 text-sm"></i>
+                                    </div>
+                                    <span class="font-medium text-gray-900 dark:text-white flex-1">Week 5</span>
+                                    <i class="fas fa-chevron-down text-xs text-gray-400 dark:text-gray-500 transition-transform duration-200" id="week-5-chevron-index"></i>
+                                </div>
+                            </a>
+                            <div class="week-5-subitems hidden" id="week-5-subitems-index">
+                                <a href="week5.html#selecteren-beoordelen" class="nav-sub-item flex items-center space-x-3 pl-11 pr-3 py-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 focus-ring transition-colors text-gray-600 dark:text-gray-300" data-anchor="#selecteren-beoordelen">
+                                    <div class="w-6 h-6 bg-gray-100 dark:bg-gray-700 rounded flex items-center justify-center flex-shrink-0">
+                                        <i class="fas fa-circle text-xs text-gray-400 dark:text-gray-500"></i>
+                                    </div>
+                                    <span class="text-sm font-medium">Selecteren en beoordelen</span>
+                                </a>
+                                <a href="week5.html#slim-bronnen-beheren" class="nav-sub-item flex items-center space-x-3 pl-11 pr-3 py-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 focus-ring transition-colors text-gray-600 dark:text-gray-300" data-anchor="#slim-bronnen-beheren">
+                                    <div class="w-6 h-6 bg-gray-100 dark:bg-gray-700 rounded flex items-center justify-center flex-shrink-0">
+                                        <i class="fas fa-circle text-xs text-gray-400 dark:text-gray-500"></i>
+                                    </div>
+                                    <span class="text-sm font-medium">Slim bronnen beheren</span>
+                                </a>
+                                <a href="week5.html#theoretisch-kader-schrijven" class="nav-sub-item flex items-center space-x-3 pl-11 pr-3 py-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 focus-ring transition-colors text-gray-600 dark:text-gray-300" data-anchor="#theoretisch-kader-schrijven">
+                                    <div class="w-6 h-6 bg-gray-100 dark:bg-gray-700 rounded flex items-center justify-center flex-shrink-0">
+                                        <i class="fas fa-circle text-xs text-gray-400 dark:text-gray-500"></i>
+                                    </div>
+                                    <span class="text-sm font-medium">Theoretisch kader schrijven</span>
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <div class="week-6-nav-item">
+                            <a href="week6.html" class="block p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 focus-ring transition-colors">
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-8 h-8 bg-indigo-100 dark:bg-indigo-900/30 rounded-lg flex items-center justify-center">
+                                        <i class="fas fa-book text-indigo-600 dark:text-indigo-400 text-sm"></i>
+                                    </div>
+                                    <span class="font-medium text-gray-900 dark:text-white flex-1">Week 6</span>
+                                    <i class="fas fa-chevron-down text-xs text-gray-400 dark:text-gray-500 transition-transform duration-200" id="week-6-chevron-index"></i>
+                                </div>
+                            </a>
+                            <div class="week-6-subitems hidden" id="week-6-subitems-index">
+                                <a href="week6.html#kernbeslissingen" class="nav-sub-item flex items-center space-x-3 pl-11 pr-3 py-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 focus-ring transition-colors text-gray-600 dark:text-gray-300" data-anchor="#kernbeslissingen">
+                                    <div class="w-6 h-6 bg-gray-100 dark:bg-gray-700 rounded flex items-center justify-center flex-shrink-0">
+                                        <i class="fas fa-circle text-xs text-gray-400 dark:text-gray-500"></i>
+                                    </div>
+                                    <span class="text-sm font-medium">Kernbeslissingen</span>
+                                </a>
+                                <a href="week6.html#onderzoekstrategie" class="nav-sub-item flex items-center space-x-3 pl-11 pr-3 py-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 focus-ring transition-colors text-gray-600 dark:text-gray-300" data-anchor="#onderzoekstrategie">
+                                    <div class="w-6 h-6 bg-gray-100 dark:bg-gray-700 rounded flex items-center justify-center flex-shrink-0">
+                                        <i class="fas fa-circle text-xs text-gray-400 dark:text-gray-500"></i>
+                                    </div>
+                                    <span class="text-sm font-medium">Onderzoeksstrategie</span>
+                                </a>
+                                <a href="week6.html#dataverzamelingsplan" class="nav-sub-item flex items-center space-x-3 pl-11 pr-3 py-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 focus-ring transition-colors text-gray-600 dark:text-gray-300" data-anchor="#dataverzamelingsplan">
+                                    <div class="w-6 h-6 bg-gray-100 dark:bg-gray-700 rounded flex items-center justify-center flex-shrink-0">
+                                        <i class="fas fa-circle text-xs text-gray-400 dark:text-gray-500"></i>
+                                    </div>
+                                    <span class="text-sm font-medium">Het dataverzamelingsplan</span>
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <a href="week7.html" class="block p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 focus-ring transition-colors">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-8 h-8 bg-pink-100 dark:bg-pink-900/30 rounded-lg flex items-center justify-center">
+                                    <i class="fas fa-book text-pink-600 dark:text-pink-400 text-sm"></i>
+                                </div>
+                                <span class="font-medium text-gray-900 dark:text-white">Week 7</span>
+                            </div>
+                        </a>
+                        
+                        <a href="register.html" class="block p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 focus-ring transition-colors">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-8 h-8 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center">
+                                    <i class="fas fa-list-ul text-blue-600 dark:text-blue-400 text-sm"></i>
+                                </div>
+                                <span class="font-medium text-gray-900 dark:text-white">Begrippenlijst</span>
+                            </div>
+                        </a>
+                        
+                        <a href="afsluiting.html" class="block p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 focus-ring transition-colors">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-8 h-8 bg-gray-100 dark:bg-gray-700 rounded-lg flex items-center justify-center">
+                                    <i class="fas fa-graduation-cap text-gray-600 dark:text-gray-300 text-sm"></i>
+                                </div>
+                                <span class="font-medium text-gray-900 dark:text-white">Afsluiting</span>
+                            </div>
+                        </a>
+                    </div>
+                </nav>
+
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <div class="flex-1 flex flex-col lg:ml-80 relative">
+            <!-- Header -->
+            <header class="fixed top-0 z-40 bg-white dark:bg-gray-800 shadow-sm border-b border-gray-200 dark:border-gray-700 lg:left-80 left-0 right-0" id="main-header" style="view-transition-name: main-header;">
+                <div class="px-4 sm:px-6 h-[56px] sm:h-[64px] transition-colors duration-200 flex items-center">
+                <div class="flex items-center justify-between relative z-10 bg-white dark:bg-gray-800 transition-colors duration-200 w-full">
+                    <!-- Left section: Mobile menu & Breadcrumbs -->
+                    <div class="flex items-center flex-1 min-w-0">
+                        <!-- Mobile menu button -->
+                        <button id="mobile-menu-button" class="lg:hidden p-2 rounded-md text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 focus-ring transition-colors mr-2" aria-label="Open navigatie menu">
+                            <i class="fas fa-bars text-xl"></i>
+                        </button>
+
+                        <!-- Breadcrumbs -->
+                        <nav class="flex items-center space-x-2 text-sm flex-shrink-0" aria-label="Breadcrumb">
+                            <span class="text-gray-900 dark:text-white font-medium">Start</span>
+                        </nav>
+                    </div>
+
+                    <!-- Right section: Actions -->
+                    <div class="flex items-center space-x-2 sm:space-x-3 ml-4">
+                        <!-- Search Toggle Button -->
+                        <button 
+                            id="search-toggle-btn" 
+                            class="p-2 rounded-lg text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 transition-colors"
+                            aria-label="Zoeken">
+                            <i class="fas fa-search text-lg"></i>
+                        </button>
+                        
+                        <!-- Dark Mode Toggle -->
+                        <button 
+                            id="dark-mode-toggle" 
+                            class="relative p-2 rounded-lg bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-700 dark:to-gray-800 hover:from-gray-200 hover:to-gray-300 dark:hover:from-gray-600 dark:hover:to-gray-700 focus-ring transition-all duration-300 group shadow-sm hover:shadow-md" 
+                            aria-label="Toggle dark mode"
+                            title="Dark mode">
+                            <div class="relative w-6 h-6 flex items-center justify-center overflow-hidden">
+                                <i id="dark-mode-icon-sun" class="fas fa-sun text-yellow-500 absolute transform transition-all duration-500 rotate-0 scale-100 opacity-100 dark:rotate-90 dark:scale-0 dark:opacity-0"></i>
+                                <i id="dark-mode-icon-moon" class="fas fa-moon text-blue-400 absolute transform transition-all duration-500 rotate-0 scale-0 opacity-0 dark:rotate-0 dark:scale-100 dark:opacity-100"></i>
+                            </div>
+                            <span class="absolute inset-0 rounded-lg bg-gradient-to-r from-yellow-400/20 to-blue-400/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-sm"></span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Search Overlay (Hidden by default) -->
+                <div id="search-overlay" class="absolute inset-0 bg-white dark:bg-gray-800 z-20 px-6 flex items-center opacity-0 pointer-events-none transition-all duration-300 transform -translate-y-2">
+                    <div class="relative w-full max-w-3xl mx-auto flex items-center">
+                        <i class="fas fa-search text-gray-400 dark:text-gray-500 absolute left-3"></i>
+                        <input 
+                            type="text" 
+                            id="global-search-input" 
+                            class="block w-full pl-10 pr-10 py-2 border-b-2 border-gray-200 dark:border-gray-700 bg-transparent text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:border-blue-500 dark:focus:border-blue-400 sm:text-lg transition-colors duration-200" 
+                            placeholder="Waar ben je naar op zoek?"
+                            autocomplete="off"
+                        >
+                        <button id="close-search-btn" class="absolute right-0 p-2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors">
+                            <i class="fas fa-times text-lg"></i>
+                        </button>
+                        
+                        <!-- Results Dropdown -->
+                        <div id="search-results-dropdown" class="absolute top-full left-0 right-0 mt-2 bg-white dark:bg-gray-800 shadow-xl rounded-b-lg border-x border-b border-gray-200 dark:border-gray-700 max-h-[70vh] overflow-auto hidden z-50 custom-scrollbar">
+                            <!-- Results will be injected here -->
+                    </div>
+                </div>
+            </header>
+
+            <!-- Main Content -->
+            <div class="flex-1 overflow-y-auto custom-scrollbar pt-[56px] sm:pt-[64px]">
+                <main id="main-content" class="bg-gray-50 dark:bg-gray-900 transition-colors duration-200">
+                <div class="max-w-4xl mx-auto px-6 py-8">
+                    <!-- Lesson Content -->
+                    <article class="space-y-8 fade-in">
+                        <!-- Course Title Section -->

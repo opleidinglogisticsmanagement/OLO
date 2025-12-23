@@ -1410,7 +1410,8 @@ app.get('/api/test-gemini', async (req, res) => {
 // ============================================
 // monorepoRoot is al gedeclareerd bovenaan (regel 12)
 const coreDir = __dirname; // packages/core
-let appDir = process.env.APP_DIR || path.join(monorepoRoot, 'apps/logistiek-onderzoek');
+// Determine app directory - use APP_DIR env var or find first available app
+let appDir = process.env.APP_DIR;
 const gameDir = path.join(monorepoRoot, 'game');
 
 // Fallback voor Vercel: probeer verschillende locaties
@@ -1419,14 +1420,17 @@ if (process.env.VERCEL && process.env.VERCEL_ROOT_DIR) {
     rootDir = process.env.VERCEL_ROOT_DIR;
     console.log(`[Monorepo] Using Vercel root directory: ${rootDir}`);
     // Probeer app directory te vinden
-    const possibleAppDirs = [
-        path.join(rootDir, 'apps', 'logistiek-onderzoek'),
-        path.join(rootDir, 'apps', fs.readdirSync(path.join(rootDir, 'apps')).find(d => d !== 'core' && fs.statSync(path.join(rootDir, 'apps', d)).isDirectory()) || 'logistiek-onderzoek')
-    ];
-    for (const possibleAppDir of possibleAppDirs) {
-        if (fs.existsSync(possibleAppDir)) {
-            appDir = possibleAppDir;
-            break;
+    if (!appDir) {
+        const appsDir = path.join(rootDir, 'apps');
+        if (fs.existsSync(appsDir)) {
+            const apps = fs.readdirSync(appsDir).filter(d => 
+                d !== 'core' && fs.statSync(path.join(appsDir, d)).isDirectory()
+            );
+            if (apps.length > 0) {
+                // Use first available app
+                appDir = path.join(appsDir, apps[0]);
+                console.log(`[Monorepo] Found app directory: ${appDir}`);
+            }
         }
     }
     } else {
@@ -1436,19 +1440,26 @@ if (process.env.VERCEL && process.env.VERCEL_ROOT_DIR) {
     console.log(`[Monorepo] Game: ${gameDir}`);
 }
 
-// Verifieer dat directories bestaan
-if (!fs.existsSync(appDir)) {
-    console.warn(`[Monorepo] ⚠️ App directory not found: ${appDir}`);
+// Verifieer dat directories bestaan en bepaal appDir als het nog niet is ingesteld
+if (!appDir || !fs.existsSync(appDir)) {
+    if (appDir) {
+        console.warn(`[Monorepo] ⚠️ App directory not found: ${appDir}`);
+    }
     console.warn(`[Monorepo] Looking for apps in: ${path.join(monorepoRoot, 'apps')}`);
-    if (fs.existsSync(path.join(monorepoRoot, 'apps'))) {
-        const apps = fs.readdirSync(path.join(monorepoRoot, 'apps')).filter(f => 
-            fs.statSync(path.join(monorepoRoot, 'apps', f)).isDirectory()
+    const appsDir = path.join(monorepoRoot, 'apps');
+    if (fs.existsSync(appsDir)) {
+        const apps = fs.readdirSync(appsDir).filter(f => 
+            fs.statSync(path.join(appsDir, f)).isDirectory()
         );
         console.warn(`[Monorepo] Available apps: ${apps.join(', ')}`);
         if (apps.length > 0) {
-            appDir = path.join(monorepoRoot, 'apps', apps[0]);
+            appDir = path.join(appsDir, apps[0]);
             console.log(`[Monorepo] Using first available app: ${appDir}`);
+        } else {
+            console.error(`[Monorepo] ❌ No apps found in ${appsDir}`);
         }
+    } else {
+        console.error(`[Monorepo] ❌ Apps directory not found: ${appsDir}`);
     }
 }
 
@@ -1471,20 +1482,6 @@ app.get(/^\/core\/.*$/, (req, res, next) => {
     console.log(`[Core Route] rootDir: ${rootDir}`);
     console.log(`[Core Route] monorepoRoot: ${monorepoRoot}`);
     
-    // #region agent log - Hypothesis E: Check if pages file is being requested
-    if (filePath.startsWith('pages/')) {
-        console.log(`[DEBUG HYPOTHESIS E] Pages file requested: ${filePath}`);
-        const pagesDirPath = path.join(coreDir, 'pages');
-        const pagesDirExists = fs.existsSync(pagesDirPath);
-        console.log(`[DEBUG HYPOTHESIS E] Pages directory exists: ${pagesDirExists}, path: ${pagesDirPath}`);
-        if (pagesDirExists) {
-            const pagesFiles = fs.readdirSync(pagesDirPath);
-            const requestedFileName = filePath.replace('pages/', '');
-            const fileExists = pagesFiles.includes(requestedFileName);
-            console.log(`[DEBUG HYPOTHESIS E] Requested file: ${requestedFileName}, exists in pages: ${fileExists}, all pages files:`, pagesFiles);
-        }
-    }
-    // #endregion
     
     // Set no-cache headers voor JS bestanden
     if (filePath.endsWith('.js')) {
@@ -1510,21 +1507,6 @@ app.get(/^\/core\/.*$/, (req, res, next) => {
             const coreDirContents = fs.readdirSync(coreDir);
             console.log(`[Core Route] DEBUG: Files in coreDir (first 20):`, coreDirContents.slice(0, 20));
             
-            // #region agent log - Hypothesis A, B, D: Check if pages directory exists when file not found
-            const pagesDirPath = path.join(coreDir, 'pages');
-            const pagesDirExists = fs.existsSync(pagesDirPath);
-            console.log(`[DEBUG HYPOTHESIS A,B,D] File not found - checking pages directory. Requested: ${filePath}, coreDir: ${coreDir}, pagesDir: ${pagesDirPath}, exists: ${pagesDirExists}`);
-            
-            if (pagesDirExists) {
-                const pagesFiles = fs.readdirSync(pagesDirPath);
-                console.log(`[DEBUG HYPOTHESIS C] Pages directory exists during request: ${pagesDirPath}, files:`, pagesFiles, `requested: ${filePath}`);
-                console.log(`[Core Route] DEBUG: Pages directory exists: ${pagesDirPath}`);
-                console.log(`[Core Route] DEBUG: Files in pages:`, pagesFiles);
-            } else {
-                console.log(`[DEBUG HYPOTHESIS A,B,D] Pages directory missing during request: ${pagesDirPath}, coreDir: ${coreDir}, requested: ${filePath}`);
-                console.log(`[Core Route] DEBUG: Pages directory does NOT exist: ${pagesDirPath}`);
-            }
-            // #endregion
             
             // Check if js directory exists
             const jsDir = path.join(coreDir, 'js');
@@ -1538,16 +1520,6 @@ app.get(/^\/core\/.*$/, (req, res, next) => {
             console.error(`[Core Route] DEBUG: Error reading coreDir:`, e.message);
         }
     }
-    
-    // #region agent log - Hypothesis E: Log all possible paths for pages files
-    if (filePath.startsWith('pages/')) {
-        console.log(`[DEBUG HYPOTHESIS E] Checking possible paths for pages file: ${filePath}`);
-        possiblePaths.forEach((p, idx) => {
-            const exists = fs.existsSync(p);
-            console.log(`[DEBUG HYPOTHESIS E] Path ${idx}: ${p}, exists: ${exists}`);
-        });
-    }
-    // #endregion
     
     let foundPath = null;
     for (const possiblePath of possiblePaths) {

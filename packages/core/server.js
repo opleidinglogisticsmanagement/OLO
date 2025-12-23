@@ -1488,6 +1488,26 @@ app.get(/^\/core\/.*$/, (req, res, next) => {
         path.join(monorepoRoot, 'packages', 'core', filePath), // Monorepo root
     ];
     
+    // DEBUG: Log welke bestanden wel beschikbaar zijn in coreDir
+    if (!fs.existsSync(possiblePaths[0])) {
+        console.log(`[Core Route] DEBUG: Checking what files exist in coreDir: ${coreDir}`);
+        try {
+            const coreDirContents = fs.readdirSync(coreDir);
+            console.log(`[Core Route] DEBUG: Files in coreDir (first 20):`, coreDirContents.slice(0, 20));
+            
+            // Check if js directory exists
+            const jsDir = path.join(coreDir, 'js');
+            if (fs.existsSync(jsDir)) {
+                const jsDirContents = fs.readdirSync(jsDir);
+                console.log(`[Core Route] DEBUG: Files in coreDir/js (first 20):`, jsDirContents.slice(0, 20));
+            } else {
+                console.log(`[Core Route] DEBUG: js directory does not exist in coreDir`);
+            }
+        } catch (e) {
+            console.error(`[Core Route] DEBUG: Error reading coreDir:`, e.message);
+        }
+    }
+    
     let foundPath = null;
     for (const possiblePath of possiblePaths) {
         console.log(`[Core Route] Checking path: ${possiblePath}`);

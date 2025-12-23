@@ -8,74 +8,70 @@
  * in de root van het project (of app root als root directory is ingesteld).
  */
 
-// CRITICAL: Log onmiddellijk om te bevestigen dat de functie wordt uitgevoerd
-console.log('=== [App API Handler] Function is being executed ===');
-console.log('[App API Handler] Timestamp:', new Date().toISOString());
-console.log('[App API Handler] Node version:', process.version);
-console.log('[App API Handler] __filename:', __filename);
-console.log('[App API Handler] __dirname:', __dirname);
+// BELANGRIJK: Vercel moet een functie exporteren, niet alleen een Express app
+// We maken een wrapper functie die altijd werkt, zelfs als de core API niet laadt
 
 // Zet VERCEL environment variable
 process.env.VERCEL = '1';
 
 // Stel de APP_DIR in voor de server.js om de juiste app-specifieke bestanden te vinden
-// Dit pad is relatief ten opzichte van de monorepo root, die Vercel als /var/task ziet
-// Aangezien de Root Directory van het Vercel project apps/logistiek-onderzoek is,
-// is de appDir de root van de Vercel deployment.
-process.env.APP_DIR = process.cwd(); // Dit is /var/task/ in Vercel, wat de app root is.
+process.env.APP_DIR = process.cwd();
 
-// Importeer de core API handler
-// Deze staat in packages/core/api/index.js
-// We gebruiken een relatief pad dat werkt vanuit de app directory
+// Importeer dependencies
 const path = require('path');
+const fs = require('fs');
 
 // Bepaal het pad naar de core API
-// Vanuit apps/logistiek-onderzoek/api/index.js naar packages/core/api/index.js
 const coreApiPath = path.resolve(__dirname, '../../packages/core/api/index.js');
 
-// Debug logging
-console.log('[App API Handler] Loading core API from:', coreApiPath);
-console.log('[App API Handler] __dirname:', __dirname);
-console.log('[App API Handler] process.cwd():', process.cwd());
-console.log('[App API Handler] APP_DIR:', process.env.APP_DIR);
+// Laad de core API (lazy loading in de handler)
+let coreApp = null;
+let loadError = null;
 
-// Vercel serverless functions moeten een handler functie exporteren
-// Express apps worden automatisch geconverteerd naar handlers door Vercel
-// BELANGRIJK: We moeten de export SYNCHROON doen, niet in een try-catch
-// omdat Vercel de functie moet kunnen laden voordat het kan worden uitgevoerd
-
-let coreApp;
-
-try {
-    console.log('[App API Handler] Attempting to require core API...');
-    console.log('[App API Handler] coreApiPath exists:', require('fs').existsSync(coreApiPath));
+function loadCoreApp() {
+    if (coreApp !== null) {
+        return coreApp; // Al geladen
+    }
     
-    // Importeer de core API (dit is een Express app)
-    coreApp = require(coreApiPath);
-    console.log('[App API Handler] ✅ Core API loaded successfully');
-    console.log('[App API Handler] Core app type:', typeof coreApp);
-    console.log('[App API Handler] Core app has listen method:', typeof coreApp.listen === 'function');
-} catch (error) {
-    console.error('[App API Handler] ❌ Error loading core API:', error);
-    console.error('[App API Handler] Error message:', error.message);
-    console.error('[App API Handler] Error stack:', error.stack);
+    if (loadError !== null) {
+        throw loadError; // Al geprobeerd en gefaald
+    }
     
-    // Export een error handler zodat Vercel weet dat de functie bestaat
-    // Dit voorkomt dat Vercel de source code serveert
-    coreApp = (req, res) => {
-        console.error('[App API Handler] Error handler called for:', req.method, req.path);
+    try {
+        console.log('[App API Handler] Loading core API from:', coreApiPath);
+        console.log('[App API Handler] File exists:', fs.existsSync(coreApiPath));
+        coreApp = require(coreApiPath);
+        console.log('[App API Handler] ✅ Core API loaded successfully');
+        return coreApp;
+    } catch (error) {
+        loadError = error;
+        console.error('[App API Handler] ❌ Error loading core API:', error.message);
+        console.error('[App API Handler] Error stack:', error.stack);
+        throw error;
+    }
+}
+
+// Export een handler functie die Vercel kan uitvoeren
+// Deze functie wordt aangeroepen voor elke request
+module.exports = function handler(req, res) {
+    console.log('[App API Handler] Handler called for:', req.method, req.path);
+    console.log('[App API Handler] Timestamp:', new Date().toISOString());
+    
+    try {
+        // Laad de core app (lazy loading)
+        const app = loadCoreApp();
+        
+        // De Express app handelt de request af
+        app(req, res);
+    } catch (error) {
+        console.error('[App API Handler] Error in handler:', error.message);
         res.status(500).json({
-            error: 'Serverless function initialization failed',
+            error: 'Serverless function error',
             message: error.message,
             path: req.path,
             method: req.method,
             timestamp: new Date().toISOString()
         });
-    };
-}
-
-// Export de app/handler - dit MOET altijd gebeuren, ook bij errors
-// Vercel herkent een functie export als een serverless functie
-console.log('[App API Handler] Exporting handler, type:', typeof coreApp);
-module.exports = coreApp;
+    }
+};
 

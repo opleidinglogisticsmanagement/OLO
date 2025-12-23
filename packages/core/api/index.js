@@ -17,7 +17,10 @@ const fs = require('fs');
 // api/index.js staat in packages/core/api/
 const monorepoRoot = path.resolve(__dirname, '../..'); // 2 levels omhoog
 const coreDir = path.resolve(__dirname, '..'); // packages/core
-const appDir = process.env.APP_DIR || path.join(monorepoRoot, 'apps/logistiek-onderzoek');
+// Bepaal app directory: als we vanuit apps/logistiek-onderzoek/api/index.js worden aangeroepen,
+// moeten we de app directory vinden op basis van waar de request vandaan komt
+// Standaard: apps/logistiek-onderzoek (kan worden overschreven met APP_DIR env var)
+const appDir = process.env.APP_DIR || path.join(monorepoRoot, 'apps', 'logistiek-onderzoek');
 
 // Probeer verschillende paden om de root directory te vinden
 // Op Vercel serverless worden alle bestanden in /var/task/ geplaatst

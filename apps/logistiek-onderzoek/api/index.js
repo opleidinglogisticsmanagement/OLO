@@ -9,9 +9,10 @@
 // Maar als de functie crasht tijdens loading, serveert Vercel de source code
 // We moeten ervoor zorgen dat module.exports altijd wordt bereikt
 
-// Test: Minimale functie zonder dependencies
-// Als deze werkt, kunnen we de core API toevoegen
-// Gebruik een named export in plaats van arrow function om compatibiliteit te garanderen
+// Lazy load de core API om te voorkomen dat crashes tijdens module loading
+// de source code worden geserveerd
+let coreApp = null;
+
 function handler(req, res) {
     // Log onmiddellijk om te bevestigen dat de functie wordt uitgevoerd
     console.log('=== [App API Handler] Handler function is being executed! ===');
@@ -20,17 +21,32 @@ function handler(req, res) {
     console.log('[App API Handler] __dirname:', __dirname);
     console.log('[App API Handler] process.cwd():', process.cwd());
     
-    // Test: Geef een simpele response om te bevestigen dat de functie werkt
-    res.setHeader('Content-Type', 'application/json');
-    res.status(200).json({
-        success: true,
-        message: 'Serverless function is working!',
-        path: req.path,
-        method: req.method,
-        timestamp: new Date().toISOString(),
-        __dirname: __dirname,
-        cwd: process.cwd()
-    });
+    // Lazy load de core API (eerste keer alleen)
+    if (!coreApp) {
+        try {
+            console.log('[App API Handler] Loading core API...');
+            const path = require('path');
+            // Bepaal het pad naar packages/core/api/index.js
+            // Vanuit apps/logistiek-onderzoek/api/index.js naar packages/core/api/index.js
+            const coreApiPath = path.resolve(__dirname, '../../../packages/core/api/index.js');
+            console.log('[App API Handler] Core API path:', coreApiPath);
+            coreApp = require(coreApiPath);
+            console.log('[App API Handler] ✅ Core API loaded successfully');
+        } catch (error) {
+            console.error('[App API Handler] ❌ Error loading core API:', error);
+            // Fallback: geef een error response
+            res.status(500).json({
+                success: false,
+                error: 'Failed to load core API',
+                message: error.message,
+                stack: process.env.NODE_ENV === 'development' ? error.stack : undefined
+            });
+            return;
+        }
+    }
+    
+    // Gebruik de core API om de request af te handelen
+    coreApp(req, res);
 }
 
 // Export als default

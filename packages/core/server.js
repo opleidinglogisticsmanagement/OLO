@@ -1429,7 +1429,7 @@ if (process.env.VERCEL && process.env.VERCEL_ROOT_DIR) {
             break;
         }
     }
-} else {
+    } else {
     console.log(`[Monorepo] Root: ${monorepoRoot}`);
     console.log(`[Monorepo] Core: ${coreDir}`);
     console.log(`[Monorepo] App: ${appDir}`);
@@ -1494,6 +1494,22 @@ app.get(/^\/core\/.*$/, (req, res, next) => {
         try {
             const coreDirContents = fs.readdirSync(coreDir);
             console.log(`[Core Route] DEBUG: Files in coreDir (first 20):`, coreDirContents.slice(0, 20));
+            
+            // #region agent log - Hypothesis A, B, D: Check if pages directory exists when file not found
+            const pagesDirPath = path.join(coreDir, 'pages');
+            const pagesDirExists = fs.existsSync(pagesDirPath);
+            console.log(`[DEBUG HYPOTHESIS A,B,D] File not found - checking pages directory. Requested: ${filePath}, coreDir: ${coreDir}, pagesDir: ${pagesDirPath}, exists: ${pagesDirExists}`);
+            
+            if (pagesDirExists) {
+                const pagesFiles = fs.readdirSync(pagesDirPath);
+                console.log(`[DEBUG HYPOTHESIS C] Pages directory exists during request: ${pagesDirPath}, files:`, pagesFiles, `requested: ${filePath}`);
+                console.log(`[Core Route] DEBUG: Pages directory exists: ${pagesDirPath}`);
+                console.log(`[Core Route] DEBUG: Files in pages:`, pagesFiles);
+            } else {
+                console.log(`[DEBUG HYPOTHESIS A,B,D] Pages directory missing during request: ${pagesDirPath}, coreDir: ${coreDir}, requested: ${filePath}`);
+                console.log(`[Core Route] DEBUG: Pages directory does NOT exist: ${pagesDirPath}`);
+            }
+            // #endregion
             
             // Check if js directory exists
             const jsDir = path.join(coreDir, 'js');
@@ -2078,10 +2094,10 @@ app.use((req, res) => {
            .setHeader('Content-Type', 'application/javascript; charset=utf-8')
            .send(`// Error: /core/* route not matched for ${req.path}\n// Check Vercel deployment logs for route matching issues.`);
     } else {
-        res.status(404).json({
-            error: 'Not found',
-            message: `Route ${req.method} ${req.path} niet gevonden`
-        });
+    res.status(404).json({
+        error: 'Not found',
+        message: `Route ${req.method} ${req.path} niet gevonden`
+    });
     }
 });
 

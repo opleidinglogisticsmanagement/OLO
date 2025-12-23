@@ -20,6 +20,44 @@ class Week1LessonPage extends BaseLessonPage {
             return this.renderErrorState();
         }
 
+        let sections = '';
+
+        // Render leerdoelen sectie (if available)
+        if (this.content.leerdoelen) {
+            let leerdoelenContent = '';
+            if (this.content.leerdoelen.interactive && this.content.leerdoelen.items && this.content.leerdoelen.items.length > 0) {
+                // Use interactive checklist
+                leerdoelenContent = ContentRenderer.renderLearningObjectivesChecklist({
+                    title: this.content.leerdoelen.title,
+                    description: this.content.leerdoelen.description,
+                    items: this.content.leerdoelen.items,
+                    storageKey: 'week1-learning-objectives'
+                });
+            } else {
+                // Use standard list
+                leerdoelenContent = `
+                    ${this.content.leerdoelen.description ? `<p class="text-gray-600 dark:text-gray-300 mb-4">${this.content.leerdoelen.description}</p>` : ''}
+                    ${this.content.leerdoelen.items && this.content.leerdoelen.items.length > 0 ? `
+                        <ul class="space-y-2">
+                            ${this.content.leerdoelen.items.map(item => `
+                                <li class="flex items-start space-x-3">
+                                    <i class="fas fa-check text-green-500 dark:text-green-400 mt-1"></i>
+                                    <span class="text-gray-700 dark:text-gray-300">${item}</span>
+                                </li>
+                            `).join('')}
+                        </ul>
+                    ` : ''}
+                `;
+            }
+
+            sections += this.contentTemplateRenderer.renderSection(
+                this.content.leerdoelen.title || 'Leerdoelen',
+                leerdoelenContent,
+                'target',
+                'green'
+            );
+        }
+
         // Render theorie content
         let theorieHtml = '';
         const theorie = this.content.theorie;
@@ -32,12 +70,14 @@ class Week1LessonPage extends BaseLessonPage {
         const theorieTitle = (theorie && theorie.title) ? theorie.title : 'Theorie';
 
         // Use ContentTemplateRenderer for consistent section styling
-        return this.contentTemplateRenderer.renderSection(
+        sections += this.contentTemplateRenderer.renderSection(
             theorieTitle,
             theorieHtml,
             'book',
             'blue'
         );
+
+        return sections;
     }
 
     /**

@@ -4,6 +4,13 @@
     "subtitle": "Operations Management - Introductie",
     "description": "Welkom bij Operations Management! Deze module behandelt de belangrijkste concepten en praktijken van operations management."
   },
+  "leerdoelen": {
+    "title": "Leerdoelen",
+    "items": [
+      "Je kunt uitleggen wat Operations Management is en welke rol het speelt in moderne organisaties."
+    ],
+    "interactive": false
+  },
   "theorie": {
     "title": "Introductie Operations Management",
     "content": [

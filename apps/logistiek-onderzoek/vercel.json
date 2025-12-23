@@ -11,19 +11,19 @@
   "rewrites": [
     {
       "source": "/api/(.*)",
-      "destination": "/api/index.js"
+      "destination": "/api/index"
     },
     {
       "source": "/core/(.*)",
-      "destination": "/api/index.js"
+      "destination": "/api/index"
     },
     {
       "source": "/game/(.*)",
-      "destination": "/api/index.js"
+      "destination": "/api/index"
     },
     {
       "source": "/(.*)\\.html$",
-      "destination": "/api/index.js"
+      "destination": "/api/index"
     }
   ],
   "headers": [

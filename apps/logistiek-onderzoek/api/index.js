@@ -8,6 +8,13 @@
  * in de root van het project (of app root als root directory is ingesteld).
  */
 
+// CRITICAL: Log onmiddellijk om te bevestigen dat de functie wordt uitgevoerd
+console.log('=== [App API Handler] Function is being executed ===');
+console.log('[App API Handler] Timestamp:', new Date().toISOString());
+console.log('[App API Handler] Node version:', process.version);
+console.log('[App API Handler] __filename:', __filename);
+console.log('[App API Handler] __dirname:', __dirname);
+
 // Zet VERCEL environment variable
 process.env.VERCEL = '1';
 
@@ -32,23 +39,40 @@ console.log('[App API Handler] __dirname:', __dirname);
 console.log('[App API Handler] process.cwd():', process.cwd());
 console.log('[App API Handler] APP_DIR:', process.env.APP_DIR);
 
+// Vercel serverless functions moeten een handler functie exporteren
+// Express apps worden automatisch geconverteerd naar handlers door Vercel
 try {
-    // Importeer en exporteer de core API
+    // Importeer de core API (dit is een Express app)
     const coreApp = require(coreApiPath);
     console.log('[App API Handler] ✅ Core API loaded successfully');
     console.log('[App API Handler] Core app type:', typeof coreApp);
-    module.exports = coreApp;
+    
+    // Vercel converteert Express apps automatisch naar handlers
+    // Maar we moeten ervoor zorgen dat het een Express app is
+    if (typeof coreApp === 'function') {
+        // Als het al een handler is, exporteer het direct
+        module.exports = coreApp;
+    } else {
+        // Als het een object is, exporteer het als app
+        module.exports = coreApp;
+    }
 } catch (error) {
     console.error('[App API Handler] ❌ Error loading core API:', error);
+    console.error('[App API Handler] Error message:', error.message);
     console.error('[App API Handler] Error stack:', error.stack);
+    
     // Export een error handler zodat Vercel weet dat de functie bestaat
-    module.exports = (req, res) => {
-        console.error('[App API Handler] Error handler called');
+    // Dit voorkomt dat Vercel de source code serveert
+    const errorHandler = (req, res) => {
+        console.error('[App API Handler] Error handler called for:', req.method, req.path);
         res.status(500).json({
             error: 'Serverless function initialization failed',
             message: error.message,
-            stack: process.env.NODE_ENV === 'development' ? error.stack : undefined
+            path: req.path,
+            method: req.method
         });
     };
+    
+    module.exports = errorHandler;
 }
 

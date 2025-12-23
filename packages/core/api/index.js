@@ -15,24 +15,39 @@ const fs = require('fs');
 
 // Monorepo structuur: bepaal directories
 // api/index.js staat in packages/core/api/
-const monorepoRoot = path.resolve(__dirname, '../..'); // 2 levels omhoog
-const coreDir = path.resolve(__dirname, '..'); // packages/core
-// Bepaal app directory: als we vanuit apps/logistiek-onderzoek/api/index.js worden aangeroepen,
-// moeten we de app directory vinden op basis van waar de request vandaan komt
-// Standaard: apps/logistiek-onderzoek (kan worden overschreven met APP_DIR env var)
-const appDir = process.env.APP_DIR || path.join(monorepoRoot, 'apps', 'logistiek-onderzoek');
+const monorepoRoot = path.resolve(__dirname, '../..'); // 2 levels omhoog = /var/task
+const coreDir = path.resolve(__dirname, '..'); // packages/core = /var/task/packages/core
+
+// BELANGRIJK: In Vercel met Root Directory "apps/logistiek-onderzoek":
+// - /var/task = app directory (waar index.html staat)
+// - /var/task/packages/core = core directory
+// - appDir moet /var/task zijn, NIET /var/task/apps/logistiek-onderzoek
+let appDir = process.env.APP_DIR;
+if (!appDir) {
+    // Probeer eerst /var/task (Vercel default met Root Directory)
+    if (fs.existsSync('/var/task/index.html')) {
+        appDir = '/var/task';
+    } else if (fs.existsSync(path.join(monorepoRoot, 'index.html'))) {
+        appDir = monorepoRoot;
+    } else {
+        // Fallback: probeer apps/logistiek-onderzoek (lokale development)
+        appDir = path.join(monorepoRoot, 'apps', 'logistiek-onderzoek');
+    }
+}
+
+// BELANGRIJK: In Vercel met Root Directory "apps/logistiek-onderzoek":
+// - /var/task = app directory (waar index.html staat)
+// - rootDir moet /var/task zijn (niet /var/task/apps/logistiek-onderzoek)
+let rootDir = null;
 
 // Probeer verschillende paden om de root directory te vinden
 // Op Vercel serverless worden alle bestanden in /var/task/ geplaatst
 const possibleRoots = [
     '/var/task', // Vercel default - waar alle bestanden zijn (probeer dit eerst!)
+    appDir, // App directory (al berekend hierboven)
     monorepoRoot, // Monorepo root
-    path.join(monorepoRoot, 'apps', 'logistiek-onderzoek'), // App directory
-    path.join(__dirname, '../..'), // 2 levels omhoog van api/
     process.cwd(), // Current working directory
 ];
-
-let rootDir = null;
 
 // Zoek waar index.html daadwerkelijk staat (in app directory)
 for (const possibleRoot of possibleRoots) {
@@ -42,19 +57,12 @@ for (const possibleRoot of possibleRoots) {
         console.log(`✅ Found root directory: ${rootDir}`);
         break;
     }
-    // Ook checken in apps/logistiek-onderzoek subdirectory
-    const appTestFile = path.join(possibleRoot, 'apps', 'logistiek-onderzoek', 'index.html');
-    if (fs.existsSync(appTestFile)) {
-        rootDir = path.join(possibleRoot, 'apps', 'logistiek-onderzoek');
-        console.log(`✅ Found app directory: ${rootDir}`);
-        break;
-    }
 }
 
-// Fallback naar /var/task als niets gevonden wordt (Vercel standaard)
+// Fallback: gebruik appDir als rootDir
 if (!rootDir) {
-    rootDir = '/var/task';
-    console.log(`⚠️  No root directory found, using default: ${rootDir}`);
+    rootDir = appDir || '/var/task';
+    console.log(`⚠️  No root directory found, using appDir: ${rootDir}`);
 }
 
 // Zet environment variable zodat server.js het kan gebruiken

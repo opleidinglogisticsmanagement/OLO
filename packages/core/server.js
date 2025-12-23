@@ -1471,6 +1471,21 @@ app.get(/^\/core\/.*$/, (req, res, next) => {
     console.log(`[Core Route] rootDir: ${rootDir}`);
     console.log(`[Core Route] monorepoRoot: ${monorepoRoot}`);
     
+    // #region agent log - Hypothesis E: Check if pages file is being requested
+    if (filePath.startsWith('pages/')) {
+        console.log(`[DEBUG HYPOTHESIS E] Pages file requested: ${filePath}`);
+        const pagesDirPath = path.join(coreDir, 'pages');
+        const pagesDirExists = fs.existsSync(pagesDirPath);
+        console.log(`[DEBUG HYPOTHESIS E] Pages directory exists: ${pagesDirExists}, path: ${pagesDirPath}`);
+        if (pagesDirExists) {
+            const pagesFiles = fs.readdirSync(pagesDirPath);
+            const requestedFileName = filePath.replace('pages/', '');
+            const fileExists = pagesFiles.includes(requestedFileName);
+            console.log(`[DEBUG HYPOTHESIS E] Requested file: ${requestedFileName}, exists in pages: ${fileExists}, all pages files:`, pagesFiles);
+        }
+    }
+    // #endregion
+    
     // Set no-cache headers voor JS bestanden
     if (filePath.endsWith('.js')) {
         res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
@@ -1523,6 +1538,16 @@ app.get(/^\/core\/.*$/, (req, res, next) => {
             console.error(`[Core Route] DEBUG: Error reading coreDir:`, e.message);
         }
     }
+    
+    // #region agent log - Hypothesis E: Log all possible paths for pages files
+    if (filePath.startsWith('pages/')) {
+        console.log(`[DEBUG HYPOTHESIS E] Checking possible paths for pages file: ${filePath}`);
+        possiblePaths.forEach((p, idx) => {
+            const exists = fs.existsSync(p);
+            console.log(`[DEBUG HYPOTHESIS E] Path ${idx}: ${p}, exists: ${exists}`);
+        });
+    }
+    // #endregion
     
     let foundPath = null;
     for (const possiblePath of possiblePaths) {

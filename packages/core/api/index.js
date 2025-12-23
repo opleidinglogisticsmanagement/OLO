@@ -40,33 +40,34 @@ if (!appDir) {
 }
 
 // BELANGRIJK: In Vercel met Root Directory "apps/logistiek-onderzoek":
-// - /var/task = app directory (waar index.html staat)
-// - rootDir moet /var/task zijn (niet /var/task/apps/logistiek-onderzoek)
+// - /var/task = monorepo root (waar packages/ en apps/ staan)
+// - /var/task/apps/logistiek-onderzoek = app directory (waar index.html staat)
+// - rootDir moet /var/task zijn (monorepo root), NIET de app directory!
+// - packages/core/server.js verwacht dat rootDir de monorepo root is
 let rootDir = null;
 
-// Probeer verschillende paden om de root directory te vinden
+// Probeer verschillende paden om de monorepo root te vinden
 // Op Vercel serverless worden alle bestanden in /var/task/ geplaatst
 const possibleRoots = [
-    '/var/task', // Vercel default - waar alle bestanden zijn (probeer dit eerst!)
-    appDir, // App directory (al berekend hierboven)
-    monorepoRoot, // Monorepo root
+    '/var/task', // Vercel default - monorepo root (probeer dit eerst!)
+    monorepoRoot, // Monorepo root (al berekend hierboven)
     process.cwd(), // Current working directory
 ];
 
-// Zoek waar index.html daadwerkelijk staat (in app directory)
+// Zoek waar packages/ directory staat (monorepo root)
 for (const possibleRoot of possibleRoots) {
-    const testFile = path.join(possibleRoot, 'index.html');
+    const testFile = path.join(possibleRoot, 'packages', 'core');
     if (fs.existsSync(testFile)) {
         rootDir = possibleRoot;
-        console.log(`✅ Found root directory: ${rootDir}`);
+        console.log(`✅ Found monorepo root directory: ${rootDir}`);
         break;
     }
 }
 
-// Fallback: gebruik appDir als rootDir
+// Fallback: gebruik monorepoRoot
 if (!rootDir) {
-    rootDir = appDir || '/var/task';
-    console.log(`⚠️  No root directory found, using appDir: ${rootDir}`);
+    rootDir = monorepoRoot || '/var/task';
+    console.log(`⚠️  No monorepo root found, using monorepoRoot: ${rootDir}`);
 }
 
 // Zet environment variable zodat server.js het kan gebruiken

@@ -11,7 +11,8 @@
 
 // Test: Minimale functie zonder dependencies
 // Als deze werkt, kunnen we de core API toevoegen
-module.exports = (req, res) => {
+// Gebruik een named export in plaats van arrow function om compatibiliteit te garanderen
+function handler(req, res) {
     // Log onmiddellijk om te bevestigen dat de functie wordt uitgevoerd
     console.log('=== [App API Handler] Handler function is being executed! ===');
     console.log('[App API Handler] Request:', req.method, req.path);
@@ -30,5 +31,8 @@ module.exports = (req, res) => {
         __dirname: __dirname,
         cwd: process.cwd()
     });
-};
+}
+
+// Export als default
+module.exports = handler;
 

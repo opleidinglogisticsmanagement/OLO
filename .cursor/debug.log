@@ -1,0 +1,4 @@
+{"location":"Week3LessonPage.js:570","message":"setupMCQuestionButton called","data":{"retries":5,"hostname":"localhost","isVercel":false},"timestamp":1766478510743,"sessionId":"debug-session","runId":"run1","hypothesisId":"A"}
+{"location":"Week3LessonPage.js:571","message":"Button lookup result","data":{"buttonFound":true,"buttonId":"generate-mc-question-btn"},"timestamp":1766478510744,"sessionId":"debug-session","runId":"run1","hypothesisId":"A"}
+{"location":"Week3LessonPage.js:571","message":"Button lookup result","data":{"buttonFound":true,"buttonId":"generate-mc-question-btn"},"timestamp":1766478510759,"sessionId":"debug-session","runId":"run1","hypothesisId":"A"}
+{"location":"Week3LessonPage.js:570","message":"setupMCQuestionButton called","data":{"retries":5,"hostname":"localhost","isVercel":false},"timestamp":1766478510758,"sessionId":"debug-session","runId":"run1","hypothesisId":"A"}

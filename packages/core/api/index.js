@@ -15,8 +15,12 @@ const fs = require('fs');
 
 // Monorepo structuur: bepaal directories
 // api/index.js staat in packages/core/api/
-const monorepoRoot = path.resolve(__dirname, '../..'); // 2 levels omhoog = /var/task
+// BELANGRIJK: In Vercel met Root Directory "apps/logistiek-onderzoek":
+// - __dirname = /var/task/packages/core/api
+// - monorepoRoot moet /var/task zijn (niet /var/task/packages)
 const coreDir = path.resolve(__dirname, '..'); // packages/core = /var/task/packages/core
+// monorepoRoot is 3 levels omhoog van packages/core/api (niet 2!)
+const monorepoRoot = path.resolve(__dirname, '../../..'); // 3 levels omhoog = /var/task
 
 // BELANGRIJK: In Vercel met Root Directory "apps/logistiek-onderzoek":
 // - /var/task = app directory (waar index.html staat)

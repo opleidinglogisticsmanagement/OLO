@@ -5,9 +5,13 @@
  * Als deze functie crasht tijdens module loading, serveert Vercel de source code.
  */
 
-// TEST: Eerst een minimale functie die altijd werkt om te testen of Vercel de functie herkent
+// BELANGRIJK: Vercel herkent functies automatisch in de api/ directory
+// Maar als de functie crasht tijdens loading, serveert Vercel de source code
+// We moeten ervoor zorgen dat module.exports altijd wordt bereikt
+
+// Test: Minimale functie zonder dependencies
 // Als deze werkt, kunnen we de core API toevoegen
-module.exports = function handler(req, res) {
+module.exports = (req, res) => {
     // Log onmiddellijk om te bevestigen dat de functie wordt uitgevoerd
     console.log('=== [App API Handler] Handler function is being executed! ===');
     console.log('[App API Handler] Request:', req.method, req.path);

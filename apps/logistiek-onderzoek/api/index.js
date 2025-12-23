@@ -41,21 +41,20 @@ console.log('[App API Handler] APP_DIR:', process.env.APP_DIR);
 
 // Vercel serverless functions moeten een handler functie exporteren
 // Express apps worden automatisch geconverteerd naar handlers door Vercel
+// BELANGRIJK: We moeten de export SYNCHROON doen, niet in een try-catch
+// omdat Vercel de functie moet kunnen laden voordat het kan worden uitgevoerd
+
+let coreApp;
+
 try {
+    console.log('[App API Handler] Attempting to require core API...');
+    console.log('[App API Handler] coreApiPath exists:', require('fs').existsSync(coreApiPath));
+    
     // Importeer de core API (dit is een Express app)
-    const coreApp = require(coreApiPath);
+    coreApp = require(coreApiPath);
     console.log('[App API Handler] ✅ Core API loaded successfully');
     console.log('[App API Handler] Core app type:', typeof coreApp);
-    
-    // Vercel converteert Express apps automatisch naar handlers
-    // Maar we moeten ervoor zorgen dat het een Express app is
-    if (typeof coreApp === 'function') {
-        // Als het al een handler is, exporteer het direct
-        module.exports = coreApp;
-    } else {
-        // Als het een object is, exporteer het als app
-        module.exports = coreApp;
-    }
+    console.log('[App API Handler] Core app has listen method:', typeof coreApp.listen === 'function');
 } catch (error) {
     console.error('[App API Handler] ❌ Error loading core API:', error);
     console.error('[App API Handler] Error message:', error.message);
@@ -63,16 +62,20 @@ try {
     
     // Export een error handler zodat Vercel weet dat de functie bestaat
     // Dit voorkomt dat Vercel de source code serveert
-    const errorHandler = (req, res) => {
+    coreApp = (req, res) => {
         console.error('[App API Handler] Error handler called for:', req.method, req.path);
         res.status(500).json({
             error: 'Serverless function initialization failed',
             message: error.message,
             path: req.path,
-            method: req.method
+            method: req.method,
+            timestamp: new Date().toISOString()
         });
     };
-    
-    module.exports = errorHandler;
 }
+
+// Export de app/handler - dit MOET altijd gebeuren, ook bij errors
+// Vercel herkent een functie export als een serverless functie
+console.log('[App API Handler] Exporting handler, type:', typeof coreApp);
+module.exports = coreApp;
 

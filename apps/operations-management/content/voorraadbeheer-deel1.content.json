@@ -1,0 +1,26 @@
+{
+  "intro": {
+    "title": "Voorraadbeheer (deel 1)",
+    "subtitle": "Voorraadbeheer (deel 1)",
+    "description": "In deze module leer je over voorraadbeheer."
+  },
+  "leerdoelen": {
+    "title": "Leerdoelen",
+    "items": [
+      "Je kunt de basisprincipes van voorraadbeheer uitleggen."
+    ],
+    "interactive": false
+  },
+  "theorie": {
+    "title": "Voorraadbeheer (deel 1)",
+    "content": [
+      {
+        "type": "paragraph",
+        "text": [
+          "Content wordt binnenkort toegevoegd."
+        ]
+      }
+    ]
+  }
+}
+

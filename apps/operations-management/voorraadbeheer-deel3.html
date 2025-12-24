@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="view-transition" content="same-origin" />
+    <title>Voorraadbeheer (deel 3) - Operations Management</title>
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+      }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-blue: #0077b6;
+            --success-green: #90be6d;
+            --neutral-bg: #f8f9fa;
+            --text-dark: #212529;
+            --text-light: #6c757d;
+        }
+        
+        .dark {
+            --primary-blue: #4a9eff;
+            --success-green: #a8d977;
+            --neutral-bg: #1a1a1a;
+            --text-dark: #f5f5f5;
+            --text-light: #a0a0a0;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--neutral-bg);
+            color: var(--text-dark);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <div class="flex-1 flex items-center justify-center min-h-screen">
+        <div class="text-center">
+            <div class="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-600 mx-auto mb-4"></div>
+            <p class="text-gray-600 dark:text-gray-300">Voorraadbeheer (deel 3) wordt geladen...</p>
+        </div>
+    </div>
+
+    <script src="/core/js/DarkMode.js"></script>
+    <script src="/core/js/components/LayoutRenderer.js"></script>
+    <script src="/core/js/ui/SidebarManager.js"></script>
+    <script src="/core/js/ui/HeaderManager.js"></script>
+    <script src="/core/js/ui/ScrollManager.js"></script>
+    <script src="/core/js/ui/ImageModalManager.js"></script>
+    <script src="/core/js/ui/InteractiveManager.js"></script>
+    <script src="/core/js/ui/VideoManager.js"></script>
+    <script src="/core/js/ui/TableCopyManager.js"></script>
+    <script src="/core/js/services/NavigationService.js"></script>
+    <script src="/core/js/components/NavigationRenderer.js"></script>
+    <script src="/core/js/components/ContentTemplateRenderer.js"></script>
+    <script src="/core/pages/BaseLessonPage.js"></script>
+    <script src="/core/pages/ContentRenderer.js"></script>
+    <script src="pages/VoorraadbeheerDeel3LessonPage.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            if (!window.appRouter) {
+                try {
+                    const page = new VoorraadbeheerDeel3LessonPage();
+                    page.init();
+                } catch (e) {
+                    console.error('[voorraadbeheer-deel3.html] Failed to initialize VoorraadbeheerDeel3LessonPage:', e);
+                }
+            }
+        });
+    </script>
+</body>
+</html>
+

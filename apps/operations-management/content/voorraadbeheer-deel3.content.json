@@ -1,0 +1,26 @@
+{
+  "intro": {
+    "title": "Voorraadbeheer (deel 3)",
+    "subtitle": "Voorraadbeheer (deel 3)",
+    "description": "In deze module leer je over voorraadbeheer (vervolg)."
+  },
+  "leerdoelen": {
+    "title": "Leerdoelen",
+    "items": [
+      "Je kunt complexe voorraadbeheersystemen ontwerpen en implementeren."
+    ],
+    "interactive": false
+  },
+  "theorie": {
+    "title": "Voorraadbeheer (deel 3)",
+    "content": [
+      {
+        "type": "paragraph",
+        "text": [
+          "Content wordt binnenkort toegevoegd."
+        ]
+      }
+    ]
+  }
+}
+

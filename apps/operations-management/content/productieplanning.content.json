@@ -1,0 +1,26 @@
+{
+  "intro": {
+    "title": "Productieplanning",
+    "subtitle": "Productieplanning",
+    "description": "In deze module leer je over productieplanning."
+  },
+  "leerdoelen": {
+    "title": "Leerdoelen",
+    "items": [
+      "Je kunt productieplanning opstellen en uitvoeren."
+    ],
+    "interactive": false
+  },
+  "theorie": {
+    "title": "Productieplanning",
+    "content": [
+      {
+        "type": "paragraph",
+        "text": [
+          "Content wordt binnenkort toegevoegd."
+        ]
+      }
+    ]
+  }
+}
+

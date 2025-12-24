@@ -628,6 +628,16 @@
     
     <!-- Week Page Classes - Load for SPA router -->
     <script src="pages/Week1LessonPage.js" onerror="console.error('[Script] Failed to load Week1LessonPage.js')"></script>
+    <script src="pages/OperationsProcesstrategieLessonPage.js" onerror="console.error('[Script] Failed to load OperationsProcesstrategieLessonPage.js')"></script>
+    <script src="pages/VraagvoorspellingDeel1LessonPage.js" onerror="console.error('[Script] Failed to load VraagvoorspellingDeel1LessonPage.js')"></script>
+    <script src="pages/VraagvoorspellingDeel2LessonPage.js" onerror="console.error('[Script] Failed to load VraagvoorspellingDeel2LessonPage.js')"></script>
+    <script src="pages/ProductieplanningLessonPage.js" onerror="console.error('[Script] Failed to load ProductieplanningLessonPage.js')"></script>
+    <script src="pages/VoorraadbeheerDeel1LessonPage.js" onerror="console.error('[Script] Failed to load VoorraadbeheerDeel1LessonPage.js')"></script>
+    <script src="pages/VoorraadbeheerDeel2LessonPage.js" onerror="console.error('[Script] Failed to load VoorraadbeheerDeel2LessonPage.js')"></script>
+    <script src="pages/VoorraadbeheerDeel3LessonPage.js" onerror="console.error('[Script] Failed to load VoorraadbeheerDeel3LessonPage.js')"></script>
+    <script src="pages/CapaciteitsmanagementDeel1LessonPage.js" onerror="console.error('[Script] Failed to load CapaciteitsmanagementDeel1LessonPage.js')"></script>
+    <script src="pages/CapaciteitsmanagementDeel2LessonPage.js" onerror="console.error('[Script] Failed to load CapaciteitsmanagementDeel2LessonPage.js')"></script>
+    <script src="pages/OperationsPlanningSchedulingLessonPage.js" onerror="console.error('[Script] Failed to load OperationsPlanningSchedulingLessonPage.js')"></script>
     
     <!-- Verify all classes are loaded with detailed logging -->
     <script>
@@ -636,7 +646,17 @@
             setTimeout(() => {
                 console.log('[Script Loader] ⏰ Verification started at:', new Date().toISOString());
                 const expectedClasses = [
-                    'Week1LessonPage'
+                    'Week1LessonPage',
+                    'OperationsProcesstrategieLessonPage',
+                    'VraagvoorspellingDeel1LessonPage',
+                    'VraagvoorspellingDeel2LessonPage',
+                    'ProductieplanningLessonPage',
+                    'VoorraadbeheerDeel1LessonPage',
+                    'VoorraadbeheerDeel2LessonPage',
+                    'VoorraadbeheerDeel3LessonPage',
+                    'CapaciteitsmanagementDeel1LessonPage',
+                    'CapaciteitsmanagementDeel2LessonPage',
+                    'OperationsPlanningSchedulingLessonPage'
                 ];
                 
                 console.log('[Script Loader] 🔍 Checking for page classes...');
@@ -711,6 +731,96 @@
                                     <i class="fas fa-book text-green-600 dark:text-green-400 text-sm"></i>
                                 </div>
                                 <span class="font-medium text-gray-900 dark:text-white">Week 1</span>
+                            </div>
+                        </a>
+                        
+                        <a href="operations-processtrategie.html" class="block p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 focus-ring transition-colors">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-8 h-8 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center">
+                                    <i class="fas fa-book text-green-600 dark:text-green-400 text-sm"></i>
+                                </div>
+                                <span class="font-medium text-gray-900 dark:text-white">Operations en processtrategie</span>
+                            </div>
+                        </a>
+                        
+                        <a href="vraagvoorspelling-deel1.html" class="block p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 focus-ring transition-colors">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-8 h-8 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center">
+                                    <i class="fas fa-book text-green-600 dark:text-green-400 text-sm"></i>
+                                </div>
+                                <span class="font-medium text-gray-900 dark:text-white">Vraagvoorspelling (deel 1)</span>
+                            </div>
+                        </a>
+                        
+                        <a href="vraagvoorspelling-deel2.html" class="block p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 focus-ring transition-colors">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-8 h-8 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center">
+                                    <i class="fas fa-book text-green-600 dark:text-green-400 text-sm"></i>
+                                </div>
+                                <span class="font-medium text-gray-900 dark:text-white">Vraagvoorspelling (deel 2)</span>
+                            </div>
+                        </a>
+                        
+                        <a href="productieplanning.html" class="block p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 focus-ring transition-colors">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-8 h-8 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center">
+                                    <i class="fas fa-book text-green-600 dark:text-green-400 text-sm"></i>
+                                </div>
+                                <span class="font-medium text-gray-900 dark:text-white">Productieplanning</span>
+                            </div>
+                        </a>
+                        
+                        <a href="voorraadbeheer-deel1.html" class="block p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 focus-ring transition-colors">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-8 h-8 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center">
+                                    <i class="fas fa-book text-green-600 dark:text-green-400 text-sm"></i>
+                                </div>
+                                <span class="font-medium text-gray-900 dark:text-white">Voorraadbeheer (deel 1)</span>
+                            </div>
+                        </a>
+                        
+                        <a href="voorraadbeheer-deel2.html" class="block p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 focus-ring transition-colors">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-8 h-8 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center">
+                                    <i class="fas fa-book text-green-600 dark:text-green-400 text-sm"></i>
+                                </div>
+                                <span class="font-medium text-gray-900 dark:text-white">Voorraadbeheer (deel 2)</span>
+                            </div>
+                        </a>
+                        
+                        <a href="voorraadbeheer-deel3.html" class="block p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 focus-ring transition-colors">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-8 h-8 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center">
+                                    <i class="fas fa-book text-green-600 dark:text-green-400 text-sm"></i>
+                                </div>
+                                <span class="font-medium text-gray-900 dark:text-white">Voorraadbeheer (deel 3)</span>
+                            </div>
+                        </a>
+                        
+                        <a href="capaciteitsmanagement-deel1.html" class="block p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 focus-ring transition-colors">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-8 h-8 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center">
+                                    <i class="fas fa-book text-green-600 dark:text-green-400 text-sm"></i>
+                                </div>
+                                <span class="font-medium text-gray-900 dark:text-white">Capaciteitsmanagement (deel 1)</span>
+                            </div>
+                        </a>
+                        
+                        <a href="capaciteitsmanagement-deel2.html" class="block p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 focus-ring transition-colors">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-8 h-8 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center">
+                                    <i class="fas fa-book text-green-600 dark:text-green-400 text-sm"></i>
+                                </div>
+                                <span class="font-medium text-gray-900 dark:text-white">Capaciteitsmanagement (deel 2)</span>
+                            </div>
+                        </a>
+                        
+                        <a href="operations-planning-scheduling.html" class="block p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 focus-ring transition-colors">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-8 h-8 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center">
+                                    <i class="fas fa-book text-green-600 dark:text-green-400 text-sm"></i>
+                                </div>
+                                <span class="font-medium text-gray-900 dark:text-white">Operations planning en scheduling</span>
                             </div>
                         </a>
                     </div>
@@ -1544,7 +1654,17 @@
             
             // Expected classes for operations-management app
             const expectedClasses = [
-                'Week1LessonPage'
+                'Week1LessonPage',
+                'OperationsProcesstrategieLessonPage',
+                'VraagvoorspellingDeel1LessonPage',
+                'VraagvoorspellingDeel2LessonPage',
+                'ProductieplanningLessonPage',
+                'VoorraadbeheerDeel1LessonPage',
+                'VoorraadbeheerDeel2LessonPage',
+                'VoorraadbeheerDeel3LessonPage',
+                'CapaciteitsmanagementDeel1LessonPage',
+                'CapaciteitsmanagementDeel2LessonPage',
+                'OperationsPlanningSchedulingLessonPage'
             ];
             
             const missingClasses = expectedClasses.filter(cls => !availableClasses.includes(cls));
@@ -1561,7 +1681,17 @@
                 // Override routes for operations-management app
                 router.routes = {
                     'index.html': () => router.loadIndexPage(),
-                    'week1.html': () => router.loadWeekPage('week-1', 'Week1LessonPage')
+                    'week1.html': () => router.loadWeekPage('week-1', 'Week1LessonPage'),
+                    'operations-processtrategie.html': () => router.loadWeekPage('operations-processtrategie', 'OperationsProcesstrategieLessonPage'),
+                    'vraagvoorspelling-deel1.html': () => router.loadWeekPage('vraagvoorspelling-deel1', 'VraagvoorspellingDeel1LessonPage'),
+                    'vraagvoorspelling-deel2.html': () => router.loadWeekPage('vraagvoorspelling-deel2', 'VraagvoorspellingDeel2LessonPage'),
+                    'productieplanning.html': () => router.loadWeekPage('productieplanning', 'ProductieplanningLessonPage'),
+                    'voorraadbeheer-deel1.html': () => router.loadWeekPage('voorraadbeheer-deel1', 'VoorraadbeheerDeel1LessonPage'),
+                    'voorraadbeheer-deel2.html': () => router.loadWeekPage('voorraadbeheer-deel2', 'VoorraadbeheerDeel2LessonPage'),
+                    'voorraadbeheer-deel3.html': () => router.loadWeekPage('voorraadbeheer-deel3', 'VoorraadbeheerDeel3LessonPage'),
+                    'capaciteitsmanagement-deel1.html': () => router.loadWeekPage('capaciteitsmanagement-deel1', 'CapaciteitsmanagementDeel1LessonPage'),
+                    'capaciteitsmanagement-deel2.html': () => router.loadWeekPage('capaciteitsmanagement-deel2', 'CapaciteitsmanagementDeel2LessonPage'),
+                    'operations-planning-scheduling.html': () => router.loadWeekPage('operations-planning-scheduling', 'OperationsPlanningSchedulingLessonPage')
                 };
                 router.init();
                 window.appRouter = router; // Store globally for debugging
@@ -1578,7 +1708,17 @@
         const waitForAllScripts = () => {
             checkAttempts++;
             const expectedClasses = [
-                'Week1LessonPage'
+                'Week1LessonPage',
+                'OperationsProcesstrategieLessonPage',
+                'VraagvoorspellingDeel1LessonPage',
+                'VraagvoorspellingDeel2LessonPage',
+                'ProductieplanningLessonPage',
+                'VoorraadbeheerDeel1LessonPage',
+                'VoorraadbeheerDeel2LessonPage',
+                'VoorraadbeheerDeel3LessonPage',
+                'CapaciteitsmanagementDeel1LessonPage',
+                'CapaciteitsmanagementDeel2LessonPage',
+                'OperationsPlanningSchedulingLessonPage'
             ];
             
             const allAvailable = expectedClasses.every(cls => window[cls]);

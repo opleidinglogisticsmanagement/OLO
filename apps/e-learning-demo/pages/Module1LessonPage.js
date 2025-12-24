@@ -1,13 +1,13 @@
 /**
  * Module1LessonPage
  * 
- * Module 1: Welkom bij het Framework
+ * Het Fundament
  * Meta-e-learning voor collega-docenten om te leren hoe ze hun eigen e-learning app kunnen vullen
  */
 
 class Module1LessonPage extends BaseLessonPage {
     constructor() {
-        super('module1', 'Module 1', 'Welkom bij het Framework');
+        super('module1', 'Het Fundament', 'Het Fundament');
         // content and contentLoaded are now initialized in BaseLessonPage
     }
 

@@ -1,12 +1,12 @@
 {
   "intro": {
-    "title": "Module 1: Welkom bij het Framework",
+    "title": "Het Fundament",
     "subtitle": "Samen slimmer onderwijs bouwen",
     "description": "Welkom bij deze meta-e-learning! Hier leer je hoe je zelf je eigen e-learning app kunt vullen binnen deze monorepo. We beheren de techniek centraal, zodat jij je kunt focussen op de didactische inhoud. Met behulp van AI-assistentie via Cursor wordt het vullen van content eenvoudig en efficiënt."
   },
   "leerdoelen": {
     "title": "Leerdoelen",
-    "description": "Na het doorlopen van deze module kun je:",
+    "description": "Na het doorlopen van deze les kun je:",
     "items": [
       "De monorepo-filosofie uitleggen en begrijpen waarom we deze architectuur gebruiken",
       "Het onderscheid maken tussen de Core (gedeeld framework) en je eigen App (vakspecifieke omgeving)",

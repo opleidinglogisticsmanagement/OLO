@@ -516,7 +516,8 @@ Voordat je begint, zorg dat je **alle** onderstaande stappen doorloopt:
 - [ ] **Stap 3:** HTML pagina aanmaken (of bestaande aanpassen)
 - [ ] **Stap 4:** Script loader toevoegen aan `index.html`
 - [ ] **Stap 5:** Route configureren in router (in `index.html` of `AppRouter.js`)
-- [ ] **Stap 6:** Testen lokaal
+- [ ] **Stap 6:** Sidebar navigatie link toevoegen aan `index.html`
+- [ ] **Stap 7:** Testen lokaal
 
 #### Stap 1: Content JSON Bestand
 
@@ -697,7 +698,38 @@ this.routes = {
 };
 ```
 
-#### Stap 6: Testen
+#### Stap 6: Sidebar Navigatie Link
+
+**BELANGRIJK:** Voeg een link toe aan de sidebar navigatie in `index.html` zodat gebruikers de nieuwe pagina kunnen vinden. Zonder deze link is de pagina wel bereikbaar via directe URL, maar niet zichtbaar in het menu.
+
+Zoek in `index.html` naar de sidebar navigatie sectie (rond regel 696-720) en voeg een link toe:
+
+```html
+<!-- Module Navigation -->
+<nav class="flex-1 overflow-y-auto custom-scrollbar p-6" aria-label="Module navigatie">
+    <div class="space-y-2">
+        <!-- ... bestaande links ... -->
+        
+        <!-- TOEVOEGEN: Nieuwe module/week link -->
+        <a href="week8.html" class="block p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 focus-ring transition-colors">
+            <div class="flex items-center space-x-3">
+                <div class="w-8 h-8 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center">
+                    <i class="fas fa-book text-green-600 dark:text-green-400 text-sm"></i>
+                </div>
+                <span class="font-medium text-gray-900 dark:text-white">Week 8</span>
+            </div>
+        </a>
+    </div>
+</nav>
+```
+
+**Kleuren voor iconen:**
+- Groen (`bg-green-100`, `text-green-600`) - Voor week pagina's
+- Blauw (`bg-blue-100`, `text-blue-600`) - Voor demo/start pagina's
+- Paars (`bg-purple-100`, `text-purple-600`) - Voor module pagina's
+- Oranje (`bg-orange-100`, `text-orange-600`) - Voor speciale pagina's
+
+#### Stap 7: Testen
 
 1. Start de development server:
    ```bash
@@ -718,6 +750,7 @@ this.routes = {
 3. **Route vergeten** → Navigatie werkt niet, pagina niet bereikbaar via router
 4. **Script loader vergeten** → Class niet beschikbaar voor router
 5. **Class naam mismatch** → Router kan class niet vinden
+6. **Sidebar link vergeten** → Pagina niet zichtbaar in menu (wel bereikbaar via directe URL)
 
 #### 📝 Content Bestand Mapping
 

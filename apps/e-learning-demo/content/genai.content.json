@@ -1,0 +1,236 @@
+{
+  "intro": {
+    "title": "GenAI in de e-learning",
+    "subtitle": "Krachtige AI-mogelijkheden voor interactief onderwijs",
+    "description": "Ontdek hoe je Generative AI kunt inzetten om rijke, interactieve leerervaringen te creëren. Met GenAI kun je automatisch oefeningen genereren, realistische casussen maken en studenten gepersonaliseerde feedback geven."
+  },
+  "leerdoelen": {
+    "title": "Leerdoelen",
+    "description": "Na het doorlopen van deze les kun je:",
+    "items": [
+      "Uitleggen welke AI-mogelijkheden beschikbaar zijn in het platform",
+      "Een Google Gemini API key verkrijgen en configureren",
+      "GenAI lokaal en op Vercel instellen",
+      "AI-tools toepassen in je eigen e-learning content"
+    ],
+    "interactive": false
+  },
+  "theorie": {
+    "title": "GenAI mogelijkheden en setup",
+    "content": [
+      {
+        "type": "heading",
+        "text": "Overzicht van beschikbare AI-mogelijkheden",
+        "level": 2
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">GenAI maakt het mogelijk om verschillende soorten oefeningen en content te genereren. Hieronder vind je enkele voorbeelden van wat mogelijk is:</p>"
+        ]
+      },
+      {
+        "type": "highlight",
+        "title": "Multiple Choice vragen genereren",
+        "content": [
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-3\">Aan het einde van elke week kun je automatisch MC-vragen genereren op basis van de behandelde theorie. De AI genereert vragen op verschillende cognitieve niveaus (kennen, begrijpen, analyseren, evalueren) en voorziet elke vraag van directe feedback.</p>"
+        ],
+        "bgColor": "bg-blue-50 dark:bg-blue-900/20",
+        "borderColor": "border-blue-500 dark:border-blue-400",
+        "titleColor": "text-blue-900 dark:text-blue-200",
+        "contentColor": "text-blue-800 dark:text-blue-300"
+      },
+      {
+        "type": "highlight",
+        "title": "Oefeningen voor Operations Management",
+        "content": [
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-3\">GenAI kan specifieke oefeningen genereren voor Operations Management, zoals:</p>",
+          "<ul class=\"list-disc list-outside space-y-2 mb-3 ml-6 pl-4 text-gray-700 dark:text-gray-300\">",
+          "<li class=\"mb-2\"><strong>EOQ-berekeningen:</strong> Scenario's met verschillende vraagpatronen en kostenstructuren</li>",
+          "<li class=\"mb-2\"><strong>Voorraadbeheer:</strong> Oefeningen over ABC-analyse, veiligheidsvoorraad, reorder points</li>",
+          "<li class=\"mb-2\"><strong>Processen:</strong> Oefeningen over bottleneck-analyse en capaciteitsplanning</li>",
+          "</ul>"
+        ],
+        "bgColor": "bg-green-50 dark:bg-green-900/20",
+        "borderColor": "border-green-500 dark:border-green-400",
+        "titleColor": "text-green-900 dark:text-green-200",
+        "contentColor": "text-green-800 dark:text-green-300"
+      },
+      {
+        "type": "highlight",
+        "title": "Logistieke casussen",
+        "content": [
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-3\">GenAI kan realistische scenario's genereren voor verschillende logistieke situaties, zoals transportplanning, warehouse-optimalisatie en supply chain-analyse. Deze casussen kunnen worden aangepast op moeilijkheidsniveau en context.</p>"
+        ],
+        "bgColor": "bg-purple-50 dark:bg-purple-900/20",
+        "borderColor": "border-purple-500 dark:border-purple-400",
+        "titleColor": "text-purple-900 dark:text-purple-200",
+        "contentColor": "text-purple-800 dark:text-purple-300"
+      },
+      {
+        "type": "highlight",
+        "title": "Aangepaste oefeningen voor elk leerdoel",
+        "content": [
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-3\">De kracht van GenAI is juist dat je <strong>elk soort oefening</strong> kunt maken. Van eenvoudige kennisvragen tot complexe analyse-opdrachten - GenAI past zich aan aan jouw specifieke leerdoelen en vakgebied.</p>"
+        ],
+        "bgColor": "bg-orange-50 dark:bg-orange-900/20",
+        "borderColor": "border-orange-500 dark:border-orange-400",
+        "titleColor": "text-orange-900 dark:text-orange-200",
+        "contentColor": "text-orange-800 dark:text-orange-300"
+      },
+      {
+        "type": "heading",
+        "text": "Stap 1: Google AI Studio account aanmaken",
+        "level": 2
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Om GenAI te kunnen gebruiken, heb je een Google AI Studio account nodig:</p>",
+          "<ol class=\"list-decimal list-outside space-y-2 mb-4 ml-6 pl-4 text-gray-700 dark:text-gray-300\">",
+          "<li class=\"mb-2\">Ga naar: <a href=\"https://aistudio.google.com/\" target=\"_blank\" class=\"text-blue-600 dark:text-blue-400 hover:underline\">https://aistudio.google.com/</a></li>",
+          "<li class=\"mb-2\">Log in met je Google-account</li>",
+          "<li class=\"mb-2\">Accepteer de gebruiksvoorwaarden</li>",
+          "</ol>"
+        ]
+      },
+      {
+        "type": "heading",
+        "text": "Stap 2: API key verkrijgen",
+        "level": 2
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Eenmaal ingelogd kun je een API key aanmaken:</p>",
+          "<ol class=\"list-decimal list-outside space-y-2 mb-4 ml-6 pl-4 text-gray-700 dark:text-gray-300\">",
+          "<li class=\"mb-2\">In Google AI Studio: Klik op <strong>\"Get API Key\"</strong> (rechtsboven) of ga naar: <a href=\"https://aistudio.google.com/app/apikey\" target=\"_blank\" class=\"text-blue-600 dark:text-blue-400 hover:underline\">https://aistudio.google.com/app/apikey</a></li>",
+          "<li class=\"mb-2\">Maak een nieuw project aan (of gebruik een bestaand project)</li>",
+          "<li class=\"mb-2\">Kies <strong>\"Create API Key\"</strong></li>",
+          "<li class=\"mb-2\">Kopieer de API key (begint meestal met <code class=\"bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded\">AIza...</code>)</li>",
+          "</ol>",
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>Belangrijk:</strong> Bewaar deze API key veilig - je kunt hem later niet meer volledig zien!</p>"
+        ]
+      },
+      {
+        "type": "heading",
+        "text": "Stap 3: Lokaal configureren (.env)",
+        "level": 2
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Voor lokale ontwikkeling moet je de API key instellen in een <code class=\"bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded\">.env</code> bestand:</p>",
+          "<ol class=\"list-decimal list-outside space-y-2 mb-4 ml-6 pl-4 text-gray-700 dark:text-gray-300\">",
+          "<li class=\"mb-2\">Ga naar de root van de monorepo (<code class=\"bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded\">packages/core/</code>)</li>",
+          "<li class=\"mb-2\">Maak een <code class=\"bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded\">.env</code> bestand aan (als deze nog niet bestaat)</li>",
+          "<li class=\"mb-2\">Voeg de volgende regel toe:</li>",
+          "</ol>"
+        ]
+      },
+      {
+        "type": "html",
+        "html": "<div class=\"bg-gray-900 dark:bg-gray-800 rounded-lg p-4 mb-4 overflow-x-auto\"><pre class=\"text-green-400 text-sm\"><code>GEMINI_API_KEY=je_api_key_hier</code></pre></div>"
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "<ol class=\"list-decimal list-outside space-y-2 mb-4 ml-6 pl-4 text-gray-700 dark:text-gray-300\" start=\"4\">",
+          "<li class=\"mb-2\">Vervang <code class=\"bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded\">je_api_key_hier</code> met je gekopieerde API key</li>",
+          "<li class=\"mb-2\">Start de server opnieuw: <code class=\"bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded\">cd packages/core && npm start</code></li>",
+          "</ol>",
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>Verificatie:</strong> In de console zie je: <code class=\"bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded\">📝 API Key configured: ✅ Yes</code>. Als je <code class=\"bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded\">❌ No</code> ziet, controleer of de <code class=\"bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded\">.env</code> correct is.</p>"
+        ]
+      },
+      {
+        "type": "heading",
+        "text": "Stap 4: Vercel configureren (voor productie)",
+        "level": 2
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Voor deployment op Vercel moet je de API key instellen als environment variable:</p>",
+          "<ol class=\"list-decimal list-outside space-y-2 mb-4 ml-6 pl-4 text-gray-700 dark:text-gray-300\">",
+          "<li class=\"mb-2\">Ga naar je Vercel-project: Open <a href=\"https://vercel.com/dashboard\" target=\"_blank\" class=\"text-blue-600 dark:text-blue-400 hover:underline\">https://vercel.com/dashboard</a> en selecteer je project (bijv. <code class=\"bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded\">e-learning-demo</code>)</li>",
+          "<li class=\"mb-2\">Ga naar <strong>Settings</strong> → <strong>Environment Variables</strong></li>",
+          "<li class=\"mb-2\">Voeg een nieuwe variabele toe:</li>",
+          "<ul class=\"list-disc list-outside space-y-1 mb-2 ml-6 pl-4 text-gray-700 dark:text-gray-300\">",
+          "<li><strong>Name:</strong> <code class=\"bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded\">GEMINI_API_KEY</code></li>",
+          "<li><strong>Value:</strong> je API key</li>",
+          "<li><strong>Selecteer alle environments:</strong> Production, Preview, Development</li>",
+          "</ul>",
+          "<li class=\"mb-2\">Klik op <strong>\"Save\"</strong></li>",
+          "<li class=\"mb-2\">Redeploy je project: Ga naar <strong>Deployments</strong>, klik op de drie puntjes bij de laatste deployment en kies <strong>\"Redeploy\"</strong></li>",
+          "</ol>",
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>Belangrijk:</strong> De API key wordt automatisch gebruikt door de server. Het <code class=\"bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded\">config.js</code> bestand wordt dynamisch gegenereerd vanuit deze environment variable. Je hoeft geen <code class=\"bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded\">config.js</code> bestand handmatig aan te maken.</p>"
+        ]
+      },
+      {
+        "type": "heading",
+        "text": "Stap 5: Testen op Vercel",
+        "level": 2
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Na het configureren kun je de AI-functionaliteit testen:</p>",
+          "<ol class=\"list-decimal list-outside space-y-2 mb-4 ml-6 pl-4 text-gray-700 dark:text-gray-300\">",
+          "<li class=\"mb-2\">Ga naar je live Vercel URL</li>",
+          "<li class=\"mb-2\">Test de AI-functionaliteit: Ga naar een pagina met een AI-tool en test of deze werkt (bijv. klik op \"Genereer vragen\" of gebruik een AI-oefening)</li>",
+          "<li class=\"mb-2\">Check de browser console (F12) voor eventuele errors</li>",
+          "</ol>"
+        ]
+      },
+      {
+        "type": "heading",
+        "text": "Belangrijke opmerking: API key limieten",
+        "level": 2
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">De Google Gemini API heeft dagelijkse limieten op de Free Tier. Als je deze limiet bereikt, krijg je een melding \"AI-coach daglimiet bereikt\". Dit is normaal gedrag. Je kunt:</p>",
+          "<ul class=\"list-disc list-outside space-y-2 mb-4 ml-6 pl-4 text-gray-700 dark:text-gray-300\">",
+          "<li class=\"mb-2\">Wachten tot de volgende dag (limiet reset)</li>",
+          "<li class=\"mb-2\">Upgrade naar een betaald plan voor hogere limieten</li>",
+          "</ul>"
+        ]
+      },
+      {
+        "type": "heading",
+        "text": "Veiligheid",
+        "level": 2
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "<ul class=\"list-disc list-outside space-y-2 mb-4 ml-6 pl-4 text-gray-700 dark:text-gray-300\">",
+          "<li class=\"mb-2\">Deel je API key <strong>nooit</strong> publiekelijk</li>",
+          "<li class=\"mb-2\">De <code class=\"bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded\">.env</code> staat in <code class=\"bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded\">.gitignore</code> en wordt niet gecommit</li>",
+          "<li class=\"mb-2\">Op Vercel worden environment variables veilig opgeslagen</li>",
+          "<li class=\"mb-2\">De API key wordt alleen server-side gebruikt; nooit in de frontend code</li>",
+          "</ul>"
+        ]
+      },
+      {
+        "type": "heading",
+        "text": "Volgende stappen",
+        "level": 2
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Na het configureren kun je:</p>",
+          "<ul class=\"list-disc list-outside space-y-2 mb-4 ml-6 pl-4 text-gray-700 dark:text-gray-300\">",
+          "<li class=\"mb-2\">AI-tools toevoegen aan je content JSON-bestanden</li>",
+          "<li class=\"mb-2\">Automatisch MC-vragen genereren aan het einde van elke week</li>",
+          "<li class=\"mb-2\">Aangepaste oefeningen maken voor je specifieke leerdoelen</li>",
+          "<li class=\"mb-2\">Realistische casussen genereren voor je vakgebied</li>",
+          "</ul>"
+        ]
+      }
+    ]
+  }
+}
+

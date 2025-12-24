@@ -631,6 +631,7 @@
     <script src="pages/Module1LessonPage.js" onerror="console.error('[Script] Failed to load Module1LessonPage.js')"></script>
     <script src="pages/CursorLessonPage.js" onerror="console.error('[Script] Failed to load CursorLessonPage.js')"></script>
     <script src="pages/Fase3LessonPage.js" onerror="console.error('[Script] Failed to load Fase3LessonPage.js')"></script>
+    <script src="pages/GenAILessonPage.js" onerror="console.error('[Script] Failed to load GenAILessonPage.js')"></script>
     
     <!-- Verify all classes are loaded with detailed logging -->
     <script>
@@ -642,7 +643,8 @@
                     'DemoLessonPage',
                     'Module1LessonPage',
                     'CursorLessonPage',
-                    'Fase3LessonPage'
+                    'Fase3LessonPage',
+                    'GenAILessonPage'
                 ];
                 
                 console.log('[Script Loader] 🔍 Checking for page classes...');
@@ -651,6 +653,7 @@
                 console.log('[Script Loader] Module1LessonPage available:', !!window.Module1LessonPage);
                 console.log('[Script Loader] CursorLessonPage available:', !!window.CursorLessonPage);
                 console.log('[Script Loader] Fase3LessonPage available:', !!window.Fase3LessonPage);
+                console.log('[Script Loader] GenAILessonPage available:', !!window.GenAILessonPage);
                 
                 const availableClasses = expectedClasses.filter(cls => window[cls]);
                 const missingClasses = expectedClasses.filter(cls => !window[cls]);
@@ -786,6 +789,15 @@
                                 </a>
                             </div>
                         </div>
+                        
+                        <a href="genai.html" class="block p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 focus-ring transition-colors">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-8 h-8 bg-orange-100 dark:bg-orange-900/30 rounded-lg flex items-center justify-center">
+                                    <i class="fas fa-robot text-orange-600 dark:text-orange-400 text-sm"></i>
+                                </div>
+                                <span class="font-medium text-gray-900 dark:text-white">GenAI in de e-learning</span>
+                            </div>
+                        </a>
                     </div>
                 </nav>
 
@@ -1649,6 +1661,7 @@
             console.log('[Index] Module1LessonPage available:', !!window.Module1LessonPage);
             console.log('[Index] CursorLessonPage available:', !!window.CursorLessonPage);
             console.log('[Index] Fase3LessonPage available:', !!window.Fase3LessonPage);
+            console.log('[Index] GenAILessonPage available:', !!window.GenAILessonPage);
             
             // Expected classes for demo app
             const expectedClasses = [
@@ -1672,7 +1685,8 @@
                     'demo.html': () => router.loadWeekPage('demo', 'DemoLessonPage'),
                     'module1.html': () => router.loadWeekPage('module1', 'Module1LessonPage'),
                     'cursor.html': () => router.loadWeekPage('cursor', 'CursorLessonPage'),
-                    'fase3.html': () => router.loadWeekPage('fase3', 'Fase3LessonPage')
+                    'fase3.html': () => router.loadWeekPage('fase3', 'Fase3LessonPage'),
+                    'genai.html': () => router.loadWeekPage('genai', 'GenAILessonPage')
                 };
                 router.init();
                 window.appRouter = router; // Store globally for debugging

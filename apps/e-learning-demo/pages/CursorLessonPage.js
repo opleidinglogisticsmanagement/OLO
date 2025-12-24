@@ -1,13 +1,13 @@
 /**
  * CursorLessonPage
  * 
- * Fase 2: Cursor
+ * Cursor
  * Meta-e-learning voor collega-docenten om te leren hoe ze Cursor effectief inzetten als AI-copiloot
  */
 
 class CursorLessonPage extends BaseLessonPage {
     constructor() {
-        super('cursor', 'Fase 2: Cursor', 'Je persoonlijke AI-copiloot');
+        super('cursor', 'Cursor', 'Je persoonlijke AI-copiloot');
         // content and contentLoaded are now initialized in BaseLessonPage
     }
 

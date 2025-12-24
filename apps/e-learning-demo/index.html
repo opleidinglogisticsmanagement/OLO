@@ -737,18 +737,55 @@
                                 <div class="w-8 h-8 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center">
                                     <i class="fas fa-laptop-code text-blue-600 dark:text-blue-400 text-sm"></i>
                                 </div>
-                                <span class="font-medium text-gray-900 dark:text-white">Fase 2: Cursor</span>
+                                <span class="font-medium text-gray-900 dark:text-white">Cursor</span>
                             </div>
                         </a>
                         
-                        <a href="fase3.html" class="block p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 focus-ring transition-colors">
-                            <div class="flex items-center space-x-3">
-                                <div class="w-8 h-8 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center">
-                                    <i class="fas fa-book text-green-600 dark:text-green-400 text-sm"></i>
+                        <div class="fase3-nav-item">
+                            <a href="fase3.html" class="block p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 focus-ring transition-colors">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center space-x-3 flex-1">
+                                        <div class="w-8 h-8 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center">
+                                            <i class="fas fa-book text-green-600 dark:text-green-400 text-sm"></i>
+                                        </div>
+                                        <span class="font-medium text-gray-900 dark:text-white">De Catalogus</span>
+                                    </div>
+                                    <i id="fase3-chevron-index" class="fas fa-chevron-down text-xs text-gray-400 dark:text-gray-500 transition-transform"></i>
                                 </div>
-                                <span class="font-medium text-gray-900 dark:text-white">Fase 3: De Catalogus</span>
+                            </a>
+                            <div id="fase3-subitems-index" class="hidden pl-11 pr-3 pb-2">
+                                <a href="fase3.html#basis-elementen" class="nav-sub-item flex items-center space-x-3 py-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 focus-ring transition-colors text-gray-600 dark:text-gray-300" data-anchor="#basis-elementen">
+                                    <div class="w-6 h-6 bg-gray-100 dark:bg-gray-700 rounded flex items-center justify-center flex-shrink-0">
+                                        <i class="fas fa-circle text-xs text-gray-400 dark:text-gray-500"></i>
+                                    </div>
+                                    <span class="text-sm font-medium">Basis Elementen</span>
+                                </a>
+                                <a href="fase3.html#informatie-ordening" class="nav-sub-item flex items-center space-x-3 py-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 focus-ring transition-colors text-gray-600 dark:text-gray-300" data-anchor="#informatie-ordening">
+                                    <div class="w-6 h-6 bg-gray-100 dark:bg-gray-700 rounded flex items-center justify-center flex-shrink-0">
+                                        <i class="fas fa-circle text-xs text-gray-400 dark:text-gray-500"></i>
+                                    </div>
+                                    <span class="text-sm font-medium">Informatie-ordening</span>
+                                </a>
+                                <a href="fase3.html#checklists" class="nav-sub-item flex items-center space-x-3 py-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 focus-ring transition-colors text-gray-600 dark:text-gray-300" data-anchor="#checklists">
+                                    <div class="w-6 h-6 bg-gray-100 dark:bg-gray-700 rounded flex items-center justify-center flex-shrink-0">
+                                        <i class="fas fa-circle text-xs text-gray-400 dark:text-gray-500"></i>
+                                    </div>
+                                    <span class="text-sm font-medium">Checklists</span>
+                                </a>
+                                <a href="fase3.html#interactieve-oefeningen" class="nav-sub-item flex items-center space-x-3 py-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 focus-ring transition-colors text-gray-600 dark:text-gray-300" data-anchor="#interactieve-oefeningen">
+                                    <div class="w-6 h-6 bg-gray-100 dark:bg-gray-700 rounded flex items-center justify-center flex-shrink-0">
+                                        <i class="fas fa-circle text-xs text-gray-400 dark:text-gray-500"></i>
+                                    </div>
+                                    <span class="text-sm font-medium">Interactieve Oefeningen</span>
+                                </a>
+                                <a href="fase3.html#geavanceerde-ai-tools" class="nav-sub-item flex items-center space-x-3 py-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 focus-ring transition-colors text-gray-600 dark:text-gray-300" data-anchor="#geavanceerde-ai-tools">
+                                    <div class="w-6 h-6 bg-gray-100 dark:bg-gray-700 rounded flex items-center justify-center flex-shrink-0">
+                                        <i class="fas fa-circle text-xs text-gray-400 dark:text-gray-500"></i>
+                                    </div>
+                                    <span class="text-sm font-medium">Geavanceerde AI-Tools</span>
+                                </a>
                             </div>
-                        </a>
+                        </div>
                     </div>
                 </nav>
 
@@ -1259,6 +1296,41 @@
                     
                     // Allow normal navigation when clicking the link (not chevron)
                     week6Link.addEventListener('click', (e) => {
+                        // Don't prevent navigation - let it navigate normally
+                        // Only prevent if clicking the chevron (handled above)
+                        if (e.target === chevron || chevron.contains(e.target)) {
+                            e.preventDefault();
+                            e.stopPropagation();
+                        }
+                    });
+                }
+            }
+            
+            // Fase 3 (De Catalogus) submenu functionality for index.html
+            const fase3NavItem = document.querySelector('.fase3-nav-item');
+            if (fase3NavItem) {
+                const fase3Link = fase3NavItem.querySelector('a');
+                const subItemsContainer = document.getElementById('fase3-subitems-index');
+                const chevron = document.getElementById('fase3-chevron-index');
+                
+                if (fase3Link && subItemsContainer && chevron) {
+                    // Only toggle when clicking the chevron icon, not the link itself
+                    chevron.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        const isHidden = subItemsContainer.classList.contains('hidden');
+                        
+                        if (isHidden) {
+                            subItemsContainer.classList.remove('hidden');
+                            chevron.classList.add('rotate-180');
+                        } else {
+                            subItemsContainer.classList.add('hidden');
+                            chevron.classList.remove('rotate-180');
+                        }
+                    });
+                    
+                    // Allow normal navigation when clicking the link (not chevron)
+                    fase3Link.addEventListener('click', (e) => {
                         // Don't prevent navigation - let it navigate normally
                         // Only prevent if clicking the chevron (handled above)
                         if (e.target === chevron || chevron.contains(e.target)) {

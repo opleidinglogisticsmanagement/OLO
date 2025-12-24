@@ -1,13 +1,13 @@
 /**
  * Fase3LessonPage
  * 
- * Fase 3: De Catalogus
+ * De Catalogus
  * Meta-e-learning voor collega-docenten om alle beschikbare bouwstenen te leren kennen
  */
 
 class Fase3LessonPage extends BaseLessonPage {
     constructor() {
-        super('fase3', 'Fase 3: De Catalogus', 'Alle beschikbare bouwstenen');
+        super('fase3', 'De Catalogus', 'Alle beschikbare bouwstenen');
         // content and contentLoaded are now initialized in BaseLessonPage
     }
 

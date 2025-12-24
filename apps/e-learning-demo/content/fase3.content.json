@@ -1,8 +1,8 @@
 {
   "intro": {
-    "title": "Fase 3: De Catalogus",
+    "title": "De Catalogus",
     "subtitle": "Alle beschikbare bouwstenen",
-    "description": "In deze fase ontdek je alle beschikbare content types die je kunt gebruiken om rijke, interactieve leerervaringen te creëren. Elke bouwsteen wordt gedemonstreerd met realistische logistieke voorbeelden die je direct kunt toepassen in je eigen e-learning."
+    "description": "Ontdek alle beschikbare content types die je kunt gebruiken om rijke, interactieve leerervaringen te creëren. Elke bouwsteen wordt gedemonstreerd met realistische logistieke voorbeelden die je direct kunt toepassen in je eigen e-learning."
   },
   "leerdoelen": {
     "title": "Leerdoelen",
@@ -19,20 +19,23 @@
     "content": [
       {
         "type": "heading",
-        "text": "1. Basis Elementen",
-        "level": 2
+        "text": "Basis Elementen",
+        "level": 2,
+        "id": "basis-elementen"
       },
       {
         "type": "paragraph",
         "text": [
-          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>Type: paragraph</strong></p>",
+          "<h3 class=\"text-lg font-semibold text-gray-900 dark:text-white mb-2\">Paragraph</h3>",
+          "<p class=\"text-gray-600 dark:text-gray-400 mb-4\">Gebruik paragraphs voor normale tekstblokken. Je kunt meerdere paragrafen combineren in één element.</p>",
           "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">De opslag van gevaarlijke stoffen (ADR) vereist speciale aandacht voor veiligheid en compliance. Volgens de ADR-richtlijnen moeten gevaarlijke stoffen worden opgeslagen in speciaal daarvoor ingerichte ruimtes met de juiste ventilatie, brandbeveiliging en afstand tot andere gebouwen. Medewerkers die werken met ADR-goederen moeten beschikken over de juiste certificering en training.</p>"
         ]
       },
       {
         "type": "paragraph",
         "text": [
-          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>Type: image</strong></p>"
+          "<h3 class=\"text-lg font-semibold text-gray-900 dark:text-white mb-2\">Image</h3>",
+          "<p class=\"text-gray-600 dark:text-gray-400 mb-4\">Voeg afbeeldingen toe met automatische modal functionaliteit voor de laatste afbeelding in een sectie.</p>"
         ]
       },
       {
@@ -44,7 +47,8 @@
       {
         "type": "paragraph",
         "text": [
-          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>Type: url</strong></p>"
+          "<h3 class=\"text-lg font-semibold text-gray-900 dark:text-white mb-2\">URL</h3>",
+          "<p class=\"text-gray-600 dark:text-gray-400 mb-4\">Voeg externe links toe naar relevante websites en bronnen.</p>"
         ]
       },
       {
@@ -55,7 +59,8 @@
       {
         "type": "paragraph",
         "text": [
-          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>Type: document</strong></p>"
+          "<h3 class=\"text-lg font-semibold text-gray-900 dark:text-white mb-2\">Document</h3>",
+          "<p class=\"text-gray-600 dark:text-gray-400 mb-4\">Voeg downloadbare documenten toe zoals PDF's, Word-bestanden of andere bestanden.</p>"
         ]
       },
       {
@@ -66,7 +71,8 @@
       {
         "type": "paragraph",
         "text": [
-          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>Type: video</strong></p>"
+          "<h3 class=\"text-lg font-semibold text-gray-900 dark:text-white mb-2\">Video</h3>",
+          "<p class=\"text-gray-600 dark:text-gray-400 mb-4\">Embed video's van YouTube of andere platforms voor visuele uitleg.</p>"
         ]
       },
       {
@@ -75,13 +81,15 @@
       },
       {
         "type": "heading",
-        "text": "2. Informatie-ordening",
-        "level": 2
+        "text": "Informatie-ordening",
+        "level": 2,
+        "id": "informatie-ordening"
       },
       {
         "type": "paragraph",
         "text": [
-          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>Type: highlight</strong></p>"
+          "<h3 class=\"text-lg font-semibold text-gray-900 dark:text-white mb-2\">Highlight</h3>",
+          "<p class=\"text-gray-600 dark:text-gray-400 mb-4\">Gebruik highlight boxes voor belangrijke informatie, waarschuwingen of tips. Je kunt verschillende kleuren gebruiken.</p>"
         ]
       },
       {
@@ -99,7 +107,8 @@
       {
         "type": "paragraph",
         "text": [
-          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>Type: accordion</strong></p>"
+          "<h3 class=\"text-lg font-semibold text-gray-900 dark:text-white mb-2\">Accordion</h3>",
+          "<p class=\"text-gray-600 dark:text-gray-400 mb-4\">Organiseer gerelateerde informatie in uitklapbare secties. Ideaal voor FAQ's of gestructureerde informatie.</p>"
         ]
       },
       {
@@ -125,7 +134,8 @@
       {
         "type": "paragraph",
         "text": [
-          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>Type: tabs</strong></p>"
+          "<h3 class=\"text-lg font-semibold text-gray-900 dark:text-white mb-2\">Tabs</h3>",
+          "<p class=\"text-gray-600 dark:text-gray-400 mb-4\">Presenteer verschillende onderwerpen naast elkaar in tabbladen. Perfect voor vergelijkingen of verschillende perspectieven.</p>"
         ]
       },
       {
@@ -181,7 +191,8 @@
       {
         "type": "paragraph",
         "text": [
-          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>Type: clickableSteps</strong></p>"
+          "<h3 class=\"text-lg font-semibold text-gray-900 dark:text-white mb-2\">Clickable Steps</h3>",
+          "<p class=\"text-gray-600 dark:text-gray-400 mb-4\">Toon processen of workflows stap voor stap. Studenten kunnen door de stappen klikken om elke fase te bekijken.</p>"
         ]
       },
       {
@@ -221,13 +232,15 @@
       },
       {
         "type": "heading",
-        "text": "3. Checklists",
-        "level": 2
+        "text": "Checklists",
+        "level": 2,
+        "id": "checklists"
       },
       {
         "type": "paragraph",
         "text": [
-          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>Type: learningObjectivesChecklist</strong></p>"
+          "<h3 class=\"text-lg font-semibold text-gray-900 dark:text-white mb-2\">Learning Objectives Checklist</h3>",
+          "<p class=\"text-gray-600 dark:text-gray-400 mb-4\">Laat studenten hun voortgang bijhouden door leerdoelen af te vinken. De voortgang wordt opgeslagen in de browser.</p>"
         ]
       },
       {
@@ -245,7 +258,8 @@
       {
         "type": "paragraph",
         "text": [
-          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>Type: smartChecklist</strong></p>"
+          "<h3 class=\"text-lg font-semibold text-gray-900 dark:text-white mb-2\">SMART Checklist</h3>",
+          "<p class=\"text-gray-600 dark:text-gray-400 mb-4\">Analyseer doelstellingen op SMART-criteria (Specifiek, Meetbaar, Acceptabel, Relevant, Tijdgebonden).</p>"
         ]
       },
       {
@@ -287,7 +301,8 @@
       {
         "type": "paragraph",
         "text": [
-          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>Type: conceptQualityChecklist</strong></p>"
+          "<h3 class=\"text-lg font-semibold text-gray-900 dark:text-white mb-2\">Concept Quality Checklist</h3>",
+          "<p class=\"text-gray-600 dark:text-gray-400 mb-4\">Evalueer begripsdefinities op kwaliteitscriteria zoals afbakening, operationalisatie en aansluiting.</p>"
         ]
       },
       {
@@ -318,13 +333,15 @@
       },
       {
         "type": "heading",
-        "text": "4. Interactieve Oefeningen",
-        "level": 2
+        "text": "Interactieve Oefeningen",
+        "level": 2,
+        "id": "interactieve-oefeningen"
       },
       {
         "type": "paragraph",
         "text": [
-          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>Type: trueFalseExercise</strong></p>"
+          "<h3 class=\"text-lg font-semibold text-gray-900 dark:text-white mb-2\">True/False Exercise</h3>",
+          "<p class=\"text-gray-600 dark:text-gray-400 mb-4\">Test kennis met waar/onwaar stellingen. Studenten krijgen directe feedback per stelling.</p>"
         ]
       },
       {
@@ -362,7 +379,8 @@
       {
         "type": "paragraph",
         "text": [
-          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>Type: matchingExercise</strong></p>"
+          "<h3 class=\"text-lg font-semibold text-gray-900 dark:text-white mb-2\">Matching Exercise</h3>",
+          "<p class=\"text-gray-600 dark:text-gray-400 mb-4\">Laat studenten items naar de juiste categorieën slepen. Ideaal voor het leren van classificaties.</p>"
         ]
       },
       {
@@ -414,7 +432,8 @@
       {
         "type": "paragraph",
         "text": [
-          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>Type: sequenceExercise</strong></p>"
+          "<h3 class=\"text-lg font-semibold text-gray-900 dark:text-white mb-2\">Sequence Exercise</h3>",
+          "<p class=\"text-gray-600 dark:text-gray-400 mb-4\">Laat studenten alinea's of stappen in de juiste volgorde zetten door te slepen. Perfect voor processen en procedures.</p>"
         ]
       },
       {
@@ -447,8 +466,9 @@
       },
       {
         "type": "heading",
-        "text": "5. Geavanceerde AI-Tools",
-        "level": 2
+        "text": "Geavanceerde AI-Tools",
+        "level": 2,
+        "id": "geavanceerde-ai-tools"
       },
       {
         "type": "paragraph",

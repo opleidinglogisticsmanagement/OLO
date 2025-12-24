@@ -79,15 +79,18 @@ class BaseLessonPage {
         
         for (let attempt = 1; attempt <= retries; attempt++) {
             try {
-                // Probeer verschillende paden (relatief, absoluut, en vanaf root)
+                // Probeer verschillende paden - RELATIEVE paden EERST om cross-app contamination te voorkomen
+                // Absolute paden kunnen naar verkeerde app wijzen op Vercel met meerdere apps
                 const paths = [
+                    // Relatieve paden eerst (meest veilig - altijd relatief aan huidige pagina)
                     `./content/${contentFileName}`,
                     `content/${contentFileName}`,
                     `${basePath}content/${contentFileName}`,
+                    // Relatieve paden met origin (veilig omdat basePath uniek is per app)
+                    `${window.location.origin}${basePath}content/${contentFileName}`,
+                    // Absolute paden alleen als laatste redmiddel (kan naar verkeerde app wijzen)
                     `/content/${contentFileName}`,
-                    // Try with current origin for absolute URLs
-                    `${window.location.origin}/content/${contentFileName}`,
-                    `${window.location.origin}${basePath}content/${contentFileName}`
+                    `${window.location.origin}/content/${contentFileName}`
                 ];
                 
                 let lastError = null;
@@ -120,6 +123,17 @@ class BaseLessonPage {
                         
                         const jsonData = await response.json();
                         
+                        // CRITICAL VALIDATION: Verify content matches expected module/app
+                        // This prevents loading content from wrong app
+                        const validation = this.validateContentMatchesModule(jsonData, contentPath);
+                        if (!validation.isValid) {
+                            console.error(`[${this.constructor.name}] ❌ Content validation failed:`, validation.errors);
+                            console.error(`[${this.constructor.name}] Expected moduleId: ${this.moduleId}`);
+                            console.error(`[${this.constructor.name}] Loaded from: ${contentPath}`);
+                            // Don't use this content, try next path
+                            throw new Error(`Content validation failed: ${validation.errors.join(', ')}`);
+                        }
+                        
                         // Validate JSON structure if ContentValidator is available
                         if (typeof window.ContentValidator !== 'undefined') {
                             const isValid = ContentValidator.validateAndLog(jsonData, this.moduleId, false);
@@ -132,16 +146,20 @@ class BaseLessonPage {
                         this.contentLoaded = true;
                         console.log(`[${this.constructor.name}] ✅ Content loaded successfully from: ${contentPath}`);
                         return; // Success, exit function
-                    } catch (pathError) {
-                        if (pathError.name === 'AbortError') {
-                            console.warn(`[${this.constructor.name}] Timeout loading from ${contentPath}`);
-                            lastError = new Error(`Timeout: ${contentPath}`);
-                        } else {
-                            console.warn(`[${this.constructor.name}] Failed to load from ${contentPath}:`, pathError.message);
-                            lastError = pathError;
-                        }
-                        // Try next path
+                } catch (pathError) {
+                    if (pathError.name === 'AbortError') {
+                        console.warn(`[${this.constructor.name}] Timeout loading from ${contentPath}`);
+                        lastError = new Error(`Timeout: ${contentPath}`);
+                    } else if (pathError.message && pathError.message.includes('Content validation failed')) {
+                        // Content validation failed - log but try next path
+                        console.warn(`[${this.constructor.name}] Content validation failed for ${contentPath}, trying next path...`);
+                        lastError = pathError;
+                    } else {
+                        console.warn(`[${this.constructor.name}] Failed to load from ${contentPath}:`, pathError.message);
+                        lastError = pathError;
                     }
+                    // Try next path
+                }
                 }
                 
                 // All paths failed, throw last error
@@ -182,6 +200,63 @@ class BaseLessonPage {
                 }
             }
         }
+    }
+
+    /**
+     * Validate that loaded content matches expected module/app
+     * This prevents loading content from wrong app
+     * @param {Object} jsonData - Loaded JSON content
+     * @param {string} contentPath - Path from which content was loaded
+     * @returns {Object} { isValid: boolean, errors: Array<string> }
+     */
+    validateContentMatchesModule(jsonData, contentPath) {
+        const errors = [];
+        
+        if (!jsonData || typeof jsonData !== 'object') {
+            errors.push('Content is not a valid object');
+            return { isValid: false, errors };
+        }
+        
+        // For demo module, verify intro.title contains "Demo"
+        if (this.moduleId === 'demo') {
+            if (jsonData.intro && jsonData.intro.title) {
+                const title = jsonData.intro.title.toLowerCase();
+                if (!title.includes('demo')) {
+                    errors.push(`Expected demo content but got: "${jsonData.intro.title}"`);
+                }
+            } else {
+                // Demo should have intro.title, but don't fail strictly
+                console.warn(`[${this.constructor.name}] Demo content missing intro.title`);
+            }
+        }
+        
+        // For week modules, verify content path contains expected filename
+        // This is a strong indicator that we're loading the right file
+        if (this.moduleId.startsWith('week-')) {
+            const expectedFileName = this.getContentFileName();
+            // Check if contentPath ends with expected filename
+            if (!contentPath.includes(expectedFileName)) {
+                // Warning but not error - paths can vary
+                console.warn(`[${this.constructor.name}] Content path doesn't contain expected filename: ${expectedFileName}`);
+            }
+            
+            // Additional check: verify content has expected structure
+            // Week content should have either intro or theorie section
+            if (!jsonData.intro && !jsonData.theorie) {
+                errors.push('Content missing both intro and theorie sections (unlikely for week content)');
+            }
+        }
+        
+        // Additional safety check: verify content path is relative or matches current origin
+        // Absolute paths from different origins are suspicious
+        if (contentPath.startsWith('http') && !contentPath.startsWith(window.location.origin)) {
+            errors.push(`Content loaded from different origin: ${contentPath}`);
+        }
+        
+        return {
+            isValid: errors.length === 0,
+            errors
+        };
     }
 
     /**

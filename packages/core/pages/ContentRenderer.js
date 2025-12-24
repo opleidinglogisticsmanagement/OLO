@@ -529,7 +529,7 @@ class ContentRenderer {
             : KaTeXRenderer.renderInline(item.formula);
         
         if (isDisplay) {
-            return `<div class="my-4 flex justify-center overflow-x-auto">${formulaHtml}</div>`;
+            return `<div class="my-4 flex justify-center overflow-x-hidden">${formulaHtml}</div>`;
         }
         return `<span class="katex-inline inline-block">${formulaHtml}</span>`;
     }

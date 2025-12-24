@@ -286,12 +286,52 @@
       {
         "type": "paragraph",
         "text": [
-          "<strong>Formules voor kwaliteitsmeting:</strong>",
-          "• <strong>CFE</strong> (Cumulative sum of Forecast Errors) = <strong>ΣE<sub>t</sub></strong>",
-          "• <strong>AFE</strong> (Average Forecast Error) = <strong>CFE / n</strong>",
-          "• <strong>MAD</strong> (Mean Absolute Deviation) = <strong>Σ|E<sub>t</sub>| / n</strong>",
-          "• <strong>MAPE</strong> (Mean Absolute Percent Error) = <strong>(Σ(|E<sub>t</sub>| / D<sub>t</sub>) × 100%) / n</strong>"
+          "<strong>Formules voor kwaliteitsmeting:</strong>"
         ]
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "<strong>CFE</strong> (Cumulative sum of Forecast Errors) = "
+        ]
+      },
+      {
+        "type": "formula",
+        "formula": "\\text{CFE} = \\sum E_t",
+        "display": false
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "<strong>AFE</strong> (Average Forecast Error) = "
+        ]
+      },
+      {
+        "type": "formula",
+        "formula": "\\text{AFE} = \\frac{\\text{CFE}}{n}",
+        "display": false
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "<strong>MAD</strong> (Mean Absolute Deviation) = "
+        ]
+      },
+      {
+        "type": "formula",
+        "formula": "\\text{MAD} = \\frac{\\sum |E_t|}{n}",
+        "display": false
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "<strong>MAPE</strong> (Mean Absolute Percent Error) = "
+        ]
+      },
+      {
+        "type": "formula",
+        "formula": "\\text{MAPE} = \\frac{100}{n} \\sum \\frac{|E_t|}{D_t}",
+        "display": false
       },
       {
         "type": "accordion",
@@ -360,8 +400,9 @@
         ]
       },
       {
-        "type": "html",
-        "html": "<div class=\"my-4 p-4 bg-gray-50 dark:bg-gray-800 rounded-lg border-l-4 border-blue-500\"><p class=\"text-center text-lg font-semibold text-gray-900 dark:text-white mb-3\"><strong>Y = a + bX</strong></p></div>"
+        "type": "formula",
+        "formula": "Y = a + bX",
+        "display": true
       },
       {
         "type": "paragraph",
@@ -450,12 +491,22 @@
         "type": "highlight",
         "title": "Voorspelling berekenen",
         "content": [
-          "<p class=\"text-gray-700 dark:text-gray-300 mb-3\">Met de gevonden regressievergelijking <strong>Y = a + bX</strong> kunnen we toekomstige verkoopcijfers voorspellen.</p>",
-          "<p class=\"text-gray-700 dark:text-gray-300 mb-3\">Bij een gepland advertentiebudget van <strong>€ 1.500 (X)</strong> bedraagt de verwachte verkoop:</p>",
-          "<p class=\"text-gray-700 dark:text-gray-300 mb-3 text-center text-lg font-semibold\"><strong>Y = a + b × 1.500 stuks</strong></p>"
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-3\">Met de gevonden regressievergelijking kunnen we toekomstige verkoopcijfers voorspellen.</p>",
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-3\">Bij een gepland advertentiebudget van <strong>€ 1.500 (X)</strong> bedraagt de verwachte verkoop:</p>"
         ],
         "icon": "fa-calculator",
         "iconClass": "fas"
+      },
+      {
+        "type": "formula",
+        "formula": "Y = a + b \\times 1.500",
+        "display": true
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "stuks"
+        ]
       },
       {
         "type": "accordion",

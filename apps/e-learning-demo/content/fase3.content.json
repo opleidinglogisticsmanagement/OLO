@@ -1,0 +1,475 @@
+{
+  "intro": {
+    "title": "Fase 3: De Catalogus",
+    "subtitle": "Alle beschikbare bouwstenen",
+    "description": "In deze fase ontdek je alle beschikbare content types die je kunt gebruiken om rijke, interactieve leerervaringen te creëren. Elke bouwsteen wordt gedemonstreerd met realistische logistieke voorbeelden die je direct kunt toepassen in je eigen e-learning."
+  },
+  "leerdoelen": {
+    "title": "Leerdoelen",
+    "description": "Na het doorlopen van deze fase kun je:",
+    "items": [
+      "Alle beschikbare content types herkennen en toepassen",
+      "Het verschil begrijpen tussen basis elementen, informatie-ordening, checklists en oefeningen",
+      "Weten wanneer je welk content type gebruikt voor optimale leerervaringen"
+    ],
+    "interactive": false
+  },
+  "theorie": {
+    "title": "De Catalogus van Bouwstenen",
+    "content": [
+      {
+        "type": "heading",
+        "text": "1. Basis Elementen",
+        "level": 2
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>Type: paragraph</strong></p>",
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">De opslag van gevaarlijke stoffen (ADR) vereist speciale aandacht voor veiligheid en compliance. Volgens de ADR-richtlijnen moeten gevaarlijke stoffen worden opgeslagen in speciaal daarvoor ingerichte ruimtes met de juiste ventilatie, brandbeveiliging en afstand tot andere gebouwen. Medewerkers die werken met ADR-goederen moeten beschikken over de juiste certificering en training.</p>"
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>Type: image</strong></p>"
+        ]
+      },
+      {
+        "type": "image",
+        "src": "assets/images/dc-voorbeeld.png",
+        "alt": "Modern distributiecentrum met geautomatiseerde opslag- en orderpicksystemen",
+        "enableModal": false
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>Type: url</strong></p>"
+        ]
+      },
+      {
+        "type": "url",
+        "url": "https://www.portofrotterdam.com",
+        "text": "Bezoek de website van de Port of Rotterdam"
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>Type: document</strong></p>"
+        ]
+      },
+      {
+        "type": "document",
+        "src": "assets/Documents/Template Vrachtbrief (CMR).pdf",
+        "text": "Download: Template Vrachtbrief (CMR)"
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>Type: video</strong></p>"
+        ]
+      },
+      {
+        "type": "video",
+        "url": "https://www.youtube.com/embed/example-agv-video"
+      },
+      {
+        "type": "heading",
+        "text": "2. Informatie-ordening",
+        "level": 2
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>Type: highlight</strong></p>"
+        ]
+      },
+      {
+        "type": "highlight",
+        "title": "Belangrijke Veiligheidswaarschuwing",
+        "content": [
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-3\">Heftruckverkeer in het magazijn vereist constante aandacht voor veiligheid. Zorg altijd voor voldoende zicht, gebruik de claxon bij kruispunten en rijd nooit sneller dan de toegestane snelheid. Voetgangers hebben altijd voorrang.</p>",
+          "<p class=\"text-gray-700 dark:text-gray-300\">Bij twijfel: stop en controleer je omgeving voordat je verder rijdt.</p>"
+        ],
+        "bgColor": "bg-red-50 dark:bg-red-900/20",
+        "borderColor": "border-red-500 dark:border-red-400",
+        "titleColor": "text-red-900 dark:text-red-200",
+        "contentColor": "text-red-800 dark:text-red-300"
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>Type: accordion</strong></p>"
+        ]
+      },
+      {
+        "type": "accordion",
+        "usePlusIcon": true,
+        "defaultOpen": false,
+        "items": [
+          {
+            "title": "Verschillende pallettypen",
+            "defaultOpen": false,
+            "content": [
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">In de logistiek worden verschillende pallettypen gebruikt, elk met hun eigen kenmerken en toepassingen:</p>",
+              "<h4 class=\"font-semibold text-gray-900 dark:text-white mb-2\">Europallets</h4>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">De standaard Europalleet (EUR-pallet) heeft afmetingen van 1200 x 800 mm en is gemaakt van hout. Deze pallet is het meest gebruikt in Europa en is geschikt voor de meeste transportmodaliteiten. De pallet kan een gewicht dragen tot 1500 kg bij statische belasting.</p>",
+              "<h4 class=\"font-semibold text-gray-900 dark:text-white mb-2\">Blokpallets</h4>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Blokpallets hebben blokken aan alle vier de hoeken en in het midden, wat zorgt voor extra stabiliteit. Ze zijn geschikt voor zware lasten en kunnen van alle kanten worden opgetild met een vorkheftruck. Blokpallets zijn duurzamer maar ook duurder dan standaard pallets.</p>",
+              "<h4 class=\"font-semibold text-gray-900 dark:text-white mb-2\">Kunststof pallets</h4>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Kunststof pallets zijn hygiënischer en makkelijker schoon te maken dan houten pallets, waardoor ze ideaal zijn voor de voedingsmiddelenindustrie. Ze zijn lichter dan houten pallets maar hebben een hogere initiële investering. Kunststof pallets zijn ook beter bestand tegen weersinvloeden.</p>"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>Type: tabs</strong></p>"
+        ]
+      },
+      {
+        "type": "tabs",
+        "defaultTab": 0,
+        "tabs": [
+          {
+            "title": "Wegvervoer",
+            "content": [
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Wegvervoer is de meest flexibele transportmodaliteit en geschikt voor korte tot middellange afstanden. Voordelen zijn de directe deur-tot-deur service en snelle levertijden.</p>",
+              "<ul class=\"list-disc list-outside space-y-2 mb-4 ml-6 pl-4 text-gray-700 dark:text-gray-300\">",
+              "<li class=\"mb-2\"><strong>Voordelen:</strong> Flexibiliteit, directe levering, snelle doorlooptijd</li>",
+              "<li class=\"mb-2\"><strong>Nadelen:</strong> Hogere kosten per ton/km, beperkte capaciteit, verkeersafhankelijk</li>",
+              "<li class=\"mb-2\"><strong>Geschikt voor:</strong> Kleine tot middelgrote zendingen, tijdkritische leveringen</li>",
+              "</ul>"
+            ]
+          },
+          {
+            "title": "Spoor",
+            "content": [
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Spoorvervoer is zeer efficiënt voor grote volumes over lange afstanden. Het is milieuvriendelijker dan wegvervoer en heeft lagere kosten per ton/km.</p>",
+              "<ul class=\"list-disc list-outside space-y-2 mb-4 ml-6 pl-4 text-gray-700 dark:text-gray-300\">",
+              "<li class=\"mb-2\"><strong>Voordelen:</strong> Grote capaciteit, lage kosten per ton/km, milieuvriendelijk</li>",
+              "<li class=\"mb-2\"><strong>Nadelen:</strong> Beperkte flexibiliteit, afhankelijk van spoorinfrastructuur, langere doorlooptijd</li>",
+              "<li class=\"mb-2\"><strong>Geschikt voor:</strong> Bulkgoederen, containers, lange afstanden</li>",
+              "</ul>"
+            ]
+          },
+          {
+            "title": "Zeevaart",
+            "content": [
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Zeevaart is de meest kosteneffectieve modaliteit voor internationale transporten over lange afstanden. Moderne containerschepen kunnen enorme volumes vervoeren.</p>",
+              "<ul class=\"list-disc list-outside space-y-2 mb-4 ml-6 pl-4 text-gray-700 dark:text-gray-300\">",
+              "<li class=\"mb-2\"><strong>Voordelen:</strong> Zeer lage kosten per ton/km, enorme capaciteit, geschikt voor alle soorten goederen</li>",
+              "<li class=\"mb-2\"><strong>Nadelen:</strong> Langere doorlooptijd, afhankelijk van havens, weerafhankelijk</li>",
+              "<li class=\"mb-2\"><strong>Geschikt voor:</strong> Internationale transporten, bulkgoederen, containers</li>",
+              "</ul>"
+            ]
+          },
+          {
+            "title": "Luchtvracht",
+            "content": [
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Luchtvracht is de snelste transportmodaliteit en essentieel voor tijdkritische zendingen. Het is echter ook de duurste optie.</p>",
+              "<ul class=\"list-disc list-outside space-y-2 mb-4 ml-6 pl-4 text-gray-700 dark:text-gray-300\">",
+              "<li class=\"mb-2\"><strong>Voordelen:</strong> Zeer snelle levering, wereldwijde dekking, betrouwbaar</li>",
+              "<li class=\"mb-2\"><strong>Nadelen:</strong> Hoge kosten, beperkte capaciteit, gewichts- en volumebeperkingen</li>",
+              "<li class=\"mb-2\"><strong>Geschikt voor:</strong> Tijdkritische zendingen, waardevolle goederen, kleine volumes</li>",
+              "</ul>"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>Type: clickableSteps</strong></p>"
+        ]
+      },
+      {
+        "type": "clickableSteps",
+        "steps": [
+          {
+            "label": "Ontvangst order",
+            "content": [
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Het orderpickproces begint met de ontvangst van een order. De order wordt geregistreerd in het Warehouse Management System (WMS) en toegewezen aan een orderpicker. Het systeem bepaalt de optimale pickroute op basis van de locatie van de artikelen in het magazijn.</p>"
+            ]
+          },
+          {
+            "label": "Picking",
+            "content": [
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Tijdens het pickingproces verzamelt de orderpicker de gevraagde artikelen volgens de route die door het WMS is bepaald. De picker scant elke artikelbarcode om te verifiëren dat het juiste artikel wordt gepickt. Moderne magazijnen gebruiken vaak pick-to-light systemen of voice picking om de efficiëntie te verhogen.</p>"
+            ]
+          },
+          {
+            "label": "Controle",
+            "content": [
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Na het picken worden de artikelen gecontroleerd op volledigheid en kwaliteit. Het aantal artikelen wordt geteld en vergeleken met de order. Beschadigde artikelen worden geretourneerd naar de voorraad en vervangen door intacte exemplaren. Deze controle is essentieel om fouten te voorkomen.</p>"
+            ]
+          },
+          {
+            "label": "Verpakken",
+            "content": [
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">De gecontroleerde artikelen worden verpakt in geschikte verpakkingsmaterialen. De verpakking wordt gekozen op basis van de aard van de goederen, het transport en de bestemming. Fragiele artikelen krijgen extra bescherming. Het pakket wordt gelabeld met het juiste adres en trackingnummer.</p>"
+            ]
+          },
+          {
+            "label": "Verzenden",
+            "content": [
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Het verpakte pakket wordt overgedragen aan de transporteur. Het WMS registreert de verzending en genereert de benodigde documenten zoals de vrachtbrief. De klant ontvangt een bevestiging met trackinginformatie zodat hij de zending kan volgen tot aan de levering.</p>"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "heading",
+        "text": "3. Checklists",
+        "level": 2
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>Type: learningObjectivesChecklist</strong></p>"
+        ]
+      },
+      {
+        "type": "learningObjectivesChecklist",
+        "title": "Leerdoelen: Voorraadbeheer",
+        "items": [
+          "Je kunt uitleggen wat voorraadbeheer is en waarom het belangrijk is voor logistieke processen",
+          "Je kunt verschillende voorraadbeheermethoden (zoals ABC-analyse en Just-in-Time) toepassen",
+          "Je kunt de optimale bestelhoeveelheid berekenen met behulp van het EOQ-model",
+          "Je kunt voorraadkosten identificeren en analyseren",
+          "Je kunt een voorraadbeheersysteem ontwerpen voor een specifieke logistieke situatie"
+        ],
+        "storageKey": "voorraadbeheer-leerdoelen"
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>Type: smartChecklist</strong></p>"
+        ]
+      },
+      {
+        "type": "smartChecklist",
+        "doelstelling": "Het doel van dit project is het verlagen van de doorlooptijd van order tot levering met 10% binnen 6 maanden door het optimaliseren van de orderpickprocessen en het implementeren van een geavanceerd Warehouse Management System, waardoor de klanttevredenheid wordt verhoogd en de operationele kosten worden verlaagd.",
+        "criteria": [
+          {
+            "letter": "S",
+            "name": "Specifiek",
+            "description": "De doelstelling is duidelijk en concreet geformuleerd",
+            "question": "Wat precies wil je bereiken?"
+          },
+          {
+            "letter": "M",
+            "name": "Meetbaar",
+            "description": "Je kunt vaststellen of de doelstelling is behaald",
+            "question": "Hoe meet je succes?"
+          },
+          {
+            "letter": "A",
+            "name": "Acceptabel/Haalbaar",
+            "description": "De doelstelling is realistisch en uitvoerbaar",
+            "question": "Is dit haalbaar binnen de tijd en middelen?"
+          },
+          {
+            "letter": "R",
+            "name": "Relevant",
+            "description": "De doelstelling draagt bij aan het oplossen van het probleem",
+            "question": "Helpt dit het praktijkprobleem op te lossen?"
+          },
+          {
+            "letter": "T",
+            "name": "Tijdgebonden",
+            "description": "Er is een duidelijk tijdsbestek voor de doelstelling",
+            "question": "Wanneer moet dit zijn afgerond?"
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>Type: conceptQualityChecklist</strong></p>"
+        ]
+      },
+      {
+        "type": "conceptQualityChecklist",
+        "title": "Analyseer deze begripsdefinitie op kwaliteitscriteria:",
+        "concept": "Just-in-Time",
+        "definition": "Just-in-Time (JIT) is een voorraadbeheermethode waarbij grondstoffen en componenten precies op het moment van gebruik worden geleverd, waardoor voorraadkosten worden geminimaliseerd en de efficiëntie van het productieproces wordt verhoogd.",
+        "criteria": [
+          {
+            "letter": "A",
+            "name": "Afbakening",
+            "description": "Is tijd en plaats toegevoegd?",
+            "question": "Welke locatie en periode worden bedoeld?"
+          },
+          {
+            "letter": "O",
+            "name": "Operationalisatie",
+            "description": "Zijn er waarneembare indicatoren?",
+            "question": "Kun je het begrip meten of observeren?"
+          },
+          {
+            "letter": "S",
+            "name": "Aansluiting",
+            "description": "Sluit het aan bij doelstelling en hoofdvraag?",
+            "question": "Helpt deze definitie om de doelstelling te bereiken?"
+          }
+        ]
+      },
+      {
+        "type": "heading",
+        "text": "4. Interactieve Oefeningen",
+        "level": 2
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>Type: trueFalseExercise</strong></p>"
+        ]
+      },
+      {
+        "type": "trueFalseExercise",
+        "title": "Test je kennis: Lean Manufacturing in de Logistiek",
+        "instruction": "Bepaal of de volgende stellingen over Lean Manufacturing waar of onwaar zijn:",
+        "statements": [
+          {
+            "text": "Lean Manufacturing richt zich op het elimineren van verspilling (waste) in productie- en logistieke processen.",
+            "correctAnswer": true,
+            "explanation": "Correct! Lean Manufacturing heeft als hoofddoel het identificeren en elimineren van alle vormen van verspilling (muda) om de efficiëntie te verhogen en kosten te verlagen."
+          },
+          {
+            "text": "Voorraad wordt in Lean Manufacturing gezien als een vorm van verspilling die moet worden geminimaliseerd.",
+            "correctAnswer": true,
+            "explanation": "Correct! Overmatige voorraad wordt beschouwd als verspilling omdat het kapitaal bindt, ruimte inneemt en kan leiden tot veroudering van producten."
+          },
+          {
+            "text": "Just-in-Time (JIT) is een onderdeel van Lean Manufacturing en betekent dat voorraden zo groot mogelijk moeten zijn.",
+            "correctAnswer": false,
+            "explanation": "Onjuist. JIT betekent juist dat voorraden zo klein mogelijk moeten zijn - materialen worden precies op het moment van gebruik geleverd, niet eerder en niet later."
+          },
+          {
+            "text": "De 5S-methode (Sorteren, Schikken, Schoonmaken, Standaardiseren, Standhouden) is een belangrijk instrument binnen Lean Manufacturing.",
+            "correctAnswer": true,
+            "explanation": "Correct! De 5S-methode is een fundamenteel onderdeel van Lean Manufacturing en helpt bij het creëren van een georganiseerde, efficiënte werkplek."
+          },
+          {
+            "text": "Lean Manufacturing accepteert wachttijden als onderdeel van het normale proces.",
+            "correctAnswer": false,
+            "explanation": "Onjuist. Wachttijden worden gezien als verspilling (muda) en moeten worden geëlimineerd of geminimaliseerd volgens Lean principes."
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>Type: matchingExercise</strong></p>"
+        ]
+      },
+      {
+        "type": "matchingExercise",
+        "title": "Match Incoterms aan de juiste risico-overdracht",
+        "instruction": "Sleep de Incoterms naar de juiste beschrijving van risico-overdracht:",
+        "categories": [
+          {
+            "name": "Risico bij verkoper",
+            "description": "De verkoper draagt alle risico's tot aan de levering bij de koper"
+          },
+          {
+            "name": "Risico bij koper",
+            "description": "De koper draagt alle risico's vanaf het moment van verzending"
+          },
+          {
+            "name": "Gedeeld risico",
+            "description": "Risico wordt overgedragen op een specifiek punt tijdens het transport"
+          }
+        ],
+        "items": [
+          {
+            "text": "EXW (Ex Works) - De verkoper stelt de goederen beschikbaar op zijn locatie",
+            "correctCategory": 1,
+            "explanation": "Bij EXW draagt de koper alle risico's vanaf het moment dat de goederen worden opgehaald bij de verkoper."
+          },
+          {
+            "text": "FOB (Free On Board) - De verkoper levert de goederen aan boord van het schip",
+            "correctCategory": 2,
+            "explanation": "Bij FOB wordt het risico overgedragen op het moment dat de goederen de reling van het schip passeren."
+          },
+          {
+            "text": "DDP (Delivered Duty Paid) - De verkoper levert de goederen bij de koper, alle kosten en risico's zijn voor de verkoper",
+            "correctCategory": 0,
+            "explanation": "Bij DDP draagt de verkoper alle risico's en kosten tot aan de levering bij de koper, inclusief invoerrechten."
+          },
+          {
+            "text": "CIF (Cost, Insurance and Freight) - De verkoper betaalt kosten, verzekering en vracht tot aan de haven van bestemming",
+            "correctCategory": 2,
+            "explanation": "Bij CIF wordt het risico overgedragen wanneer de goederen aan boord van het schip worden geplaatst, maar de verkoper betaalt de kosten tot aan de haven van bestemming."
+          },
+          {
+            "text": "FCA (Free Carrier) - De verkoper levert de goederen aan de vervoerder die door de koper is aangewezen",
+            "correctCategory": 2,
+            "explanation": "Bij FCA wordt het risico overgedragen op het moment dat de goederen worden overgedragen aan de vervoerder."
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>Type: sequenceExercise</strong></p>"
+        ]
+      },
+      {
+        "type": "sequenceExercise",
+        "title": "De Supply Chain: Van Grondstofleverancier tot Eindconsument",
+        "instruction": "Zet de schakels in de juiste volgorde van de supply chain:",
+        "paragraphs": [
+          {
+            "text": "De grondstofleverancier levert ruwe materialen zoals staal, plastic of hout aan de fabrikant.",
+            "order": 1
+          },
+          {
+            "text": "De fabrikant transformeert de grondstoffen tot eindproducten in het productieproces.",
+            "order": 2
+          },
+          {
+            "text": "Het distributiecentrum ontvangt de eindproducten en slaat deze op in voorraad.",
+            "order": 3
+          },
+          {
+            "text": "Het distributiecentrum verzendt de producten naar verschillende verkooppunten of retailers.",
+            "order": 4
+          },
+          {
+            "text": "De retailer verkoopt de producten aan de eindconsument in de winkel of online.",
+            "order": 5
+          }
+        ],
+        "explanation": "De supply chain begint bij de grondstofleverancier en eindigt bij de eindconsument. Elke schakel voegt waarde toe aan het product en draagt bij aan de uiteindelijke levering aan de klant."
+      },
+      {
+        "type": "heading",
+        "text": "5. Geavanceerde AI-Tools",
+        "level": 2
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Het platform biedt ook geavanceerde AI-tools zoals <code class=\"bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded\">booleanOperatorExercise</code>, <code class=\"bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded\">aiQueryExercise</code> en <code class=\"bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded\">aiBouwsteenGenerator</code>. Deze tools helpen studenten bij het ontwikkelen van onderzoeksvaardigheden en het genereren van content.</p>",
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Deze geavanceerde AI-tools worden uitgebreid behandeld in de volgende fase, waar je leert hoe je deze kunt inzetten voor specifieke leerdoelen en onderzoeksopdrachten.</p>"
+        ]
+      },
+      {
+        "type": "highlight",
+        "title": "Volgende Stap",
+        "content": [
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-3\">Nu je alle beschikbare bouwstenen kent, ben je klaar om te beginnen met het bouwen van je eigen e-learning content. Gebruik deze catalogus als referentie wanneer je twijfelt welk content type het beste past bij je leerdoel.</p>",
+          "<p class=\"text-gray-700 dark:text-gray-300\">Onthoud: elke bouwsteen heeft zijn eigen kracht. Kies het type dat het beste past bij wat je studenten moeten leren en oefenen.</p>"
+        ],
+        "bgColor": "bg-green-50 dark:bg-green-900/20",
+        "borderColor": "border-green-500 dark:border-green-400",
+        "titleColor": "text-green-900 dark:text-green-200",
+        "contentColor": "text-green-800 dark:text-green-300"
+      }
+    ]
+  }
+}
+

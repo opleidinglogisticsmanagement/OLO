@@ -629,6 +629,8 @@
     <!-- Demo Page Classes - Load for SPA router -->
     <script src="pages/DemoLessonPage.js" onerror="console.error('[Script] Failed to load DemoLessonPage.js')"></script>
     <script src="pages/Module1LessonPage.js" onerror="console.error('[Script] Failed to load Module1LessonPage.js')"></script>
+    <script src="pages/CursorLessonPage.js" onerror="console.error('[Script] Failed to load CursorLessonPage.js')"></script>
+    <script src="pages/Fase3LessonPage.js" onerror="console.error('[Script] Failed to load Fase3LessonPage.js')"></script>
     
     <!-- Verify all classes are loaded with detailed logging -->
     <script>
@@ -638,13 +640,17 @@
                 console.log('[Script Loader] ⏰ Verification started at:', new Date().toISOString());
                 const expectedClasses = [
                     'DemoLessonPage',
-                    'Module1LessonPage'
+                    'Module1LessonPage',
+                    'CursorLessonPage',
+                    'Fase3LessonPage'
                 ];
                 
                 console.log('[Script Loader] 🔍 Checking for page classes...');
                 console.log('[Script Loader] BaseLessonPage available:', !!window.BaseLessonPage);
                 console.log('[Script Loader] DemoLessonPage available:', !!window.DemoLessonPage);
                 console.log('[Script Loader] Module1LessonPage available:', !!window.Module1LessonPage);
+                console.log('[Script Loader] CursorLessonPage available:', !!window.CursorLessonPage);
+                console.log('[Script Loader] Fase3LessonPage available:', !!window.Fase3LessonPage);
                 
                 const availableClasses = expectedClasses.filter(cls => window[cls]);
                 const missingClasses = expectedClasses.filter(cls => !window[cls]);
@@ -723,6 +729,24 @@
                                     <i class="fas fa-book text-purple-600 dark:text-purple-400 text-sm"></i>
                                 </div>
                                 <span class="font-medium text-gray-900 dark:text-white">Het Fundament</span>
+                            </div>
+                        </a>
+                        
+                        <a href="cursor.html" class="block p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 focus-ring transition-colors">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-8 h-8 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center">
+                                    <i class="fas fa-laptop-code text-blue-600 dark:text-blue-400 text-sm"></i>
+                                </div>
+                                <span class="font-medium text-gray-900 dark:text-white">Fase 2: Cursor</span>
+                            </div>
+                        </a>
+                        
+                        <a href="fase3.html" class="block p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 focus-ring transition-colors">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-8 h-8 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center">
+                                    <i class="fas fa-book text-green-600 dark:text-green-400 text-sm"></i>
+                                </div>
+                                <span class="font-medium text-gray-900 dark:text-white">Fase 3: De Catalogus</span>
                             </div>
                         </a>
                     </div>
@@ -1551,6 +1575,8 @@
             console.log('[Index] Available page classes:', availableClasses);
             console.log('[Index] DemoLessonPage available:', !!window.DemoLessonPage);
             console.log('[Index] Module1LessonPage available:', !!window.Module1LessonPage);
+            console.log('[Index] CursorLessonPage available:', !!window.CursorLessonPage);
+            console.log('[Index] Fase3LessonPage available:', !!window.Fase3LessonPage);
             
             // Expected classes for demo app
             const expectedClasses = [
@@ -1572,7 +1598,9 @@
                 router.routes = {
                     'index.html': () => router.loadIndexPage(),
                     'demo.html': () => router.loadWeekPage('demo', 'DemoLessonPage'),
-                    'module1.html': () => router.loadWeekPage('module1', 'Module1LessonPage')
+                    'module1.html': () => router.loadWeekPage('module1', 'Module1LessonPage'),
+                    'cursor.html': () => router.loadWeekPage('cursor', 'CursorLessonPage'),
+                    'fase3.html': () => router.loadWeekPage('fase3', 'Fase3LessonPage')
                 };
                 router.init();
                 window.appRouter = router; // Store globally for debugging

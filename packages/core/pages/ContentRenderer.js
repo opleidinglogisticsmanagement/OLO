@@ -109,6 +109,28 @@ class ContentRenderer {
         }
 
         if (Array.isArray(item.text)) {
+            // Check if all items start with bullet points (•) or dashes (-)
+            const allBulletPoints = item.text.every(textItem => {
+                const trimmed = textItem.trim();
+                return trimmed.startsWith('•') || trimmed.startsWith('-') || trimmed.startsWith('*');
+            });
+            
+            if (allBulletPoints && item.text.length > 1) {
+                // Render as unordered list with proper indentation
+                const listItems = item.text.map(textItem => {
+                    const trimmedText = textItem.trim();
+                    // Remove bullet point character
+                    const content = trimmedText.replace(/^[•\-\*]\s*/, '');
+                    // Als content begint met HTML tag, render direct
+                    if (content.trim().startsWith('<')) {
+                        return `<li class="mb-2 text-gray-700 dark:text-gray-300">${content}</li>`;
+                    }
+                    return `<li class="mb-2 text-gray-700 dark:text-gray-300">${content}</li>`;
+                }).join('');
+                
+                return `<ul class="list-disc list-outside space-y-2 mb-4 ml-6 pl-4 text-gray-700 dark:text-gray-300">${listItems}</ul>`;
+            }
+            
             // Join all text items first, then process for table copy buttons
             const joinedHtml = item.text.map(textItem => {
                 const trimmedText = textItem.trim();
@@ -529,7 +551,7 @@ class ContentRenderer {
             : KaTeXRenderer.renderInline(item.formula);
         
         if (isDisplay) {
-            return `<div class="my-4 flex justify-center overflow-x-hidden">${formulaHtml}</div>`;
+            return `<div class="my-4 flex justify-center overflow-x-hidden katex-display-wrapper">${formulaHtml}</div>`;
         }
         return `<span class="katex-inline inline-block">${formulaHtml}</span>`;
     }

@@ -223,8 +223,13 @@
         /* KaTeX display formula styling */
         .katex-display {
             margin: 1em 0;
-            overflow-x: auto;
+            overflow-x: hidden;
             overflow-y: hidden;
+        }
+        
+        /* Prevent scrollbar on formula wrapper */
+        .katex-display-wrapper {
+            overflow-x: hidden !important;
         }
 
         /* Responsive formula wrapping */

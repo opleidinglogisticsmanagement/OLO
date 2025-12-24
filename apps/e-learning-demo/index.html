@@ -627,7 +627,6 @@
     <script src="/core/pages/MCQuestionRenderer.js"></script>
     
     <!-- Demo Page Classes - Load for SPA router -->
-    <script src="pages/DemoLessonPage.js" onerror="console.error('[Script] Failed to load DemoLessonPage.js')"></script>
     <script src="pages/Module1LessonPage.js" onerror="console.error('[Script] Failed to load Module1LessonPage.js')"></script>
     <script src="pages/CursorLessonPage.js" onerror="console.error('[Script] Failed to load CursorLessonPage.js')"></script>
     <script src="pages/Fase3LessonPage.js" onerror="console.error('[Script] Failed to load Fase3LessonPage.js')"></script>
@@ -642,7 +641,6 @@
             setTimeout(() => {
                 console.log('[Script Loader] ⏰ Verification started at:', new Date().toISOString());
                 const expectedClasses = [
-                    'DemoLessonPage',
                     'Module1LessonPage',
                     'CursorLessonPage',
                     'Fase3LessonPage',
@@ -653,7 +651,6 @@
                 
                 console.log('[Script Loader] 🔍 Checking for page classes...');
                 console.log('[Script Loader] BaseLessonPage available:', !!window.BaseLessonPage);
-                console.log('[Script Loader] DemoLessonPage available:', !!window.DemoLessonPage);
                 console.log('[Script Loader] Module1LessonPage available:', !!window.Module1LessonPage);
                 console.log('[Script Loader] CursorLessonPage available:', !!window.CursorLessonPage);
                 console.log('[Script Loader] Fase3LessonPage available:', !!window.Fase3LessonPage);
@@ -720,15 +717,6 @@
                                     <i class="fas fa-home text-blue-600 dark:text-blue-400 text-sm"></i>
                                 </div>
                                 <span class="font-medium text-gray-900 dark:text-white">Start</span>
-                            </div>
-                        </a>
-                        
-                        <a href="demo.html" class="block p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 focus-ring transition-colors">
-                            <div class="flex items-center space-x-3">
-                                <div class="w-8 h-8 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center">
-                                    <i class="fas fa-graduation-cap text-blue-600 dark:text-blue-400 text-sm"></i>
-                                </div>
-                                <span class="font-medium text-gray-900 dark:text-white">Demo</span>
                             </div>
                         </a>
                         
@@ -959,30 +947,14 @@
                                     <i class="fas fa-book text-green-600 dark:text-green-400 text-lg"></i>
                                 </div>
                                 <div class="flex-1 min-w-0 box-border sm:pr-[70px]" style="min-width: 0; max-width: 100%; box-sizing: border-box;">
-                                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Demo Structuur</h3>
+                                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Structuur</h3>
                                     
                                     <div class="prose max-w-none">
                                         <p class="text-gray-700 dark:text-gray-300 mb-4">
-                                            Deze demo bestaat uit één pagina die laat zien wat er mogelijk is in het e-learning platform. 
+                                            Deze e-learning bestaat uit verschillende modules die je helpen om zelf je eigen e-learning te bouwen. 
                                             Je kunt hier voorbeelden vinden van alle beschikbare content types en uitleg over hoe je ze gebruikt.
                                         </p>
                                         
-                                        <h4 class="text-lg font-semibold text-gray-900 dark:text-white mb-3">Demo en Handleiding</h4>
-                                        <div class="flex flex-col gap-3 mb-6">
-                                            <a href="demo.html" class="bg-gray-50 dark:bg-gray-900/50 rounded-lg px-6 py-3 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-200 cursor-pointer focus-ring hover-lift block">
-                                                <div class="flex items-center justify-between">
-                                                    <div class="flex-1">
-                                                        <h5 class="font-semibold text-gray-900 dark:text-white mb-1">
-                                                            Demo: Wat is mogelijk en handleiding
-                                                        </h5>
-                                                        <p class="text-gray-600 dark:text-gray-300 text-sm">
-                                                            Bekijk wat er allemaal mogelijk is in het e-learning platform en leer hoe je als collega je eigen e-learning kunt bouwen.
-                                                        </p>
-                                                    </div>
-                                                    <i class="fas fa-arrow-right text-sm text-gray-400 dark:text-gray-500 ml-4 flex-shrink-0"></i>
-                                                </div>
-                                            </a>
-                                        </div>
                                         
                                         <!-- PDF Export Button -->
                                         <div class="mt-6 mb-8 flex justify-center">
@@ -1019,10 +991,6 @@
 
                     <!-- Action Buttons -->
                     <div class="mt-12 flex justify-center items-center space-x-6">
-                        <a href="demo.html" class="flex items-center space-x-2 px-6 py-3 bg-blue-600 dark:bg-blue-700 text-white rounded-lg hover:bg-blue-700 dark:hover:bg-blue-600 focus-ring transition-colors">
-                            <i class="fas fa-graduation-cap"></i>
-                            <span>Naar Demo</span>
-                        </a>
                     </div>
                 </div>
                 </main>
@@ -1681,7 +1649,6 @@
                 k.includes('LessonPage') || k === 'RegisterPage'
             );
             console.log('[Index] Available page classes:', availableClasses);
-            console.log('[Index] DemoLessonPage available:', !!window.DemoLessonPage);
             console.log('[Index] Module1LessonPage available:', !!window.Module1LessonPage);
             console.log('[Index] CursorLessonPage available:', !!window.CursorLessonPage);
             console.log('[Index] Fase3LessonPage available:', !!window.Fase3LessonPage);
@@ -1690,9 +1657,7 @@
             console.log('[Index] PublicerenLessonPage available:', !!window.PublicerenLessonPage);
             
             // Expected classes for demo app
-            const expectedClasses = [
-                'DemoLessonPage'
-            ];
+            const expectedClasses = [];
             
             const missingClasses = expectedClasses.filter(cls => !availableClasses.includes(cls));
             if (missingClasses.length > 0) {
@@ -1708,7 +1673,6 @@
                 // Override routes for demo app
                 router.routes = {
                     'index.html': () => router.loadIndexPage(),
-                    'demo.html': () => router.loadWeekPage('demo', 'DemoLessonPage'),
                     'module1.html': () => router.loadWeekPage('module1', 'Module1LessonPage'),
                     'cursor.html': () => router.loadWeekPage('cursor', 'CursorLessonPage'),
                     'fase3.html': () => router.loadWeekPage('fase3', 'Fase3LessonPage'),
@@ -1730,9 +1694,7 @@
         const maxAttempts = 40; // 40 * 50ms = 2 seconds max wait
         const waitForAllScripts = () => {
             checkAttempts++;
-            const expectedClasses = [
-                'DemoLessonPage'
-            ];
+            const expectedClasses = [];
             
             const allAvailable = expectedClasses.every(cls => window[cls]);
             

@@ -1,0 +1,355 @@
+{
+  "intro": {
+    "title": "Formules met KaTeX",
+    "subtitle": "Wiskundige formules in je e-learning",
+    "description": "Leer hoe je professionele wiskundige formules toevoegt aan je content met KaTeX en LaTeX syntax."
+  },
+  "leerdoelen": {
+    "title": "Leerdoelen",
+    "description": "Na het doorlopen van deze module kun je:",
+    "items": [
+      "Weten wat KaTeX is en waarom het gebruikt wordt",
+      "Basis LaTeX syntax begrijpen voor formules",
+      "Inline en display formules toevoegen aan je content",
+      "Formules gebruiken in verschillende vakgebieden",
+      "Best practices toepassen voor formule presentatie"
+    ],
+    "interactive": false
+  },
+  "theorie": {
+    "title": "KaTeX Formules",
+    "content": [
+      {
+        "type": "heading",
+        "text": "Wat is KaTeX?",
+        "level": 2,
+        "id": "wat-is-katex"
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "KaTeX is een snelle JavaScript bibliotheek voor het renderen van wiskundige formules. Het gebruikt LaTeX syntax, wat de standaard is voor wetenschappelijke documentatie. KaTeX is speciaal ontworpen voor web browsers en is veel sneller dan alternatieven zoals MathJax."
+        ]
+      },
+      {
+        "type": "highlight",
+        "title": "Waarom KaTeX?",
+        "content": [
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-3\"><strong>Voordelen van KaTeX:</strong></p>",
+          "<ul class=\"list-disc list-outside space-y-2 mb-3 ml-6 pl-4 text-gray-700 dark:text-gray-300\">",
+          "<li class=\"mb-2\"><strong>Snelheid</strong>: KaTeX rendert formules zeer snel, zonder merkbare vertraging</li>",
+          "<li class=\"mb-2\"><strong>Kwaliteit</strong>: Professionele weergave die perfect past bij wetenschappelijke documentatie</li>",
+          "<li class=\"mb-2\"><strong>LaTeX syntax</strong>: Gebruikt dezelfde syntax als LaTeX, wat veel docenten al kennen</li>",
+          "<li class=\"mb-2\"><strong>Dark mode</strong>: Automatische ondersteuning voor dark mode</li>",
+          "<li class=\"mb-2\"><strong>Responsive</strong>: Werkt perfect op mobiele apparaten</li>",
+          "</ul>"
+        ],
+        "icon": "fa-lightbulb",
+        "iconClass": "fas"
+      },
+      {
+        "type": "heading",
+        "text": "Basis syntax",
+        "level": 2,
+        "id": "basis-syntax"
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "KaTeX gebruikt LaTeX syntax voor formules. Hieronder zie je de basis elementen die je nodig hebt:"
+        ]
+      },
+      {
+        "type": "heading",
+        "text": "Inline vs Display formules",
+        "level": 3,
+        "id": "inline-vs-display"
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "Er zijn twee manieren om formules weer te geven:"
+        ]
+      },
+      {
+        "type": "tabs",
+        "defaultTab": 0,
+        "tabs": [
+          {
+            "title": "Inline formules",
+            "content": [
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Inline formules worden gebruikt <strong>in de tekst</strong>, zoals deze formule die de voorspelfout berekent:</p>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">De voorspelfout wordt berekend met de formule: ",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">die inline in de tekst staat.</p>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>JSON voorbeeld:</strong></p>",
+              "<div class=\"bg-gray-900 dark:bg-gray-800 rounded-lg p-4 mb-4 overflow-x-auto\"><pre class=\"text-green-400 text-sm\"><code>{\n  \"type\": \"formula\",\n  \"formula\": \"E_t = D_t - F_t\",\n  \"display\": false\n}</code></pre></div>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>Wanneer gebruiken:</strong> Voor formules die deel uitmaken van een zin of paragraaf.</p>"
+            ]
+          },
+          {
+            "title": "Display formules",
+            "content": [
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Display formules worden <strong>gecentreerd en op een aparte regel</strong> weergegeven, zoals deze belangrijke formule:</p>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-2 text-center\">MAD (Mean Absolute Deviation):</p>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>JSON voorbeeld:</strong></p>",
+              "<div class=\"bg-gray-900 dark:bg-gray-800 rounded-lg p-4 mb-4 overflow-x-auto\"><pre class=\"text-green-400 text-sm\"><code>{\n  \"type\": \"formula\",\n  \"formula\": \"\\\\text{MAD} = \\\\frac{\\\\sum |E_t|}{n}\",\n  \"display\": true\n}</code></pre></div>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>Wanneer gebruiken:</strong> Voor belangrijke formules die extra aandacht verdienen, of complexe formules die meer ruimte nodig hebben.</p>"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "Hieronder zie je de formules daadwerkelijk gerenderd:"
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "<strong>Inline formule voorbeeld:</strong> De voorspelfout wordt berekend met de formule "
+        ]
+      },
+      {
+        "type": "formula",
+        "formula": "E_t = D_t - F_t",
+        "display": false
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "die inline in de tekst staat."
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "<strong>Display formule voorbeeld:</strong> MAD (Mean Absolute Deviation):"
+        ]
+      },
+      {
+        "type": "formula",
+        "formula": "\\text{MAD} = \\frac{\\sum |E_t|}{n}",
+        "display": true
+      },
+      {
+        "type": "heading",
+        "text": "Veelgebruikte LaTeX commando's",
+        "level": 3,
+        "id": "latex-commando"
+      },
+      {
+        "type": "accordion",
+        "usePlusIcon": true,
+        "defaultOpen": false,
+        "items": [
+          {
+            "title": "Subscripts en superscripts",
+            "content": [
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Gebruik <code class=\"bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded\">_</code> voor subscript en <code class=\"bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded\">^</code> voor superscript:</p>",
+              "<div class=\"bg-gray-900 dark:bg-gray-800 rounded-lg p-4 mb-4 overflow-x-auto\"><pre class=\"text-green-400 text-sm\"><code>E_t     → E<sub>t</sub>\nD_{t+1} → D<sub>t+1</sub>\nx^2     → x²\nx^{n+1} → x<sup>n+1</sup></code></pre></div>"
+            ]
+          },
+          {
+            "title": "Breuken",
+            "content": [
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Gebruik <code class=\"bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded\">\\frac{numerator}{denominator}</code> voor breuken:</p>",
+              "<div class=\"bg-gray-900 dark:bg-gray-800 rounded-lg p-4 mb-4 overflow-x-auto\"><pre class=\"text-green-400 text-sm\"><code>\\frac{a}{b}        → a/b\n\\frac{1}{n}       → 1/n\n\\frac{\\sum x}{n} → Σx/n</code></pre></div>"
+            ]
+          },
+          {
+            "title": "Griekse letters",
+            "content": [
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Griekse letters met <code class=\"bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded\">\\</code> gevolgd door de naam:</p>",
+              "<div class=\"bg-gray-900 dark:bg-gray-800 rounded-lg p-4 mb-4 overflow-x-auto\"><pre class=\"text-green-400 text-sm\"><code>\\alpha, \\beta, \\gamma\n\\Delta, \\Sigma, \\Pi\n\\theta, \\phi, \\lambda</code></pre></div>"
+            ]
+          },
+          {
+            "title": "Operatoren en symbolen",
+            "content": [
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Veelgebruikte operatoren:</p>",
+              "<div class=\"bg-gray-900 dark:bg-gray-800 rounded-lg p-4 mb-4 overflow-x-auto\"><pre class=\"text-green-400 text-sm\"><code>\\sum    → Σ (sommatie)\n\\prod   → Π (product)\n\\int    → ∫ (integraal)\n\\sqrt{x} → √x (wortel)\n\\leq    → ≤ (kleiner of gelijk)\n\\geq    → ≥ (groter of gelijk)\n\\neq    → ≠ (niet gelijk)</code></pre></div>"
+            ]
+          },
+          {
+            "title": "Tekst in formules",
+            "content": [
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Gebruik <code class=\"bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded\">\\text{}</code> voor normale tekst in formules:</p>",
+              "<div class=\"bg-gray-900 dark:bg-gray-800 rounded-lg p-4 mb-4 overflow-x-auto\"><pre class=\"text-green-400 text-sm\"><code>\\text{MAD} = \\frac{\\sum |E_t|}{n}\n\\text{CFE} = \\sum E_t</code></pre></div>"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "heading",
+        "text": "Voorbeelden per vakgebied",
+        "level": 2,
+        "id": "voorbeelden"
+      },
+      {
+        "type": "tabs",
+        "defaultTab": 0,
+        "tabs": [
+          {
+            "title": "Operations Management",
+            "content": [
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>Voorspelfout:</strong></p>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>MAD (Mean Absolute Deviation):</strong></p>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>MAPE (Mean Absolute Percent Error):</strong></p>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>JSON voorbeeld:</strong></p>",
+              "<div class=\"bg-gray-900 dark:bg-gray-800 rounded-lg p-4 mb-4 overflow-x-auto\"><pre class=\"text-green-400 text-sm\"><code>{\n  \"type\": \"formula\",\n  \"formula\": \"\\\\text{MAD} = \\\\frac{\\\\sum |E_t|}{n}\",\n  \"display\": true\n}</code></pre></div>"
+            ]
+          },
+          {
+            "title": "Statistiek",
+            "content": [
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>Gemiddelde:</strong></p>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>Standaarddeviatie:</strong></p>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>Correlatiecoëfficiënt:</strong></p>"
+            ]
+          },
+          {
+            "title": "Economie",
+            "content": [
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>Break-even punt:</strong></p>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>Elasticiteit:</strong></p>"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "heading",
+        "text": "Best practices",
+        "level": 2,
+        "id": "best-practices"
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "Hier zijn enkele tips voor het effectief gebruik van formules in je e-learning:"
+        ]
+      },
+      {
+        "type": "accordion",
+        "usePlusIcon": true,
+        "defaultOpen": false,
+        "items": [
+          {
+            "title": "1. Kies de juiste formule type",
+            "content": [
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>Inline formules</strong> gebruik je voor:</p>",
+              "<ul class=\"list-disc list-outside space-y-2 mb-4 ml-6 pl-4 text-gray-700 dark:text-gray-300\">",
+              "<li class=\"mb-2\">Formules die deel uitmaken van een zin</li>",
+              "<li class=\"mb-2\">Eenvoudige formules zoals <code class=\"bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded\">E_t = D_t - F_t</code></li>",
+              "<li class=\"mb-2\">Variabelen die in de tekst genoemd worden</li>",
+              "</ul>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>Display formules</strong> gebruik je voor:</p>",
+              "<ul class=\"list-disc list-outside space-y-2 mb-4 ml-6 pl-4 text-gray-700 dark:text-gray-300\">",
+              "<li class=\"mb-2\">Belangrijke formules die extra aandacht verdienen</li>",
+              "<li class=\"mb-2\">Complexe formules met breuken, sommaties, etc.</li>",
+              "<li class=\"mb-2\">Formules die je wilt laten opvallen</li>",
+              "</ul>"
+            ]
+          },
+          {
+            "title": "2. Gebruik duidelijke variabele namen",
+            "content": [
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Gebruik <code class=\"bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded\">\\text{}</code> voor duidelijke labels:</p>",
+              "<div class=\"bg-gray-900 dark:bg-gray-800 rounded-lg p-4 mb-4 overflow-x-auto\"><pre class=\"text-green-400 text-sm\"><code>\\text{MAD} = \\frac{\\sum |E_t|}{n}\n\\text{CFE} = \\sum E_t\n\\text{MAPE} = \\frac{100}{n} \\sum \\frac{|E_t|}{D_t}</code></pre></div>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Dit maakt formules veel leesbaarder dan alleen symbolen.</p>"
+            ]
+          },
+          {
+            "title": "3. Introduceer formules met context",
+            "content": [
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Zet altijd een paragraaf voor de formule die uitlegt wat het betekent:</p>",
+              "<div class=\"bg-gray-900 dark:bg-gray-800 rounded-lg p-4 mb-4 overflow-x-auto\"><pre class=\"text-green-400 text-sm\"><code>{\n  \"type\": \"paragraph\",\n  \"text\": [\n    \"De basis voor elke kwaliteitsmeting is de voorspelfout (E_t) per periode. Deze wordt berekend met de volgende formule:\"\n  ]\n},\n{\n  \"type\": \"formula\",\n  \"formula\": \"E_t = D_t - F_t\",\n  \"display\": true\n}</code></pre></div>"
+            ]
+          },
+          {
+            "title": "4. Test je formules",
+            "content": [
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Controleer altijd of je formules correct renderen:</p>",
+              "<ul class=\"list-disc list-outside space-y-2 mb-4 ml-6 pl-4 text-gray-700 dark:text-gray-300\">",
+              "<li class=\"mb-2\">Test in de browser na het toevoegen</li>",
+              "<li class=\"mb-2\">Controleer zowel light als dark mode</li>",
+              "<li class=\"mb-2\">Test op mobiele apparaten (formules moeten responsive zijn)</li>",
+              "<li class=\"mb-2\">Check de browser console voor foutmeldingen</li>",
+              "</ul>"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "heading",
+        "text": "Troubleshooting",
+        "level": 2,
+        "id": "troubleshooting"
+      },
+      {
+        "type": "accordion",
+        "usePlusIcon": true,
+        "defaultOpen": false,
+        "items": [
+          {
+            "title": "Formule wordt niet weergegeven",
+            "content": [
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>Mogelijke oorzaken:</strong></p>",
+              "<ul class=\"list-disc list-outside space-y-2 mb-4 ml-6 pl-4 text-gray-700 dark:text-gray-300\">",
+              "<li class=\"mb-2\">Check of <code class=\"bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded\">formula</code> property aanwezig is</li>",
+              "<li class=\"mb-2\">Controleer of LaTeX syntax correct is (gebruik <code class=\"bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded\">\\\\</code> voor backslashes in JSON)</li>",
+              "<li class=\"mb-2\">Open browser console voor foutmeldingen</li>",
+              "<li class=\"mb-2\">Zorg dat KaTeX CDN correct geladen is</li>",
+              "</ul>"
+            ]
+          },
+          {
+            "title": "Formule ziet er verkeerd uit",
+            "content": [
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>Veelvoorkomende fouten:</strong></p>",
+              "<ul class=\"list-disc list-outside space-y-2 mb-4 ml-6 pl-4 text-gray-700 dark:text-gray-300\">",
+              "<li class=\"mb-2\"><strong>Vergeten backslashes:</strong> Gebruik <code class=\"bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded\">\\\\frac</code> in plaats van <code class=\"bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded\">\\frac</code> in JSON</li>",
+              "<li class=\"mb-2\"><strong>Verkeerde haakjes:</strong> Gebruik <code class=\"bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded\">{}</code> voor groepering</li>",
+              "<li class=\"mb-2\"><strong>Vergeten tekst labels:</strong> Gebruik <code class=\"bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded\">\\text{}</code> voor normale tekst</li>",
+              "</ul>"
+            ]
+          },
+          {
+            "title": "Formule is te klein of te groot",
+            "content": [
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">KaTeX past automatisch de grootte aan. Als je specifieke styling nodig hebt:</p>",
+              "<ul class=\"list-disc list-outside space-y-2 mb-4 ml-6 pl-4 text-gray-700 dark:text-gray-300\">",
+              "<li class=\"mb-2\">Gebruik <code class=\"bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded\">display: true</code> voor grote formules</li>",
+              "<li class=\"mb-2\">Gebruik <code class=\"bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded\">display: false</code> voor inline formules</li>",
+              "<li class=\"mb-2\">Complexe formules worden automatisch responsive op mobiel</li>",
+              "</ul>"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "heading",
+        "text": "Volgende stappen",
+        "level": 2,
+        "id": "volgende-stappen"
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "Nu je weet hoe KaTeX werkt, kun je formules toevoegen aan je eigen content. Begin met eenvoudige formules en bouw langzaam op naar complexere expressies."
+        ]
+      },
+      {
+        "type": "highlight",
+        "title": "Tip",
+        "content": [
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-3\">Gebruik Cursor om je te helpen bij het schrijven van LaTeX formules. Je kunt vragen: \"Hoe schrijf ik een formule voor MAD in LaTeX?\" en Cursor helpt je met de juiste syntax.</p>",
+          "<p class=\"text-gray-700 dark:text-gray-300\">Onthoud: in JSON moet je backslashes escapen, dus <code class=\"bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded\">\\\\frac</code> in plaats van <code class=\"bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded\">\\frac</code>.</p>"
+        ],
+        "icon": "fa-lightbulb",
+        "iconClass": "fas"
+      }
+    ]
+  }
+}
+

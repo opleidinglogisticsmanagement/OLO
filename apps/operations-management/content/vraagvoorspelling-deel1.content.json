@@ -212,8 +212,9 @@
         ]
       },
       {
-        "type": "html",
-        "html": "<div class=\"my-4 p-4 bg-gray-50 dark:bg-gray-800 rounded-lg border-l-4 border-blue-500\"><p class=\"text-center text-lg font-semibold text-gray-900 dark:text-white mb-3\"><strong>E<sub>t</sub> = D<sub>t</sub> - F<sub>t</sub></strong></p></div>"
+        "type": "formula",
+        "formula": "E_t = D_t - F_t",
+        "display": true
       },
       {
         "type": "paragraph",

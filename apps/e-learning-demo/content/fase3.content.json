@@ -478,6 +478,49 @@
         ]
       },
       {
+        "type": "heading",
+        "text": "Wiskundige formules",
+        "level": 2,
+        "id": "wiskundige-formules"
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Voor wiskundige formules kun je het <code class=\"bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded\">formula</code> content type gebruiken met KaTeX. Dit ondersteunt LaTeX syntax voor professionele formule weergave.</p>"
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "<h3 class=\"text-lg font-semibold text-gray-900 dark:text-white mb-2\">Formula</h3>",
+          "<p class=\"text-gray-600 dark:text-gray-400 mb-4\">Voeg wiskundige formules toe met LaTeX syntax. Ondersteunt zowel inline als display (gecentreerde) formules.</p>"
+        ]
+      },
+      {
+        "type": "formula",
+        "formula": "E_t = D_t - F_t",
+        "display": false
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Voor display formules:</p>"
+        ]
+      },
+      {
+        "type": "formula",
+        "formula": "\\text{MAD} = \\frac{\\sum |E_t|}{n}",
+        "display": true
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>JSON voorbeeld:</strong></p>",
+          "<div class=\"bg-gray-900 dark:bg-gray-800 rounded-lg p-4 mb-4 overflow-x-auto\"><pre class=\"text-green-400 text-sm\"><code>{\n  \"type\": \"formula\",\n  \"formula\": \"E_t = D_t - F_t\",\n  \"display\": false\n}</code></pre></div>",
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Zie <a href=\"formules-katex.html\" class=\"text-blue-600 hover:text-blue-800 underline\">Formules met KaTeX</a> voor uitgebreide uitleg en voorbeelden.</p>"
+        ]
+      },
+      {
         "type": "highlight",
         "title": "Volgende Stap",
         "content": [

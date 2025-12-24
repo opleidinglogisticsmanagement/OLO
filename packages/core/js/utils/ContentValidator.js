@@ -91,6 +91,18 @@ class ContentValidator {
                 }
                 break;
                 
+            case 'formula':
+                if (!item.formula && item.formula !== '') {
+                    errors.push(`${context}: Formula missing required 'formula' property`);
+                }
+                if (item.formula && typeof item.formula !== 'string') {
+                    errors.push(`${context}: Formula 'formula' property must be a string`);
+                }
+                if (item.display !== undefined && typeof item.display !== 'boolean') {
+                    errors.push(`${context}: Formula 'display' property must be a boolean`);
+                }
+                break;
+                
             case 'accordion':
                 if (!item.items || !Array.isArray(item.items)) {
                     errors.push(`${context}: Accordion missing 'items' array`);

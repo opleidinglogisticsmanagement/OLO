@@ -61,6 +61,8 @@ class ContentRenderer {
                     return this.renderHighlight(item);
                 case 'html':
                     return this.renderHtml(item);
+                case 'formula':
+                    return this.renderFormula(item);
                 case 'accordion':
                     return this.renderAccordion(item);
                 case 'smartChecklist':
@@ -508,6 +510,28 @@ class ContentRenderer {
             <i class="${iconClass} ${icon} mr-2"></i>
             <a href="${item.src}" target="_blank" class="${classes}">${item.text}</a>
         </p>`;
+    }
+
+    /**
+     * Render een formula item
+     * @param {Object} item - Formula item met formula string en optioneel display mode
+     * @returns {string} HTML string
+     */
+    static renderFormula(item) {
+        if (!item.formula) {
+            console.warn('Formula item missing formula property:', item);
+            return '';
+        }
+        
+        const isDisplay = item.display === true;
+        const formulaHtml = isDisplay 
+            ? KaTeXRenderer.renderDisplay(item.formula)
+            : KaTeXRenderer.renderInline(item.formula);
+        
+        if (isDisplay) {
+            return `<div class="my-4 flex justify-center overflow-x-auto">${formulaHtml}</div>`;
+        }
+        return `<span class="katex-inline inline-block">${formulaHtml}</span>`;
     }
 
     /**

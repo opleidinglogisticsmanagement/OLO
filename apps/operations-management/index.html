@@ -26,6 +26,17 @@
     </script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- KaTeX for mathematical formulas -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" 
+          integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" 
+          crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"
+            integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8"
+            crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+            integrity="sha384-+VBxd3r6XgURyc+Z4YmKz3F8K5q3q5q5q5q5q5q5q5q5q5q5q5q5q5q5q5q5q5q5q"
+            crossorigin="anonymous"
+            onload="if(typeof renderMathInElement !== 'undefined') { renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}, {left: '\\\\[', right: '\\\\]', display: true}, {left: '\\\\(', right: '\\\\)', display: false}], throwOnError: false}); }"></script>
     <!-- PDF Export Libraries -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" 
             onerror="console.error('Fout bij laden jspdf bibliotheek')"
@@ -169,6 +180,60 @@
             color: rgb(209, 213, 219); /* dark:text-gray-300 */
         }
         
+        /* KaTeX dark mode support */
+        .dark .katex {
+            color: #e5e7eb;
+        }
+
+        .dark .katex .base {
+            color: #e5e7eb;
+        }
+
+        .dark .katex .mord {
+            color: #e5e7eb;
+        }
+
+        .dark .katex .mrel {
+            color: #9ca3af;
+        }
+
+        .dark .katex .mop {
+            color: #60a5fa;
+        }
+
+        .dark .katex .mbin {
+            color: #34d399;
+        }
+
+        .dark .katex .mopen,
+        .dark .katex .mclose {
+            color: #e5e7eb;
+        }
+
+        .dark .katex .mfrac {
+            color: #e5e7eb;
+        }
+
+        /* KaTeX inline spacing */
+        .katex-inline {
+            margin: 0 0.2em;
+            vertical-align: baseline;
+        }
+
+        /* KaTeX display formula styling */
+        .katex-display {
+            margin: 1em 0;
+            overflow-x: auto;
+            overflow-y: hidden;
+        }
+
+        /* Responsive formula wrapping */
+        @media (max-width: 640px) {
+            .katex-display {
+                font-size: 0.9em;
+            }
+        }
+
         /* Tabellen dark mode support */
         .dark table {
             background-color: rgb(31, 41, 55); /* dark:bg-gray-800 */
@@ -613,6 +678,7 @@
     <script src="/core/pages/BaseLessonPage.js"></script>
     <script src="/core/pages/ContentRenderer.js"></script>
     <script src="/core/js/utils/ContentValidator.js"></script>
+    <script src="/core/js/utils/KaTeXRenderer.js"></script>
     
     <!-- Interactive components -->
     <script src="/core/js/components/interactive/utils/HtmlUtils.js"></script>

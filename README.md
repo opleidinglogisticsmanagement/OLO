@@ -503,74 +503,234 @@ Elke week pagina gebruikt de `BaseLessonPage` als basis. Deze bevat:
 }
 ```
 
-### Nieuwe Week Toevoegen
+### Nieuwe Week of Module Pagina Toevoegen
 
-Met `BaseLessonPage` is het toevoegen van een nieuwe week nu zeer eenvoudig:
+> ⚠️ **BELANGRIJK:** Het toevoegen van een nieuwe week of module pagina vereist **meerdere stappen**. Alleen een JSON bestand aanmaken is **niet genoeg**. Je moet ook een LessonPage class, HTML pagina en router configuratie toevoegen.
 
-1. **Maak een nieuwe JavaScript file** (bijv. `pages/Week8LessonPage.js`):
-   ```javascript
-   class Week8LessonPage extends BaseLessonPage {
-       constructor() {
-           super('week-8', 'Week 8', 'Titel van Week 8');
-           // content en contentLoaded worden automatisch geïnitialiseerd
-       }
-       
-       // loadContent() wordt automatisch aangeroepen door BaseLessonPage
-       // getFallbackContent() en renderErrorState() zijn beschikbaar
-       
-       renderContentSections() {
-           if (!this.content) {
-               return this.renderErrorState();
-           }
-           
-           // Render theorie content
-           const theorieContent = this.content.theorie.content 
-               ? ContentRenderer.renderContentItems(this.content.theorie.content, { enableModal: true })
-               : '';
-           const theorieTitle = this.content.theorie?.title || 'Theorie';
-           
-           return this.contentTemplateRenderer.renderSection(
-               theorieTitle,
-               theorieContent,
-               'book',
-               'purple'
-           );
-       }
-   }
+#### 📋 Complete Checklist
+
+Voordat je begint, zorg dat je **alle** onderstaande stappen doorloopt:
+
+- [ ] **Stap 1:** Content JSON bestand aanmaken
+- [ ] **Stap 2:** LessonPage class aanmaken
+- [ ] **Stap 3:** HTML pagina aanmaken (of bestaande aanpassen)
+- [ ] **Stap 4:** Script loader toevoegen aan `index.html`
+- [ ] **Stap 5:** Route configureren in router (in `index.html` of `AppRouter.js`)
+- [ ] **Stap 6:** Testen lokaal
+
+#### Stap 1: Content JSON Bestand
+
+Maak een nieuw JSON bestand aan in `content/` met de naam `weekX.content.json` of `moduleX.content.json`:
+
+**Belangrijk:** De bestandsnaam moet overeenkomen met de `moduleId` die je in Stap 2 gebruikt:
+- `week-8` → `week8.content.json` (automatische mapping)
+- `module1` → `module1.content.json`
+- `module-1` → `module-1.content.json`
+
+```json
+{
+  "intro": {
+    "title": "Week 8",
+    "subtitle": "Titel van Week 8",
+    "description": "Beschrijving van de week"
+  },
+  "leerdoelen": {
+    "title": "Leerdoelen",
+    "description": "Na het doorlopen van deze week kun je:",
+    "items": [
+      "Leerdoel 1",
+      "Leerdoel 2"
+    ],
+    "interactive": false
+  },
+  "theorie": {
+    "title": "Theorie",
+    "content": [
+      {
+        "type": "paragraph",
+        "text": ["Je content hier..."]
+      }
+    ]
+  }
+}
+```
+
+#### Stap 2: LessonPage Class
+
+Maak een nieuwe JavaScript class aan in `pages/` (bijv. `pages/Week8LessonPage.js`):
+
+**Belangrijk:** 
+- De `moduleId` in de constructor moet overeenkomen met je JSON bestandsnaam
+- De class naam moet overeenkomen met de class die je in Stap 5 gebruikt
+
+```javascript
+class Week8LessonPage extends BaseLessonPage {
+    constructor() {
+        super('week-8', 'Week 8', 'Titel van Week 8');
+        // moduleId 'week-8' → laadt automatisch 'week8.content.json'
+    }
+    
+    renderContentSections() {
+        if (!this.content) {
+            return this.renderErrorState();
+        }
+        
+        // Render theorie content
+        let theorieHtml = '';
+        const theorie = this.content.theorie;
+        
+        if (theorie && theorie.content && Array.isArray(theorie.content)) {
+            theorieHtml = ContentRenderer.renderContentItems(theorie.content, { enableModal: true });
+        }
+        
+        const theorieTitle = (theorie && theorie.title) ? theorie.title : 'Theorie';
+        
+        return this.contentTemplateRenderer.renderSection(
+            theorieTitle,
+            theorieHtml,
+            'book',
+            'purple'
+        );
+    }
+    
+    async afterContentLoaded() {
+        if (!this.content || !this.contentLoaded) {
+            console.error('[Week8LessonPage] ❌ Content not loaded properly');
+            return false;
+        }
+        return true;
+    }
+}
+
+// Export voor gebruik in router
+try {
+    if (typeof module !== 'undefined' && module.exports) {
+        module.exports = Week8LessonPage;
+    } else {
+        window.Week8LessonPage = Week8LessonPage;
+    }
+    console.log('[Week8LessonPage] ✅ Exported to window');
+} catch (error) {
+    console.error('[Week8LessonPage] ❌ Error exporting:', error);
+    try {
+        window.Week8LessonPage = Week8LessonPage;
+    } catch (e) {
+        console.error('[Week8LessonPage] ❌ Failed to force export:', e);
+    }
+}
+```
+
+#### Stap 3: HTML Pagina
+
+Maak een nieuwe HTML pagina aan (bijv. `week8.html`) of gebruik een bestaande template:
+
+```html
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week 8 - E-Learning</title>
+    <!-- ... head content ... -->
+</head>
+<body>
+    <!-- Content wordt geladen door JavaScript -->
+    <div class="flex-1 flex items-center justify-center min-h-screen">
+        <div class="text-center">
+            <div class="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-600 mx-auto mb-4"></div>
+            <p class="text-gray-600 dark:text-gray-300">Week 8 wordt geladen...</p>
+        </div>
+    </div>
+
+    <!-- Load scripts -->
+    <script src="/core/js/DarkMode.js"></script>
+    <!-- ... andere core scripts ... -->
+    <script src="/core/pages/BaseLessonPage.js"></script>
+    <script src="/core/pages/ContentRenderer.js"></script>
+    <script src="pages/Week8LessonPage.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            if (!window.appRouter) {
+                try {
+                    const week8Page = new Week8LessonPage();
+                    week8Page.init();
+                } catch (e) {
+                    console.error('[week8.html] Failed to initialize Week8LessonPage:', e);
+                }
+            }
+        });
+    </script>
+</body>
+</html>
+```
+
+#### Stap 4: Script Loader in index.html
+
+Voeg de script tag toe aan `index.html` zodat de router de class kan laden:
+
+```html
+<!-- Week Page Classes - Load all for SPA router -->
+<script src="pages/Week8LessonPage.js" onerror="console.error('[Script] Failed to load Week8LessonPage.js')"></script>
+```
+
+#### Stap 5: Router Configuratie
+
+Voeg de route toe aan de router configuratie in `index.html` (rond regel 1562):
+
+```javascript
+router.routes = {
+    'index.html': () => router.loadIndexPage(),
+    'week1.html': () => router.loadWeekPage('week-1', 'Week1LessonPage'),
+    // ... andere routes ...
+    'week8.html': () => router.loadWeekPage('week-8', 'Week8LessonPage')  // NIEUWE ROUTE
+};
+```
+
+**Alternatief:** Als je de router in `packages/core/js/core/AppRouter.js` configureert (voor alle apps), voeg daar de route toe:
+
+```javascript
+this.routes = {
+    'index.html': () => this.loadIndexPage(),
+    'week1.html': () => this.loadWeekPage('week-1', 'Week1LessonPage'),
+    // ... andere routes ...
+    'week8.html': () => this.loadWeekPage('week-8', 'Week8LessonPage')  // NIEUWE ROUTE
+};
+```
+
+#### Stap 6: Testen
+
+1. Start de development server:
+   ```bash
+   cd packages/core
+   npm run dev
    ```
 
-2. **Maak een content JSON file** (bijv. `content/week8.content.json`):
-   ```json
-   {
-     "intro": {
-       "title": "Week 8",
-       "subtitle": "Titel van Week 8",
-       "description": "Beschrijving van de week"
-     },
-     "theorie": {
-       "title": "Theorie",
-       "content": [
-         {
-           "type": "paragraph",
-           "text": ["Je content hier..."]
-         }
-       ]
-     }
-   }
-   ```
+2. Open in browser:
+   - Direct: `http://localhost:3000/week8.html`
+   - Via dashboard: `http://localhost:3000/index.html` (met SPA router)
 
-3. **Voeg route toe aan `js/core/AppRouter.js`**:
-   ```javascript
-   'week8.html': () => this.loadWeekPage('week-8', 'Week8LessonPage')
-   ```
+3. Check browser console voor errors
 
-4. **Voeg script tag toe aan `index.html`** (indien nodig voor standalone pagina):
-   ```html
-   <script src="pages/Week8LessonPage.js"></script>
-   ```
+#### ⚠️ Veelgemaakte Fouten
 
-**Wat gebeurt automatisch:**
-- ✅ `loadContent()` laadt automatisch `content/week8.content.json`
+1. **Alleen JSON bestand aangemaakt** → Pagina werkt niet, class ontbreekt
+2. **Verkeerde moduleId** → Content wordt niet geladen (check `BaseLessonPage.getContentFileName()`)
+3. **Route vergeten** → Navigatie werkt niet, pagina niet bereikbaar via router
+4. **Script loader vergeten** → Class niet beschikbaar voor router
+5. **Class naam mismatch** → Router kan class niet vinden
+
+#### 📝 Content Bestand Mapping
+
+Het systeem gebruikt `BaseLessonPage.getContentFileName()` om de bestandsnaam te bepalen:
+
+- `moduleId = 'week-8'` → `week8.content.json` (speciale mapping voor week-X)
+- `moduleId = 'module1'` → `module1.content.json`
+- `moduleId = 'module-1'` → `module-1.content.json`
+- `moduleId = 'afsluiting'` → `afsluiting.content.json` (speciale case)
+- `moduleId = 'register'` → `register.json` (speciale case)
+
+**Wat gebeurt automatisch (na correcte setup):**
+- ✅ `loadContent()` laadt automatisch het juiste JSON bestand
 - ✅ `init()` flow wordt automatisch uitgevoerd
 - ✅ JSON validatie via `ContentValidator`
 - ✅ Error handling en fallback content

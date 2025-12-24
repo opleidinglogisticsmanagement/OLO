@@ -626,8 +626,9 @@
     <script src="/core/pages/AIGenerator.js"></script>
     <script src="/core/pages/MCQuestionRenderer.js"></script>
     
-    <!-- Demo Page Class - Load for SPA router -->
+    <!-- Demo Page Classes - Load for SPA router -->
     <script src="pages/DemoLessonPage.js" onerror="console.error('[Script] Failed to load DemoLessonPage.js')"></script>
+    <script src="pages/Module1LessonPage.js" onerror="console.error('[Script] Failed to load Module1LessonPage.js')"></script>
     
     <!-- Verify all classes are loaded with detailed logging -->
     <script>
@@ -636,15 +637,14 @@
             setTimeout(() => {
                 console.log('[Script Loader] ⏰ Verification started at:', new Date().toISOString());
                 const expectedClasses = [
-                    'DemoLessonPage'
+                    'DemoLessonPage',
+                    'Module1LessonPage'
                 ];
                 
                 console.log('[Script Loader] 🔍 Checking for page classes...');
                 console.log('[Script Loader] BaseLessonPage available:', !!window.BaseLessonPage);
-                console.log('[Script Loader] Week1LessonPage available:', !!window.Week1LessonPage);
-                console.log('[Script Loader] Week3LessonPage available:', !!window.Week3LessonPage);
-                console.log('[Script Loader] Week5LessonPage available:', !!window.Week5LessonPage);
-                console.log('[Script Loader] Week6LessonPage available:', !!window.Week6LessonPage);
+                console.log('[Script Loader] DemoLessonPage available:', !!window.DemoLessonPage);
+                console.log('[Script Loader] Module1LessonPage available:', !!window.Module1LessonPage);
                 
                 const availableClasses = expectedClasses.filter(cls => window[cls]);
                 const missingClasses = expectedClasses.filter(cls => !window[cls]);
@@ -1541,6 +1541,7 @@
             );
             console.log('[Index] Available page classes:', availableClasses);
             console.log('[Index] DemoLessonPage available:', !!window.DemoLessonPage);
+            console.log('[Index] Module1LessonPage available:', !!window.Module1LessonPage);
             
             // Expected classes for demo app
             const expectedClasses = [
@@ -1561,7 +1562,8 @@
                 // Override routes for demo app
                 router.routes = {
                     'index.html': () => router.loadIndexPage(),
-                    'demo.html': () => router.loadWeekPage('demo', 'DemoLessonPage')
+                    'demo.html': () => router.loadWeekPage('demo', 'DemoLessonPage'),
+                    'module1.html': () => router.loadWeekPage('module1', 'Module1LessonPage')
                 };
                 router.init();
                 window.appRouter = router; // Store globally for debugging

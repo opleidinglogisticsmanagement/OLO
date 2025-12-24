@@ -13,6 +13,9 @@ class AppRouter {
         this.isNavigating = false;
         this.pageCache = new Map();
         
+        // Store app context for cache key generation
+        this.appContext = this.getAppContext();
+        
         // Route mapping
         this.routes = {
             'index.html': () => this.loadIndexPage(),
@@ -26,6 +29,24 @@ class AppRouter {
             'register.html': () => this.loadWeekPage('register', 'RegisterPage'),
             'afsluiting.html': () => this.loadWeekPage('afsluiting', 'AfsluitingLessonPage')
         };
+    }
+
+    /**
+     * Get unique app context for cache key generation
+     * Uses origin + base path to ensure uniqueness per app deployment
+     * This prevents cache conflicts when multiple apps use the same moduleIds
+     */
+    getAppContext() {
+        // Get base path (everything before the filename)
+        const pathname = window.location.pathname;
+        const basePath = pathname.substring(0, pathname.lastIndexOf('/') + 1);
+        
+        // Combine origin + base path for unique app identifier
+        // This works for:
+        // - Local dev: http://localhost:3000/ -> "http://localhost:3000/"
+        // - Vercel: https://app-name.vercel.app/ -> "https://app-name.vercel.app/"
+        // - Different apps: each gets unique context
+        return `${window.location.origin}${basePath}`;
     }
 
     /**
@@ -45,6 +66,15 @@ class AppRouter {
             }
             return false;
         })();
+        
+        // Clear cache on hard refresh to prevent cross-app contamination
+        // This ensures fresh content after refresh, even if cache keys overlap
+        if (isHardRefresh) {
+            console.log('[AppRouter] 🔄 Hard refresh detected, clearing cache');
+            this.pageCache.clear();
+            // Update app context in case URL changed
+            this.appContext = this.getAppContext();
+        }
         
         // Als het een hard refresh is en we niet al op index.html zijn, redirect
         const currentPath = window.location.pathname;
@@ -255,32 +285,83 @@ class AppRouter {
     async loadWeekPage(moduleId, pageClassName) {
         console.log('[AppRouter] 📚 Loading week page:', moduleId, pageClassName);
         
+        // Update app context in case URL changed (e.g., navigation between apps)
+        const currentAppContext = this.getAppContext();
+        if (currentAppContext !== this.appContext) {
+            console.log('[AppRouter] 🔄 App context changed, clearing cache');
+            this.pageCache.clear();
+            this.appContext = currentAppContext;
+        }
+        
+        // Create unique cache key that includes app context
+        // Format: "origin/path-moduleId-pageClassName"
+        // This ensures cache is unique per app, even if moduleIds overlap
+        const cacheKey = `${this.appContext}-${moduleId}-${pageClassName}`;
+        console.log('[AppRouter] 🔑 Cache key:', cacheKey);
+        
         // Check cache first
-        const cacheKey = `${moduleId}-${pageClassName}`;
         if (this.pageCache.has(cacheKey)) {
-            console.log('[AppRouter] 💾 Using cached content');
-            const cachedContent = this.pageCache.get(cacheKey);
-            this.updateContent(cachedContent);
+            console.log('[AppRouter] 💾 Found cached content');
             
-            // Still need to create page instance and attach listeners
-            // Load page class dynamically
-            let PageClass = window[pageClassName];
-            if (!PageClass) {
-                console.warn(`[AppRouter] ⚠️ Page class ${pageClassName} not found for cached content`);
-                return;
+            // Validate cached content: check if it matches expected metadata
+            const cachedData = this.pageCache.get(cacheKey);
+            
+            // Handle both old format (string) and new format (object with metadata)
+            let cachedContent = null;
+            let isValid = false;
+            
+            if (typeof cachedData === 'string') {
+                // Old format: just HTML string
+                // Validate by checking if page class exists
+                const PageClass = window[pageClassName];
+                if (PageClass) {
+                    cachedContent = cachedData;
+                    isValid = true;
+                } else {
+                    console.warn('[AppRouter] ⚠️ Page class not found for cached content, clearing cache');
+                    this.pageCache.delete(cacheKey);
+                }
+            } else if (cachedData && typeof cachedData === 'object') {
+                // New format: object with metadata
+                // Validate metadata matches current request
+                if (cachedData.pageClassName === pageClassName && 
+                    cachedData.moduleId === moduleId &&
+                    cachedData.appContext === this.appContext) {
+                    cachedContent = cachedData.content;
+                    isValid = true;
+                } else {
+                    console.warn('[AppRouter] ⚠️ Cached content metadata mismatch, clearing cache');
+                    console.warn('[AppRouter] Expected:', { pageClassName, moduleId, appContext: this.appContext });
+                    console.warn('[AppRouter] Found:', cachedData);
+                    this.pageCache.delete(cacheKey);
+                }
             }
             
-            // Create page instance for event listeners
-            const pageInstance = new PageClass();
-            console.log('[AppRouter] ✅ Page instance created for cached content');
-            
-            // Attach event listeners even for cached content
-            console.log('[AppRouter] 🔌 Attaching content listeners for cached content');
-            await this.attachContentListeners(pageInstance);
-            
-            // Store instance
-            this.currentPageInstance = pageInstance;
-            return;
+            // Use cached content if valid
+            if (isValid && cachedContent) {
+                console.log('[AppRouter] ✅ Using validated cached content');
+                this.updateContent(cachedContent);
+                
+                // Still need to create page instance and attach listeners
+                const PageClass = window[pageClassName];
+                if (!PageClass) {
+                    console.warn(`[AppRouter] ⚠️ Page class ${pageClassName} not found for cached content`);
+                    return;
+                }
+                
+                // Create page instance for event listeners
+                const pageInstance = new PageClass();
+                console.log('[AppRouter] ✅ Page instance created for cached content');
+                
+                // Attach event listeners even for cached content
+                console.log('[AppRouter] 🔌 Attaching content listeners for cached content');
+                await this.attachContentListeners(pageInstance);
+                
+                // Store instance
+                this.currentPageInstance = pageInstance;
+                return;
+            }
+            // If validation failed, fall through to load fresh content
         }
         
         // Load page class dynamically
@@ -366,9 +447,16 @@ class AppRouter {
         // It will also call pageInstance.attachEventListeners() if it exists
         await this.attachContentListeners(pageInstance);
         
-        // Cache the content
-        this.pageCache.set(cacheKey, content);
-        console.log('[AppRouter] 💾 Content cached');
+        // Cache the content with metadata for validation
+        // Store as object with metadata for better validation and debugging
+        this.pageCache.set(cacheKey, {
+            content: content,
+            moduleId: moduleId,
+            pageClassName: pageClassName,
+            timestamp: Date.now(),
+            appContext: this.appContext
+        });
+        console.log('[AppRouter] 💾 Content cached with key:', cacheKey);
         
         // Store instance for cleanup
         this.currentPageInstance = pageInstance;

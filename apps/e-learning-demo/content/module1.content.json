@@ -1,0 +1,95 @@
+{
+  "intro": {
+    "title": "Module 1: Welkom bij het Framework",
+    "subtitle": "Samen slimmer onderwijs bouwen",
+    "description": "Welkom bij deze meta-e-learning! Hier leer je hoe je zelf je eigen e-learning app kunt vullen binnen deze monorepo. We beheren de techniek centraal, zodat jij je kunt focussen op de didactische inhoud. Met behulp van AI-assistentie via Cursor wordt het vullen van content eenvoudig en efficiënt."
+  },
+  "leerdoelen": {
+    "title": "Leerdoelen",
+    "description": "Na het doorlopen van deze module kun je:",
+    "items": [
+      "De monorepo-filosofie uitleggen en begrijpen waarom we deze architectuur gebruiken",
+      "Het onderscheid maken tussen de Core (gedeeld framework) en je eigen App (vakspecifieke omgeving)",
+      "Uitleggen hoe Cursor helpt bij het vullen van content zonder dat je technische code hoeft te schrijven"
+    ],
+    "interactive": false
+  },
+  "theorie": {
+    "title": "Het Framework Begrijpen",
+    "content": [
+      {
+        "type": "paragraph",
+        "text": [
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Het e-learning platform waar je nu mee werkt, is gebouwd op een <strong>gedeeld fundament</strong>: de <strong>Core</strong>. Deze Core bevat alle interactieve elementen, componenten en functionaliteiten die je nodig hebt om rijke, interactieve leerervaringen te creëren.</p>",
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Als docent werk je binnen je eigen <strong>App</strong> - een vakspecifieke omgeving die toegang heeft tot deze krachtige gereedschapskist. Je hoeft je geen zorgen te maken over de technische implementatie van accordions, tabs, oefeningen of andere interactieve elementen. Die zijn al voor je gebouwd en getest.</p>",
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Je rol? Focus op de <strong>didactiek</strong> en de <strong>inhoud</strong>. De techniek regelen wij voor je.</p>"
+        ]
+      },
+      {
+        "type": "tabs",
+        "defaultTab": 0,
+        "tabs": [
+          {
+            "title": "Wat is een Monorepo?",
+            "content": [
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Een <strong>monorepo</strong> (monolithic repository) is een manier van code organiseren waarbij meerdere projecten of apps in één centrale repository staan. In ons geval betekent dit:</p>",
+              "<ul class=\"list-disc list-outside space-y-2 mb-4 ml-6 pl-4 text-gray-700 dark:text-gray-300\">",
+              "<li class=\"mb-2\">Alle apps (zoals jouw vak-specifieke e-learning) staan samen in de <code class=\"bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded\">apps/</code> folder</li>",
+              "<li class=\"mb-2\">De gedeelde Core code staat in <code class=\"bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded\">packages/core/</code></li>",
+              "<li class=\"mb-2\">Wanneer er een verbetering of nieuwe feature wordt toegevoegd aan de Core, profiteert <strong>iedereen</strong> daar direct van</li>",
+              "<li class=\"mb-2\">Geen gedupliceerde code, geen versieconflicten, geen 'vergeten updates'</li>",
+              "</ul>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Stel je voor: er wordt een nieuwe interactieve component ontwikkeld (bijvoorbeeld een verbeterde quiz). In plaats van dat elke docent deze zelf moet implementeren, wordt deze één keer toegevoegd aan de Core en is direct beschikbaar voor alle apps.</p>"
+            ]
+          },
+          {
+            "title": "Monorepo vs Polyrepo",
+            "content": [
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">In een <strong>polyrepo</strong> (poly-repository) zou elke docent een volledig aparte kopie van de techniek hebben. Dit klinkt misschien aantrekkelijk ('ik heb mijn eigen ding'), maar heeft grote nadelen:</p>",
+              "<ul class=\"list-disc list-outside space-y-2 mb-4 ml-6 pl-4 text-gray-700 dark:text-gray-300\">",
+              "<li class=\"mb-2\"><strong>Onderhoudsproblemen:</strong> Als er een bug wordt gevonden, moet deze in elke aparte repository worden opgelost</li>",
+              "<li class=\"mb-2\"><strong>Verspreide updates:</strong> Nieuwe features moeten handmatig worden gekopieerd naar elke repository</li>",
+              "<li class=\"mb-2\"><strong>Inconsistentie:</strong> Verschillende versies van dezelfde component leiden tot verschillende gebruikerservaringen</li>",
+              "<li class=\"mb-2\"><strong>Tijdverspilling:</strong> Elke docent moet technische kennis hebben om updates toe te passen</li>",
+              "</ul>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Met onze <strong>monorepo</strong> hebben we één krachtige motor die iedereen deelt. Updates gebeuren centraal, bugs worden één keer opgelost, en nieuwe features zijn direct voor iedereen beschikbaar. Jij als docent kunt je volledig focussen op wat je het beste doet: <strong>onderwijs maken</strong>.</p>"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "highlight",
+        "title": "Jouw Rol als Content Creator",
+        "content": [
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-3\">Als docent ben je de <strong>eigenaar van de content</strong> in je app. Alle JSON-bestanden in de <code class=\"bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded\">content/</code> folder zijn van jou. Hier bepaal jij wat studenten leren, welke oefeningen ze maken, en hoe de leerstof wordt gepresenteerd.</p>",
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-3\">Je gebruikt <strong>Cursor</strong> als je 'copiloot' - een AI-assistent die je helpt bij het vullen van deze JSON-bestanden. Je hoeft geen JavaScript te schrijven, geen HTML te coderen, en geen CSS te stylen. Je beschrijft gewoon wat je wilt, en Cursor helpt je de juiste JSON-structuur te maken.</p>",
+          "<p class=\"text-gray-700 dark:text-gray-300\">De techniek? Die regelen wij. Jij? Je maakt geweldig onderwijs.</p>"
+        ],
+        "bgColor": "bg-purple-50 dark:bg-purple-900/20",
+        "borderColor": "border-purple-500 dark:border-purple-400",
+        "titleColor": "text-purple-900 dark:text-purple-200",
+        "contentColor": "text-purple-800 dark:text-purple-300"
+      },
+      {
+        "type": "heading",
+        "text": "De .cursorrules: Je Veilige Gids",
+        "level": 3
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Om ervoor te zorgen dat Cursor altijd de juiste paden gebruikt en de juiste content types toepast, hebben we <strong>.cursorrules</strong> bestanden opgesteld. Deze bestanden fungeren als een gids voor de AI-assistent:</p>",
+          "<ul class=\"list-disc list-outside space-y-2 mb-4 ml-6 pl-4 text-gray-700 dark:text-gray-300\">",
+          "<li class=\"mb-2\">Ze vertellen Cursor welke bestanden wel en niet aangepast mogen worden</li>",
+          "<li class=\"mb-2\">Ze specificeren welke content types beschikbaar zijn en hoe deze gebruikt moeten worden</li>",
+          "<li class=\"mb-2\">Ze zorgen ervoor dat je altijd werkt binnen de juiste mappenstructuur</li>",
+          "<li class=\"mb-2\">Ze voorkomen dat je per ongeluk technische code wijzigt die je niet zou moeten aanraken</li>",
+          "</ul>",
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Met andere woorden: de <code class=\"bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded\">.cursorrules</code> zorgen ervoor dat je altijd op het juiste pad blijft. Je hoeft je geen zorgen te maken over het per ongeluk breken van technische functionaliteiten - de AI weet precies wat wel en niet mag.</p>",
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Dit betekent dat je met vertrouwen kunt werken aan je content, wetende dat Cursor je helpt binnen de grenzen van het framework te blijven. Geen technische kennis nodig - alleen didactische expertise en de wil om geweldig onderwijs te maken.</p>"
+        ]
+      }
+    ]
+  }
+}
+

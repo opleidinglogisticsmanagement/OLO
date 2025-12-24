@@ -1,0 +1,45 @@
+#!/bin/sh
+# Pre-push hook: Voorkomt dat gebruikers core wijzigingen pushen
+# Dit script controleert automatisch of er wijzigingen zijn in packages/core/
+# en blokkeert de push als dat het geval is.
+#
+# INSTALLATIE:
+# Kopieer dit bestand naar .git/hooks/pre-push:
+#   cp scripts/hooks/pre-push .git/hooks/pre-push
+#   chmod +x .git/hooks/pre-push
+#
+# Op Windows (Git Bash):
+#   cp scripts/hooks/pre-push .git/hooks/pre-push
+
+# Haal alle bestanden op die gepusht worden
+protected_paths="packages/core"
+
+# Check of er wijzigingen zijn in protected paths
+if git diff --cached --name-only | grep -q "^${protected_paths}/"; then
+    echo ""
+    echo "❌ FOUT: Je probeert wijzigingen in packages/core te pushen."
+    echo ""
+    echo "   Core wijzigingen moeten via Pull Request worden gedaan."
+    echo "   Alleen wijzigingen in je eigen app folder zijn toegestaan."
+    echo ""
+    echo "   Toegestane paden:"
+    echo "   - apps/[jouw-app]/content/"
+    echo "   - apps/[jouw-app]/pages/"
+    echo "   - apps/[jouw-app]/assets/"
+    echo ""
+    echo "   Oplossing:"
+    echo "   1. Haal core-wijzigingen uit je commit:"
+    echo "      git reset HEAD packages/core/"
+    echo ""
+    echo "   2. Commit alleen je app-wijzigingen:"
+    echo "      git commit --amend"
+    echo ""
+    echo "   3. Push opnieuw:"
+    echo "      git push"
+    echo ""
+    exit 1
+fi
+
+# Alles OK, push mag doorgaan
+exit 0
+

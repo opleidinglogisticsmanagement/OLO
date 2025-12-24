@@ -1,0 +1,420 @@
+{
+  "intro": {
+    "title": "E-learning publiceren",
+    "subtitle": "Van wijziging naar live in een paar stappen",
+    "description": "Leer hoe je je wijzigingen publiceert en live zet. Met de automatische pre-push hook controle en Vercel deployment gaat je content direct online."
+  },
+  "leerdoelen": {
+    "title": "Leerdoelen",
+    "description": "Na het doorlopen van deze les kun je:",
+    "items": [
+      "De juiste branch selecteren voor je wijzigingen",
+      "Je wijzigingen committen en pushen met automatische controle",
+      "Begrijpen hoe de pre-push hook werkt en wat te doen bij een blokkade",
+      "Je live deployment volgen en controleren"
+    ],
+    "interactive": false
+  },
+  "theorie": {
+    "title": "Publiceren in de praktijk",
+    "content": [
+      {
+        "type": "heading",
+        "text": "1. De juiste branch selecteren",
+        "level": 2
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Voordat je begint met committen, zorg dat je op de juiste branch werkt. Meestal is dit de <code class=\"bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded\">main</code> of <code class=\"bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded\">master</code> branch.</p>"
+        ]
+      },
+      {
+        "type": "tabs",
+        "defaultTab": 0,
+        "tabs": [
+          {
+            "title": "GitHub Desktop",
+            "content": [
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">In GitHub Desktop:</p>",
+              "<ol class=\"list-decimal list-outside space-y-2 mb-4 ml-6 pl-4 text-gray-700 dark:text-gray-300\">",
+              "<li class=\"mb-2\">Open GitHub Desktop</li>",
+              "<li class=\"mb-2\">Klik op de branch naam bovenaan (bijv. \"main\" of \"master\")</li>",
+              "<li class=\"mb-2\">Selecteer de juiste branch uit de lijst</li>",
+              "<li class=\"mb-2\">Je bent nu op de geselecteerde branch</li>",
+              "</ol>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>Tip:</strong> De branch naam staat altijd bovenaan in GitHub Desktop, naast de repository naam.</p>"
+            ]
+          },
+          {
+            "title": "Terminal",
+            "content": [
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">In de terminal:</p>",
+              "<ol class=\"list-decimal list-outside space-y-2 mb-4 ml-6 pl-4 text-gray-700 dark:text-gray-300\">",
+              "<li class=\"mb-2\">Check op welke branch je zit: <code class=\"bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded\">git branch</code></li>",
+              "<li class=\"mb-2\">De huidige branch heeft een * ervoor</li>",
+              "<li class=\"mb-2\">Wissel naar main branch: <code class=\"bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded\">git checkout main</code></li>",
+              "</ol>",
+              "<div class=\"bg-gray-900 dark:bg-gray-800 rounded-lg p-4 mb-4 overflow-x-auto\"><pre class=\"text-green-400 text-sm\"><code>$ git branch\n* main\n  andere-branch\n\n$ git checkout main\nAlready on 'main'</code></pre></div>"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "highlight",
+        "title": "Belangrijk",
+        "content": [
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-3\">Je hoeft <strong>geen nieuwe branch aan te maken</strong>. Werk gewoon op de main branch (of de branch die de beheerder heeft ingesteld).</p>",
+          "<p class=\"text-gray-700 dark:text-gray-300\">De beheerder heeft het Vercel project al voor je opgezet, dus je kunt direct beginnen met committen en pushen.</p>"
+        ],
+        "bgColor": "bg-blue-50 dark:bg-blue-900/20",
+        "borderColor": "border-blue-500 dark:border-blue-400",
+        "titleColor": "text-blue-900 dark:text-blue-200",
+        "contentColor": "text-blue-800 dark:text-blue-300"
+      },
+      {
+        "type": "heading",
+        "text": "2. Je wijzigingen committen en pushen",
+        "level": 2
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Nu je op de juiste branch zit, kun je je wijzigingen committen en pushen. De pre-push hook controleert automatisch of je alleen app-wijzigingen pusht.</p>"
+        ]
+      },
+      {
+        "type": "clickableSteps",
+        "steps": [
+          {
+            "label": "Stap 1: Wijzigingen maken",
+            "content": [
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Maak je wijzigingen in Cursor:</p>",
+              "<ul class=\"list-disc list-outside space-y-2 mb-4 ml-6 pl-4 text-gray-700 dark:text-gray-300\">",
+              "<li class=\"mb-2\">Wijzig content bestanden in <code class=\"bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded\">content/</code></li>",
+              "<li class=\"mb-2\">Voeg nieuwe pagina's toe in <code class=\"bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded\">pages/</code></li>",
+              "<li class=\"mb-2\">Upload afbeeldingen naar <code class=\"bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded\">assets/</code></li>",
+              "</ul>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>Belangrijk:</strong> Wijzig alleen bestanden in je eigen app folder (<code class=\"bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded\">apps/[jouw-app]/</code>). Wijzigingen in <code class=\"bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded\">packages/core/</code> worden geblokkeerd.</p>"
+            ]
+          },
+          {
+            "label": "Stap 2: Bestanden committen",
+            "content": [
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Selecteer de gewijzigde bestanden en maak een commit:</p>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>GitHub Desktop:</strong></p>",
+              "<ol class=\"list-decimal list-outside space-y-2 mb-4 ml-6 pl-4 text-gray-700 dark:text-gray-300\">",
+              "<li class=\"mb-2\">Selecteer de bestanden die je wilt committen (vinkje aanzetten)</li>",
+              "<li class=\"mb-2\">Schrijf een duidelijke commit message (bijv. \"Nieuwe content toegevoegd voor week 1\")</li>",
+              "<li class=\"mb-2\">Klik op \"Commit to main\" (of je branch naam)</li>",
+              "</ol>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>Terminal:</strong></p>",
+              "<div class=\"bg-gray-900 dark:bg-gray-800 rounded-lg p-4 mb-4 overflow-x-auto\"><pre class=\"text-green-400 text-sm\"><code>git add apps/mijn-app/content/week1.content.json\ngit commit -m \"Nieuwe content toegevoegd voor week 1\"</code></pre></div>"
+            ]
+          },
+          {
+            "label": "Stap 3: Pushen met automatische controle",
+            "content": [
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Nu kun je pushen. De pre-push hook controleert automatisch of je alleen app-wijzigingen pusht:</p>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>GitHub Desktop:</strong></p>",
+              "<ol class=\"list-decimal list-outside space-y-2 mb-4 ml-6 pl-4 text-gray-700 dark:text-gray-300\">",
+              "<li class=\"mb-2\">Klik op \"Push origin\" (of de push knop)</li>",
+              "<li class=\"mb-2\">De hook controleert automatisch je wijzigingen</li>",
+              "<li class=\"mb-2\">Als alles OK is: push gaat door ✅</li>",
+              "<li class=\"mb-2\">Als er core-wijzigingen zijn: push wordt geblokkeerd ❌</li>",
+              "</ol>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>Terminal:</strong></p>",
+              "<div class=\"bg-gray-900 dark:bg-gray-800 rounded-lg p-4 mb-4 overflow-x-auto\"><pre class=\"text-green-400 text-sm\"><code>git push origin main</code></pre></div>"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "heading",
+        "text": "De pre-push hook: automatische bescherming",
+        "level": 3
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">De pre-push hook controleert automatisch of je alleen wijzigingen in je eigen app folder pusht. Dit voorkomt dat je per ongeluk core-wijzigingen pusht.</p>",
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>De hook is al geïnstalleerd</strong> door de beheerder. Je hoeft niets te doen - het werkt automatisch!</p>"
+        ]
+      },
+      {
+        "type": "accordion",
+        "usePlusIcon": true,
+        "defaultOpen": false,
+        "items": [
+          {
+            "title": "Wat gebeurt er bij een geslaagde push?",
+            "content": [
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Als je alleen app-wijzigingen pusht:</p>",
+              "<ul class=\"list-disc list-outside space-y-2 mb-4 ml-6 pl-4 text-gray-700 dark:text-gray-300\">",
+              "<li class=\"mb-2\">De hook controleert je wijzigingen</li>",
+              "<li class=\"mb-2\">Geen core-wijzigingen gevonden ✅</li>",
+              "<li class=\"mb-2\">Push gaat door</li>",
+              "<li class=\"mb-2\">Je wijzigingen worden naar GitHub gepusht</li>",
+              "<li class=\"mb-2\">Vercel start automatisch een nieuwe deployment</li>",
+              "</ul>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>GitHub Desktop:</strong> Je ziet \"✓ Pushed to origin/main\"</p>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>Terminal:</strong> Je ziet normale Git push output</p>"
+            ]
+          },
+          {
+            "title": "Wat gebeurt er bij een geblokkeerde push?",
+            "content": [
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Als je per ongeluk core-wijzigingen probeert te pushen:</p>",
+              "<ul class=\"list-disc list-outside space-y-2 mb-4 ml-6 pl-4 text-gray-700 dark:text-gray-300\">",
+              "<li class=\"mb-2\">De hook controleert je wijzigingen</li>",
+              "<li class=\"mb-2\">Core-wijzigingen gevonden ❌</li>",
+              "<li class=\"mb-2\">Push wordt geblokkeerd</li>",
+              "<li class=\"mb-2\">Je krijgt een duidelijke foutmelding</li>",
+              "</ul>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>GitHub Desktop:</strong> Je ziet een foutmelding. Klik op \"Details\" voor de volledige uitleg.</p>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>Terminal:</strong> Je ziet direct de foutmelding met instructies:</p>",
+              "<div class=\"bg-gray-900 dark:bg-gray-800 rounded-lg p-4 mb-4 overflow-x-auto\"><pre class=\"text-red-400 text-sm\"><code>❌ FOUT: Je probeert wijzigingen in packages/core te pushen.\n\nCore wijzigingen moeten via Pull Request worden gedaan.\nAlleen wijzigingen in je eigen app folder zijn toegestaan.\n\nerror: failed to push some refs to 'origin'</code></pre></div>"
+            ]
+          },
+          {
+            "title": "Wat te doen bij een blokkade?",
+            "content": [
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Als je push wordt geblokkeerd omdat je per ongeluk core-wijzigingen hebt toegevoegd:</p>",
+              "<ol class=\"list-decimal list-outside space-y-2 mb-4 ml-6 pl-4 text-gray-700 dark:text-gray-300\">",
+              "<li class=\"mb-2\"><strong>Haal core-wijzigingen uit je commit:</strong></li>",
+              "</ol>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>GitHub Desktop:</strong></p>",
+              "<ul class=\"list-disc list-outside space-y-2 mb-4 ml-6 pl-4 text-gray-700 dark:text-gray-300\">",
+              "<li class=\"mb-2\">Ga naar de \"History\" tab</li>",
+              "<li class=\"mb-2\">Klik rechts op je laatste commit</li>",
+              "<li class=\"mb-2\">Kies \"Revert commit\" of \"Undo commit\"</li>",
+              "<li class=\"mb-2\">Haal de core-wijzigingen uit de staging area</li>",
+              "<li class=\"mb-2\">Commit alleen je app-wijzigingen</li>",
+              "<li class=\"mb-2\">Push opnieuw</li>",
+              "</ul>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>Terminal:</strong></p>",
+              "<div class=\"bg-gray-900 dark:bg-gray-800 rounded-lg p-4 mb-4 overflow-x-auto\"><pre class=\"text-green-400 text-sm\"><code># Haal core-wijzigingen uit staging\ngit reset HEAD packages/core/\n\n# Commit alleen je app-wijzigingen\ngit commit --amend\n\n# Push opnieuw\ngit push origin main</code></pre></div>"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "heading",
+        "text": "3. Automatisch live gaan",
+        "level": 2
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Na een geslaagde push gebeurt er automatisch het volgende:</p>"
+        ]
+      },
+      {
+        "type": "clickableSteps",
+        "steps": [
+          {
+            "label": "Stap 1: Push naar GitHub",
+            "content": [
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Je wijzigingen worden naar GitHub gepusht. Dit gebeurt direct na een geslaagde push.</p>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>GitHub Desktop:</strong> Je ziet \"✓ Pushed to origin/main\"</p>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>Terminal:</strong> Je ziet normale Git push output met \"Writing objects\" en \"Total\"</p>"
+            ]
+          },
+          {
+            "label": "Stap 2: Vercel detecteert wijzigingen",
+            "content": [
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Vercel is gekoppeld aan je GitHub repository en detecteert automatisch nieuwe pushes.</p>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Binnen enkele seconden start Vercel een nieuwe deployment.</p>"
+            ]
+          },
+          {
+            "label": "Stap 3: Deployment wordt gebouwd",
+            "content": [
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Vercel bouwt je app:</p>",
+              "<ul class=\"list-disc list-outside space-y-2 mb-4 ml-6 pl-4 text-gray-700 dark:text-gray-300\">",
+              "<li class=\"mb-2\">Bestanden worden gekopieerd</li>",
+              "<li class=\"mb-2\">Serverless functions worden voorbereid</li>",
+              "<li class=\"mb-2\">Environment variables worden geladen</li>",
+              "</ul>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Dit duurt meestal 1-2 minuten.</p>"
+            ]
+          },
+          {
+            "label": "Stap 4: Live!",
+            "content": [
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Na een succesvolle build is je app live:</p>",
+              "<ul class=\"list-disc list-outside space-y-2 mb-4 ml-6 pl-4 text-gray-700 dark:text-gray-300\">",
+              "<li class=\"mb-2\">Je wijzigingen zijn zichtbaar op je live URL</li>",
+              "<li class=\"mb-2\">Studenten kunnen de nieuwe content zien</li>",
+              "<li class=\"mb-2\">Alles werkt automatisch!</li>",
+              "</ul>"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "heading",
+        "text": "Deployment-status controleren",
+        "level": 3
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Je kunt de status van je deployment controleren op verschillende manieren:</p>"
+        ]
+      },
+      {
+        "type": "tabs",
+        "defaultTab": 0,
+        "tabs": [
+          {
+            "title": "Vercel Dashboard",
+            "content": [
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">In het Vercel Dashboard:</p>",
+              "<ol class=\"list-decimal list-outside space-y-2 mb-4 ml-6 pl-4 text-gray-700 dark:text-gray-300\">",
+              "<li class=\"mb-2\">Ga naar <a href=\"https://vercel.com/dashboard\" target=\"_blank\" class=\"text-blue-600 dark:text-blue-400 hover:underline\">https://vercel.com/dashboard</a></li>",
+              "<li class=\"mb-2\">Selecteer je project</li>",
+              "<li class=\"mb-2\">Ga naar de \"Deployments\" tab</li>",
+              "<li class=\"mb-2\">Je ziet alle deployments met status (Building, Ready, Error)</li>",
+              "<li class=\"mb-2\">Klik op een deployment voor details en logs</li>",
+              "</ol>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>Status indicatoren:</strong></p>",
+              "<ul class=\"list-disc list-outside space-y-2 mb-4 ml-6 pl-4 text-gray-700 dark:text-gray-300\">",
+              "<li class=\"mb-2\">🟡 Building - Deployment wordt gebouwd</li>",
+              "<li class=\"mb-2\">🟢 Ready - Deployment is live</li>",
+              "<li class=\"mb-2\">🔴 Error - Er is een fout opgetreden (check logs)</li>",
+              "</ul>"
+            ]
+          },
+          {
+            "title": "GitHub Desktop",
+            "content": [
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">In GitHub Desktop:</p>",
+              "<ol class=\"list-decimal list-outside space-y-2 mb-4 ml-6 pl-4 text-gray-700 dark:text-gray-300\">",
+              "<li class=\"mb-2\">Na een push zie je een melding \"View on GitHub\"</li>",
+              "<li class=\"mb-2\">Klik hierop om naar GitHub te gaan</li>",
+              "<li class=\"mb-2\">Op GitHub zie je een Vercel badge bij je commit</li>",
+              "<li class=\"mb-2\">Klik op de badge om naar de deployment te gaan</li>",
+              "</ol>"
+            ]
+          },
+          {
+            "title": "Je live URL",
+            "content": [
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">De eenvoudigste manier:</p>",
+              "<ol class=\"list-decimal list-outside space-y-2 mb-4 ml-6 pl-4 text-gray-700 dark:text-gray-300\">",
+              "<li class=\"mb-2\">Open je live URL (bijv. <code class=\"bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded\">jouw-app.vercel.app</code>)</li>",
+              "<li class=\"mb-2\">Check of je wijzigingen zichtbaar zijn</li>",
+              "<li class=\"mb-2\">Als je oude content ziet: wacht even (cache) of refresh met Ctrl+F5</li>",
+              "</ol>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>Tip:</strong> Vercel gebruikt caching. Soms zie je oude content totdat de cache is ververst. Dit duurt meestal niet langer dan een minuut.</p>"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "heading",
+        "text": "4. Updates publiceren",
+        "level": 2
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Voor nieuwe wijzigingen volg je gewoon dezelfde stappen:</p>",
+          "<ol class=\"list-decimal list-outside space-y-2 mb-4 ml-6 pl-4 text-gray-700 dark:text-gray-300\">",
+          "<li class=\"mb-2\">Maak je wijzigingen in Cursor</li>",
+          "<li class=\"mb-2\">Commit je wijzigingen</li>",
+          "<li class=\"mb-2\">Push naar GitHub</li>",
+          "<li class=\"mb-2\">Vercel deployt automatisch</li>",
+          "<li class=\"mb-2\">Je wijzigingen zijn live!</li>",
+          "</ol>",
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Het maakt niet uit of je 1 bestand wijzigt of 10 bestanden - het proces blijft hetzelfde.</p>"
+        ]
+      },
+      {
+        "type": "heading",
+        "text": "Core-updates begrijpen",
+        "level": 3
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Soms worden er updates gedaan aan de core (het gedeelde framework). Dit doet de beheerder:</p>"
+        ]
+      },
+      {
+        "type": "accordion",
+        "usePlusIcon": true,
+        "defaultOpen": false,
+        "items": [
+          {
+            "title": "Wat gebeurt er bij core-updates?",
+            "content": [
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Wanneer de beheerder core-updates pusht:</p>",
+              "<ul class=\"list-disc list-outside space-y-2 mb-4 ml-6 pl-4 text-gray-700 dark:text-gray-300\">",
+              "<li class=\"mb-2\">De beheerder pusht wijzigingen in <code class=\"bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded\">packages/core/</code></li>",
+              "<li class=\"mb-2\">Vercel detecteert de wijzigingen</li>",
+              "<li class=\"mb-2\">Alle apps worden automatisch opnieuw gebouwd</li>",
+              "<li class=\"mb-2\">Je app krijgt automatisch de nieuwe core-functionaliteit</li>",
+              "</ul>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>Je hoeft niets te doen!</strong> Core-updates worden automatisch toegepast op alle apps.</p>"
+            ]
+          },
+          {
+            "title": "Moet ik iets doen?",
+            "content": [
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Nee, core-updates worden automatisch toegepast. Je hoeft:</p>",
+              "<ul class=\"list-disc list-outside space-y-2 mb-4 ml-6 pl-4 text-gray-700 dark:text-gray-300\">",
+              "<li class=\"mb-2\">Geen nieuwe code te schrijven</li>",
+              "<li class=\"mb-2\">Geen bestanden te updaten</li>",
+              "<li class=\"mb-2\">Geen deployment te starten</li>",
+              "</ul>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Vercel bouwt je app automatisch opnieuw met de nieuwe core-versie. Dit gebeurt meestal binnen 1-2 minuten na de core-update.</p>"
+            ]
+          },
+          {
+            "title": "Hoe weet ik dat er een core-update is?",
+            "content": [
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Je kunt core-updates zien door:</p>",
+              "<ul class=\"list-disc list-outside space-y-2 mb-4 ml-6 pl-4 text-gray-700 dark:text-gray-300\">",
+              "<li class=\"mb-2\">GitHub commits te bekijken (commits met wijzigingen in <code class=\"bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded\">packages/core/</code>)</li>",
+              "<li class=\"mb-2\">Vercel deployments te bekijken (nieuwe deployment zonder jouw wijzigingen)</li>",
+              "<li class=\"mb-2\">Een melding van de beheerder (als die dit communiceert)</li>",
+              "</ul>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Meestal merk je het pas als je nieuwe functionaliteit gebruikt die door de core-update beschikbaar is gekomen.</p>"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "heading",
+        "text": "Samenvatting: het publicatieproces",
+        "level": 2
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Het publiceren van je e-learning is eenvoudig:</p>"
+        ]
+      },
+      {
+        "type": "highlight",
+        "title": "Workflow in 3 stappen",
+        "content": [
+          "<ol class=\"list-decimal list-outside space-y-2 mb-3 ml-6 pl-4 text-gray-700 dark:text-gray-300\">",
+          "<li class=\"mb-2\"><strong>Wijzig:</strong> Maak je content in Cursor (alleen in je eigen app folder)</li>",
+          "<li class=\"mb-2\"><strong>Push:</strong> Commit en push naar GitHub (hook controleert automatisch)</li>",
+          "<li class=\"mb-2\"><strong>Live:</strong> Vercel deployt automatisch binnen 1-2 minuten</li>",
+          "</ol>",
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-3\"><strong>Geen Pull Request nodig</strong> voor app-wijzigingen. De pre-push hook zorgt ervoor dat alleen toegestane wijzigingen worden gepusht.</p>",
+          "<p class=\"text-gray-700 dark:text-gray-300\"><strong>Geen handmatige deployment</strong> nodig. Vercel doet alles automatisch na elke push.</p>"
+        ],
+        "bgColor": "bg-green-50 dark:bg-green-900/20",
+        "borderColor": "border-green-500 dark:border-green-400",
+        "titleColor": "text-green-900 dark:text-green-200",
+        "contentColor": "text-green-800 dark:text-green-300"
+      }
+    ]
+  }
+}
+

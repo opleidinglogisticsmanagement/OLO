@@ -30,53 +30,53 @@
         ]
       },
       {
-        "type": "highlight",
-        "title": "Multiple Choice vragen genereren",
-        "content": [
-          "<p class=\"text-gray-700 dark:text-gray-300 mb-3\">Aan het einde van elke week kun je automatisch MC-vragen genereren op basis van de behandelde theorie. De AI genereert vragen op verschillende cognitieve niveaus (kennen, begrijpen, analyseren, evalueren) en voorziet elke vraag van directe feedback.</p>"
-        ],
-        "bgColor": "bg-blue-50 dark:bg-blue-900/20",
-        "borderColor": "border-blue-500 dark:border-blue-400",
-        "titleColor": "text-blue-900 dark:text-blue-200",
-        "contentColor": "text-blue-800 dark:text-blue-300"
+        "type": "heading",
+        "text": "Multiple Choice vragen genereren",
+        "level": 3
       },
       {
-        "type": "highlight",
-        "title": "Oefeningen voor Operations Management",
-        "content": [
-          "<p class=\"text-gray-700 dark:text-gray-300 mb-3\">GenAI kan specifieke oefeningen genereren voor Operations Management, zoals:</p>",
-          "<ul class=\"list-disc list-outside space-y-2 mb-3 ml-6 pl-4 text-gray-700 dark:text-gray-300\">",
+        "type": "paragraph",
+        "text": [
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Aan het einde van elke week kun je automatisch MC-vragen genereren op basis van de behandelde theorie. De AI genereert vragen op verschillende cognitieve niveaus (kennen, begrijpen, analyseren, evalueren) en voorziet elke vraag van directe feedback.</p>"
+        ]
+      },
+      {
+        "type": "heading",
+        "text": "Oefeningen voor Operations Management",
+        "level": 3
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">GenAI kan specifieke oefeningen genereren voor Operations Management, zoals:</p>",
+          "<ul class=\"list-disc list-outside space-y-2 mb-4 ml-6 pl-4 text-gray-700 dark:text-gray-300\">",
           "<li class=\"mb-2\"><strong>EOQ-berekeningen:</strong> Scenario's met verschillende vraagpatronen en kostenstructuren</li>",
           "<li class=\"mb-2\"><strong>Voorraadbeheer:</strong> Oefeningen over ABC-analyse, veiligheidsvoorraad, reorder points</li>",
           "<li class=\"mb-2\"><strong>Processen:</strong> Oefeningen over bottleneck-analyse en capaciteitsplanning</li>",
           "</ul>"
-        ],
-        "bgColor": "bg-green-50 dark:bg-green-900/20",
-        "borderColor": "border-green-500 dark:border-green-400",
-        "titleColor": "text-green-900 dark:text-green-200",
-        "contentColor": "text-green-800 dark:text-green-300"
+        ]
       },
       {
-        "type": "highlight",
-        "title": "Logistieke casussen",
-        "content": [
-          "<p class=\"text-gray-700 dark:text-gray-300 mb-3\">GenAI kan realistische scenario's genereren voor verschillende logistieke situaties, zoals transportplanning, warehouse-optimalisatie en supply chain-analyse. Deze casussen kunnen worden aangepast op moeilijkheidsniveau en context.</p>"
-        ],
-        "bgColor": "bg-purple-50 dark:bg-purple-900/20",
-        "borderColor": "border-purple-500 dark:border-purple-400",
-        "titleColor": "text-purple-900 dark:text-purple-200",
-        "contentColor": "text-purple-800 dark:text-purple-300"
+        "type": "heading",
+        "text": "Logistieke casussen",
+        "level": 3
       },
       {
-        "type": "highlight",
-        "title": "Aangepaste oefeningen voor elk leerdoel",
-        "content": [
-          "<p class=\"text-gray-700 dark:text-gray-300 mb-3\">De kracht van GenAI is juist dat je <strong>elk soort oefening</strong> kunt maken. Van eenvoudige kennisvragen tot complexe analyse-opdrachten - GenAI past zich aan aan jouw specifieke leerdoelen en vakgebied.</p>"
-        ],
-        "bgColor": "bg-orange-50 dark:bg-orange-900/20",
-        "borderColor": "border-orange-500 dark:border-orange-400",
-        "titleColor": "text-orange-900 dark:text-orange-200",
-        "contentColor": "text-orange-800 dark:text-orange-300"
+        "type": "paragraph",
+        "text": [
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">GenAI kan realistische scenario's genereren voor verschillende logistieke situaties, zoals transportplanning, warehouse-optimalisatie en supply chain-analyse. Deze casussen kunnen worden aangepast op moeilijkheidsniveau en context.</p>"
+        ]
+      },
+      {
+        "type": "heading",
+        "text": "Aangepaste oefeningen voor elk leerdoel",
+        "level": 3
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">De kracht van GenAI is juist dat je <strong>elk soort oefening</strong> kunt maken. Van eenvoudige kennisvragen tot complexe analyse-opdrachten - GenAI past zich aan aan jouw specifieke leerdoelen en vakgebied.</p>"
+        ]
       },
       {
         "type": "heading",

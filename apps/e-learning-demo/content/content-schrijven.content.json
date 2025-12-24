@@ -1,0 +1,332 @@
+{
+  "intro": {
+    "title": "Content Schrijven",
+    "subtitle": "Van idee naar interactieve leerervaring",
+    "description": "Leer stap voor stap hoe je praktische, interactieve content schrijft voor je e-learning. Van de basis JSON-structuur tot het gebruik van Cursor als je schrijfhulp."
+  },
+  "leerdoelen": {
+    "title": "Leerdoelen",
+    "description": "Na het doorlopen van deze les kun je:",
+    "items": [
+      "De JSON-structuur van content bestanden begrijpen en toepassen",
+      "Je eerste content bestand schrijven met een praktisch voorbeeld",
+      "Verschillende content types gebruiken in je eigen context",
+      "Cursor effectief inzetten als schrijfhulp voor content generatie"
+    ],
+    "interactive": false
+  },
+  "theorie": {
+    "title": "Praktische gids voor content schrijven",
+    "content": [
+      {
+        "type": "heading",
+        "text": "1. JSON-structuur begrijpen",
+        "level": 2
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Elk content bestand volgt een vaste structuur met drie hoofdsecties: <code class=\"bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded\">intro</code>, <code class=\"bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded\">leerdoelen</code> en <code class=\"bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded\">theorie</code>. Laten we elke sectie bekijken:</p>"
+        ]
+      },
+      {
+        "type": "accordion",
+        "usePlusIcon": true,
+        "defaultOpen": false,
+        "items": [
+          {
+            "title": "Intro sectie",
+            "content": [
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">De <code class=\"bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded\">intro</code> sectie bevat de eerste indruk van je les:</p>",
+              "<ul class=\"list-disc list-outside space-y-2 mb-4 ml-6 pl-4 text-gray-700 dark:text-gray-300\">",
+              "<li class=\"mb-2\"><strong>title:</strong> De hoofdnaam van je les (bijv. \"Week 1\" of \"Voorraadbeheer\")</li>",
+              "<li class=\"mb-2\"><strong>subtitle:</strong> Een korte ondertitel die de focus aangeeft</li>",
+              "<li class=\"mb-2\"><strong>description:</strong> Een korte beschrijving die studenten vertelt wat ze gaan leren</li>",
+              "</ul>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>Voorbeeld:</strong></p>",
+              "<div class=\"bg-gray-900 dark:bg-gray-800 rounded-lg p-4 mb-4 overflow-x-auto\"><pre class=\"text-green-400 text-sm\"><code>\"intro\": {\n  \"title\": \"Voorraadbeheer\",\n  \"subtitle\": \"De basis van efficiënt voorraadbeheer\",\n  \"description\": \"In deze week leer je hoe je voorraden efficiënt beheert en kosten minimaliseert.\"\n}</code></pre></div>"
+            ]
+          },
+          {
+            "title": "Leerdoelen sectie",
+            "content": [
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">De <code class=\"bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded\">leerdoelen</code> sectie definieert wat studenten moeten kunnen na de les:</p>",
+              "<ul class=\"list-disc list-outside space-y-2 mb-4 ml-6 pl-4 text-gray-700 dark:text-gray-300\">",
+              "<li class=\"mb-2\"><strong>title:</strong> Meestal \"Leerdoelen\"</li>",
+              "<li class=\"mb-2\"><strong>description:</strong> Inleidende tekst (bijv. \"Na het doorlopen van deze week kun je:\")</li>",
+              "<li class=\"mb-2\"><strong>items:</strong> Array met concrete, meetbare leerdoelen</li>",
+              "<li class=\"mb-2\"><strong>interactive:</strong> <code class=\"bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded\">false</code> voor normale leerdoelen, <code class=\"bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded\">true</code> voor interactieve checklist</li>",
+              "</ul>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>Voorbeeld:</strong></p>",
+              "<div class=\"bg-gray-900 dark:bg-gray-800 rounded-lg p-4 mb-4 overflow-x-auto\"><pre class=\"text-green-400 text-sm\"><code>\"leerdoelen\": {\n  \"title\": \"Leerdoelen\",\n  \"description\": \"Na het doorlopen van deze week kun je:\",\n  \"items\": [\n    \"Uitleggen wat voorraadbeheer is\",\n    \"Het EOQ-model toepassen\",\n    \"ABC-analyse uitvoeren\"\n  ],\n  \"interactive\": false\n}</code></pre></div>"
+            ]
+          },
+          {
+            "title": "Theorie sectie",
+            "content": [
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">De <code class=\"bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded\">theorie</code> sectie bevat alle inhoud van je les:</p>",
+              "<ul class=\"list-disc list-outside space-y-2 mb-4 ml-6 pl-4 text-gray-700 dark:text-gray-300\">",
+              "<li class=\"mb-2\"><strong>title:</strong> Titel van de theorie sectie (bijv. \"Voorraadbeheer in de praktijk\")</li>",
+              "<li class=\"mb-2\"><strong>content:</strong> Array met content items (paragraphs, images, oefeningen, etc.)</li>",
+              "</ul>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>Belangrijk:</strong> De <code class=\"bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded\">content</code> array kan verschillende types bevatten. Zie \"De Catalogus\" voor alle beschikbare types.</p>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>Voorbeeld:</strong></p>",
+              "<div class=\"bg-gray-900 dark:bg-gray-800 rounded-lg p-4 mb-4 overflow-x-auto\"><pre class=\"text-green-400 text-sm\"><code>\"theorie\": {\n  \"title\": \"Voorraadbeheer in de praktijk\",\n  \"content\": [\n    {\n      \"type\": \"paragraph\",\n      \"text\": [\"&lt;p&gt;Je content hier...&lt;/p&gt;\"]\n    }\n  ]\n}</code></pre></div>"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "highlight",
+        "title": "Bestandsnaamconventies",
+        "content": [
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-3\">De bestandsnaam moet overeenkomen met de <code class=\"bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded\">moduleId</code> in je LessonPage class:</p>",
+          "<ul class=\"list-disc list-outside space-y-2 mb-3 ml-6 pl-4 text-gray-700 dark:text-gray-300\">",
+          "<li class=\"mb-2\"><code class=\"bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded\">week1</code> → <code class=\"bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded\">week1.content.json</code></li>",
+          "<li class=\"mb-2\"><code class=\"bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded\">module1</code> → <code class=\"bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded\">module1.content.json</code></li>",
+          "<li class=\"mb-2\"><code class=\"bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded\">voorraadbeheer</code> → <code class=\"bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded\">voorraadbeheer.content.json</code></li>",
+          "</ul>",
+          "<p class=\"text-gray-700 dark:text-gray-300\">Het bestand moet altijd eindigen op <code class=\"bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded\">.content.json</code> en staan in de <code class=\"bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded\">content/</code> map van je app.</p>"
+        ],
+        "bgColor": "bg-blue-50 dark:bg-blue-900/20",
+        "borderColor": "border-blue-500 dark:border-blue-400",
+        "titleColor": "text-blue-900 dark:text-blue-200",
+        "contentColor": "text-blue-800 dark:text-blue-300"
+      },
+      {
+        "type": "heading",
+        "text": "2. Eerste content schrijven",
+        "level": 2
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Laten we stap voor stap je eerste content bestand maken. We gebruiken een praktisch voorbeeld: een week over \"Voorraadbeheer\".</p>"
+        ]
+      },
+      {
+        "type": "clickableSteps",
+        "steps": [
+          {
+            "label": "Stap 1: Bestand aanmaken",
+            "content": [
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Maak een nieuw bestand aan in de <code class=\"bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded\">content/</code> map met de naam <code class=\"bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded\">voorraadbeheer.content.json</code>.</p>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Begin met een lege JSON structuur:</p>",
+              "<div class=\"bg-gray-900 dark:bg-gray-800 rounded-lg p-4 mb-4 overflow-x-auto\"><pre class=\"text-green-400 text-sm\"><code>{\n  \"intro\": {},\n  \"leerdoelen\": {},\n  \"theorie\": {}\n}</code></pre></div>"
+            ]
+          },
+          {
+            "label": "Stap 2: Intro invullen",
+            "content": [
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Vul de intro sectie in met een duidelijke titel en beschrijving:</p>",
+              "<div class=\"bg-gray-900 dark:bg-gray-800 rounded-lg p-4 mb-4 overflow-x-auto\"><pre class=\"text-green-400 text-sm\"><code>\"intro\": {\n  \"title\": \"Voorraadbeheer\",\n  \"subtitle\": \"De basis van efficiënt voorraadbeheer\",\n  \"description\": \"In deze week leer je hoe je voorraden efficiënt beheert en kosten minimaliseert. Je leert verschillende modellen en technieken die je direct kunt toepassen in de praktijk.\"\n}</code></pre></div>"
+            ]
+          },
+          {
+            "label": "Stap 3: Leerdoelen definiëren",
+            "content": [
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Bedenk 3-5 concrete, meetbare leerdoelen. Gebruik actieve werkwoorden:</p>",
+              "<div class=\"bg-gray-900 dark:bg-gray-800 rounded-lg p-4 mb-4 overflow-x-auto\"><pre class=\"text-green-400 text-sm\"><code>\"leerdoelen\": {\n  \"title\": \"Leerdoelen\",\n  \"description\": \"Na het doorlopen van deze week kun je:\",\n  \"items\": [\n    \"Uitleggen wat voorraadbeheer is en waarom het belangrijk is\",\n    \"Het EOQ-model toepassen om optimale bestelhoeveelheden te berekenen\",\n    \"Een ABC-analyse uitvoeren om voorraden te categoriseren\",\n    \"Voorraadkosten identificeren en analyseren\"\n  ],\n  \"interactive\": false\n}</code></pre></div>"
+            ]
+          },
+          {
+            "label": "Stap 4: Eerste theorie content",
+            "content": [
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Begin met een eenvoudige theorie sectie met paragraphs:</p>",
+              "<div class=\"bg-gray-900 dark:bg-gray-800 rounded-lg p-4 mb-4 overflow-x-auto\"><pre class=\"text-green-400 text-sm\"><code>\"theorie\": {\n  \"title\": \"Voorraadbeheer in de praktijk\",\n  \"content\": [\n    {\n      \"type\": \"paragraph\",\n      \"text\": [\n        \"&lt;p class=\\\"text-gray-700 dark:text-gray-300 mb-4\\\"&gt;Voorraadbeheer is essentieel voor elke logistieke organisatie. Het gaat om het vinden van de balans tussen te veel voorraad (hoge kosten) en te weinig voorraad (risico op stockouts).&lt;/p&gt;\",\n        \"&lt;p class=\\\"text-gray-700 dark:text-gray-300 mb-4\\\"&gt;In deze les leer je verschillende modellen en technieken die je helpen om deze balans te vinden.&lt;/p&gt;\"\n      ]\n    }\n  ]\n}</code></pre></div>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>Tip:</strong> Gebruik altijd de Tailwind CSS classes voor tekstkleur en spacing. Dit zorgt voor consistente styling en dark mode ondersteuning.</p>"
+            ]
+          },
+          {
+            "label": "Stap 5: Afbeelding toevoegen",
+            "content": [
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Voeg een afbeelding toe aan je content array:</p>",
+              "<div class=\"bg-gray-900 dark:bg-gray-800 rounded-lg p-4 mb-4 overflow-x-auto\"><pre class=\"text-green-400 text-sm\"><code>{\n  \"type\": \"image\",\n  \"src\": \"assets/images/voorraadbeheer.png\",\n  \"alt\": \"Voorbeeld van een magazijn met verschillende voorraadniveaus\"\n}</code></pre></div>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>Belangrijk:</strong> Zorg dat de afbeelding bestaat in de <code class=\"bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded\">assets/images/</code> map van je app.</p>"
+            ]
+          },
+          {
+            "label": "Stap 6: Testen",
+            "content": [
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Test je content door:</p>",
+              "<ol class=\"list-decimal list-outside space-y-2 mb-4 ml-6 pl-4 text-gray-700 dark:text-gray-300\">",
+              "<li class=\"mb-2\">De JSON syntax te controleren (geen komma's na laatste item)</li>",
+              "<li class=\"mb-2\">Het bestand op te slaan</li>",
+              "<li class=\"mb-2\">De pagina te openen in je browser (na het aanmaken van de LessonPage en HTML pagina)</li>",
+              "<li class=\"mb-2\">De browser console te checken voor errors (F12)</li>",
+              "</ol>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>Tip:</strong> Gebruik een JSON validator (bijv. jsonlint.com) om syntax errors te vinden.</p>"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "heading",
+        "text": "3. Content types gebruiken",
+        "level": 2
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Nu je de basis kent, kun je je content uitbreiden met verschillende content types. Hieronder vind je praktische voorbeelden die je direct kunt gebruiken:</p>"
+        ]
+      },
+      {
+        "type": "tabs",
+        "defaultTab": 0,
+        "tabs": [
+          {
+            "title": "Tabs voor vergelijkingen",
+            "content": [
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Gebruik tabs om verschillende concepten naast elkaar te vergelijken:</p>",
+              "<div class=\"bg-gray-900 dark:bg-gray-800 rounded-lg p-4 mb-4 overflow-x-auto\"><pre class=\"text-green-400 text-sm\"><code>{\n  \"type\": \"tabs\",\n  \"defaultTab\": 0,\n  \"tabs\": [\n    {\n      \"title\": \"EOQ-model\",\n      \"content\": [\n        \"&lt;p class=\\\"text-gray-700 dark:text-gray-300 mb-4\\\"&gt;Het EOQ-model berekent de optimale bestelhoeveelheid...&lt;/p&gt;\"\n      ]\n    },\n    {\n      \"title\": \"ABC-analyse\",\n      \"content\": [\n        \"&lt;p class=\\\"text-gray-700 dark:text-gray-300 mb-4\\\"&gt;ABC-analyse categoriseert voorraden op basis van waarde...&lt;/p&gt;\"\n      ]\n    }\n  ]\n}</code></pre></div>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>Wanneer gebruiken:</strong> Bij het vergelijken van methoden, modellen of perspectieven.</p>"
+            ]
+          },
+          {
+            "title": "Highlight voor belangrijke info",
+            "content": [
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Gebruik highlight boxes voor belangrijke informatie, waarschuwingen of tips:</p>",
+              "<div class=\"bg-gray-900 dark:bg-gray-800 rounded-lg p-4 mb-4 overflow-x-auto\"><pre class=\"text-green-400 text-sm\"><code>{\n  \"type\": \"highlight\",\n  \"title\": \"Belangrijk\",\n  \"content\": [\n    \"&lt;p class=\\\"text-gray-700 dark:text-gray-300 mb-3\\\"&gt;Let op: voorraadkosten bestaan uit opslagkosten, bestelkosten en kapitaalkosten.&lt;/p&gt;\"\n  ],\n  \"bgColor\": \"bg-yellow-50 dark:bg-yellow-900/20\",\n  \"borderColor\": \"border-yellow-500 dark:border-yellow-400\",\n  \"titleColor\": \"text-yellow-900 dark:text-yellow-200\",\n  \"contentColor\": \"text-yellow-800 dark:text-yellow-300\"\n}</code></pre></div>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>Kleuren:</strong> Gebruik geel voor waarschuwingen, rood voor fouten, groen voor tips, blauw voor informatie.</p>"
+            ]
+          },
+          {
+            "title": "Accordion voor gestructureerde info",
+            "content": [
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Gebruik accordions om informatie gestructureerd te presenteren:</p>",
+              "<div class=\"bg-gray-900 dark:bg-gray-800 rounded-lg p-4 mb-4 overflow-x-auto\"><pre class=\"text-green-400 text-sm\"><code>{\n  \"type\": \"accordion\",\n  \"usePlusIcon\": true,\n  \"defaultOpen\": false,\n  \"items\": [\n    {\n      \"title\": \"Wat is EOQ?\",\n      \"content\": [\n        \"&lt;p class=\\\"text-gray-700 dark:text-gray-300 mb-4\\\"&gt;EOQ staat voor Economic Order Quantity...&lt;/p&gt;\"\n      ]\n    },\n    {\n      \"title\": \"Hoe bereken je EOQ?\",\n      \"content\": [\n        \"&lt;p class=\\\"text-gray-700 dark:text-gray-300 mb-4\\\"&gt;De formule is: EOQ = √(2DS/H)...&lt;/p&gt;\"\n      ]\n    }\n  ]\n}</code></pre></div>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>Wanneer gebruiken:</strong> Voor FAQ's, stappenplannen of gestructureerde uitleg.</p>"
+            ]
+          },
+          {
+            "title": "Oefeningen toevoegen",
+            "content": [
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Voeg interactieve oefeningen toe om kennis te testen:</p>",
+              "<div class=\"bg-gray-900 dark:bg-gray-800 rounded-lg p-4 mb-4 overflow-x-auto\"><pre class=\"text-green-400 text-sm\"><code>{\n  \"type\": \"trueFalseExercise\",\n  \"title\": \"Test je kennis: Voorraadbeheer\",\n  \"instruction\": \"Bepaal of de volgende stellingen waar of onwaar zijn:\",\n  \"statements\": [\n    {\n      \"text\": \"EOQ minimaliseert de totale voorraadkosten.\",\n      \"correctAnswer\": true,\n      \"explanation\": \"Correct! EOQ berekent de optimale bestelhoeveelheid waarbij de som van bestelkosten en opslagkosten minimaal is.\"\n    },\n    {\n      \"text\": \"ABC-analyse categoriseert op basis van volume.\",\n      \"correctAnswer\": false,\n      \"explanation\": \"Onjuist. ABC-analyse categoriseert op basis van waarde, niet volume.\"\n    }\n  ]\n}</code></pre></div>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>Tip:</strong> Zie \"De Catalogus\" voor alle beschikbare oefening types (matching, sequence, etc.).</p>"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "highlight",
+        "title": "Content types combineren",
+        "content": [
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-3\">Je kunt content types combineren voor rijke leerervaringen:</p>",
+          "<ul class=\"list-disc list-outside space-y-2 mb-3 ml-6 pl-4 text-gray-700 dark:text-gray-300\">",
+          "<li class=\"mb-2\">Start met een <strong>paragraph</strong> voor context</li>",
+          "<li class=\"mb-2\">Gebruik <strong>tabs</strong> om verschillende methoden te vergelijken</li>",
+          "<li class=\"mb-2\">Voeg een <strong>highlight</strong> toe voor belangrijke informatie</li>",
+          "<li class=\"mb-2\">Eindig met een <strong>oefening</strong> om kennis te testen</li>",
+          "</ul>",
+          "<p class=\"text-gray-700 dark:text-gray-300\">Experimenteer met verschillende combinaties om te zien wat het beste werkt voor jouw leerdoelen.</p>"
+        ],
+        "bgColor": "bg-green-50 dark:bg-green-900/20",
+        "borderColor": "border-green-500 dark:border-green-400",
+        "titleColor": "text-green-900 dark:text-green-200",
+        "contentColor": "text-green-800 dark:text-green-300"
+      },
+      {
+        "type": "heading",
+        "text": "4. Cursor als schrijfhulp",
+        "level": 2
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Cursor kan je enorm helpen bij het schrijven van content. Hieronder vind je effectieve prompt strategieën:</p>"
+        ]
+      },
+      {
+        "type": "accordion",
+        "usePlusIcon": true,
+        "defaultOpen": false,
+        "items": [
+          {
+            "title": "Basis prompt voor content generatie",
+            "content": [
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Begin met een duidelijke beschrijving van wat je wilt:</p>",
+              "<div class=\"bg-gray-900 dark:bg-gray-800 rounded-lg p-4 mb-4 overflow-x-auto\"><pre class=\"text-yellow-400 text-sm\"><code>Maak een JSON content structuur voor een week over \"Transportplanning\" met:\n- Intro met titel \"Transportplanning\" en beschrijving\n- 3 leerdoelen over transportmodaliteiten\n- Theorie sectie met 2 paragraphs over wegvervoer en spoorvervoer\n- Een tabs component met 4 tabs voor verschillende modaliteiten</code></pre></div>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>Tip:</strong> Wees specifiek over welke content types je wilt gebruiken.</p>"
+            ]
+          },
+          {
+            "title": "Context meegeven met @-symbols",
+            "content": [
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Gebruik @-symbols om bestaande content als voorbeeld te geven:</p>",
+              "<div class=\"bg-gray-900 dark:bg-gray-800 rounded-lg p-4 mb-4 overflow-x-auto\"><pre class=\"text-yellow-400 text-sm\"><code>@fase3.content.json Gebruik dezelfde structuur als dit bestand, maar maak content over \"Warehouse Management\" met:\n- Tabs voor verschillende opslagmethoden (blokopslag, stellingopslag, automatische opslag)\n- Een highlight box met veiligheidstips\n- Een trueFalseExercise met 5 stellingen over warehouse veiligheid</code></pre></div>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>Voordelen:</strong> Cursor begrijpt de structuur en stijl van je bestaande content.</p>"
+            ]
+          },
+          {
+            "title": "Iteratief verbeteren",
+            "content": [
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Begin met basis content en verbeter stap voor stap:</p>",
+              "<ol class=\"list-decimal list-outside space-y-2 mb-4 ml-6 pl-4 text-gray-700 dark:text-gray-300\">",
+              "<li class=\"mb-2\"><strong>Eerste prompt:</strong> \"Maak een basis JSON structuur voor voorraadbeheer\"</li>",
+              "<li class=\"mb-2\"><strong>Tweede prompt:</strong> \"Voeg een highlight box toe met belangrijke waarschuwing over veiligheid\"</li>",
+              "<li class=\"mb-2\"><strong>Derde prompt:</strong> \"Voeg een tabs component toe die EOQ en ABC-analyse vergelijkt\"</li>",
+              "<li class=\"mb-2\"><strong>Vierde prompt:</strong> \"Voeg een trueFalseExercise toe met 5 stellingen\"</li>",
+              "</ol>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>Tip:</strong> Gebruik CMD+K (Inline Edit) voor kleine aanpassingen en CMD+L (Chat) voor grote vragen.</p>"
+            ]
+          },
+          {
+            "title": "Specifieke content types genereren",
+            "content": [
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Vraag expliciet om specifieke content types:</p>",
+              "<div class=\"bg-gray-900 dark:bg-gray-800 rounded-lg p-4 mb-4 overflow-x-auto\"><pre class=\"text-yellow-400 text-sm\"><code>Maak een trueFalseExercise met 5 stellingen over Lean Manufacturing.\nGebruik de structuur uit @fase3.content.json als voorbeeld.\nZorg dat elke stelling een duidelijke uitleg heeft.</code></pre></div>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>Of voor een matching exercise:</strong></p>",
+              "<div class=\"bg-gray-900 dark:bg-gray-800 rounded-lg p-4 mb-4 overflow-x-auto\"><pre class=\"text-yellow-400 text-sm\"><code>Maak een matchingExercise waarbij studenten Incoterms moeten matchen aan risico-overdracht.\nGebruik 3 categorieën: Risico bij verkoper, Risico bij koper, Gedeeld risico.\nVoeg 5 Incoterms toe: EXW, FOB, DDP, CIF, FCA.</code></pre></div>"
+            ]
+          },
+          {
+            "title": "Content aanpassen aan context",
+            "content": [
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Geef context over je vakgebied en doelgroep:</p>",
+              "<div class=\"bg-gray-900 dark:bg-gray-800 rounded-lg p-4 mb-4 overflow-x-auto\"><pre class=\"text-yellow-400 text-sm\"><code>Maak content voor Operations Management studenten over EOQ.\nGebruik praktische voorbeelden uit de logistiek.\nZorg dat de uitleg geschikt is voor tweedejaars studenten.\nVoeg een rekenvoorbeeld toe met concrete cijfers.</code></pre></div>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>Tip:</strong> Hoe meer context je geeft, hoe beter Cursor je content kan aanpassen.</p>"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "highlight",
+        "title": "Best practices voor prompting",
+        "content": [
+          "<ul class=\"list-disc list-outside space-y-2 mb-3 ml-6 pl-4 text-gray-700 dark:text-gray-300\">",
+          "<li class=\"mb-2\"><strong>Wees specifiek:</strong> Beschrijf precies wat je wilt (type, aantal items, context)</li>",
+          "<li class=\"mb-2\"><strong>Gebruik voorbeelden:</strong> Verwijs naar bestaande content met @-symbols</li>",
+          "<li class=\"mb-2\"><strong>Iteratief werken:</strong> Begin simpel en bouw uit</li>",
+          "<li class=\"mb-2\"><strong>Geef context:</strong> Vertel over je vakgebied en doelgroep</li>",
+          "<li class=\"mb-2\"><strong>Test en verbeter:</strong> Test de gegenereerde content en vraag om aanpassingen</li>",
+          "</ul>"
+        ],
+        "bgColor": "bg-purple-50 dark:bg-purple-900/20",
+        "borderColor": "border-purple-500 dark:border-purple-400",
+        "titleColor": "text-purple-900 dark:text-purple-200",
+        "contentColor": "text-purple-800 dark:text-purple-300"
+      },
+      {
+        "type": "heading",
+        "text": "Volgende stappen",
+        "level": 2
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Nu je weet hoe je content schrijft, kun je:</p>",
+          "<ul class=\"list-disc list-outside space-y-2 mb-4 ml-6 pl-4 text-gray-700 dark:text-gray-300\">",
+          "<li class=\"mb-2\">Je eerste content bestand maken en testen</li>",
+          "<li class=\"mb-2\">Experimenteren met verschillende content types</li>",
+          "<li class=\"mb-2\">Cursor gebruiken om je workflow te versnellen</li>",
+          "<li class=\"mb-2\">Je content uitbreiden met interactieve elementen</li>",
+          "</ul>",
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Onthoud: begin simpel en bouw langzaam uit. Elke content die je schrijft, wordt beter!</p>"
+        ]
+      }
+    ]
+  }
+}
+

@@ -277,8 +277,11 @@ class ExerciseRenderer {
             }
         `;
         
+        // Store explanation in data attribute for custom feedback
+        const explanation = item.explanation || '';
+        
         return `
-            <div class="matching-exercise mb-6 sm:mb-8 px-6 py-4" id="${exerciseId}">
+            <div class="matching-exercise mb-6 sm:mb-8 px-6 py-4" id="${exerciseId}" data-explanation="${HtmlUtils.escapeHtml(explanation)}">
                 <style>${gridStyle}</style>
                 <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">${item.title || 'Matching Oefening'}</h3>
                 <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">${item.instruction || 'Sleep de omschrijvingen naar de juiste categorie:'}</p>
@@ -498,10 +501,24 @@ class ExerciseRenderer {
         
         if (correctCount === totalCount && totalCount > 0) {
             resultDiv.className = 'mt-4 p-3 rounded-lg border-2 border-green-500 dark:border-green-400 bg-green-50 dark:bg-green-900/20';
-            resultDiv.innerHTML = `
-                <h4 class="font-semibold mb-2 text-green-800 dark:text-green-200 text-sm">✓ Uitstekend!</h4>
-                <p class="text-sm text-green-800 dark:text-green-200">Je hebt alle items correct gematcht!</p>
-            `;
+            
+            // Check for custom explanation
+            const customExplanation = exercise.getAttribute('data-explanation');
+            if (customExplanation && customExplanation.trim() !== '') {
+                // Unescape HTML entities
+                const decodedExplanation = customExplanation
+                    .replace(/&quot;/g, '"')
+                    .replace(/&#39;/g, "'")
+                    .replace(/&amp;/g, '&')
+                    .replace(/&lt;/g, '<')
+                    .replace(/&gt;/g, '>');
+                resultDiv.innerHTML = decodedExplanation;
+            } else {
+                resultDiv.innerHTML = `
+                    <h4 class="font-semibold mb-2 text-green-800 dark:text-green-200 text-sm">✓ Uitstekend!</h4>
+                    <p class="text-sm text-green-800 dark:text-green-200">Je hebt alle items correct gematcht!</p>
+                `;
+            }
         } else if (correctCount > 0) {
             resultDiv.className = 'mt-4 p-3 rounded-lg border-2 border-yellow-500 bg-yellow-50';
             resultDiv.innerHTML = `

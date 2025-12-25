@@ -45,7 +45,7 @@
       },
       {
         "type": "image",
-        "src": "assets/images/afb-1.1.jpg",
+        "src": "assets/images/1.1.jpg",
         "alt": "Processes and operations (Krajewski en Malhotra, 2022, p. 25)"
       },
       {
@@ -106,7 +106,7 @@
       },
       {
         "type": "image",
-        "src": "assets/images/afbeelding-1.2.jpg",
+        "src": "assets/images/1.2.jpg",
         "alt": "Vier kernprocessen: Supplier relationship process, New product development process, Order fulfillment process, Customer relationship process",
         "enableModal": true
       },
@@ -172,6 +172,416 @@
               "<li class=\"mb-2\"><strong>New product development process:</strong> nieuwe ingrediënten ontdekken, onderzoeken en verwerken in nieuwe gerechten</li>",
               "<li class=\"mb-2\"><strong>Order fulfillment process:</strong> het klaarmaken van gerechten voor klanten in het restaurant</li>",
               "</ul>"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "heading",
+        "text": "Productie- en dienstverlenende processen",
+        "level": 3,
+        "id": "productie-dienstverlenend"
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "Het boek beschrijft ook het verschil tussen <strong>productie- en dienstverlenende processen.</strong>",
+          "Dit verschil is relevant als je processen gaat ontwerpen of verbeteren. Voor dienstverlenende processen kunnen andere beslissingen belangrijk zijn dan voor productieprocessen."
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "Bij productieprocessen is het bijvoorbeeld vaak makkelijker om output te meten dan bij dienstverlenende processen. Andersom zijn wachttijden voor dienstverlenende processen waar een klant direct bij betrokken is vaak vervelender dan voor productieprocessen waar een klant tijdens een proces geen rol heeft en dus minder directe hinder kan ervaren."
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "Het verschil tussen een productie- of dienstverlenend proces is niet zwart-wit. Het past beter om 'een mate van' te beschrijven. In het boek worden daarvoor twee criteria gebruikt:",
+          "1. De mate van verandering in eigenschappen van output (e.g. fysieke eigenschappen, vorm, grootte, afwerking, combinatie van meerdere onderdelen)",
+          "2. De mate van klantcontact (van laag naar hoog)"
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "Bedrijven kunnen zowel productie- als dienstverlenende processen uitvoeren.",
+          "Hieronder zijn de criteria gevisualiseerd in een continuüm."
+        ]
+      },
+      {
+        "type": "image",
+        "src": "assets/images/1.3.png",
+        "alt": "Continuüm productie- en dienstverlenende processen"
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "<em>Continuüm productie- en dienstverlenende processen</em>"
+        ]
+      },
+      {
+        "type": "html",
+        "html": "<div class=\"mb-6\"><p class=\"text-sm text-gray-600 dark:text-gray-400 mb-2\"><strong>Toelichting continuüm</strong></p><audio controls class=\"w-full max-w-2xl\"><source src=\"assets/audio/toelichting-continuum.mp3\" type=\"audio/mpeg\">Je browser ondersteunt het audio element niet.</audio></div>"
+      },
+      {
+        "type": "heading",
+        "text": "Wat heb je geleerd?",
+        "level": 3,
+        "id": "wat-heb-je-geleerd-1"
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "Je hebt in dit blok het volgende geleerd:",
+          "• Je weet wat wordt bedoeld met het begrip 'operations management'",
+          "• Je kunt kernprocessen en ondersteunende processen onderscheiden",
+          "• Je weet op basis van welke criteria je productie- van dienstverlenende processen kunt onderscheiden"
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "In het volgende blok besteden we aandacht de samenhang tussen bedrijfsdoelen op de lange termijn en het inrichten en aansturen van processen."
+        ]
+      },
+      {
+        "type": "heading",
+        "text": "Operations Strategie",
+        "level": 2,
+        "id": "operations-strategie"
+      },
+      {
+        "type": "html",
+        "html": "<div class=\"my-4 overflow-hidden rounded-lg\" style=\"height: 150px; max-height: 200px;\"><div style=\"position: relative; width: 100%; height: 100%; overflow: hidden;\"><img src=\"assets/images/1.4.jpg\" alt=\"Operations strategie\" class=\"w-full\" style=\"object-fit: cover; object-position: bottom; height: 400%; transform: translateY(75%);\"></div></div>"
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "Een bedrijf maakt een plan waarin staat welke lange termijn doelen ze wil bereiken.",
+          "In een <strong>operations strategie</strong> staat beschreven hoe het bedrijf deze doelen wil realiseren om klanten zo goed mogelijk te kunnen bedienen en voordeel te behalen ten opzichte van de concurrent."
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "Lange- en korte termijn beslissingen worden in de operations strategie met elkaar in verband gebracht. Daarmee worden handvatten geboden voor het inrichten en verbeteren van processen binnen het bedrijf en in de keten."
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "In het onderstaande plaatje zie je op welke gebieden bedrijven beslissingen nemen die resulteren een operations strategie. In het geluidsfragment daaronder volgt een toelichting."
+        ]
+      },
+      {
+        "type": "image",
+        "src": "assets/images/1.5.png",
+        "alt": "Operations strategy framework (Krajewski en Malhotra, 2022, p. 29)",
+        "enableModal": true
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "<em>Operations strategy framework (Krajewski en Malhotra, 2022, p. 29)</em>"
+        ]
+      },
+      {
+        "type": "html",
+        "html": "<div class=\"mb-6\"><p class=\"text-sm text-gray-600 dark:text-gray-400 mb-2\"><strong>Toelichting operations strategy framework</strong></p><audio controls class=\"w-full max-w-2xl\"><source src=\"assets/audio/toelichting-operations-strategy-framework.mp3\" type=\"audio/mpeg\">Je browser ondersteunt het audio element niet.</audio></div>"
+      },
+      {
+        "type": "heading",
+        "text": "Wat heb je geleerd?",
+        "level": 3,
+        "id": "wat-heb-je-geleerd-2"
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "Je hebt in dit blok het volgende geleerd:",
+          "• Je weet wat wordt bedoeld met het begrip 'operations strategie'",
+          "• Je weet welke beslissingen (op lange termijn) binnen het bedrijf van invloed zijn op de te formuleren operations strategie"
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "In het volgende blok zoomen we in op twee onderdelen van het model dat in dit blok is besproken; de marktanalyse en de competitive priorities die daarvan worden afgeleid."
+        ]
+      },
+      {
+        "type": "heading",
+        "text": "Competitive priorities",
+        "level": 2,
+        "id": "competitive-priorities"
+      },
+      {
+        "type": "html",
+        "html": "<div class=\"my-4 overflow-hidden rounded-lg\" style=\"height: 150px; max-height: 200px;\"><div style=\"position: relative; width: 100%; height: 100%; overflow: hidden;\"><img src=\"assets/images/1.6.jpg\" alt=\"Competitive priorities\" class=\"w-full\" style=\"object-fit: cover; object-position: center; height: 400%; transform: translateY(-37.5%);\"></div></div>"
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "Een bedrijf kan bestaan omdat het waarde toevoegt voor een klant.",
+          "Het richt zich daarbij op een of meerdere <strong>marktsegment(en)</strong> (market segmentation). Een marktsegment is een groep klanten met gelijke karakteristieken. Voor elk marktsegment wordt in kaart gebracht wat klanten in dat segment belangrijk vinden (needs assessment)."
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "Daaruit vloeit voort wat belangrijke <strong>prioriteiten</strong> zijn voor het bedrijf bij de inrichting van processen. Dit worden <strong>competitive priorities</strong> genoemd."
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "In dit blok geven we antwoord op de volgende vragen:",
+          "• Wat zijn order winners en qualifiers?",
+          "• Wat zijn competitive priorities en welke worden onderscheiden?"
+        ]
+      },
+      {
+        "type": "image",
+        "src": "assets/images/1.7.jpg",
+        "alt": "Competitive priorities"
+      },
+      {
+        "type": "highlight",
+        "title": "Het begrip klantwens is al bekend voor je!",
+        "content": [
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-3\">Tijdens het vak procesmanagement en project procesverbetering heb je verschillende technieken geleerd om een klantwens in kaart te brengen. Probeer onderstaande vragen te beantwoorden en draai vervolgens het kaartje.</p>"
+        ],
+        "icon": "fa-lightbulb",
+        "iconClass": "fas"
+      },
+      {
+        "type": "accordion",
+        "usePlusIcon": true,
+        "defaultOpen": false,
+        "items": [
+          {
+            "title": "Welk model heb je geleerd om klantwensen te categoriseren bij procesmanagement?",
+            "content": [
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Het KANO model is een model dat wordt gebruikt om klantwensen te categoriseren. Het model onderscheidt verschillende typen klantwensen op basis van hoe klanten reageren op de aanwezigheid of afwezigheid van bepaalde kenmerken.</p>",
+              "<div class=\"mb-4\"><img src=\"assets/images/1.8.png\" alt=\"KANO model\" class=\"w-full rounded-lg\"></div>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Het KANO model helpt bedrijven te begrijpen welke product- of dienstkenmerken essentieel zijn (must-be), welke kenmerken klanttevredenheid verhogen (one-dimensional), en welke kenmerken klanten verrassen en enthousiast maken (attractive).</p>"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "accordion",
+        "usePlusIcon": true,
+        "defaultOpen": false,
+        "items": [
+          {
+            "title": "Ben je het eens met de volgende stelling?",
+            "content": [
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Om een klantwens in kaart te brengen is het noodzakelijk te beginnen met het afnemen van interviews met- of uitzetten van enquêtes naar klanten.</p>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Je kunt reactief en pro-actief informatie over klantwensen verzamelen. Bedrijven hebben vaak al informatie beschikbaar over wat klanten belangrijk vinden bijvoorbeeld door reviews of ontvangen klachten (reactief). Het kan zinvol zijn om te beginnen met het inventariseren van die beschikbare informatie.</p>"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "Om succesvol te zijn in een markt, probeert een bedrijf klantwensen zo goed mogelijk te bedienen. Een andere manier om klantwensen te onderscheiden dan het Kano-model is door order winners en order qualifiers te definiëren. Hieronder worden ze toegelicht."
+        ]
+      },
+      {
+        "type": "tabs",
+        "defaultTab": 0,
+        "tabs": [
+          {
+            "title": "Order qualifiers",
+            "content": [
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Het minimum niveau voor bepaalde criteria die een klant belangrijk vindt, waaraan een bedrijf moet voldoen om überhaupt als aanbieder in een markt te worden gezien.</p>"
+            ]
+          },
+          {
+            "title": "Order winners",
+            "content": [
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Criteria die de klant gebruikt te kiezen tussen aanbieder A of B in een markt.</p>"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "highlight",
+        "title": "Oefening",
+        "content": [
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-3\">Nu volgt een oefening. Bekijk onderstaand filmpje over een bedrijf dat matrassen verkoopt. Verplaats je dan in de consument die op zoek is naar een topmatras. Wat zouden order winners en order qualifiers zijn voor de klanten waar dit bedrijf zich op richt?</p>"
+        ],
+        "icon": "fa-lightbulb",
+        "iconClass": "fas"
+      },
+      {
+        "type": "video",
+        "url": "https://www.youtube.com/embed/7s3yf8d-2V4",
+        "title": "Matrassen bedrijf",
+        "description": "Film over een bedrijf dat matrassen verkoopt"
+      },
+      {
+        "type": "matchingExercise",
+        "title": "Order winners en order qualifiers",
+        "instruction": "Sleep de items naar de juiste categorie:",
+        "explanation": "<h4 class=\"font-semibold mb-3 text-green-800 dark:text-green-200\">Uitwerking vraag</h4><p class=\"text-sm text-green-800 dark:text-green-200 mb-3\">Het bedrijf probeert zich te onderscheiden van de concurrent met twee items in het filmpje. Dit zijn de order winners:</p><ul class=\"list-disc list-outside space-y-2 mb-4 ml-6 pl-4 text-sm text-green-800 dark:text-green-200\"><li class=\"mb-2\">De prijs van het product (geen dure showrooms, verkopers, etc.)</li><li class=\"mb-2\">De periode van proefslapen</li></ul><p class=\"text-sm text-green-800 dark:text-green-200 mb-3\">De order qualifiers zijn basisvereisten die voor elke beddenzaak relevant zijn om überhaupt als marktpartij gezien te worden:</p><ul class=\"list-disc list-outside space-y-2 mb-4 ml-6 pl-4 text-sm text-green-800 dark:text-green-200\"><li class=\"mb-2\">Een geschikt formaat bed kunnen kiezen</li><li class=\"mb-2\">Topmatrassen verkopen</li></ul>",
+        "categories": [
+          {
+            "name": "Order winner",
+            "description": "Criteria die de klant gebruikt te kiezen tussen aanbieder A of B"
+          },
+          {
+            "name": "Order qualifier",
+            "description": "Het minimum niveau waaraan een bedrijf moet voldoen om überhaupt als aanbieder gezien te worden"
+          }
+        ],
+        "items": [
+          {
+            "text": "Keuze formaat bed",
+            "correctCategory": 1
+          },
+          {
+            "text": "Periode proefslapen",
+            "correctCategory": 0
+          },
+          {
+            "text": "Prijs product",
+            "correctCategory": 0
+          },
+          {
+            "text": "Topmatrassen te koop",
+            "correctCategory": 1
+          }
+        ]
+      },
+      {
+        "type": "heading",
+        "text": "Competitive priorities",
+        "level": 2
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "Bedenk voor jezelf eens welke supermarkten je allemaal kent...",
+          "Bedienen deze supermarkten allemaal dezelfde groep klanten?"
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "Het antwoord is nee. Elke supermarktketen richt zich op een of meerdere marktsegmenten. Dat zie je bijvoorbeeld aan het productassortiment dat wordt aangeboden, de inrichting van de winkel, de aanvullende diensten die worden aangeboden (zoals de aanwezigheid van zelfscankassa's, een koffieautomaat of de mogelijkheid om pakketjes op te halen of in te leveren)."
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "Een supermarkt maakt keuzes in de producten en diensten die ze bieden en de wijze waarop processen worden ingericht, om hun <strong>marktsegment</strong> zo goed mogelijk te kunnen bedienen. Als bekend is wat order winners en <strong>order qualifiers</strong> zijn voor de klant, kan het bedrijf bepalen op welke aspecten het zich richt."
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "Competitive priorities worden ingedeeld in vier categorieën:",
+          "• Kosten (1)",
+          "• Kwaliteit (2,3)",
+          "• Tijd (4,5,6)",
+          "• Flexibiliteit (7,8,9)"
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "We bespreken hieronder 9 competitive priorities met een voorbeeld. De nummers hierboven geven aan bij welke categorie de competitive priority hoort."
+        ]
+      },
+      {
+        "type": "clickableSteps",
+        "steps": [
+          {
+            "label": "1. Low-cost operations",
+            "content": [
+              {
+                "type": "paragraph",
+                "text": [
+                  "<strong>Definitie</strong>"
+                ]
+              },
+              {
+                "type": "paragraph",
+                "text": [
+                  "Een product of dienst leveren tegen de <strong>laagst</strong> mogelijke <strong>kosten</strong>.",
+                  "Lage kosten kunnen resulteren in een lage prijs van het product of de dienst."
+                ]
+              },
+              {
+                "type": "paragraph",
+                "text": [
+                  "<strong>Wat betekent dit voor de inrichting van processen</strong>"
+                ]
+              },
+              {
+                "type": "paragraph",
+                "text": [
+                  "Processen worden efficiënt ingericht om de (proces)kosten per product of dienst zo laag mogelijk te houden. Een overweging kan zijn om processen te automatiseren om personeelskosten te verlagen."
+                ]
+              },
+              {
+                "type": "paragraph",
+                "text": [
+                  "<strong>Voorbeeld</strong>",
+                  "Action."
+                ]
+              },
+              {
+                "type": "image",
+                "src": "assets/images/1.9.jpg",
+                "alt": "Action - voorbeeld van low-cost operations"
+              }
+            ]
+          },
+          {
+            "label": "2. Top Quality",
+            "content": [
+              {
+                "type": "paragraph",
+                "text": [
+                  "<strong>Definitie</strong>"
+                ]
+              },
+              {
+                "type": "paragraph",
+                "text": [
+                  "Een product of dienst leveren van <strong>topkwaliteit</strong>."
+                ]
+              },
+              {
+                "type": "paragraph",
+                "text": [
+                  "<strong>Wat betekent dit voor de inrichting van processen</strong>"
+                ]
+              },
+              {
+                "type": "paragraph",
+                "text": [
+                  "Dit kan betekenen dat de klant actief wordt betrokken in het proces, dat er een goede klantenservice is ingericht en dat er sprake is van een lage fouttolerantie."
+                ]
+              },
+              {
+                "type": "paragraph",
+                "text": [
+                  "<strong>Voorbeeld</strong>",
+                  "Rolex."
+                ]
+              },
+              {
+                "type": "image",
+                "src": "assets/images/1.10.jpg",
+                "alt": "Rolex - voorbeeld van top quality"
+              }
             ]
           }
         ]

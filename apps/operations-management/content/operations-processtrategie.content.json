@@ -2,12 +2,14 @@
   "intro": {
     "title": "Operations en processtrategie",
     "subtitle": "Operations en processtrategie",
-    "description": "In deze module leer je over operations en processtrategie."
+    "description": "In deze module leer je over operations en processtrategie, waarom bedrijven plannen maken en hoe doelen op lange termijn worden vertaald naar beslissingen voor het inrichten van processen."
   },
   "leerdoelen": {
     "title": "Leerdoelen",
     "items": [
-      "Je kunt uitleggen wat operations en processtrategie betekent."
+      "Je kunt uitleggen wat Operations Management betekent.",
+      "Je kunt het onderscheid tussen kernprocessen en ondersteunende processen uitleggen.",
+      "Je kunt de vier kernprocessen benoemen en herkennen in praktijksituaties."
     ],
     "interactive": false
   },
@@ -15,12 +17,165 @@
     "title": "Operations en processtrategie",
     "content": [
       {
+        "type": "heading",
+        "text": "Waarom operations- en processtrategie?",
+        "level": 2,
+        "id": "waarom-operations-processtrategie"
+      },
+      {
         "type": "paragraph",
         "text": [
-          "Content wordt binnenkort toegevoegd."
+          "Welkom bij de eerste e-learning van Operations Management!",
+          "In de e-learning beginnen we met een uitleg van het begrip Operations Management.",
+          "Dan gaan we verder met het onderwerp van deze e-learning; operations en processtrategie."
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "Bedrijven maken plannen om succesvol te blijven of worden in de toekomst.",
+          "Die plannen bevatten lange- en kortere termijn doelen die het bedrijf wil realiseren. Daarmee hoopt een bedrijf haar klanten zo goed mogelijk te kunnen bedienen door het leveren van waardevolle producten of diensten. Processen moeten zodanig worden ingericht, dat de doelen van het bedrijf kunnen worden behaald."
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "Hoe worden doelen op lange termijn vertaald naar beslissingen die belangrijk zijn voor het inrichten van processen? Die vraag beantwoorden we in deze eerste e-learning."
+        ]
+      },
+      {
+        "type": "image",
+        "src": "assets/images/afb-1.1.jpg",
+        "alt": "Processes and operations (Krajewski en Malhotra, 2022, p. 25)"
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "<em>Processes and operations (Krajewski en Malhotra, 2022, p. 25)</em>"
+        ]
+      },
+      {
+        "type": "heading",
+        "text": "Operations Management",
+        "level": 3,
+        "id": "operations-management"
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "Operations management is:"
+        ]
+      },
+      {
+        "type": "highlight",
+        "title": "Definitie Operations Management",
+        "content": [
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-3\">'Het systematisch ontwerpen, aansturen en beheersen van processen die inputs transformeren in diensten en producten voor interne- en externe klanten' (Krajewski en Malhotra, 2022).</p>"
+        ],
+        "icon": "fa-book",
+        "iconClass": "fas"
+      },
+      {
+        "type": "html",
+        "html": "<div class=\"mb-6\"><p class=\"text-sm text-gray-600 dark:text-gray-400 mb-2\"><strong>Toelichting processes and operations</strong></p><audio controls class=\"w-full max-w-2xl\"><source src=\"assets/audio/toelichting-processes-and-operations.mp3\" type=\"audio/mpeg\">Je browser ondersteunt het audio element niet.</audio></div>"
+      },
+      {
+        "type": "heading",
+        "text": "Kernprocessen en ondersteunende processen",
+        "level": 3,
+        "id": "kernprocessen-ondersteunend"
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "Er wordt onderscheid gemaakt tussen <strong>kernprocessen</strong> en <strong>ondersteunende</strong> processen.",
+          "Een kernproces is een verzameling activiteiten waarin direct waarde wordt toegevoegd voor een <strong>externe klant</strong>. Dat kan een eindgebruiker van een product of dienst zijn, of een tussenpartij in de keten aan wie iets wordt geleverd. Ondersteunende processen voorzien kernprocessen van middelen en informatie."
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "In bedrijven komen meestal meerdere kernprocessen voor, in meer of mindere mate. Bepaalde bedrijven richten zich bijvoorbeeld vooral op order fulfillment, terwijl andere bedrijven vooral zijn gericht op het ontwikkelen van nieuwe producten of diensten."
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "In de afbeelding hieronder worden de <strong>vier</strong> kernprocessen onderscheiden die in het boek worden besproken. In het geluidsfragment daaronder worden ze toegelicht."
+        ]
+      },
+      {
+        "type": "image",
+        "src": "assets/images/afbeelding-1.2.jpg",
+        "alt": "Vier kernprocessen: Supplier relationship process, New product development process, Order fulfillment process, Customer relationship process",
+        "enableModal": true
+      },
+      {
+        "type": "html",
+        "html": "<div class=\"mb-6\"><p class=\"text-sm text-gray-600 dark:text-gray-400 mb-2\"><strong>Toelichting core- and support processes</strong></p><audio controls class=\"w-full max-w-2xl\"><source src=\"assets/audio/toelichting-core-and-support-processes.mp3\" type=\"audio/mpeg\">Je browser ondersteunt het audio element niet.</audio></div>"
+      },
+      {
+        "type": "highlight",
+        "title": "Oefening",
+        "content": [
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-3\">Nu volgt een oefening. Je ziet straks twee filmpjes van twee verschillende bedrijven. Probeer te herkennen met welke kernprocessen deze bedrijven waarde creëren voor hun externe klant. Draai vervolgens de kaartjes om, om je antwoorden te vergelijken.</p>"
+        ],
+        "icon": "fa-lightbulb",
+        "iconClass": "fas"
+      },
+      {
+        "type": "tabs",
+        "defaultTab": 0,
+        "tabs": [
+          {
+            "title": "Winst uit je woning",
+            "content": [
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Bekijk het filmpje hieronder over het bedrijf Winst uit je woning, de winnaar van de Gazelle award van het Financieel Dagblad in 2021. Welk(e) kernproces(sen) herken je in het filmpje?</p>",
+              "<div class=\"mb-6\"><div class=\"rounded-lg overflow-hidden mb-2 relative bg-black dark:bg-black w-full video-responsive-container\" style=\"max-width: 100%;\"><div class=\"video-responsive-wrapper\" style=\"position: relative; width: 100%; padding-bottom: 56.25%; height: 0; overflow: hidden; background-color: #000;\"><iframe src=\"https://www.youtube.com/embed/ZwG2vzAaSdM\" title=\"Winst uit je woning\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen class=\"video-responsive-iframe\" style=\"position: absolute !important; top: 0 !important; left: 0 !important; width: 100% !important; height: 100% !important; border: 0 !important; margin: 0 !important; padding: 0 !important; background-color: #000;\" loading=\"lazy\"></iframe></div></div></div>"
+            ]
+          },
+          {
+            "title": "Central",
+            "content": [
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Bekijk het filmpje hieronder over het restaurant Central (Lima). Welk(e) kernproces(sen) herken je in het filmpje?</p>",
+              "<div class=\"mb-6\"><div class=\"rounded-lg overflow-hidden mb-2 relative bg-black dark:bg-black w-full video-responsive-container\" style=\"max-width: 100%;\"><div class=\"video-responsive-wrapper\" style=\"position: relative; width: 100%; padding-bottom: 56.25%; height: 0; overflow: hidden; background-color: #000;\"><iframe src=\"https://www.youtube.com/embed/XzOar1TTxXE\" title=\"Central Restaurant\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen class=\"video-responsive-iframe\" style=\"position: absolute !important; top: 0 !important; left: 0 !important; width: 100% !important; height: 100% !important; border: 0 !important; margin: 0 !important; padding: 0 !important; background-color: #000;\" loading=\"lazy\"></iframe></div></div></div>"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "heading",
+        "text": "Antwoorden",
+        "level": 3,
+        "id": "antwoorden"
+      },
+      {
+        "type": "accordion",
+        "usePlusIcon": true,
+        "defaultOpen": false,
+        "items": [
+          {
+            "title": "Antwoord: Winst uit je woning",
+            "content": [
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">In het filmpje van Winst uit je woning zijn de volgende kernprocessen te herkennen:</p>",
+              "<ul class=\"list-disc list-outside space-y-2 mb-4 ml-6 pl-4 text-gray-700 dark:text-gray-300\">",
+              "<li class=\"mb-2\"><strong>Supplier relationship process:</strong> het gezamenlijk inkopen van verduurzamingsinvesteringen bij bouw- of installatiebedrijven</li>",
+              "<li class=\"mb-2\"><strong>Customer relationship process:</strong> het contact met particulieren om op maat verduurzamingsmaatregelen aan te bieden met een klantenservice voor vragen</li>",
+              "</ul>"
+            ]
+          },
+          {
+            "title": "Antwoord: Central",
+            "content": [
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">In het filmpje van Central zijn de volgende kernprocessen te herkennen:</p>",
+              "<ul class=\"list-disc list-outside space-y-2 mb-4 ml-6 pl-4 text-gray-700 dark:text-gray-300\">",
+              "<li class=\"mb-2\"><strong>New product development process:</strong> nieuwe ingrediënten ontdekken, onderzoeken en verwerken in nieuwe gerechten</li>",
+              "<li class=\"mb-2\"><strong>Order fulfillment process:</strong> het klaarmaken van gerechten voor klanten in het restaurant</li>",
+              "</ul>"
+            ]
+          }
         ]
       }
     ]
   }
 }
-

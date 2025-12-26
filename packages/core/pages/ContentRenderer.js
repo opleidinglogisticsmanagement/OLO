@@ -109,11 +109,19 @@ class ContentRenderer {
         }
 
         if (Array.isArray(item.text)) {
+            // #region agent log
+            (function(){try{const _d={location:'ContentRenderer.js:111',message:'renderParagraph: Checking bullet points',data:{textArrayLength:item.text.length,firstItem:item.text[0]?.substring(0,50),hasBulletPoints:item.text.some(t=>t.trim().startsWith('•')||t.trim().startsWith('-')||t.trim().startsWith('*'))},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'};fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(_d)}).catch(()=>{});}catch(e){}})();
+            // #endregion
+            
             // Check if all items start with bullet points (•) or dashes (-)
             const allBulletPoints = item.text.every(textItem => {
                 const trimmed = textItem.trim();
                 return trimmed.startsWith('•') || trimmed.startsWith('-') || trimmed.startsWith('*');
             });
+            
+            // #region agent log
+            (function(){try{const _d={location:'ContentRenderer.js:120',message:'renderParagraph: allBulletPoints result',data:{allBulletPoints:allBulletPoints,willRenderAsList:allBulletPoints&&item.text.length>1},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'};fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(_d)}).catch(()=>{});}catch(e){}})();
+            // #endregion
             
             if (allBulletPoints && item.text.length > 1) {
                 // Render as unordered list with proper indentation
@@ -128,7 +136,60 @@ class ContentRenderer {
                     return `<li class="mb-2 text-gray-700 dark:text-gray-300">${content}</li>`;
                 }).join('');
                 
+                // #region agent log
+                (function(){try{const _d={location:'ContentRenderer.js:135',message:'renderParagraph: Rendering as list',data:{listItemsCount:item.text.length,htmlLength:listItems.length},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'};fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(_d)}).catch(()=>{});}catch(e){}})();
+                // #endregion
+                
                 return `<ul class="list-disc list-outside space-y-2 mb-4 ml-6 pl-4 text-gray-700 dark:text-gray-300">${listItems}</ul>`;
+            }
+            
+            // Check if some items have bullet points (mixed content)
+            const bulletPointItems = item.text.filter(textItem => {
+                const trimmed = textItem.trim();
+                return trimmed.startsWith('•') || trimmed.startsWith('-') || trimmed.startsWith('*');
+            });
+            
+            // #region agent log
+            (function(){try{const _d={location:'ContentRenderer.js:145',message:'renderParagraph: Checking for mixed content',data:{bulletPointItemsCount:bulletPointItems.length,totalItems:item.text.length,hasMixedContent:bulletPointItems.length>0&&bulletPointItems.length<item.text.length},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'B'};fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(_d)}).catch(()=>{});}catch(e){}})();
+            // #endregion
+            
+            if (bulletPointItems.length > 0 && bulletPointItems.length < item.text.length) {
+                // Mixed content: render non-bullet items as paragraphs, bullet items as list
+                const result = [];
+                let currentListItems = [];
+                
+                item.text.forEach((textItem, index) => {
+                    const trimmed = textItem.trim();
+                    const isBullet = trimmed.startsWith('•') || trimmed.startsWith('-') || trimmed.startsWith('*');
+                    
+                    if (isBullet) {
+                        const content = trimmed.replace(/^[•\-\*]\s*/, '');
+                        currentListItems.push(`<li class="mb-2 text-gray-700 dark:text-gray-300">${content}</li>`);
+                    } else {
+                        // If we have accumulated list items, render them first
+                        if (currentListItems.length > 0) {
+                            result.push(`<ul class="list-disc list-outside space-y-2 mb-4 ml-6 pl-4 text-gray-700 dark:text-gray-300">${currentListItems.join('')}</ul>`);
+                            currentListItems = [];
+                        }
+                        // Render non-bullet item as paragraph
+                        if (trimmed.startsWith('<')) {
+                            result.push(trimmed);
+                        } else {
+                            result.push(`<p class="text-gray-700 dark:text-gray-300 mb-4">${textItem}</p>`);
+                        }
+                    }
+                });
+                
+                // Render any remaining list items
+                if (currentListItems.length > 0) {
+                    result.push(`<ul class="list-disc list-outside space-y-2 mb-4 ml-6 pl-4 text-gray-700 dark:text-gray-300">${currentListItems.join('')}</ul>`);
+                }
+                
+                // #region agent log
+                (function(){try{const _d={location:'ContentRenderer.js:175',message:'renderParagraph: Rendering mixed content',data:{resultParts:result.length,hasList:currentListItems.length>0},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'B'};fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(_d)}).catch(()=>{});}catch(e){}})();
+                // #endregion
+                
+                return result.join('');
             }
             
             // Join all text items first, then process for table copy buttons

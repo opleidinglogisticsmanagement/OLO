@@ -373,6 +373,11 @@
                 height: auto !important;
             }
             
+            /* Exception for cropped images with explicit height in inline styles */
+            img[style*="height: 400%"], img[style*="height: 300%"], img[style*="height: 200%"] {
+                height: inherit !important;
+            }
+            
             /* Exception for responsive video containers */
             .video-responsive-container iframe,
             .video-responsive-wrapper iframe {
@@ -514,6 +519,11 @@
         img {
             max-width: 100%;
             height: auto;
+        }
+        
+        /* Exception for cropped images with explicit height in inline styles */
+        img[style*="height: 400%"], img[style*="height: 300%"], img[style*="height: 200%"] {
+            height: inherit !important;
         }
         
         .responsive-image-container {

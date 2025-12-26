@@ -697,11 +697,6 @@ class ContentRenderer {
         if (!item.html) {
             return '';
         }
-        
-        // #region agent log
-        (function(){try{const _d={location:'ContentRenderer.js:696',message:'renderHtml: Rendering HTML',data:{htmlLength:item.html.length,containsImg:item.html.includes('<img'),contains1_4:item.html.includes('1.4.jpg'),contains1_6:item.html.includes('1.6.jpg'),transformValue:item.html.match(/transform:\s*translateY\(([^)]+)\)/)?.[1]},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'};fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(_d)}).catch(()=>{});}catch(e){}})();
-        // #endregion
-        
         return item.html;
     }
 

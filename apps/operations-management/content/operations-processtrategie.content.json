@@ -254,7 +254,7 @@
       },
       {
         "type": "html",
-        "html": "<div class=\"my-4 overflow-hidden rounded-lg\" style=\"height: 150px; max-height: 200px;\"><div style=\"position: relative; width: 100%; height: 100%; overflow: hidden;\"><img src=\"assets/images/1.4.jpg\" alt=\"Operations strategie\" class=\"w-full\" style=\"object-fit: cover; object-position: 0% 75%; height: 400%; transform: translateY(0%);\"></div></div>"
+        "html": "<div class=\"my-4 overflow-hidden rounded-lg\" style=\"height: 150px; max-height: 200px;\"><div style=\"position: relative; width: 100%; height: 100%; overflow: hidden;\"><img src=\"assets/images/1.4.jpg\" alt=\"Operations strategie\" class=\"w-full\" style=\"object-fit: cover; object-position: 0% 100%; height: 400%; transform: translateY(-53%);\"></div></div>"
       },
       {
         "type": "paragraph",

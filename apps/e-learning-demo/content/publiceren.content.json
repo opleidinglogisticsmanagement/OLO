@@ -8,6 +8,7 @@
     "title": "Leerdoelen",
     "description": "Na het doorlopen van deze les kun je:",
     "items": [
+      "Je app lokaal starten en testen voordat je publiceert",
       "De juiste branch selecteren voor je wijzigingen",
       "Je wijzigingen committen en pushen met automatische controle",
       "Begrijpen hoe de pre-push hook werkt en wat te doen bij een blokkade",
@@ -18,6 +19,231 @@
   "theorie": {
     "title": "Publiceren in de praktijk",
     "content": [
+      {
+        "type": "heading",
+        "text": "0. Lokaal testen voordat je publiceert",
+        "level": 2
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Voordat je je wijzigingen publiceert, is het belangrijk om ze eerst <strong>lokaal te testen</strong>. Dit voorkomt dat je fouten of problemen live zet en geeft je de kans om alles te controleren voordat studenten het zien.</p>",
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Met de lokale development server kun je je app draaien op je eigen computer, precies zoals het er live uit zal zien. Je ziet direct het resultaat van je wijzigingen zonder te wachten op een deployment.</p>"
+        ]
+      },
+      {
+        "type": "highlight",
+        "title": "Waarom lokaal testen?",
+        "content": [
+          "<ul class=\"list-disc list-outside space-y-2 mb-3 ml-6 pl-4 text-gray-700 dark:text-gray-300\">",
+          "<li class=\"mb-2\"><strong>Snelle feedback:</strong> Zie direct het resultaat van je wijzigingen</li>",
+          "<li class=\"mb-2\"><strong>Fouten voorkomen:</strong> Vind problemen voordat ze live gaan</li>",
+          "<li class=\"mb-2\"><strong>Geen wachttijd:</strong> Test zonder te wachten op Vercel deployment</li>",
+          "<li class=\"mb-2\"><strong>Veilig experimenteren:</strong> Probeer dingen uit zonder risico</li>",
+          "</ul>"
+        ],
+        "bgColor": "bg-blue-50 dark:bg-blue-900/20",
+        "borderColor": "border-blue-500 dark:border-blue-400",
+        "titleColor": "text-blue-900 dark:text-blue-200",
+        "contentColor": "text-blue-800 dark:text-blue-300"
+      },
+      {
+        "type": "heading",
+        "text": "Single-App Mode: Je eigen app lokaal draaien",
+        "level": 3
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">De eenvoudigste manier om je app lokaal te testen is met <strong>Single-App Mode</strong>. Dit start alleen jouw app op <code class=\"bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded\">http://localhost:3000/</code>.</p>"
+        ]
+      },
+      {
+        "type": "clickableSteps",
+        "steps": [
+          {
+            "label": "Stap 1: Open een terminal",
+            "content": [
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Open een terminal (PowerShell, Command Prompt, of Terminal) in je editor of als apart venster.</p>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>In Cursor/VS Code:</strong> Druk op <code class=\"bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded\">Ctrl+`</code> (backtick) of ga naar Terminal → New Terminal in het menu.</p>"
+            ]
+          },
+          {
+            "label": "Stap 2: Navigeer naar je app directory",
+            "content": [
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Ga naar de directory van jouw app. Vervang <code class=\"bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded\">jouw-app-naam</code> met de naam van jouw app:</p>",
+              "<div class=\"bg-gray-900 dark:bg-gray-800 rounded-lg p-4 mb-4 overflow-x-auto\"><pre class=\"text-green-400 text-sm\"><code># Voorbeelden:\ncd apps/logistiek-onderzoek\n# of\ncd apps/operations-management\n# of\ncd apps/e-learning-demo</code></pre></div>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>Tip:</strong> Je kunt ook in Cursor rechtsklikken op je app folder en kiezen voor \"Open in Terminal\" of \"Open in Integrated Terminal\".</p>"
+            ]
+          },
+          {
+            "label": "Stap 3: Start de development server",
+            "content": [
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Typ het volgende commando:</p>",
+              "<div class=\"bg-gray-900 dark:bg-gray-800 rounded-lg p-4 mb-4 overflow-x-auto\"><pre class=\"text-green-400 text-sm\"><code>npm run dev</code></pre></div>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Je ziet nu output zoals:</p>",
+              "<div class=\"bg-gray-900 dark:bg-gray-800 rounded-lg p-4 mb-4 overflow-x-auto\"><pre class=\"text-green-400 text-sm\"><code>🚀 Starting development server for app: logistiek-onderzoek\n📁 App directory: C:\\...\\apps\\logistiek-onderzoek\n\n💡 App beschikbaar op: http://localhost:3000/\n\n[nodemon] starting `node server.js`\n🚀 Server running on http://localhost:3000</code></pre></div>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>Belangrijk:</strong> Laat deze terminal open! De server moet blijven draaien om je app te kunnen bekijken.</p>"
+            ]
+          },
+          {
+            "label": "Stap 4: Open je app in de browser",
+            "content": [
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Open je browser en ga naar:</p>",
+              "<div class=\"bg-blue-50 dark:bg-blue-900/20 border-l-4 border-blue-500 dark:border-blue-400 p-4 rounded-r-lg mb-4\"><p class=\"text-blue-900 dark:text-blue-200 font-mono text-lg\">http://localhost:3000/</p></div>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Je app zou nu zichtbaar moeten zijn! Je ziet je <code class=\"bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded\">index.html</code> pagina.</p>"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "heading",
+        "text": "Werken met live reload",
+        "level": 3
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Een van de handigste features van de development server is <strong>live reload</strong>. Dit betekent dat wijzigingen automatisch worden gedetecteerd:</p>"
+        ]
+      },
+      {
+        "type": "tabs",
+        "defaultTab": 0,
+        "tabs": [
+          {
+            "title": "Content JSON bestanden",
+            "content": [
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Wanneer je een <code class=\"bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded\">.content.json</code> bestand wijzigt:</p>",
+              "<ul class=\"list-disc list-outside space-y-2 mb-4 ml-6 pl-4 text-gray-700 dark:text-gray-300\">",
+              "<li class=\"mb-2\">Sla het bestand op (Ctrl+S)</li>",
+              "<li class=\"mb-2\">De server detecteert de wijziging automatisch</li>",
+              "<li class=\"mb-2\">Refresh je browser (F5) om de nieuwe content te zien</li>",
+              "</ul>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>Voorbeeld:</strong> Je wijzigt <code class=\"bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded\">content/week1.content.json</code>, slaat op, en refresh de browser. De nieuwe content is direct zichtbaar!</p>"
+            ]
+          },
+          {
+            "title": "HTML en JavaScript bestanden",
+            "content": [
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Voor HTML en JavaScript bestanden:</p>",
+              "<ul class=\"list-disc list-outside space-y-2 mb-4 ml-6 pl-4 text-gray-700 dark:text-gray-300\">",
+              "<li class=\"mb-2\">Sla het bestand op (Ctrl+S)</li>",
+              "<li class=\"mb-2\">De server herstart automatisch (je ziet dit in de terminal)</li>",
+              "<li class=\"mb-2\">Refresh je browser (F5) om de wijzigingen te zien</li>",
+              "</ul>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>Tip:</strong> Soms moet je een hard refresh doen (Ctrl+Shift+R of Ctrl+F5) om zeker te zijn dat de browser de nieuwe versie laadt.</p>"
+            ]
+          },
+          {
+            "title": "Afbeeldingen en assets",
+            "content": [
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Voor nieuwe afbeeldingen of andere assets:</p>",
+              "<ul class=\"list-disc list-outside space-y-2 mb-4 ml-6 pl-4 text-gray-700 dark:text-gray-300\">",
+              "<li class=\"mb-2\">Plaats het bestand in <code class=\"bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded\">assets/images/</code> (of andere asset folder)</li>",
+              "<li class=\"mb-2\">Gebruik het pad in je content JSON: <code class=\"bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded\">assets/images/naam-van-je-afbeelding.png</code></li>",
+              "<li class=\"mb-2\">Refresh je browser (F5) om de nieuwe afbeelding te zien</li>",
+              "</ul>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>Voorbeeld:</strong> Je uploadt <code class=\"bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded\">assets/images/nieuwe-afbeelding.png</code> en verwijst ernaar in je content JSON. Na een refresh zie je de afbeelding!</p>"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "heading",
+        "text": "Server stoppen",
+        "level": 3
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Om de server te stoppen:</p>",
+          "<ul class=\"list-disc list-outside space-y-2 mb-4 ml-6 pl-4 text-gray-700 dark:text-gray-300\">",
+          "<li class=\"mb-2\">Ga naar de terminal waar de server draait</li>",
+          "<li class=\"mb-2\">Druk op <code class=\"bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded\">Ctrl+C</code></li>",
+          "<li class=\"mb-2\">De server stopt en je kunt de terminal sluiten</li>",
+          "</ul>",
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>Tip:</strong> Je kunt de server altijd opnieuw starten met <code class=\"bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded\">npm run dev</code> wanneer je weer wilt testen.</p>"
+        ]
+      },
+      {
+        "type": "heading",
+        "text": "Troubleshooting: veelvoorkomende problemen",
+        "level": 3
+      },
+      {
+        "type": "accordion",
+        "usePlusIcon": true,
+        "defaultOpen": false,
+        "items": [
+          {
+            "title": "Poort 3000 is al in gebruik",
+            "content": [
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Als je deze fout ziet:</p>",
+              "<div class=\"bg-gray-900 dark:bg-gray-800 rounded-lg p-4 mb-4 overflow-x-auto\"><pre class=\"text-red-400 text-sm\"><code>Error: listen EADDRINUSE: address already in use :::3000</code></pre></div>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>Oplossing:</strong></p>",
+              "<ol class=\"list-decimal list-outside space-y-2 mb-4 ml-6 pl-4 text-gray-700 dark:text-gray-300\">",
+              "<li class=\"mb-2\">Er draait al een server op poort 3000</li>",
+              "<li class=\"mb-2\">Zoek de andere terminal waar de server draait en stop die met Ctrl+C</li>",
+              "<li class=\"mb-2\">Of gebruik een andere poort: <code class=\"bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded\">PORT=3001 npm run dev</code></li>",
+              "</ol>"
+            ]
+          },
+          {
+            "title": "npm run dev werkt niet",
+            "content": [
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Als je een fout krijgt zoals \"Missing script\" of \"Command not found\":</p>",
+              "<ol class=\"list-decimal list-outside space-y-2 mb-4 ml-6 pl-4 text-gray-700 dark:text-gray-300\">",
+              "<li class=\"mb-2\">Controleer of je in de juiste directory bent: <code class=\"bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded\">cd apps/jouw-app-naam</code></li>",
+              "<li class=\"mb-2\">Controleer of dependencies geïnstalleerd zijn: ga naar de root directory en run <code class=\"bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded\">npm install</code></li>",
+              "<li class=\"mb-2\">Probeer opnieuw: <code class=\"bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded\">npm run dev</code></li>",
+              "</ol>"
+            ]
+          },
+          {
+            "title": "Wijzigingen worden niet getoond",
+            "content": [
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Als je wijzigingen niet ziet in de browser:</p>",
+              "<ol class=\"list-decimal list-outside space-y-2 mb-4 ml-6 pl-4 text-gray-700 dark:text-gray-300\">",
+              "<li class=\"mb-2\">Doe een hard refresh: <code class=\"bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded\">Ctrl+Shift+R</code> (Windows) of <code class=\"bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded\">Cmd+Shift+R</code> (Mac)</li>",
+              "<li class=\"mb-2\">Controleer of je het bestand hebt opgeslagen (Ctrl+S)</li>",
+              "<li class=\"mb-2\">Kijk in de terminal of de server de wijziging heeft gedetecteerd</li>",
+              "<li class=\"mb-2\">Stop en start de server opnieuw: <code class=\"bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded\">Ctrl+C</code> en dan <code class=\"bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded\">npm run dev</code></li>",
+              "</ol>"
+            ]
+          },
+          {
+            "title": "AI-functionaliteit werkt niet",
+            "content": [
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Als AI-functies (zoals MC vragen genereren) niet werken:</p>",
+              "<ol class=\"list-decimal list-outside space-y-2 mb-4 ml-6 pl-4 text-gray-700 dark:text-gray-300\">",
+              "<li class=\"mb-2\">Controleer of je een <code class=\"bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded\">.env</code> bestand hebt in de root directory</li>",
+              "<li class=\"mb-2\">Controleer of <code class=\"bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded\">GEMINI_API_KEY</code> is ingesteld</li>",
+              "<li class=\"mb-2\">Kijk in de terminal output of je ziet: <code class=\"bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded\">API Key configured: ✅ Yes</code></li>",
+              "<li class=\"mb-2\">Als niet: maak een <code class=\"bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded\">.env</code> bestand met <code class=\"bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded\">GEMINI_API_KEY=je_api_key</code></li>",
+              "</ol>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>Let op:</strong> AI-functionaliteit is optioneel. Je kunt je app ook zonder gebruiken, alleen de AI-functies werken dan niet.</p>"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "highlight",
+        "title": "Klaar om te testen?",
+        "content": [
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-3\">Nu je weet hoe je lokaal test, kun je veilig je wijzigingen maken en controleren voordat je ze publiceert. Dit is de workflow:</p>",
+          "<ol class=\"list-decimal list-outside space-y-2 mb-3 ml-6 pl-4 text-gray-700 dark:text-gray-300\">",
+          "<li class=\"mb-2\"><strong>Test lokaal:</strong> Start de server en test je wijzigingen</li>",
+          "<li class=\"mb-2\"><strong>Controleer alles:</strong> Zorg dat alles werkt zoals verwacht</li>",
+          "<li class=\"mb-2\"><strong>Publiceer:</strong> Als alles goed is, commit en push je wijzigingen</li>",
+          "</ol>",
+          "<p class=\"text-gray-700 dark:text-gray-300\">Nu ga je verder met de volgende stappen: branch selecteren, committen en pushen!</p>"
+        ],
+        "bgColor": "bg-green-50 dark:bg-green-900/20",
+        "borderColor": "border-green-500 dark:border-green-400",
+        "titleColor": "text-green-900 dark:text-green-200",
+        "contentColor": "text-green-800 dark:text-green-300"
+      },
       {
         "type": "heading",
         "text": "1. De juiste branch selecteren",

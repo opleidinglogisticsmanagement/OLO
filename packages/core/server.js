@@ -1431,6 +1431,11 @@ if (fs.existsSync(appsDir)) {
 
 // Multi-app mode: if MULTI_APP=true, enable routing for all apps
 const MULTI_APP_MODE = process.env.MULTI_APP === 'true' || process.env.MULTI_APP === '1';
+console.log(`[Multi-App] MULTI_APP_MODE: ${MULTI_APP_MODE}, MULTI_APP env: ${process.env.MULTI_APP}`);
+console.log(`[Multi-App] Available apps count: ${Object.keys(availableApps).length}`);
+if (Object.keys(availableApps).length > 0) {
+    console.log(`[Multi-App] Available apps: ${Object.keys(availableApps).join(', ')}`);
+}
 
 // Fallback voor Vercel: probeer verschillende locaties
 let rootDir = monorepoRoot;
@@ -1685,6 +1690,7 @@ if (MULTI_APP_MODE && Object.keys(availableApps).length > 0) {
         
         // Route voor app index.html
         app.get(`/${appName}/`, (req, res, next) => {
+            console.log(`[Multi-App Route] GET ${req.path} -> serving index.html from ${appName}`);
             res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
             res.setHeader('Pragma', 'no-cache');
             res.setHeader('Expires', '0');
@@ -1745,7 +1751,8 @@ if (MULTI_APP_MODE && Object.keys(availableApps).length > 0) {
             }
         });
         
-        // Static file serving voor app directory
+        // Static file serving voor app directory (fallback voor andere bestanden)
+        // BELANGRIJK: Dit moet NA de specifieke routes komen
         app.use(`/${appName}`, express.static(appDir, {
             index: false,
             dotfiles: 'ignore',

@@ -9,6 +9,8 @@
   ],
   "scripts": {
     "dev": "npm run dev --workspace=packages/core",
+    "dev:multi": "npm run dev:multi --workspace=packages/core",
+    "dev:app": "npm run dev:app --workspace=packages/core --",
     "start": "npm run start --workspace=packages/core",
     "install:all": "npm install",
     "build": "npm run build --workspaces --if-present"

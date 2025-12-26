@@ -127,16 +127,8 @@ class ContentRenderer {
                 return isBulletPoint(text) || isNumberedListItem(text);
             };
             
-            // #region agent log
-            (function(){try{const _d={location:'ContentRenderer.js:111',message:'renderParagraph: Checking list items',data:{textArrayLength:item.text.length,firstItem:item.text[0]?.substring(0,50),hasBulletPoints:item.text.some(isBulletPoint),hasNumberedItems:item.text.some(isNumberedListItem),hasListItems:item.text.some(isListItem)},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'};fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(_d)}).catch(()=>{});}catch(e){}})();
-            // #endregion
-            
             // Check if all items are list items (bullets or numbered)
             const allListItems = item.text.every(textItem => isListItem(textItem));
-            
-            // #region agent log
-            (function(){try{const _d={location:'ContentRenderer.js:125',message:'renderParagraph: allListItems result',data:{allListItems:allListItems,willRenderAsList:allListItems&&item.text.length>1},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'};fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(_d)}).catch(()=>{});}catch(e){}})();
-            // #endregion
             
             if (allListItems && item.text.length > 1) {
                 // Determine if it's a numbered list or bullet list
@@ -163,19 +155,11 @@ class ContentRenderer {
                     return `<li class="mb-2 text-gray-700 dark:text-gray-300">${content}</li>`;
                 }).join('');
                 
-                // #region agent log
-                (function(){try{const _d={location:'ContentRenderer.js:145',message:'renderParagraph: Rendering as list',data:{listItemsCount:item.text.length,listType:listTag,isNumbered:isNumberedList},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'};fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(_d)}).catch(()=>{});}catch(e){}})();
-                // #endregion
-                
                 return `<${listTag} class="${listClass} list-outside space-y-2 mb-4 ml-6 pl-4 text-gray-700 dark:text-gray-300">${listItems}</${listTag}>`;
             }
             
             // Check if some items are list items (mixed content)
             const listItemCount = item.text.filter(textItem => isListItem(textItem)).length;
-            
-            // #region agent log
-            (function(){try{const _d={location:'ContentRenderer.js:155',message:'renderParagraph: Checking for mixed content',data:{listItemCount:listItemCount,totalItems:item.text.length,hasMixedContent:listItemCount>0&&listItemCount<item.text.length},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'B'};fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(_d)}).catch(()=>{});}catch(e){}})();
-            // #endregion
             
             if (listItemCount > 0 && listItemCount < item.text.length) {
                 // Mixed content: render non-list items as paragraphs, list items as list
@@ -231,10 +215,6 @@ class ContentRenderer {
                     const listClass = currentListType === 'ol' ? 'list-decimal' : 'list-disc';
                     result.push(`<${currentListType} class="${listClass} list-outside space-y-2 mb-4 ml-6 pl-4 text-gray-700 dark:text-gray-300">${currentListItems.join('')}</${currentListType}>`);
                 }
-                
-                // #region agent log
-                (function(){try{const _d={location:'ContentRenderer.js:200',message:'renderParagraph: Rendering mixed content',data:{resultParts:result.length,hasList:currentListItems.length>0},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'B'};fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(_d)}).catch(()=>{});}catch(e){}})();
-                // #endregion
                 
                 return result.join('');
             }
@@ -717,6 +697,11 @@ class ContentRenderer {
         if (!item.html) {
             return '';
         }
+        
+        // #region agent log
+        (function(){try{const _d={location:'ContentRenderer.js:696',message:'renderHtml: Rendering HTML',data:{htmlLength:item.html.length,containsImg:item.html.includes('<img'),contains1_4:item.html.includes('1.4.jpg'),contains1_6:item.html.includes('1.6.jpg'),transformValue:item.html.match(/transform:\s*translateY\(([^)]+)\)/)?.[1]},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'};fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(_d)}).catch(()=>{});}catch(e){}})();
+        // #endregion
+        
         return item.html;
     }
 

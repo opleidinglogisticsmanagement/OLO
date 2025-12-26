@@ -109,26 +109,53 @@ class ContentRenderer {
         }
 
         if (Array.isArray(item.text)) {
-            // #region agent log
-            (function(){try{const _d={location:'ContentRenderer.js:111',message:'renderParagraph: Checking bullet points',data:{textArrayLength:item.text.length,firstItem:item.text[0]?.substring(0,50),hasBulletPoints:item.text.some(t=>t.trim().startsWith('•')||t.trim().startsWith('-')||t.trim().startsWith('*'))},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'};fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(_d)}).catch(()=>{});}catch(e){}})();
-            // #endregion
+            // Helper function to check if text starts with a numbered list item (1., 2., etc. or 1), 2), etc.)
+            const isNumberedListItem = (text) => {
+                const trimmed = text.trim();
+                // Match patterns like "1. ", "2. ", "1) ", "2) ", etc.
+                return /^\d+[\.\)]\s/.test(trimmed);
+            };
             
-            // Check if all items start with bullet points (•) or dashes (-)
-            const allBulletPoints = item.text.every(textItem => {
-                const trimmed = textItem.trim();
+            // Helper function to check if text starts with a bullet point
+            const isBulletPoint = (text) => {
+                const trimmed = text.trim();
                 return trimmed.startsWith('•') || trimmed.startsWith('-') || trimmed.startsWith('*');
-            });
+            };
+            
+            // Helper function to check if text is a list item (bullet or numbered)
+            const isListItem = (text) => {
+                return isBulletPoint(text) || isNumberedListItem(text);
+            };
             
             // #region agent log
-            (function(){try{const _d={location:'ContentRenderer.js:120',message:'renderParagraph: allBulletPoints result',data:{allBulletPoints:allBulletPoints,willRenderAsList:allBulletPoints&&item.text.length>1},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'};fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(_d)}).catch(()=>{});}catch(e){}})();
+            (function(){try{const _d={location:'ContentRenderer.js:111',message:'renderParagraph: Checking list items',data:{textArrayLength:item.text.length,firstItem:item.text[0]?.substring(0,50),hasBulletPoints:item.text.some(isBulletPoint),hasNumberedItems:item.text.some(isNumberedListItem),hasListItems:item.text.some(isListItem)},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'};fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(_d)}).catch(()=>{});}catch(e){}})();
             // #endregion
             
-            if (allBulletPoints && item.text.length > 1) {
-                // Render as unordered list with proper indentation
+            // Check if all items are list items (bullets or numbered)
+            const allListItems = item.text.every(textItem => isListItem(textItem));
+            
+            // #region agent log
+            (function(){try{const _d={location:'ContentRenderer.js:125',message:'renderParagraph: allListItems result',data:{allListItems:allListItems,willRenderAsList:allListItems&&item.text.length>1},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'};fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(_d)}).catch(()=>{});}catch(e){}})();
+            // #endregion
+            
+            if (allListItems && item.text.length > 1) {
+                // Determine if it's a numbered list or bullet list
+                const isNumberedList = item.text.some(textItem => isNumberedListItem(textItem));
+                const listTag = isNumberedList ? 'ol' : 'ul';
+                const listClass = isNumberedList ? 'list-decimal' : 'list-disc';
+                
+                // Render as list with proper indentation
                 const listItems = item.text.map(textItem => {
                     const trimmedText = textItem.trim();
-                    // Remove bullet point character
-                    const content = trimmedText.replace(/^[•\-\*]\s*/, '');
+                    // Remove list marker (bullet or number)
+                    let content;
+                    if (isNumberedListItem(trimmedText)) {
+                        // Remove number pattern (1. or 1))
+                        content = trimmedText.replace(/^\d+[\.\)]\s*/, '');
+                    } else {
+                        // Remove bullet point character
+                        content = trimmedText.replace(/^[•\-\*]\s*/, '');
+                    }
                     // Als content begint met HTML tag, render direct
                     if (content.trim().startsWith('<')) {
                         return `<li class="mb-2 text-gray-700 dark:text-gray-300">${content}</li>`;
@@ -137,41 +164,60 @@ class ContentRenderer {
                 }).join('');
                 
                 // #region agent log
-                (function(){try{const _d={location:'ContentRenderer.js:135',message:'renderParagraph: Rendering as list',data:{listItemsCount:item.text.length,htmlLength:listItems.length},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'};fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(_d)}).catch(()=>{});}catch(e){}})();
+                (function(){try{const _d={location:'ContentRenderer.js:145',message:'renderParagraph: Rendering as list',data:{listItemsCount:item.text.length,listType:listTag,isNumbered:isNumberedList},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'};fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(_d)}).catch(()=>{});}catch(e){}})();
                 // #endregion
                 
-                return `<ul class="list-disc list-outside space-y-2 mb-4 ml-6 pl-4 text-gray-700 dark:text-gray-300">${listItems}</ul>`;
+                return `<${listTag} class="${listClass} list-outside space-y-2 mb-4 ml-6 pl-4 text-gray-700 dark:text-gray-300">${listItems}</${listTag}>`;
             }
             
-            // Check if some items have bullet points (mixed content)
-            const bulletPointItems = item.text.filter(textItem => {
-                const trimmed = textItem.trim();
-                return trimmed.startsWith('•') || trimmed.startsWith('-') || trimmed.startsWith('*');
-            });
+            // Check if some items are list items (mixed content)
+            const listItemCount = item.text.filter(textItem => isListItem(textItem)).length;
             
             // #region agent log
-            (function(){try{const _d={location:'ContentRenderer.js:145',message:'renderParagraph: Checking for mixed content',data:{bulletPointItemsCount:bulletPointItems.length,totalItems:item.text.length,hasMixedContent:bulletPointItems.length>0&&bulletPointItems.length<item.text.length},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'B'};fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(_d)}).catch(()=>{});}catch(e){}})();
+            (function(){try{const _d={location:'ContentRenderer.js:155',message:'renderParagraph: Checking for mixed content',data:{listItemCount:listItemCount,totalItems:item.text.length,hasMixedContent:listItemCount>0&&listItemCount<item.text.length},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'B'};fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(_d)}).catch(()=>{});}catch(e){}})();
             // #endregion
             
-            if (bulletPointItems.length > 0 && bulletPointItems.length < item.text.length) {
-                // Mixed content: render non-bullet items as paragraphs, bullet items as list
+            if (listItemCount > 0 && listItemCount < item.text.length) {
+                // Mixed content: render non-list items as paragraphs, list items as list
                 const result = [];
                 let currentListItems = [];
+                let currentListType = null; // 'ul' or 'ol'
                 
                 item.text.forEach((textItem, index) => {
                     const trimmed = textItem.trim();
-                    const isBullet = trimmed.startsWith('•') || trimmed.startsWith('-') || trimmed.startsWith('*');
+                    const isList = isListItem(trimmed);
                     
-                    if (isBullet) {
-                        const content = trimmed.replace(/^[•\-\*]\s*/, '');
+                    if (isList) {
+                        // Determine list type for this item
+                        const isNumbered = isNumberedListItem(trimmed);
+                        const itemListType = isNumbered ? 'ol' : 'ul';
+                        
+                        // If list type changes, render previous list first
+                        if (currentListType && currentListType !== itemListType && currentListItems.length > 0) {
+                            const listClass = currentListType === 'ol' ? 'list-decimal' : 'list-disc';
+                            result.push(`<${currentListType} class="${listClass} list-outside space-y-2 mb-4 ml-6 pl-4 text-gray-700 dark:text-gray-300">${currentListItems.join('')}</${currentListType}>`);
+                            currentListItems = [];
+                        }
+                        
+                        currentListType = itemListType;
+                        
+                        // Remove list marker
+                        let content;
+                        if (isNumbered) {
+                            content = trimmed.replace(/^\d+[\.\)]\s*/, '');
+                        } else {
+                            content = trimmed.replace(/^[•\-\*]\s*/, '');
+                        }
                         currentListItems.push(`<li class="mb-2 text-gray-700 dark:text-gray-300">${content}</li>`);
                     } else {
                         // If we have accumulated list items, render them first
                         if (currentListItems.length > 0) {
-                            result.push(`<ul class="list-disc list-outside space-y-2 mb-4 ml-6 pl-4 text-gray-700 dark:text-gray-300">${currentListItems.join('')}</ul>`);
+                            const listClass = currentListType === 'ol' ? 'list-decimal' : 'list-disc';
+                            result.push(`<${currentListType} class="${listClass} list-outside space-y-2 mb-4 ml-6 pl-4 text-gray-700 dark:text-gray-300">${currentListItems.join('')}</${currentListType}>`);
                             currentListItems = [];
+                            currentListType = null;
                         }
-                        // Render non-bullet item as paragraph
+                        // Render non-list item as paragraph
                         if (trimmed.startsWith('<')) {
                             result.push(trimmed);
                         } else {
@@ -182,11 +228,12 @@ class ContentRenderer {
                 
                 // Render any remaining list items
                 if (currentListItems.length > 0) {
-                    result.push(`<ul class="list-disc list-outside space-y-2 mb-4 ml-6 pl-4 text-gray-700 dark:text-gray-300">${currentListItems.join('')}</ul>`);
+                    const listClass = currentListType === 'ol' ? 'list-decimal' : 'list-disc';
+                    result.push(`<${currentListType} class="${listClass} list-outside space-y-2 mb-4 ml-6 pl-4 text-gray-700 dark:text-gray-300">${currentListItems.join('')}</${currentListType}>`);
                 }
                 
                 // #region agent log
-                (function(){try{const _d={location:'ContentRenderer.js:175',message:'renderParagraph: Rendering mixed content',data:{resultParts:result.length,hasList:currentListItems.length>0},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'B'};fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(_d)}).catch(()=>{});}catch(e){}})();
+                (function(){try{const _d={location:'ContentRenderer.js:200',message:'renderParagraph: Rendering mixed content',data:{resultParts:result.length,hasList:currentListItems.length>0},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'B'};fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(_d)}).catch(()=>{});}catch(e){}})();
                 // #endregion
                 
                 return result.join('');

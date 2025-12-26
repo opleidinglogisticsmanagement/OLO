@@ -82,12 +82,30 @@ Het platform gebruikt een Node.js server voor AI-functionaliteit (Gemini API). D
    npm install
    ```
 
-2. **Server starten**:
-   ```bash
-   npm start
-   ```
+2. **Server starten** - Je hebt twee opties:
 
-3. **Open in browser**: `http://localhost:3000/week2.html`
+   **Optie A: Eén app apart draaien**
+   ```bash
+   # Vanuit een app directory (bijv. apps/logistiek-onderzoek)
+   npm run dev
+   
+   # Of vanuit packages/core
+   npm run dev:app logistiek-onderzoek
+   ```
+   App beschikbaar op: `http://localhost:3000/`
+
+   **Optie B: Alle apps tegelijk (Multi-App Mode)**
+   ```bash
+   # Vanuit packages/core
+   npm run dev:multi
+   ```
+   Apps beschikbaar op:
+   - `http://localhost:3000/e-learning-demo/`
+   - `http://localhost:3000/logistiek-onderzoek/`
+   - `http://localhost:3000/operations-management/`
+   - `http://localhost:3000/` (app selector)
+
+3. **Open in browser**: Navigeer naar de app URL hierboven
 
 #### 📋 Stap-voor-stap Setup
 
@@ -112,6 +130,37 @@ Dit installeert:
 - dotenv (voor environment variables)
 - @google/generative-ai (voor Gemini API)
 - node-fetch (voor API calls)
+
+#### 🎯 App Development Strategieën
+
+Het monorepo ondersteunt twee manieren om apps te ontwikkelen:
+
+**1. Single-App Mode (Standaard)**
+- Elke app draait apart op `http://localhost:3000/`
+- Gebruik dit wanneer je aan één app werkt
+- Start vanuit de app directory:
+  ```bash
+  cd apps/logistiek-onderzoek
+  npm run dev
+  ```
+
+**2. Multi-App Mode**
+- Alle apps draaien tegelijk op verschillende subdirectories
+- Gebruik dit om snel tussen apps te schakelen
+- Start vanuit packages/core:
+  ```bash
+  cd packages/core
+  npm run dev:multi
+  ```
+- Apps beschikbaar op:
+  - `http://localhost:3000/e-learning-demo/`
+  - `http://localhost:3000/logistiek-onderzoek/`
+  - `http://localhost:3000/operations-management/`
+  - `http://localhost:3000/` (app selector pagina)
+
+**Welke strategie kiezen?**
+- **Single-App Mode**: Sneller, minder overhead, ideaal voor dagelijks werk
+- **Multi-App Mode**: Handig voor demo's, vergelijken van apps, of wanneer je meerdere apps tegelijk test
 
 **Stap 3: .env bestand aanmaken**
 

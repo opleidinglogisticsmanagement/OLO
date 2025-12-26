@@ -4,7 +4,9 @@
     "main":  "server.js",
     "scripts":  {
                     "start":  "node server.js",
-                    "dev":  "nodemon server.js"
+                    "dev":  "nodemon server.js",
+                    "dev:app":  "node scripts/dev-app.js",
+                    "dev:multi":  "node scripts/dev-multi.js"
                 },
     "devDependencies":  {
                             "nodemon":  "^3.0.1"

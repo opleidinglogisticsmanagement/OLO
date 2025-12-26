@@ -1414,6 +1414,24 @@ const coreDir = __dirname; // packages/core
 let appDir = process.env.APP_DIR;
 const gameDir = path.join(monorepoRoot, 'game');
 
+// Multi-app support: detect all available apps
+const appsDir = path.join(monorepoRoot, 'apps');
+let availableApps = {};
+if (fs.existsSync(appsDir)) {
+    const appDirs = fs.readdirSync(appsDir).filter(f => {
+        const fullPath = path.join(appsDir, f);
+        return fs.statSync(fullPath).isDirectory() && 
+               fs.existsSync(path.join(fullPath, 'index.html'));
+    });
+    appDirs.forEach(appName => {
+        availableApps[appName] = path.join(appsDir, appName);
+    });
+    console.log(`[Multi-App] Detected ${Object.keys(availableApps).length} apps: ${Object.keys(availableApps).join(', ')}`);
+}
+
+// Multi-app mode: if MULTI_APP=true, enable routing for all apps
+const MULTI_APP_MODE = process.env.MULTI_APP === 'true' || process.env.MULTI_APP === '1';
+
 // Fallback voor Vercel: probeer verschillende locaties
 let rootDir = monorepoRoot;
 if (process.env.VERCEL && process.env.VERCEL_ROOT_DIR) {
@@ -1635,45 +1653,209 @@ if (fs.existsSync(gameDir)) {
     }));
 }
 
-// Serveer index.html voor root route (vanuit app directory)
-app.get('/', (req, res, next) => {
-    // Set no-cache headers
-    res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
-    res.setHeader('Pragma', 'no-cache');
-    res.setHeader('Expires', '0');
-    
-    // Eerst proberen: gebruik in-memory cache (voor Vercel serverless)
-    if (global.htmlFilesCache && global.htmlFilesCache['index.html']) {
-        console.log(`✅ Serving index.html from memory cache`);
-        res.setHeader('Content-Type', 'text/html; charset=utf-8');
-        return res.send(global.htmlFilesCache['index.html']);
+// ============================================
+// MULTI-APP ROUTING
+// ============================================
+// Helper functie om bestanden uit een specifieke app directory te serveren
+function serveFromApp(appName, filePath, res, next) {
+    const targetAppDir = availableApps[appName];
+    if (!targetAppDir) {
+        return res.status(404).json({ error: `App '${appName}' not found` });
     }
     
-    // Serveer vanuit app directory
-    const indexPath = path.join(appDir, 'index.html');
-    console.log(`[Monorepo] Serving index.html from: ${indexPath}`);
-    console.log(`[Monorepo] appDir exists: ${fs.existsSync(appDir)}`);
-    console.log(`[Monorepo] index.html exists: ${fs.existsSync(indexPath)}`);
-    
-    if (!fs.existsSync(indexPath)) {
-        console.error(`[Monorepo] ❌ index.html not found at: ${indexPath}`);
-        console.error(`[Monorepo] appDir: ${appDir}`);
-        console.error(`[Monorepo] monorepoRoot: ${monorepoRoot}`);
-        return res.status(404).json({ 
-            error: 'index.html not found',
-            appDir: appDir,
-            indexPath: indexPath,
-            appDirExists: fs.existsSync(appDir)
+    const fullPath = path.join(targetAppDir, filePath);
+    if (fs.existsSync(fullPath)) {
+        res.sendFile(fullPath, (err) => {
+            if (err) {
+                console.error(`[Multi-App] Error serving ${filePath} from ${appName}:`, err);
+                next(err);
+            }
         });
+    } else {
+        res.status(404).json({ error: `File not found in app '${appName}': ${filePath}` });
     }
-    
-    res.sendFile(indexPath, (err) => {
-        if (err) {
-            console.error('[Monorepo] Error serving index.html:', err);
-            next(err);
-        }
+}
+
+// Multi-app routes: /app-name/* voor elke app
+if (MULTI_APP_MODE && Object.keys(availableApps).length > 0) {
+    console.log(`[Multi-App] 🚀 Multi-app mode enabled. Apps available at:`);
+    Object.keys(availableApps).forEach(appName => {
+        const appDir = availableApps[appName];
+        console.log(`[Multi-App]   - http://localhost:${PORT}/${appName}/`);
+        
+        // Route voor app index.html
+        app.get(`/${appName}/`, (req, res, next) => {
+            res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+            res.setHeader('Pragma', 'no-cache');
+            res.setHeader('Expires', '0');
+            serveFromApp(appName, 'index.html', res, next);
+        });
+        
+        // Route voor app HTML bestanden
+        app.get(new RegExp(`^/${appName}/.*\\.html$`), (req, res, next) => {
+            const fileName = req.path.replace(`/${appName}/`, '');
+            res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+            res.setHeader('Pragma', 'no-cache');
+            res.setHeader('Expires', '0');
+            serveFromApp(appName, fileName, res, next);
+        });
+        
+        // Route voor app JSON bestanden (content)
+        app.get(new RegExp(`^/${appName}/.*\\.json$`), (req, res, next) => {
+            const fileName = req.path.replace(`/${appName}/`, '');
+            res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+            res.setHeader('Pragma', 'no-cache');
+            res.setHeader('Expires', '0');
+            res.setHeader('Content-Type', 'application/json; charset=utf-8');
+            serveFromApp(appName, fileName, res, next);
+        });
+        
+        // Route voor app JavaScript bestanden (skip /core/ routes)
+        app.get(new RegExp(`^/${appName}/.*\\.js$`), (req, res, next) => {
+            // Skip /core/ routes
+            if (req.path.includes('/core/')) {
+                return next();
+            }
+            const fileName = req.path.replace(`/${appName}/`, '');
+            res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+            res.setHeader('Pragma', 'no-cache');
+            res.setHeader('Expires', '0');
+            res.setHeader('Content-Type', 'application/javascript; charset=utf-8');
+            serveFromApp(appName, fileName, res, next);
+        });
+        
+        // Route voor app assets (images, documents, etc.)
+        app.get(`/${appName}/assets/*`, (req, res, next) => {
+            const fileName = req.path.replace(`/${appName}/`, '');
+            serveFromApp(appName, fileName, res, next);
+        });
+        
+        // Route voor app config.js
+        app.get(`/${appName}/config.js`, (req, res, next) => {
+            const configPath = path.join(availableApps[appName], 'config.js');
+            if (fs.existsSync(configPath)) {
+                res.setHeader('Content-Type', 'application/javascript; charset=utf-8');
+                res.sendFile(configPath, (err) => {
+                    if (err) {
+                        generateDynamicConfig(res);
+                    }
+                });
+            } else {
+                generateDynamicConfig(res);
+            }
+        });
+        
+        // Static file serving voor app directory
+        app.use(`/${appName}`, express.static(appDir, {
+            index: false,
+            dotfiles: 'ignore',
+            etag: true,
+            lastModified: true,
+            maxAge: '1y'
+        }));
     });
-});
+    
+    // Root route: toon app selector in multi-app mode
+    app.get('/', (req, res, next) => {
+        res.setHeader('Content-Type', 'text/html; charset=utf-8');
+        const appList = Object.keys(availableApps).map(appName => {
+            const appPath = `/${appName}/`;
+            return `<li><a href="${appPath}" style="color: #0077b6; text-decoration: none; font-size: 1.2em;">${appName}</a></li>`;
+        }).join('\n        ');
+        
+        const html = `<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Learning Apps</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        h1 {
+            color: #0077b6;
+            border-bottom: 3px solid #0077b6;
+            padding-bottom: 10px;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        li {
+            margin: 15px 0;
+            padding: 15px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        li:hover {
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+        a:hover {
+            text-decoration: underline !important;
+        }
+    </style>
+</head>
+<body>
+    <h1>📚 Beschikbare E-Learning Apps</h1>
+    <p>Kies een app om te openen:</p>
+    <ul>
+        ${appList}
+    </ul>
+    <p style="margin-top: 30px; color: #666; font-size: 0.9em;">
+        💡 Tip: Je kunt ook direct naar <code>http://localhost:${PORT}/app-naam/</code> navigeren
+    </p>
+</body>
+</html>`;
+        res.send(html);
+    });
+} else {
+    // Single-app mode: serveer default app op root
+    // Serveer index.html voor root route (vanuit app directory)
+    app.get('/', (req, res, next) => {
+        // Set no-cache headers
+        res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+        res.setHeader('Pragma', 'no-cache');
+        res.setHeader('Expires', '0');
+        
+        // Eerst proberen: gebruik in-memory cache (voor Vercel serverless)
+        if (global.htmlFilesCache && global.htmlFilesCache['index.html']) {
+            console.log(`✅ Serving index.html from memory cache`);
+            res.setHeader('Content-Type', 'text/html; charset=utf-8');
+            return res.send(global.htmlFilesCache['index.html']);
+        }
+        
+        // Serveer vanuit app directory
+        const indexPath = path.join(appDir, 'index.html');
+        console.log(`[Monorepo] Serving index.html from: ${indexPath}`);
+        console.log(`[Monorepo] appDir exists: ${fs.existsSync(appDir)}`);
+        console.log(`[Monorepo] index.html exists: ${fs.existsSync(indexPath)}`);
+        
+        if (!fs.existsSync(indexPath)) {
+            console.error(`[Monorepo] ❌ index.html not found at: ${indexPath}`);
+            console.error(`[Monorepo] appDir: ${appDir}`);
+            console.error(`[Monorepo] monorepoRoot: ${monorepoRoot}`);
+            return res.status(404).json({ 
+                error: 'index.html not found',
+                appDir: appDir,
+                indexPath: indexPath,
+                appDirExists: fs.existsSync(appDir)
+            });
+        }
+        
+        res.sendFile(indexPath, (err) => {
+            if (err) {
+                console.error('[Monorepo] Error serving index.html:', err);
+                next(err);
+            }
+        });
+    });
+}
 
 // Serveer game/index.html expliciet (vanuit game directory)
 app.get('/game/index.html', (req, res, next) => {
@@ -2111,7 +2293,24 @@ if (require.main === module) {
         if (!GEMINI_API_KEY) {
             console.log(`⚠️  Please set GEMINI_API_KEY in .env file`);
         }
-        console.log(`\n📚 E-Learning template is available at: http://localhost:${PORT}`);
+        
+        if (MULTI_APP_MODE) {
+            console.log(`\n📚 Multi-App Mode: Alle apps beschikbaar op:`);
+            Object.keys(availableApps).forEach(appName => {
+                console.log(`   - http://localhost:${PORT}/${appName}/`);
+            });
+            console.log(`\n   Root: http://localhost:${PORT}/ (app selector)`);
+        } else {
+            console.log(`\n📚 Single-App Mode: App beschikbaar op:`);
+            if (appDir) {
+                const appName = path.basename(appDir);
+                console.log(`   - http://localhost:${PORT}/ (${appName})`);
+            } else {
+                console.log(`   - http://localhost:${PORT}/`);
+            }
+            console.log(`\n   💡 Tip: Zet MULTI_APP=true om alle apps te zien`);
+        }
+        
         console.log(`🔧 API endpoint: http://localhost:${PORT}/api/generate-questions`);
         
         // Pre-load available models cache on server start

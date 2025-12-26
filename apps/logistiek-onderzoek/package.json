@@ -7,8 +7,9 @@
     "@e-learning/core": "*"
   },
   "scripts": {
-    "dev": "cd ../../packages/core && npm run dev",
-    "start": "cd ../../packages/core && npm start"
+    "dev": "cd ../../packages/core && npm run dev:app logistiek-onderzoek",
+    "dev:multi": "cd ../../packages/core && npm run dev:multi",
+    "start": "cd ../../packages/core && npm run dev:app logistiek-onderzoek"
   }
 }
 

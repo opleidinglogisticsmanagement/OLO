@@ -30,8 +30,9 @@ if (!appName) {
 }
 
 // Bepaal paden
-const monorepoRoot = path.resolve(__dirname, '../..');
 const coreDir = path.resolve(__dirname, '..');
+// Script staat in packages/core/scripts/, dus 3 levels omhoog = monorepo root
+const monorepoRoot = path.resolve(__dirname, '../../..');
 const appDir = path.join(monorepoRoot, 'apps', appName);
 
 // Verifieer dat app bestaat

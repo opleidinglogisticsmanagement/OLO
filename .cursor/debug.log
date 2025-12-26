@@ -4,3 +4,15 @@
 {"location":"Week3LessonPage.js:570","message":"setupMCQuestionButton called","data":{"retries":5,"hostname":"localhost","isVercel":false},"timestamp":1766478510758,"sessionId":"debug-session","runId":"run1","hypothesisId":"A"}
 {"location":"index.html:1563","message":"Adding click listener to PDF export button","data":{},"timestamp":1766641892678,"sessionId":"debug-session","runId":"run1","hypothesisId":"A"}
 {"location":"index.html:1563","message":"Adding click listener to PDF export button","data":{},"timestamp":1766641893135,"sessionId":"debug-session","runId":"run1","hypothesisId":"A"}
+{"location":"index.html:1563","message":"Adding click listener to PDF export button","data":{},"timestamp":1766775794412,"sessionId":"debug-session","runId":"run1","hypothesisId":"A"}
+{"location":"index.html:1563","message":"Adding click listener to PDF export button","data":{},"timestamp":1766775794872,"sessionId":"debug-session","runId":"run1","hypothesisId":"A"}
+{"location":"SidebarManager.js:1","message":"SidebarManager.js loading started","data":{"hasPath":false,"hasModule":false,"hasRequire":true},"timestamp":1766775816293,"sessionId":"debug-session","runId":"run1","hypothesisId":"A"}
+{"location":"ContentRenderer.js:1","message":"ContentRenderer.js loading started","data":{"hasPath":false,"hasModule":false,"hasRequire":true},"timestamp":1766775816298,"sessionId":"debug-session","runId":"run1","hypothesisId":"A"}
+{"location":"BaseLessonPage.js:411","message":"BaseLessonPage.js export","data":{"hasModule":false,"hasWindow":true,"classDefined":true},"timestamp":1766775816297,"sessionId":"debug-session","runId":"run1","hypothesisId":"A"}
+{"location":"index.html:1563","message":"Adding click listener to PDF export button","data":{},"timestamp":1766775816688,"sessionId":"debug-session","runId":"run1","hypothesisId":"A"}
+{"location":"index.html:1563","message":"Adding click listener to PDF export button","data":{},"timestamp":1766775817190,"sessionId":"debug-session","runId":"run1","hypothesisId":"A"}
+{"location":"SidebarManager.js:1","message":"SidebarManager.js loading started","data":{"hasPath":false,"hasModule":false,"hasRequire":true},"timestamp":1766775829241,"sessionId":"debug-session","runId":"run1","hypothesisId":"A"}
+{"location":"BaseLessonPage.js:411","message":"BaseLessonPage.js export","data":{"hasModule":false,"hasWindow":true,"classDefined":true},"timestamp":1766775829243,"sessionId":"debug-session","runId":"run1","hypothesisId":"A"}
+{"location":"ContentRenderer.js:1","message":"ContentRenderer.js loading started","data":{"hasPath":false,"hasModule":false,"hasRequire":true},"timestamp":1766775829323,"sessionId":"debug-session","runId":"run1","hypothesisId":"A"}
+{"location":"index.html:1563","message":"Adding click listener to PDF export button","data":{},"timestamp":1766775829678,"sessionId":"debug-session","runId":"run1","hypothesisId":"A"}
+{"location":"index.html:1563","message":"Adding click listener to PDF export button","data":{},"timestamp":1766775830173,"sessionId":"debug-session","runId":"run1","hypothesisId":"A"}

@@ -11,8 +11,9 @@ const fs = require('fs');
 
 // Bepaal paden
 const coreDir = path.resolve(__dirname, '..');
-// Script staat in packages/core/scripts/, dus 2 levels omhoog = monorepo root
-const monorepoRoot = path.resolve(__dirname, '../..');
+// Script staat in packages/core/scripts/, dus 3 levels omhoog = monorepo root
+// packages/core/scripts -> packages/core -> packages -> root
+const monorepoRoot = path.resolve(__dirname, '../../..');
 const appsDir = path.join(monorepoRoot, 'apps');
 
 // Debug: log paden

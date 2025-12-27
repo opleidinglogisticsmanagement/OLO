@@ -18,16 +18,20 @@
     "content": [
       {
         "type": "heading",
-        "text": "Waarom operations- en processtrategie?",
+        "text": "Introductie",
         "level": 2,
+        "id": "introductie"
+      },
+      {
+        "type": "heading",
+        "text": "Waarom operations- en processtrategie?",
+        "level": 3,
         "id": "waarom-operations-processtrategie"
       },
       {
         "type": "paragraph",
         "text": [
-          "Welkom bij de eerste e-learning van Operations Management!",
-          "In de e-learning beginnen we met een uitleg van het begrip Operations Management.",
-          "Dan gaan we verder met het onderwerp van deze e-learning; operations en processtrategie."
+          "In de e-learning beginnen we met een uitleg van het begrip Operations Management. Dan gaan we verder met het onderwerp van deze e-learning; operations en processtrategie."
         ]
       },
       {
@@ -459,11 +463,6 @@
         ]
       },
       {
-        "type": "heading",
-        "text": "Competitive priorities",
-        "level": 2
-      },
-      {
         "type": "paragraph",
         "text": [
           "Bedenk voor jezelf eens welke supermarkten je allemaal kent...",
@@ -585,6 +584,12 @@
             ]
           }
         ]
+      },
+      {
+        "type": "heading",
+        "text": "Procesbeslissingen",
+        "level": 2,
+        "id": "procesbeslissingen"
       }
     ]
   }

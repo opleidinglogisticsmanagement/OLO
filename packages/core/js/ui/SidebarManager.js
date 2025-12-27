@@ -32,6 +32,7 @@ class SidebarManager {
         this.setupWeek4Submenu();
         this.setupWeek5Submenu();
         this.setupWeek6Submenu();
+        this.setupOperationsProcesstrategieSubmenu();
     }
 
     /**
@@ -502,6 +503,114 @@ class SidebarManager {
             }
             // Otherwise, allow normal navigation (AppRouter will handle it)
         }, true); // Use capture phase to run before AppRouter
+    }
+
+    /**
+     * Setup Operations Processtrategie submenu expand/collapse functionality
+     */
+    setupOperationsProcesstrategieSubmenu() {
+        // Try to find elements immediately first
+        let navItem = document.querySelector('.operations-processtrategie-nav-item');
+        
+        // If not found, try again after a short delay (for hash navigation cases)
+        if (!navItem) {
+            setTimeout(() => {
+                navItem = document.querySelector('.operations-processtrategie-nav-item');
+                if (!navItem) {
+                    return;
+                }
+                this._setupOperationsProcesstrategieSubmenuInternal(navItem);
+            }, 50);
+        } else {
+            // Elements found immediately, setup right away
+            this._setupOperationsProcesstrategieSubmenuInternal(navItem);
+        }
+    }
+    
+    _setupOperationsProcesstrategieSubmenuInternal(navItem) {
+        const link = navItem.querySelector('a');
+        const subItemsContainer = document.getElementById('operations-processtrategie-submenu');
+        const chevron = document.getElementById('operations-processtrategie-chevron-index');
+        
+        if (!link || !subItemsContainer || !chevron) {
+            return;
+        }
+        
+        // Check if we're on Operations Processtrategie page - if so, expand by default
+        const isOperationsProcesstrategiePage = this.moduleId === 'operations-processtrategie';
+        if (isOperationsProcesstrategiePage) {
+            subItemsContainer.classList.remove('hidden');
+            chevron.classList.add('rotate-180');
+        }
+        
+        // Remove old event listeners if they exist (prevent duplicate listeners)
+        // Use a data attribute to track if listeners are already attached
+        if (chevron.dataset.listenersAttached === 'true') {
+            return;
+        }
+        
+        if (this.operationsProcesstrategieHandlers) {
+            if (this.operationsProcesstrategieHandlers.chevronClick) {
+                chevron.removeEventListener('click', this.operationsProcesstrategieHandlers.chevronClick, true);
+            }
+            if (this.operationsProcesstrategieHandlers.linkClick) {
+                link.removeEventListener('click', this.operationsProcesstrategieHandlers.linkClick, true);
+            }
+        }
+        
+        // Toggle submenu only when clicking the chevron icon
+        // Use capture phase to ensure this runs before AppRouter's link interceptor
+        const chevronClickHandler = (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            const isHidden = subItemsContainer.classList.contains('hidden');
+            
+            if (isHidden) {
+                subItemsContainer.classList.remove('hidden');
+                chevron.classList.add('rotate-180');
+            } else {
+                subItemsContainer.classList.add('hidden');
+                chevron.classList.remove('rotate-180');
+            }
+        };
+        
+        // Handle chevron clicks on the link itself (in capture phase to run before AppRouter)
+        const linkClickHandler = (e) => {
+            // Check if click is on chevron or within chevron
+            const target = e.target;
+            const isChevronClick = target === chevron || 
+                                   chevron.contains(target) ||
+                                   (target.id && target.id.includes('operations-processtrategie-chevron')) ||
+                                   (target.tagName === 'I' && target.classList && target.classList.contains('fa-chevron-down') && target.id === 'operations-processtrategie-chevron-index');
+            
+            if (isChevronClick) {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                // Toggle submenu
+                const isHidden = subItemsContainer.classList.contains('hidden');
+                if (isHidden) {
+                    subItemsContainer.classList.remove('hidden');
+                    chevron.classList.add('rotate-180');
+                } else {
+                    subItemsContainer.classList.add('hidden');
+                    chevron.classList.remove('rotate-180');
+                }
+            }
+            // Otherwise, allow normal navigation (AppRouter will handle it)
+        };
+        
+        // Store handlers for cleanup
+        this.operationsProcesstrategieHandlers = {
+            chevronClick: chevronClickHandler,
+            linkClick: linkClickHandler
+        };
+        
+        chevron.addEventListener('click', chevronClickHandler, true); // Use capture phase to run before AppRouter
+        link.addEventListener('click', linkClickHandler, true); // Use capture phase to run before AppRouter
+        
+        // Mark that listeners are attached
+        chevron.dataset.listenersAttached = 'true';
     }
 }
 

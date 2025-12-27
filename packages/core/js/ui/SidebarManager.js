@@ -7,10 +7,6 @@
  * - Nav link click handling (sluit sidebar op mobile)
  */
 
-// #region agent log
-(function(){try{const _d={location:'SidebarManager.js:1',message:'SidebarManager.js loading started',data:{hasPath:typeof path!=='undefined',hasModule:typeof module!=='undefined',hasRequire:typeof require!=='function'},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'};fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(_d)}).catch(()=>{});}catch(e){}})();
-// #endregion
-
 class SidebarManager {
     constructor(moduleId) {
         this.moduleId = moduleId;
@@ -39,42 +35,19 @@ class SidebarManager {
      * Setup mobile menu open/close functionaliteit
      */
     setupMobileMenu() {
-        // #region agent log
-        console.log('[SidebarManager] setupMobileMenu called', {moduleId:this.moduleId,windowWidth:window.innerWidth});
-        // #endregion
+        
         const mobileMenuButton = document.getElementById('mobile-menu-button');
         const sidebar = document.getElementById('sidebar');
         const overlay = document.getElementById('overlay');
 
-        // #region agent log
-        console.log('[SidebarManager] DOM elements check', {mobileMenuButton:!!mobileMenuButton,sidebar:!!sidebar,overlay:!!overlay,sidebarClasses:sidebar?Array.from(sidebar.classList):null,hasTranslateX:sidebar?.classList.contains('-translate-x-full'),overlayHidden:overlay?.classList.contains('hidden')});
-        // #endregion
-
         if (!mobileMenuButton || !sidebar || !overlay) {
-            // #region agent log
-            console.warn('[SidebarManager] Early return - missing elements', {mobileMenuButton:!!mobileMenuButton,sidebar:!!sidebar,overlay:!!overlay});
-            // #endregion
+            
             return;
         }
         
         // Ensure sidebar is closed on mobile after navigation
         if (window.innerWidth < 1024) {
-            // #region agent log
-            const beforeTransform = window.getComputedStyle(sidebar).transform;
-            const beforeDisplay = window.getComputedStyle(sidebar).display;
-            const beforeVisibility = window.getComputedStyle(sidebar).visibility;
-            const beforeClasses = Array.from(sidebar.classList);
-            console.log('[SidebarManager] Ensuring sidebar is closed on mobile', {
-                currentHasTranslateX:sidebar.classList.contains('-translate-x-full'),
-                hasLgTranslateX0:sidebar.classList.contains('lg:translate-x-0'),
-                computedTransform:beforeTransform,
-                computedDisplay:beforeDisplay,
-                computedVisibility:beforeVisibility,
-                sidebarRect:sidebar.getBoundingClientRect(),
-                allClasses:beforeClasses
-            });
-            // #endregion
-            
+
             // Remove lg:translate-x-0 if present (it might be overriding on mobile)
             sidebar.classList.remove('lg:translate-x-0');
             sidebar.classList.add('-translate-x-full');
@@ -85,19 +58,7 @@ class SidebarManager {
             
             overlay.classList.add('hidden');
             document.body.style.overflow = '';
-            
-            // #region agent log
-            const afterTransform = window.getComputedStyle(sidebar).transform;
-            const afterRect = sidebar.getBoundingClientRect();
-            console.log('[SidebarManager] After closing sidebar', {
-                hasTranslateX:sidebar.classList.contains('-translate-x-full'),
-                hasLgTranslateX0:sidebar.classList.contains('lg:translate-x-0'),
-                computedTransform:afterTransform,
-                inlineStyle:sidebar.style.transform,
-                sidebarRect:afterRect,
-                sidebarLeft:afterRect.left
-            });
-            // #endregion
+
         }
 
         // Remove old event listeners if they exist (prevent duplicate listeners)
@@ -114,17 +75,13 @@ class SidebarManager {
         this.mobileMenuHandlers.navLinkClose = [];
 
         const openSidebar = () => {
-            // #region agent log
-            console.log('[SidebarManager] openSidebar called', {sidebarClassesBefore:Array.from(sidebar.classList),overlayClassesBefore:Array.from(overlay.classList)});
-            // #endregion
+            
             sidebar.classList.remove('-translate-x-full');
             // Remove inline transform to allow CSS classes to work
             sidebar.style.transform = '';
             overlay.classList.remove('hidden');
             document.body.style.overflow = 'hidden'; // Prevent body scroll when sidebar is open
-            // #region agent log
-            console.log('[SidebarManager] openSidebar after', {sidebarClassesAfter:Array.from(sidebar.classList),overlayClassesAfter:Array.from(overlay.classList),hasTranslateX:sidebar.classList.contains('-translate-x-full'),computedTransform:window.getComputedStyle(sidebar).transform,inlineStyle:sidebar.style.transform});
-            // #endregion
+            
         };
 
         const closeSidebar = () => {
@@ -142,15 +99,9 @@ class SidebarManager {
         this.mobileMenuHandlers.openSidebar = openSidebar;
         this.mobileMenuHandlers.closeSidebar = closeSidebar;
 
-        // #region agent log
-        console.log('[SidebarManager] Attaching event listeners', {mobileMenuButtonExists:!!mobileMenuButton,overlayExists:!!overlay});
-        // #endregion
-        
         // Wrap openSidebar to add logging and ensure it runs
         const wrappedOpenSidebar = (e) => {
-            // #region agent log
-            console.log('[SidebarManager] mobileMenuButton clicked!', {event:e,button:mobileMenuButton,target:e.target,currentTarget:e.currentTarget});
-            // #endregion
+            
             e.stopPropagation(); // Prevent event from bubbling to AppRouter
             openSidebar();
         };
@@ -165,10 +116,6 @@ class SidebarManager {
         }; // Update stored handler
         
         overlay.addEventListener('click', closeSidebar);
-        
-        // #region agent log
-        console.log('[SidebarManager] Event listeners attached', {hasClickHandler:mobileMenuButton.onclick !== null});
-        // #endregion
 
         // Close button in sidebar
         const sidebarCloseButton = document.getElementById('sidebar-close-button');

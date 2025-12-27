@@ -59,11 +59,20 @@
     <script src="/core/js/services/NavigationService.js"></script>
     <script src="/core/js/components/NavigationRenderer.js"></script>
     <script src="/core/js/components/ContentTemplateRenderer.js"></script>
-    <script>
-        
-    </script>
     <script src="/core/pages/BaseLessonPage.js" onerror="console.error('[vraagvoorspelling-deel1.html] Failed to load BaseLessonPage.js');"></script>
     <script src="/core/pages/ContentRenderer.js"></script>
+    <script src="/core/js/utils/ContentValidator.js"></script>
+    <script src="/core/js/utils/KaTeXRenderer.js"></script>
+    
+    <!-- Interactive components -->
+    <script src="/core/js/components/interactive/utils/HtmlUtils.js"></script>
+    <script src="/core/js/components/interactive/TabRenderer.js"></script>
+    <script src="/core/js/components/interactive/AccordionRenderer.js"></script>
+    <script src="/core/js/components/interactive/ClickableStepsRenderer.js"></script>
+    <script src="/core/js/components/interactive/ChecklistRenderer.js"></script>
+    <script src="/core/js/components/interactive/ExerciseRenderer.js"></script>
+    <script src="/core/js/components/interactive/AIRenderer.js"></script>
+    <script src="/core/pages/InteractiveRenderer.js"></script>
     <script>
 
         // Wait for BaseLessonPage to be loaded before proceeding
@@ -82,7 +91,7 @@
         }
         
         function initializePage() {
-            
+
             if (!window.appRouter) {
                 if (typeof window.VraagvoorspellingDeel1LessonPage === 'undefined') {
                     
@@ -90,13 +99,13 @@
                     return;
                 }
                 try {
-                    
+
                     const page = new VraagvoorspellingDeel1LessonPage();
-                    
+
                     page.init();
                 } catch (e) {
                     console.error('[vraagvoorspelling-deel1.html] Failed to initialize VraagvoorspellingDeel1LessonPage:', e);
-                    
+
                 }
             }
         }

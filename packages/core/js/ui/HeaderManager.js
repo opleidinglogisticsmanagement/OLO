@@ -16,6 +16,7 @@ class HeaderManager {
      * Moet worden aangeroepen nadat de DOM geladen is
      */
     async init() {
+        
         await this.setupSearchFunctionality();
         this.setupDarkModeToggle();
     }
@@ -29,13 +30,21 @@ class HeaderManager {
         const searchToggleBtn = document.getElementById('search-toggle-btn');
         const searchOverlay = document.getElementById('search-overlay');
         const closeSearchBtn = document.getElementById('close-search-btn');
-        
-        if (!searchInput || !resultsDropdown) return;
+
+        if (!searchInput || !resultsDropdown) {
+            
+            return;
+        }
         
         // Initialize search service (lazy load)
+        
         if (window.SearchService && !window.SearchService.isInitialized) {
             // Start init in background
-            window.SearchService.init().catch(console.error);
+            
+            window.SearchService.init().catch((err) => {
+                console.error(err);
+                
+            });
         }
         
         // Toggle Search Overlay Logic
@@ -78,24 +87,28 @@ class HeaderManager {
         
         searchInput.addEventListener('input', (e) => {
             const query = e.target.value;
-            
+
             clearTimeout(debounceTimer);
             debounceTimer = setTimeout(() => {
                 if (query.length < 2) {
+                    
                     resultsDropdown.classList.add('hidden');
                     resultsDropdown.innerHTML = '';
                     return;
                 }
-                
+
                 if (window.SearchService) {
                     // Ensure initialized
                     if (!window.SearchService.isInitialized) {
+                        
                         window.SearchService.init().then(() => {
                             this.performSearch(query, resultsDropdown);
                         });
                     } else {
                         this.performSearch(query, resultsDropdown);
                     }
+                } else {
+                    
                 }
             }, 300);
         });
@@ -141,8 +154,9 @@ class HeaderManager {
      * Perform search and render results
      */
     performSearch(query, container) {
+
         const results = window.SearchService.search(query);
-        
+
         if (results.length === 0) {
             container.innerHTML = `
                 <div class="px-4 py-3 text-sm text-gray-500 dark:text-gray-400">
@@ -241,8 +255,4 @@ if (typeof module !== 'undefined' && module.exports) {
 } else {
     window.HeaderManager = HeaderManager;
 }
-
-
-
-
 

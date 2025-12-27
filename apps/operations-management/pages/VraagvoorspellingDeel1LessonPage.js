@@ -4,7 +4,28 @@
  * Specifieke pagina voor Vraagvoorspelling (deel 1)
  */
 
-class VraagvoorspellingDeel1LessonPage extends BaseLessonPage {
+// Wait for BaseLessonPage to be available before defining the class
+(function() {
+    const maxWait = 5000; // 5 seconds
+    const startTime = Date.now();
+    
+    function checkAndDefine() {
+        if (typeof BaseLessonPage !== 'undefined') {
+            // BaseLessonPage is available, define the class
+            defineClass();
+        } else if (Date.now() - startTime < maxWait) {
+            // Still waiting, check again in 50ms
+            setTimeout(checkAndDefine, 50);
+        } else {
+            // Timeout - log error but don't throw (allow retry)
+            console.error('[VraagvoorspellingDeel1LessonPage] ❌ BaseLessonPage not available after waiting. Class will not be defined.');
+            
+        }
+    }
+    
+    function defineClass() {
+
+        class VraagvoorspellingDeel1LessonPage extends BaseLessonPage {
     constructor() {
         super('vraagvoorspelling-deel1', 'Vraagvoorspelling (deel 1)', 'Vraagvoorspelling (deel 1)');
     }
@@ -68,34 +89,41 @@ class VraagvoorspellingDeel1LessonPage extends BaseLessonPage {
         return sections;
     }
 
-    async afterContentLoaded() {
-        if (!this.content || !this.contentLoaded) {
-            console.error('[VraagvoorspellingDeel1LessonPage] ❌ Content not loaded properly');
-            return false;
+            async afterContentLoaded() {
+                if (!this.content || !this.contentLoaded) {
+                    console.error('[VraagvoorspellingDeel1LessonPage] ❌ Content not loaded properly');
+                    return false;
+                }
+                
+                if (!this.content.theorie) {
+                    console.warn('[VraagvoorspellingDeel1LessonPage] ⚠️ Theorie section missing in content');
+                }
+                
+                return true;
+            }
         }
         
-        if (!this.content.theorie) {
-            console.warn('[VraagvoorspellingDeel1LessonPage] ⚠️ Theorie section missing in content');
+        // Export the class
+        try {
+            if (typeof module !== 'undefined' && module.exports) {
+                module.exports = VraagvoorspellingDeel1LessonPage;
+            } else {
+                window.VraagvoorspellingDeel1LessonPage = VraagvoorspellingDeel1LessonPage;
+            }
+            console.log('[VraagvoorspellingDeel1LessonPage] ✅ Exported to window');
+            
+        } catch (error) {
+            console.error('[VraagvoorspellingDeel1LessonPage] ❌ Error exporting:', error);
+            
+            try {
+                window.VraagvoorspellingDeel1LessonPage = VraagvoorspellingDeel1LessonPage;
+            } catch (e) {
+                console.error('[VraagvoorspellingDeel1LessonPage] ❌ Failed to force export:', e);
+            }
         }
-        
-        return true;
     }
-}
-
-try {
-    if (typeof module !== 'undefined' && module.exports) {
-        module.exports = VraagvoorspellingDeel1LessonPage;
-    } else {
-        window.VraagvoorspellingDeel1LessonPage = VraagvoorspellingDeel1LessonPage;
-    }
-    console.log('[VraagvoorspellingDeel1LessonPage] ✅ Exported to window');
-} catch (error) {
-    console.error('[VraagvoorspellingDeel1LessonPage] ❌ Error exporting:', error);
-    try {
-        window.VraagvoorspellingDeel1LessonPage = VraagvoorspellingDeel1LessonPage;
-    } catch (e) {
-        console.error('[VraagvoorspellingDeel1LessonPage] ❌ Failed to force export:', e);
-    }
-}
-
+    
+    // Start checking for BaseLessonPage
+    checkAndDefine();
+})();
 

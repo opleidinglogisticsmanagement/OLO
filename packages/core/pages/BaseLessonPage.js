@@ -16,10 +16,6 @@
  * - VideoManager: Video error detection
  */
 
-// #region agent log
-(function(){try{const _d={location:'BaseLessonPage.js:1',message:'BaseLessonPage.js loading started',data:{hasPath:typeof path!=='undefined',hasModule:typeof module!=='undefined',hasRequire:typeof require!=='function',alreadyDefined:typeof BaseLessonPage!=='undefined'},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'};fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(_d)}).catch(()=>{});}catch(e){}})();
-// #endregion
-
 class BaseLessonPage {
     constructor(moduleId, moduleTitle, moduleSubtitle) {
         this.moduleId = moduleId;
@@ -48,6 +44,7 @@ class BaseLessonPage {
      * @returns {string} Content filename
      */
     getContentFileName() {
+        
         // Special cases
         if (this.moduleId === 'afsluiting') {
             return 'afsluiting.content.json';
@@ -63,7 +60,9 @@ class BaseLessonPage {
         }
         
         // Fallback: use moduleId directly
-        return `${this.moduleId}.content.json`;
+        const fileName = `${this.moduleId}.content.json`;
+        
+        return fileName;
     }
 
     /**
@@ -71,12 +70,13 @@ class BaseLessonPage {
      * @param {number} retries - Aantal retry pogingen
      */
     async loadContent(retries = 3) {
+        
         const contentFileName = this.getContentFileName();
         
         // Build paths based on current location
         const currentPath = window.location.pathname;
         const basePath = currentPath.substring(0, currentPath.lastIndexOf('/') + 1);
-        
+
         for (let attempt = 1; attempt <= retries; attempt++) {
             try {
                 // Probeer verschillende paden (relatief, absoluut, en vanaf root)
@@ -89,12 +89,12 @@ class BaseLessonPage {
                     `${window.location.origin}/content/${contentFileName}`,
                     `${window.location.origin}${basePath}content/${contentFileName}`
                 ];
-                
+
                 let lastError = null;
                 for (const contentPath of paths) {
                     try {
                         console.log(`[${this.constructor.name}] Loading content from: ${contentPath} (attempt ${attempt}/${retries})`);
-                        
+
                         // Add timeout to prevent hanging
                         const controller = new AbortController();
                         const timeoutId = setTimeout(() => controller.abort(), 5000); // 5 second timeout
@@ -108,7 +108,7 @@ class BaseLessonPage {
                         });
                         
                         clearTimeout(timeoutId);
-                        
+
                         if (!response.ok) {
                             throw new Error(`HTTP error! status: ${response.status} for path: ${contentPath}`);
                         }
@@ -119,7 +119,7 @@ class BaseLessonPage {
                         }
                         
                         const jsonData = await response.json();
-                        
+
                         // Validate JSON structure if ContentValidator is available
                         if (typeof window.ContentValidator !== 'undefined') {
                             const isValid = ContentValidator.validateAndLog(jsonData, this.moduleId, false);
@@ -131,8 +131,10 @@ class BaseLessonPage {
                         this.content = jsonData;
                         this.contentLoaded = true;
                         console.log(`[${this.constructor.name}] ✅ Content loaded successfully from: ${contentPath}`);
+                        
                         return; // Success, exit function
                     } catch (pathError) {
+                        
                         if (pathError.name === 'AbortError') {
                             console.warn(`[${this.constructor.name}] Timeout loading from ${contentPath}`);
                             lastError = new Error(`Timeout: ${contentPath}`);
@@ -157,7 +159,7 @@ class BaseLessonPage {
                 };
                 
                 console.error(`[${this.constructor.name}] Error loading content (attempt ${attempt}/${retries}):`, errorDetails);
-                
+
                 if (attempt === retries) {
                     // Last attempt failed, use fallback
                     console.error(`[${this.constructor.name}] ❌ All attempts failed, using fallback content`);
@@ -174,6 +176,7 @@ class BaseLessonPage {
                     });
                     this.contentLoaded = false;
                     this.content = this.getFallbackContent();
+                    
                 } else {
                     // Wait before retry (exponential backoff)
                     const delay = Math.min(1000 * Math.pow(2, attempt - 1), 5000);
@@ -342,15 +345,15 @@ class BaseLessonPage {
         return this.navigationRenderer.renderNavigation();
     }
 
-
     /**
      * Initialiseer de pagina met content loading en lifecycle hooks
      */
     async init() {
+        
         try {
             // Load content
             await this.loadContent();
-            
+
             // Hook: afterContentLoaded - voor validatie of extra checks
             if (typeof this.afterContentLoaded === 'function') {
                 const shouldContinue = await this.afterContentLoaded();
@@ -369,8 +372,10 @@ class BaseLessonPage {
             if (typeof this.afterEventListeners === 'function') {
                 await this.afterEventListeners();
             }
+            
         } catch (error) {
             console.error(`[${this.constructor.name}] ❌ Error during initialization:`, error);
+            
             document.body.innerHTML = this.renderErrorState();
         }
     }
@@ -412,9 +417,7 @@ class BaseLessonPage {
 }
 
 // Export voor gebruik in andere modules
-// #region agent log
-(function(){try{const _d={location:'BaseLessonPage.js:411',message:'BaseLessonPage.js export',data:{hasModule:typeof module!=='undefined',hasWindow:typeof window!=='undefined',classDefined:typeof BaseLessonPage!=='undefined'},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'};fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(_d)}).catch(()=>{});}catch(e){}})();
-// #endregion
+
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = BaseLessonPage;
 } else {

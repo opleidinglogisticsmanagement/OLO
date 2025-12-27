@@ -59,22 +59,92 @@
     <script src="/core/js/services/NavigationService.js"></script>
     <script src="/core/js/components/NavigationRenderer.js"></script>
     <script src="/core/js/components/ContentTemplateRenderer.js"></script>
-    <script src="/core/pages/BaseLessonPage.js"></script>
-    <script src="/core/pages/ContentRenderer.js"></script>
-    <script src="pages/VraagvoorspellingDeel1LessonPage.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
+        
+    </script>
+    <script src="/core/pages/BaseLessonPage.js" onerror="console.error('[vraagvoorspelling-deel1.html] Failed to load BaseLessonPage.js');"></script>
+    <script src="/core/pages/ContentRenderer.js"></script>
+    <script>
+
+        // Wait for BaseLessonPage to be loaded before proceeding
+        // Note: We wait for the class to be available, not just the script onload event
+        // because onload fires when the script is downloaded, not when it's executed
+        function waitForBaseLessonPageScript() {
+            
+            if (typeof window.BaseLessonPage === 'undefined') {
+                
+                setTimeout(waitForBaseLessonPageScript, 50);
+                return;
+            }
+            
+            // BaseLessonPage is loaded, now start the dependency waiting
+            waitForDependencies();
+        }
+        
+        function initializePage() {
+            
             if (!window.appRouter) {
+                if (typeof window.VraagvoorspellingDeel1LessonPage === 'undefined') {
+                    
+                    setTimeout(initializePage, 50);
+                    return;
+                }
                 try {
+                    
                     const page = new VraagvoorspellingDeel1LessonPage();
+                    
                     page.init();
                 } catch (e) {
                     console.error('[vraagvoorspelling-deel1.html] Failed to initialize VraagvoorspellingDeel1LessonPage:', e);
+                    
                 }
             }
-        });
+        }
+        
+        // Wait for BaseLessonPage to be available before loading the page script
+        function waitForDependencies() {
+            
+            if (typeof window.BaseLessonPage === 'undefined') {
+                setTimeout(waitForDependencies, 50);
+                return;
+            }
+            
+            // Load script and wait for it to be available
+            // Determine the correct script path based on current location
+            const currentPath = window.location.pathname;
+            let scriptPath;
+            if (currentPath.includes('/apps/')) {
+                scriptPath = '/apps/operations-management/pages/VraagvoorspellingDeel1LessonPage.js';
+            } else if (currentPath.startsWith('/operations-management/')) {
+                scriptPath = '/operations-management/pages/VraagvoorspellingDeel1LessonPage.js';
+            } else {
+                scriptPath = 'pages/VraagvoorspellingDeel1LessonPage.js';
+            }
+
+            const script = document.createElement('script');
+            script.src = scriptPath;
+            script.onload = function() {
+                
+                if (document.readyState === 'loading') {
+                    document.addEventListener('DOMContentLoaded', initializePage);
+                } else {
+                    initializePage();
+                }
+            };
+            script.onerror = function() {
+                
+                console.error('[vraagvoorspelling-deel1.html] Failed to load VraagvoorspellingDeel1LessonPage.js from:', scriptPath);
+            };
+            document.head.appendChild(script);
+        }
+        
+        // Start waiting for BaseLessonPage script to load first
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', waitForBaseLessonPageScript);
+        } else {
+            waitForBaseLessonPageScript();
+        }
     </script>
 </body>
 </html>
-
 

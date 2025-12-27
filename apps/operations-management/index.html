@@ -790,7 +790,6 @@
                     </div>
                 </div>
 
-
                 <!-- Module Navigation -->
                 <nav class="flex-1 overflow-y-auto custom-scrollbar p-6" aria-label="Module navigatie">
                     <div class="space-y-2">
@@ -1126,8 +1125,6 @@
                                 </div>
                             </div>
                         </section>
-
-
 
                     </article>
 
@@ -1528,22 +1525,15 @@
                 // Remove existing event listener by cloning (prevents duplicates)
                 const newBtn = exportPdfBtn.cloneNode(true);
                 exportPdfBtn.parentNode.replaceChild(newBtn, exportPdfBtn);
-                
-                // #region agent log
-                fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'index.html:1563',message:'Adding click listener to PDF export button',data:{},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'})}).catch(()=>{});
-                // #endregion
+
                 newBtn.addEventListener('click', async () => {
-                    // #region agent log
-                    fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'index.html:1564',message:'PDF export button clicked',data:{},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'D'})}).catch(()=>{});
-                    // #endregion
+                    
                     // Disable button tijdens export
                     newBtn.disabled = true;
                     newBtn.innerHTML = '<i class="fas fa-spinner fa-spin text-xl"></i><span class="font-semibold">Exporteren...</span>';
                     
                     try {
-                        // #region agent log
-                        fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'index.html:1570',message:'Waiting for PDF libraries',data:{jspdf:typeof window.jspdf,html2canvas:typeof html2canvas},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'C'})}).catch(()=>{});
-                        // #endregion
+                        
                         // Wacht tot bibliotheken geladen zijn
                         await window.waitForPDFLibraries();
                         
@@ -1551,16 +1541,11 @@
                         if (typeof window.jspdf === 'undefined' || typeof html2canvas === 'undefined') {
                             throw new Error('PDF bibliotheken zijn niet beschikbaar. Herlaad de pagina en probeer het opnieuw.');
                         }
-                        
-                        // #region agent log
-                        fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'index.html:1577',message:'Calling PDFExporter',data:{},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'C'})}).catch(()=>{});
-                        // #endregion
+
                         const exporter = new PDFExporter();
                         await exporter.exportAllContentToPDF();
                     } catch (error) {
-                        // #region agent log
-                        fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'index.html:1579',message:'PDF export error',data:{errorMessage:error.message,errorName:error.name},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'C'})}).catch(()=>{});
-                        // #endregion
+                        
                         console.error('PDF export error:', error);
                         const errorMessage = error.message || 'Er is een fout opgetreden bij het exporteren. Probeer het opnieuw.';
                         alert(errorMessage);
@@ -1752,6 +1737,7 @@
         
         // Initialize SPA Router - Wait for all scripts to load
         const initializeRouter = () => {
+            
             console.log('[Index] Checking for AppRouter:', !!window.AppRouter);
             console.log('[Index] ⏰ Router initialization started at:', new Date().toISOString());
             
@@ -1786,6 +1772,7 @@
             }
             
             if (window.AppRouter) {
+                
                 console.log('[Index] ✅ AppRouter found, initializing...');
                 const router = new AppRouter();
                 // Override routes for operations-management app
@@ -1803,10 +1790,13 @@
                     'capaciteitsmanagement-deel2.html': () => router.loadWeekPage('capaciteitsmanagement-deel2', 'CapaciteitsmanagementDeel2LessonPage'),
                     'operations-planning-scheduling.html': () => router.loadWeekPage('operations-planning-scheduling', 'OperationsPlanningSchedulingLessonPage')
                 };
+                
                 router.init();
                 window.appRouter = router; // Store globally for debugging
                 console.log('[Index] ✅ Router initialized and stored in window.appRouter');
+                
             } else {
+                
                 console.error('[Index] ❌ AppRouter not found! Check if js/core/AppRouter.js is loaded.');
             }
         };
@@ -1832,19 +1822,17 @@
             ];
             
             const allAvailable = expectedClasses.every(cls => window[cls]);
-            
+
             if (allAvailable) {
                 console.log('[Index] ✅ All scripts loaded, initializing router');
                 initializeRouter();
             } else if (checkAttempts < maxAttempts) {
-                const missing = expectedClasses.filter(cls => !window[cls]);
                 console.log(`[Index] ⏳ Waiting for scripts... (attempt ${checkAttempts}/${maxAttempts}) Missing:`, missing);
                 // Check again in 50ms
                 setTimeout(waitForAllScripts, 50);
             } else {
                 // Timeout reached, initialize anyway with what we have
                 console.warn('[Index] ⚠️ Timeout waiting for all scripts, initializing router with available classes');
-                const missing = expectedClasses.filter(cls => !window[cls]);
                 console.warn('[Index] Missing classes:', missing);
                 initializeRouter();
             }

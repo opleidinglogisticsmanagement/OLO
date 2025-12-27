@@ -1,3 +1,4 @@
+// @ts-nocheck
 /**
  * AppRouter
  * 
@@ -32,6 +33,7 @@ class AppRouter {
      * Initialiseer de router
      */
     init() {
+        
         // Detect hard refresh en redirect naar index
         const isHardRefresh = (() => {
             // Moderne browsers: gebruik Performance Navigation API
@@ -80,6 +82,7 @@ class AppRouter {
      */
     interceptLinks() {
         document.addEventListener('click', (e) => {
+            
             // Check if click is on a chevron icon (for sidebar submenu expansion)
             // Chevrons have IDs like 'week-2-chevron', 'week-3-chevron', etc.
             // or have class 'fa-chevron-down'
@@ -98,7 +101,9 @@ class AppRouter {
             }
             
             const link = e.target.closest('a[href]');
-            if (!link) return;
+            if (!link) {
+                return;
+            }
             
             const href = link.getAttribute('href');
             
@@ -119,8 +124,13 @@ class AppRouter {
                 fileName = fileName.split('#')[0];
             }
             
-            if (this.routes[fileName] || fileName === 'index.html') {
-                console.log('[AppRouter] ✅ Link intercepted:', href, 'File:', fileName);
+            // Check if it's a known route or can be dynamically detected
+            const isKnownRoute = this.routes[fileName] || fileName === 'index.html';
+            const detectedClassName = this.detectPageClassName(fileName);
+            const canDetectDynamically = detectedClassName !== null;
+            
+            if (isKnownRoute || canDetectDynamically) {
+                console.log('[AppRouter] ✅ Link intercepted:', href, 'File:', fileName, 'Known route:', isKnownRoute, 'Can detect dynamically:', canDetectDynamically);
                 e.preventDefault();
                 e.stopPropagation();
                 
@@ -143,7 +153,10 @@ class AppRouter {
      * Navigeer naar een nieuwe route
      */
     async navigate(path, hash = null) {
-        if (this.isNavigating) return;
+        
+        if (this.isNavigating) {
+            return;
+        }
         
         this.isNavigating = true;
         
@@ -171,9 +184,37 @@ class AppRouter {
     }
 
     /**
+     * Detect page class name from file name
+     * Examples:
+     * - vraagvoorspelling-deel1.html -> VraagvoorspellingDeel1LessonPage
+     * - operations-processtrategie.html -> OperationsProcesstrategieLessonPage
+     * - week-1.html -> Week1LessonPage (already handled by routes)
+     */
+    detectPageClassName(fileName) {
+        
+        // Remove .html extension
+        const baseName = fileName.replace('.html', '');
+        
+        // Skip if it's index.html or already in routes
+        if (baseName === 'index' || this.routes[fileName]) {
+            return null;
+        }
+        
+        // Convert kebab-case to PascalCase and append LessonPage
+        // vraagvoorspelling-deel1 -> VraagvoorspellingDeel1LessonPage
+        const parts = baseName.split('-');
+        const pascalCase = parts.map(part => part.charAt(0).toUpperCase() + part.slice(1)).join('');
+        const pageClassName = pascalCase + 'LessonPage';
+        
+        console.log(`[AppRouter] 🔍 Detected page class name: ${pageClassName} from ${fileName}`);
+        return pageClassName;
+    }
+
+    /**
      * Handle route change
      */
     async handleRoute(path, hash = null) {
+        
         let fileName = path.split('/').pop() || 'index.html';
         // Remove query params and hash
         fileName = fileName.split('?')[0].split('#')[0];
@@ -183,6 +224,40 @@ class AppRouter {
         const routeHandler = this.routes[fileName];
         
         if (!routeHandler) {
+            
+            // Try to detect if this is a lesson page by checking the file name pattern
+            // For example: vraagvoorspelling-deel1.html -> VraagvoorspellingDeel1LessonPage
+            const moduleId = fileName.replace('.html', '').replace(/-/g, '');
+            const possiblePageClassName = this.detectPageClassName(fileName);
+            
+            if (possiblePageClassName) {
+                console.log(`[AppRouter] 🔍 Detected potential page class: ${possiblePageClassName} for ${fileName}`);
+                // Show loading state
+                this.showLoadingState();
+                try {
+                    await this.loadWeekPage(moduleId, possiblePageClassName);
+                    console.log('[AppRouter] ✅ Dynamic route handler completed');
+                    
+                    // Handle hash after content is loaded
+                    if (hash) {
+                        setTimeout(() => {
+                            this.scrollToHash('#' + hash);
+                        }, 300);
+                    }
+                    
+                    // Update active state in sidebar
+                    this.updateSidebarActiveState(fileName);
+                    
+                    // Update breadcrumbs
+                    this.updateBreadcrumbs();
+                    return;
+                } catch (error) {
+                    console.error(`[AppRouter] ❌ Error loading dynamic route ${fileName}:`, error);
+                    this.showErrorState(error);
+                    return;
+                }
+            }
+            
             console.warn(`[AppRouter] ⚠️ No route handler for: ${fileName}`);
             console.warn(`[AppRouter] Falling back to normal navigation`);
             // Fallback to normal navigation
@@ -250,6 +325,67 @@ class AppRouter {
     }
 
     /**
+     * Laad een script dynamisch
+     */
+    async loadScript(scriptPath) {
+        return new Promise((resolve, reject) => {
+            // Check if script is already loaded
+            const existingScript = document.querySelector(`script[src="${scriptPath}"]`);
+            if (existingScript) {
+                console.log(`[AppRouter] Script already loaded: ${scriptPath}`);
+                // Wait a bit to ensure it's fully executed
+                setTimeout(() => resolve(), 100);
+                return;
+            }
+            
+            const script = document.createElement('script');
+            script.src = scriptPath;
+            script.onload = () => {
+                console.log(`[AppRouter] ✅ Script loaded: ${scriptPath}`);
+                // Wait a bit for the script to execute
+                setTimeout(() => resolve(), 100);
+            };
+            script.onerror = () => {
+                console.error(`[AppRouter] ❌ Failed to load script: ${scriptPath}`);
+                reject(new Error(`Failed to load script: ${scriptPath}`));
+            };
+            document.head.appendChild(script);
+        });
+    }
+    
+    /**
+     * Wacht tot BaseLessonPage beschikbaar is
+     */
+    async waitForBaseLessonPage(maxWait = 2000) {
+        if (typeof window.BaseLessonPage !== 'undefined') {
+            return true;
+        }
+        
+        console.log('[AppRouter] ⏳ Waiting for BaseLessonPage to be available...');
+        // Try to load BaseLessonPage if it's not available
+        if (!document.querySelector('script[src*="BaseLessonPage.js"]')) {
+            console.log('[AppRouter] 📥 BaseLessonPage script not found, loading it...');
+            try {
+                await this.loadScript('/core/pages/BaseLessonPage.js');
+            } catch (error) {
+                console.warn('[AppRouter] ⚠️ Failed to load BaseLessonPage script:', error);
+            }
+        }
+        
+        const startTime = Date.now();
+        while (Date.now() - startTime < maxWait) {
+            await new Promise(resolve => setTimeout(resolve, 100));
+            if (typeof window.BaseLessonPage !== 'undefined') {
+                console.log('[AppRouter] ✅ BaseLessonPage is now available');
+                return true;
+            }
+        }
+        
+        console.error('[AppRouter] ❌ BaseLessonPage not available after waiting');
+        return false;
+    }
+
+    /**
      * Laad week pagina
      */
     async loadWeekPage(moduleId, pageClassName) {
@@ -284,9 +420,71 @@ class AppRouter {
         }
         
         // Load page class dynamically
-        // Wait a bit if class is not immediately available (scripts might still be loading)
+        // First, try to load the script if class is not available
         let PageClass = window[pageClassName];
         console.log(`[AppRouter] 🔍 Looking for ${pageClassName}, available:`, !!PageClass);
+        
+        if (!PageClass) {
+            
+            // First, ensure BaseLessonPage is available
+            const baseLessonPageAvailable = await this.waitForBaseLessonPage();
+            if (!baseLessonPageAvailable) {
+                console.error('[AppRouter] ❌ Cannot proceed without BaseLessonPage');
+                throw new Error('BaseLessonPage is required but not available');
+            }
+            
+            // Try to load the script dynamically
+            // Determine script path based on current location
+            const currentPath = window.location.pathname;
+            let scriptPath;
+            
+            // Check if we're in /apps/{appName}/ context
+            if (currentPath.includes('/apps/')) {
+                const appMatch = currentPath.match(/\/apps\/([^\/]+)/);
+                if (appMatch) {
+                    const appName = appMatch[1];
+                    scriptPath = `/apps/${appName}/pages/${pageClassName}.js`;
+                } else {
+                    // Fallback: try /apps/pages/ route
+                    scriptPath = `/apps/pages/${pageClassName}.js`;
+                }
+            } else if (currentPath.startsWith('/operations-management/') || currentPath.startsWith('/logistiek-onderzoek/') || currentPath.startsWith('/e-learning-demo/')) {
+                // Direct app path (without /apps/)
+                const appMatch = currentPath.match(/\/([^\/]+)\//);
+                if (appMatch) {
+                    const appName = appMatch[1];
+                    scriptPath = `/${appName}/pages/${pageClassName}.js`;
+                } else {
+                    scriptPath = `pages/${pageClassName}.js`;
+                }
+            } else {
+                // Try to detect app from path
+                const pathParts = currentPath.split('/').filter(p => p);
+                if (pathParts.length > 0 && pathParts[0] !== 'core' && pathParts[0] !== 'game') {
+                    scriptPath = `/${pathParts[0]}/pages/${pageClassName}.js`;
+                } else {
+                    scriptPath = `pages/${pageClassName}.js`;
+                }
+            }
+            
+            console.log(`[AppRouter] 📥 Attempting to load script: ${scriptPath}`);
+            try {
+                await this.loadScript(scriptPath);
+                // Wait a bit for the script to execute and export the class
+                let attempts = 0;
+                while (attempts < 30 && !PageClass) {
+                    await new Promise(resolve => setTimeout(resolve, 100));
+                    PageClass = window[pageClassName];
+                    attempts++;
+                }
+                if (PageClass) {
+                    console.log(`[AppRouter] ✅ Page class ${pageClassName} loaded after script load`);
+                }
+            } catch (error) {
+                console.warn(`[AppRouter] ⚠️ Failed to load script ${scriptPath}, will wait for class to become available:`, error);
+            }
+        }
+        
         if (!PageClass) {
             console.warn(`[AppRouter] ⚠️ Page class ${pageClassName} not immediately available, waiting...`);
             const available = Object.keys(window).filter(k => k.includes('Page'));

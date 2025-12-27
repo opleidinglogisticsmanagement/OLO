@@ -1432,6 +1432,7 @@ if (fs.existsSync(appsDir)) {
 // Multi-app mode: if MULTI_APP=true, enable routing for all apps
 const MULTI_APP_MODE = process.env.MULTI_APP === 'true' || process.env.MULTI_APP === '1';
 console.log(`[Multi-App] MULTI_APP_MODE: ${MULTI_APP_MODE}, MULTI_APP env: ${process.env.MULTI_APP}`);
+
 console.log(`[Multi-App] Available apps count: ${Object.keys(availableApps).length}`);
 if (Object.keys(availableApps).length > 0) {
     console.log(`[Multi-App] Available apps: ${Object.keys(availableApps).join(', ')}`);
@@ -1504,8 +1505,7 @@ app.get(/^\/core\/.*$/, (req, res, next) => {
     console.log(`[Core Route] coreDir: ${coreDir}`);
     console.log(`[Core Route] rootDir: ${rootDir}`);
     console.log(`[Core Route] monorepoRoot: ${monorepoRoot}`);
-    
-    
+
     // Set no-cache headers voor JS bestanden
     if (filePath.endsWith('.js')) {
         res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
@@ -1529,8 +1529,7 @@ app.get(/^\/core\/.*$/, (req, res, next) => {
         try {
             const coreDirContents = fs.readdirSync(coreDir);
             console.log(`[Core Route] DEBUG: Files in coreDir (first 20):`, coreDirContents.slice(0, 20));
-            
-            
+
             // Check if js directory exists
             const jsDir = path.join(coreDir, 'js');
             if (fs.existsSync(jsDir)) {
@@ -1682,14 +1681,103 @@ function serveFromApp(appName, filePath, res, next) {
 }
 
 // Multi-app routes: /app-name/* voor elke app
+// EERST: Routes voor /apps/{appName}/* (voor backward compatibility)
+if (Object.keys(availableApps).length > 0) {
+    Object.keys(availableApps).forEach(appName => {
+        const appDir = availableApps[appName];
+        
+        // Route voor /apps/{appName}/ index.html
+        app.get(`/apps/${appName}/`, (req, res, next) => {
+            console.log(`[Multi-App Route] GET ${req.path} -> serving index.html from ${appName} (via /apps/ prefix)`);
+            res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+            res.setHeader('Pragma', 'no-cache');
+            res.setHeader('Expires', '0');
+            serveFromApp(appName, 'index.html', res, next);
+        });
+        
+        // Route voor /apps/{appName}/*.html bestanden
+        app.get(new RegExp(`^/apps/${appName}/.*\\.html$`), (req, res, next) => {
+            const fileName = req.path.replace(`/apps/${appName}/`, '');
+            console.log(`[Multi-App Route] GET ${req.path} -> serving ${fileName} from ${appName} (via /apps/ prefix)`);
+            res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+            res.setHeader('Pragma', 'no-cache');
+            res.setHeader('Expires', '0');
+            serveFromApp(appName, fileName, res, next);
+        });
+        
+        // Route voor /apps/{appName}/*.json bestanden (content)
+        app.get(new RegExp(`^/apps/${appName}/.*\\.json$`), (req, res, next) => {
+            const fileName = req.path.replace(`/apps/${appName}/`, '');
+            res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+            res.setHeader('Pragma', 'no-cache');
+            res.setHeader('Expires', '0');
+            res.setHeader('Content-Type', 'application/json; charset=utf-8');
+            serveFromApp(appName, fileName, res, next);
+        });
+        
+        // Route voor /apps/{appName}/*.js bestanden (skip /core/ routes)
+        app.get(new RegExp(`^/apps/${appName}/.*\\.js$`), (req, res, next) => {
+            console.log(`[Multi-App Route] GET ${req.path} -> serving JS file from ${appName} (via /apps/ prefix)`);
+            // Skip /core/ routes
+            if (req.path.includes('/core/')) {
+                console.log(`[Multi-App Route] Skipping /core/ route: ${req.path}`);
+                return next();
+            }
+            const fileName = req.path.replace(`/apps/${appName}/`, '');
+            console.log(`[Multi-App Route] Extracted fileName: ${fileName} from path: ${req.path}`);
+            const targetAppDir = availableApps[appName];
+            const fullPath = path.join(targetAppDir, fileName);
+            console.log(`[Multi-App Route] Full path: ${fullPath}, exists: ${fs.existsSync(fullPath)}`);
+            res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+            res.setHeader('Pragma', 'no-cache');
+            res.setHeader('Expires', '0');
+            res.setHeader('Content-Type', 'application/javascript; charset=utf-8');
+            serveFromApp(appName, fileName, res, next);
+        });
+        
+        // Route voor /apps/{appName}/assets/* bestanden
+        app.get(`/apps/${appName}/assets/*`, (req, res, next) => {
+            const fileName = req.path.replace(`/apps/${appName}/`, '');
+            serveFromApp(appName, fileName, res, next);
+        });
+        
+        // Route voor /apps/{appName}/config.js
+        app.get(`/apps/${appName}/config.js`, (req, res, next) => {
+            const configPath = path.join(availableApps[appName], 'config.js');
+            if (fs.existsSync(configPath)) {
+                res.setHeader('Content-Type', 'application/javascript; charset=utf-8');
+                res.sendFile(configPath, (err) => {
+                    if (err) {
+                        generateDynamicConfig(res);
+                    }
+                });
+            } else {
+                generateDynamicConfig(res);
+            }
+        });
+        
+        // Static file serving voor /apps/{appName}/* (fallback voor andere bestanden)
+        app.use(`/apps/${appName}`, express.static(appDir, {
+            index: false,
+            dotfiles: 'ignore',
+            etag: true,
+            lastModified: true,
+            maxAge: '1y'
+        }));
+    });
+}
+
+// DAN: Routes voor /{appName}/* (zonder /apps/ prefix) - alleen als MULTI_APP_MODE enabled is
 if (MULTI_APP_MODE && Object.keys(availableApps).length > 0) {
     console.log(`[Multi-App] 🚀 Multi-app mode enabled. Apps available at:`);
     Object.keys(availableApps).forEach(appName => {
         const appDir = availableApps[appName];
         console.log(`[Multi-App]   - http://localhost:${PORT}/${appName}/`);
+        console.log(`[Multi-App]   - http://localhost:${PORT}/apps/${appName}/`);
         
         // Route voor app index.html
         app.get(`/${appName}/`, (req, res, next) => {
+            
             console.log(`[Multi-App Route] GET ${req.path} -> serving index.html from ${appName}`);
             res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
             res.setHeader('Pragma', 'no-cache');
@@ -2113,11 +2201,54 @@ app.use(express.static(appDir, {
     maxAge: '1y' // Cache static files for 1 year
 }));
 
+// Expliciete route voor /apps/pages/*.js bestanden (zonder appName in pad)
+// Dit handelt requests af zoals /apps/pages/VraagvoorspellingDeel1LessonPage.js
+// door alle apps te doorzoeken
+app.get(/^\/apps\/pages\/.*\.js$/, (req, res, next) => {
+    const fileName = req.path.replace(/^\/apps\//, ''); // bijv. pages/VraagvoorspellingDeel1LessonPage.js
+    console.log(`[Multi-App Route] GET ${req.path} -> searching all apps for ${fileName}`);
+    
+    // Zoek in alle apps
+    let foundPath = null;
+    let foundApp = null;
+    
+    for (const [appName, appDir] of Object.entries(availableApps)) {
+        const fullPath = path.join(appDir, fileName);
+        if (fs.existsSync(fullPath)) {
+            foundPath = fullPath;
+            foundApp = appName;
+            console.log(`[Multi-App Route] ✅ Found ${fileName} in app: ${appName}`);
+            break;
+        }
+    }
+    
+    if (foundPath) {
+        res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+        res.setHeader('Pragma', 'no-cache');
+        res.setHeader('Expires', '0');
+        res.setHeader('Content-Type', 'application/javascript; charset=utf-8');
+        res.sendFile(foundPath, (err) => {
+            if (err) {
+                console.error(`[Multi-App Route] Error serving ${fileName} from ${foundApp}:`, err);
+                next(err);
+            }
+        });
+    } else {
+        console.error(`[Multi-App Route] ❌ JS file not found in any app: ${fileName}`);
+        res.status(404).send(`// File not found: ${fileName}`);
+    }
+});
+
 // Expliciete route voor JavaScript bestanden (fallback als static middleware faalt)
 // App-specifieke JS bestanden (pages/Week*LessonPage.js, js/PDFExporter.js, etc.)
 app.get(/\.js$/, (req, res, next) => {
     // Skip /core/ routes (die worden al gehandeld door /core static middleware)
     if (req.path.startsWith('/core/')) {
+        return next();
+    }
+    
+    // Skip /apps/ routes (die worden al gehandeld door specifieke routes hierboven)
+    if (req.path.startsWith('/apps/')) {
         return next();
     }
     

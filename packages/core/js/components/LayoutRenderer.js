@@ -9,6 +9,23 @@ class LayoutRenderer {
     constructor(moduleId, moduleTitle) {
         this.moduleId = moduleId;
         this.moduleTitle = moduleTitle;
+        
+        // Detect which app we're in based on URL path
+        const pathname = window.location.pathname;
+        if (pathname.includes('operations-management')) {
+            this.appId = 'operations-management';
+            this.appTitle = 'Operations Management';
+        } else if (pathname.includes('e-learning-demo')) {
+            this.appId = 'e-learning-demo';
+            this.appTitle = 'E-Learning Demo';
+        } else if (pathname.includes('logistiek-onderzoek')) {
+            this.appId = 'logistiek-onderzoek';
+            this.appTitle = 'Opzetten van Logistieke Onderzoeken (OLO)';
+        } else {
+            // Default to logistiek-onderzoek for backward compatibility
+            this.appId = 'logistiek-onderzoek';
+            this.appTitle = 'Opzetten van Logistieke Onderzoeken (OLO)';
+        }
     }
 
     /**
@@ -37,7 +54,7 @@ class LayoutRenderer {
                             <i class="fas fa-graduation-cap text-white text-lg"></i>
                         </div>
                         <div class="min-w-0 flex-1">
-                            <p class="text-xs sm:text-sm text-gray-500 dark:text-gray-400 break-words leading-tight m-0 font-bold">Opzetten van Logistieke Onderzoeken (OLO)</p>
+                            <p class="text-xs sm:text-sm text-gray-500 dark:text-gray-400 break-words leading-tight m-0 font-bold">${this.appTitle}</p>
                         </div>
                     </div>
                     <!-- Close button for mobile -->
@@ -53,6 +70,81 @@ class LayoutRenderer {
      * Render module navigatie
      */
     renderModuleNavigation() {
+        // Render different navigation based on app
+        if (this.appId === 'operations-management') {
+            return this.renderOperationsManagementNavigation();
+        } else if (this.appId === 'e-learning-demo') {
+            return this.renderElearningDemoNavigation();
+        } else {
+            return this.renderLogistiekOnderzoekNavigation();
+        }
+    }
+
+    /**
+     * Render navigation for operations-management app
+     */
+    renderOperationsManagementNavigation() {
+        const modules = [
+            { id: 'start', title: 'Start', href: 'index.html' },
+            { id: 'week-1', title: 'Week 1', href: 'week1.html' },
+            {
+                id: 'operations-processtrategie',
+                title: 'Operations en processtrategie',
+                href: 'operations-processtrategie.html',
+                subItems: [
+                    { id: 'introductie', title: 'Introductie', anchor: '#introductie' },
+                    { id: 'operations-strategie', title: 'Operations Strategie', anchor: '#operations-strategie' },
+                    { id: 'competitive-priorities', title: 'Competitive priorities', anchor: '#competitive-priorities' },
+                    { id: 'procesbeslissingen', title: 'Procesbeslissingen', anchor: '#procesbeslissingen' }
+                ]
+            },
+            { id: 'vraagvoorspelling-deel1', title: 'Vraagvoorspelling (deel 1)', href: 'vraagvoorspelling-deel1.html' },
+            { id: 'vraagvoorspelling-deel2', title: 'Vraagvoorspelling (deel 2)', href: 'vraagvoorspelling-deel2.html' },
+            { id: 'productieplanning', title: 'Productieplanning', href: 'productieplanning.html' },
+            { id: 'voorraadbeheer-deel1', title: 'Voorraadbeheer (deel 1)', href: 'voorraadbeheer-deel1.html' },
+            { id: 'voorraadbeheer-deel2', title: 'Voorraadbeheer (deel 2)', href: 'voorraadbeheer-deel2.html' },
+            { id: 'voorraadbeheer-deel3', title: 'Voorraadbeheer (deel 3)', href: 'voorraadbeheer-deel3.html' },
+            { id: 'capaciteitsmanagement-deel1', title: 'Capaciteitsmanagement (deel 1)', href: 'capaciteitsmanagement-deel1.html' },
+            { id: 'capaciteitsmanagement-deel2', title: 'Capaciteitsmanagement (deel 2)', href: 'capaciteitsmanagement-deel2.html' },
+            { id: 'operations-planning-scheduling', title: 'Operations planning en scheduling', href: 'operations-planning-scheduling.html' }
+        ];
+
+        return this.renderModuleNavigationItems(modules);
+    }
+
+    /**
+     * Render navigation for e-learning-demo app
+     */
+    renderElearningDemoNavigation() {
+        const modules = [
+            { id: 'start', title: 'Start', href: 'index.html' },
+            { id: 'module1', title: 'Het Fundament', href: 'module1.html' },
+            { id: 'cursor', title: 'Cursor', href: 'cursor.html' },
+            {
+                id: 'fase3',
+                title: 'De Catalogus',
+                href: 'fase3.html',
+                subItems: [
+                    { id: 'basis-elementen', title: 'Basis Elementen', anchor: '#basis-elementen' },
+                    { id: 'informatie-ordening', title: 'Informatie-ordening', anchor: '#informatie-ordening' },
+                    { id: 'checklists', title: 'Checklists', anchor: '#checklists' },
+                    { id: 'interactieve-oefeningen', title: 'Interactieve Oefeningen', anchor: '#interactieve-oefeningen' },
+                    { id: 'geavanceerde-ai-tools', title: 'Geavanceerde AI-Tools', anchor: '#geavanceerde-ai-tools' }
+                ]
+            },
+            { id: 'genai', title: 'GenAI in de e-learning', href: 'genai.html' },
+            { id: 'content-schrijven', title: 'Content Schrijven', href: 'content-schrijven.html' },
+            { id: 'formules-katex', title: 'Formules met KaTeX', href: 'formules-katex.html' },
+            { id: 'publiceren', title: 'E-learning publiceren', href: 'publiceren.html' }
+        ];
+
+        return this.renderModuleNavigationItems(modules);
+    }
+
+    /**
+     * Render navigation for logistiek-onderzoek app
+     */
+    renderLogistiekOnderzoekNavigation() {
         const modules = [
             { id: 'start', title: 'Start', href: 'index.html' },
             { id: 'week-1', title: 'Week 1', href: 'week1.html' },
@@ -112,6 +204,14 @@ class LayoutRenderer {
             { id: 'afsluiting', title: 'Afsluiting', href: 'afsluiting.html' }
         ];
 
+        return this.renderModuleNavigationItems(modules);
+    }
+
+    /**
+     * Render module navigation items from a modules array
+     * @param {Array} modules - Array of module objects with id, title, href, and optional subItems
+     */
+    renderModuleNavigationItems(modules) {
         const moduleItems = modules.map(module => {
             const isCurrent = module.id === this.moduleId;
             const hasSubItems = module.subItems && module.subItems.length > 0;
@@ -120,9 +220,11 @@ class LayoutRenderer {
             const isWeek4 = module.id === 'week-4';
             const isWeek5 = module.id === 'week-5';
             const isWeek6 = module.id === 'week-6';
+            const isOperationsProcesstrategie = module.id === 'operations-processtrategie';
+            const isFase3 = module.id === 'fase3';
             
-            // Special handling for Week 2, Week 3, Week 4, Week 5 and Week 6 with sub-items
-            if (hasSubItems && (isWeek2 || isWeek3 || isWeek4 || isWeek5 || isWeek6)) {
+            // Special handling for modules with sub-items
+            if (hasSubItems && (isWeek2 || isWeek3 || isWeek4 || isWeek5 || isWeek6 || isOperationsProcesstrategie || isFase3)) {
                 const subItemsHtml = module.subItems.map(subItem => {
                     const isSubCurrent = window.location.hash === subItem.anchor || 
                                         (isCurrent && window.location.hash === subItem.anchor);
@@ -159,6 +261,14 @@ class LayoutRenderer {
                     navItemClass = 'week-6-nav-item';
                     chevronId = 'week-6-chevron';
                     subItemsId = 'week-6-subitems';
+                } else if (isOperationsProcesstrategie) {
+                    navItemClass = 'operations-processtrategie-nav-item';
+                    chevronId = 'operations-processtrategie-chevron-index';
+                    subItemsId = 'operations-processtrategie-submenu';
+                } else if (isFase3) {
+                    navItemClass = 'fase3-nav-item';
+                    chevronId = 'fase3-chevron-index';
+                    subItemsId = 'fase3-subitems-index';
                 }
                 
                 return `
@@ -170,7 +280,7 @@ class LayoutRenderer {
                             <span class="font-medium flex-1">${module.title}</span>
                             <i class="fas fa-chevron-down text-xs text-gray-400 dark:text-gray-500 transition-transform duration-200 ${isCurrent ? 'rotate-180' : ''}" id="${chevronId}"></i>
                         </a>
-                        <div class="${navItemClass.replace('-nav-item', '-subitems')} ${isCurrent ? '' : 'hidden'}" id="${subItemsId}">
+                        <div class="${isOperationsProcesstrategie || isFase3 ? 'nav-sub-items' : navItemClass.replace('-nav-item', '-subitems')} ${isCurrent ? '' : 'hidden'}" id="${subItemsId}">
                             ${subItemsHtml}
                         </div>
                     </div>

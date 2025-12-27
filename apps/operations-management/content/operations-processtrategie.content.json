@@ -432,6 +432,7 @@
         "type": "matchingExercise",
         "title": "Order winners en order qualifiers",
         "instruction": "Sleep de items naar de juiste categorie:",
+        "hideBorder": true,
         "explanation": "<h4 class=\"font-semibold mb-3 text-green-800 dark:text-green-200\">Uitwerking vraag</h4><p class=\"text-sm text-green-800 dark:text-green-200 mb-3\">Het bedrijf probeert zich te onderscheiden van de concurrent met twee items in het filmpje. Dit zijn de order winners:</p><ul class=\"list-disc list-outside space-y-2 mb-4 ml-6 pl-4 text-sm text-green-800 dark:text-green-200\"><li class=\"mb-2\">De prijs van het product (geen dure showrooms, verkopers, etc.)</li><li class=\"mb-2\">De periode van proefslapen</li></ul><p class=\"text-sm text-green-800 dark:text-green-200 mb-3\">De order qualifiers zijn basisvereisten die voor elke beddenzaak relevant zijn om überhaupt als marktpartij gezien te worden:</p><ul class=\"list-disc list-outside space-y-2 mb-4 ml-6 pl-4 text-sm text-green-800 dark:text-green-200\"><li class=\"mb-2\">Een geschikt formaat bed kunnen kiezen</li><li class=\"mb-2\">Topmatrassen verkopen</li></ul>",
         "categories": [
           {

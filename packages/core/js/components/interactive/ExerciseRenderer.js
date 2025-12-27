@@ -183,12 +183,13 @@ class ExerciseRenderer {
      * @returns {string} HTML string
      */
     static renderMatchingExercise(item) {
-        if (!item.categories || !item.items || !Array.isArray(item.categories) || !Array.isArray(item.items)) {
-            console.warn('Matching exercise missing categories or items:', item);
-            return '';
-        }
+        try {
+            if (!item.categories || !item.items || !Array.isArray(item.categories) || !Array.isArray(item.items)) {
+                console.warn('Matching exercise missing categories or items:', item);
+                return '';
+            }
 
-        const exerciseId = `matching-exercise-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+            const exerciseId = `matching-exercise-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
         
         // Shuffle items for variety but keep track of original indices
         const itemsWithIndices = item.items.map((itemObj, originalIndex) => ({
@@ -279,11 +280,21 @@ class ExerciseRenderer {
         
         // Store explanation in data attribute for custom feedback
         const explanation = item.explanation || '';
+        const endFeedback = item.endFeedback || '';
         
-        return `
-            <div class="matching-exercise mb-6 sm:mb-8 px-6 py-4" id="${exerciseId}" data-explanation="${HtmlUtils.escapeHtml(explanation)}">
+        // Store explanation and endFeedback - use encodeURIComponent to safely store HTML in data attributes
+        // This prevents issues with quotes and special characters that break HTML attributes
+        // Use standard section wrapper styling for consistency with other content items
+        // Allow hiding border/outline via hideBorder or noBorder property
+        const hideBorder = item.hideBorder || item.noBorder || false;
+        const borderClasses = hideBorder ? '' : 'border border-gray-200 dark:border-gray-700';
+        // Remove left padding to align completely to the left
+        const sectionClasses = `bg-white dark:bg-gray-800 rounded-xl shadow-sm ${borderClasses} pt-4 pb-4 pr-4 sm:pt-6 sm:pb-6 sm:pr-6 pl-0 hover-lift transition-colors duration-200 w-full max-w-full overflow-hidden box-border min-w-0 mb-6 sm:mb-8`;
+        
+        const htmlResult = `
+            <section class="${sectionClasses}" id="${exerciseId}" data-explanation="${encodeURIComponent(explanation)}" data-end-feedback="${encodeURIComponent(endFeedback)}">
                 <style>${gridStyle}</style>
-                <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">${item.title || 'Matching Oefening'}</h3>
+                <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">${item.title || 'Matching Oefening'}</h2>
                 <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">${item.instruction || 'Sleep de omschrijvingen naar de juiste categorie:'}</p>
                 
                 <div class="grid gap-4 mb-4 grid-cols-1 categories-grid">
@@ -305,8 +316,13 @@ class ExerciseRenderer {
                 </button>
                 
                 <div id="${exerciseId}-result" class="hidden mt-4"></div>
-            </div>
+            </section>
         `;
+        return htmlResult;
+        } catch (error) {
+            console.error('Error rendering matching exercise:', error);
+            return `<div class="p-4 bg-red-100 border border-red-400 text-red-700 rounded">Error rendering matching exercise: ${String(error.message)}</div>`;
+        }
     }
 
     /**
@@ -499,39 +515,72 @@ class ExerciseRenderer {
         
         resultDiv.classList.remove('hidden');
         
+        // Get endFeedback from data attribute (should be shown regardless of result)
+        // Decode from URI component (was encoded with encodeURIComponent)
+        let endFeedback = '';
+        try {
+            const endFeedbackEncoded = exercise.getAttribute('data-end-feedback');
+            if (endFeedbackEncoded) {
+                endFeedback = decodeURIComponent(endFeedbackEncoded);
+            }
+        } catch(e) {
+            console.warn('Error decoding endFeedback:', e);
+        }
+        
         if (correctCount === totalCount && totalCount > 0) {
             resultDiv.className = 'mt-4 p-3 rounded-lg border-2 border-green-500 dark:border-green-400 bg-green-50 dark:bg-green-900/20';
             
-            // Check for custom explanation
-            const customExplanation = exercise.getAttribute('data-explanation');
+            // Check for custom explanation - decode from URI component
+            let customExplanation = '';
+            try {
+                const explanationEncoded = exercise.getAttribute('data-explanation');
+                if (explanationEncoded) {
+                    customExplanation = decodeURIComponent(explanationEncoded);
+                }
+            } catch(e) {
+                console.warn('Error decoding explanation:', e);
+            }
+            let resultHtml = '';
             if (customExplanation && customExplanation.trim() !== '') {
-                // Unescape HTML entities
-                const decodedExplanation = customExplanation
-                    .replace(/&quot;/g, '"')
-                    .replace(/&#39;/g, "'")
-                    .replace(/&amp;/g, '&')
-                    .replace(/&lt;/g, '<')
-                    .replace(/&gt;/g, '>');
-                resultDiv.innerHTML = decodedExplanation;
+                // Explanation is already decoded HTML, use directly
+                resultHtml = customExplanation;
             } else {
-                resultDiv.innerHTML = `
+                resultHtml = `
                     <h4 class="font-semibold mb-2 text-green-800 dark:text-green-200 text-sm">✓ Uitstekend!</h4>
                     <p class="text-sm text-green-800 dark:text-green-200">Je hebt alle items correct gematcht!</p>
                 `;
             }
+            // Add endFeedback if available (shown after explanation)
+            // endFeedback is already decoded HTML, use directly
+            if (endFeedback && endFeedback.trim() !== '') {
+                resultHtml += `<div class="mt-3 pt-3 border-t border-green-300 dark:border-green-600">${endFeedback}</div>`;
+            }
+            resultDiv.innerHTML = resultHtml;
         } else if (correctCount > 0) {
             resultDiv.className = 'mt-4 p-3 rounded-lg border-2 border-yellow-500 bg-yellow-50';
-            resultDiv.innerHTML = `
+            let feedbackHtml = `
                 <h4 class="font-semibold mb-2 text-yellow-800 text-sm">⚠ Goed bezig</h4>
                 <p class="text-sm text-yellow-800 mb-2">Je hebt ${correctCount} van de ${totalCount} items correct gematcht.</p>
                 ${feedback.length > 0 ? `<ul class="text-xs text-yellow-800 space-y-1 mt-2">${feedback.map(f => `<li>• ${f}</li>`).join('')}</ul>` : ''}
             `;
+            // Add endFeedback if available
+            // endFeedback is already decoded HTML, use directly
+            if (endFeedback && endFeedback.trim() !== '') {
+                feedbackHtml += `<div class="mt-3 pt-3 border-t border-yellow-300">${endFeedback}</div>`;
+            }
+            resultDiv.innerHTML = feedbackHtml;
         } else {
             resultDiv.className = 'mt-4 p-3 rounded-lg border-2 border-blue-500 bg-blue-50';
-            resultDiv.innerHTML = `
+            let feedbackHtml = `
                 <h4 class="font-semibold mb-2 text-blue-800 text-sm">💡 Probeer opnieuw</h4>
                 <p class="text-sm text-blue-800">Sleep de items naar de juiste categorieën en controleer opnieuw.</p>
             `;
+            // Add endFeedback if available
+            // endFeedback is already decoded HTML, use directly
+            if (endFeedback && endFeedback.trim() !== '') {
+                feedbackHtml += `<div class="mt-3 pt-3 border-t border-blue-300">${endFeedback}</div>`;
+            }
+            resultDiv.innerHTML = feedbackHtml;
         }
     }
 

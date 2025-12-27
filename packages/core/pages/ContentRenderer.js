@@ -5,10 +5,6 @@
  * Ondersteunt: paragraph, image, url, document, highlight, accordion
  */
 
-// #region agent log
-(function(){try{const _d={location:'ContentRenderer.js:1',message:'ContentRenderer.js loading started',data:{hasPath:typeof path!=='undefined',hasModule:typeof module!=='undefined',hasRequire:typeof require!=='function'},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'};fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(_d)}).catch(()=>{});}catch(e){}})();
-// #endregion
-
 class ContentRenderer {
     /**
      * Render een array van content items

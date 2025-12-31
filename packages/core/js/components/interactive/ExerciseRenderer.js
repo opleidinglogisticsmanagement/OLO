@@ -920,6 +920,200 @@ class ExerciseRenderer {
         });
     }
 
+    /**
+     * Render een multiple choice oefening
+     * Laat studenten een antwoord kiezen uit meerdere opties met directe feedback
+     * @param {Object} item - Multiple choice exercise item met question en options array
+     * @returns {string} HTML string
+     */
+    static renderMultipleChoiceExercise(item) {
+        if (!item.question || !item.options || !Array.isArray(item.options) || item.options.length === 0) {
+            console.warn('Multiple choice exercise missing question or options array:', item);
+            return '';
+        }
+
+        const exerciseId = `mc-exercise-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+        
+        const optionsHtml = item.options.map((option, index) => {
+            const optionId = `${exerciseId}-option-${index}`;
+            const isCorrect = option.correct === true;
+            const feedback = option.feedback || (isCorrect ? 'Correct!' : 'Niet helemaal juist.');
+            
+            return `
+                <label class="flex items-start space-x-3 p-4 border-2 border-gray-300 dark:border-gray-600 rounded-lg cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors relative mc-option-label" 
+                       id="${optionId}-label"
+                       data-is-correct="${isCorrect}"
+                       data-feedback="${HtmlUtils.escapeHtml(feedback)}">
+                    <input 
+                        type="radio" 
+                        name="${exerciseId}" 
+                        value="${index}"
+                        id="${optionId}"
+                        class="mt-1 w-4 h-4 text-blue-600 border-gray-300 focus:ring-blue-500"
+                        onchange="InteractiveRenderer.handleMultipleChoiceAnswer('${exerciseId}', ${index})"
+                    />
+                    <div class="flex-1">
+                        <span class="text-gray-700 dark:text-gray-300">${HtmlUtils.escapeHtml(option.text)}</span>
+                    </div>
+                    <span id="${optionId}-icon" class="hidden ml-auto">
+                        <i class="fas ${isCorrect ? 'fa-check-circle text-green-600 dark:text-green-400' : 'fa-times-circle text-red-600 dark:text-red-400'} text-xl"></i>
+                    </span>
+                </label>
+            `;
+        }).join('');
+
+        return `
+            <div class="multiple-choice-exercise mb-6 sm:mb-8" id="${exerciseId}">
+                ${item.title ? `<h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-3">${HtmlUtils.escapeHtml(item.title)}</h3>` : ''}
+                <p class="text-gray-700 dark:text-gray-300 mb-4">${HtmlUtils.escapeHtml(item.question)}</p>
+                
+                <div class="space-y-3 mb-4">
+                    ${optionsHtml}
+                </div>
+                
+                <div id="${exerciseId}-feedback" class="hidden mt-4"></div>
+                <div id="${exerciseId}-reset-container" class="hidden mt-4">
+                    <button 
+                        onclick="InteractiveRenderer.resetMultipleChoiceExercise('${exerciseId}')"
+                        class="px-4 py-2 bg-gray-600 dark:bg-gray-700 text-white rounded-lg hover:bg-gray-700 dark:hover:bg-gray-600 transition-colors font-medium text-sm"
+                    >
+                        <i class="fas fa-redo mr-2"></i>Opnieuw proberen
+                    </button>
+                </div>
+            </div>
+        `;
+    }
+
+    /**
+     * Handle multiple choice answer selection
+     * @param {string} exerciseId - ID of the exercise container
+     * @param {number} selectedIndex - Index of the selected option
+     */
+    static handleMultipleChoiceAnswer(exerciseId, selectedIndex) {
+        const exercise = document.getElementById(exerciseId);
+        if (!exercise) return;
+
+        const feedbackDiv = document.getElementById(`${exerciseId}-feedback`);
+        const allOptions = exercise.querySelectorAll('.mc-option-label');
+        const selectedOption = allOptions[selectedIndex];
+        
+        if (!selectedOption || !feedbackDiv) return;
+
+        const isCorrect = selectedOption.getAttribute('data-is-correct') === 'true';
+        const feedback = selectedOption.getAttribute('data-feedback') || '';
+
+        // Disable all options
+        allOptions.forEach((option, index) => {
+            const radio = option.querySelector('input[type="radio"]');
+            const icon = option.querySelector('[id$="-icon"]');
+            
+            if (radio) {
+                radio.disabled = true;
+            }
+            
+            if (index === selectedIndex) {
+                // Selected option styling
+                if (isCorrect) {
+                    option.classList.add('border-green-500', 'bg-green-50', 'dark:bg-green-900/20');
+                    option.classList.remove('border-gray-300', 'dark:border-gray-600');
+                    if (icon) icon.classList.remove('hidden');
+                } else {
+                    option.classList.add('border-red-500', 'bg-red-50', 'dark:bg-red-900/20');
+                    option.classList.remove('border-gray-300', 'dark:border-gray-600');
+                    if (icon) icon.classList.remove('hidden');
+                }
+            } else {
+                // Other options - highlight correct if wrong was selected
+                const optionIsCorrect = option.getAttribute('data-is-correct') === 'true';
+                if (!isCorrect && optionIsCorrect) {
+                    option.classList.add('border-green-500', 'bg-green-50', 'dark:bg-green-900/20');
+                    option.classList.remove('border-gray-300', 'dark:border-gray-600');
+                    const optionIcon = option.querySelector('[id$="-icon"]');
+                    if (optionIcon) optionIcon.classList.remove('hidden');
+                } else {
+                    option.classList.remove('border-green-500', 'border-red-500', 'bg-green-50', 'dark:bg-green-900/20', 'bg-red-50', 'dark:bg-red-900/20');
+                    option.classList.add('border-gray-300', 'dark:border-gray-600');
+                }
+            }
+        });
+
+        // Show feedback
+        if (isCorrect) {
+            feedbackDiv.className = 'mt-4 p-4 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg';
+            feedbackDiv.innerHTML = `
+                <div class="flex items-center space-x-2 mb-2">
+                    <i class="fas fa-check-circle text-green-600 dark:text-green-400 text-xl"></i>
+                    <span class="font-semibold text-green-800 dark:text-green-200">Correct</span>
+                </div>
+                <p class="text-sm text-green-800 dark:text-green-200">${feedback}</p>
+            `;
+        } else {
+            feedbackDiv.className = 'mt-4 p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg';
+            feedbackDiv.innerHTML = `
+                <div class="flex items-center space-x-2 mb-2">
+                    <i class="fas fa-times-circle text-red-600 dark:text-red-400 text-xl"></i>
+                    <span class="font-semibold text-red-800 dark:text-red-200">Incorrect</span>
+                </div>
+                <p class="text-sm text-red-800 dark:text-red-200">${feedback}</p>
+            `;
+        }
+        
+        feedbackDiv.classList.remove('hidden');
+        
+        // Show reset button
+        const resetContainer = document.getElementById(`${exerciseId}-reset-container`);
+        if (resetContainer) {
+            resetContainer.classList.remove('hidden');
+        }
+    }
+
+    /**
+     * Reset multiple choice exercise to initial state
+     * @param {string} exerciseId - ID of the exercise container
+     */
+    static resetMultipleChoiceExercise(exerciseId) {
+        const exercise = document.getElementById(exerciseId);
+        if (!exercise) return;
+
+        const feedbackDiv = document.getElementById(`${exerciseId}-feedback`);
+        const resetContainer = document.getElementById(`${exerciseId}-reset-container`);
+        const allOptions = exercise.querySelectorAll('.mc-option-label');
+        
+        // Reset all options
+        allOptions.forEach((option) => {
+            const radio = option.querySelector('input[type="radio"]');
+            const icon = option.querySelector('[id$="-icon"]');
+            
+            // Re-enable radio buttons
+            if (radio) {
+                radio.disabled = false;
+                radio.checked = false;
+            }
+            
+            // Reset styling to original
+            option.classList.remove(
+                'border-green-500', 'bg-green-50', 'dark:bg-green-900/20',
+                'border-red-500', 'bg-red-50', 'dark:bg-red-900/20'
+            );
+            option.classList.add('border-gray-300', 'dark:border-gray-600');
+            
+            // Hide icons
+            if (icon) {
+                icon.classList.add('hidden');
+            }
+        });
+        
+        // Hide feedback and reset button
+        if (feedbackDiv) {
+            feedbackDiv.classList.add('hidden');
+            feedbackDiv.innerHTML = '';
+        }
+        
+        if (resetContainer) {
+            resetContainer.classList.add('hidden');
+        }
+    }
+
     // NOTE: Source Evaluation Exercise methoden zijn zeer groot (>700 regels)
     // Deze worden toegevoegd in een aparte stap om de bestandsgrootte beheersbaar te houden
     // Voor nu delegeren we naar InteractiveRenderer die deze methoden nog bevat

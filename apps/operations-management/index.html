@@ -69,6 +69,156 @@
             transition: background-color 0.3s ease, color 0.3s ease;
         }
         
+        /* Dark mode styling voor audio controls - behoud border-radius en consistente lay-out */
+        audio {
+            border-radius: 8px !important;
+            width: 100%;
+            height: 32px;
+            overflow: hidden;
+        }
+        
+        /* Webkit browsers (Chrome, Safari, Edge) */
+        audio::-webkit-media-controls-panel {
+            background-color: #f3f4f6;
+            border-radius: 8px !important;
+            overflow: hidden;
+        }
+        
+        .dark audio::-webkit-media-controls-panel {
+            background-color: #374151;
+            border-radius: 8px !important;
+            overflow: hidden;
+        }
+        
+        /* Zorg dat het hele audio element de border-radius behoudt */
+        .dark audio {
+            border-radius: 8px !important;
+        }
+        
+        /* Zorg dat alle controls dezelfde kleur hebben in dark mode */
+        .dark audio::-webkit-media-controls-play-button,
+        .dark audio::-webkit-media-controls-current-time-display,
+        .dark audio::-webkit-media-controls-time-remaining-display,
+        .dark audio::-webkit-media-controls-mute-button,
+        .dark audio::-webkit-media-controls-fullscreen-button {
+            filter: brightness(0) invert(1);
+        }
+        
+        /* Firefox */
+        .dark audio {
+            background-color: #374151;
+            color: #e5e7eb;
+        }
+        
+        /* Flip Card Styles */
+        .flip-card-container {
+            perspective: 1000px;
+            width: fit-content;
+            max-width: 90%;
+            margin: 0 auto;
+            display: inline-block;
+        }
+        
+        .flip-card-inner {
+            position: relative;
+            width: fit-content;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+            cursor: pointer;
+        }
+        
+        .flip-card-inner.flipped {
+            transform: rotateY(180deg);
+        }
+        
+        .flip-card-front {
+            position: relative;
+            width: auto;
+            min-width: 300px;
+            max-width: none;
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 24px;
+            background-color: #ffffff;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            display: inline-block;
+            box-sizing: border-box;
+        }
+        
+        .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 24px;
+            background-color: #ffffff;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            transform: rotateY(180deg);
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .flip-card-back .flip-card-content {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        
+        .flip-card-back img,
+        .flip-card-back .image-modal-container {
+            max-width: 100%;
+            max-height: 100%;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+        }
+        
+        .dark .flip-card-front,
+        .dark .flip-card-back {
+            border-color: #374151;
+            background-color: #1f2937;
+        }
+        
+        .flip-card-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            height: 100%;
+        }
+        
+        .flip-card-hint {
+            margin-top: auto;
+            text-align: center;
+            padding-top: 16px;
+            border-top: 1px solid #e5e7eb;
+        }
+        
+        .dark .flip-card-hint {
+            border-top-color: #374151;
+        }
+        
+        /* Hover effect */
+        .flip-card-inner:not(.flipped):hover .flip-card-front {
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        
+        .flip-card-inner.flipped:hover .flip-card-back {
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        
         .custom-scrollbar::-webkit-scrollbar {
             width: 6px;
         }
@@ -703,6 +853,7 @@
     <script src="/core/js/components/interactive/ChecklistRenderer.js"></script>
     <script src="/core/js/components/interactive/ExerciseRenderer.js"></script>
     <script src="/core/js/components/interactive/AIRenderer.js"></script>
+    <script src="/core/js/components/interactive/FlipCardRenderer.js"></script>
     <script src="/core/pages/InteractiveRenderer.js"></script>
     <script src="/core/pages/AIGenerator.js"></script>
     <script src="/core/pages/MCQuestionRenderer.js"></script>

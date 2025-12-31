@@ -116,6 +116,88 @@
             to { transform: translateX(0); }
         }
         
+        /* Flip Card Styles */
+        .flip-card-container {
+            perspective: 1000px;
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+            cursor: pointer;
+        }
+        
+        .flip-card-inner.flipped {
+            transform: rotateY(180deg);
+        }
+        
+        .flip-card-front {
+            position: relative;
+            width: 100%;
+            min-height: 200px;
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 24px;
+            background-color: #ffffff;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+        
+        .flip-card-back {
+            position: absolute;
+            width: 100%;
+            min-height: 200px;
+            top: 0;
+            left: 0;
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 24px;
+            background-color: #ffffff;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            transform: rotateY(180deg);
+        }
+        
+        .dark .flip-card-front,
+        .dark .flip-card-back {
+            border-color: #374151;
+            background-color: #1f2937;
+        }
+        
+        .flip-card-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            height: 100%;
+        }
+        
+        .flip-card-hint {
+            margin-top: auto;
+            text-align: center;
+            padding-top: 16px;
+            border-top: 1px solid #e5e7eb;
+        }
+        
+        .dark .flip-card-hint {
+            border-top-color: #374151;
+        }
+        
+        /* Hover effect */
+        .flip-card-inner:not(.flipped):hover .flip-card-front {
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        
+        .flip-card-inner.flipped:hover .flip-card-back {
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        
         .progress-animation {
             transition: width 0.5s ease-in-out;
         }
@@ -693,6 +775,7 @@
     <script src="/core/js/components/interactive/ChecklistRenderer.js"></script>
     <script src="/core/js/components/interactive/ExerciseRenderer.js"></script>
     <script src="/core/js/components/interactive/AIRenderer.js"></script>
+    <script src="/core/js/components/interactive/FlipCardRenderer.js"></script>
     <script src="/core/pages/InteractiveRenderer.js"></script>
     <script src="/core/pages/AIGenerator.js"></script>
     <script src="/core/pages/MCQuestionRenderer.js"></script>

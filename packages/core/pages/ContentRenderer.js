@@ -69,6 +69,8 @@ class ContentRenderer {
                     return this.renderMatchingExercise(item);
                 case 'trueFalseExercise':
                     return this.renderTrueFalseExercise(item);
+                case 'multipleChoiceExercise':
+                    return this.renderMultipleChoiceExercise(item);
                 case 'sourceEvaluationExercise':
                     return this.renderSourceEvaluationExercise(item);
                 case 'sequenceExercise':
@@ -87,6 +89,8 @@ class ContentRenderer {
                     return this.renderAIQueryExercise(item);
                 case 'aiBouwsteenGenerator':
                     return this.renderAIBouwsteenGenerator(item);
+                case 'flipCard':
+                    return this.renderFlipCard(item);
                 default:
                     console.warn(`Unknown content type: ${item.type}`);
                     return '';
@@ -763,6 +767,17 @@ class ContentRenderer {
     }
 
     /**
+     * Render een multiple choice oefening
+     */
+    static renderMultipleChoiceExercise(item) {
+        if (typeof window.InteractiveRenderer !== 'undefined') {
+            return InteractiveRenderer.renderMultipleChoiceExercise(item);
+        }
+        console.warn('InteractiveRenderer not loaded. Multiple choice exercise will not render.');
+        return '';
+    }
+
+    /**
      * Render een bronbeoordelingsoefening
      */
     static renderSourceEvaluationExercise(item) {
@@ -827,6 +842,19 @@ class ContentRenderer {
             return InteractiveRenderer.renderTabs(item);
         }
         console.warn('InteractiveRenderer not loaded. Tabs will not render.');
+        return '';
+    }
+
+    /**
+     * Render flip card component (delegates to InteractiveRenderer)
+     * @param {Object} item - Flip card item
+     * @returns {string} HTML string
+     */
+    static renderFlipCard(item) {
+        if (typeof window.InteractiveRenderer !== 'undefined') {
+            return InteractiveRenderer.renderFlipCard(item);
+        }
+        console.warn('InteractiveRenderer not loaded. Flip card will not render.');
         return '';
     }
 

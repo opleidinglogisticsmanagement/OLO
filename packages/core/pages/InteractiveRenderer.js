@@ -250,6 +250,45 @@ class InteractiveRenderer {
         return '';
     }
 
+    /**
+     * Render een multiple choice oefening
+     * @deprecated Gebruik ExerciseRenderer.renderMultipleChoiceExercise() in plaats daarvan
+     * @param {Object} item - Multiple choice exercise item met question en options array
+     * @returns {string} HTML string
+     */
+    static renderMultipleChoiceExercise(item) {
+        if (typeof window.ExerciseRenderer !== 'undefined') {
+            return ExerciseRenderer.renderMultipleChoiceExercise(item);
+        }
+        console.warn('ExerciseRenderer not loaded. Multiple choice exercise will not render.');
+        return '';
+    }
+
+    /**
+     * Handle multiple choice answer selection
+     * @deprecated Gebruik ExerciseRenderer.handleMultipleChoiceAnswer() in plaats daarvan
+     * @param {string} exerciseId - ID of the exercise container
+     * @param {number} selectedIndex - Index of the selected option
+     */
+    static handleMultipleChoiceAnswer(exerciseId, selectedIndex) {
+        if (typeof window.ExerciseRenderer !== 'undefined') {
+            return ExerciseRenderer.handleMultipleChoiceAnswer(exerciseId, selectedIndex);
+        }
+        console.warn('ExerciseRenderer not loaded. Multiple choice answer handling will not work.');
+    }
+
+    /**
+     * Reset multiple choice exercise to initial state
+     * @deprecated Gebruik ExerciseRenderer.resetMultipleChoiceExercise() in plaats daarvan
+     * @param {string} exerciseId - ID of the exercise container
+     */
+    static resetMultipleChoiceExercise(exerciseId) {
+        if (typeof window.ExerciseRenderer !== 'undefined') {
+            return ExerciseRenderer.resetMultipleChoiceExercise(exerciseId);
+        }
+        console.warn('ExerciseRenderer not loaded. Multiple choice reset will not work.');
+    }
+
 
     /**
      * Update true/false answer
@@ -1184,6 +1223,41 @@ class InteractiveRenderer {
         }
         console.warn('TabRenderer not loaded. Tabs will not render.');
             return '';
+    }
+
+    /**
+     * Render een flip card component
+     * @param {Object} item - Flip card item met front en back
+     * @returns {string} HTML string
+     */
+    static renderFlipCard(item) {
+        if (typeof window.FlipCardRenderer !== 'undefined') {
+            return FlipCardRenderer.renderFlipCard(item);
+        }
+        console.warn('FlipCardRenderer not loaded. Flip card will not render.');
+        return '';
+    }
+
+    /**
+     * Flip een flip card
+     * @param {string} cardId - ID van de flip card
+     */
+    static flipFlipCard(cardId) {
+        if (typeof window.FlipCardRenderer !== 'undefined') {
+            return FlipCardRenderer.flipCard(cardId);
+        }
+        console.warn('FlipCardRenderer not loaded. Flip card flip will not work.');
+    }
+
+    /**
+     * Reset een flip card naar voorkant
+     * @param {string} cardId - ID van de flip card
+     */
+    static resetFlipCard(cardId) {
+        if (typeof window.FlipCardRenderer !== 'undefined') {
+            return FlipCardRenderer.resetFlipCard(cardId);
+        }
+        console.warn('FlipCardRenderer not loaded. Flip card reset will not work.');
     }
 
     /**

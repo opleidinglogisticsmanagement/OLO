@@ -465,6 +465,56 @@
         "explanation": "De supply chain begint bij de grondstofleverancier en eindigt bij de eindconsument. Elke schakel voegt waarde toe aan het product en draagt bij aan de uiteindelijke levering aan de klant."
       },
       {
+        "type": "paragraph",
+        "text": [
+          "<h3 class=\"text-lg font-semibold text-gray-900 dark:text-white mb-2\">Multiple Choice Exercise</h3>",
+          "<p class=\"text-gray-600 dark:text-gray-400 mb-4\">Test kennis met meerkeuzevragen. Studenten kiezen één antwoord en krijgen directe feedback met uitleg. Ideaal voor het testen van begrip van concepten.</p>"
+        ]
+      },
+      {
+        "type": "multipleChoiceExercise",
+        "question": "Welke transportmodaliteit is het meest geschikt voor het vervoer van bulkgoederen over lange afstanden?",
+        "options": [
+          {
+            "text": "Wegvervoer - flexibel en snel",
+            "correct": false,
+            "feedback": "Wegvervoer is inderdaad flexibel en snel, maar niet de meest kosteneffectieve optie voor bulkgoederen over lange afstanden."
+          },
+          {
+            "text": "Zeevaart - lage kosten per ton/km en grote capaciteit",
+            "correct": true,
+            "feedback": "Correct! Zeevaart is de meest kosteneffectieve modaliteit voor bulkgoederen over lange afstanden vanwege de lage kosten per ton/km en enorme capaciteit."
+          },
+          {
+            "text": "Luchtvracht - zeer snel maar duur",
+            "correct": false,
+            "feedback": "Luchtvracht is inderdaad snel, maar veel te duur voor bulkgoederen. Het wordt vooral gebruikt voor tijdkritische of waardevolle zendingen."
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "<h3 class=\"text-lg font-semibold text-gray-900 dark:text-white mb-2\">Flip Card</h3>",
+          "<p class=\"text-gray-600 dark:text-gray-400 mb-4\">Creëer interactieve kaarten met een vraag op de voorkant en het antwoord op de achterkant. Studenten denken eerst na voordat ze de kaart omdraaien. Perfect voor zelfstudie en het leren van definities.</p>"
+        ]
+      },
+      {
+        "type": "flipCard",
+        "front": "Wat betekent de afkorting EOQ in voorraadbeheer?",
+        "back": [
+          {
+            "type": "paragraph",
+            "text": [
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>EOQ</strong> staat voor <strong>Economic Order Quantity</strong> (Economische Bestelhoeveelheid).</p>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Het is de optimale bestelhoeveelheid waarbij de totale voorraadkosten (bestelkosten + opslagkosten) worden geminimaliseerd. De formule is:</p>",
+              "<p class=\"text-gray-700 dark:text-gray-300\">EOQ = √(2DS/H)</p>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mt-4\">Waarbij:<br>D = Jaarlijkse vraag<br>S = Bestelkosten per order<br>H = Opslagkosten per eenheid per jaar</p>"
+            ]
+          }
+        ]
+      },
+      {
         "type": "heading",
         "text": "Geavanceerde AI-Tools",
         "level": 2,

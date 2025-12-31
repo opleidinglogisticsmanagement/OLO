@@ -53,12 +53,6 @@
         "alt": "Processes and operations (Krajewski en Malhotra, 2022, p. 25)"
       },
       {
-        "type": "paragraph",
-        "text": [
-          "<em>Processes and operations (Krajewski en Malhotra, 2022, p. 25)</em>"
-        ]
-      },
-      {
         "type": "heading",
         "text": "Operations Management",
         "level": 3,
@@ -81,7 +75,11 @@
       },
       {
         "type": "html",
-        "html": "<div class=\"mb-6\"><p class=\"text-sm text-gray-600 dark:text-gray-400 mb-2\"><strong>Toelichting processes and operations</strong></p><audio controls class=\"w-full max-w-2xl\"><source src=\"assets/audio/toelichting-processes-and-operations.mp3\" type=\"audio/mpeg\">Je browser ondersteunt het audio element niet.</audio></div>"
+        "html": "<div class=\"mb-8\"><p class=\"text-sm text-gray-600 dark:text-gray-400 mb-2\"><strong>Toelichting processes and operations</strong></p><audio controls class=\"w-full max-w-2xl\"><source src=\"assets/audio/toelichting-processes-and-operations.mp3\" type=\"audio/mpeg\">Je browser ondersteunt het audio element niet.</audio></div>"
+      },
+      {
+        "type": "paragraph",
+        "text": [""]
       },
       {
         "type": "heading",
@@ -116,7 +114,11 @@
       },
       {
         "type": "html",
-        "html": "<div class=\"mb-6\"><p class=\"text-sm text-gray-600 dark:text-gray-400 mb-2\"><strong>Toelichting core- and support processes</strong></p><audio controls class=\"w-full max-w-2xl\"><source src=\"assets/audio/toelichting-core-and-support-processes.mp3\" type=\"audio/mpeg\">Je browser ondersteunt het audio element niet.</audio></div>"
+        "html": "<div class=\"mb-8\"><p class=\"text-sm text-gray-600 dark:text-gray-400 mb-2\"><strong>Toelichting core- and support processes</strong></p><audio controls class=\"w-full max-w-2xl\"><source src=\"assets/audio/toelichting-core-and-support-processes.mp3\" type=\"audio/mpeg\">Je browser ondersteunt het audio element niet.</audio></div>"
+      },
+      {
+        "type": "paragraph",
+        "text": [""]
       },
       {
         "type": "highlight",
@@ -220,14 +222,12 @@
         "alt": "Continuüm productie- en dienstverlenende processen"
       },
       {
-        "type": "paragraph",
-        "text": [
-          "<em>Continuüm productie- en dienstverlenende processen</em>"
-        ]
+        "type": "html",
+        "html": "<div class=\"mb-8\"><p class=\"text-sm text-gray-600 dark:text-gray-400 mb-2\"><strong>Toelichting continuüm</strong></p><audio controls class=\"w-full max-w-2xl\"><source src=\"assets/audio/toelichting-continuum.mp3\" type=\"audio/mpeg\">Je browser ondersteunt het audio element niet.</audio></div>"
       },
       {
-        "type": "html",
-        "html": "<div class=\"mb-6\"><p class=\"text-sm text-gray-600 dark:text-gray-400 mb-2\"><strong>Toelichting continuüm</strong></p><audio controls class=\"w-full max-w-2xl\"><source src=\"assets/audio/toelichting-continuum.mp3\" type=\"audio/mpeg\">Je browser ondersteunt het audio element niet.</audio></div>"
+        "type": "paragraph",
+        "text": [""]
       },
       {
         "type": "heading",
@@ -286,14 +286,12 @@
         "enableModal": true
       },
       {
-        "type": "paragraph",
-        "text": [
-          "<em>Operations strategy framework (Krajewski en Malhotra, 2022, p. 29)</em>"
-        ]
+        "type": "html",
+        "html": "<div class=\"mb-8\"><p class=\"text-sm text-gray-600 dark:text-gray-400 mb-2\"><strong>Toelichting operations strategy framework</strong></p><audio controls class=\"w-full max-w-2xl\"><source src=\"assets/audio/toelichting-operations-strategy-framework.mp3\" type=\"audio/mpeg\">Je browser ondersteunt het audio element niet.</audio></div>"
       },
       {
-        "type": "html",
-        "html": "<div class=\"mb-6\"><p class=\"text-sm text-gray-600 dark:text-gray-400 mb-2\"><strong>Toelichting operations strategy framework</strong></p><audio controls class=\"w-full max-w-2xl\"><source src=\"assets/audio/toelichting-operations-strategy-framework.mp3\" type=\"audio/mpeg\">Je browser ondersteunt het audio element niet.</audio></div>"
+        "type": "paragraph",
+        "text": [""]
       },
       {
         "type": "heading",
@@ -583,7 +581,404 @@
                 "alt": "Rolex - voorbeeld van top quality"
               }
             ]
+          },
+          {
+            "label": "3. Consistent Quality",
+            "content": [
+              {
+                "type": "paragraph",
+                "text": [
+                  "<strong>Definitie</strong>"
+                ]
+              },
+              {
+                "type": "paragraph",
+                "text": [
+                  "Producten of diensten leveren van <strong>constante</strong> kwaliteit."
+                ]
+              },
+              {
+                "type": "paragraph",
+                "text": [
+                  "<strong>Wat betekent dit voor de inrichting van processen</strong>"
+                ]
+              },
+              {
+                "type": "paragraph",
+                "text": [
+                  "Processen worden ingericht op het minimaliseren en monitoren van fouten. Processen worden waar mogelijk gestandaardiseerd."
+                ]
+              },
+              {
+                "type": "paragraph",
+                "text": [
+                  "<strong>Voorbeeld</strong>",
+                  "McDonald's heeft processen in hoge mate gestandaardiseerd en personeel opgeleid om processen correct uit te voeren."
+                ]
+              },
+              {
+                "type": "image",
+                "src": "assets/images/1.11.jpg",
+                "alt": "McDonald's - voorbeeld van consistent quality"
+              }
+            ]
+          },
+          {
+            "label": "4. Delivery Speed",
+            "content": [
+              {
+                "type": "paragraph",
+                "text": [
+                  "<strong>Definitie</strong>"
+                ]
+              },
+              {
+                "type": "paragraph",
+                "text": [
+                  "Snel kunnen leveren van een product of dienst."
+                ]
+              },
+              {
+                "type": "paragraph",
+                "text": [
+                  "<strong>Wat betekent dit voor de inrichting van processen</strong>"
+                ]
+              },
+              {
+                "type": "paragraph",
+                "text": [
+                  "Doorlooptijden in processen worden verkort. Om dit te bereiken kan worden ingezet op het realiseren van reservecapaciteit, op slimme plaatsen (kleine) voorraden aanleggen of te investeren in snelle distributie van het product of de dienst."
+                ]
+              },
+              {
+                "type": "paragraph",
+                "text": [
+                  "<strong>Voorbeeld</strong>",
+                  "Netflix is in staat om orderproces van aanvraag tot levering in zeer korte tijd af te ronden."
+                ]
+              },
+              {
+                "type": "image",
+                "src": "assets/images/1.12.jpg",
+                "alt": "Netflix - voorbeeld van delivery speed"
+              }
+            ]
+          },
+          {
+            "label": "5. On-Time Delivery",
+            "content": [
+              {
+                "type": "paragraph",
+                "text": [
+                  "<strong>Definitie</strong>"
+                ]
+              },
+              {
+                "type": "paragraph",
+                "text": [
+                  "Een product of dienst leveren op de tijd dat de klant daarom vraagt."
+                ]
+              },
+              {
+                "type": "paragraph",
+                "text": [
+                  "<strong>Wat betekent dit voor de inrichting van processen</strong>"
+                ]
+              },
+              {
+                "type": "paragraph",
+                "text": [
+                  "Naast het reduceren van doorlooptijden wordt geïnvesteerd in planningsprocessen die het mogelijk maken om op het juiste tijdstip te leveren."
+                ]
+              },
+              {
+                "type": "paragraph",
+                "text": [
+                  "<strong>Voorbeeld</strong>",
+                  "UPS."
+                ]
+              },
+              {
+                "type": "image",
+                "src": "assets/images/1.13.jpg",
+                "alt": "UPS - voorbeeld van on-time delivery"
+              }
+            ]
+          },
+          {
+            "label": "6. Development Speed",
+            "content": [
+              {
+                "type": "paragraph",
+                "text": [
+                  "<strong>Definitie</strong>"
+                ]
+              },
+              {
+                "type": "paragraph",
+                "text": [
+                  "Snel nieuwe producten of diensten kunnen ontwikkelen en op de markt brengen."
+                ]
+              },
+              {
+                "type": "paragraph",
+                "text": [
+                  "<strong>Wat betekent dit voor de inrichting van processen</strong>"
+                ]
+              },
+              {
+                "type": "paragraph",
+                "text": [
+                  "Investeren in processen waarin professionals vanuit verschillende disciplines en ketenpartners snel en effectief met elkaar kunnen samenwerken om nieuwe producten of diensten te ontwikkelen."
+                ]
+              },
+              {
+                "type": "paragraph",
+                "text": [
+                  "<strong>Voorbeeld</strong>",
+                  "Zara staat bekend voor de wijze waarop snel nieuwe kleding wordt ontwikkeld en op de markt wordt gebracht."
+                ]
+              },
+              {
+                "type": "image",
+                "src": "assets/images/1.14.jpg",
+                "alt": "Zara - voorbeeld van development speed"
+              }
+            ]
+          },
+          {
+            "label": "7. Customization",
+            "content": [
+              {
+                "type": "paragraph",
+                "text": [
+                  "<strong>Definitie</strong>"
+                ]
+              },
+              {
+                "type": "paragraph",
+                "text": [
+                  "Producten of diensten leveren die zijn afgestemd op specifieke klantwensen (maatwerk)."
+                ]
+              },
+              {
+                "type": "paragraph",
+                "text": [
+                  "<strong>Wat betekent dit voor de inrichting van processen</strong>"
+                ]
+              },
+              {
+                "type": "paragraph",
+                "text": [
+                  "Processen zijn ingericht op lage volumes, een hoge mate van klantcontact en de mogelijkheid om processtappen aan te passen voor specifieke klantwensen."
+                ]
+              },
+              {
+                "type": "paragraph",
+                "text": [
+                  "<strong>Voorbeeld</strong>",
+                  "Ritz Carlton is een luxe hotel waarin individuele wensen van klanten kunnen worden gerealiseerd."
+                ]
+              },
+              {
+                "type": "image",
+                "src": "assets/images/1.15.jpg",
+                "alt": "Ritz Carlton - voorbeeld van customization"
+              }
+            ]
+          },
+          {
+            "label": "8. Variety",
+            "content": [
+              {
+                "type": "paragraph",
+                "text": [
+                  "<strong>Definitie</strong>"
+                ]
+              },
+              {
+                "type": "paragraph",
+                "text": [
+                  "Een grote diversiteit aan producten en diensten kunnen leveren."
+                ]
+              },
+              {
+                "type": "paragraph",
+                "text": [
+                  "<strong>Wat betekent dit voor de inrichting van processen</strong>"
+                ]
+              },
+              {
+                "type": "paragraph",
+                "text": [
+                  "Processen zijn in staat om grotere volumes van diverse producten of diensten aan te bieden, maar niet afgestemd op individuele klantwensen (zoals bij customization). Processen hebben een hoog repetitief karakter."
+                ]
+              },
+              {
+                "type": "paragraph",
+                "text": [
+                  "<strong>Voorbeeld</strong>",
+                  "Amazon.com maakt gebruik van geavanceerde informatietechnologie om de klantvraag te kennen en het biedt een grote variatie aan producten."
+                ]
+              },
+              {
+                "type": "image",
+                "src": "assets/images/1.16.jpg",
+                "alt": "Amazon.com - voorbeeld van variety"
+              }
+            ]
+          },
+          {
+            "label": "9. Volume Flexibility",
+            "content": [
+              {
+                "type": "paragraph",
+                "text": [
+                  "<strong>Definitie</strong>"
+                ]
+              },
+              {
+                "type": "paragraph",
+                "text": [
+                  "Snel kunnen op- of afschalen in het leveren van producten of diensten om variatie in de klantvraag op te vangen."
+                ]
+              },
+              {
+                "type": "paragraph",
+                "text": [
+                  "<strong>Wat betekent dit voor de inrichting van processen</strong>"
+                ]
+              },
+              {
+                "type": "paragraph",
+                "text": [
+                  "Processen worden ingericht met een hoge mate van flexibiliteit in capaciteit en de mogelijkheid om voorraden aan te leggen of reduceren."
+                ]
+              },
+              {
+                "type": "paragraph",
+                "text": [
+                  "<strong>Voorbeeld</strong>",
+                  "Apple is in staat om nieuwe producten met een relatieve korte productlevenscyclus snel op te schalen in productievolume"
+                ]
+              },
+              {
+                "type": "image",
+                "src": "assets/images/1.17.jpg",
+                "alt": "Apple - voorbeeld van volume flexibility"
+              }
+            ]
           }
+        ]
+      },
+      {
+        "type": "heading",
+        "text": "Oefening: Koppel competitive priorities aan procesoverwegingen",
+        "level": 3,
+        "id": "oefening-competitive-priorities"
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "Nu jij! Bij welke competitive priority past welke overweging voor het inrichten van processen het beste?"
+        ]
+      },
+      {
+        "type": "html",
+        "html": "<style>section[id^=\"matching-exercise-\"] [id*=\"-category-\"] { min-height: 60px !important; padding: 0.75rem !important; } section[id^=\"matching-exercise-\"] [id*=\"-category-\"] .dropped-items { min-height: 30px !important; }</style>"
+      },
+      {
+        "type": "matchingExercise",
+        "title": "Koppel competitive priorities aan procesoverwegingen",
+        "instruction": "Sleep de procesoverwegingen naar de juiste competitive priority:",
+        "hideBorder": true,
+        "explanation": "<h4 class=\"font-semibold mb-3 text-green-800 dark:text-green-200\">Uitwerking</h4><p class=\"text-sm text-green-800 dark:text-green-200 mb-3\">Hieronder vind je de juiste koppelingen:</p><ul class=\"list-disc list-outside space-y-2 mb-4 ml-6 pl-4 text-sm text-green-800 dark:text-green-200\"><li class=\"mb-2\"><strong>1. Customization:</strong> Laag volume, intensief klantcontact, eenvoudig aanpasbare samenstelling</li><li class=\"mb-2\"><strong>2. Top Quality:</strong> Intensief klantcontact, superieure producteigenschappen</li><li class=\"mb-2\"><strong>3. Delivery Speed:</strong> Verkorten van doorlooptijd</li><li class=\"mb-2\"><strong>4. On-Time Delivery:</strong> Effectieve planningsprocessen om tijdige levering mogelijk te maken</li><li class=\"mb-2\"><strong>5. Consistent Quality:</strong> Monitoren van processen om fouten te reduceren/voorkomen</li><li class=\"mb-2\"><strong>6. Variety:</strong> Groter volumes mogelijk dan processen ingericht voor maatwerk</li><li class=\"mb-2\"><strong>7. Development Speed:</strong> Snel en effectief samenwerken met andere afdelingen en leveranciers</li><li class=\"mb-2\"><strong>8. Low-Cost Operations:</strong> Processen zo efficiënt mogelijk inrichten</li><li class=\"mb-2\"><strong>9. Volume Flexibility:</strong> Capaciteit snel kunnen op- of afschalen</li></ul>",
+        "categories": [
+          {
+            "name": "1. Customization"
+          },
+          {
+            "name": "2. Top Quality"
+          },
+          {
+            "name": "3. Delivery Speed"
+          },
+          {
+            "name": "4. On-Time Delivery"
+          },
+          {
+            "name": "5. Consistent Quality"
+          },
+          {
+            "name": "6. Variety"
+          },
+          {
+            "name": "7. Development Speed"
+          },
+          {
+            "name": "8. Low-Cost Operations"
+          },
+          {
+            "name": "9. Volume Flexibility"
+          }
+        ],
+        "items": [
+          {
+            "text": "Laag volume, intensief klantcontact, eenvoudig aanpasbare samenstelling",
+            "correctCategory": 0
+          },
+          {
+            "text": "Intensief klantcontact, superieure producteigenschappen",
+            "correctCategory": 1
+          },
+          {
+            "text": "Verkorten van doorlooptijd",
+            "correctCategory": 2
+          },
+          {
+            "text": "Effectieve planningsprocessen om tijdige levering mogelijk te maken",
+            "correctCategory": 3
+          },
+          {
+            "text": "Monitoren van processen om fouten te reduceren/voorkomen",
+            "correctCategory": 4
+          },
+          {
+            "text": "Groter volumes mogelijk dan processen ingericht voor maatwerk",
+            "correctCategory": 5
+          },
+          {
+            "text": "Snel en effectief samenwerken met andere afdelingen en leveranciers",
+            "correctCategory": 6
+          },
+          {
+            "text": "Processen zo efficiënt mogelijk inrichten",
+            "correctCategory": 7
+          },
+          {
+            "text": "Capaciteit snel kunnen op- of afschalen",
+            "correctCategory": 8
+          }
+        ]
+      },
+      {
+        "type": "heading",
+        "text": "Wat heb je geleerd?",
+        "level": 3,
+        "id": "wat-heb-je-geleerd-competitive-priorities"
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "Je hebt in dit blok het volgende geleerd:",
+          "• Je weet wat order winners en qualifiers zijn",
+          "• Je weet wat competitive priorities zijn, hoe ze worden afgeleid uit een marktanalyse en wat de implicaties zijn voor het inrichten van processen"
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "In het vervolg van dit blok gaan we verder in op belangrijke <strong>beslissingen</strong> die een rol spelen bij het ontwerpen en aansturen van processen."
         ]
       },
       {
@@ -591,6 +986,256 @@
         "text": "Procesbeslissingen",
         "level": 2,
         "id": "procesbeslissingen"
+      },
+      {
+        "type": "html",
+        "html": "<div class=\"my-4 overflow-hidden rounded-lg\" style=\"height: 150px; max-height: 200px;\"><div style=\"position: relative; width: 100%; height: 100%; overflow: hidden;\"><img src=\"assets/images/1.18.png\" alt=\"Procesbeslissingen\" class=\"w-full\" style=\"object-fit: cover; object-position: center; height: 400%; transform: translateY(-37.5%);\"></div></div>"
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "Waarde wordt toegevoegd in processen.",
+          "Zonder processen komen er geen producten of diensten tot stand."
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "In het vorige blok hebben we besproken hoe <strong>order winners</strong> en <strong>order qualifiers</strong> helpen om een klantwens te definiëren in een gekozen marktsegment. Daaruit kunnen <strong>competitive priorities</strong> worden afgeleid die het bedrijf wil nastreven om competitief voordeel te behalen in de markt."
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "In dit blok besteden we aandacht aan beslissingen die relevant zijn voor het ontwerpen en aansturen van processen, die passen bij deze competitive priorities. We geven antwoord op de volgende vragen:"
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "• Wat wordt bedoeld met processtrategie?",
+          "• Welke procesbeslissingen zijn relevant bij het inrichten en aansturen van processen?",
+          "• Wat zijn de product-proces matrix en de klant-contactmatrix en hoe helpen die bij het kiezen van een geschikte processtructuur"
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "Tijdens de klassikale workshop gaan we aan de slag met een casus over dit onderwerp."
+        ]
+      },
+      {
+        "type": "heading",
+        "text": "Processtrategie",
+        "level": 3,
+        "id": "processtrategie"
+      },
+      {
+        "type": "html",
+        "html": "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Is het geheel aan <strong>beslissingen</strong> dat wordt genomen bij het inrichten en aansturen van processen om de gekozen <strong>competitive priorities</strong> te kunnen realiseren (Krajewski en Malhotra, 2022)</p><div class=\"flex flex-col sm:flex-row gap-4 mb-2 items-start\"><div class=\"flex-shrink-0\" style=\"max-width: 50%; width: 50%;\"><div class=\"relative rounded-lg group image-modal-container cursor-pointer\" style=\"width: 100%; overflow: hidden !important; position: relative !important;\" data-image-src=\"assets/images/1.19.jpg\" data-image-alt=\"Procesbeslissingen (Krajewski en Malhotra, 2022, p. 76)\"><img src=\"assets/images/1.19.jpg\" alt=\"Procesbeslissingen (Krajewski en Malhotra, 2022, p. 76)\" class=\"rounded-lg transition-transform duration-300 group-hover:scale-110 desktop-only-hover\" style=\"max-width: 100% !important; max-height: 400px !important; width: auto !important; height: auto !important; object-fit: contain !important; display: block !important; margin: 0 auto !important;\"><div class=\"absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-10 transition-all duration-300 rounded-lg flex items-center justify-center desktop-only-hover pointer-events-none\" style=\"z-index: 1;\"><i class=\"fas fa-search-plus text-white text-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-300\"></i></div></div></div><div class=\"flex-1 min-w-0\"><p class=\"text-gray-700 dark:text-gray-300\">In de afbeelding links staan vier strategische procesbeslissingen die van centraal worden gesteld in het boek.</p></div></div>"
+      },
+      {
+        "type": "heading",
+        "text": "Strategische procesbeslissingen",
+        "level": 3,
+        "id": "strategische-procesbeslissingen"
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "We bespreken de strategische procesbeslissingen die worden behandeld in het boek.",
+          "Er volgt een definitie van elke procesbeslissing met een ingesproken toelichting daaronder."
+        ]
+      },
+      {
+        "type": "html",
+        "html": "<div class=\"flex flex-col sm:flex-row gap-4 mb-2 items-start\"><div class=\"flex-shrink-0\" style=\"max-width: 50%; width: 50%;\"><div class=\"relative rounded-lg\" style=\"width: 100%; overflow: hidden !important; position: relative !important;\"><img src=\"assets/images/1.20.jpg\" alt=\"IKEA store\" class=\"rounded-lg\" style=\"max-width: 100% !important; max-height: 400px !important; width: auto !important; height: auto !important; object-fit: contain !important; display: block !important; margin: 0 auto !important;\"></div></div><div class=\"flex-1 min-w-0\"><p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>Klantbetrokkenheid (customer involvement)</strong></p><p class=\"text-gray-700 dark:text-gray-300\">De mate waarin een klant wordt betrokken in het proces waarin een product of dienst tot stand komt.</p></div></div>"
+      },
+      {
+        "type": "html",
+        "html": "<div class=\"mb-8\"><p class=\"text-sm text-gray-600 dark:text-gray-400 mb-2\"><strong>Toelichting klantbetrokkenheid</strong></p><audio controls class=\"w-full max-w-2xl\"><source src=\"assets/audio/toelichting-klantbetrokkenheid.mp3\" type=\"audio/mpeg\">Je browser ondersteunt het audio element niet.</audio></div>"
+      },
+      {
+        "type": "paragraph",
+        "text": [""]
+      },
+      {
+        "type": "accordion",
+        "usePlusIcon": true,
+        "defaultOpen": false,
+        "items": [
+          {
+            "title": "Welke voordelen zijn benoemd van een hoge klantbetrokkenheid in het proces?",
+            "content": [
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Meerwaarde voor de klant, bijvoorbeeld:</p>",
+              "<ul class=\"list-disc list-outside space-y-2 mb-4 ml-6 pl-4 text-gray-700 dark:text-gray-300\">",
+              "<li class=\"mb-2\">Reduceren van kosten</li>",
+              "<li class=\"mb-2\">Besparing van tijd</li>",
+              "</ul>"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "accordion",
+        "usePlusIcon": true,
+        "defaultOpen": false,
+        "items": [
+          {
+            "title": "Wat zijn nadelen van een hoge klantbetrokkenheid in het proces?",
+            "content": [
+              "<ul class=\"list-disc list-outside space-y-2 mb-4 ml-6 pl-4 text-gray-700 dark:text-gray-300\">",
+              "<li class=\"mb-2\">Verstoort mogelijk het proces</li>",
+              "<li class=\"mb-2\">Vraagt om aanvullende vaardigheden in klantcontact</li>",
+              "</ul>"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "html",
+        "html": "<div class=\"flex flex-col sm:flex-row gap-4 mb-2 items-start\"><div class=\"flex-shrink-0\" style=\"max-width: 50%; width: 50%;\"><div class=\"relative rounded-lg\" style=\"width: 100%; overflow: hidden !important; position: relative !important;\"><img src=\"assets/images/1.21.jpg\" alt=\"Flexibiliteit in middelen\" class=\"rounded-lg\" style=\"max-width: 100% !important; max-height: 400px !important; width: auto !important; height: auto !important; object-fit: contain !important; display: block !important; margin: 0 auto !important;\"></div></div><div class=\"flex-1 min-w-0\"><p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>Flexibiliteit in middelen</strong> (resource flexibility)</p><p class=\"text-gray-700 dark:text-gray-300 mb-4\">De mate waarin <strong>personeel</strong> en <strong>materieel</strong> flexibel inzetbaar zijn in het proces.</p><p class=\"text-gray-700 dark:text-gray-300\">Deze beslissingen zijn afhankelijk de mate waarin a) de aard van het werk varieert of b) de vraag (het volume) fluctueert</p></div></div>"
+      },
+      {
+        "type": "html",
+        "html": "<div class=\"mb-8\"><p class=\"text-sm text-gray-600 dark:text-gray-400 mb-2\"><strong>Toelichting flexibiliteit in middelen</strong></p><audio controls class=\"w-full max-w-2xl\"><source src=\"assets/audio/toelichting-flexibiliteit-in-middelen.mp3\" type=\"audio/mpeg\">Je browser ondersteunt het audio element niet.</audio></div>"
+      },
+      {
+        "type": "paragraph",
+        "text": [""]
+      },
+      {
+        "type": "heading",
+        "text": "Personeel",
+        "level": 3,
+        "id": "personeel"
+      },
+      {
+        "type": "multipleChoiceExercise",
+        "question": "Een bedrijf levert houten meubelen op maat voor klanten. Elke order is uniek in samenstelling (type hout, afwerking, lak). De bewerkingen in het proces variëren per klantorder. Welke keuze zou hier goed bij passen?",
+        "options": [
+          {
+            "text": "Een hoge mate van flexibiliteit (breed inzetbare medewerkers)",
+            "correct": true,
+            "feedback": "Door de hoge mate van maatwerk variëren bewerkingen in het proces per order. Breed inzetbare medewerkers zorgen ervoor dat variatie in orders eenvoudiger opgevangen kan worden."
+          },
+          {
+            "text": "Een lage mate van flexibiliteit (medewerkers die goed zijn in specifieke bewerkingen)",
+            "correct": false,
+            "feedback": "Door de hoge mate van maatwerk variëren bewerkingen in het proces per order. Breed inzetbare medewerkers zorgen ervoor dat variatie in orders eenvoudiger opgevangen kan worden."
+          }
+        ]
+      },
+      {
+        "type": "heading",
+        "text": "Materieel",
+        "level": 3,
+        "id": "materieel"
+      },
+      {
+        "type": "multipleChoiceExercise",
+        "question": "Een koffieproducent levert drie soorten koffie. Elke koffiesoort wordt in zeer grote volumes geproduceerd. Het bedrijf kan kiezen om één **algemene** koffiebrander aan te schaffen voor alle soorten koffie of **specialistische** branders per type koffie (dit is kostbaarder in aanschaf, met lagere variabele kosten). Welke keuze zou hier goed bij passen?",
+        "options": [
+          {
+            "text": "Specialistische branders per type koffie (specialistisch materieel)",
+            "correct": true,
+            "feedback": "Wanneer productievolumes laag zijn, is het (te) kostbaar om per product specialistisch materiaal aan te schaffen. Hoge aanschafkosten wegen niet op tegen de reductie van variabele kosten. Wanneer volumes toenemen kunnen hoge aanschafskosten eenvoudiger worden terugverdiend."
+          },
+          {
+            "text": "Eén algemene koffiebrander (generiek materieel)",
+            "correct": false,
+            "feedback": "Wanneer productievolumes laag zijn, is het (te) kostbaar om per product specialistisch materiaal aan te schaffen. Hoge aanschafkosten wegen niet op tegen de reductie van variabele kosten. Wanneer volumes toenemen kunnen hoge aanschafskosten eenvoudiger worden terugverdiend."
+          }
+        ]
+      },
+      {
+        "type": "html",
+        "html": "<div class=\"flex flex-col sm:flex-row gap-4 mb-2 items-start\"><div class=\"flex-shrink-0\" style=\"max-width: 50%; width: 50%;\"><div class=\"relative rounded-lg\" style=\"width: 100%; overflow: hidden !important; position: relative !important;\"><img src=\"assets/images/1.22.jpg\" alt=\"Kapitaal intensiteit\" class=\"rounded-lg\" style=\"max-width: 100% !important; max-height: 400px !important; width: auto !important; height: auto !important; object-fit: contain !important; display: block !important; margin: 0 auto !important;\"></div></div><div class=\"flex-1 min-w-0\"><p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>Kapitaal intensiteit</strong> (capital intensity)</p><p class=\"text-gray-700 dark:text-gray-300\">De verhouding tussen arbeid en materieel. Hoe groter de kosten voor materieel in verhouding tot de kosten voor arbeid, hoe groter de kapitaalintensiteit.</p></div></div>"
+      },
+      {
+        "type": "html",
+        "html": "<div class=\"mb-8\"><p class=\"text-sm text-gray-600 dark:text-gray-400 mb-2\"><strong>Toelichting kapitaalintensiteit</strong></p><audio controls class=\"w-full max-w-2xl\"><source src=\"assets/audio/toelichting-kapitaalintensiteit.mp3\" type=\"audio/mpeg\">Je browser ondersteunt het audio element niet.</audio></div>"
+      },
+      {
+        "type": "paragraph",
+        "text": [""]
+      },
+      {
+        "type": "heading",
+        "text": "Processtructuur",
+        "level": 3,
+        "id": "processtructuur"
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "De laatste strategische procesbeslissing is de <strong>processtructuur</strong> een vierde overweging die van belang is bij het inrichten van processen."
+        ]
+      },
+      {
+        "type": "html",
+        "html": "<div class=\"flex flex-col sm:flex-row gap-4 mb-2 items-start\"><div class=\"flex-shrink-0\" style=\"max-width: 50%; width: 50%;\"><div class=\"relative rounded-lg group image-modal-container cursor-pointer\" style=\"width: 100%; overflow: hidden !important; position: relative !important;\" data-image-src=\"assets/images/1.23.jpg\" data-image-alt=\"Procesbeslissingen (Krajewski en Malhotra, 2022, p. 76)\"><img src=\"assets/images/1.23.jpg\" alt=\"Procesbeslissingen (Krajewski en Malhotra, 2022, p. 76)\" class=\"rounded-lg transition-transform duration-300 group-hover:scale-110 desktop-only-hover\" style=\"max-width: 100% !important; max-height: 400px !important; width: auto !important; height: auto !important; object-fit: contain !important; display: block !important; margin: 0 auto !important;\"><div class=\"absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-10 transition-all duration-300 rounded-lg flex items-center justify-center desktop-only-hover pointer-events-none\" style=\"z-index: 1;\"><i class=\"fas fa-search-plus text-white text-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-300\"></i></div></div><p class=\"text-sm text-gray-600 dark:text-gray-400 mt-2\">Procesbeslissingen (Krajewski en Malhotra, 2022, p. 76)</p></div><div class=\"flex-1 min-w-0\"><p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>Processtructuur</strong></p><p class=\"text-gray-700 dark:text-gray-300\">Het type procesinrichting inclusief de bijbehorende proceseigenschappen</p></div></div>"
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "Bij het vak Logistiek Management heb je kennisgemaakt met het logistiek concept. Probeer de volgende vraag te beantwoorden die te maken heeft met de definitie van processtructuur hierboven."
+        ]
+      },
+      {
+        "type": "flipCard",
+        "front": "De te kiezen procesinrichting is mede afhankelijk van de mate waarin een klantorder doordringt in het productieproces. Welk begrip past hierbij?",
+        "back": [
+          {
+            "type": "html",
+            "html": "<div class=\"relative rounded-lg group image-modal-container cursor-pointer\" style=\"width: 100%; overflow: hidden !important; position: relative !important;\" data-image-src=\"assets/images/1.24.jpg\" data-image-alt=\"\"><img src=\"assets/images/1.24.jpg\" alt=\"\" class=\"rounded-lg transition-transform duration-300 group-hover:scale-110 desktop-only-hover\" style=\"max-width: 100% !important; width: 100% !important; height: auto !important; object-fit: contain !important; display: block !important; margin: 0 auto !important;\"><div class=\"absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-10 transition-all duration-300 rounded-lg flex items-center justify-center desktop-only-hover pointer-events-none\" style=\"z-index: 1;\"><i class=\"fas fa-search-plus text-white text-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-300\"></i></div></div>"
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "Bij de te kiezen <strong>processtructuur</strong> wordt in het boek onderscheid gemaakt tussen productie- en dienstverlenende processen. Voor beide soorten processen is een matrix uitgewerkt waarin het type procesinrichting wordt gekoppeld aan bepaalde proceseigenschappen."
+        ]
+      },
+      {
+        "type": "html",
+        "html": "<div class=\"flex flex-col sm:flex-row gap-4 mb-2 items-start\"><div class=\"flex-shrink-0\" style=\"max-width: 50%; width: 50%;\"><div class=\"relative rounded-lg group image-modal-container cursor-pointer\" style=\"width: 100%; overflow: hidden !important; position: relative !important;\" data-image-src=\"assets/images/1.25.jpg\" data-image-alt=\"Product-proces matrix (Krajewski en Malhotra, 2022, p. 79)\"><img src=\"assets/images/1.25.jpg\" alt=\"Product-proces matrix (Krajewski en Malhotra, 2022, p. 79)\" class=\"rounded-lg transition-transform duration-300 group-hover:scale-110 desktop-only-hover\" style=\"max-width: 100% !important; max-height: 400px !important; width: auto !important; height: auto !important; object-fit: contain !important; display: block !important; margin: 0 auto !important;\"><div class=\"absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-10 transition-all duration-300 rounded-lg flex items-center justify-center desktop-only-hover pointer-events-none\" style=\"z-index: 1;\"><i class=\"fas fa-search-plus text-white text-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-300\"></i></div></div><p class=\"text-sm text-gray-600 dark:text-gray-400 mt-2\">Product-proces matrix (Krajewski en Malhotra, 2022, p. 79)</p></div><div class=\"flex-1 min-w-0\"><p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>Product-proces matrix</strong> (product-process matrix)</p><p class=\"text-gray-700 dark:text-gray-300 mb-4\">Deze matrix bestaat uit de volgende elementen:</p><ul class=\"list-disc list-outside space-y-2 mb-4 ml-6 pl-4 text-gray-700 dark:text-gray-300\"><li class=\"mb-2\">De grootte van het volume</li><li class=\"mb-2\">In hoeverre sprake is van maatwerk</li><li class=\"mb-2\">Proceseigenschappen</li></ul><p class=\"text-gray-700 dark:text-gray-300\">Hieruit volgt een geschikte procesinrichting voor een <strong>productieproces</strong>. Hieronder wordt de matrix toegelicht.</p></div></div>"
+      },
+      {
+        "type": "html",
+        "html": "<div class=\"mb-8\"><p class=\"text-sm text-gray-600 dark:text-gray-400 mb-2\"><strong>Toelichting product-proces matrix</strong></p><audio controls class=\"w-full max-w-2xl\"><source src=\"assets/audio/toelichting-product-proces-matrix.mp3\" type=\"audio/mpeg\">Je browser ondersteunt het audio element niet.</audio></div>"
+      },
+      {
+        "type": "paragraph",
+        "text": [""]
+      },
+      {
+        "type": "html",
+        "html": "<div class=\"flex flex-col sm:flex-row gap-4 mb-2 items-start\"><div class=\"flex-shrink-0\" style=\"max-width: 50%; width: 50%;\"><div class=\"relative rounded-lg group image-modal-container cursor-pointer\" style=\"width: 100%; overflow: hidden !important; position: relative !important;\" data-image-src=\"assets/images/1.26.jpg\" data-image-alt=\"Klant-contact matrix (Krajewski en Malhotra, 2022, p. 79)\"><img src=\"assets/images/1.26.jpg\" alt=\"Klant-contact matrix (Krajewski en Malhotra, 2022, p. 79)\" class=\"rounded-lg transition-transform duration-300 group-hover:scale-110 desktop-only-hover\" style=\"max-width: 100% !important; max-height: 400px !important; width: auto !important; height: auto !important; object-fit: contain !important; display: block !important; margin: 0 auto !important;\"><div class=\"absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-10 transition-all duration-300 rounded-lg flex items-center justify-center desktop-only-hover pointer-events-none\" style=\"z-index: 1;\"><i class=\"fas fa-search-plus text-white text-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-300\"></i></div></div><p class=\"text-sm text-gray-600 dark:text-gray-400 mt-2\">Klant-contact matrix (Krajewski en Malhotra, 2022, p. 79)</p></div><div class=\"flex-1 min-w-0\"><p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>Klant-contact matrix</strong> (customer-contact matrix)</p><p class=\"text-gray-700 dark:text-gray-300 mb-4\">Deze matrix bestaat uit de volgende elementen:</p><ul class=\"list-disc list-outside space-y-2 mb-4 ml-6 pl-4 text-gray-700 dark:text-gray-300\"><li class=\"mb-2\">De mate van klantcontact</li><li class=\"mb-2\">In hoeverre sprake is van maatwerk</li><li class=\"mb-2\">Proceseigenschappen</li></ul><p class=\"text-gray-700 dark:text-gray-300\">Hieruit volgt een geschikte procesinrichting voor een <strong>dienstverlenend proces</strong>. Hieronder wordt de matrix toegelicht.</p></div></div>"
+      },
+      {
+        "type": "html",
+        "html": "<div class=\"mb-8\"><p class=\"text-sm text-gray-600 dark:text-gray-400 mb-2\"><strong>Toelichting klant-contact matrix</strong></p><audio controls class=\"w-full max-w-2xl\"><source src=\"assets/audio/toelichting-klant-contact-matrix.mp3\" type=\"audio/mpeg\">Je browser ondersteunt het audio element niet.</audio></div>"
+      },
+      {
+        "type": "paragraph",
+        "text": [""]
+      },
+      {
+        "type": "heading",
+        "text": "Wat heb je geleerd?",
+        "level": 3,
+        "id": "wat-heb-je-geleerd-procesbeslissingen"
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "Je hebt in dit blok het volgende geleerd:",
+          "• Je weet wat wordt bedoeld met een processtrategie",
+          "• Je weet welke procesbeslissingen relevant zijn bij het inrichten en aansturen van processen",
+          "• Je weet wat de product-proces matrix en de klant-contactmatrix zijn en hoe die helpen bij het kiezen van een geschikte processtructuur"
+        ]
       }
     ]
   }

@@ -86,7 +86,6 @@ class LayoutRenderer {
     renderOperationsManagementNavigation() {
         const modules = [
             { id: 'start', title: 'Start', href: 'index.html' },
-            { id: 'week-1', title: 'Week 1', href: 'week1.html' },
             {
                 id: 'operations-processtrategie',
                 title: 'Operations en processtrategie',

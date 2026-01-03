@@ -74,8 +74,9 @@
         "iconClass": "fas"
       },
       {
-        "type": "html",
-        "html": "<div class=\"mb-8\"><p class=\"text-sm text-gray-600 dark:text-gray-400 mb-2\"><strong>Toelichting processes and operations</strong></p><audio controls class=\"w-full max-w-2xl\"><source src=\"assets/audio/toelichting-processes-and-operations.mp3\" type=\"audio/mpeg\">Je browser ondersteunt het audio element niet.</audio></div>"
+        "type": "audio",
+        "src": "assets/audio/toelichting-processes-and-operations.mp3",
+        "caption": "Toelichting processes and operations"
       },
       {
         "type": "paragraph",
@@ -113,8 +114,9 @@
         "enableModal": true
       },
       {
-        "type": "html",
-        "html": "<div class=\"mb-8\"><p class=\"text-sm text-gray-600 dark:text-gray-400 mb-2\"><strong>Toelichting core- and support processes</strong></p><audio controls class=\"w-full max-w-2xl\"><source src=\"assets/audio/toelichting-core-and-support-processes.mp3\" type=\"audio/mpeg\">Je browser ondersteunt het audio element niet.</audio></div>"
+        "type": "audio",
+        "src": "assets/audio/toelichting-core-and-support-processes.mp3",
+        "caption": "Toelichting core- and support processes"
       },
       {
         "type": "paragraph",
@@ -222,8 +224,9 @@
         "alt": "Continuüm productie- en dienstverlenende processen"
       },
       {
-        "type": "html",
-        "html": "<div class=\"mb-8\"><p class=\"text-sm text-gray-600 dark:text-gray-400 mb-2\"><strong>Toelichting continuüm</strong></p><audio controls class=\"w-full max-w-2xl\"><source src=\"assets/audio/toelichting-continuum.mp3\" type=\"audio/mpeg\">Je browser ondersteunt het audio element niet.</audio></div>"
+        "type": "audio",
+        "src": "assets/audio/toelichting-continuum.mp3",
+        "caption": "Toelichting continuüm"
       },
       {
         "type": "paragraph",
@@ -286,8 +289,9 @@
         "enableModal": true
       },
       {
-        "type": "html",
-        "html": "<div class=\"mb-8\"><p class=\"text-sm text-gray-600 dark:text-gray-400 mb-2\"><strong>Toelichting operations strategy framework</strong></p><audio controls class=\"w-full max-w-2xl\"><source src=\"assets/audio/toelichting-operations-strategy-framework.mp3\" type=\"audio/mpeg\">Je browser ondersteunt het audio element niet.</audio></div>"
+        "type": "audio",
+        "src": "assets/audio/toelichting-operations-strategy-framework.mp3",
+        "caption": "Toelichting operations strategy framework"
       },
       {
         "type": "paragraph",
@@ -1052,8 +1056,9 @@
         "html": "<div class=\"flex flex-col sm:flex-row gap-4 mb-2 items-start\"><div class=\"flex-shrink-0\" style=\"max-width: 50%; width: 50%;\"><div class=\"relative rounded-lg\" style=\"width: 100%; overflow: hidden !important; position: relative !important;\"><img src=\"assets/images/1.20.jpg\" alt=\"IKEA store\" class=\"rounded-lg\" style=\"max-width: 100% !important; max-height: 400px !important; width: auto !important; height: auto !important; object-fit: contain !important; display: block !important; margin: 0 auto !important;\"></div></div><div class=\"flex-1 min-w-0\"><p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>Klantbetrokkenheid (customer involvement)</strong></p><p class=\"text-gray-700 dark:text-gray-300\">De mate waarin een klant wordt betrokken in het proces waarin een product of dienst tot stand komt.</p></div></div>"
       },
       {
-        "type": "html",
-        "html": "<div class=\"mb-8\"><p class=\"text-sm text-gray-600 dark:text-gray-400 mb-2\"><strong>Toelichting klantbetrokkenheid</strong></p><audio controls class=\"w-full max-w-2xl\"><source src=\"assets/audio/toelichting-klantbetrokkenheid.mp3\" type=\"audio/mpeg\">Je browser ondersteunt het audio element niet.</audio></div>"
+        "type": "audio",
+        "src": "assets/audio/toelichting-klantbetrokkenheid.mp3",
+        "caption": "Toelichting klantbetrokkenheid"
       },
       {
         "type": "paragraph",
@@ -1097,8 +1102,9 @@
         "html": "<div class=\"flex flex-col sm:flex-row gap-4 mb-2 items-start\"><div class=\"flex-shrink-0\" style=\"max-width: 50%; width: 50%;\"><div class=\"relative rounded-lg\" style=\"width: 100%; overflow: hidden !important; position: relative !important;\"><img src=\"assets/images/1.21.jpg\" alt=\"Flexibiliteit in middelen\" class=\"rounded-lg\" style=\"max-width: 100% !important; max-height: 400px !important; width: auto !important; height: auto !important; object-fit: contain !important; display: block !important; margin: 0 auto !important;\"></div></div><div class=\"flex-1 min-w-0\"><p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>Flexibiliteit in middelen</strong> (resource flexibility)</p><p class=\"text-gray-700 dark:text-gray-300 mb-4\">De mate waarin <strong>personeel</strong> en <strong>materieel</strong> flexibel inzetbaar zijn in het proces.</p><p class=\"text-gray-700 dark:text-gray-300\">Deze beslissingen zijn afhankelijk de mate waarin a) de aard van het werk varieert of b) de vraag (het volume) fluctueert</p></div></div>"
       },
       {
-        "type": "html",
-        "html": "<div class=\"mb-8\"><p class=\"text-sm text-gray-600 dark:text-gray-400 mb-2\"><strong>Toelichting flexibiliteit in middelen</strong></p><audio controls class=\"w-full max-w-2xl\"><source src=\"assets/audio/toelichting-flexibiliteit-in-middelen.mp3\" type=\"audio/mpeg\">Je browser ondersteunt het audio element niet.</audio></div>"
+        "type": "audio",
+        "src": "assets/audio/toelichting-flexibiliteit-in-middelen.mp3",
+        "caption": "Toelichting flexibiliteit in middelen"
       },
       {
         "type": "paragraph",
@@ -1153,8 +1159,9 @@
         "html": "<div class=\"flex flex-col sm:flex-row gap-4 mb-2 items-start\"><div class=\"flex-shrink-0\" style=\"max-width: 50%; width: 50%;\"><div class=\"relative rounded-lg\" style=\"width: 100%; overflow: hidden !important; position: relative !important;\"><img src=\"assets/images/1.22.jpg\" alt=\"Kapitaal intensiteit\" class=\"rounded-lg\" style=\"max-width: 100% !important; max-height: 400px !important; width: auto !important; height: auto !important; object-fit: contain !important; display: block !important; margin: 0 auto !important;\"></div></div><div class=\"flex-1 min-w-0\"><p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>Kapitaal intensiteit</strong> (capital intensity)</p><p class=\"text-gray-700 dark:text-gray-300\">De verhouding tussen arbeid en materieel. Hoe groter de kosten voor materieel in verhouding tot de kosten voor arbeid, hoe groter de kapitaalintensiteit.</p></div></div>"
       },
       {
-        "type": "html",
-        "html": "<div class=\"mb-8\"><p class=\"text-sm text-gray-600 dark:text-gray-400 mb-2\"><strong>Toelichting kapitaalintensiteit</strong></p><audio controls class=\"w-full max-w-2xl\"><source src=\"assets/audio/toelichting-kapitaalintensiteit.mp3\" type=\"audio/mpeg\">Je browser ondersteunt het audio element niet.</audio></div>"
+        "type": "audio",
+        "src": "assets/audio/toelichting-kapitaalintensiteit.mp3",
+        "caption": "Toelichting kapitaalintensiteit"
       },
       {
         "type": "paragraph",
@@ -1203,8 +1210,9 @@
         "html": "<div class=\"flex flex-col sm:flex-row gap-4 mb-2 items-start\"><div class=\"flex-shrink-0\" style=\"max-width: 50%; width: 50%;\"><div class=\"relative rounded-lg group image-modal-container cursor-pointer\" style=\"width: 100%; overflow: hidden !important; position: relative !important;\" data-image-src=\"assets/images/1.25.jpg\" data-image-alt=\"Product-proces matrix (Krajewski en Malhotra, 2022, p. 79)\"><img src=\"assets/images/1.25.jpg\" alt=\"Product-proces matrix (Krajewski en Malhotra, 2022, p. 79)\" class=\"rounded-lg transition-transform duration-300 group-hover:scale-110 desktop-only-hover\" style=\"max-width: 100% !important; max-height: 400px !important; width: auto !important; height: auto !important; object-fit: contain !important; display: block !important; margin: 0 auto !important;\"><div class=\"absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-10 transition-all duration-300 rounded-lg flex items-center justify-center desktop-only-hover pointer-events-none\" style=\"z-index: 1;\"><i class=\"fas fa-search-plus text-white text-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-300\"></i></div></div><p class=\"text-sm text-gray-600 dark:text-gray-400 mt-2\">Product-proces matrix (Krajewski en Malhotra, 2022, p. 79)</p></div><div class=\"flex-1 min-w-0\"><p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>Product-proces matrix</strong> (product-process matrix)</p><p class=\"text-gray-700 dark:text-gray-300 mb-4\">Deze matrix bestaat uit de volgende elementen:</p><ul class=\"list-disc list-outside space-y-2 mb-4 ml-6 pl-4 text-gray-700 dark:text-gray-300\"><li class=\"mb-2\">De grootte van het volume</li><li class=\"mb-2\">In hoeverre sprake is van maatwerk</li><li class=\"mb-2\">Proceseigenschappen</li></ul><p class=\"text-gray-700 dark:text-gray-300\">Hieruit volgt een geschikte procesinrichting voor een <strong>productieproces</strong>. Hieronder wordt de matrix toegelicht.</p></div></div>"
       },
       {
-        "type": "html",
-        "html": "<div class=\"mb-8\"><p class=\"text-sm text-gray-600 dark:text-gray-400 mb-2\"><strong>Toelichting product-proces matrix</strong></p><audio controls class=\"w-full max-w-2xl\"><source src=\"assets/audio/toelichting-product-proces-matrix.mp3\" type=\"audio/mpeg\">Je browser ondersteunt het audio element niet.</audio></div>"
+        "type": "audio",
+        "src": "assets/audio/toelichting-product-proces-matrix.mp3",
+        "caption": "Toelichting product-proces matrix"
       },
       {
         "type": "paragraph",
@@ -1215,8 +1223,9 @@
         "html": "<div class=\"flex flex-col sm:flex-row gap-4 mb-2 items-start\"><div class=\"flex-shrink-0\" style=\"max-width: 50%; width: 50%;\"><div class=\"relative rounded-lg group image-modal-container cursor-pointer\" style=\"width: 100%; overflow: hidden !important; position: relative !important;\" data-image-src=\"assets/images/1.26.jpg\" data-image-alt=\"Klant-contact matrix (Krajewski en Malhotra, 2022, p. 79)\"><img src=\"assets/images/1.26.jpg\" alt=\"Klant-contact matrix (Krajewski en Malhotra, 2022, p. 79)\" class=\"rounded-lg transition-transform duration-300 group-hover:scale-110 desktop-only-hover\" style=\"max-width: 100% !important; max-height: 400px !important; width: auto !important; height: auto !important; object-fit: contain !important; display: block !important; margin: 0 auto !important;\"><div class=\"absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-10 transition-all duration-300 rounded-lg flex items-center justify-center desktop-only-hover pointer-events-none\" style=\"z-index: 1;\"><i class=\"fas fa-search-plus text-white text-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-300\"></i></div></div><p class=\"text-sm text-gray-600 dark:text-gray-400 mt-2\">Klant-contact matrix (Krajewski en Malhotra, 2022, p. 79)</p></div><div class=\"flex-1 min-w-0\"><p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>Klant-contact matrix</strong> (customer-contact matrix)</p><p class=\"text-gray-700 dark:text-gray-300 mb-4\">Deze matrix bestaat uit de volgende elementen:</p><ul class=\"list-disc list-outside space-y-2 mb-4 ml-6 pl-4 text-gray-700 dark:text-gray-300\"><li class=\"mb-2\">De mate van klantcontact</li><li class=\"mb-2\">In hoeverre sprake is van maatwerk</li><li class=\"mb-2\">Proceseigenschappen</li></ul><p class=\"text-gray-700 dark:text-gray-300\">Hieruit volgt een geschikte procesinrichting voor een <strong>dienstverlenend proces</strong>. Hieronder wordt de matrix toegelicht.</p></div></div>"
       },
       {
-        "type": "html",
-        "html": "<div class=\"mb-8\"><p class=\"text-sm text-gray-600 dark:text-gray-400 mb-2\"><strong>Toelichting klant-contact matrix</strong></p><audio controls class=\"w-full max-w-2xl\"><source src=\"assets/audio/toelichting-klant-contact-matrix.mp3\" type=\"audio/mpeg\">Je browser ondersteunt het audio element niet.</audio></div>"
+        "type": "audio",
+        "src": "assets/audio/toelichting-klant-contact-matrix.mp3",
+        "caption": "Toelichting klant-contact matrix"
       },
       {
         "type": "paragraph",

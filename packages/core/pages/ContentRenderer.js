@@ -51,6 +51,8 @@ class ContentRenderer {
                     return this.renderUrl(item);
                 case 'video':
                     return this.renderVideo(item);
+                case 'audio':
+                    return this.renderAudio(item);
                 case 'document':
                     return this.renderDocument(item);
                 case 'highlight':
@@ -598,6 +600,30 @@ class ContentRenderer {
                     overflow: hidden !important;
                 }
             </style>
+        `;
+    }
+
+    /**
+     * Render een audio item
+     * @param {Object} item - Audio item met src, caption (optioneel)
+     * @returns {string} HTML string
+     */
+    static renderAudio(item) {
+        if (!item.src) {
+            console.warn('Audio item missing src:', item);
+            return '';
+        }
+
+        const caption = item.caption || '';
+        
+        return `
+            <div class="mt-8 mb-8">
+                <audio controls class="w-full max-w-2xl mb-2">
+                    <source src="${item.src}" type="audio/mpeg">
+                    Je browser ondersteunt het audio element niet.
+                </audio>
+                ${caption ? `<p class="text-sm text-gray-600 dark:text-gray-400"><strong>${caption}</strong></p>` : ''}
+            </div>
         `;
     }
 

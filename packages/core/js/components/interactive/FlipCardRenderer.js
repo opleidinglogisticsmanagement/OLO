@@ -187,16 +187,8 @@ class FlipCardRenderer {
             const naturalWidth = front.scrollWidth;
             const naturalHeight = front.scrollHeight;
             
-            // #region agent log
-            fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'FlipCardRenderer.js:makeCardSquare',message:'Measuring flip card dimensions',data:{cardId:cardId,naturalWidth:naturalWidth,naturalHeight:naturalHeight},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'})}).catch(()=>{});
-            // #endregion
-            
             // Maak de kaart vierkant: gebruik de grootste dimensie
             const targetSize = Math.max(naturalWidth, naturalHeight);
-            
-            // #region agent log
-            fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'FlipCardRenderer.js:makeCardSquare',message:'Setting square dimensions',data:{targetSize:targetSize},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'})}).catch(()=>{});
-            // #endregion
             
             // Stel de breedte en hoogte in voor een vierkante vorm
             front.style.width = targetSize + 'px';

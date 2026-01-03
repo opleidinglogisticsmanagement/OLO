@@ -59,6 +59,18 @@
       {
         "type": "paragraph",
         "text": [
+          "<h3 class=\"text-lg font-semibold text-gray-900 dark:text-white mb-2\">Audio</h3>",
+          "<p class=\"text-gray-600 dark:text-gray-400 mb-4\">Voeg audiobestanden toe met toelichtingen. Het bijschrift wordt automatisch onder het audio-element geplaatst.</p>"
+        ]
+      },
+      {
+        "type": "audio",
+        "src": "assets/audio/voorbeeld-audio.mp3",
+        "caption": "Voorbeeld: Toelichting op logistieke processen"
+      },
+      {
+        "type": "paragraph",
+        "text": [
           "<h3 class=\"text-lg font-semibold text-gray-900 dark:text-white mb-2\">Document</h3>",
           "<p class=\"text-gray-600 dark:text-gray-400 mb-4\">Voeg downloadbare documenten toe zoals PDF's, Word-bestanden of andere bestanden.</p>"
         ]

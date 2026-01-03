@@ -837,6 +837,11 @@ class AppRouter {
         console.log('[AppRouter] attachIndexPageScripts called');
         console.log('[AppRouter] Checking for export-pdf-btn:', !!document.getElementById('export-pdf-btn'));
         
+        // Update start button text if IndexPageButtonUpdater is available
+        if (window.IndexPageButtonUpdater) {
+            window.IndexPageButtonUpdater.updateStartButton();
+        }
+        
         // Re-initialize search if needed
         if (window.SearchService && typeof setupSearch === 'function') {
             setupSearch();

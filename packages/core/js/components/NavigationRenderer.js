@@ -22,6 +22,7 @@ class NavigationRenderer {
      * @returns {Object|null} Navigatie configuratie of null
      */
     getNavigationConfig() {
+        // Lees configuratie opnieuw bij elke call (voor dynamische updates)
         if (typeof window !== 'undefined' && window.AppConfig && window.AppConfig.navigation) {
             return window.AppConfig.navigation;
         }
@@ -61,6 +62,9 @@ class NavigationRenderer {
      * @returns {string} HTML string voor navigatie buttons
      */
     renderNavigation() {
+        // Lees configuratie opnieuw (kan zijn veranderd)
+        this.navConfig = this.getNavigationConfig();
+        
         const prevModule = this.navigationService.getPreviousModule(this.moduleId);
         const nextModule = this.navigationService.getNextModule(this.moduleId);
 

@@ -7,15 +7,53 @@
 
 class NavigationService {
     constructor() {
-        // Detect which app we're in based on URL path
+        this.appId = this.detectApp();
+        this.modules = this.getModulesForApp(this.appId);
+    }
+    
+    /**
+     * Detect which app we're in based on URL
+     * @returns {string} App ID
+     */
+    detectApp() {
+        // Check multiple sources for app detection
         const pathname = window.location.pathname;
-        if (pathname.includes('operations-management')) {
-            this.appId = 'operations-management';
-            this.modules = this.getOperationsManagementModules();
+        const href = window.location.href;
+        const hostname = window.location.hostname;
+        
+        // Check pathname and href for app indicators
+        if (pathname.includes('operations-management') || href.includes('operations-management')) {
+            return 'operations-management';
+        } else if (pathname.includes('e-learning-demo') || href.includes('e-learning-demo')) {
+            return 'e-learning-demo';
+        } else if (pathname.includes('logistiek-onderzoek') || href.includes('logistiek-onderzoek')) {
+            return 'logistiek-onderzoek';
+        }
+        
+        // Check hostname for Vercel deployments
+        if (hostname.includes('operations-management')) {
+            return 'operations-management';
+        } else if (hostname.includes('e-learning-demo')) {
+            return 'e-learning-demo';
+        } else if (hostname.includes('logistiek-onderzoek')) {
+            return 'logistiek-onderzoek';
+        }
+        
+        // Default to logistiek-onderzoek for backward compatibility
+        return 'logistiek-onderzoek';
+    }
+    
+    /**
+     * Get modules array for specific app
+     * @param {string} appId - App ID
+     * @returns {Array} Modules array
+     */
+    getModulesForApp(appId) {
+        if (appId === 'operations-management') {
+            return this.getOperationsManagementModules();
         } else {
             // Default modules voor logistiek-onderzoek en andere apps
-            this.appId = 'logistiek-onderzoek';
-            this.modules = [
+            return [
                 { id: 'week-1', title: 'Week 1', href: 'week1.html' },
                 { id: 'week-2', title: 'Week 2', href: 'week2.html' },
                 { id: 'week-3', title: 'Week 3', href: 'week3.html' },
@@ -50,11 +88,25 @@ class NavigationService {
     }
 
     /**
+     * Herinitialiseer modules (voor SPA navigatie)
+     */
+    reinitialize() {
+        const newAppId = this.detectApp();
+        if (newAppId !== this.appId) {
+            this.appId = newAppId;
+            this.modules = this.getModulesForApp(this.appId);
+        }
+    }
+
+    /**
      * Get previous module
      * @param {string} moduleId - Current module ID
      * @returns {Object|null} Previous module object or null
      */
     getPreviousModule(moduleId) {
+        // Herinitialiseer modules als nodig (voor SPA navigatie)
+        this.reinitialize();
+        
         const currentIndex = this.modules.findIndex(module => module.id === moduleId);
         return this.modules[currentIndex - 1] || null;
     }
@@ -65,6 +117,9 @@ class NavigationService {
      * @returns {Object|null} Next module object or null
      */
     getNextModule(moduleId) {
+        // Herinitialiseer modules als nodig (voor SPA navigatie)
+        this.reinitialize();
+        
         const currentIndex = this.modules.findIndex(module => module.id === moduleId);
         return this.modules[currentIndex + 1] || null;
     }

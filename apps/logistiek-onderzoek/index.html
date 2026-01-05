@@ -670,6 +670,7 @@
     <script src="config.js"></script>
     <!-- Core dependencies -->
     <script src="/core/js/components/LayoutRenderer.js"></script>
+    <script src="/core/js/components/NavigationInitializer.js"></script>
     <script src="/core/js/ui/SidebarManager.js"></script>
     <script src="/core/js/ui/HeaderManager.js"></script>
     <script src="/core/js/ui/ScrollManager.js"></script>
@@ -1961,13 +1962,28 @@
             }
         };
         
+        // Initialize navigation dynamically on page load (prevents hardcoded nav from getting out of sync)
+        const initializeNavigation = () => {
+            if (window.NavigationInitializer && window.LayoutRenderer) {
+                const navInitializer = new window.NavigationInitializer();
+                navInitializer.init();
+            } else {
+                // Retry if not ready yet
+                setTimeout(initializeNavigation, 50);
+            }
+        };
+        
         if (document.readyState === 'loading') {
             document.addEventListener('DOMContentLoaded', () => {
+                // Initialize navigation first
+                initializeNavigation();
                 // Start checking for all scripts
                 setTimeout(waitForAllScripts, 100);
             });
         } else {
-            // DOM already loaded, start checking
+            // DOM already loaded, initialize navigation first
+            initializeNavigation();
+            // Start checking
             setTimeout(waitForAllScripts, 100);
         }
         

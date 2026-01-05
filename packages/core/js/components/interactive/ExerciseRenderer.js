@@ -658,7 +658,10 @@ class ExerciseRenderer {
             <div class="sequence-exercise w-full mb-6 sm:mb-8" id="${exerciseId}"
                  data-explanation="${HtmlUtils.escapeHtml(exerciseData.explanation)}"
                  data-sources="${encodeURIComponent(JSON.stringify(exerciseData.sources))}"
-                 data-incorrect-feedback="${HtmlUtils.escapeHtml(exerciseData.feedback.incorrect || '')}">
+                 data-incorrect-feedback="${HtmlUtils.escapeHtml(exerciseData.feedback.incorrect || '')}"
+                 data-feedback-image="${item.feedbackImage || ''}"
+                 data-feedback-audio-src="${item.feedbackAudio?.src || ''}"
+                 data-feedback-audio-caption="${item.feedbackAudio?.caption || ''}">
                 ${titleHtml}
                 <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">${item.instruction || 'Sleep de alinea\'s om ze in de juiste volgorde te zetten:'}</p>
                 
@@ -809,6 +812,9 @@ class ExerciseRenderer {
             // Get explanation and sources from data attributes
             const explanation = exerciseElement.getAttribute('data-explanation') || 'Je hebt de alinea\'s in de juiste logische volgorde gezet.';
             const sources = exerciseElement.getAttribute('data-sources');
+            const feedbackImage = exerciseElement.getAttribute('data-feedback-image') || '';
+            const feedbackAudioSrc = exerciseElement.getAttribute('data-feedback-audio-src') || '';
+            const feedbackAudioCaption = exerciseElement.getAttribute('data-feedback-audio-caption') || '';
             
             let sourcesHtml = '';
             if (sources) {
@@ -827,12 +833,34 @@ class ExerciseRenderer {
                 }
             }
             
+            let additionalContent = '';
+            if (feedbackImage) {
+                additionalContent += `
+                    <div class="my-4">
+                        <img src="${feedbackImage}" alt="Feedback afbeelding" class="rounded-lg w-full max-w-2xl mx-auto" style="max-width: 100%; height: auto;">
+                    </div>
+                `;
+            }
+            
+            if (feedbackAudioSrc) {
+                additionalContent += `
+                    <div class="mt-4">
+                        <audio controls class="w-full max-w-2xl mb-2">
+                            <source src="${feedbackAudioSrc}" type="audio/mpeg">
+                            Je browser ondersteunt het audio element niet.
+                        </audio>
+                        ${feedbackAudioCaption ? `<p class="text-sm text-gray-600 dark:text-gray-400"><strong>${HtmlUtils.escapeHtml(feedbackAudioCaption)}</strong></p>` : ''}
+                    </div>
+                `;
+            }
+            
             resultDiv.innerHTML = `
                 <div class="flex items-start">
                     <i class="fas fa-check-circle text-green-600 dark:text-green-400 text-xl mt-0.5 mr-3"></i>
                     <div class="flex-1">
                         <h4 class="font-semibold text-green-900 dark:text-green-300 mb-2">Uitstekend! De volgorde is correct.</h4>
                         <p class="text-sm text-green-800 dark:text-green-400 mb-3">${HtmlUtils.escapeHtml(explanation)}</p>
+                        ${additionalContent}
                         ${sourcesHtml}
                     </div>
                 </div>
@@ -840,27 +868,46 @@ class ExerciseRenderer {
         } else {
             resultDiv.className = 'mt-4 p-4 rounded-lg border-2 border-yellow-500 dark:border-yellow-400 bg-yellow-50 dark:bg-yellow-900/20';
             
-            // Fixed feedback message and hints
-            const feedbackMessage = 'Helaas nog niet alle alinea\'s staan goed. Gebruik de hint hieronder om de alinea\'s goed te structureren.';
-            const hints = [
-                'Alinea 1 gaat over het probleem (disbalans door gebrek aan data-gestuurd model).',
-                'Alinea 2 legt de methode uit waarmee het probleem opgelost kan worden (kwantitatieve analyse).',
-                'Alinea 3 beschrijft de oplossing (EOQ-model).',
-                'Alinea 4 benoemt de knowledge gap (onbekende kostvariabelen en besparingspotentieel).'
-            ];
+            // Get custom feedback from data attributes
+            const explanation = exerciseElement.getAttribute('data-explanation') || '';
+            const feedbackImage = exerciseElement.getAttribute('data-feedback-image') || '';
+            const feedbackAudioSrc = exerciseElement.getAttribute('data-feedback-audio-src') || '';
+            const feedbackAudioCaption = exerciseElement.getAttribute('data-feedback-audio-caption') || '';
+            
+            let feedbackContent = '';
+            if (explanation) {
+                feedbackContent = `<p class="text-sm text-yellow-800 dark:text-yellow-400 mb-3">${explanation}</p>`;
+            } else {
+                // Default feedback message if no explanation provided
+                feedbackContent = '<p class="text-sm text-yellow-800 dark:text-yellow-400 mb-3">Helaas nog niet alle stappen staan goed. Probeer het opnieuw.</p>';
+            }
+            
+            if (feedbackImage) {
+                feedbackContent += `
+                    <div class="my-4">
+                        <img src="${feedbackImage}" alt="Feedback afbeelding" class="rounded-lg w-full max-w-2xl mx-auto" style="max-width: 100%; height: auto;">
+                    </div>
+                `;
+            }
+            
+            if (feedbackAudioSrc) {
+                feedbackContent += `
+                    <div class="mt-4">
+                        <audio controls class="w-full max-w-2xl mb-2">
+                            <source src="${feedbackAudioSrc}" type="audio/mpeg">
+                            Je browser ondersteunt het audio element niet.
+                        </audio>
+                        ${feedbackAudioCaption ? `<p class="text-sm text-gray-600 dark:text-gray-400"><strong>${HtmlUtils.escapeHtml(feedbackAudioCaption)}</strong></p>` : ''}
+                    </div>
+                `;
+            }
             
             resultDiv.innerHTML = `
                 <div class="flex items-start">
                     <i class="fas fa-exclamation-triangle text-yellow-600 dark:text-yellow-400 text-xl mt-0.5 mr-3"></i>
                     <div class="flex-1">
                         <h4 class="font-semibold text-yellow-900 dark:text-yellow-300 mb-2">Niet helemaal correct</h4>
-                        <p class="text-sm text-yellow-800 dark:text-yellow-400 mb-3">${HtmlUtils.escapeHtml(feedbackMessage)}</p>
-                        <div class="text-sm text-yellow-800 dark:text-yellow-400">
-                            <p class="font-medium mb-2">Hint:</p>
-                            <ul class="list-disc list-inside space-y-1">
-                                ${hints.map(hint => `<li class="mb-2">${HtmlUtils.escapeHtml(hint)}</li>`).join('')}
-                            </ul>
-                        </div>
+                        ${feedbackContent}
                     </div>
                 </div>
             `;

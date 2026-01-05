@@ -18,6 +18,9 @@ class LayoutRenderer {
         } else if (pathname.includes('e-learning-demo')) {
             this.appId = 'e-learning-demo';
             this.appTitle = 'E-Learning Demo';
+        } else if (pathname.includes('edubook-logistiek')) {
+            this.appId = 'edubook-logistiek';
+            this.appTitle = 'Edubook-Logistiek';
         } else if (pathname.includes('logistiek-onderzoek')) {
             this.appId = 'logistiek-onderzoek';
             this.appTitle = 'Opzetten van Logistieke Onderzoeken (OLO)';
@@ -75,6 +78,8 @@ class LayoutRenderer {
             return this.renderOperationsManagementNavigation();
         } else if (this.appId === 'e-learning-demo') {
             return this.renderElearningDemoNavigation();
+        } else if (this.appId === 'edubook-logistiek') {
+            return this.renderEdubookLogistiekNavigation();
         } else {
             return this.renderLogistiekOnderzoekNavigation();
         }
@@ -97,7 +102,17 @@ class LayoutRenderer {
                     { id: 'procesbeslissingen', title: 'Procesbeslissingen', anchor: '#procesbeslissingen' }
                 ]
             },
-            { id: 'vraagvoorspelling-deel1', title: 'Vraagvoorspelling (deel 1)', href: 'vraagvoorspelling-deel1.html' },
+            {
+                id: 'vraagvoorspelling-deel1',
+                title: 'Vraagvoorspelling (deel 1)',
+                href: 'vraagvoorspelling-deel1.html',
+                subItems: [
+                    { id: 'introductie', title: 'Introductie', anchor: '#introductie' },
+                    { id: 'vraagvoorspelproces', title: 'Vraagvoorspelproces', anchor: '#vraagvoorspelproces' },
+                    { id: 'kwaliteit-van-voorspellingen', title: 'Kwaliteit van voorspellingen', anchor: '#kwaliteit-van-voorspellingen' },
+                    { id: 'kwalitatieve-inschatting-en-lineaire-regressie', title: 'Kwalitatieve inschatting en lineaire regressie', anchor: '#kwalitatieve-inschatting-en-lineaire-regressie' }
+                ]
+            },
             { id: 'vraagvoorspelling-deel2', title: 'Vraagvoorspelling (deel 2)', href: 'vraagvoorspelling-deel2.html' },
             { id: 'productieplanning', title: 'Productieplanning', href: 'productieplanning.html' },
             { id: 'voorraadbeheer-deel1', title: 'Voorraadbeheer (deel 1)', href: 'voorraadbeheer-deel1.html' },
@@ -135,6 +150,32 @@ class LayoutRenderer {
             { id: 'content-schrijven', title: 'Content Schrijven', href: 'content-schrijven.html' },
             { id: 'formules-katex', title: 'Formules met KaTeX', href: 'formules-katex.html' },
             { id: 'publiceren', title: 'E-learning publiceren', href: 'publiceren.html' }
+        ];
+
+        return this.renderModuleNavigationItems(modules);
+    }
+
+    /**
+     * Render navigation for edubook-logistiek app
+     */
+    renderEdubookLogistiekNavigation() {
+        const modules = [
+            { id: 'start', title: 'Start', href: 'index.html' },
+            { 
+                id: 'hd09', 
+                title: 'HD 09 - Supply Chain', 
+                href: 'hd09.html',
+                subItems: [
+                    { id: 'introductie', title: 'Introductie', anchor: '#introductie' },
+                    { id: '9-1', title: '9.1 Supply Chain naar Demand Chain', anchor: '#9-1' },
+                    { id: '9-2', title: '9.2 Samenwerking in de supply chain', anchor: '#9-2' },
+                    { id: '9-3', title: '9.3 Horizontale en Verticale Samenwerking', anchor: '#9-3' },
+                    { id: '9-4', title: '9.4 De Vijf Integratievormen', anchor: '#9-4' },
+                    { id: '9-5', title: '9.5 The Extended Enterprise', anchor: '#9-5' },
+                    { id: '9-6', title: '9.6 Supply Chain Maturity Models', anchor: '#9-6' },
+                    { id: 'bronvermelding', title: 'Bronvermelding', anchor: '#bronvermelding' }
+                ]
+            }
         ];
 
         return this.renderModuleNavigationItems(modules);
@@ -219,11 +260,13 @@ class LayoutRenderer {
             const isWeek4 = module.id === 'week-4';
             const isWeek5 = module.id === 'week-5';
             const isWeek6 = module.id === 'week-6';
+            const isHD09 = module.id === 'hd09';
             const isOperationsProcesstrategie = module.id === 'operations-processtrategie';
+            const isVraagvoorspellingDeel1 = module.id === 'vraagvoorspelling-deel1';
             const isFase3 = module.id === 'fase3';
             
             // Special handling for modules with sub-items
-            if (hasSubItems && (isWeek2 || isWeek3 || isWeek4 || isWeek5 || isWeek6 || isOperationsProcesstrategie || isFase3)) {
+            if (hasSubItems && (isWeek2 || isWeek3 || isWeek4 || isWeek5 || isWeek6 || isHD09 || isOperationsProcesstrategie || isVraagvoorspellingDeel1 || isFase3)) {
                 const subItemsHtml = module.subItems.map(subItem => {
                     const isSubCurrent = window.location.hash === subItem.anchor || 
                                         (isCurrent && window.location.hash === subItem.anchor);
@@ -260,10 +303,18 @@ class LayoutRenderer {
                     navItemClass = 'week-6-nav-item';
                     chevronId = 'week-6-chevron';
                     subItemsId = 'week-6-subitems';
+                } else if (isHD09) {
+                    navItemClass = 'hd09-nav-item';
+                    chevronId = 'hd09-chevron-index';
+                    subItemsId = 'hd09-subitems-index';
                 } else if (isOperationsProcesstrategie) {
                     navItemClass = 'operations-processtrategie-nav-item';
                     chevronId = 'operations-processtrategie-chevron-index';
                     subItemsId = 'operations-processtrategie-submenu';
+                } else if (isVraagvoorspellingDeel1) {
+                    navItemClass = 'vraagvoorspelling-deel1-nav-item';
+                    chevronId = 'vraagvoorspelling-deel1-chevron-index';
+                    subItemsId = 'vraagvoorspelling-deel1-submenu';
                 } else if (isFase3) {
                     navItemClass = 'fase3-nav-item';
                     chevronId = 'fase3-chevron-index';
@@ -279,7 +330,7 @@ class LayoutRenderer {
                             <span class="font-medium flex-1">${module.title}</span>
                             <i class="fas fa-chevron-down text-xs text-gray-400 dark:text-gray-500 transition-transform duration-200 ${isCurrent ? 'rotate-180' : ''}" id="${chevronId}"></i>
                         </a>
-                        <div class="${isOperationsProcesstrategie || isFase3 ? 'nav-sub-items' : navItemClass.replace('-nav-item', '-subitems')} ${isCurrent ? '' : 'hidden'}" id="${subItemsId}">
+                        <div class="${isOperationsProcesstrategie || isVraagvoorspellingDeel1 || isFase3 ? 'nav-sub-items' : (isHD09 ? 'hd09-subitems' : navItemClass.replace('-nav-item', '-subitems'))} ${isCurrent ? '' : 'hidden'}" id="${subItemsId}">
                             ${subItemsHtml}
                         </div>
                     </div>

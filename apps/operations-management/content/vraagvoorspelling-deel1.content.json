@@ -17,93 +17,207 @@
       {
         "type": "heading",
         "text": "Introductie",
-        "level": 2
+        "level": 2,
+        "id": "introductie"
+      },
+      {
+        "type": "html",
+        "html": "<div class=\"my-4 overflow-hidden rounded-lg mx-auto\" style=\"width: 100%; max-width: 800px; height: 200px; max-height: 250px;\"><div style=\"position: relative; width: 100%; height: 100%; overflow: hidden;\"><img src=\"assets/images/Vraagvoorspelling(deel-1)/2.1.jpg\" alt=\"Afbeelding 2.1\" class=\"w-full\" style=\"object-fit: cover; object-position: center; height: 400%; transform: translateY(-37.5%);\"></div></div>"
       },
       {
         "type": "paragraph",
         "text": [
-          "Vraagvoorspelling gaat over het inschatten van hoeveel producten en/of diensten klanten van je bedrijf gaan afnemen in de toekomst. In dit blok wordt verkend waarom bedrijven aan vraagvoorspelling doen en wordt de voorkennis vanuit het vak Logistiek Management opgehaald."
+          "<strong>Vraagvoorspelling</strong> gaat over het inschatten van hoeveel producten en/of diensten klanten van je bedrijf gaan afnemen in de toekomst. In dit blok verkennen we eerst waarom bedrijven überhaupt aan vraagvoorspelling doen. Vervolgens bespreken we wat je al van vraagvoorspelling weet vanuit het vak Logistiek Management."
         ]
       },
       {
         "type": "heading",
         "text": "Waarom vraagvoorspelling?",
-        "level": 2
+        "level": 3
       },
       {
         "type": "paragraph",
         "text": [
-          "Vraagvoorspellingen worden binnen bedrijven gebruikt als belangrijke input voor allerlei soorten planningen, zoals:",
+          "Deze vraag verkennen we aan de hand van een filmpje."
+        ]
+      },
+      {
+        "type": "highlight",
+        "title": "",
+        "content": [
+          "<p class=\"mb-2\">Bekijk onderstaand filmpje en vind het antwoord op deze 2 vragen:</p>",
+          "<ol class=\"list-decimal list-inside space-y-1 ml-2\">",
+          "<li>Waarvoor worden vraagvoorspellingen gebruikt bij bedrijven?</li>",
+          "<li>Wat gebeurt er als er geen goede vraagvoorspelling is?</li>",
+          "</ol>"
+        ],
+        "icon": "fa-info-circle",
+        "iconClass": "fas"
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "Het geselecteerde fragment loopt van 0:38 t/m 1:41 (stopt automatisch bij de eerste keer afspelen)."
+        ]
+      },
+      {
+        "type": "html",
+        "html": "<div class=\"mb-6\"><div class=\"rounded-lg overflow-hidden mb-2 relative bg-black dark:bg-black w-full video-responsive-container\" style=\"max-width: 100%;\"><div class=\"video-responsive-wrapper\" style=\"position: relative; width: 100%; padding-bottom: 56.25%; height: 0; overflow: hidden; background-color: #000;\"><iframe src=\"https://www.youtube.com/embed/cqlVfzPjkx0?start=38&end=101\" title=\"Video\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen class=\"video-responsive-iframe\" style=\"position: absolute !important; top: 0 !important; left: 0 !important; width: 100% !important; height: 100% !important; border: 0 !important; margin: 0 !important; padding: 0 !important; background-color: #000;\" loading=\"lazy\"></iframe></div></div><p class=\"text-sm mb-0\"><a href=\"https://youtu.be/cqlVfzPjkx0\" target=\"_blank\" class=\"text-blue-600 hover:text-blue-800 underline font-medium\"><i class=\"fas fa-external-link-alt mr-1\"></i>Open video in nieuw tabblad</a></p></div>"
+      },
+      {
+        "type": "heading",
+        "text": "Waarvoor worden vraagvoorspellingen gebruikt",
+        "level": 3
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "Vraagvoorspellingen worden <strong>binnen bedrijven</strong> gebruikt als belangrijke input voor allerlei soorten planningen:",
           "• Productieplan (Productie)",
           "• Personeelsplan (HRM)",
           "• Budgetteringsplan (Finance)",
-          "• Supply chain samenwerking om de keten efficiënt te laten werken"
+          "• Etc.",
+          "...en <strong>tussen bedrijven</strong> in een supply chain om de keten efficiënt te laten werken."
         ]
+      },
+      {
+        "type": "audio",
+        "src": "assets/audio/placeholder.mp3",
+        "caption": ""
       },
       {
         "type": "heading",
         "text": "Gevolgen van geen goede vraagvoorspelling",
-        "level": 2
-      },
-      {
-        "type": "heading",
-        "text": "Bedrijven die producten verkopen",
         "level": 3
       },
       {
         "type": "paragraph",
         "text": [
-          "Voor deze bedrijven is een goede vraagvoorspelling een voorwaarde om te weten hoeveel voorraad er op welk moment nodig is om aan de klantbehoefte te voldoen."
+          "Voor bedrijven die producten verkopen is een goede vraagvoorspelling een voorwaarde om te weten hoeveel producten er op welk moment op voorraad moeten zijn om goed aan de klantbehoefte te kunnen voldoen. De klant kan hierbij de consument zijn, maar ook een ander bedrijf."
         ]
       },
       {
         "type": "paragraph",
         "text": [
-          "Klantvraag te laag ingeschat: Dit resulteert in nee-verkoop, gemiste omzet en ontevreden klanten."
-        ]
-      },
-      {
-        "type": "paragraph",
-        "text": [
-          "Klantvraag te hoog ingeschat: Dit leidt tot grote voorraden en bijbehorende kosten (rente, ruimte, risico) of onverkoopbare producten."
+          "1. Als je de klantvraag te laag inschat, dan zal dit resulteren in nee-verkoop. Met <strong>gemiste omzet</strong> en <strong>ontevreden klanten</strong> als gevolg.",
+          "2. Als je de klantvraag te hoog inschat, dan blijf je zitten met <strong>grote voorraden</strong>, wat <strong>kosten</strong> met zich meebrengt (rente, ruimte, risico) en die mogelijk helemaal niet meer verkocht kunnen worden."
         ]
       },
       {
         "type": "heading",
-        "text": "Bedrijven die diensten leveren (bijv. een kapper)",
+        "text": "Hoe zit dat bij bedrijven die diensten leveren?",
+        "level": 3
+      },
+      {
+        "type": "highlight",
+        "title": "",
+        "content": [
+          "<p class=\"mb-2\">We nemen als voorbeeld van een bedrijf in de dienstensector een kapper waar klanten zonder afspraak hun haar kunnen laten knippen.</p>",
+          "<ul class=\"list-disc list-inside space-y-1 ml-2\">",
+          "<li>Wat is het gevolg als de kapper de klantvraag te laag inschat?</li>",
+          "<li>Wat is het gevolg als de kapper de klantvraag te hoog inschat?</li>",
+          "</ul>"
+        ],
+        "icon": "fa-info-circle",
+        "iconClass": "fas"
+      },
+      {
+        "type": "tabs",
+        "defaultTab": 0,
+        "tabs": [
+          {
+            "title": "KLANTVRAAG TE LAAG INGESCHAT",
+            "content": [
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Als de kapper de klantvraag te laag heeft ingeschat, oftewel er komen meer klanten naar de kapperszaak dan van tevoren verwacht, dan <strong>kan de zaak de toestroom niet aan</strong> door onvoldoende kappers of kapplekken. Dit leidt tot <strong>wachtrijen</strong>, <strong>ontevreden klanten</strong> en <strong>gemiste omzet</strong> omdat potentiële klanten de zaak voorbijlopen.</p>",
+              "<div class=\"my-4\"><img src=\"assets/images/Vraagvoorspelling(deel-1)/2.2.jpg\" alt=\"Afbeelding 2.2\" class=\"rounded-lg w-full max-w-2xl mx-auto\" style=\"max-width: 100%; height: auto;\"></div>"
+            ]
+          },
+          {
+            "title": "KLANTVRAAG TE HOOG INGESCHAT",
+            "content": [
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Als de kapper de klantvraag te hoog heeft ingeschat, oftewel er komen minder klanten naar de kapperszaak dan van tevoren verwacht, dan <strong>is het systeem erg inefficiënt</strong>. Een groot aantal kappers en kapplekken zal weinig gebruikt worden, terwijl er wel kosten verbonden zijn aan deze resources.</p>",
+              "<div class=\"my-4\"><img src=\"assets/images/Vraagvoorspelling(deel-1)/2.3.jpg\" alt=\"Afbeelding 2.3\" class=\"rounded-lg w-full max-w-2xl mx-auto\" style=\"max-width: 100%; height: auto;\"></div>"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "Het is dus voor bedrijven die producten en bedrijven die diensten leveren zinvol om de vraag naar hun producten en diensten zo goed mogelijk in te schatten."
+        ]
+      },
+      {
+        "type": "heading",
+        "text": "Wat weet ik er al van",
         "level": 3
       },
       {
         "type": "paragraph",
         "text": [
-          "Klantvraag te laag ingeschat: De zaak kan de toestroom niet aan door onvoldoende kappers of kapplekken. Dit leidt tot wachtrijen, ontevreden klanten en gemiste omzet omdat potentiële klanten de zaak voorbijlopen."
+          "In het eerste semester van de opleiding ben je al in aanraking gekomen met het onderwerp vraagvoorspelling, namelijk bij het vak Logistiek Management. Weet je nog een beetje wat er toen besproken is? Zo niet, draai de tegel dan om."
         ]
       },
       {
-        "type": "paragraph",
-        "text": [
-          "Klantvraag te hoog ingeschat: Het systeem wordt inefficiënt. Middelen (kappers en plekken) worden weinig gebruikt terwijl de kosten wel doorlopen."
-        ]
-      },
-      {
-        "type": "paragraph",
-        "text": [
-          "Het is voor zowel product- als dienstverlenende bedrijven zinvol om de vraag zo goed mogelijk in te schatten."
+        "type": "flipCard",
+        "front": "Logistiek Management",
+        "back": [
+          {
+            "type": "heading",
+            "text": "Je hebt geleerd dat",
+            "level": 3
+          },
+          {
+            "type": "paragraph",
+            "text": [
+              "• Je op verschillende manieren de vraag kunt voorspellen, namelijk intuïtief, kwalitatieve modellen, causale modellen en tijdreeksmodellen.",
+              "• Het bij tijdreeksmodellen goed is om naar het patroon te kijken (bijvoorbeeld seizoenspatroon) en dat je een voorspelmethode moet kiezen die goed bij het patroon past."
+            ]
+          }
         ]
       },
       {
         "type": "heading",
-        "text": "Voorkennis: Logistiek Management",
-        "level": 2
+        "text": "Wat ga ik extra leren",
+        "level": 3
       },
       {
         "type": "paragraph",
         "text": [
-          "Vanuit eerdere vakken is bekend dat de vraag op verschillende manieren voorspeld kan worden:",
-          "• Intuïtief",
-          "• Kwalitatieve modellen",
-          "• Causale modellen",
-          "• Tijdreeksmodellen"
+          "Bij Operations Management bekijken we net als bij Logistiek Management vraagvoorspelling vanaf de basis, maar gaan we er dieper op in:"
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "• We bekijken hoe bedrijven tot een vraagvoorspelling komen en dat behelst meer dan alleen het toepassen van voorspelmethoden op historische data.",
+          "• Als voorbeeld van een causale voorspelmethode leer je hoe je lineaire regressie kunt gebruiken voor vraagvoorspelling en hoe je dat toepast in Excel.",
+          "• Je leert meerdere voorspelmethoden die je kunt toepassen bij tijdreeksen met een horizontaal, trend- of seizoenspatroon. Je leert deze methoden ook toepassen in Excel.",
+          "• Je leert maatstaven om de kwaliteit van een voorspelmethode te beoordelen. Je leert ook hoe je deze maatstaven in Excel kunt berekenen."
+        ]
+      },
+      {
+        "type": "heading",
+        "text": "Wat heb je geleerd?",
+        "level": 3
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "Je hebt in dit blok het volgende geleerd:"
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "• Je weet uit welke stappen het vraagvoorspelproces bestaat",
+          "• Je bent bekend met de benoemde vraagvoorspelprincipes"
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "In het volgende blok bekijken we hoe je de kwaliteit van een vraagvoorspelling kunt beoordelen."
         ]
       },
       {
@@ -113,78 +227,278 @@
         "id": "vraagvoorspelproces"
       },
       {
+        "type": "html",
+        "html": "<div class=\"my-4 overflow-hidden rounded-lg mx-auto\" style=\"width: 100%; max-width: 800px; height: 200px; max-height: 250px;\"><div style=\"position: relative; width: 100%; height: 100%; overflow: hidden;\"><img src=\"assets/images/Vraagvoorspelling(deel-1)/2.4.jpg\" alt=\"Afbeelding 2.4\" class=\"w-full\" style=\"object-fit: cover; object-position: center; height: 400%; transform: translateY(-50%);\"></div></div>"
+      },
+      {
         "type": "paragraph",
         "text": [
-          "Het komen tot een goede vraagvoorspelling bestaat meestal uit meerdere stappen. In dit onderdeel bekijken we uit welke fasen dit proces bestaat en bespreken we een aantal fundamentele vraagvoorspelprincipes."
+          "Het komen tot een goede vraagvoorspelling bestaat meestal uit meerdere stappen. In dit blok bekijken we welke. Daarnaast bespreken we een aantal vraagvoorspelprincipes. Het boek beschrijft dat het voorspellen van de vraag typisch uit 6 stappen bestaat. Via een aantal oefeningetjes verkennen we dit zogeheten <em>vraagvoorspelproces</em>."
         ]
       },
       {
-        "type": "image",
-        "src": "assets/images/vraagvoorspelproces-flowchart.png",
-        "alt": "Flowchart van het vraagvoorspelproces met zes stappen: Adjust history file, Prepare initial forecasts, Consensus meetings and collaboration, Revise forecasts, Review by Operating Committee en Finalize and communicate."
+        "type": "sequenceExercise",
+        "title": "Stappen in het vraagvoorspelproces",
+        "instruction": "Zet de stappen van het vraagvoorspelproces in de juiste volgorde door ze te slepen:",
+        "paragraphs": [
+          {
+            "text": "Adjust history file",
+            "correctOrder": 1
+          },
+          {
+            "text": "Prepare initial forecasts",
+            "correctOrder": 2
+          },
+          {
+            "text": "Consensus meetings and collaboration",
+            "correctOrder": 3
+          },
+          {
+            "text": "Revise forecasts",
+            "correctOrder": 4
+          },
+          {
+            "text": "Review by Operating Committee",
+            "correctOrder": 5
+          },
+          {
+            "text": "Finalize and communicate",
+            "correctOrder": 6
+          }
+        ],
+        "explanation": "Deze puzzel was misschien best lastig. Hieronder wordt de juiste volgorde van de stappen in het vraagvoorspelproces getoond en besproken. Het vraagvoorspelproces wordt toegelicht in het audiofragment onder het plaatje.",
+        "feedbackImage": "assets/images/Vraagvoorspelling(deel-1)/2.5.jpg",
+        "feedbackAudio": {
+          "src": "assets/audio/vraagvoorspelproces.mp3",
+          "caption": ""
+        }
       },
       {
         "type": "accordion",
-        "usePlusIcon": true,
         "defaultOpen": false,
         "items": [
           {
-            "title": "De zes stappen van het vraagvoorspelproces",
+            "title": "Vraag 1: Op welke stap van het vraagvoorspelproces heeft het onderstaande fragment betrekking?",
+            "defaultOpen": false,
             "content": [
-              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Het voorspellen van de vraag vindt typisch plaats via een proces van zes opeenvolgende stappen:</p>",
-              "<ol class=\"list-decimal list-outside space-y-3 mb-4 ml-6 pl-4 text-gray-700 dark:text-gray-300\">",
-              "<li class=\"mb-3\"><strong>Adjust history file</strong>: Het corrigeren van historische data om een betrouwbare basis voor de voorspelling te leggen.</li>",
-              "<li class=\"mb-3\"><strong>Prepare initial forecasts</strong>: Het genereren van de eerste, voorlopige vraagvoorspellingen.</li>",
-              "<li class=\"mb-3\"><strong>Consensus meetings and collaboration</strong>: Overlegmomenten en samenwerking tussen verschillende afdelingen of partners om afstemming te bereiken.</li>",
-              "<li class=\"mb-3\"><strong>Revise forecasts</strong>: Het bijstellen van de voorspellingen op basis van nieuwe informatie of inzichten uit het overleg.</li>",
-              "<li class=\"mb-3\"><strong>Review by Operating Committee</strong>: Een finale controle en beoordeling door het operationeel comité.</li>",
-              "<li class=\"mb-3\"><strong>Finalize and communicate</strong>: Het definitief vaststellen van de voorspelling en het communiceren hiervan naar alle relevante belanghebbenden.</li>",
-              "</ol>"
+              {
+                "type": "paragraph",
+                "text": [
+                  "Het geselecteerde fragment loopt van 34:58 t/m 35:52 (stopt automatisch bij de eerste keer afspelen)."
+                ]
+              },
+              {
+                "type": "html",
+                "html": "<div class=\"mb-6\"><div class=\"rounded-lg overflow-hidden mb-2 relative bg-black dark:bg-black w-full video-responsive-container\" style=\"max-width: 100%;\"><div class=\"video-responsive-wrapper\" style=\"position: relative; width: 100%; padding-bottom: 56.25%; height: 0; overflow: hidden; background-color: #000;\"><iframe src=\"https://www.youtube.com/embed/TXoRrx1Idew?start=2098&end=2152\" title=\"Video\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen class=\"video-responsive-iframe\" style=\"position: absolute !important; top: 0 !important; left: 0 !important; width: 100% !important; height: 100% !important; border: 0 !important; margin: 0 !important; padding: 0 !important; background-color: #000;\" loading=\"lazy\"></iframe></div></div><p class=\"text-sm mb-0\"><a href=\"https://youtu.be/TXoRrx1Idew\" target=\"_blank\" class=\"text-blue-600 hover:text-blue-800 underline font-medium\"><i class=\"fas fa-external-link-alt mr-1\"></i>Open video in nieuw tabblad</a></p></div>"
+              },
+              {
+                "type": "multipleChoiceExercise",
+                "question": "Op welke stap van het vraagvoorspelproces heeft het onderstaande fragment betrekking?",
+                "options": [
+                  {
+                    "text": "Stap 1: Adjust history file",
+                    "correct": false,
+                    "feedback": "Dit is niet stap 1. Het fragment gaat over het maken van vraagvoorspellingen op basis van statistische methoden."
+                  },
+                  {
+                    "text": "Stap 2: Prepare initial forecasts",
+                    "correct": true,
+                    "feedback": "Correct! Het maken van een vraagvoorspelling op basis van statistische methoden (nadat je eerst de dataset met historische data hebt opgeschoond) is stap 2 uit het vraagvoorspelproces."
+                  },
+                  {
+                    "text": "Stap 3: Consensus meetings and collaboration",
+                    "correct": false,
+                    "feedback": "Dit is niet stap 3. Het fragment gaat over het maken van vraagvoorspellingen op basis van statistische methoden, niet over consensus meetings."
+                  },
+                  {
+                    "text": "Stap 4: Revise forecasts",
+                    "correct": false,
+                    "feedback": "Dit is niet stap 4. Het fragment gaat over het maken van vraagvoorspellingen op basis van statistische methoden, niet over het herzien van voorspellingen."
+                  },
+                  {
+                    "text": "Stap 5: Review by Operating Committee",
+                    "correct": false,
+                    "feedback": "Dit is niet stap 5. Het fragment gaat over het maken van vraagvoorspellingen op basis van statistische methoden, niet over review door het Operating Committee."
+                  },
+                  {
+                    "text": "Stap 6: Finalize and communicate",
+                    "correct": false,
+                    "feedback": "Dit is niet stap 6. Het fragment gaat over het maken van vraagvoorspellingen op basis van statistische methoden, niet over finaliseren en communiceren."
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "title": "Vraag 2: Op welke stap van het vraagvoorspelproces heeft het onderstaande fragment betrekking?",
+            "defaultOpen": false,
+            "content": [
+              {
+                "type": "paragraph",
+                "text": [
+                  "Het geselecteerde fragment loopt van 39:10 t/m 39:27 (stopt automatisch bij de eerste keer afspelen)."
+                ]
+              },
+              {
+                "type": "html",
+                "html": "<div class=\"mb-6\"><div class=\"rounded-lg overflow-hidden mb-2 relative bg-black dark:bg-black w-full video-responsive-container\" style=\"max-width: 100%;\"><div class=\"video-responsive-wrapper\" style=\"position: relative; width: 100%; padding-bottom: 56.25%; height: 0; overflow: hidden; background-color: #000;\"><iframe src=\"https://www.youtube.com/embed/TXoRrx1Idew?start=2350&end=2367\" title=\"Video\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen class=\"video-responsive-iframe\" style=\"position: absolute !important; top: 0 !important; left: 0 !important; width: 100% !important; height: 100% !important; border: 0 !important; margin: 0 !important; padding: 0 !important; background-color: #000;\" loading=\"lazy\"></iframe></div></div><p class=\"text-sm mb-0\"><a href=\"https://youtu.be/TXoRrx1Idew\" target=\"_blank\" class=\"text-blue-600 hover:text-blue-800 underline font-medium\"><i class=\"fas fa-external-link-alt mr-1\"></i>Open video in nieuw tabblad</a></p></div>"
+              },
+              {
+                "type": "multipleChoiceExercise",
+                "question": "Op welke stap van het vraagvoorspelproces heeft het onderstaande fragment betrekking?",
+                "options": [
+                  {
+                    "text": "Stap 1: Adjust history file",
+                    "correct": false,
+                    "feedback": "Dit is niet stap 1. Het fragment gaat over het aanpassen van vraagvoorspellingen."
+                  },
+                  {
+                    "text": "Stap 2: Prepare initial forecasts",
+                    "correct": false,
+                    "feedback": "Dit is niet stap 2. Het fragment gaat over het aanpassen van vraagvoorspellingen, niet over het maken van initiële voorspellingen."
+                  },
+                  {
+                    "text": "Stap 3: Consensus meetings and collaboration",
+                    "correct": false,
+                    "feedback": "Dit is niet stap 3. Het fragment gaat over het aanpassen van vraagvoorspellingen, niet over consensus meetings."
+                  },
+                  {
+                    "text": "Stap 4: Revise forecasts",
+                    "correct": true,
+                    "feedback": "Correct! Het aanpassen van de initiële vraagvoorspelling aan de hand van de input vanuit consensus overleggen (waarin input wordt gegeven door betrokken afdelingen) en samenwerkingen met bijvoorbeeld klanten van het bedrijf is stap 4 uit het vraagvoorspelproces. Deze aangepaste vraagvoorspelling wordt ook wel de <strong>consensusvraagvoorspelling</strong> genoemd."
+                  },
+                  {
+                    "text": "Stap 5: Review by Operating Committee",
+                    "correct": false,
+                    "feedback": "Dit is niet stap 5. Het fragment gaat over het aanpassen van vraagvoorspellingen, niet over review door het Operating Committee."
+                  },
+                  {
+                    "text": "Stap 6: Finalize and communicate",
+                    "correct": false,
+                    "feedback": "Dit is niet stap 6. Het fragment gaat over het aanpassen van vraagvoorspellingen, niet over finaliseren en communiceren."
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "title": "Vraag 3: Op welke stap van het vraagvoorspelproces heeft het onderstaande fragment betrekking?",
+            "defaultOpen": false,
+            "content": [
+              {
+                "type": "paragraph",
+                "text": [
+                  "Het geselecteerde fragment loopt van 39:35 t/m 40:11 (stopt automatisch bij de eerste keer afspelen)."
+                ]
+              },
+              {
+                "type": "html",
+                "html": "<div class=\"mb-6\"><div class=\"rounded-lg overflow-hidden mb-2 relative bg-black dark:bg-black w-full video-responsive-container\" style=\"max-width: 100%;\"><div class=\"video-responsive-wrapper\" style=\"position: relative; width: 100%; padding-bottom: 56.25%; height: 0; overflow: hidden; background-color: #000;\"><iframe src=\"https://www.youtube.com/embed/TXoRrx1Idew?start=2375&end=2411\" title=\"Video\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen class=\"video-responsive-iframe\" style=\"position: absolute !important; top: 0 !important; left: 0 !important; width: 100% !important; height: 100% !important; border: 0 !important; margin: 0 !important; padding: 0 !important; background-color: #000;\" loading=\"lazy\"></iframe></div></div><p class=\"text-sm mb-0\"><a href=\"https://youtu.be/TXoRrx1Idew\" target=\"_blank\" class=\"text-blue-600 hover:text-blue-800 underline font-medium\"><i class=\"fas fa-external-link-alt mr-1\"></i>Open video in nieuw tabblad</a></p></div>"
+              },
+              {
+                "type": "multipleChoiceExercise",
+                "question": "Op welke stap van het vraagvoorspelproces heeft het onderstaande fragment betrekking?",
+                "options": [
+                  {
+                    "text": "Stap 1: Adjust history file",
+                    "correct": false,
+                    "feedback": "Dit is niet stap 1. Het fragment gaat over het communiceren en maken van planningen."
+                  },
+                  {
+                    "text": "Stap 2: Prepare initial forecasts",
+                    "correct": false,
+                    "feedback": "Dit is niet stap 2. Het fragment gaat over het communiceren en maken van planningen, niet over het maken van initiële voorspellingen."
+                  },
+                  {
+                    "text": "Stap 3: Consensus meetings and collaboration",
+                    "correct": false,
+                    "feedback": "Dit is niet stap 3. Het fragment gaat over het communiceren en maken van planningen, niet over consensus meetings."
+                  },
+                  {
+                    "text": "Stap 4: Revise forecasts",
+                    "correct": false,
+                    "feedback": "Dit is niet stap 4. Het fragment gaat over het communiceren en maken van planningen, niet over het herzien van voorspellingen."
+                  },
+                  {
+                    "text": "Stap 5: Review by Operating Committee",
+                    "correct": false,
+                    "feedback": "Dit is niet stap 5. Het fragment gaat over het communiceren en maken van planningen, niet over review door het Operating Committee."
+                  },
+                  {
+                    "text": "Stap 6: Finalize and communicate",
+                    "correct": true,
+                    "feedback": "Correct! Het communiceren en het maken van allerlei planningen op basis van de vastgestelde vraagvoorspelling is stap 6 uit het vraagvoorspelproces."
+                  }
+                ]
+              }
             ]
           }
         ]
       },
       {
-        "type": "highlight",
-        "title": "Belangrijke vraagvoorspelprincipes",
-        "content": [
-          "<p class=\"text-gray-700 dark:text-gray-300 mb-3\">Bij het uitvoeren van vraagvoorspellingen zijn de volgende vier principes leidend:</p>",
-          "<ul class=\"list-disc list-outside space-y-2 mb-3 ml-6 pl-4 text-gray-700 dark:text-gray-300\">",
-          "<li class=\"mb-2\"><strong>Universele toepassing</strong>: Alle bedrijven doen aan vraagvoorspelling, of dit nu op een formele of informele manier gebeurt.</li>",
-          "<li class=\"mb-2\"><strong>Samenhang</strong>: De voorspelling moet altijd passen binnen het grotere plaatje van de bedrijfsstrategie en de omgeving.</li>",
-          "<li class=\"mb-2\"><strong>Aggregatie</strong>: Indien mogelijk is het raadzaam om voorspellingen op een geaggregeerd niveau uit te voeren voor een hogere betrouwbaarheid.</li>",
-          "<li class=\"mb-2\"><strong>Communicatie boven techniek</strong>: Er valt meer winst te behalen door goede samenwerking en communicatie dan door het uitsluitend inzetten van zeer geavanceerde voorspeltechnieken.</li>",
-          "</ul>"
-        ],
-        "icon": "fa-lightbulb",
-        "iconClass": "fas"
-      },
-      {
         "type": "heading",
-        "text": "Wat ga ik extra leren?",
-        "level": 2
+        "text": "Vraagvoorspelprincipes",
+        "level": 2,
+        "id": "vraagvoorspelprincipes"
       },
       {
         "type": "paragraph",
         "text": [
-          "Bij Operations Management wordt dieper op de basis ingegaan:",
-          "• Hoe bedrijven tot een voorspelling komen (meer dan alleen historische data).",
-          "• Toepassing van lineaire regressie als causale methode in Excel.",
-          "• Voorspelmethoden voor tijdreeksen met horizontale, trend- of seizoenspatronen (in Excel).",
-          "• Maatstaven om de kwaliteit van een voorspelmethode te beoordelen en te berekenen in Excel."
+          "Hieronder staan een viertal belangrijke principes met betrekking tot vraagvoorspelling. Deze worden toegelicht in het audiofragment dat eronder staat."
         ]
       },
       {
-        "type": "heading",
-        "text": "Wat heb je geleerd in dit blok?",
-        "level": 2
+        "type": "paragraph",
+        "text": [
+          "• Alle bedrijven doen aan vraagvoorspelling (formeel of informeel)",
+          "• De voorspelling moet passen bij het grotere plaatje",
+          "• Indien mogelijk, doe voorspellingen op een geaggregeerd niveau",
+          "• Er is meer winst te behalen in het goed voorspellen van de vraag door goed samen te werken en te communiceren dan door gebruik te maken van geavanceerde voorspeltechnieken"
+        ]
+      },
+      {
+        "type": "audio",
+        "src": "assets/audio/vraagvoorspelprincipes.mp3",
+        "caption": ""
       },
       {
         "type": "paragraph",
         "text": [
-          "Na afronding van deze introductie:",
-          "• Weet je waarom en waarvoor bedrijven vraagvoorspellingen gebruiken.",
-          "• Ken je de nadelige gevolgen van een slechte vraagvoorspelling."
+          "Tot besluit van dit blok nog een laatste fragment uit de webinar over ketensamenwerking. Hierin wordt een mooi voorbeeld gegeven van het laatst benoemde vraagvoorspelprincipe dat er meer winst valt te behalen door betere samenwerking dan door het toepassen van geavanceerde voorspeltechnieken. Het voorbeeld gaat over Walmart, een Amerikaanse supermarktketen."
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "Het geselecteerde fragment loopt van 14:48 t/m 15:36 (stopt automatisch bij de eerste keer afspelen)."
+        ]
+      },
+      {
+        "type": "html",
+        "html": "<div class=\"mb-6\"><div class=\"rounded-lg overflow-hidden mb-2 relative bg-black dark:bg-black w-full video-responsive-container\" style=\"max-width: 100%;\"><div class=\"video-responsive-wrapper\" style=\"position: relative; width: 100%; padding-bottom: 56.25%; height: 0; overflow: hidden; background-color: #000;\"><iframe src=\"https://www.youtube.com/embed/TXoRrx1Idew?start=888&end=936\" title=\"Video\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen class=\"video-responsive-iframe\" style=\"position: absolute !important; top: 0 !important; left: 0 !important; width: 100% !important; height: 100% !important; border: 0 !important; margin: 0 !important; padding: 0 !important; background-color: #000;\" loading=\"lazy\"></iframe></div></div><p class=\"text-sm mb-0\"><a href=\"https://youtu.be/TXoRrx1Idew\" target=\"_blank\" class=\"text-blue-600 hover:text-blue-800 underline font-medium\"><i class=\"fas fa-external-link-alt mr-1\"></i>Open video in nieuw tabblad</a></p></div>"
+      },
+      {
+        "type": "heading",
+        "text": "Wat heb je geleerd?",
+        "level": 3
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "Je hebt in dit blok het volgende geleerd:"
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "• Je weet uit welke stappen het vraagvoorspelproces bestaat",
+          "• Je bent bekend met de benoemde vraagvoorspelprincipes"
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "In het volgende blok bekijken we hoe je de kwaliteit van een vraagvoorspelling kunt beoordelen."
         ]
       },
       {
@@ -194,336 +508,238 @@
         "id": "kwaliteit-van-voorspellingen"
       },
       {
-        "type": "paragraph",
-        "text": [
-          "Een vraagvoorspelling zal vrijwel altijd afwijken van de daadwerkelijke vraag. Een goede voorspelmethode kenmerkt zich niet door foutloze resultaten, maar door voorspelfouten die zo klein mogelijk blijven. Om de kwaliteit van een methode te beoordelen, kwantificeren we deze afwijkingen."
-        ]
-      },
-      {
-        "type": "heading",
-        "text": "Voorspelfouten berekenen",
-        "level": 3,
-        "id": "voorspelfouten-berekenen"
+        "type": "html",
+        "html": "<div class=\"my-4 overflow-hidden rounded-lg mx-auto\" style=\"width: 100%; max-width: 800px; height: 200px; max-height: 250px;\"><div style=\"position: relative; width: 100%; height: 100%; overflow: hidden;\"><img src=\"assets/images/Vraagvoorspelling(deel-1)/2.6.jpg\" alt=\"Afbeelding 2.6\" class=\"w-full\" style=\"object-fit: cover; object-position: center; height: 400%; transform: translateY(-42%);\"></div></div>"
       },
       {
         "type": "paragraph",
         "text": [
-          "De basis voor elke kwaliteitsmeting is de voorspelfout (E<sub>t</sub>) per periode. Deze wordt berekend met de volgende formule:"
-        ]
-      },
-      {
-        "type": "formula",
-        "formula": "E_t = D_t - F_t",
-        "display": true
-      },
-      {
-        "type": "paragraph",
-        "text": [
-          "Hierbij staat:",
-          "• <strong>E<sub>t</sub></strong> voor de voorspelfout (forecast error) in periode t.",
-          "• <strong>D<sub>t</sub></strong> voor de daadwerkelijke vraag (actual demand) in periode t.",
-          "• <strong>F<sub>t</sub></strong> voor de voorspelling (forecast) voor periode t."
-        ]
-      },
-      {
-        "type": "paragraph",
-        "text": [
-          "De uitkomst van deze berekening vertelt ons direct iets over de aard van de schatting:",
-          "• <strong>Negatieve voorspelfout (E < 0)</strong>: De daadwerkelijke vraag is lager dan de voorspelling, wat duidt op een <strong>overschatting</strong>.",
-          "• <strong>Positieve voorspelfout (E > 0)</strong>: De daadwerkelijke vraag is hoger dan de voorspelling, wat duidt op een <strong>onderschatting</strong>.",
-          "• <strong>Voorspelfout van 0</strong>: Er is sprake van een <strong>perfecte schatting</strong>."
-        ]
-      },
-      {
-        "type": "heading",
-        "text": "Praktijkvoorbeeld: Productie van Ice-tea",
-        "level": 3,
-        "id": "ice-tea-voorbeeld"
-      },
-      {
-        "type": "paragraph",
-        "text": [
-          "Een producent van ice-tea vergelijkt twee verschillende voorspelmethoden over vier kwartalen om te bepalen welke methode de kleinste fouten produceert. In de onderstaande tabel zie je de voorspellingen en de uiteindelijk gerealiseerde vraag:"
+          "Voordat we gaan kijken naar hoe we via het toepassen van voorspelmethoden op historische data voorspellingen kunnen doen, bekijken we hoe we de kwaliteit van een voorspelmethode kunnen beoordelen. Hieronder worden begrippen en berekeningen stapsgewijs uitgelegd aan de hand van een voorbeeld."
         ]
       },
       {
         "type": "html",
-        "html": "<div class=\"overflow-x-auto my-4\"><table class=\"min-w-full border-collapse border border-gray-300 dark:border-gray-600\"><thead><tr class=\"bg-gray-100 dark:bg-gray-700\"><th class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-left font-semibold text-gray-900 dark:text-white\">Kwartaal</th><th class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-left font-semibold text-gray-900 dark:text-white\">Daadwerkelijke vraag</th><th class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-left font-semibold text-gray-900 dark:text-white\">Voorspelmethode 1</th><th class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-left font-semibold text-gray-900 dark:text-white\">Voorspelmethode 2</th></tr></thead><tbody><tr class=\"hover:bg-gray-50 dark:hover:bg-gray-800\"><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-700 dark:text-gray-300\">1</td><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-700 dark:text-gray-300\">860.000</td><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-700 dark:text-gray-300\">1.220.000</td><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-700 dark:text-gray-300\">830.000</td></tr><tr class=\"hover:bg-gray-50 dark:hover:bg-gray-800\"><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-700 dark:text-gray-300\">2</td><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-700 dark:text-gray-300\">1.150.000</td><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-700 dark:text-gray-300\">1.170.000</td><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-700 dark:text-gray-300\">1.070.000</td></tr><tr class=\"hover:bg-gray-50 dark:hover:bg-gray-800\"><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-700 dark:text-gray-300\">3</td><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-700 dark:text-gray-300\">1.290.000</td><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-700 dark:text-gray-300\">1.200.000</td><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-700 dark:text-gray-300\">1.230.000</td></tr><tr class=\"hover:bg-gray-50 dark:hover:bg-gray-800\"><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-700 dark:text-gray-300\">4</td><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-700 dark:text-gray-300\">1.500.000</td><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-700 dark:text-gray-300\">1.195.000</td><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-700 dark:text-gray-300\">1.550.000</td></tr></tbody></table></div>"
+        "html": "<div class=\"my-4 flex flex-col md:flex-row gap-4 items-start\"><div class=\"flex-shrink-0 w-full md:w-1/2\"><img src=\"assets/images/Vraagvoorspelling(deel-1)/2.7.jpg\" alt=\"Afbeelding 2.7\" class=\"rounded-lg w-full\" style=\"max-width: 100%; height: auto;\"></div><div class=\"flex-1 w-full md:w-1/2\"><p class=\"text-gray-700 dark:text-gray-300 mb-3\">Tijdens de bespreking zijn er steeds kleine oefeningetjes waarbij je zelf berekeningen uitvoert. Het idee is dat je door die oefeningetjes de begrippen beter in de vingers krijgt.</p><p class=\"text-gray-700 dark:text-gray-300 italic\">Het advies is dan ook om even pen en papier en een rekenmachine erbij te pakken.</p></div></div>"
       },
       {
-        "type": "image",
-        "src": "assets/images/vraag-naar-icetea-grafiek.png",
-        "alt": "Lijngrafiek 'Vraag naar icetea' waarin de daadwerkelijke vraag stijgt over vier kwartalen. Voorspelmethode 1 toont een nagenoeg horizontale lijn, terwijl Voorspelmethode 2 de stijgende trend van de vraag volgt."
+        "type": "heading",
+        "text": "Voorspelfouten",
+        "level": 3
       },
       {
         "type": "paragraph",
         "text": [
-          "Om te bepalen welke methode beter presteert, berekenen we de fouten per kwartaal voor Voorspelmethode 1:",
-          "• <strong>Kwartaal 1</strong>: 860.000 - 1.220.000 = <strong>-360.000</strong> (overschatting).",
-          "• <strong>Kwartaal 2</strong>: 1.150.000 - 1.170.000 = <strong>-20.000</strong> (overschatting).",
-          "• <strong>Kwartaal 3</strong>: 1.290.000 - 1.200.000 = <strong>90.000</strong> (onderschatting).",
-          "• <strong>Kwartaal 4</strong>: 1.500.000 - 1.195.000 = <strong>305.000</strong> (onderschatting)."
+          "Niets is zo moeilijk als de toekomst voorspellen. Een <strong>vraagvoorspelling</strong> zal dan ook altijd wat afwijken van de daadwerkelijke vraag naar een product of dienst. Een goede voorspelmethode is niet een methode die foutloze voorspellingen doet, maar een methode waarbij de afwijkingen van de <strong>daadwerkelijke vraag</strong> – dit noemen we de <strong>voorspelfouten</strong> – klein zijn. Aan de hand van een klein voorbeeld gaan we dit begrip verkennen."
+        ]
+      },
+      {
+        "type": "html",
+        "html": "<div class=\"my-4 flex flex-col md:flex-row gap-4 items-start\"><div class=\"flex-shrink-0 w-full md:w-1/2\"><img src=\"assets/images/Vraagvoorspelling(deel-1)/2.8.jpg\" alt=\"Afbeelding 2.8\" class=\"rounded-lg w-full\" style=\"max-width: 100%; height: auto;\"></div><div class=\"flex-1 w-full md:w-1/2\"><h4 class=\"text-lg font-semibold text-gray-900 dark:text-white mb-3\">Ice-tea</h4><p class=\"text-gray-700 dark:text-gray-300\">Een producent van ice-tea wil voor komend jaar graag weten hoeveel producten er per kwartaal kunnen worden afgezet. Op basis van historische data komen ze tot twee voorspellingen per kwartaal. Welke voorspelmethode heeft kleinere voorspelfouten?</p></div></div>"
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "Hieronder zie je de voorspellingen van beide methoden (in aantal stuks ice-tea)."
+        ]
+      },
+      {
+        "type": "html",
+        "html": "<div class=\"my-4 flex justify-center\"><div style=\"display: inline-block;\"><table class=\"border-collapse border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800\"><thead><tr class=\"bg-gray-100 dark:bg-gray-700\"><th class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-left font-semibold text-gray-900 dark:text-white\">Kwartaal</th><th class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-center font-semibold text-gray-900 dark:text-white\">1</th><th class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-center font-semibold text-gray-900 dark:text-white\">2</th><th class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-center font-semibold text-gray-900 dark:text-white\">3</th><th class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-center font-semibold text-gray-900 dark:text-white\">4</th></tr></thead><tbody><tr><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-700 dark:text-gray-300\">Voorspelmethode 1</td><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-center text-gray-700 dark:text-gray-300\">1.220.000</td><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-center text-gray-700 dark:text-gray-300\">1.170.000</td><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-center text-gray-700 dark:text-gray-300\">1.200.000</td><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-center text-gray-700 dark:text-gray-300\">1.195.000</td></tr><tr><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-700 dark:text-gray-300\">Voorspelmethode 2</td><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-center text-gray-700 dark:text-gray-300\">830.000</td><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-center text-gray-700 dark:text-gray-300\">1.070.000</td><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-center text-gray-700 dark:text-gray-300\">1.230.000</td><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-center text-gray-700 dark:text-gray-300\">1.550.000</td></tr></tbody></table></div></div>"
+      },
+      {
+        "type": "accordion",
+        "defaultOpen": false,
+        "items": [
+          {
+            "title": "Vergelijk de voorspellingen van beide voorspelmethoden. Wat valt je op?",
+            "defaultOpen": false,
+            "content": [
+              {
+                "type": "paragraph",
+                "text": [
+                  "Het volgende zou je kunnen opvallen:"
+                ]
+              },
+              {
+                "type": "paragraph",
+                "text": [
+                  "• Beide voorspelmethoden zitten gemiddeld op ongeveer 1,2 miljoen stuks per kwartaal.",
+                  "• Bij de voorspellingen van de eerste voorspelmethode fluctueren de aantallen per kwartaal maar beperkt.",
+                  "• Bij de voorspellingen van de tweede voorspelmethode zijn er grotere verschillen tussen de kwartalen, waarbij er over de kwartalen heen sprake is van een toenemend aantal."
+                ]
+              }
+            ]
+          }
         ]
       },
       {
         "type": "paragraph",
         "text": [
-          "Voor Voorspelmethode 2 zijn de fouten achtereenvolgens 30.000, 80.000, 60.000 en -50.000. Hoewel methode 1 in de eerste twee kwartalen de vraag overschat, laat de grafiek zien dat methode 2 de stijgende trend veel beter volgt."
+          "We springen vooruit in de tijd... naar het einde van het jaar. Nu weten we wat de daadwerkelijke vraag naar ice-tea is geweest in de vier kwartalen:"
+        ]
+      },
+      {
+        "type": "html",
+        "html": "<div class=\"my-4 flex justify-center\"><div style=\"display: inline-block;\"><table class=\"border-collapse border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800\"><thead><tr class=\"bg-gray-100 dark:bg-gray-700\"><th class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-left font-semibold text-gray-900 dark:text-white\">Kwartaal</th><th class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-center font-semibold text-gray-900 dark:text-white\">1</th><th class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-center font-semibold text-gray-900 dark:text-white\">2</th><th class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-center font-semibold text-gray-900 dark:text-white\">3</th><th class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-center font-semibold text-gray-900 dark:text-white\">4</th></tr></thead><tbody><tr><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-700 dark:text-gray-300\">Daadwerkelijke vraag</td><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-center text-gray-700 dark:text-gray-300\">860.000</td><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-center text-gray-700 dark:text-gray-300\">1.150.000</td><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-center text-gray-700 dark:text-gray-300\">1.290.000</td><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-center text-gray-700 dark:text-gray-300\">1.500.000</td></tr></tbody></table></div></div>"
+      },
+      {
+        "type": "highlight",
+        "title": "",
+        "content": [
+          "<p class=\"mb-0\">Welke voorspelmethode werkte er beter? Voorspelmethode 1 of 2?</p>"
+        ],
+        "icon": "fa-question-circle",
+        "iconClass": "fas"
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "Als je de voorspellingen van beide voorspelmethoden in de verschillende kwartalen vergelijkt met de daadwerkelijke vraag, dan zie je dat voorspelmethode 2 beter werkt. De daadwerkelijke vraag nam ook ieder kwartaal iets toe."
         ]
       },
       {
         "type": "heading",
-        "text": "Kwaliteitsindicatoren",
-        "level": 3,
-        "id": "kwaliteitsindicatoren"
+        "text": "Visuele inspectie",
+        "level": 3
       },
       {
         "type": "paragraph",
         "text": [
-          "Omdat een reeks losse voorspelfouten lastig te interpreteren is, vatten we deze samen in kengetallen: de kwaliteitsindicatoren. We maken gebruik van vier indicatoren om de systematische afwijking en de gemiddelde grootte van de fouten te bepalen."
+          "In dit kleine voorbeeld met maar 4 tijdsmomenten is het wel te doen om de waarden van de voorspelmethoden te vergelijken met de waarden van de daadwerkelijke vraag. Bij grotere datasets met meer tijdsmomenten is het een stuk lastiger om op deze manier een gevoel te krijgen voor de kwaliteit van een voorspelmethode. In dat geval is het voor een eerste indruk handig om een grafiek te maken met daarin de voorspellingen en de daadwerkelijke vraag; een plaatje zegt meer dan duizend getallen ;-)."
         ]
       },
       {
         "type": "paragraph",
         "text": [
-          "<strong>Formules voor kwaliteitsmeting:</strong>"
+          "Hieronder zie je de voorspellingen en de daadwerkelijke vraag van het voorbeeld weergegeven in een grafiek. Je ziet meteen dat voorspelmethode 2 beter werkt. Deze laat ook een stijgende lijn zien net als de daadwerkelijke vraag, terwijl voorspelmethode 1 een min of meer horizontale lijn laat zien."
+        ]
+      },
+      {
+        "type": "image",
+        "src": "assets/images/Vraagvoorspelling(deel-1)/2.9.jpg",
+        "alt": ""
+      },
+      {
+        "type": "heading",
+        "text": "Voorspelfouten kwantificeren",
+        "level": 3
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "Tot nu toe hebben we de voorspelfouten globaal bekeken: we hebben de voorspelwaarden vergeleken met de daadwerkelijke vraag en gekeken naar lijnen in een grafiek. Een preciezere vergelijking kunnen we maken door de voorspelfouten te kwantificeren, dus door ze uit te drukken in een getal. Daarvoor gebruiken we de volgende formule:"
+        ]
+      },
+      {
+        "type": "html",
+        "html": "<div class=\"my-4 text-center\"><p class=\"text-lg font-semibold text-gray-900 dark:text-white mb-4\"><strong>E<sub>t</sub> = D<sub>t</sub> - F<sub>t</sub></strong></p><ul class=\"list-none space-y-2 text-left inline-block\"><li>• <strong>E<sub>t</sub></strong> is de voorspelfout voor periode <em>t</em></li><li>• <strong>D<sub>t</sub></strong> is de daadwerkelijke vraag in periode <em>t</em></li><li>• <strong>F<sub>t</sub></strong> is de voorspelling voor periode <em>t</em></li></ul></div>"
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "De voorspelfout voor een periode is dus gelijk aan de daadwerkelijke vraag in die periode min de voorspelling voor die periode. Als de daadwerkelijke vraag lager is dan de voorspelling, dan zal de voorspelfout negatief zijn (kleiner dan 0). Als de daadwerkelijke vraag hoger is dan de voorspelling, dan zal de voorspelfout positief zijn (groter dan nul)."
         ]
       },
       {
         "type": "paragraph",
         "text": [
-          "<strong>CFE</strong> (Cumulative sum of Forecast Errors) = "
+          "Hieronder zie je de daadwerkelijk vraag per kwartaal en de voorspellingen van beide methoden in ons ice-tea voorbeeld."
         ]
       },
       {
-        "type": "formula",
-        "formula": "\\text{CFE} = \\sum E_t",
-        "display": false
+        "type": "html",
+        "html": "<div class=\"my-4 flex justify-center\"><div style=\"display: inline-block;\"><table class=\"border-collapse border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800\"><thead><tr class=\"bg-gray-100 dark:bg-gray-700\"><th class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-left font-semibold text-gray-900 dark:text-white\">Kwartaal</th><th class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-center font-semibold text-gray-900 dark:text-white\">1</th><th class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-center font-semibold text-gray-900 dark:text-white\">2</th><th class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-center font-semibold text-gray-900 dark:text-white\">3</th><th class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-center font-semibold text-gray-900 dark:text-white\">4</th></tr></thead><tbody><tr><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-700 dark:text-gray-300\">Daadwerkelijke vraag</td><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-center text-gray-700 dark:text-gray-300\">860.000</td><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-center text-gray-700 dark:text-gray-300\">1.150.000</td><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-center text-gray-700 dark:text-gray-300\">1.290.000</td><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-center text-gray-700 dark:text-gray-300\">1.500.000</td></tr><tr><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-700 dark:text-gray-300\">Voorspelmethode 1</td><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-center text-gray-700 dark:text-gray-300\">1.220.000</td><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-center text-gray-700 dark:text-gray-300\">1.170.000</td><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-center text-gray-700 dark:text-gray-300\">1.200.000</td><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-center text-gray-700 dark:text-gray-300\">1.195.000</td></tr><tr><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-700 dark:text-gray-300\">Voorspelmethode 2</td><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-center text-gray-700 dark:text-gray-300\">830.000</td><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-center text-gray-700 dark:text-gray-300\">1.070.000</td><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-center text-gray-700 dark:text-gray-300\">1.230.000</td><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-center text-gray-700 dark:text-gray-300\">1.550.000</td></tr></tbody></table></div></div>"
       },
       {
         "type": "paragraph",
         "text": [
-          "<strong>AFE</strong> (Average Forecast Error) = "
+          "De voorspelfouten van voorspelmethode 1 voor de vier kwartalen zijn als volgt:"
         ]
       },
       {
-        "type": "formula",
-        "formula": "\\text{AFE} = \\frac{\\text{CFE}}{n}",
-        "display": false
+        "type": "html",
+        "html": "<div class=\"my-4 text-center\"><ul class=\"list-none space-y-2 text-left inline-block\"><li>Kwartaal 1: <strong>E<sub>1</sub> = D<sub>1</sub> - F<sub>1</sub> = 860.000 - 1.220.000 = -360.000</strong></li><li>Kwartaal 2: <strong>E<sub>2</sub> = D<sub>2</sub> - F<sub>2</sub> = 1.150.000 - 1.170.000 = -20.000</strong></li><li>Kwartaal 3: <strong>E<sub>3</sub> = D<sub>3</sub> - F<sub>3</sub> = 1.290.000 - 1.200.000 = 90.000</strong></li><li>Kwartaal 4: <strong>E<sub>4</sub> = D<sub>4</sub> - F<sub>4</sub> = 1.500.000 - 1.195.000 = 305.000</strong></li></ul></div>"
       },
       {
-        "type": "paragraph",
-        "text": [
-          "<strong>MAD</strong> (Mean Absolute Deviation) = "
-        ]
-      },
-      {
-        "type": "formula",
-        "formula": "\\text{MAD} = \\frac{\\sum |E_t|}{n}",
-        "display": false
-      },
-      {
-        "type": "paragraph",
-        "text": [
-          "<strong>MAPE</strong> (Mean Absolute Percent Error) = "
-        ]
-      },
-      {
-        "type": "formula",
-        "formula": "\\text{MAPE} = \\frac{100}{n} \\sum \\frac{|E_t|}{D_t}",
-        "display": false
+        "type": "highlight",
+        "title": "",
+        "content": [
+          "<p class=\"mb-0\">Bereken de voorspelfouten van voorspelmethode 2 voor de vier kwartalen.</p>"
+        ],
+        "icon": "fa-question-circle",
+        "iconClass": "fas"
       },
       {
         "type": "accordion",
-        "usePlusIcon": true,
         "defaultOpen": false,
         "items": [
           {
-            "title": "Interpretatie van de indicatoren",
+            "title": "Antwoord voorspelfouten van voorspelmethode 2",
+            "defaultOpen": false,
             "content": [
-              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Elke indicator belicht een ander aspect van de voorspelkwaliteit:</p>",
-              "<ul class=\"list-disc list-outside space-y-3 mb-4 ml-6 pl-4 text-gray-700 dark:text-gray-300\">",
-              "<li class=\"mb-3\"><strong>CFE &amp; AFE (Systematische afwijking)</strong>: Deze indicatoren meten de 'bias'. Een positieve waarde duidt op een gemiddelde onderschatting, terwijl een negatieve waarde duidt op een gemiddelde overschatting. Idealiter ligt de waarde dicht bij 0. De AFE is hierbij makkelijker te relateren aan de vraag per periode dan de CFE.</li>",
-              "<li class=\"mb-3\"><strong>MAD (Grootte van de afwijking)</strong>: De MAD meet hoever de voorspelling gemiddeld afzit van de werkelijkheid, ongeacht of dit onder of boven de vraag is. Een hogere MAD betekent grotere fouten. Het nadeel is dat de waarde afhankelijk is van de schrootte van de vraag; een MAD van 10 is veel voor Ferrari's, maar weinig voor pakken hagelslag.</li>",
-              "<li class=\"mb-3\"><strong>MAPE (Relatieve afwijking)</strong>: De MAPE drukt de gemiddelde absolute fout uit als een percentage van de daadwerkelijke vraag. Dit maakt het mogelijk om de kwaliteit van voorspellingen tussen verschillende producten of periodes met een andere vraagomvang te vergelijken. Hoe lager het percentage, hoe nauwkeuriger de methode.</li>",
-              "</ul>"
+              {
+                "type": "paragraph",
+                "text": [
+                  "De voorspelfouten van voorspelmethode 2 zijn achtereenvolgens 30.000, 80.000, 60.000 en -50.000 stuks."
+                ]
+              }
             ]
           }
         ]
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "Wanneer is er sprake van over-, onder- of perfecte schatting van de daadwerkelijke vraag door een voorspelmethode? Maak de juiste match. Je kunt de tags aan de linkerkant verplaatsen naar een tag aan de rechterkant."
+        ]
+      },
+      {
+        "type": "matchingExercise",
+        "title": "Onder-, over- en perfecte schatting",
+        "instruction": "Sleep de voorspelfouten naar de juiste schatting:",
+        "hideBorder": true,
+        "categories": [
+          {
+            "name": "Overschatting"
+          },
+          {
+            "name": "Perfecte schatting"
+          },
+          {
+            "name": "Onderschatting"
+          }
+        ],
+        "items": [
+          {
+            "text": "Negatieve voorspelfout",
+            "correctCategory": 0
+          },
+          {
+            "text": "Voorspelfout gelijk aan 0",
+            "correctCategory": 1
+          },
+          {
+            "text": "Positieve voorspelfout",
+            "correctCategory": 2
+          }
+        ],
+        "explanation": "<p class=\"text-sm text-green-800 dark:text-green-200 mb-3\">De voorspelfout is negatief als de daadwerkelijke vraag kleiner is dan de voorspelling. Er is dan dus sprake van overschatting door de voorspelmethode.</p><p class=\"text-sm text-green-800 dark:text-green-200 mb-3\">De voorspelfout is gelijk aan nul als de daadwerkelijke vraag gelijk is aan de voorspelling. Er is dan dus sprake van een perfecte schatting door de voorspelmethode.</p><p class=\"text-sm text-green-800 dark:text-green-200 mb-3\">De voorspelfout is positief als de daadwerkelijke vraag groter is dan de voorspelling. Er is dan dus sprake van onderschatting door de voorspelmethode.</p>"
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "Vond je het lastig om de goede match te maken? Kijk dan even goed naar de herhaling van de grafiek hieronder en lees de tekst ernaast. Kwam je er prima uit ga dan door naar het kopje Kwaliteitsindicatoren."
+        ]
+      },
+      {
+        "type": "html",
+        "html": "<div class=\"my-4\"><p class=\"text-gray-700 dark:text-gray-300 mb-3\">Zoals eerder aangegeven is een voorspelfout gelijk aan de daadwerkelijke vraag min de voorspelling. Voor methode 1 geldt:</p><div class=\"mb-4\"><img src=\"assets/images/Vraagvoorspelling(deel-1)/2.10.jpg\" alt=\"Afbeelding 2.10\" class=\"rounded-lg w-full max-w-2xl mx-auto\" style=\"max-width: 100%; height: auto;\"></div><p class=\"text-gray-700 dark:text-gray-300 mb-2\">In kwartalen 1 en 2 is de voorspelfout negatief, want de daadwerkelijke vraag is lager dan de voorspelling. Een negatieve voorspelfout duidt dus op overschatting door de voorspelmethode.</p><p class=\"text-gray-700 dark:text-gray-300\">In kwartalen 3 en 4 is de voorspelfout positief, want de daadwerkelijke vraag is hoger dan de voorspelling. Een positieve voorspelfout duidt dus op onderschatting door de voorspelmethode.</p></div>"
       },
       {
         "type": "heading",
         "text": "Kwalitatieve inschatting en lineaire regressie",
         "level": 2,
         "id": "kwalitatieve-inschatting-en-lineaire-regressie"
-      },
-      {
-        "type": "paragraph",
-        "text": [
-          "In dit blok maak je kennis met een tweetal methoden die gebruikt worden bij het bepalen van een vraagvoorspelling: kwalitatieve inschatting en lineaire regressie."
-        ]
-      },
-      {
-        "type": "heading",
-        "text": "Kwalitatieve inschatting",
-        "level": 3,
-        "id": "kwalitatieve-inschatting"
-      },
-      {
-        "type": "paragraph",
-        "text": [
-          "Waar kwantitatieve methoden steunen op historische datasets, wordt bij een kwalitatieve inschatting (judgment method) de vraag voorspeld op basis van subjectieve factoren. Hierbij kan men denken aan de inschatting van een expert of resultaten uit marktonderzoek."
-        ]
-      },
-      {
-        "type": "heading",
-        "text": "Causale methoden",
-        "level": 3,
-        "id": "causale-methoden"
-      },
-      {
-        "type": "paragraph",
-        "text": [
-          "Bij causale methoden wordt de vraag naar een product of dienst voorspeld via een andere variabele of factor die een invloed uitoefent op de vraag. Een veelgebruikte techniek hiervoor is lineaire regressie."
-        ]
-      },
-      {
-        "type": "heading",
-        "text": "Lineaire regressie",
-        "level": 3,
-        "id": "lineaire-regressie-theorie"
-      },
-      {
-        "type": "paragraph",
-        "text": [
-          "Bij lineaire regressie wordt verondersteld dat er een lineair verband bestaat tussen twee variabelen, wat betekent dat de relatie goed kan worden weergegeven door een rechte lijn. De bijbehorende vergelijking luidt:"
-        ]
-      },
-      {
-        "type": "formula",
-        "formula": "Y = a + bX",
-        "display": true
-      },
-      {
-        "type": "paragraph",
-        "text": [
-          "• <strong>Y</strong>: de afhankelijke variabele (dependent variable).",
-          "• <strong>X</strong>: de onafhankelijke variabele (independent variable).",
-          "• <strong>a</strong>: het snijpunt met de Y-as (Y-intercept).",
-          "• <strong>b</strong>: de richtingscoëfficiënt of helling van de lijn (slope)."
-        ]
-      },
-      {
-        "type": "heading",
-        "text": "Scenario's voor de correlatiecoëfficiënt (r)",
-        "level": 3,
-        "id": "correlatie-scenarios"
-      },
-      {
-        "type": "paragraph",
-        "text": [
-          "De correlatiecoëfficiënt (r) geeft de sterkte en richting van het lineaire verband weer tussen de twee variabelen. De waarde ligt altijd tussen -1 en +1. Bekijk de verschillende scenario's:"
-        ]
-      },
-      {
-        "type": "tabs",
-        "defaultTab": 0,
-        "tabs": [
-          {
-            "title": "Stap 1: r = 0",
-            "content": [
-              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>Geen lineair verband</strong></p>",
-              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Er kan geen stijgende of dalende rechte lijn door de puntenwolk getrokken worden. Er is geen sprake van een lineair verband, hoewel er wel een niet-lineair verband (zoals een kromme) aanwezig kan zijn.</p>"
-            ]
-          },
-          {
-            "title": "Stap 2: r = -0,8",
-            "content": [
-              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>Sterk negatief verband</strong></p>",
-              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Er is sprake van een dalende rechte lijn; als de ene variabele toeneemt, neemt de andere gemiddeld af. De meeste punten liggen dicht bij de denkbeeldige lijn.</p>"
-            ]
-          },
-          {
-            "title": "Stap 3: r = 1",
-            "content": [
-              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>Perfect positief verband</strong></p>",
-              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Alle punten liggen exact op een stijgende rechte lijn. Als de ene variabele toeneemt, neemt de andere ook toe.</p>"
-            ]
-          },
-          {
-            "title": "Stap 4: r = 0,8",
-            "content": [
-              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>Sterk positief verband</strong></p>",
-              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Er is een duidelijke stijgende lijn zichtbaar waarbij de meeste punten dicht bij de lijn liggen.</p>"
-            ]
-          },
-          {
-            "title": "Stap 5: r = 0,6",
-            "content": [
-              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>Matig positief verband</strong></p>",
-              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Er is een stijgende trend, maar meerdere punten hebben een relatief grote afstand tot de denkbeeldige lijn.</p>"
-            ]
-          }
-        ]
-      },
-      {
-        "type": "heading",
-        "text": "Voorbeeld: Vraag naar scharnieren",
-        "level": 3,
-        "id": "casus-scharnieren"
-      },
-      {
-        "type": "paragraph",
-        "text": [
-          "Een fabrikant vermoedt dat de verkoop van scharnieren samenhangt met het advertentiebudget. Op basis van historische data (X = budget, Y = verkoop) is een regressielijn opgesteld."
-        ]
-      },
-      {
-        "type": "html",
-        "html": "<div class=\"overflow-x-auto my-4\"><table class=\"min-w-full border-collapse border border-gray-300 dark:border-gray-600\"><thead><tr class=\"bg-gray-100 dark:bg-gray-700\"><th class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-left font-semibold text-gray-900 dark:text-white\">Maand</th><th class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-left font-semibold text-gray-900 dark:text-white\">Aantal verkocht (Y)</th><th class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-left font-semibold text-gray-900 dark:text-white\">Advertentiebudget (X)</th></tr></thead><tbody><tr class=\"hover:bg-gray-50 dark:hover:bg-gray-800\"><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-700 dark:text-gray-300\">1</td><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-700 dark:text-gray-300\">116.000</td><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-700 dark:text-gray-300\">€ 1.300</td></tr><tr class=\"hover:bg-gray-50 dark:hover:bg-gray-800\"><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-700 dark:text-gray-300\">2</td><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-700 dark:text-gray-300\">165.000</td><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-700 dark:text-gray-300\">€ 1.400</td></tr><tr class=\"hover:bg-gray-50 dark:hover:bg-gray-800\"><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-700 dark:text-gray-300\">3</td><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-700 dark:text-gray-300\">101.000</td><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-700 dark:text-gray-300\">€ 1.000</td></tr><tr class=\"hover:bg-gray-50 dark:hover:bg-gray-800\"><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-700 dark:text-gray-300\">4</td><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-700 dark:text-gray-300\">209.000</td><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-700 dark:text-gray-300\">€ 2.000</td></tr><tr class=\"hover:bg-gray-50 dark:hover:bg-gray-800\"><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-700 dark:text-gray-300\">5</td><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-700 dark:text-gray-300\">264.000</td><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-700 dark:text-gray-300\">€ 2.500</td></tr></tbody></table></div>"
-      },
-      {
-        "type": "image",
-        "src": "assets/images/relatie-verkoop-advertentiebudget.png",
-        "alt": "Spreidingsdiagram van de relatie tussen verkoop en advertentiebudget voor scharnieren met een stijgende regressielijn."
-      },
-      {
-        "type": "highlight",
-        "title": "Voorspelling berekenen",
-        "content": [
-          "<p class=\"text-gray-700 dark:text-gray-300 mb-3\">Met de gevonden regressievergelijking kunnen we toekomstige verkoopcijfers voorspellen.</p>",
-          "<p class=\"text-gray-700 dark:text-gray-300 mb-3\">Bij een gepland advertentiebudget van <strong>€ 1.500 (X)</strong> bedraagt de verwachte verkoop:</p>"
-        ],
-        "icon": "fa-calculator",
-        "iconClass": "fas"
-      },
-      {
-        "type": "formula",
-        "formula": "Y = a + b \\times 1.500",
-        "display": true
-      },
-      {
-        "type": "paragraph",
-        "text": [
-          "stuks"
-        ]
-      },
-      {
-        "type": "accordion",
-        "usePlusIcon": true,
-        "defaultOpen": false,
-        "items": [
-          {
-            "title": "Interpretatie van de regressieresultaten",
-            "content": [
-              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Om de betrouwbaarheid van de voorspelling te beoordelen, kijken we naar twee indicatoren:</p>",
-              "<ul class=\"list-disc list-outside space-y-3 mb-4 ml-6 pl-4 text-gray-700 dark:text-gray-300\">",
-              "<li class=\"mb-3\"><strong>Correlatiecoëfficiënt (r)</strong>: In dit voorbeeld is r hoog, wat duidt op een zeer sterk positief lineair verband tussen het budget en de verkoop.</li>",
-              "<li class=\"mb-3\"><strong>Determinatiecoëfficiënt (r²)</strong>: Deze waarde geeft aan dat 96% van de spreiding in de verkoop verklaard kan worden door de regressielijn op basis van het advertentiebudget.</li>",
-              "</ul>"
-            ]
-          }
-        ]
       }
     ]
   }

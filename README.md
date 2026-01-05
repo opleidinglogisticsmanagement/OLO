@@ -350,6 +350,15 @@ Health check endpoint om te controleren of de server draait.
 
 ##### 📝 Nieuwe App Toevoegen
 
+> 📖 **Zie [APP_SETUP_GUIDE.md](./APP_SETUP_GUIDE.md) voor een complete guide over het aanmaken van nieuwe apps.**
+
+**Belangrijk:** Bij het aanmaken van een nieuwe app moet de sidebar **vrijwel leeg** zijn:
+- ✅ **Alleen "Start"** moet zichtbaar zijn in de sidebar
+- ❌ **GEEN** week 1-7 structuur
+- ❌ **GEEN** vooraf gedefinieerde modules
+
+Gebruikers kunnen daarna zelf pagina's toevoegen via de stappen in de guide.
+
 Wanneer je een nieuwe e-learning app toevoegt:
 
 1. **Kopieer app folder:**
@@ -360,6 +369,7 @@ Wanneer je een nieuwe e-learning app toevoegt:
 2. **Pas content aan:**
    - Wijzig `content/*.content.json` bestanden
    - Update app-specifieke configuratie
+   - **⚠️ Verwijder week 1-7 structuur uit sidebar** (zie APP_SETUP_GUIDE.md)
 
 3. **Maak nieuw Vercel project:**
    - Project Name: "[Nieuwe App Naam]"
@@ -919,6 +929,23 @@ Gebruikt voor afbeeldingen. De laatste afbeelding in de content array krijgt aut
 **Features:**
 - Automatische hover zoom effect
 - Laatste image krijgt klikbare modal functionaliteit
+
+#### Image Cropping Pattern (25% van midden tonen)
+
+Om 25% van het midden van een afbeelding te tonen, gebruik dit HTML patroon:
+
+```json
+{
+  "type": "html",
+  "html": "<div class=\"my-4 overflow-hidden rounded-lg mx-auto\" style=\"width: 100%; max-width: 800px; height: 200px; max-height: 250px;\"><div style=\"position: relative; width: 100%; height: 100%; overflow: hidden;\"><img src=\"assets/images/pad/naar/afbeelding.jpg\" alt=\"Beschrijving\" class=\"w-full\" style=\"object-fit: cover; object-position: center; height: 400%; transform: translateY(-37.5%);\"></div></div>"
+}
+```
+
+**Uitleg:**
+- Container: `height: 200px; max-height: 250px;` - bepaalt het zichtbare gebied
+- Image: `height: 400%` - maakt afbeelding 4x groter (25% zichtbaar)
+- `transform: translateY(-37.5%)` - centreert het midden (37.5% = (100% - 25%) / 2)
+- `object-fit: cover` en `object-position: center` - zorgt voor correcte positionering
 
 ### 3. URL
 

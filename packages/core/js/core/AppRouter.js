@@ -200,11 +200,40 @@ class AppRouter {
             return null;
         }
         
+        // Special cases for specific naming conventions
+        const specialCases = {
+            'hd09': 'HD09LessonPage',
+            'hd-09': 'HD09LessonPage'
+        };
+        
+        if (specialCases[baseName]) {
+            console.log(`[AppRouter] 🔍 Detected page class name (special case): ${specialCases[baseName]} from ${fileName}`);
+            return specialCases[baseName];
+        }
+        
         // Convert kebab-case to PascalCase and append LessonPage
         // vraagvoorspelling-deel1 -> VraagvoorspellingDeel1LessonPage
         const parts = baseName.split('-');
         const pascalCase = parts.map(part => part.charAt(0).toUpperCase() + part.slice(1)).join('');
         const pageClassName = pascalCase + 'LessonPage';
+        
+        // Check if a class exists with exact case (for cases like HD09LessonPage)
+        // Try both the PascalCase version and a version with all uppercase letters before numbers
+        const possibleNames = [pageClassName];
+        
+        // For cases like hd09, also try HD09LessonPage (all uppercase before numbers)
+        if (baseName.match(/^[a-z]+\d+$/)) {
+            const upperCaseVersion = baseName.toUpperCase().replace(/-/g, '') + 'LessonPage';
+            possibleNames.push(upperCaseVersion);
+        }
+        
+        // Check which one actually exists
+        for (const possibleName of possibleNames) {
+            if (typeof window !== 'undefined' && window[possibleName]) {
+                console.log(`[AppRouter] 🔍 Detected page class name: ${possibleName} from ${fileName} (found existing class)`);
+                return possibleName;
+            }
+        }
         
         console.log(`[AppRouter] 🔍 Detected page class name: ${pageClassName} from ${fileName}`);
         return pageClassName;
@@ -310,12 +339,21 @@ class AppRouter {
             }
         }
         
+        // Initialize navigation dynamically to prevent hardcoded navigation from getting out of sync
+        if (window.NavigationInitializer) {
+            const navInitializer = new window.NavigationInitializer();
+            navInitializer.init();
+        }
+        
         // Initialize SidebarManager for index page (sidebar is persistent, but listeners need to be attached)
         // Create a minimal page instance just for the managers
-        if (window.SidebarManager) {
-            const sidebarManager = new window.SidebarManager('start');
-            sidebarManager.init();
-        }
+        // Small delay to ensure navigation is updated first
+        setTimeout(() => {
+            if (window.SidebarManager) {
+                const sidebarManager = new window.SidebarManager('start');
+                sidebarManager.init();
+            }
+        }, 50);
         
         // Re-initialize any scripts needed for index page
         // Small delay to ensure DOM is updated after innerHTML replacement
@@ -424,6 +462,26 @@ class AppRouter {
         let PageClass = window[pageClassName];
         console.log(`[AppRouter] 🔍 Looking for ${pageClassName}, available:`, !!PageClass);
         
+        // Check if class exists with different case (case-insensitive search)
+        if (!PageClass) {
+            const existingClass = Object.keys(window).find(key => 
+                key.toLowerCase() === pageClassName.toLowerCase() && 
+                typeof window[key] === 'function' &&
+                window[key].prototype &&
+                window[key].prototype.constructor.name === key
+            );
+            
+            if (existingClass && existingClass !== pageClassName) {
+                console.log(`[AppRouter] 🔄 Found class with different case: ${existingClass} (looking for ${pageClassName})`);
+                PageClass = window[existingClass];
+                if (PageClass) {
+                    console.log(`[AppRouter] ✅ Using existing class: ${existingClass}`);
+                    // Update pageClassName to match the actual class name
+                    pageClassName = existingClass;
+                }
+            }
+        }
+        
         if (!PageClass) {
             
             // First, ensure BaseLessonPage is available
@@ -448,7 +506,7 @@ class AppRouter {
                     // Fallback: try /apps/pages/ route
                     scriptPath = `/apps/pages/${pageClassName}.js`;
                 }
-            } else if (currentPath.startsWith('/operations-management/') || currentPath.startsWith('/logistiek-onderzoek/') || currentPath.startsWith('/e-learning-demo/')) {
+            } else if (currentPath.startsWith('/operations-management/') || currentPath.startsWith('/logistiek-onderzoek/') || currentPath.startsWith('/e-learning-demo/') || currentPath.startsWith('/edubook-logistiek/')) {
                 // Direct app path (without /apps/)
                 const appMatch = currentPath.match(/\/([^\/]+)\//);
                 if (appMatch) {
@@ -475,6 +533,17 @@ class AppRouter {
                 while (attempts < 30 && !PageClass) {
                     await new Promise(resolve => setTimeout(resolve, 100));
                     PageClass = window[pageClassName];
+                    // Also check case-insensitive after script load
+                    if (!PageClass) {
+                        const existingClass = Object.keys(window).find(key => 
+                            key.toLowerCase() === pageClassName.toLowerCase() && 
+                            typeof window[key] === 'function'
+                        );
+                        if (existingClass) {
+                            PageClass = window[existingClass];
+                            pageClassName = existingClass;
+                        }
+                    }
                     attempts++;
                 }
                 if (PageClass) {
@@ -495,6 +564,17 @@ class AppRouter {
             for (let i = 0; i < 20; i++) {
                 await new Promise(resolve => setTimeout(resolve, 100));
                 PageClass = window[pageClassName];
+                // Also check case-insensitive while waiting
+                if (!PageClass) {
+                    const existingClass = Object.keys(window).find(key => 
+                        key.toLowerCase() === pageClassName.toLowerCase() && 
+                        typeof window[key] === 'function'
+                    );
+                    if (existingClass) {
+                        PageClass = window[existingClass];
+                        pageClassName = existingClass;
+                    }
+                }
                 if (PageClass) {
                     console.log(`[AppRouter] ✅ Page class ${pageClassName} found after ${(i + 1) * 100}ms`);
                     break;
@@ -743,7 +823,20 @@ class AppRouter {
     scrollToHash(hash) {
         if (!hash) return;
         
-        const element = document.querySelector(hash);
+        // Remove leading # if present
+        const id = hash.startsWith('#') ? hash.slice(1) : hash;
+        
+        if (!id) return;
+        
+        // Use getElementById - this works for any valid ID, including those starting with numbers
+        // CSS selectors cannot start with numbers, but getElementById can handle any valid HTML ID
+        let element = document.getElementById(id);
+        
+        // Fallback to attribute selector if getElementById fails (shouldn't happen, but just in case)
+        if (!element) {
+            element = document.querySelector(`[id="${id}"]`);
+        }
+        
         if (element) {
             const headerOffset = 80;
             const elementPosition = element.getBoundingClientRect().top;
@@ -753,6 +846,8 @@ class AppRouter {
                 top: offsetPosition,
                 behavior: 'smooth'
             });
+        } else {
+            console.warn(`[AppRouter] ⚠️ Could not find element for hash: ${hash} (id: ${id})`);
         }
     }
 

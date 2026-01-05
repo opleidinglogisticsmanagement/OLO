@@ -94,3 +94,8 @@ class KaTeXRenderer {
     }
 }
 
+// Export voor gebruik in andere modules
+if (typeof window !== 'undefined') {
+    window.KaTeXRenderer = KaTeXRenderer;
+}
+

@@ -392,6 +392,13 @@ class BaseLessonPage {
         this.interactiveManager.init();
         this.videoManager.init();
         this.tableCopyManager.init();
+        
+        // Initialize all flip cards after a short delay to ensure DOM is ready
+        if (typeof FlipCardRenderer !== 'undefined') {
+            setTimeout(() => {
+                FlipCardRenderer.initializeAllFlipCards();
+            }, 600);
+        }
     }
 
     /**

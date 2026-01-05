@@ -1,0 +1,15 @@
+{
+  "name": "@e-learning/edubook-logistiek",
+  "version": "1.0.0",
+  "private": true,
+  "description": "E-Learning: Edubook Logistiek",
+  "dependencies": {
+    "@e-learning/core": "*"
+  },
+  "scripts": {
+    "dev": "cd ../../packages/core && npm run dev:app edubook-logistiek",
+    "dev:multi": "cd ../../packages/core && npm run dev:multi",
+    "start": "cd ../../packages/core && npm run dev:app edubook-logistiek"
+  }
+}
+

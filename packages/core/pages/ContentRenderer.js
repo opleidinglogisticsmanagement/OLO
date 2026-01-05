@@ -659,10 +659,19 @@ class ContentRenderer {
             return '';
         }
         
+        // Check if KaTeXRenderer is available
+        if (typeof window.KaTeXRenderer === 'undefined' && typeof KaTeXRenderer === 'undefined') {
+            console.error('KaTeXRenderer not loaded. Formula will not render.');
+            return `<span class="text-red-600 dark:text-red-400">[KaTeXRenderer niet geladen: ${item.formula}]</span>`;
+        }
+        
+        // Use window.KaTeXRenderer if available, otherwise fall back to global scope
+        const renderer = window.KaTeXRenderer || KaTeXRenderer;
+        
         const isDisplay = item.display === true;
         const formulaHtml = isDisplay 
-            ? KaTeXRenderer.renderDisplay(item.formula)
-            : KaTeXRenderer.renderInline(item.formula);
+            ? renderer.renderDisplay(item.formula)
+            : renderer.renderInline(item.formula);
         
         if (isDisplay) {
             return `<div class="my-4 flex justify-center overflow-x-hidden katex-display-wrapper">${formulaHtml}</div>`;

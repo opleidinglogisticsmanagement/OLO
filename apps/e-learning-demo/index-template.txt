@@ -587,6 +587,8 @@
 </head>
 <body class="bg-gray-50 dark:bg-gray-900 transition-colors duration-200">
     <!-- Dark Mode Utility - MOET EERST GELADEN WORDEN -->
+    <!-- Refresh Redirect - Must load first to prevent page load on refresh -->
+    <script src="/core/js/core/RefreshRedirect.js"></script>
     <script src="/core/js/DarkMode.js"></script>
     <!-- PDF Exporter -->
     <script src="js/PDFExporter.js"></script>

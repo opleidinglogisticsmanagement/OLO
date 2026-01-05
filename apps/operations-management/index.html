@@ -110,18 +110,18 @@
             color: #e5e7eb;
         }
         
-        /* Flip Card Styles */
+        /* Flip Card Styles - Vaste formaten (small, medium, large) */
         .flip-card-container {
             perspective: 1000px;
             width: fit-content;
             max-width: 90%;
             margin: 0 auto;
-            display: inline-block;
+            display: block;
+            text-align: center;
         }
         
         .flip-card-inner {
             position: relative;
-            width: fit-content;
             transition: transform 0.6s;
             transform-style: preserve-3d;
             cursor: pointer;
@@ -131,11 +131,9 @@
             transform: rotateY(180deg);
         }
         
+        /* Basis stijlen voor alle flip cards */
         .flip-card-front {
             position: relative;
-            width: auto;
-            min-width: 300px;
-            max-width: none;
             backface-visibility: hidden;
             -webkit-backface-visibility: hidden;
             border: 2px solid #e5e7eb;
@@ -161,9 +159,9 @@
             background-color: #ffffff;
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
             transform: rotateY(180deg);
-            overflow: hidden;
+            overflow-y: auto;
             display: flex;
-            align-items: center;
+            align-items: flex-start;
             justify-content: center;
         }
         
@@ -173,8 +171,71 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
+            justify-content: space-between;
             overflow: hidden;
+            padding: 0;
+        }
+        
+        .flip-card-front .flip-card-content {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            overflow: hidden;
+            padding: 0;
+        }
+        
+        /* Vaste formaten - gedefinieerd in core (FlipCardRenderer.CARD_SIZES) */
+        /* Small: 250x300px */
+        .flip-card-small .flip-card-front,
+        .flip-card-small .flip-card-back,
+        .flip-card-small .flip-card-inner {
+            width: 250px !important;
+            height: 300px !important;
+        }
+        .flip-card-small {
+            height: 300px !important;
+        }
+        
+        /* Medium: 350x400px (standaard) */
+        .flip-card-medium .flip-card-front,
+        .flip-card-medium .flip-card-back,
+        .flip-card-medium .flip-card-inner {
+            width: 350px !important;
+            height: 400px !important;
+        }
+        .flip-card-medium {
+            height: 400px !important;
+        }
+        
+        /* Large: 450x500px */
+        .flip-card-large .flip-card-front,
+        .flip-card-large .flip-card-back,
+        .flip-card-large .flip-card-inner {
+            width: 450px !important;
+            height: 500px !important;
+        }
+        .flip-card-large {
+            height: 500px !important;
+        }
+        
+        /* Font sizes kunnen per app worden aangepast */
+        .flip-card-front .flip-card-content,
+        .flip-card-back .flip-card-content {
+            font-size: 0.875rem; /* Standaard: 14px - kan per app worden overschreven */
+        }
+        
+        .flip-card-back .flip-card-content p,
+        .flip-card-back .flip-card-content h3,
+        .flip-card-back .flip-card-content ul,
+        .flip-card-back .flip-card-content li {
+            font-size: inherit; /* Erft van .flip-card-content */
+        }
+        
+        .flip-card-front .flip-card-content p {
+            font-size: inherit; /* Erft van .flip-card-content */
         }
         
         .flip-card-back img,
@@ -195,8 +256,23 @@
         .flip-card-content {
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            justify-content: space-between;
             height: 100%;
+        }
+        
+        /* Content wrapper die de hoofdcontent bevat - verticaal gecentreerd */
+        .flip-card-content-wrapper {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            overflow-y: auto;
+            overflow-x: hidden;
+            min-height: 0; /* Zorgt ervoor dat flex item kan krimpen */
+            padding: 0;
+            /* Alleen scrollen als content echt te groot is - gebruik auto in plaats van scroll */
         }
         
         .flip-card-hint {
@@ -204,6 +280,7 @@
             text-align: center;
             padding-top: 16px;
             border-top: 1px solid #e5e7eb;
+            flex-shrink: 0; /* Voorkom dat de hint krimpt */
         }
         
         .dark .flip-card-hint {
@@ -830,6 +907,7 @@
     <script src="config.js"></script>
     <!-- Core dependencies -->
     <script src="/core/js/components/LayoutRenderer.js"></script>
+    <script src="/core/js/components/NavigationInitializer.js"></script>
     <script src="/core/js/ui/SidebarManager.js"></script>
     <script src="/core/js/ui/HeaderManager.js"></script>
     <script src="/core/js/ui/ScrollManager.js"></script>
@@ -995,14 +1073,43 @@
                             </div>
                         </div>
                         
-                        <a href="vraagvoorspelling-deel1.html" class="block p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 focus-ring transition-colors">
-                            <div class="flex items-center space-x-3">
-                                <div class="w-8 h-8 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center">
-                                    <i class="fas fa-book text-green-600 dark:text-green-400 text-sm"></i>
+                        <div class="vraagvoorspelling-deel1-nav-item">
+                            <a href="vraagvoorspelling-deel1.html" class="block p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 focus-ring transition-colors">
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-8 h-8 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center">
+                                        <i class="fas fa-book text-green-600 dark:text-green-400 text-sm"></i>
+                                    </div>
+                                    <span class="font-medium text-gray-900 dark:text-white flex-1">Vraagvoorspelling (deel 1)</span>
+                                    <i class="fas fa-chevron-down text-xs text-gray-400 dark:text-gray-500 transition-transform duration-200" id="vraagvoorspelling-deel1-chevron-index"></i>
                                 </div>
-                                <span class="font-medium text-gray-900 dark:text-white">Vraagvoorspelling (deel 1)</span>
+                            </a>
+                            <div class="nav-sub-items hidden pl-2 pb-2" id="vraagvoorspelling-deel1-submenu">
+                                <a href="vraagvoorspelling-deel1.html#introductie" class="nav-sub-item flex items-center space-x-3 pl-11 pr-3 py-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 focus-ring transition-colors text-gray-600 dark:text-gray-300" data-anchor="#introductie">
+                                    <div class="w-6 h-6 bg-gray-100 dark:bg-gray-700 rounded flex items-center justify-center flex-shrink-0">
+                                        <i class="fas fa-circle text-xs text-gray-400 dark:text-gray-500"></i>
+                                    </div>
+                                    <span class="text-sm font-medium">Introductie</span>
+                                </a>
+                                <a href="vraagvoorspelling-deel1.html#vraagvoorspelproces" class="nav-sub-item flex items-center space-x-3 pl-11 pr-3 py-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 focus-ring transition-colors text-gray-600 dark:text-gray-300" data-anchor="#vraagvoorspelproces">
+                                    <div class="w-6 h-6 bg-gray-100 dark:bg-gray-700 rounded flex items-center justify-center flex-shrink-0">
+                                        <i class="fas fa-circle text-xs text-gray-400 dark:text-gray-500"></i>
+                                    </div>
+                                    <span class="text-sm font-medium">Vraagvoorspelproces</span>
+                                </a>
+                                <a href="vraagvoorspelling-deel1.html#kwaliteit-van-voorspellingen" class="nav-sub-item flex items-center space-x-3 pl-11 pr-3 py-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 focus-ring transition-colors text-gray-600 dark:text-gray-300" data-anchor="#kwaliteit-van-voorspellingen">
+                                    <div class="w-6 h-6 bg-gray-100 dark:bg-gray-700 rounded flex items-center justify-center flex-shrink-0">
+                                        <i class="fas fa-circle text-xs text-gray-400 dark:text-gray-500"></i>
+                                    </div>
+                                    <span class="text-sm font-medium">Kwaliteit van voorspellingen</span>
+                                </a>
+                                <a href="vraagvoorspelling-deel1.html#kwalitatieve-inschatting-en-lineaire-regressie" class="nav-sub-item flex items-center space-x-3 pl-11 pr-3 py-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 focus-ring transition-colors text-gray-600 dark:text-gray-300" data-anchor="#kwalitatieve-inschatting-en-lineaire-regressie">
+                                    <div class="w-6 h-6 bg-gray-100 dark:bg-gray-700 rounded flex items-center justify-center flex-shrink-0">
+                                        <i class="fas fa-circle text-xs text-gray-400 dark:text-gray-500"></i>
+                                    </div>
+                                    <span class="text-sm font-medium">Kwalitatieve inschatting en lineaire regressie</span>
+                                </a>
                             </div>
-                        </a>
+                        </div>
                         
                         <a href="vraagvoorspelling-deel2.html" class="block p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 focus-ring transition-colors">
                             <div class="flex items-center space-x-3">
@@ -1981,13 +2088,28 @@
             }
         };
         
+        // Initialize navigation dynamically on page load (prevents hardcoded nav from getting out of sync)
+        const initializeNavigation = () => {
+            if (window.NavigationInitializer && window.LayoutRenderer) {
+                const navInitializer = new window.NavigationInitializer();
+                navInitializer.init();
+            } else {
+                // Retry if not ready yet
+                setTimeout(initializeNavigation, 50);
+            }
+        };
+        
         if (document.readyState === 'loading') {
             document.addEventListener('DOMContentLoaded', () => {
+                // Initialize navigation first
+                initializeNavigation();
                 // Start checking for all scripts
                 setTimeout(waitForAllScripts, 100);
             });
         } else {
-            // DOM already loaded, start checking
+            // DOM already loaded, initialize navigation first
+            initializeNavigation();
+            // Start checking
             setTimeout(waitForAllScripts, 100);
         }
         

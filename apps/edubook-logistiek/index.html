@@ -4,18 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="view-transition" content="same-origin" />
-    <title>E-Learning Demo - Wat is mogelijk en handleiding voor collega's</title>
+    <title>Edubook-Logistiek - E-Learning</title>
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://oloelearning.vercel.app/">
-    <meta property="og:title" content="E-Learning Demo - Wat is mogelijk en handleiding voor collega's">
-    <meta property="og:description" content="Demo e-learning die laat zien wat er mogelijk is in het platform en dient als handleiding voor collega's.">
+    <meta property="og:title" content="Edubook-Logistiek - E-Learning">
+    <meta property="og:description" content="E-learning platform voor Edubook-Logistiek.">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary">
     <meta property="twitter:url" content="https://oloelearning.vercel.app/">
-    <meta property="twitter:title" content="E-Learning Demo - Wat is mogelijk en handleiding voor collega's">
-    <meta property="twitter:description" content="Demo e-learning die laat zien wat er mogelijk is in het platform en dient als handleiding voor collega's.">
+    <meta property="twitter:title" content="Edubook-Logistiek - E-Learning">
+    <meta property="twitter:description" content="E-learning platform voor Edubook-Logistiek.">
 
     <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
     <script src="https://cdn.tailwindcss.com"></script>
@@ -114,187 +114,6 @@
         @keyframes slideIn {
             from { transform: translateX(-100%); }
             to { transform: translateX(0); }
-        }
-        
-        /* Flip Card Styles */
-        .flip-card-container {
-            perspective: 1000px;
-            width: 100%;
-            max-width: 800px;
-            margin: 0 auto;
-            display: block; /* Zorg dat de container gecentreerd wordt */
-        }
-        
-        .flip-card-inner {
-            position: relative;
-            width: 100%;
-            transition: transform 0.6s;
-            transform-style: preserve-3d;
-            cursor: pointer;
-        }
-        
-        .flip-card-inner.flipped {
-            transform: rotateY(180deg);
-        }
-        
-        .flip-card-front {
-            position: relative;
-            width: 100%;
-            min-height: 200px;
-            backface-visibility: hidden;
-            -webkit-backface-visibility: hidden;
-            border: 2px solid #e5e7eb;
-            border-radius: 12px;
-            padding: 24px;
-            background-color: #ffffff;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-        }
-        
-        .flip-card-back {
-            position: absolute;
-            width: 100%;
-            min-height: 200px;
-            top: 0;
-            left: 0;
-            backface-visibility: hidden;
-            -webkit-backface-visibility: hidden;
-            border: 2px solid #e5e7eb;
-            border-radius: 12px;
-            padding: 24px;
-            background-color: #ffffff;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-            transform: rotateY(180deg);
-        }
-        
-        .flip-card-back .flip-card-content {
-            width: 100%;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: space-between;
-            overflow: hidden;
-            padding: 0;
-        }
-        
-        .flip-card-front .flip-card-content {
-            width: 100%;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: space-between;
-            overflow: hidden;
-            padding: 0;
-        }
-        
-        /* Vaste formaten - gedefinieerd in core (FlipCardRenderer.CARD_SIZES) */
-        /* Small: 250x300px */
-        .flip-card-small .flip-card-front,
-        .flip-card-small .flip-card-back,
-        .flip-card-small .flip-card-inner {
-            width: 250px !important;
-            height: 300px !important;
-        }
-        .flip-card-small {
-            height: 300px !important;
-        }
-        
-        /* Medium: 350x400px (standaard) */
-        .flip-card-medium .flip-card-front,
-        .flip-card-medium .flip-card-back,
-        .flip-card-medium .flip-card-inner {
-            width: 350px !important;
-            height: 400px !important;
-        }
-        .flip-card-medium {
-            height: 400px !important;
-        }
-        
-        /* Large: 450x500px */
-        .flip-card-large .flip-card-front,
-        .flip-card-large .flip-card-back,
-        .flip-card-large .flip-card-inner {
-            width: 450px !important;
-            height: 500px !important;
-        }
-        .flip-card-large {
-            height: 500px !important;
-        }
-        
-        /* Font sizes kunnen per app worden aangepast */
-        .flip-card-front .flip-card-content,
-        .flip-card-back .flip-card-content {
-            font-size: 0.875rem; /* Standaard: 14px - kan per app worden overschreven */
-        }
-        
-        .flip-card-back .flip-card-content p,
-        .flip-card-back .flip-card-content h3,
-        .flip-card-back .flip-card-content ul,
-        .flip-card-back .flip-card-content li {
-            font-size: inherit; /* Erft van .flip-card-content */
-        }
-        
-        .flip-card-front .flip-card-content p {
-            font-size: inherit; /* Erft van .flip-card-content */
-        }
-        
-        .flip-card-back img,
-        .flip-card-back .image-modal-container {
-            max-width: 100%;
-            max-height: 100%;
-            width: auto;
-            height: auto;
-            object-fit: contain;
-        }
-        
-        .dark .flip-card-front,
-        .dark .flip-card-back {
-            border-color: #374151;
-            background-color: #1f2937;
-        }
-        
-        .flip-card-content {
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            height: 100%;
-        }
-        
-        /* Content wrapper die de hoofdcontent bevat - verticaal gecentreerd */
-        .flip-card-content-wrapper {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            width: 100%;
-            overflow-y: auto;
-            overflow-x: hidden;
-            min-height: 0; /* Zorgt ervoor dat flex item kan krimpen */
-            padding: 0;
-            /* Alleen scrollen als content echt te groot is - gebruik auto in plaats van scroll */
-        }
-        
-        .flip-card-hint {
-            margin-top: auto;
-            text-align: center;
-            padding-top: 16px;
-            border-top: 1px solid #e5e7eb;
-            flex-shrink: 0; /* Prevent hint from shrinking */
-        }
-        
-        .dark .flip-card-hint {
-            border-top-color: #374151;
-        }
-        
-        /* Hover effect */
-        .flip-card-inner:not(.flipped):hover .flip-card-front {
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-        }
-        
-        .flip-card-inner.flipped:hover .flip-card-back {
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
         }
         
         .progress-animation {
@@ -875,19 +694,13 @@
     <script src="/core/js/components/interactive/ChecklistRenderer.js"></script>
     <script src="/core/js/components/interactive/ExerciseRenderer.js"></script>
     <script src="/core/js/components/interactive/AIRenderer.js"></script>
-    <script src="/core/js/components/interactive/FlipCardRenderer.js"></script>
     <script src="/core/pages/InteractiveRenderer.js"></script>
     <script src="/core/pages/AIGenerator.js"></script>
     <script src="/core/pages/MCQuestionRenderer.js"></script>
     
-    <!-- Demo Page Classes - Load for SPA router -->
-    <script src="pages/Module1LessonPage.js" onerror="console.error('[Script] Failed to load Module1LessonPage.js')"></script>
-    <script src="pages/CursorLessonPage.js" onerror="console.error('[Script] Failed to load CursorLessonPage.js')"></script>
-    <script src="pages/Fase3LessonPage.js" onerror="console.error('[Script] Failed to load Fase3LessonPage.js')"></script>
-    <script src="pages/GenAILessonPage.js" onerror="console.error('[Script] Failed to load GenAILessonPage.js')"></script>
-    <script src="pages/ContentSchrijvenLessonPage.js" onerror="console.error('[Script] Failed to load ContentSchrijvenLessonPage.js')"></script>
-    <script src="pages/FormulesKaTeXLessonPage.js" onerror="console.error('[Script] Failed to load FormulesKaTeXLessonPage.js')"></script>
-    <script src="pages/PublicerenLessonPage.js" onerror="console.error('[Script] Failed to load PublicerenLessonPage.js')"></script>
+    <!-- Week Page Classes - Load all for SPA router -->
+    <script src="pages/HD09LessonPage.js" onerror="console.error('[Script] Failed to load HD09LessonPage.js')"></script>
+    <!-- Additional page classes can be added here as modules are created -->
     
     <!-- Verify all classes are loaded with detailed logging -->
     <script>
@@ -896,24 +709,13 @@
             setTimeout(() => {
                 console.log('[Script Loader] ⏰ Verification started at:', new Date().toISOString());
                 const expectedClasses = [
-                    'Module1LessonPage',
-                    'CursorLessonPage',
-                    'Fase3LessonPage',
-                    'GenAILessonPage',
-                    'ContentSchrijvenLessonPage',
-                    'FormulesKaTeXLessonPage',
-                    'PublicerenLessonPage'
+                    'HD09LessonPage'
+                    // Additional classes can be added here as modules are created
                 ];
                 
                 console.log('[Script Loader] 🔍 Checking for page classes...');
                 console.log('[Script Loader] BaseLessonPage available:', !!window.BaseLessonPage);
-                console.log('[Script Loader] Module1LessonPage available:', !!window.Module1LessonPage);
-                console.log('[Script Loader] CursorLessonPage available:', !!window.CursorLessonPage);
-                console.log('[Script Loader] Fase3LessonPage available:', !!window.Fase3LessonPage);
-                console.log('[Script Loader] GenAILessonPage available:', !!window.GenAILessonPage);
-                console.log('[Script Loader] ContentSchrijvenLessonPage available:', !!window.ContentSchrijvenLessonPage);
-                console.log('[Script Loader] FormulesKaTeXLessonPage available:', !!window.FormulesKaTeXLessonPage);
-                console.log('[Script Loader] PublicerenLessonPage available:', !!window.PublicerenLessonPage);
+                console.log('[Script Loader] HD09LessonPage available:', !!window.HD09LessonPage);
                 
                 const availableClasses = expectedClasses.filter(cls => window[cls]);
                 const missingClasses = expectedClasses.filter(cls => !window[cls]);
@@ -956,14 +758,14 @@
                             <i class="fas fa-graduation-cap text-white text-lg"></i>
                         </div>
                         <div class="min-w-0 flex-1" style="min-width: 0;">
-                            <p class="text-xs sm:text-sm text-gray-500 dark:text-gray-400 break-words leading-tight m-0 font-bold" style="word-break: normal; overflow-wrap: break-word; word-wrap: break-word;">E-Learning Demo</p>
+                            <p class="text-xs sm:text-sm text-gray-500 dark:text-gray-400 break-words leading-tight m-0 font-bold" style="word-break: normal; overflow-wrap: break-word; word-wrap: break-word;">Edubook-Logistiek</p>
                         </div>
                     </div>
                 </div>
 
 
-                <!-- Navigatie -->
-                <nav class="flex-1 overflow-y-auto custom-scrollbar p-6" aria-label="Navigatie">
+                <!-- Module Navigation -->
+                <nav class="flex-1 overflow-y-auto custom-scrollbar p-6" aria-label="Module navigatie">
                     <div class="space-y-2">
                         <div class="px-3 py-2 mb-2">
                             <span class="text-sm font-semibold text-gray-700 dark:text-gray-300">E-Learning</span>
@@ -977,105 +779,70 @@
                             </div>
                         </a>
                         
-                        <a href="module1.html" class="block p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 focus-ring transition-colors">
-                            <div class="flex items-center space-x-3">
-                                <div class="w-8 h-8 bg-purple-100 dark:bg-purple-900/30 rounded-lg flex items-center justify-center">
-                                    <i class="fas fa-book text-purple-600 dark:text-purple-400 text-sm"></i>
-                                </div>
-                                <span class="font-medium text-gray-900 dark:text-white">Het Fundament</span>
-                            </div>
-                        </a>
-                        
-                        <a href="cursor.html" class="block p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 focus-ring transition-colors">
-                            <div class="flex items-center space-x-3">
-                                <div class="w-8 h-8 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center">
-                                    <i class="fas fa-laptop-code text-blue-600 dark:text-blue-400 text-sm"></i>
-                                </div>
-                                <span class="font-medium text-gray-900 dark:text-white">Cursor</span>
-                            </div>
-                        </a>
-                        
-                        <div class="fase3-nav-item">
-                            <a href="fase3.html" class="block p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 focus-ring transition-colors">
-                                <div class="flex items-center justify-between">
-                                    <div class="flex items-center space-x-3 flex-1">
-                                        <div class="w-8 h-8 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center">
-                                            <i class="fas fa-book text-green-600 dark:text-green-400 text-sm"></i>
-                                        </div>
-                                        <span class="font-medium text-gray-900 dark:text-white">De Catalogus</span>
+                        <!-- HD 09 - Supply Chain Management (expandable) -->
+                        <div class="hd09-nav-item">
+                            <a href="hd09.html" class="block p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 focus-ring transition-colors">
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-8 h-8 bg-purple-100 dark:bg-purple-900/30 rounded-lg flex items-center justify-center">
+                                        <i class="fas fa-book text-purple-600 dark:text-purple-400 text-sm"></i>
                                     </div>
-                                    <i id="fase3-chevron-index" class="fas fa-chevron-down text-xs text-gray-400 dark:text-gray-500 transition-transform"></i>
+                                    <span class="font-medium text-gray-900 dark:text-white flex-1">HD 09 - Supply Chain</span>
+                                    <i class="fas fa-chevron-down text-xs text-gray-400 dark:text-gray-500 transition-transform duration-200" id="hd09-chevron-index"></i>
                                 </div>
                             </a>
-                            <div id="fase3-subitems-index" class="hidden pl-11 pr-3 pb-2">
-                                <a href="fase3.html#basis-elementen" class="nav-sub-item flex items-center space-x-3 py-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 focus-ring transition-colors text-gray-600 dark:text-gray-300" data-anchor="#basis-elementen">
+                            <div class="hd09-subitems hidden" id="hd09-subitems-index">
+                                <a href="hd09.html#introductie" class="nav-sub-item flex items-center space-x-3 pl-11 pr-3 py-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 focus-ring transition-colors text-gray-600 dark:text-gray-300" data-anchor="#introductie">
                                     <div class="w-6 h-6 bg-gray-100 dark:bg-gray-700 rounded flex items-center justify-center flex-shrink-0">
                                         <i class="fas fa-circle text-xs text-gray-400 dark:text-gray-500"></i>
                                     </div>
-                                    <span class="text-sm font-medium">Basis Elementen</span>
+                                    <span class="text-sm font-medium">Introductie</span>
                                 </a>
-                                <a href="fase3.html#informatie-ordening" class="nav-sub-item flex items-center space-x-3 py-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 focus-ring transition-colors text-gray-600 dark:text-gray-300" data-anchor="#informatie-ordening">
+                                <a href="hd09.html#9-1" class="nav-sub-item flex items-center space-x-3 pl-11 pr-3 py-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 focus-ring transition-colors text-gray-600 dark:text-gray-300" data-anchor="#9-1">
                                     <div class="w-6 h-6 bg-gray-100 dark:bg-gray-700 rounded flex items-center justify-center flex-shrink-0">
                                         <i class="fas fa-circle text-xs text-gray-400 dark:text-gray-500"></i>
                                     </div>
-                                    <span class="text-sm font-medium">Informatie-ordening</span>
+                                    <span class="text-sm font-medium">9.1 Supply Chain naar Demand Chain</span>
                                 </a>
-                                <a href="fase3.html#checklists" class="nav-sub-item flex items-center space-x-3 py-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 focus-ring transition-colors text-gray-600 dark:text-gray-300" data-anchor="#checklists">
+                                <a href="hd09.html#9-2" class="nav-sub-item flex items-center space-x-3 pl-11 pr-3 py-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 focus-ring transition-colors text-gray-600 dark:text-gray-300" data-anchor="#9-2">
                                     <div class="w-6 h-6 bg-gray-100 dark:bg-gray-700 rounded flex items-center justify-center flex-shrink-0">
                                         <i class="fas fa-circle text-xs text-gray-400 dark:text-gray-500"></i>
                                     </div>
-                                    <span class="text-sm font-medium">Checklists</span>
+                                    <span class="text-sm font-medium">9.2 Samenwerking in de supply chain</span>
                                 </a>
-                                <a href="fase3.html#interactieve-oefeningen" class="nav-sub-item flex items-center space-x-3 py-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 focus-ring transition-colors text-gray-600 dark:text-gray-300" data-anchor="#interactieve-oefeningen">
+                                <a href="hd09.html#9-3" class="nav-sub-item flex items-center space-x-3 pl-11 pr-3 py-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 focus-ring transition-colors text-gray-600 dark:text-gray-300" data-anchor="#9-3">
                                     <div class="w-6 h-6 bg-gray-100 dark:bg-gray-700 rounded flex items-center justify-center flex-shrink-0">
                                         <i class="fas fa-circle text-xs text-gray-400 dark:text-gray-500"></i>
                                     </div>
-                                    <span class="text-sm font-medium">Interactieve Oefeningen</span>
+                                    <span class="text-sm font-medium">9.3 Horizontale en Verticale Samenwerking</span>
                                 </a>
-                                <a href="fase3.html#geavanceerde-ai-tools" class="nav-sub-item flex items-center space-x-3 py-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 focus-ring transition-colors text-gray-600 dark:text-gray-300" data-anchor="#geavanceerde-ai-tools">
+                                <a href="hd09.html#9-4" class="nav-sub-item flex items-center space-x-3 pl-11 pr-3 py-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 focus-ring transition-colors text-gray-600 dark:text-gray-300" data-anchor="#9-4">
                                     <div class="w-6 h-6 bg-gray-100 dark:bg-gray-700 rounded flex items-center justify-center flex-shrink-0">
                                         <i class="fas fa-circle text-xs text-gray-400 dark:text-gray-500"></i>
                                     </div>
-                                    <span class="text-sm font-medium">Geavanceerde AI-Tools</span>
+                                    <span class="text-sm font-medium">9.4 De Vijf Integratievormen</span>
+                                </a>
+                                <a href="hd09.html#9-5" class="nav-sub-item flex items-center space-x-3 pl-11 pr-3 py-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 focus-ring transition-colors text-gray-600 dark:text-gray-300" data-anchor="#9-5">
+                                    <div class="w-6 h-6 bg-gray-100 dark:bg-gray-700 rounded flex items-center justify-center flex-shrink-0">
+                                        <i class="fas fa-circle text-xs text-gray-400 dark:text-gray-500"></i>
+                                    </div>
+                                    <span class="text-sm font-medium">9.5 The Extended Enterprise</span>
+                                </a>
+                                <a href="hd09.html#9-6" class="nav-sub-item flex items-center space-x-3 pl-11 pr-3 py-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 focus-ring transition-colors text-gray-600 dark:text-gray-300" data-anchor="#9-6">
+                                    <div class="w-6 h-6 bg-gray-100 dark:bg-gray-700 rounded flex items-center justify-center flex-shrink-0">
+                                        <i class="fas fa-circle text-xs text-gray-400 dark:text-gray-500"></i>
+                                    </div>
+                                    <span class="text-sm font-medium">9.6 Supply Chain Maturity Models</span>
+                                </a>
+                                <a href="hd09.html#bronvermelding" class="nav-sub-item flex items-center space-x-3 pl-11 pr-3 py-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 focus-ring transition-colors text-gray-600 dark:text-gray-300" data-anchor="#bronvermelding">
+                                    <div class="w-6 h-6 bg-gray-100 dark:bg-gray-700 rounded flex items-center justify-center flex-shrink-0">
+                                        <i class="fas fa-circle text-xs text-gray-400 dark:text-gray-500"></i>
+                                    </div>
+                                    <span class="text-sm font-medium">Bronvermelding</span>
                                 </a>
                             </div>
                         </div>
                         
-                        <a href="genai.html" class="block p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 focus-ring transition-colors">
-                            <div class="flex items-center space-x-3">
-                                <div class="w-8 h-8 bg-orange-100 dark:bg-orange-900/30 rounded-lg flex items-center justify-center">
-                                    <i class="fas fa-robot text-orange-600 dark:text-orange-400 text-sm"></i>
-                                </div>
-                                <span class="font-medium text-gray-900 dark:text-white">GenAI in de e-learning</span>
-                            </div>
-                        </a>
-                        
-                        <a href="content-schrijven.html" class="block p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 focus-ring transition-colors">
-                            <div class="flex items-center space-x-3">
-                                <div class="w-8 h-8 bg-indigo-100 dark:bg-indigo-900/30 rounded-lg flex items-center justify-center">
-                                    <i class="fas fa-pen-fancy text-indigo-600 dark:text-indigo-400 text-sm"></i>
-                                </div>
-                                <span class="font-medium text-gray-900 dark:text-white">Content Schrijven</span>
-                            </div>
-                        </a>
-                        
-                        <a href="formules-katex.html" class="block p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 focus-ring transition-colors">
-                            <div class="flex items-center space-x-3">
-                                <div class="w-8 h-8 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center">
-                                    <i class="fas fa-calculator text-blue-600 dark:text-blue-400 text-sm"></i>
-                                </div>
-                                <span class="font-medium text-gray-900 dark:text-white">Formules met KaTeX</span>
-                            </div>
-                        </a>
-                        
-                        <a href="publiceren.html" class="block p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 focus-ring transition-colors">
-                            <div class="flex items-center space-x-3">
-                                <div class="w-8 h-8 bg-teal-100 dark:bg-teal-900/30 rounded-lg flex items-center justify-center">
-                                    <i class="fas fa-rocket text-teal-600 dark:text-teal-400 text-sm"></i>
-                                </div>
-                                <span class="font-medium text-gray-900 dark:text-white">E-learning publiceren</span>
-                            </div>
-                        </a>
+                        <!-- Additional modules can be added here as they are created -->
                     </div>
                 </nav>
 
@@ -1156,8 +923,8 @@
                     <article class="space-y-8 fade-in">
                         <!-- Course Title Section -->
                         <section class="bg-gradient-to-r from-blue-600 to-blue-700 rounded-xl shadow-lg p-8 text-white mb-8">
-                            <h1 class="text-4xl font-bold mb-4">E-Learning Demo</h1>
-                            <p class="text-blue-100 text-lg">Wat is mogelijk in de e-learning en handleiding voor collega's</p>
+                            <h1 class="text-4xl font-bold mb-4">Edubook-Logistiek</h1>
+                            <p class="text-blue-100 text-lg">E-learning platform voor logistiek onderwijs</p>
                         </section>
 
                         <!-- General Information Section -->
@@ -1167,22 +934,23 @@
                                     <i class="fas fa-info-circle text-green-600 dark:text-green-400 text-lg"></i>
                                 </div>
                                 <div class="flex-1 min-w-0 box-border sm:pr-[70px]" style="min-width: 0; max-width: 100%; box-sizing: border-box;">
-                                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-3">Over deze demo</h3>
+                                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-3">Over dit vak</h3>
                                     <div class="prose max-w-none">
                                         <p class="text-gray-700 dark:text-gray-300 mb-4">
-                                            Deze demo e-learning laat zien wat er allemaal mogelijk is in het e-learning platform. 
-                                            Tegelijkertijd dient deze pagina als handleiding voor collega's die hun eigen e-learning willen bouwen.
+                                            Welkom bij Edubook-Logistiek! Dit e-learning platform biedt een uitgebreide verzameling 
+                                            van leermateriaal voor logistiek onderwijs. Hier vind je theorie, praktijkvoorbeelden en 
+                                            interactieve oefeningen om je kennis en vaardigheden op het gebied van logistiek te ontwikkelen.
                                         </p>
                                         <p class="text-gray-700 dark:text-gray-300 mb-4">
-                                            Het platform biedt verschillende mogelijkheden voor interactieve content, zoals video's, quizzen, 
-                                            reflectie-opdrachten en meer. Door middel van concrete voorbeelden zie je hoe je deze kunt gebruiken.
+                                            Het platform is opgebouwd uit verschillende modules die je stap voor stap door de belangrijkste 
+                                            concepten en praktijken in de logistiek leiden.
                                         </p>
-                                        <h4 class="text-lg font-semibold text-gray-900 dark:text-white mb-3 mt-6">Wat kun je hier vinden?</h4>
+                                        <h4 class="text-lg font-semibold text-gray-900 dark:text-white mb-3 mt-6">Wat vind je hier?</h4>
                                         <ul class="list-disc list-inside space-y-2 text-gray-700 dark:text-gray-300">
-                                            <li>Overzicht van alle beschikbare content types</li>
-                                            <li>Handleiding voor het bouwen van je eigen e-learning</li>
-                                            <li>Voorbeelden van interactieve componenten</li>
-                                            <li>Uitleg over de structuur en opzet van het platform</li>
+                                            <li>Uitgebreide theorie over logistieke concepten</li>
+                                            <li>Praktijkvoorbeelden en cases</li>
+                                            <li>Interactieve oefeningen en opdrachten</li>
+                                            <li>Ondersteunende materialen en documenten</li>
                                         </ul>
                                     </div>
                                 </div>
@@ -1196,31 +964,53 @@
                                     <i class="fas fa-bullseye text-blue-600 dark:text-blue-400 text-lg"></i>
                                 </div>
                                 <div class="flex-1 min-w-0 box-border sm:pr-[70px]" style="min-width: 0; max-width: 100%; box-sizing: border-box;">
-                                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-3">Doel van deze demo</h3>
+                                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-3">Leeruitkomst</h3>
                                     <p class="text-gray-700 dark:text-gray-300 mb-4 leading-relaxed">
-                                        Deze demo laat zien wat er mogelijk is in het e-learning platform en helpt collega's om te begrijpen 
-                                        hoe ze hun eigen e-learning kunnen bouwen. Je ziet voorbeelden van alle beschikbare content types en 
-                                        krijgt uitleg over de structuur en opzet van het platform.
+                                        Na het doorlopen van dit e-learning platform heb je een solide basiskennis opgebouwd van 
+                                        belangrijke logistieke concepten en praktijken. Je kunt deze kennis toepassen in praktijksituaties 
+                                        en bent in staat om logistieke vraagstukken te analyseren en op te lossen.
                                     </p>
                                 </div>
                             </div>
                         </section>
 
-                        <!-- Structuur Sectie -->
+                        <!-- Module Structure Section -->
                         <section class="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 hover-lift transition-colors duration-200">
                             <div class="flex flex-col sm:flex-row items-start box-border" style="width: 100%; max-width: 100%; box-sizing: border-box;">
                                 <div class="w-10 h-10 sm:w-12 sm:h-12 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center flex-shrink-0 mb-3 sm:mb-0 sm:mr-4">
                                     <i class="fas fa-book text-green-600 dark:text-green-400 text-lg"></i>
                                 </div>
                                 <div class="flex-1 min-w-0 box-border sm:pr-[70px]" style="min-width: 0; max-width: 100%; box-sizing: border-box;">
-                                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Structuur</h3>
+                                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Module Structuur</h3>
                                     
                                     <div class="prose max-w-none">
                                         <p class="text-gray-700 dark:text-gray-300 mb-4">
-                                            Deze e-learning bestaat uit verschillende modules die je helpen om zelf je eigen e-learning te bouwen. 
-                                            Je kunt hier voorbeelden vinden van alle beschikbare content types en uitleg over hoe je ze gebruikt.
+                                            Dit e-learning platform is opgebouwd uit verschillende modules en hoofdstukken. 
+                                            Elke module behandelt een specifiek onderwerp binnen de logistiek en bouwt voort op 
+                                            de kennis uit voorgaande modules.
                                         </p>
                                         
+                                        <h4 class="text-lg font-semibold text-gray-900 dark:text-white mb-3">Overzicht van de modules</h4>
+                                        <p class="text-gray-700 dark:text-gray-300 mb-4">
+                                            De modules worden hier getoond zodra ze beschikbaar zijn. Begin met de eerste module 
+                                            om je reis door de logistiek te starten.
+                                        </p>
+                                        <div class="flex flex-col gap-3 mb-6">
+                                            <a href="hd09.html" class="bg-gray-50 dark:bg-gray-900/50 rounded-lg px-6 py-3 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-200 cursor-pointer focus-ring hover-lift block">
+                                                <div class="flex items-center justify-between">
+                                                    <div class="flex-1">
+                                                        <h5 class="font-semibold text-gray-900 dark:text-white mb-1">
+                                                            HD 09 - Supply Chain Management
+                                                        </h5>
+                                                        <p class="text-gray-600 dark:text-gray-300 text-sm">
+                                                            Slim samenwerken: de kunst van supply chain management.
+                                                        </p>
+                                                    </div>
+                                                    <i class="fas fa-arrow-right text-sm text-gray-400 dark:text-gray-500 ml-4 flex-shrink-0"></i>
+                                                </div>
+                                            </a>
+                                            <!-- Additional modules can be added here as they are created -->
+                                        </div>
                                         
                                         <!-- PDF Export Button -->
                                         <div class="mt-6 mb-8 flex justify-center">
@@ -1239,9 +1029,9 @@
                                                 <div>
                                                     <h5 class="font-semibold text-blue-900 dark:text-blue-200 mb-1">Belangrijke Tip</h5>
                                                     <p class="text-blue-800 dark:text-blue-300 text-sm">
-                                                        Bekijk de README.md in de root van het project voor uitgebreide documentatie over alle 
-                                                        beschikbare content types en hoe je ze gebruikt. Gebruik deze demo als startpunt voor 
-                                                        het bouwen van je eigen e-learning.
+                                                        Neem de tijd om elke module goed door te nemen. Logistiek is een breed vakgebied met veel 
+                                                        verschillende aspecten. Begin daarom met de basisconcepten voordat je verder gaat met 
+                                                        meer geavanceerde onderwerpen.
                                                     </p>
                                                 </div>
                                             </div>
@@ -1257,6 +1047,12 @@
 
                     <!-- Action Buttons -->
                     <div class="mt-12 flex justify-center items-center space-x-6">
+                        <a href="hd09.html" class="flex items-center space-x-2 px-6 py-3 bg-blue-600 dark:bg-blue-700 text-white rounded-lg hover:bg-blue-700 dark:hover:bg-blue-600 focus-ring transition-colors">
+                            <i class="fas fa-play"></i>
+                            <span>Start Module</span>
+                        </a>
+                        
+                        <!-- Additional action buttons can be added here -->
                     </div>
                 </div>
                 </main>
@@ -1396,15 +1192,15 @@
                 }, 100);
             }
             
-            // Week 2 submenu functionality for index.html
+            // HD 09 submenu functionality for index.html
             // On index.html, submenus stay collapsed - clicking navigates normally
-            const week2NavItem = document.querySelector('.week-2-nav-item');
-            if (week2NavItem) {
-                const week2Link = week2NavItem.querySelector('a');
-                const subItemsContainer = document.getElementById('week-2-subitems-index');
-                const chevron = document.getElementById('week-2-chevron-index');
+            const hd09NavItem = document.querySelector('.hd09-nav-item');
+            if (hd09NavItem) {
+                const hd09Link = hd09NavItem.querySelector('a');
+                const subItemsContainer = document.getElementById('hd09-subitems-index');
+                const chevron = document.getElementById('hd09-chevron-index');
                 
-                if (week2Link && subItemsContainer && chevron) {
+                if (hd09Link && subItemsContainer && chevron) {
                     // Only toggle when clicking the chevron icon, not the link itself
                     chevron.addEventListener('click', (e) => {
                         e.preventDefault();
@@ -1421,186 +1217,7 @@
                     });
                     
                     // Allow normal navigation when clicking the link (not chevron)
-                    week2Link.addEventListener('click', (e) => {
-                        // Don't prevent navigation - let it navigate normally
-                        // Only prevent if clicking the chevron (handled above)
-                        if (e.target === chevron || chevron.contains(e.target)) {
-                            e.preventDefault();
-                            e.stopPropagation();
-                        }
-                    });
-                }
-            }
-            
-            // Week 3 submenu functionality for index.html
-            // On index.html, submenus stay collapsed - clicking navigates normally
-            const week3NavItem = document.querySelector('.week-3-nav-item');
-            if (week3NavItem) {
-                const week3Link = week3NavItem.querySelector('a');
-                const subItemsContainer = document.getElementById('week-3-subitems-index');
-                const chevron = document.getElementById('week-3-chevron-index');
-                
-                if (week3Link && subItemsContainer && chevron) {
-                    // Only toggle when clicking the chevron icon, not the link itself
-                    chevron.addEventListener('click', (e) => {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        const isHidden = subItemsContainer.classList.contains('hidden');
-                        
-                        if (isHidden) {
-                            subItemsContainer.classList.remove('hidden');
-                            chevron.classList.add('rotate-180');
-                        } else {
-                            subItemsContainer.classList.add('hidden');
-                            chevron.classList.remove('rotate-180');
-                        }
-                    });
-                    
-                    // Allow normal navigation when clicking the link (not chevron)
-                    week3Link.addEventListener('click', (e) => {
-                        // Don't prevent navigation - let it navigate normally
-                        // Only prevent if clicking the chevron (handled above)
-                        if (e.target === chevron || chevron.contains(e.target)) {
-                            e.preventDefault();
-                            e.stopPropagation();
-                        }
-                    });
-                }
-            }
-            
-            // Week 4 submenu functionality for index.html
-            // On index.html, submenus stay collapsed - clicking navigates normally
-            const week4NavItem = document.querySelector('.week-4-nav-item');
-            if (week4NavItem) {
-                const week4Link = week4NavItem.querySelector('a');
-                const subItemsContainer = document.getElementById('week-4-subitems-index');
-                const chevron = document.getElementById('week-4-chevron-index');
-                
-                if (week4Link && subItemsContainer && chevron) {
-                    // Only toggle when clicking the chevron icon, not the link itself
-                    chevron.addEventListener('click', (e) => {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        const isHidden = subItemsContainer.classList.contains('hidden');
-                        
-                        if (isHidden) {
-                            subItemsContainer.classList.remove('hidden');
-                            chevron.classList.add('rotate-180');
-                        } else {
-                            subItemsContainer.classList.add('hidden');
-                            chevron.classList.remove('rotate-180');
-                        }
-                    });
-                    
-                    // Allow normal navigation when clicking the link (not chevron)
-                    week4Link.addEventListener('click', (e) => {
-                        // Don't prevent navigation - let it navigate normally
-                        // Only prevent if clicking the chevron (handled above)
-                        if (e.target === chevron || chevron.contains(e.target)) {
-                            e.preventDefault();
-                            e.stopPropagation();
-                        }
-                    });
-                }
-            }
-            
-            // Week 5 submenu functionality for index.html
-            // On index.html, submenus stay collapsed - clicking navigates normally
-            const week5NavItem = document.querySelector('.week-5-nav-item');
-            if (week5NavItem) {
-                const week5Link = week5NavItem.querySelector('a');
-                const subItemsContainer = document.getElementById('week-5-subitems-index');
-                const chevron = document.getElementById('week-5-chevron-index');
-                
-                if (week5Link && subItemsContainer && chevron) {
-                    // Only toggle when clicking the chevron icon, not the link itself
-                    chevron.addEventListener('click', (e) => {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        const isHidden = subItemsContainer.classList.contains('hidden');
-                        
-                        if (isHidden) {
-                            subItemsContainer.classList.remove('hidden');
-                            chevron.classList.add('rotate-180');
-                        } else {
-                            subItemsContainer.classList.add('hidden');
-                            chevron.classList.remove('rotate-180');
-                        }
-                    });
-                    
-                    // Allow normal navigation when clicking the link (not chevron)
-                    week5Link.addEventListener('click', (e) => {
-                        // Don't prevent navigation - let it navigate normally
-                        // Only prevent if clicking the chevron (handled above)
-                        if (e.target === chevron || chevron.contains(e.target)) {
-                            e.preventDefault();
-                            e.stopPropagation();
-                        }
-                    });
-                }
-            }
-            
-            // Week 6 submenu functionality for index.html
-            // On index.html, submenus stay collapsed - clicking navigates normally
-            const week6NavItem = document.querySelector('.week-6-nav-item');
-            if (week6NavItem) {
-                const week6Link = week6NavItem.querySelector('a');
-                const subItemsContainer = document.getElementById('week-6-subitems-index');
-                const chevron = document.getElementById('week-6-chevron-index');
-                
-                if (week6Link && subItemsContainer && chevron) {
-                    // Only toggle when clicking the chevron icon, not the link itself
-                    chevron.addEventListener('click', (e) => {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        const isHidden = subItemsContainer.classList.contains('hidden');
-                        
-                        if (isHidden) {
-                            subItemsContainer.classList.remove('hidden');
-                            chevron.classList.add('rotate-180');
-                        } else {
-                            subItemsContainer.classList.add('hidden');
-                            chevron.classList.remove('rotate-180');
-                        }
-                    });
-                    
-                    // Allow normal navigation when clicking the link (not chevron)
-                    week6Link.addEventListener('click', (e) => {
-                        // Don't prevent navigation - let it navigate normally
-                        // Only prevent if clicking the chevron (handled above)
-                        if (e.target === chevron || chevron.contains(e.target)) {
-                            e.preventDefault();
-                            e.stopPropagation();
-                        }
-                    });
-                }
-            }
-            
-            // Fase 3 (De Catalogus) submenu functionality for index.html
-            const fase3NavItem = document.querySelector('.fase3-nav-item');
-            if (fase3NavItem) {
-                const fase3Link = fase3NavItem.querySelector('a');
-                const subItemsContainer = document.getElementById('fase3-subitems-index');
-                const chevron = document.getElementById('fase3-chevron-index');
-                
-                if (fase3Link && subItemsContainer && chevron) {
-                    // Only toggle when clicking the chevron icon, not the link itself
-                    chevron.addEventListener('click', (e) => {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        const isHidden = subItemsContainer.classList.contains('hidden');
-                        
-                        if (isHidden) {
-                            subItemsContainer.classList.remove('hidden');
-                            chevron.classList.add('rotate-180');
-                        } else {
-                            subItemsContainer.classList.add('hidden');
-                            chevron.classList.remove('rotate-180');
-                        }
-                    });
-                    
-                    // Allow normal navigation when clicking the link (not chevron)
-                    fase3Link.addEventListener('click', (e) => {
+                    hd09Link.addEventListener('click', (e) => {
                         // Don't prevent navigation - let it navigate normally
                         // Only prevent if clicking the chevron (handled above)
                         if (e.target === chevron || chevron.contains(e.target)) {
@@ -1915,16 +1532,16 @@
                 k.includes('LessonPage') || k === 'RegisterPage'
             );
             console.log('[Index] Available page classes:', availableClasses);
-            console.log('[Index] Module1LessonPage available:', !!window.Module1LessonPage);
-            console.log('[Index] CursorLessonPage available:', !!window.CursorLessonPage);
-            console.log('[Index] Fase3LessonPage available:', !!window.Fase3LessonPage);
-            console.log('[Index] GenAILessonPage available:', !!window.GenAILessonPage);
-            console.log('[Index] ContentSchrijvenLessonPage available:', !!window.ContentSchrijvenLessonPage);
-            console.log('[Index] FormulesKaTeXLessonPage available:', !!window.FormulesKaTeXLessonPage);
-            console.log('[Index] PublicerenLessonPage available:', !!window.PublicerenLessonPage);
+            console.log('[Index] Week1LessonPage available:', !!window.Week1LessonPage);
+            console.log('[Index] Week3LessonPage available:', !!window.Week3LessonPage);
+            console.log('[Index] Week5LessonPage available:', !!window.Week5LessonPage);
+            console.log('[Index] Week6LessonPage available:', !!window.Week6LessonPage);
             
-            // Expected classes for demo app
-            const expectedClasses = [];
+            // Expected classes
+            const expectedClasses = [
+                'HD09LessonPage'
+                // Additional classes can be added here as modules are created
+            ];
             
             const missingClasses = expectedClasses.filter(cls => !availableClasses.includes(cls));
             if (missingClasses.length > 0) {
@@ -1937,17 +1554,6 @@
             if (window.AppRouter) {
                 console.log('[Index] ✅ AppRouter found, initializing...');
                 const router = new AppRouter();
-                // Override routes for demo app
-                router.routes = {
-                    'index.html': () => router.loadIndexPage(),
-                    'module1.html': () => router.loadWeekPage('module1', 'Module1LessonPage'),
-                    'cursor.html': () => router.loadWeekPage('cursor', 'CursorLessonPage'),
-                    'fase3.html': () => router.loadWeekPage('fase3', 'Fase3LessonPage'),
-                    'genai.html': () => router.loadWeekPage('genai', 'GenAILessonPage'),
-                    'content-schrijven.html': () => router.loadWeekPage('content-schrijven', 'ContentSchrijvenLessonPage'),
-                    'formules-katex.html': () => router.loadWeekPage('formules-katex', 'FormulesKaTeXLessonPage'),
-                    'publiceren.html': () => router.loadWeekPage('publiceren', 'PublicerenLessonPage')
-                };
                 router.init();
                 window.appRouter = router; // Store globally for debugging
                 console.log('[Index] ✅ Router initialized and stored in window.appRouter');
@@ -1962,7 +1568,10 @@
         const maxAttempts = 40; // 40 * 50ms = 2 seconds max wait
         const waitForAllScripts = () => {
             checkAttempts++;
-            const expectedClasses = [];
+            const expectedClasses = [
+                'HD09LessonPage'
+                // Additional classes can be added here as modules are created
+            ];
             
             const allAvailable = expectedClasses.every(cls => window[cls]);
             
@@ -2002,7 +1611,9 @@
                 setTimeout(waitForAllScripts, 100);
             });
         } else {
-            // DOM already loaded, start checking
+            // DOM already loaded, initialize navigation first
+            initializeNavigation();
+            // Start checking
             setTimeout(waitForAllScripts, 100);
         }
         

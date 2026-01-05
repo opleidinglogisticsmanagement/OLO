@@ -1,0 +1,135 @@
+{
+  "intro": {
+    "title": "HD 09 - Supply Chain Management",
+    "subtitle": "Slim samenwerken: de kunst van supply chain management",
+    "description": "Welkom bij HD 09. In dit hoofdstuk leer je over supply chain management en hoe organisaties effectief kunnen samenwerken in de keten."
+  },
+  "theorie": {
+    "title": "Inleiding",
+    "content": [
+      {
+        "type": "heading",
+        "text": "Introductie",
+        "level": 2,
+        "id": "introductie"
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Welkom bij HD 09 - Supply Chain Management. Dit hoofdstuk behandelt de kunst van slim samenwerken in supply chains.</p>",
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">In dit hoofdstuk maak je kennis met verschillende concepten en praktijken rondom supply chain management, van supply chain naar demand chain, tot samenwerkingsvormen en integratiemodellen.</p>"
+        ]
+      },
+      {
+        "type": "heading",
+        "text": "Overzicht van het hoofdstuk",
+        "level": 3
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Dit hoofdstuk bestaat uit de volgende onderdelen:</p>",
+          "<ul class=\"list-disc list-inside space-y-2 text-gray-700 dark:text-gray-300 mb-4\">",
+          "<li>9.1 Supply Chain naar Demand Chain</li>",
+          "<li>9.2 Samenwerking in de supply chain</li>",
+          "<li>9.3 Horizontale en Verticale Samenwerking</li>",
+          "<li>9.4 De Vijf Integratievormen</li>",
+          "<li>9.5 The Extended Enterprise</li>",
+          "<li>9.6 Supply Chain Maturity Models</li>",
+          "</ul>"
+        ]
+      },
+      {
+        "type": "heading",
+        "text": "9.1 Supply Chain naar Demand Chain",
+        "level": 2,
+        "id": "9-1"
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">In deze paragraaf leer je over de ontwikkeling van supply chain naar demand chain.</p>",
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Content voor deze paragraaf wordt later toegevoegd.</p>"
+        ]
+      },
+      {
+        "type": "heading",
+        "text": "9.2 Samenwerking in de supply chain",
+        "level": 2,
+        "id": "9-2"
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">In deze paragraaf leer je over samenwerking in de supply chain.</p>",
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Content voor deze paragraaf wordt later toegevoegd.</p>"
+        ]
+      },
+      {
+        "type": "heading",
+        "text": "9.3 Horizontale en Verticale Samenwerking",
+        "level": 2,
+        "id": "9-3"
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">In deze paragraaf leer je over horizontale en verticale samenwerking.</p>",
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Content voor deze paragraaf wordt later toegevoegd.</p>"
+        ]
+      },
+      {
+        "type": "heading",
+        "text": "9.4 De Vijf Integratievormen",
+        "level": 2,
+        "id": "9-4"
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">In deze paragraaf leer je over de vijf integratievormen.</p>",
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Content voor deze paragraaf wordt later toegevoegd.</p>"
+        ]
+      },
+      {
+        "type": "heading",
+        "text": "9.5 The Extended Enterprise",
+        "level": 2,
+        "id": "9-5"
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">In deze paragraaf leer je over The Extended Enterprise.</p>",
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Content voor deze paragraaf wordt later toegevoegd.</p>"
+        ]
+      },
+      {
+        "type": "heading",
+        "text": "9.6 Supply Chain Maturity Models",
+        "level": 2,
+        "id": "9-6"
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">In deze paragraaf leer je over Supply Chain Maturity Models.</p>",
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Content voor deze paragraaf wordt later toegevoegd.</p>"
+        ]
+      },
+      {
+        "type": "heading",
+        "text": "Bronvermelding",
+        "level": 2,
+        "id": "bronvermelding"
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Hieronder vind je de bronvermelding voor dit hoofdstuk.</p>",
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Content voor de bronvermelding wordt later toegevoegd.</p>"
+        ]
+      }
+    ]
+  }
+}

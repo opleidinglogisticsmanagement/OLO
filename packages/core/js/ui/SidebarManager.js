@@ -28,7 +28,10 @@ class SidebarManager {
         this.setupWeek4Submenu();
         this.setupWeek5Submenu();
         this.setupWeek6Submenu();
+        this.setupHD09Submenu();
         this.setupOperationsProcesstrategieSubmenu();
+        this.setupVraagvoorspellingDeel1Submenu();
+        this.setupFase3Submenu();
     }
 
     /**
@@ -453,6 +456,68 @@ class SidebarManager {
     }
 
     /**
+     * Setup HD 09 submenu expand/collapse functionality
+     */
+    setupHD09Submenu() {
+        const hd09NavItem = document.querySelector('.hd09-nav-item');
+        if (!hd09NavItem) return;
+        
+        const hd09Link = hd09NavItem.querySelector('a');
+        const subItemsContainer = document.getElementById('hd09-subitems-index') || document.getElementById('hd09-subitems');
+        const chevron = document.getElementById('hd09-chevron-index') || document.getElementById('hd09-chevron');
+        
+        if (!hd09Link || !subItemsContainer || !chevron) return;
+        
+        // Check if we're on HD 09 page - if so, expand by default
+        const isHD09Page = this.moduleId === 'hd09';
+        if (isHD09Page) {
+            subItemsContainer.classList.remove('hidden');
+            chevron.classList.add('rotate-180');
+        }
+        
+        // Toggle submenu only when clicking the chevron icon
+        // Use capture phase to ensure this runs before AppRouter's link interceptor
+        chevron.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            const isHidden = subItemsContainer.classList.contains('hidden');
+            
+            if (isHidden) {
+                subItemsContainer.classList.remove('hidden');
+                chevron.classList.add('rotate-180');
+            } else {
+                subItemsContainer.classList.add('hidden');
+                chevron.classList.remove('rotate-180');
+            }
+        }, true); // Use capture phase to run before AppRouter
+        
+        // Handle chevron clicks on the link itself (in capture phase to run before AppRouter)
+        hd09Link.addEventListener('click', (e) => {
+            // Check if click is on chevron or within chevron
+            const isChevronClick = e.target === chevron || 
+                                   chevron.contains(e.target) ||
+                                   (e.target.id && e.target.id.endsWith('-chevron')) ||
+                                   (e.target.tagName === 'I' && e.target.classList && e.target.classList.contains('fa-chevron-down'));
+            
+            if (isChevronClick) {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                // Toggle submenu
+                const isHidden = subItemsContainer.classList.contains('hidden');
+                if (isHidden) {
+                    subItemsContainer.classList.remove('hidden');
+                    chevron.classList.add('rotate-180');
+                } else {
+                    subItemsContainer.classList.add('hidden');
+                    chevron.classList.remove('rotate-180');
+                }
+            }
+            // Otherwise, allow normal navigation (AppRouter will handle it)
+        }, true); // Use capture phase to run before AppRouter
+    }
+
+    /**
      * Setup Operations Processtrategie submenu expand/collapse functionality
      */
     setupOperationsProcesstrategieSubmenu() {
@@ -549,6 +614,216 @@ class SidebarManager {
         
         // Store handlers for cleanup
         this.operationsProcesstrategieHandlers = {
+            chevronClick: chevronClickHandler,
+            linkClick: linkClickHandler
+        };
+        
+        chevron.addEventListener('click', chevronClickHandler, true); // Use capture phase to run before AppRouter
+        link.addEventListener('click', linkClickHandler, true); // Use capture phase to run before AppRouter
+        
+        // Mark that listeners are attached
+        chevron.dataset.listenersAttached = 'true';
+    }
+    
+    setupVraagvoorspellingDeel1Submenu() {
+        // Try to find elements immediately first
+        let navItem = document.querySelector('.vraagvoorspelling-deel1-nav-item');
+        
+        // If not found, try again after a short delay (for hash navigation cases)
+        if (!navItem) {
+            setTimeout(() => {
+                navItem = document.querySelector('.vraagvoorspelling-deel1-nav-item');
+                if (!navItem) {
+                    return;
+                }
+                this._setupVraagvoorspellingDeel1SubmenuInternal(navItem);
+            }, 50);
+        } else {
+            // Elements found immediately, setup right away
+            this._setupVraagvoorspellingDeel1SubmenuInternal(navItem);
+        }
+    }
+    
+    _setupVraagvoorspellingDeel1SubmenuInternal(navItem) {
+        const link = navItem.querySelector('a');
+        const subItemsContainer = document.getElementById('vraagvoorspelling-deel1-submenu');
+        const chevron = document.getElementById('vraagvoorspelling-deel1-chevron-index');
+        
+        if (!link || !subItemsContainer || !chevron) {
+            return;
+        }
+        
+        // Check if we're on Vraagvoorspelling Deel 1 page - if so, expand by default
+        const isVraagvoorspellingDeel1Page = this.moduleId === 'vraagvoorspelling-deel1';
+        if (isVraagvoorspellingDeel1Page) {
+            subItemsContainer.classList.remove('hidden');
+            chevron.classList.add('rotate-180');
+        }
+        
+        // Remove old event listeners if they exist (prevent duplicate listeners)
+        // Use a data attribute to track if listeners are already attached
+        if (chevron.dataset.listenersAttached === 'true') {
+            return;
+        }
+        
+        if (this.vraagvoorspellingDeel1Handlers) {
+            if (this.vraagvoorspellingDeel1Handlers.chevronClick) {
+                chevron.removeEventListener('click', this.vraagvoorspellingDeel1Handlers.chevronClick, true);
+            }
+            if (this.vraagvoorspellingDeel1Handlers.linkClick) {
+                link.removeEventListener('click', this.vraagvoorspellingDeel1Handlers.linkClick, true);
+            }
+        }
+        
+        // Toggle submenu only when clicking the chevron icon
+        // Use capture phase to ensure this runs before AppRouter's link interceptor
+        const chevronClickHandler = (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            const isHidden = subItemsContainer.classList.contains('hidden');
+            
+            if (isHidden) {
+                subItemsContainer.classList.remove('hidden');
+                chevron.classList.add('rotate-180');
+            } else {
+                subItemsContainer.classList.add('hidden');
+                chevron.classList.remove('rotate-180');
+            }
+        };
+        
+        // Handle chevron clicks on the link itself (in capture phase to run before AppRouter)
+        const linkClickHandler = (e) => {
+            // Check if click is on chevron or within chevron
+            const target = e.target;
+            const isChevronClick = target === chevron || 
+                                   chevron.contains(target) ||
+                                   (target.id && target.id.includes('vraagvoorspelling-deel1-chevron')) ||
+                                   (target.tagName === 'I' && target.classList && target.classList.contains('fa-chevron-down') && target.id === 'vraagvoorspelling-deel1-chevron-index');
+            
+            if (isChevronClick) {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                // Toggle submenu
+                const isHidden = subItemsContainer.classList.contains('hidden');
+                if (isHidden) {
+                    subItemsContainer.classList.remove('hidden');
+                    chevron.classList.add('rotate-180');
+                } else {
+                    subItemsContainer.classList.add('hidden');
+                    chevron.classList.remove('rotate-180');
+                }
+            }
+            // Otherwise, allow normal navigation (AppRouter will handle it)
+        };
+        
+        // Store handlers for cleanup
+        this.vraagvoorspellingDeel1Handlers = {
+            chevronClick: chevronClickHandler,
+            linkClick: linkClickHandler
+        };
+        
+        chevron.addEventListener('click', chevronClickHandler, true); // Use capture phase to run before AppRouter
+        link.addEventListener('click', linkClickHandler, true); // Use capture phase to run before AppRouter
+        
+        // Mark that listeners are attached
+        chevron.dataset.listenersAttached = 'true';
+    }
+    
+    setupFase3Submenu() {
+        // Try to find elements immediately first
+        let navItem = document.querySelector('.fase3-nav-item');
+        
+        // If not found, try again after a short delay (for hash navigation cases)
+        if (!navItem) {
+            setTimeout(() => {
+                navItem = document.querySelector('.fase3-nav-item');
+                if (!navItem) {
+                    return;
+                }
+                this._setupFase3SubmenuInternal(navItem);
+            }, 50);
+        } else {
+            // Elements found immediately, setup right away
+            this._setupFase3SubmenuInternal(navItem);
+        }
+    }
+    
+    _setupFase3SubmenuInternal(navItem) {
+        const link = navItem.querySelector('a');
+        const subItemsContainer = document.getElementById('fase3-subitems-index');
+        const chevron = document.getElementById('fase3-chevron-index');
+        
+        if (!link || !subItemsContainer || !chevron) {
+            return;
+        }
+        
+        // Check if we're on Fase3 page - if so, expand by default
+        const isFase3Page = this.moduleId === 'fase3';
+        if (isFase3Page) {
+            subItemsContainer.classList.remove('hidden');
+            chevron.classList.add('rotate-180');
+        }
+        
+        // Remove old event listeners if they exist (prevent duplicate listeners)
+        // Use a data attribute to track if listeners are already attached
+        if (chevron.dataset.listenersAttached === 'true') {
+            return;
+        }
+        
+        if (this.fase3Handlers) {
+            if (this.fase3Handlers.chevronClick) {
+                chevron.removeEventListener('click', this.fase3Handlers.chevronClick, true);
+            }
+            if (this.fase3Handlers.linkClick) {
+                link.removeEventListener('click', this.fase3Handlers.linkClick, true);
+            }
+        }
+        
+        // Toggle submenu only when clicking the chevron icon
+        // Use capture phase to ensure this runs before AppRouter's link interceptor
+        const chevronClickHandler = (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            const isHidden = subItemsContainer.classList.contains('hidden');
+            
+            if (isHidden) {
+                subItemsContainer.classList.remove('hidden');
+                chevron.classList.add('rotate-180');
+            } else {
+                subItemsContainer.classList.add('hidden');
+                chevron.classList.remove('rotate-180');
+            }
+        };
+        
+        // Handle chevron clicks on the link itself (in capture phase to run before AppRouter)
+        const linkClickHandler = (e) => {
+            // Check if click is on chevron or within chevron
+            const target = e.target;
+            const isChevronClick = target === chevron || 
+                                   chevron.contains(target) ||
+                                   (target.id && target.id.includes('fase3-chevron')) ||
+                                   (target.tagName === 'I' && target.classList && target.classList.contains('fa-chevron-down') && target.id === 'fase3-chevron-index');
+            
+            if (isChevronClick) {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                // Toggle submenu
+                const isHidden = subItemsContainer.classList.contains('hidden');
+                if (isHidden) {
+                    subItemsContainer.classList.remove('hidden');
+                    chevron.classList.add('rotate-180');
+                } else {
+                    subItemsContainer.classList.add('hidden');
+                    chevron.classList.remove('rotate-180');
+                }
+            }
+            // Otherwise, allow normal navigation (AppRouter will handle it)
+        };
+        
+        // Store handlers for cleanup
+        this.fase3Handlers = {
             chevronClick: chevronClickHandler,
             linkClick: linkClickHandler
         };

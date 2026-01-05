@@ -11,6 +11,7 @@ class NavigationInitializer {
         const pathname = window.location.pathname;
         const href = window.location.href;
         const hostname = window.location.hostname;
+        console.log('[DEBUG NavigationInitializer] Constructor called', {pathname, href, hostname});
         fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'NavigationInitializer.js:11',message:'NavigationInitializer constructor called',data:{pathname,href,hostname},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'})}).catch(()=>{});
         // #endregion
         
@@ -34,7 +35,9 @@ class NavigationInitializer {
         }
         
         // #region agent log
-        fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'NavigationInitializer.js:28',message:'App detection result',data:{appId:this.appId,appTitle:this.appTitle,pathnameMatched:pathname.includes('operations-management')||pathname.includes('e-learning-demo')||pathname.includes('edubook-logistiek')||pathname.includes('logistiek-onderzoek')},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'})}).catch(()=>{});
+        const pathnameMatched = pathname.includes('operations-management')||pathname.includes('e-learning-demo')||pathname.includes('edubook-logistiek')||pathname.includes('logistiek-onderzoek');
+        console.log('[DEBUG NavigationInitializer] App detection result', {appId: this.appId, appTitle: this.appTitle, pathnameMatched, pathname});
+        fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'NavigationInitializer.js:28',message:'App detection result',data:{appId:this.appId,appTitle:this.appTitle,pathnameMatched},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'})}).catch(()=>{});
         // #endregion
     }
 
@@ -44,7 +47,9 @@ class NavigationInitializer {
      */
     init() {
         // #region agent log
-        fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'NavigationInitializer.js:35',message:'init() called',data:{appId:this.appId,pathname:window.location.pathname,alreadyInitialized:!!document.querySelector('[data-navigation-initialized="true"]')},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'B'})}).catch(()=>{});
+        const alreadyInitialized = !!document.querySelector('[data-navigation-initialized="true"]');
+        console.log('[DEBUG NavigationInitializer] init() called', {appId: this.appId, pathname: window.location.pathname, alreadyInitialized});
+        fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'NavigationInitializer.js:35',message:'init() called',data:{appId:this.appId,pathname:window.location.pathname,alreadyInitialized},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'B'})}).catch(()=>{});
         // #endregion
         
         // Check if we're on index page
@@ -84,11 +89,15 @@ class NavigationInitializer {
         }
 
         // #region agent log
+        console.log('[DEBUG NavigationInitializer] Creating LayoutRenderer instance', {appId: this.appId, appTitle: this.appTitle});
         fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'NavigationInitializer.js:66',message:'Creating LayoutRenderer instance',data:{appId:this.appId,appTitle:this.appTitle},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'D'})}).catch(()=>{});
         // #endregion
 
         // Create a temporary LayoutRenderer instance to generate navigation
         const layoutRenderer = new window.LayoutRenderer('start', this.appTitle);
+        // #region agent log
+        console.log('[DEBUG NavigationInitializer] LayoutRenderer created', {layoutRendererAppId: layoutRenderer.appId, layoutRendererAppTitle: layoutRenderer.appTitle});
+        // #endregion
         const generatedNavigation = layoutRenderer.renderModuleNavigation();
 
         // Parse the generated HTML

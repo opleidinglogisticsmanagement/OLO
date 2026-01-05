@@ -10,17 +10,13 @@ class LayoutRenderer {
         this.moduleId = moduleId;
         this.moduleTitle = moduleTitle;
         
-        // #region agent log
-        const pathname = window.location.pathname;
-        const href = window.location.href;
-        const hostname = window.location.hostname;
-        console.log('[DEBUG LayoutRenderer] Constructor called', {moduleId, moduleTitle, pathname, href, hostname});
-        fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'LayoutRenderer.js:14',message:'LayoutRenderer constructor called',data:{moduleId,moduleTitle,pathname,href,hostname},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'})}).catch(()=>{});
-        // #endregion
-        
         // Detect which app we're in based on URL path, href, and hostname
         // Check hostname first (for Vercel deployments where each app has its own domain)
         // Then check href and pathname (for local development)
+        const pathname = window.location.pathname;
+        const href = window.location.href;
+        const hostname = window.location.hostname;
+        
         if (hostname.includes('operations-management') || href.includes('operations-management') || pathname.includes('operations-management')) {
             this.appId = 'operations-management';
             this.appTitle = 'Operations Management';
@@ -38,12 +34,6 @@ class LayoutRenderer {
             this.appId = 'logistiek-onderzoek';
             this.appTitle = 'Opzetten van Logistieke Onderzoeken (OLO)';
         }
-        
-        // #region agent log
-        const matched = hostname.includes('operations-management')||hostname.includes('e-learning-demo')||hostname.includes('edubook-logistiek')||hostname.includes('logistiek-onderzoek')||href.includes('operations-management')||href.includes('e-learning-demo')||href.includes('edubook-logistiek')||href.includes('logistiek-onderzoek')||pathname.includes('operations-management')||pathname.includes('e-learning-demo')||pathname.includes('edubook-logistiek')||pathname.includes('logistiek-onderzoek');
-        console.log('[DEBUG LayoutRenderer] App detection result', {appId: this.appId, appTitle: this.appTitle, matched, hostname, href, pathname});
-        fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'LayoutRenderer.js:31',message:'LayoutRenderer app detection result',data:{appId:this.appId,appTitle:this.appTitle,matched,hostname,href,pathname},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'})}).catch(()=>{});
-        // #endregion
     }
 
     /**
@@ -88,30 +78,14 @@ class LayoutRenderer {
      * Render module navigatie
      */
     renderModuleNavigation() {
-        // #region agent log
-        console.log('[DEBUG LayoutRenderer] renderModuleNavigation() called', {appId: this.appId, pathname: window.location.pathname});
-        // #endregion
-        
         // Render different navigation based on app
         if (this.appId === 'operations-management') {
-            // #region agent log
-            console.log('[DEBUG LayoutRenderer] Rendering operations-management navigation');
-            // #endregion
             return this.renderOperationsManagementNavigation();
         } else if (this.appId === 'e-learning-demo') {
-            // #region agent log
-            console.log('[DEBUG LayoutRenderer] Rendering e-learning-demo navigation');
-            // #endregion
             return this.renderElearningDemoNavigation();
         } else if (this.appId === 'edubook-logistiek') {
-            // #region agent log
-            console.log('[DEBUG LayoutRenderer] Rendering edubook-logistiek navigation');
-            // #endregion
             return this.renderEdubookLogistiekNavigation();
         } else {
-            // #region agent log
-            console.log('[DEBUG LayoutRenderer] Rendering logistiek-onderzoek navigation (default)', {appId: this.appId});
-            // #endregion
             return this.renderLogistiekOnderzoekNavigation();
         }
     }

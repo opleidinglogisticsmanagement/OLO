@@ -10,8 +10,14 @@ class LayoutRenderer {
         this.moduleId = moduleId;
         this.moduleTitle = moduleTitle;
         
-        // Detect which app we're in based on URL path
+        // #region agent log
         const pathname = window.location.pathname;
+        const href = window.location.href;
+        const hostname = window.location.hostname;
+        fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'LayoutRenderer.js:14',message:'LayoutRenderer constructor called',data:{moduleId,moduleTitle,pathname,href,hostname},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'})}).catch(()=>{});
+        // #endregion
+        
+        // Detect which app we're in based on URL path
         if (pathname.includes('operations-management')) {
             this.appId = 'operations-management';
             this.appTitle = 'Operations Management';
@@ -29,6 +35,10 @@ class LayoutRenderer {
             this.appId = 'logistiek-onderzoek';
             this.appTitle = 'Opzetten van Logistieke Onderzoeken (OLO)';
         }
+        
+        // #region agent log
+        fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'LayoutRenderer.js:31',message:'LayoutRenderer app detection result',data:{appId:this.appId,appTitle:this.appTitle,pathnameMatched:pathname.includes('operations-management')||pathname.includes('e-learning-demo')||pathname.includes('edubook-logistiek')||pathname.includes('logistiek-onderzoek')},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'})}).catch(()=>{});
+        // #endregion
     }
 
     /**

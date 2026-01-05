@@ -341,6 +341,9 @@ class AppRouter {
         
         // Initialize navigation dynamically to prevent hardcoded navigation from getting out of sync
         if (window.NavigationInitializer) {
+            // #region agent log
+            fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'AppRouter.js:343',message:'AppRouter calling NavigationInitializer',data:{pathname:window.location.pathname},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'B'})}).catch(()=>{});
+            // #endregion
             const navInitializer = new window.NavigationInitializer();
             navInitializer.init();
         }

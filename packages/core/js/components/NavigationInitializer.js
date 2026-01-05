@@ -15,17 +15,19 @@ class NavigationInitializer {
         fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'NavigationInitializer.js:11',message:'NavigationInitializer constructor called',data:{pathname,href,hostname},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'})}).catch(()=>{});
         // #endregion
         
-        // Detect which app we're in based on URL path
-        if (pathname.includes('operations-management')) {
+        // Detect which app we're in based on URL path, href, and hostname
+        // Check hostname first (for Vercel deployments where each app has its own domain)
+        // Then check href and pathname (for local development)
+        if (hostname.includes('operations-management') || href.includes('operations-management') || pathname.includes('operations-management')) {
             this.appId = 'operations-management';
             this.appTitle = 'Operations Management';
-        } else if (pathname.includes('e-learning-demo')) {
+        } else if (hostname.includes('e-learning-demo') || href.includes('e-learning-demo') || pathname.includes('e-learning-demo')) {
             this.appId = 'e-learning-demo';
             this.appTitle = 'E-Learning Demo';
-        } else if (pathname.includes('edubook-logistiek')) {
+        } else if (hostname.includes('edubook-logistiek') || href.includes('edubook-logistiek') || pathname.includes('edubook-logistiek')) {
             this.appId = 'edubook-logistiek';
             this.appTitle = 'Edubook-Logistiek';
-        } else if (pathname.includes('logistiek-onderzoek')) {
+        } else if (hostname.includes('logistiek-onderzoek') || href.includes('logistiek-onderzoek') || pathname.includes('logistiek-onderzoek')) {
             this.appId = 'logistiek-onderzoek';
             this.appTitle = 'Opzetten van Logistieke Onderzoeken (OLO)';
         } else {
@@ -35,9 +37,9 @@ class NavigationInitializer {
         }
         
         // #region agent log
-        const pathnameMatched = pathname.includes('operations-management')||pathname.includes('e-learning-demo')||pathname.includes('edubook-logistiek')||pathname.includes('logistiek-onderzoek');
-        console.log('[DEBUG NavigationInitializer] App detection result', {appId: this.appId, appTitle: this.appTitle, pathnameMatched, pathname});
-        fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'NavigationInitializer.js:28',message:'App detection result',data:{appId:this.appId,appTitle:this.appTitle,pathnameMatched},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'})}).catch(()=>{});
+        const matched = hostname.includes('operations-management')||hostname.includes('e-learning-demo')||hostname.includes('edubook-logistiek')||hostname.includes('logistiek-onderzoek')||href.includes('operations-management')||href.includes('e-learning-demo')||href.includes('edubook-logistiek')||href.includes('logistiek-onderzoek')||pathname.includes('operations-management')||pathname.includes('e-learning-demo')||pathname.includes('edubook-logistiek')||pathname.includes('logistiek-onderzoek');
+        console.log('[DEBUG NavigationInitializer] App detection result', {appId: this.appId, appTitle: this.appTitle, matched, hostname, href, pathname});
+        fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'NavigationInitializer.js:28',message:'App detection result',data:{appId:this.appId,appTitle:this.appTitle,matched,hostname,href,pathname},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'})}).catch(()=>{});
         // #endregion
     }
 

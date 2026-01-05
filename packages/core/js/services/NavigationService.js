@@ -25,48 +25,30 @@ class NavigationService {
         fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'NavigationService.js:18',message:'detectApp() called',data:{pathname,href,hostname},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'})}).catch(()=>{});
         // #endregion
         
-        // Check pathname and href for app indicators
-        if (pathname.includes('operations-management') || href.includes('operations-management')) {
+        // Check hostname first (for Vercel deployments where each app has its own domain)
+        // Then check href and pathname (for local development)
+        if (hostname.includes('operations-management') || href.includes('operations-management') || pathname.includes('operations-management')) {
             // #region agent log
-            fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'NavigationService.js:25',message:'Detected operations-management',data:{detectedVia:'pathname_or_href'},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'})}).catch(()=>{});
+            const detectedVia = hostname.includes('operations-management') ? 'hostname' : (href.includes('operations-management') ? 'href' : 'pathname');
+            fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'NavigationService.js:28',message:'Detected operations-management',data:{detectedVia},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'})}).catch(()=>{});
             // #endregion
             return 'operations-management';
-        } else if (pathname.includes('e-learning-demo') || href.includes('e-learning-demo')) {
+        } else if (hostname.includes('e-learning-demo') || href.includes('e-learning-demo') || pathname.includes('e-learning-demo')) {
             // #region agent log
-            fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'NavigationService.js:27',message:'Detected e-learning-demo',data:{detectedVia:'pathname_or_href'},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'})}).catch(()=>{});
+            const detectedVia = hostname.includes('e-learning-demo') ? 'hostname' : (href.includes('e-learning-demo') ? 'href' : 'pathname');
+            fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'NavigationService.js:30',message:'Detected e-learning-demo',data:{detectedVia},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'})}).catch(()=>{});
             // #endregion
             return 'e-learning-demo';
-        } else if (pathname.includes('edubook-logistiek') || href.includes('edubook-logistiek')) {
+        } else if (hostname.includes('edubook-logistiek') || href.includes('edubook-logistiek') || pathname.includes('edubook-logistiek')) {
             // #region agent log
-            fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'NavigationService.js:29',message:'Detected edubook-logistiek',data:{detectedVia:'pathname_or_href'},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'})}).catch(()=>{});
+            const detectedVia = hostname.includes('edubook-logistiek') ? 'hostname' : (href.includes('edubook-logistiek') ? 'href' : 'pathname');
+            fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'NavigationService.js:32',message:'Detected edubook-logistiek',data:{detectedVia},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'})}).catch(()=>{});
             // #endregion
             return 'edubook-logistiek';
-        } else if (pathname.includes('logistiek-onderzoek') || href.includes('logistiek-onderzoek')) {
+        } else if (hostname.includes('logistiek-onderzoek') || href.includes('logistiek-onderzoek') || pathname.includes('logistiek-onderzoek')) {
             // #region agent log
-            fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'NavigationService.js:31',message:'Detected logistiek-onderzoek',data:{detectedVia:'pathname_or_href'},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'})}).catch(()=>{});
-            // #endregion
-            return 'logistiek-onderzoek';
-        }
-        
-        // Check hostname for Vercel deployments
-        if (hostname.includes('operations-management')) {
-            // #region agent log
-            fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'NavigationService.js:34',message:'Detected operations-management via hostname',data:{hostname},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'})}).catch(()=>{});
-            // #endregion
-            return 'operations-management';
-        } else if (hostname.includes('e-learning-demo')) {
-            // #region agent log
-            fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'NavigationService.js:36',message:'Detected e-learning-demo via hostname',data:{hostname},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'})}).catch(()=>{});
-            // #endregion
-            return 'e-learning-demo';
-        } else if (hostname.includes('edubook-logistiek')) {
-            // #region agent log
-            fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'NavigationService.js:38',message:'Detected edubook-logistiek via hostname',data:{hostname},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'})}).catch(()=>{});
-            // #endregion
-            return 'edubook-logistiek';
-        } else if (hostname.includes('logistiek-onderzoek')) {
-            // #region agent log
-            fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'NavigationService.js:40',message:'Detected logistiek-onderzoek via hostname',data:{hostname},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'})}).catch(()=>{});
+            const detectedVia = hostname.includes('logistiek-onderzoek') ? 'hostname' : (href.includes('logistiek-onderzoek') ? 'href' : 'pathname');
+            fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'NavigationService.js:34',message:'Detected logistiek-onderzoek',data:{detectedVia},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'})}).catch(()=>{});
             // #endregion
             return 'logistiek-onderzoek';
         }

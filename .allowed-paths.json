@@ -1,6 +1,7 @@
 {
   "admins": [
-    "opleidingslogisticsmanagement"
+    "opleidingslogisticsmanagement",
+    "opleidinglogisticsmanagement"
   ],
   "users": {
     "docent1-username": {

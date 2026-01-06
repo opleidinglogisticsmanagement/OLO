@@ -204,14 +204,15 @@ function main() {
   const config = loadConfig();
   const username = getGitUsername();
   
-  // Debug: toon gedetecteerde username (alleen in development)
-  if (process.env.NODE_ENV !== 'production') {
-    log(`🔍 Gedetecteerde username: "${username}"`, 'blue');
-    log(`🔍 Admins in config: ${JSON.stringify(config.admins || [])}`, 'blue');
-  }
+  // Debug: toon gedetecteerde username
+  log(`🔍 Gedetecteerde username: "${username}"`, 'blue');
+  log(`🔍 Admins in config: ${JSON.stringify(config.admins || [])}`, 'blue');
   
   // Check of gebruiker admin is - admins kunnen alles pushen (inclusief merge commits en core)
-  const isAdmin = config.admins && config.admins.includes(username);
+  // Case-insensitive matching voor extra flexibiliteit
+  const isAdmin = config.admins && config.admins.some(admin => 
+    admin.toLowerCase() === username.toLowerCase()
+  );
   
   if (isAdmin) {
     log('✅ Admin gebruiker gedetecteerd. Push toegestaan (inclusief merge commits en core wijzigingen).', 'green');

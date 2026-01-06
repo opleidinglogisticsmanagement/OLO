@@ -1500,6 +1500,86 @@ localStorage.setItem('debug', 'true');
 
 ---
 
+## 🔒 Git Workflow & Directory Beperkingen
+
+Dit project gebruikt **Husky** om ervoor te zorgen dat elke docent alleen wijzigingen kan pushen in hun eigen app directory.
+
+### Hoe het werkt
+
+Bij elke `git push` controleert een pre-push hook automatisch:
+- ✅ Of je alleen wijzigingen in je eigen app directory pusht
+- ✅ Of je geen wijzigingen in `packages/core` pusht (alleen via PR)
+- ✅ Of je geen gevoelige bestanden pusht (`config.js`, `.env`, etc.)
+- ✅ Of je geen nieuwe app directories aanmaakt zonder toestemming
+- ✅ Of je geen root bestanden wijzigt (`package.json`, `README.md`, etc.)
+- ✅ Of je geen merge commits pusht (gebruik rebase)
+
+### Configuratie
+
+Je GitHub username moet zijn toegevoegd aan `.allowed-paths.json` met je toegestane app directories:
+
+```json
+{
+  "users": {
+    "jouw-git-username": {
+      "allowedPaths": ["apps/jouw-app-naam"],
+      "name": "Jouw Naam"
+    }
+  }
+}
+```
+
+### Wat gebeurt er bij een blokkering?
+
+Als je probeert te pushen met niet-toegestane wijzigingen, krijg je een duidelijke foutmelding:
+
+```
+❌ FOUT: Push bevat niet-toegestane wijzigingen. Push is GEBLOKKEERD.
+
+   other_app:
+     - apps/operations-management/content/week1.content.json
+       Bestand in andere app: apps/operations-management
+   
+   Toegestane paden voor jou:
+     - apps/logistiek-onderzoek/
+   
+   Oplossing:
+   1. Haal niet-toegestane wijzigingen uit je commit:
+      git reset HEAD <bestand>
+   
+   2. Commit alleen toegestane wijzigingen:
+      git commit --amend
+   
+   3. Push opnieuw:
+      git push
+```
+
+### Beheerders
+
+Beheerders (zoals geconfigureerd in `.allowed-paths.json`) kunnen overal pushen, inclusief `packages/core`.
+
+### Nieuwe gebruiker toevoegen
+
+1. Voeg de gebruiker toe aan `.allowed-paths.json` met hun GitHub username
+2. Commit en push de wijziging
+3. De gebruiker kan nu alleen in hun toegewezen directory pushen
+
+### Veelgestelde vragen
+
+**Q: Wat als ik per ongeluk in de verkeerde app push?**  
+A: De push wordt geblokkeerd met een duidelijke melding. Haal de wijzigingen uit je commit en push opnieuw.
+
+**Q: Kan ik meerdere apps hebben?**  
+A: Ja, voeg meerdere paden toe aan `allowedPaths` in `.allowed-paths.json`.
+
+**Q: Wat als twee docenten tegelijk pushen naar verschillende apps?**  
+A: Geen probleem! Git merge werkt automatisch omdat de wijzigingen in verschillende directories zijn.
+
+**Q: Kan ik de hook overslaan met `--no-verify`?**  
+A: Technisch mogelijk, maar dit wordt sterk afgeraden. De hook beschermt de codebase integriteit.
+
+---
+
 ## 🤝 Bijdragen
 
 ### Development Workflow

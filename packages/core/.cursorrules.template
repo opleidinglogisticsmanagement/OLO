@@ -1,0 +1,116 @@
+# E-Learning: [APP-NAAM]
+
+## Context
+Je werkt aan de e-learning in deze app folder (`apps/[app-naam]`). 
+Deze app gebruikt het gedeelde framework uit `packages/core`.
+
+## Focus & Scope
+
+### ✅ WEL doen:
+- **Content bestanden**: Werk alleen met JSON bestanden in `content/` folder
+- **App-specifieke pagina's**: Maak/werk aan pagina's in `pages/` die `BaseLessonPage` extenden
+- **Assets**: Voeg afbeeldingen en documenten toe aan `assets/`
+- **Configuratie**: Pas `config.js` of app-specifieke config aan (maar push deze NIET)
+- **HTML bestanden**: Pas HTML aan voor app-specifieke aanpassingen
+
+### ❌ NIET doen:
+- **Core framework wijzigen**: Wijzig GEEN bestanden in `packages/core/`
+- **Andere apps**: Verwijs niet naar of wijzig content van andere apps in `apps/`
+- **Gedeelde componenten**: Als je een nieuwe component nodig hebt, vraag de beheerder om deze toe te voegen aan `packages/core`
+- **Config.js pushen**: Dit bestand bevat gevoelige data en wordt geblokkeerd door Husky
+
+## Code Patterns
+
+### Nieuwe Week Pagina Toevoegen:
+```javascript
+// pages/WeekXLessonPage.js
+/**
+ * Week X Lesson Page
+ * @extends BaseLessonPage
+ */
+class WeekXLessonPage extends BaseLessonPage {
+    constructor() {
+        super('week-X', 'Week X', 'Titel van Week X');
+    }
+    
+    /**
+     * Render content sections
+     * @returns {string} HTML string
+     */
+    renderContentSections() {
+        // Gebruik ContentRenderer uit core
+        const theorieContent = this.content.theorie?.content 
+            ? ContentRenderer.renderContentItems(this.content.theorie.content, { enableModal: true })
+            : '';
+        return this.contentTemplateRenderer.renderSection(
+            this.content.theorie?.title || 'Theorie',
+            theorieContent,
+            'book',
+            'purple'
+        );
+    }
+}
+```
+
+### Content JSON Structuur:
+Gebruik de standaard content types uit het framework:
+- `paragraph`, `image`, `url`, `document`, `highlight`
+- `accordion`, `tabs`, `clickableSteps`
+- `matchingExercise`, `trueFalseExercise`, etc.
+
+Zie `../../packages/core/pages/ContentRenderer.js` voor alle beschikbare types.
+
+## Best Practices
+
+1. **Content alleen in JSON**: Plaats alle content in `content/*.content.json` bestanden
+2. **Hergebruik core**: Gebruik altijd componenten uit `packages/core`, maak geen duplicates
+3. **Validatie**: Controleer JSON met `ContentValidator` (automatisch bij laden)
+4. **Naming**: Gebruik consistente naming: `week1.content.json`, `week2.content.json`, etc.
+5. **Error Handling**: Gebruik altijd try-catch voor async operaties
+6. **JSDoc**: Voeg documentatie toe aan alle functies
+
+## Als je een nieuwe feature nodig hebt:
+
+Als je een nieuwe interactieve component of functionaliteit nodig hebt:
+1. **Beschrijf het probleem** in een issue of vraag het aan de beheerder
+2. **Wacht op implementatie** in `packages/core`
+3. **Gebruik de nieuwe feature** in je content JSON
+
+## File Paths
+
+- Core framework: `../../packages/core/` (relatief vanaf app)
+- Andere apps: `../[andere-app]/` (alleen lezen, niet wijzigen)
+- Eigen content: `./content/`
+- Eigen assets: `./assets/`
+- Eigen pages: `./pages/`
+
+## Testing
+
+Test altijd lokaal met:
+```bash
+cd ../../packages/core
+npm run dev
+```
+
+Open dan je HTML bestanden via `http://localhost:3000`
+
+## Git Workflow
+
+- **Husky controleert automatisch** of je alleen in je eigen app wijzigt
+- **Push wordt geblokkeerd** als je core of andere apps wijzigt
+- **Check `.allowed-paths.json`** om te zien welke directories je mag wijzigen
+- **Gebruik rebase**: `git pull --rebase` in plaats van merge
+
+## Vercel Deployment
+
+- Elke push naar `main` triggert automatisch Vercel deployment
+- App is beschikbaar op `[app-naam].vercel.app` binnen 1-2 minuten
+- Check `vercel.json` voor deployment configuratie
+
+## Troubleshooting
+
+- **Scripts laden niet?** Check of paths beginnen met `/core/` voor core bestanden
+- **Content laadt niet?** Check of JSON bestand in `content/` folder staat
+- **Server werkt niet?** Check of je in `packages/core` directory bent en `npm run dev` gebruikt
+- **Push wordt geblokkeerd?** Check `.allowed-paths.json` en je GitHub username
+

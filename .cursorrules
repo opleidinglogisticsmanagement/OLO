@@ -1,10 +1,106 @@
 # E-Learning Monorepo Rules
 
+## 🚨 Prioritering
+
+### MUST FOLLOW (Kritisch - Push wordt geblokkeerd)
+- ❌ **NIET** wijzigen in `packages/core` (alleen via PR)
+- ❌ **NIET** wijzigen in andere apps (niet jouw app)
+- ❌ **NIET** pushen van `config.js`, `.env`, of andere gevoelige bestanden
+- ❌ **NIET** nieuwe app directories aanmaken zonder toestemming
+- ❌ **NIET** root bestanden wijzigen (`package.json`, `README.md`, etc.)
+- ✅ **ALTIJD** werken in je eigen app folder (zoals geconfigureerd in `.allowed-paths.json`)
+
+### SHOULD FOLLOW (Aanbevolen - Best Practices)
+- ✅ Gebruik async/await voor asynchrone operaties
+- ✅ Gebruik try-catch voor error handling
+- ✅ Voeg JSDoc comments toe aan functies
+- ✅ Test lokaal voordat je pusht
+- ✅ Gebruik consistente naming conventions
+
+---
+
+## 📋 Quick Reference Cheat Sheet
+
+### Toegestane Wijzigingen
+```
+✅ apps/[jouw-app]/content/*.content.json
+✅ apps/[jouw-app]/pages/*.js
+✅ apps/[jouw-app]/assets/*
+✅ apps/[jouw-app]/*.html
+✅ apps/[jouw-app]/js/*.js
+```
+
+### Verboden Wijzigingen
+```
+❌ packages/core/** (alleen via PR)
+❌ apps/[andere-app]/** (niet jouw app)
+❌ config.js (gevoelige data)
+❌ .env, .env.local (gevoelige data)
+❌ package.json, README.md (root bestanden)
+❌ Nieuwe app directories aanmaken
+```
+
+### File Paths
+- Core JavaScript: `/core/js/...` (absolute path vanaf root)
+- Core pages: `/core/pages/...` (absolute path vanaf root)
+- App content: `content/...` (relatief vanaf app root)
+- App assets: `assets/...` (relatief vanaf app root)
+- App pages: `pages/Week*LessonPage.js` (relatief vanaf app root)
+
+---
+
+## 🤖 AI-specifieke Instructies (Cursor/Composer)
+
+### VOOR je wijzigingen voorstelt:
+
+1. **Check toegestane paden:**
+   - Lees `.allowed-paths.json` in de root
+   - Controleer of de gebruiker geconfigureerd is
+   - Als gebruiker niet geconfigureerd is, vraag naar GitHub username
+   - Controleer `allowedPaths` voor de gebruiker
+   - **STEL ALLEEN wijzigingen voor in toegestane paden**
+
+2. **Check huidige context:**
+   - In welke directory werk je? (`apps/[app-naam]` of root?)
+   - Welke bestanden zijn open?
+   - Is dit een app-specifieke wijziging of core wijziging?
+
+3. **Als gebruiker niet geconfigureerd is:**
+   - Vraag: "Wat is je GitHub username? Ik moet dit checken in `.allowed-paths.json` om te zien welke directories je mag wijzigen."
+   - Of: "Je GitHub username staat niet in `.allowed-paths.json`. Neem contact op met de beheerder om je toe te voegen."
+
+4. **Bij twijfel:**
+   - Vraag de gebruiker om bevestiging
+   - Verwijs naar deze `.cursorrules`
+   - Toon welke paden toegestaan zijn volgens `.allowed-paths.json`
+
+### Wanneer wel/niet core wijzigen:
+
+**NIET wijzigen (app-specifieke wijziging):**
+- Nieuwe content toevoegen → `apps/[app]/content/*.json`
+- Nieuwe pagina toevoegen → `apps/[app]/pages/*.js`
+- App-specifieke styling → `apps/[app]/*.html` of `apps/[app]/js/*.js`
+
+**WEL wijzigen (maar alleen via PR):**
+- Nieuwe content type nodig → `packages/core/pages/ContentRenderer.js`
+- Nieuwe interactieve component → `packages/core/js/components/interactive/`
+- Core functionaliteit uitbreiden → `packages/core/**`
+
+**Als gebruiker core wil wijzigen:**
+- Leg uit dat dit alleen via Pull Request kan
+- Verwijs naar beheerder
+- Stel voor om het probleem te beschrijven in een issue
+
+---
+
 ## Structuur
+
 - `/packages/core` - Gedeelde framework code (wijzig alleen via PR)
 - `/apps/*` - Individuele e-learning apps (elke docent werkt in eigen app)
 - `/game` - Research Architect game (blijft in root)
 - `/research-architect` - Game source code (blijft in root)
+
+---
 
 ## Best Practices
 
@@ -17,13 +113,6 @@
 - **Werk altijd in je eigen app folder** (bijv. `/apps/logistiek-onderzoek`)
 - Wijzig alleen: content JSON bestanden, app-specifieke pagina's, assets
 - Gebruik core functionaliteit via `/core/` paths in HTML
-
-### File Paths
-- Core JavaScript: `/core/js/...` (absolute path vanaf root)
-- Core pages: `/core/pages/...` (absolute path vanaf root)
-- App content: `content/...` (relatief vanaf app root)
-- App assets: `assets/...` (relatief vanaf app root)
-- App pages: `pages/Week*LessonPage.js` (relatief vanaf app root)
 
 ### Content Development
 - Alle content staat in `content/*.content.json` bestanden
@@ -41,16 +130,104 @@ Als je een nieuwe interactieve component of functionaliteit nodig hebt:
 - Open dan: `http://localhost:3000`
 - Check browser console voor errors
 
+---
+
+## 💻 JavaScript Coding Standards
+
+### Async/Await
+Gebruik altijd async/await in plaats van promises:
+
+```javascript
+// ✅ GOED
+async loadContent() {
+    try {
+        const response = await fetch(url);
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('Error loading content:', error);
+        throw error;
+    }
+}
+
+// ❌ SLECHT
+loadContent() {
+    return fetch(url)
+        .then(response => response.json())
+        .then(data => data)
+        .catch(error => {
+            console.error('Error:', error);
+            throw error;
+        });
+}
+```
+
+### Error Handling
+Gebruik altijd try-catch voor async operaties:
+
+```javascript
+// ✅ GOED
+async function processData() {
+    try {
+        const data = await fetchData();
+        return process(data);
+    } catch (error) {
+        console.error('[FunctionName] Error:', error);
+        // Fallback of error state
+        return getFallbackData();
+    }
+}
+```
+
+### JSDoc Comments
+Voeg JSDoc toe aan alle functies en classes:
+
+```javascript
+/**
+ * Laad content uit JSON bestand
+ * @param {string} fileName - Naam van het content bestand
+ * @param {number} retries - Aantal retry pogingen (default: 3)
+ * @returns {Promise<Object>} Content object
+ * @throws {Error} Als content niet kan worden geladen na alle retries
+ */
+async loadContent(fileName, retries = 3) {
+    // Implementation
+}
+```
+
+### Naming Conventions
+- Classes: PascalCase (`BaseLessonPage`, `ContentRenderer`)
+- Functies/Methodes: camelCase (`loadContent`, `renderSection`)
+- Variabelen: camelCase (`moduleId`, `contentLoaded`)
+- Constants: UPPER_SNAKE_CASE (`MAX_RETRIES`, `DEFAULT_TIMEOUT`)
+- Private methods: prefix met `_` (`_internalMethod`)
+
+### Code Organization
+- Gebruik static methods voor utility functies
+- Gebruik instance methods voor stateful operaties
+- Groepeer gerelateerde functies bij elkaar
+- Voeg comments toe bij complexe logica
+
+---
+
 ## Code Patterns
 
 ### Nieuwe Week Pagina Toevoegen:
 ```javascript
 // apps/[app-naam]/pages/WeekXLessonPage.js
+/**
+ * Week X Lesson Page
+ * @extends BaseLessonPage
+ */
 class WeekXLessonPage extends BaseLessonPage {
     constructor() {
         super('week-X', 'Week X', 'Titel van Week X');
     }
     
+    /**
+     * Render content sections
+     * @returns {string} HTML string
+     */
     renderContentSections() {
         // Gebruik ContentRenderer uit core
         const theorieContent = this.content.theorie?.content 
@@ -74,14 +251,115 @@ Gebruik de standaard content types uit het framework:
 
 Zie `packages/core/pages/ContentRenderer.js` voor alle beschikbare types.
 
-## Git Workflow
-- Werk op je eigen branch: `onderwijs/docent-[naam]-[vak]`
-- Wijzig alleen bestanden in je eigen app folder
-- Core wijzigingen: maak een Pull Request
-- Commit messages: gebruik duidelijke beschrijvingen
+---
+
+## 🚀 Vercel Deployment Workflow
+
+### Automatische Deployment
+- Elke push naar `main` branch triggert automatisch een Vercel deployment
+- Elke app heeft zijn eigen Vercel project
+- Deployment gebeurt binnen 1-2 minuten na push
+
+### Deployment Process
+1. **Push naar GitHub:** `git push origin main`
+2. **Husky controleert:** Pre-push hook controleert toegestane paden
+3. **Vercel detecteert push:** Automatisch via GitHub integration
+4. **Build & Deploy:** Vercel bouwt en deployt automatisch
+5. **Live:** App is beschikbaar op `[app-naam].vercel.app`
+
+### Vercel Configuratie
+Elke app heeft zijn eigen `vercel.json`:
+```json
+{
+  "functions": {
+    "api/index.js": {
+      "includeFiles": "../**/*.{html,js,json,png,jpg,jpeg,gif,svg,ico,woff,woff2,ttf,eot,docx,pdf,xlsx,vsdx}",
+      "memory": 1024,
+      "maxDuration": 30
+    }
+  }
+}
+```
+
+### Belangrijke Notities
+- **Root Directory:** Elke app heeft Root Directory ingesteld op `apps/[app-naam]`
+- **Environment Variables:** `GEMINI_API_KEY` moet ingesteld zijn in Vercel
+- **includeFiles:** Pattern `../**/*` zorgt dat `packages/core` wordt meegenomen
+- **Geen Build Command nodig:** Vercel serveert statische bestanden direct
+
+### Troubleshooting Deployment
+- **Build faalt?** Check Vercel build logs
+- **App laadt niet?** Check of `api/index.js` bestaat
+- **Core niet beschikbaar?** Check `includeFiles` pattern in `vercel.json`
+- **Environment variables?** Check Vercel project settings
+
+---
+
+## Git Workflow & Directory Beperkingen
+
+### Husky Pre-Push Hook
+Dit project gebruikt **Husky** om automatisch te controleren of je alleen wijzigingen pusht in je eigen app directory. De hook blokkeert de push als:
+- ❌ Je wijzigingen in `packages/core` probeert te pushen (alleen via PR)
+- ❌ Je wijzigingen in andere apps pusht (niet jouw app)
+- ❌ Je gevoelige bestanden pusht (`config.js`, `.env`, etc.)
+- ❌ Je nieuwe app directories aanmaakt zonder toestemming
+- ❌ Je root bestanden wijzigt (`package.json`, `README.md`, etc.)
+- ❌ Je merge commits pusht (gebruik rebase: `git pull --rebase`)
+
+### Toegestane acties
+- ✅ Werk op je eigen branch: `onderwijs/docent-[naam]-[vak]`
+- ✅ Wijzig alleen bestanden in je eigen app folder (zoals geconfigureerd in `.allowed-paths.json`)
+- ✅ Core wijzigingen: maak een Pull Request
+- ✅ Commit messages: gebruik duidelijke beschrijvingen
+
+### Als je push wordt geblokkeerd
+1. Lees de foutmelding - deze toont welke bestanden problematisch zijn
+2. Haal niet-toegestane wijzigingen uit je commit: `git reset HEAD <bestand>`
+3. Commit alleen toegestane wijzigingen: `git commit --amend`
+4. Push opnieuw: `git push`
+
+**Belangrijk:** Je GitHub username moet zijn toegevoegd aan `.allowed-paths.json` met je toegestane app directories. Neem contact op met de beheerder als je niet geconfigureerd bent.
+
+### Husky Configuratie
+Het bestand `.allowed-paths.json` bevat:
+- `admins`: Beheerders met volledige toegang
+- `users`: Gebruikers met toegestane paden per gebruiker
+- `protectedPaths`: Paden die alleen via PR gewijzigd mogen worden
+- `blockedFiles`: Bestanden die nergens gepusht mogen worden
+- `blockedRootFiles`: Root bestanden die niet gewijzigd mogen worden
+
+---
 
 ## Troubleshooting
 - **Scripts laden niet?** Check of paths beginnen met `/core/` voor core bestanden
 - **Content laadt niet?** Check of JSON bestand in `content/` folder staat
 - **Server werkt niet?** Check of je in `packages/core` directory bent en `npm run dev` gebruikt
+- **Push wordt geblokkeerd?** Check `.allowed-paths.json` en je GitHub username
+- **Vercel deployment faalt?** Check build logs en `vercel.json` configuratie
 
+---
+
+## 📝 Common Mistakes to Avoid
+
+### ❌ Fouten die Push Blokkeren
+1. **Core wijzigen zonder PR:** Wijzigingen in `packages/core` worden geblokkeerd
+2. **Andere app wijzigen:** Wijzigingen in andere apps worden geblokkeerd
+3. **Config.js pushen:** Bevat gevoelige data, wordt geblokkeerd
+4. **Root bestanden wijzigen:** `package.json`, `README.md` worden geblokkeerd
+5. **Merge commits:** Gebruik `git pull --rebase` in plaats van merge
+
+### ⚠️ Veelgemaakte Fouten
+1. **Verkeerde paths:** Gebruik `/core/` voor core, relatief voor app
+2. **Geen error handling:** Voeg altijd try-catch toe aan async functies
+3. **Geen JSDoc:** Voeg documentatie toe aan functies
+4. **Niet testen lokaal:** Test altijd voordat je pusht
+5. **Inconsistente naming:** Volg naming conventions
+
+---
+
+## 🔗 Handige Links
+
+- Content Types: `packages/core/pages/ContentRenderer.js`
+- Base Lesson Page: `packages/core/pages/BaseLessonPage.js`
+- Vercel Setup: `VERCEL_SETUP_GUIDE.md`
+- Husky Config: `.allowed-paths.json`

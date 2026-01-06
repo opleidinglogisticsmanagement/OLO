@@ -98,4 +98,3 @@ class KaTeXRenderer {
 if (typeof window !== 'undefined') {
     window.KaTeXRenderer = KaTeXRenderer;
 }
-

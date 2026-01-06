@@ -28,6 +28,12 @@
         "apps/edubook-logistiek"
       ],
       "name": "Docent met meerdere apps"
+    },
+    "HenriGrolleman": {
+      "allowedPaths": [
+        "apps/edubook-logistiek"
+      ],
+      "name": "Henri Grolleman"
     }
   },
   "protectedPaths": [

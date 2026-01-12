@@ -14,7 +14,7 @@
     "start": "npm run start --workspace=packages/core",
     "install:all": "npm install",
     "build": "npm run build --workspaces --if-present",
-    "prepare": "husky install"
+    "prepare": "node -e \"if (!process.env.CI && !process.env.VERCEL) { try { require.resolve('husky'); require('husky').install() } catch (e) { if (e.code !== 'MODULE_NOT_FOUND') throw e } }\""
   },
   "keywords": [
     "e-learning",

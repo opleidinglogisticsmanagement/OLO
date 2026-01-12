@@ -737,6 +737,203 @@
       },
       {
         "type": "heading",
+        "text": "Kwaliteitsindicatoren",
+        "level": 3
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "Hierboven heb je gezien hoe je met het berekenen van de voorspelfouten de kwaliteit van een voorspelmethode kunt kwantificeren. Om de kwaliteit van een voorspelmethode betrouwbaar in te kunnen schatten is het noodzakelijk voor meerdere meetpunten de voorspelfouten te berekenen."
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "In het voorbeeld wordt dit voor 4 kwartalen gedaan, liever heb je nog meer meetmomenten."
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "Als je een reeks voorspelfouten hebt, dan is het lastig om daar in één oogopslag informatie uit te halen. Zo'n reeks voorspelfouten wordt dan ook vaak samengevat in een kengetal. Zo'n samenvatting noemen we een <strong>kwaliteitsindicator</strong> van een voorspelmethode. Hieronder worden een viertal kwaliteitsindicatoren die we binnen dit vak gebruiken besproken. Deze worden toegelicht in het audiofragment onder de formules."
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "In het volgende blok bij de voorspelmethode lineaire regressie wordt nog een vijfde kwaliteitsindicator besproken."
+        ]
+      },
+      {
+        "type": "html",
+        "html": "<div class=\"my-6 grid grid-cols-1 md:grid-cols-2 gap-6\" id=\"kwaliteitsindicatoren-formules-grid\"><div class=\"bg-green-50 dark:bg-green-900/20 p-4 rounded-lg\"><h4 class=\"text-lg font-semibold text-gray-900 dark:text-white mb-2\">Cumulative sum of forecast errors</h4><p class=\"text-sm text-gray-600 dark:text-gray-400 mb-2\">Afkorting: <strong>CFE</strong></p><div class=\"text-center my-2\" data-katex=\"\\text{CFE} = \\sum E_t\"></div></div><div class=\"bg-green-50 dark:bg-green-900/20 p-4 rounded-lg\"><h4 class=\"text-lg font-semibold text-gray-900 dark:text-white mb-2\">Average forecast error (AFE)</h4><p class=\"text-sm text-gray-600 dark:text-gray-400 mb-2\">Afkorting: <strong>Ē</strong></p><div class=\"text-center my-2\" data-katex=\"\\bar{E} = \\frac{\\text{CFE}}{n}\"></div></div><div class=\"bg-green-50 dark:bg-green-900/20 p-4 rounded-lg\"><h4 class=\"text-lg font-semibold text-gray-900 dark:text-white mb-2\">Mean absolute deviation</h4><p class=\"text-sm text-gray-600 dark:text-gray-400 mb-2\">Afkorting: <strong>MAD</strong></p><div class=\"text-center my-2\" data-katex=\"\\text{MAD} = \\frac{\\sum |E_t|}{n}\"></div></div><div class=\"bg-green-50 dark:bg-green-900/20 p-4 rounded-lg\"><h4 class=\"text-lg font-semibold text-gray-900 dark:text-white mb-2\">Mean absolute percent error</h4><p class=\"text-sm text-gray-600 dark:text-gray-400 mb-2\">Afkorting: <strong>MAPE</strong></p><div class=\"text-center my-2\" data-katex=\"\\text{MAPE} = \\frac{\\sum \\frac{|E_t|}{D_t} \\cdot 100\\%}{n}\"></div></div></div>"
+      },
+      {
+        "type": "audio",
+        "src": "assets/audio/kwaliteitsindicatoren.mp3",
+        "caption": "Klik op play voor een introductie van de kwaliteitsindicatoren inclusief een tip om nooit meer klusjes thuis te hoeven doen ;-)"
+      },
+      {
+        "type": "heading",
+        "text": "Cumulative sum of forecast errors (CFE)",
+        "level": 3
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "De eerste kwaliteitsindicator die we gaan bekijken is de cumulative sum of forecast errors (Nederlands: cumulatieve som van de voorspelfouten), vaak afgekort tot CFE."
+        ]
+      },
+      {
+        "type": "highlight",
+        "title": "Cumulative sum of forecast errors",
+        "content": [
+          "<div class=\"text-center my-3\"></div>"
+        ],
+        "icon": "fa-calculator",
+        "iconClass": "fas"
+      },
+      {
+        "type": "formula",
+        "formula": "\\text{CFE} = \\sum E_t",
+        "display": true
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "Het Σ-teken staat in formules voor het nemen van de som, dus de CFE is niets anders dan alle voorspelfouten simpelweg bij elkaar opgeteld (zoals eerder besproken staat E_t voor de voorspelfout in periode t)."
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "Hieronder zie je de daadwerkelijk vraag per kwartaal en de voorspellingen van methode 1 inclusief voorspelfouten in ons ice-tea voorbeeld."
+        ]
+      },
+      {
+        "type": "html",
+        "html": "<div class=\"my-4 flex justify-center\"><div style=\"display: inline-block;\"><table class=\"border-collapse border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800\"><thead><tr class=\"bg-gray-100 dark:bg-gray-700\"><th class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-left font-semibold text-gray-900 dark:text-white\">Kwartaal</th><th class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-center font-semibold text-gray-900 dark:text-white\">1</th><th class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-center font-semibold text-gray-900 dark:text-white\">2</th><th class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-center font-semibold text-gray-900 dark:text-white\">3</th><th class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-center font-semibold text-gray-900 dark:text-white\">4</th></tr></thead><tbody><tr><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-700 dark:text-gray-300\">Daadwerkelijke vraag</td><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-center text-gray-700 dark:text-gray-300\">860.000</td><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-center text-gray-700 dark:text-gray-300\">1.150.000</td><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-center text-gray-700 dark:text-gray-300\">1.290.000</td><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-center text-gray-700 dark:text-gray-300\">1.500.000</td></tr><tr><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-700 dark:text-gray-300\">Voorspelmethode 1</td><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-center text-gray-700 dark:text-gray-300\">1.220.000</td><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-center text-gray-700 dark:text-gray-300\">1.170.000</td><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-center text-gray-700 dark:text-gray-300\">1.200.000</td><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-center text-gray-700 dark:text-gray-300\">1.195.000</td></tr><tr><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-700 dark:text-gray-300\">Voorspelfout</td><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-center text-gray-700 dark:text-gray-300\">-360.000</td><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-center text-gray-700 dark:text-gray-300\">-20.000</td><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-center text-gray-700 dark:text-gray-300\">90.000</td><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-center text-gray-700 dark:text-gray-300\">305.000</td></tr></tbody></table></div></div>"
+      },
+      {
+        "type": "accordion",
+        "defaultOpen": false,
+        "items": [
+          {
+            "title": "Oefening: Bereken de CFE voor voorspelmethode 2",
+            "defaultOpen": false,
+            "content": [
+              {
+                "type": "paragraph",
+                "text": [
+                  "Bereken de CFE voor voorspelmethode 2 (een tabel met benodigde gegevens staat hieronder)."
+                ]
+              },
+              {
+                "type": "html",
+                "html": "<div class=\"my-4 flex justify-center\"><div style=\"display: inline-block;\"><table class=\"border-collapse border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800\"><thead><tr class=\"bg-gray-100 dark:bg-gray-700\"><th class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-left font-semibold text-gray-900 dark:text-white\">Kwartaal</th><th class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-center font-semibold text-gray-900 dark:text-white\">1</th><th class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-center font-semibold text-gray-900 dark:text-white\">2</th><th class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-center font-semibold text-gray-900 dark:text-white\">3</th><th class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-center font-semibold text-gray-900 dark:text-white\">4</th></tr></thead><tbody><tr><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-700 dark:text-gray-300\">Daadwerkelijke vraag</td><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-center text-gray-700 dark:text-gray-300\">860.000</td><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-center text-gray-700 dark:text-gray-300\">1.150.000</td><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-center text-gray-700 dark:text-gray-300\">1.290.000</td><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-center text-gray-700 dark:text-gray-300\">1.500.000</td></tr><tr><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-700 dark:text-gray-300\">Voorspelmethode 2</td><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-center text-gray-700 dark:text-gray-300\">830.000</td><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-center text-gray-700 dark:text-gray-300\">1.070.000</td><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-center text-gray-700 dark:text-gray-300\">1.230.000</td><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-center text-gray-700 dark:text-gray-300\">1.550.000</td></tr><tr><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-700 dark:text-gray-300\">Voorspelfout</td><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-center text-gray-700 dark:text-gray-300\">30.000</td><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-center text-gray-700 dark:text-gray-300\">80.000</td><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-center text-gray-700 dark:text-gray-300\">60.000</td><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-center text-gray-700 dark:text-gray-300\">-50.000</td></tr></tbody></table></div></div>"
+              },
+              {
+                "type": "html",
+                "html": "<div class=\"my-4\"><button onclick=\"this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'block':'none';this.textContent=this.nextElementSibling.style.display==='none'?'Toon antwoord':'Verberg antwoord'\" class=\"px-4 py-2 bg-blue-600 hover:bg-blue-700 dark:bg-blue-700 dark:hover:bg-blue-600 text-white rounded-lg font-medium transition-colors duration-200\">Toon antwoord</button><div id=\"cfe-antwoord-methode-2\" style=\"display:none;\" class=\"mt-4 p-4 bg-green-50 dark:bg-green-900/20 rounded-lg border border-green-200 dark:border-green-800\"><p class=\"text-gray-700 dark:text-gray-300 mb-0\">De CFE voor voorspelmethode 2 is gelijk aan 30.000 + 80.000 + 60.000 + -50.000 = 120.000 stuks.</p></div></div>"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "heading",
+        "text": "Interpretatie van de CFE:",
+        "level": 4
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "De CFE meet of er sprake is van een systematische afwijking bij een voorspelmethode (ook wel bias genoemd)."
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "Een positieve CFE vertelt ons dat er gemiddeld gezien sprake is van onderschatting door de voorspelmethode."
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "Een negatieve CFE vertelt ons dat er gemiddeld gezien sprake is van overschatting door de voorspelmethode."
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "Hoe groter de afwijking van 0, hoe groter het effect."
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "Idealiter ligt de waarde van de CFE dicht bij 0."
+        ]
+      },
+      {
+        "type": "html",
+        "html": "<div class=\"my-4 flex flex-col md:flex-row gap-4 items-start md:items-center\"><div class=\"flex-shrink-0 w-full md:w-1/2\"><div class=\"relative overflow-hidden rounded-lg group image-modal-container\" data-image-src=\"assets/images/Vraagvoorspelling(deel-1)/2.11.svg\" data-image-alt=\"Interpretatie van de CFE\"><img src=\"assets/images/Vraagvoorspelling(deel-1)/2.11.svg\" alt=\"Interpretatie van de CFE\" class=\"rounded-lg h-auto w-full object-contain transition-transform duration-300 group-hover:scale-110 desktop-only-hover\" style=\"max-width: 100%; height: auto;\"><div class=\"absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-10 transition-all duration-300 rounded-lg flex items-center justify-center desktop-only-hover\"><i class=\"fas fa-search-plus text-white text-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-300\"></i></div></div></div><div class=\"flex-1 w-full md:w-1/2\"><h4 class=\"text-lg font-semibold text-gray-900 dark:text-white mb-3\">Wat vertelt de CFE ons in het voorbeeld?</h4><ul class=\"list-disc list-outside space-y-2 mb-4 ml-6 pl-4 text-gray-700 dark:text-gray-300\"><li class=\"mb-2\">De CFE's van beide voorspelmethoden zijn respectievelijk 15.000 en 120.000 stuks.</li><li class=\"mb-2\">Beide CFE's zijn positief wat aangeeft dat beide methoden gemiddeld gezien de daadwerkelijke vraag onderschatten.</li><li class=\"mb-2\">De CFE van methode 1 is kleiner; bij deze methode is de systematische afwijking dus kleiner.</li></ul></div></div>"
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "Dat methode 1 beter scoort op de CFE vind je misschien verrassend omdat we eerder hadden vastgesteld dat methode 1 niet zo'n goede voorspellingen deed (in vergelijking met methode 2). Als je puur kijkt naar de systematische afwijking dan scoort methode 1 goed, maar straks zullen we bij het bespreken van de MAD en MAPE (een ander soort kwaliteitsindicatoren) zien dat methode 1 daar slecht scoort."
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "Een nadeel bij het interpreteren van de CFE is dat je er altijd bij moet bedenken over hoeveel perioden deze gaat. Een CFE van 100 over 4 perioden gerekend duidt op een grotere systematische onderschatting dan een CFE van 100 over 100 perioden gerekend. De AFE die we nu gaan bekijken heeft dit probleem niet."
+        ]
+      },
+      {
+        "type": "heading",
+        "text": "Average forecast error (AFE)",
+        "level": 3
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "De tweede kwaliteitsindicator die we gaan bekijken is de average forecast error (Nederlands: gemiddelde voorspelfout), vaak afgekort tot AFE."
+        ]
+      },
+      {
+        "type": "highlight",
+        "title": "Average forecast error (AFE)",
+        "content": [
+          "<div class=\"text-center my-3\"></div>"
+        ],
+        "icon": "fa-calculator",
+        "iconClass": "fas"
+      },
+      {
+        "type": "formula",
+        "formula": "\\bar{E} = \\frac{\\text{CFE}}{n}",
+        "display": true
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "De AFE wordt ook wel genoteerd met Ē; de E stond voor voorspelfout hadden we al eerder gezien, het streepje erboven staat voor het gemiddelde. De AFE vind je door de CFE (som van alle voorspelfouten) te delen door het aantal perioden (in notatie n)."
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "Voor ons ice-tea voorbeeld hadden we de CFE's van beide methoden al bepaald, namelijk 15.000 stuks voor methode 1 en 120.000 stuks voor methode 2. In beide situaties is dit gebaseerd op n = 4 kwartalen. Dit geeft de volgende AFE's:"
+        ]
+      },
+      {
+        "type": "html",
+        "html": "<ul class=\"list-disc list-outside space-y-2 mb-4 ml-6 pl-4 text-gray-700 dark:text-gray-300\"><li class=\"mb-2\">Voorspelmethode 1: AFE = 15.000/4 = 3.750 stuks</li><li class=\"mb-2\">Voorspelmethode 2: AFE = 120.000/4 = 30.000 stuks</li></ul>"
+      },
+      {
+        "type": "heading",
         "text": "Kwalitatieve inschatting en lineaire regressie",
         "level": 2,
         "id": "kwalitatieve-inschatting-en-lineaire-regressie"

@@ -686,12 +686,15 @@ class AppRouter {
         contentContainer.style.opacity = '0';
         console.log('[AppRouter] ⬇️ Fade out started');
         
-        // Wait for fade-out to complete before replacing content
+            // Wait for fade-out to complete before replacing content
         setTimeout(() => {
             console.log('[AppRouter] 🔄 Replacing content HTML');
             
             // Replace content while invisible
             contentContainer.innerHTML = html;
+            
+            // Render KaTeX formulas after content is in DOM
+            this.renderKaTeXFormulas();
             
             // Ensure background persists after content replacement
             contentContainer.style.backgroundColor = targetBg;
@@ -814,6 +817,44 @@ class AppRouter {
                     </div>
                 </div>
             `;
+        }
+    }
+
+    /**
+     * Render KaTeX formulas in content (for elements with data-katex attributes)
+     */
+    renderKaTeXFormulas() {
+        const grid = document.getElementById('kwaliteitsindicatoren-formules-grid');
+        if (!grid) return;
+        
+        const formulaDivs = grid.querySelectorAll('[data-katex]');
+        if (formulaDivs.length === 0) return;
+        
+        const hasKaTeXRenderer = typeof window.KaTeXRenderer !== 'undefined';
+        const hasRenderMathInElement = typeof renderMathInElement !== 'undefined';
+        
+        if (hasKaTeXRenderer) {
+            formulaDivs.forEach(function(div) {
+                const formula = div.getAttribute('data-katex');
+                if (formula) {
+                    try {
+                        div.innerHTML = window.KaTeXRenderer.renderDisplay(formula);
+                    } catch (e) {
+                        console.error('KaTeX render error:', e);
+                    }
+                }
+            });
+        } else if (hasRenderMathInElement) {
+            try {
+                renderMathInElement(grid, {
+                    delimiters: [
+                        {left: '\\[', right: '\\]', display: true}
+                    ],
+                    throwOnError: false
+                });
+            } catch (e) {
+                console.error('KaTeX auto-render error:', e);
+            }
         }
     }
 

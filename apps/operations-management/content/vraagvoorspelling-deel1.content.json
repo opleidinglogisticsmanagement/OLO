@@ -933,6 +933,135 @@
         "html": "<ul class=\"list-disc list-outside space-y-2 mb-4 ml-6 pl-4 text-gray-700 dark:text-gray-300\"><li class=\"mb-2\">Voorspelmethode 1: AFE = 15.000/4 = 3.750 stuks</li><li class=\"mb-2\">Voorspelmethode 2: AFE = 120.000/4 = 30.000 stuks</li></ul>"
       },
       {
+        "type": "paragraph",
+        "text": [
+          "De interpretatie van de AFE is vergelijkbaar met die van de CFE, die we al bespraken. Het verschil zit erin dat de AFE een waarde per periode is en daardoor gemakkelijker te relateren is aan de daadwerkelijke vraag omdat die ook per periode wordt gegeven."
+        ]
+      },
+      {
+        "type": "heading",
+        "text": "Mean absolute deviation (MAD)",
+        "level": 3
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "De CFE en AFE vertellen ons iets over de systematische afwijking van een voorspelmethode (is er gemiddeld gezien sprake van onder- of overschatting). Andere belangrijke informatie is om te weten hoever een voorspelling gemiddeld afzit van de daadwerkelijke vraag, waarbij je er niet naar kijkt of het nu om onder- of overschatting kijkt. De <strong>mean absolute deviation</strong> (Nederlands: gemiddelde absolute afwijking), vaak afgekort tot <strong>MAD</strong>, is een kwaliteitsindicator die hier informatie over geeft."
+        ]
+      },
+      {
+        "type": "highlight",
+        "title": "Mean absolute deviation",
+        "content": [
+          "<div class=\"text-center my-3\"></div>"
+        ],
+        "icon": "fa-calculator",
+        "iconClass": "fas"
+      },
+      {
+        "type": "formula",
+        "formula": "\\text{MAD} = \\frac{\\sum |E_t|}{n}",
+        "display": true
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "Het Σ-teken staat in formules voor het nemen van de som, en de n staat voor het aantal perioden, net zoals bij de AFE. Het verschil zit erin dat we hier niet direct over de voorspelfouten rekenen, maar over de <strong>absolute voorspelfouten</strong>, wat we aangeven met twee verticale streepjes. De <strong>absolute waarde</strong> (absolute waarde) van een getal is de afstand van dat getal tot nul, ongeacht of het getal boven of onder nul ligt. Zo is de absolute waarde van -3 (notatie |-3|) gelijk aan 3, maar ook |3| = 3."
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "Hieronder zie je de daadwerkelijke vraag per kwartaal en de voorspellingen inclusief voorspelfouten van de eerste voorspelmethode in ons ice-tea voorbeeld."
+        ]
+      },
+      {
+        "type": "html",
+        "html": "<div class=\"my-4 flex justify-center\"><div style=\"display: inline-block;\"><table class=\"border-collapse border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800\"><thead><tr class=\"bg-gray-100 dark:bg-gray-700\"><th class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-left font-semibold text-gray-900 dark:text-white\">Kwartaal</th><th class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-center font-semibold text-gray-900 dark:text-white\">1</th><th class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-center font-semibold text-gray-900 dark:text-white\">2</th><th class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-center font-semibold text-gray-900 dark:text-white\">3</th><th class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-center font-semibold text-gray-900 dark:text-white\">4</th></tr></thead><tbody><tr><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-700 dark:text-gray-300\">Daadwerkelijke vraag</td><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-center text-gray-700 dark:text-gray-300\">860.000</td><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-center text-gray-700 dark:text-gray-300\">1.150.000</td><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-center text-gray-700 dark:text-gray-300\">1.290.000</td><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-center text-gray-700 dark:text-gray-300\">1.500.000</td></tr><tr><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-700 dark:text-gray-300\">Voorspelmethode 1</td><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-center text-gray-700 dark:text-gray-300\">1.220.000</td><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-center text-gray-700 dark:text-gray-300\">1.170.000</td><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-center text-gray-700 dark:text-gray-300\">1.200.000</td><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-center text-gray-700 dark:text-gray-300\">1.195.000</td></tr><tr><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-700 dark:text-gray-300\">Voorspelfout</td><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-center text-gray-700 dark:text-gray-300\">-360.000</td><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-center text-gray-700 dark:text-gray-300\">-20.000</td><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-center text-gray-700 dark:text-gray-300\">90.000</td><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-center text-gray-700 dark:text-gray-300\">305.000</td></tr></tbody></table></div></div>"
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "De absolute voorspelfouten bij methode 1 zijn achtereenvolgens 360.000, 20.000, 90.000 en 305.000 stuks. De MAD is dan (360.000 + 20.000 + 90.000 + 305.000)/4 = 193.500 stuks."
+        ]
+      },
+      {
+        "type": "accordion",
+        "defaultOpen": false,
+        "items": [
+          {
+            "title": "Oefening: Bereken de MAD voor voorspelmethode 2",
+            "defaultOpen": false,
+            "content": [
+              {
+                "type": "paragraph",
+                "text": [
+                  "Bereken de MAD voor voorspelmethode 2 (een tabel met benodigde gegevens staat hieronder)."
+                ]
+              },
+              {
+                "type": "html",
+                "html": "<div class=\"my-4 flex justify-center\"><div style=\"display: inline-block;\"><table class=\"border-collapse border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800\"><thead><tr class=\"bg-gray-100 dark:bg-gray-700\"><th class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-left font-semibold text-gray-900 dark:text-white\">Kwartaal</th><th class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-center font-semibold text-gray-900 dark:text-white\">1</th><th class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-center font-semibold text-gray-900 dark:text-white\">2</th><th class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-center font-semibold text-gray-900 dark:text-white\">3</th><th class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-center font-semibold text-gray-900 dark:text-white\">4</th></tr></thead><tbody><tr><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-700 dark:text-gray-300\">Daadwerkelijke vraag</td><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-center text-gray-700 dark:text-gray-300\">860.000</td><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-center text-gray-700 dark:text-gray-300\">1.150.000</td><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-center text-gray-700 dark:text-gray-300\">1.290.000</td><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-center text-gray-700 dark:text-gray-300\">1.500.000</td></tr><tr><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-700 dark:text-gray-300\">Voorspelmethode 2</td><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-center text-gray-700 dark:text-gray-300\">830.000</td><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-center text-gray-700 dark:text-gray-300\">1.070.000</td><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-center text-gray-700 dark:text-gray-300\">1.230.000</td><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-center text-gray-700 dark:text-gray-300\">1.550.000</td></tr><tr><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-700 dark:text-gray-300\">Voorspelfout</td><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-center text-gray-700 dark:text-gray-300\">30.000</td><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-center text-gray-700 dark:text-gray-300\">80.000</td><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-center text-gray-700 dark:text-gray-300\">60.000</td><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-center text-gray-700 dark:text-gray-300\">-50.000</td></tr></tbody></table></div></div>"
+              },
+              {
+                "type": "html",
+                "html": "<div class=\"my-4\"><button onclick=\"this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'block':'none';this.textContent=this.nextElementSibling.style.display==='none'?'Toon antwoord':'Verberg antwoord'\" class=\"px-4 py-2 bg-blue-600 hover:bg-blue-700 dark:bg-blue-700 dark:hover:bg-blue-600 text-white rounded-lg font-medium transition-colors duration-200\">Toon antwoord</button><div id=\"mad-antwoord-methode-2\" style=\"display:none;\" class=\"mt-4 p-4 bg-green-50 dark:bg-green-900/20 rounded-lg border border-green-200 dark:border-green-800\"><p class=\"text-gray-700 dark:text-gray-300 mb-0\">De absolute voorspelfouten bij methode 2 zijn achtereenvolgens 30.000, 80.000, 60.000 en 50.000 stuks. De MAD is dan (30.000 + 80.000 + 60.000 + 50.000)/4 = 55.000 stuks.</p></div></div>"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "heading",
+        "text": "Interpretatie van de MAD:",
+        "level": 4
+      },
+      {
+        "type": "html",
+        "html": "<ul class=\"list-disc list-outside space-y-2 mb-4 ml-6 pl-4 text-gray-700 dark:text-gray-300\"><li class=\"mb-2\">De MAD meet hoever een voorspelmethode gemiddeld gezien afzit van de daadwerkelijke vraag, waarbij het puur gaat om de grootte van de afwijking en niet of er sprake is van onder- of overschatting.</li><li class=\"mb-2\">Hoe hoger de waarde van de MAD, hoe groter de voorspelfouten gemiddeld zijn.</li><li class=\"mb-2\">Idealiter is de waarde van de MAD zo laag mogelijk.</li></ul>"
+      },
+      {
+        "type": "html",
+        "html": "<div class=\"my-4 flex flex-col md:flex-row gap-4 items-start md:items-center\"><div class=\"flex-shrink-0 w-full md:w-1/2\"><div class=\"relative overflow-hidden rounded-lg group image-modal-container\" data-image-src=\"assets/images/Vraagvoorspelling(deel-1)/2.12.jpg\" data-image-alt=\"Wat vertelt de MAD ons in het voorbeeld?\"><img src=\"assets/images/Vraagvoorspelling(deel-1)/2.12.jpg\" alt=\"Wat vertelt de MAD ons in het voorbeeld?\" class=\"rounded-lg h-auto w-full object-contain transition-transform duration-300 group-hover:scale-110 desktop-only-hover\" style=\"max-width: 100%; height: auto;\"><div class=\"absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-10 transition-all duration-300 rounded-lg flex items-center justify-center desktop-only-hover\"><i class=\"fas fa-search-plus text-white text-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-300\"></i></div></div></div><div class=\"flex-1 w-full md:w-1/2\"><h4 class=\"text-lg font-semibold text-gray-900 dark:text-white mb-3\">Wat vertelt de MAD ons in het voorbeeld?</h4><p class=\"text-gray-700 dark:text-gray-300 mb-2\">De MAD's van beide voorspelmethoden zijn respectievelijk 193.750 en 55.000 stuks.</p><p class=\"text-gray-700 dark:text-gray-300 mb-0\">De MAD van methode 2 is veel lager; bij deze methode is gemiddeld gezien de grootte van de voorspelfouten een stuk kleiner.</p></div></div>"
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "Een nadeel bij het goed interpreteren van de MAD is dat je er altijd bij moet bedenken hoe groot de daadwerkelijke vraag gemiddeld is geweest. Bijvoorbeeld, een MAD van 10 stuks is voor de inschatting van de weekvraag naar pakken hagelslag bij een supermarkt prima, terwijl een MAD van 10 bij de weekvraag naar Ferrari's bij een dealer van luxe sportauto's erg hoog is."
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "De MAPE, de kwaliteitsindicator die we nu gaan bekijken relateert de grootte van de voorspelfout direct aan de daadwerkelijke vraag in de betreffende periode."
+        ]
+      },
+      {
+        "type": "heading",
+        "text": "Mean absolute percent error (MAPE)",
+        "level": 3
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "De laatste kwaliteitsindicator die we gaan bekijken is de <strong>mean absolute percent error</strong> (Nederlands: gemiddelde absolute procentuele fout), vaak afgekort tot MAPE."
+        ]
+      },
+      {
+        "type": "highlight",
+        "title": "Mean absolute percent error",
+        "content": [
+          "<div class=\"text-center my-3\"></div>"
+        ],
+        "icon": "fa-calculator",
+        "iconClass": "fas"
+      },
+      {
+        "type": "formula",
+        "formula": "\\text{MAPE} = \\frac{\\sum \\frac{|E_t|}{D_t} \\cdot 100\\%}{n}",
+        "display": true
+      },
+      {
         "type": "heading",
         "text": "Kwalitatieve inschatting en lineaire regressie",
         "level": 2,

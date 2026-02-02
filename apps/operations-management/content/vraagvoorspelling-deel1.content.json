@@ -766,7 +766,7 @@
       },
       {
         "type": "html",
-        "html": "<div class=\"my-6 grid grid-cols-1 md:grid-cols-2 gap-6\" id=\"kwaliteitsindicatoren-formules-grid\"><div class=\"bg-green-50 dark:bg-green-900/20 p-4 rounded-lg\"><h4 class=\"text-lg font-semibold text-gray-900 dark:text-white mb-2\">Cumulative sum of forecast errors</h4><p class=\"text-sm text-gray-600 dark:text-gray-400 mb-2\">Afkorting: <strong>CFE</strong></p><div class=\"text-center my-2\" data-katex=\"\\text{CFE} = \\sum E_t\"></div></div><div class=\"bg-green-50 dark:bg-green-900/20 p-4 rounded-lg\"><h4 class=\"text-lg font-semibold text-gray-900 dark:text-white mb-2\">Average forecast error (AFE)</h4><p class=\"text-sm text-gray-600 dark:text-gray-400 mb-2\">Afkorting: <strong>Ē</strong></p><div class=\"text-center my-2\" data-katex=\"\\bar{E} = \\frac{\\text{CFE}}{n}\"></div></div><div class=\"bg-green-50 dark:bg-green-900/20 p-4 rounded-lg\"><h4 class=\"text-lg font-semibold text-gray-900 dark:text-white mb-2\">Mean absolute deviation</h4><p class=\"text-sm text-gray-600 dark:text-gray-400 mb-2\">Afkorting: <strong>MAD</strong></p><div class=\"text-center my-2\" data-katex=\"\\text{MAD} = \\frac{\\sum |E_t|}{n}\"></div></div><div class=\"bg-green-50 dark:bg-green-900/20 p-4 rounded-lg\"><h4 class=\"text-lg font-semibold text-gray-900 dark:text-white mb-2\">Mean absolute percent error</h4><p class=\"text-sm text-gray-600 dark:text-gray-400 mb-2\">Afkorting: <strong>MAPE</strong></p><div class=\"text-center my-2\" data-katex=\"\\text{MAPE} = \\frac{\\sum \\frac{|E_t|}{D_t} \\cdot 100\\%}{n}\"></div></div></div>"
+        "html": "<div class=\"my-6 grid grid-cols-1 md:grid-cols-2 gap-6\" id=\"kwaliteitsindicatoren-formules-grid\"><div class=\"bg-green-50 dark:bg-green-900/20 p-4 rounded-lg\"><h4 class=\"text-lg font-semibold text-gray-900 dark:text-white mb-2\">Cumulative sum of forecast errors</h4><p class=\"text-sm text-gray-600 dark:text-gray-400 mb-2\">Afkorting: <strong>CFE</strong></p><div class=\"text-center my-2\" data-katex=\"\\text{CFE} = \\sum E_t\"></div></div><div class=\"bg-green-50 dark:bg-green-900/20 p-4 rounded-lg\"><h4 class=\"text-lg font-semibold text-gray-900 dark:text-white mb-2\">Average forecast error (AFE)</h4><p class=\"text-sm text-gray-600 dark:text-gray-400 mb-2\">Afkorting: <strong>Ē</strong></p><div class=\"text-center my-2\" data-katex=\"\\bar{E} = \\frac{\\text{CFE}}{n}\"></div></div><div class=\"bg-green-50 dark:bg-green-900/20 p-4 rounded-lg\"><h4 class=\"text-lg font-semibold text-gray-900 dark:text-white mb-2\">Mean absolute deviation</h4><p class=\"text-sm text-gray-600 dark:text-gray-400 mb-2\">Afkorting: <strong>MAD</strong></p><div class=\"text-center my-2\" data-katex=\"\\text{MAD} = \\frac{\\sum |E_t|}{n}\"></div></div><div class=\"bg-green-50 dark:bg-green-900/20 p-4 rounded-lg\"><h4 class=\"text-lg font-semibold text-gray-900 dark:text-white mb-2\">Mean absolute percent error</h4><p class=\"text-sm text-gray-600 dark:text-gray-400 mb-2\">Afkorting: <strong>MAPE</strong></p><div class=\"text-center my-2\" data-katex=\"\\text{MAPE} = \\frac{\\left(\\sum \\frac{|E_t|}{D_t}\\right) \\cdot 100\\%}{n}\"></div></div></div>"
       },
       {
         "type": "audio",
@@ -1058,8 +1058,102 @@
       },
       {
         "type": "formula",
-        "formula": "\\text{MAPE} = \\frac{\\sum \\frac{|E_t|}{D_t} \\cdot 100\\%}{n}",
+        "formula": "\\text{MAPE} = \\frac{\\left(\\sum \\frac{|E_t|}{D_t}\\right) \\cdot 100\\%}{n}",
         "display": true
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "Het Σ-teken staat wederom voor het nemen van de som en n voor het aantal perioden, dus er wordt weer een gemiddelde berekend. Dit gemiddelde betreft de absolute procentuele fouten; deze vind je door de absolute voorspelfout te delen door de daadwerkelijke vraag en dat dan uitgedrukt als een percentage."
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "Hieronder zie je de daadwerkelijk vraag per kwartaal en de voorspellingen inclusief voorspelfouten van de eerste voorspelmethode in ons ice-tea voorbeeld."
+        ]
+      },
+      {
+        "type": "html",
+        "html": "<div class=\"my-4 flex justify-center\"><div style=\"display: inline-block;\"><table class=\"border-collapse border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800\"><thead><tr class=\"bg-gray-100 dark:bg-gray-700\"><th class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-left font-semibold text-gray-900 dark:text-white\">Kwartaal</th><th class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-center font-semibold text-gray-900 dark:text-white\">1</th><th class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-center font-semibold text-gray-900 dark:text-white\">2</th><th class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-center font-semibold text-gray-900 dark:text-white\">3</th><th class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-center font-semibold text-gray-900 dark:text-white\">4</th></tr></thead><tbody><tr><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-700 dark:text-gray-300\">Daadwerkelijke vraag</td><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-center text-gray-700 dark:text-gray-300\">860.000</td><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-center text-gray-700 dark:text-gray-300\">1.150.000</td><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-center text-gray-700 dark:text-gray-300\">1.290.000</td><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-center text-gray-700 dark:text-gray-300\">1.500.000</td></tr><tr><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-700 dark:text-gray-300\">Voorspelmethode 1</td><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-center text-gray-700 dark:text-gray-300\">1.220.000</td><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-center text-gray-700 dark:text-gray-300\">1.170.000</td><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-center text-gray-700 dark:text-gray-300\">1.200.000</td><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-center text-gray-700 dark:text-gray-300\">1.195.000</td></tr><tr><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-700 dark:text-gray-300\">Voorspelfout</td><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-center text-gray-700 dark:text-gray-300\">-360.000</td><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-center text-gray-700 dark:text-gray-300\">-20.000</td><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-center text-gray-700 dark:text-gray-300\">90.000</td><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-center text-gray-700 dark:text-gray-300\">305.000</td></tr></tbody></table></div></div>"
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "De absolute procentuele fout in kwartaal 1 is gelijk aan (|-360.000|/860.000) x 100% = (360.000/860.000) x 100% = 41,9%."
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "De absolute procentuele fouten voor alle vier de kwartalen zijn achtereenvolgens 41,9%, 1,7%, 7,0% en 20,3%."
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "De MAPE voor methode 1 is dan (41,9% + 1,7% + 7,0% + 20,3%)/4 = 17,7%."
+        ]
+      },
+      {
+        "type": "accordion",
+        "defaultOpen": false,
+        "items": [
+          {
+            "title": "Oefening: Bereken de MAPE voor voorspelmethode 2",
+            "defaultOpen": false,
+            "content": [
+              {
+                "type": "paragraph",
+                "text": [
+                  "Bereken de MAPE voor voorspelmethode 2 (een tabel met benodigde gegevens staat hieronder)."
+                ]
+              },
+              {
+                "type": "html",
+                "html": "<div class=\"my-4 flex justify-center\"><div style=\"display: inline-block;\"><table class=\"border-collapse border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800\"><thead><tr class=\"bg-gray-100 dark:bg-gray-700\"><th class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-left font-semibold text-gray-900 dark:text-white\">Kwartaal</th><th class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-center font-semibold text-gray-900 dark:text-white\">1</th><th class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-center font-semibold text-gray-900 dark:text-white\">2</th><th class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-center font-semibold text-gray-900 dark:text-white\">3</th><th class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-center font-semibold text-gray-900 dark:text-white\">4</th></tr></thead><tbody><tr><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-700 dark:text-gray-300\">Daadwerkelijke vraag</td><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-center text-gray-700 dark:text-gray-300\">860.000</td><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-center text-gray-700 dark:text-gray-300\">1.150.000</td><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-center text-gray-700 dark:text-gray-300\">1.290.000</td><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-center text-gray-700 dark:text-gray-300\">1.500.000</td></tr><tr><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-700 dark:text-gray-300\">Voorspelmethode 2</td><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-center text-gray-700 dark:text-gray-300\">830.000</td><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-center text-gray-700 dark:text-gray-300\">1.070.000</td><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-center text-gray-700 dark:text-gray-300\">1.230.000</td><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-center text-gray-700 dark:text-gray-300\">1.550.000</td></tr><tr><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-700 dark:text-gray-300\">Voorspelfout</td><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-center text-gray-700 dark:text-gray-300\">30.000</td><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-center text-gray-700 dark:text-gray-300\">80.000</td><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-center text-gray-700 dark:text-gray-300\">60.000</td><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2 text-center text-gray-700 dark:text-gray-300\">-50.000</td></tr></tbody></table></div></div>"
+              },
+              {
+                "type": "html",
+                "html": "<div class=\"my-4\"><button onclick=\"this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'block':'none';this.textContent=this.nextElementSibling.style.display==='none'?'Toon antwoord':'Verberg antwoord'\" class=\"px-4 py-2 bg-blue-600 hover:bg-blue-700 dark:bg-blue-700 dark:hover:bg-blue-600 text-white rounded-lg font-medium transition-colors duration-200\">Toon antwoord</button><div id=\"mape-antwoord-methode-2\" style=\"display:none;\" class=\"mt-4 p-4 bg-green-50 dark:bg-green-900/20 rounded-lg border border-green-200 dark:border-green-800\"><p class=\"text-gray-700 dark:text-gray-300 mb-0\">De absolute procentuele fouten voor alle vier de kwartalen zijn achtereenvolgens 3,5%, 7,0%, 4,7% en 3,3%. De MAPE is dan (3,5% + 7,0% + 4,7% + 3,3%)/4 = 4,6%.</p></div></div>"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "heading",
+        "text": "Vraag naar ice-tea",
+        "level": 4
+      },
+      {
+        "type": "html",
+        "html": "<ul class=\"list-disc list-outside space-y-2 mb-4 ml-6 pl-4 text-gray-700 dark:text-gray-300\"><li class=\"mb-2\">Voorspelmethode 1</li><li class=\"mb-2\">Voorspelmethode 2</li><li class=\"mb-2\">Daadwerkelijke vraag</li></ul>"
+      },
+      {
+        "type": "html",
+        "html": "<div class=\"my-4 flex flex-col md:flex-row gap-4 items-start md:items-center\"><div class=\"flex-shrink-0 w-full md:w-1/2\"><div class=\"relative overflow-hidden rounded-lg group image-modal-container\" data-image-src=\"assets/images/Vraagvoorspelling(deel-1)/2.13.jpg\" data-image-alt=\"Vraag naar ice-tea\"><img src=\"assets/images/Vraagvoorspelling(deel-1)/2.13.jpg\" alt=\"Vraag naar ice-tea\" class=\"rounded-lg h-auto w-full object-contain transition-transform duration-300 group-hover:scale-110 desktop-only-hover\" style=\"max-width: 100%; height: auto;\"><div class=\"absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-10 transition-all duration-300 rounded-lg flex items-center justify-center desktop-only-hover\"><i class=\"fas fa-search-plus text-white text-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-300\"></i></div></div></div><div class=\"flex-1 w-full md:w-1/2\"><h4 class=\"text-lg font-semibold text-gray-900 dark:text-white mb-3\">Wat vertelt de MAPE ons in het voorbeeld?</h4><p class=\"text-gray-700 dark:text-gray-300 mb-2\">De MAPE's van beide voorspelmethoden zijn respectievelijk 17,7% en 4,6%.</p><p class=\"text-gray-700 dark:text-gray-300 mb-0\">De MAPE van methode 2 is veel lager; bij deze methode is gemiddeld gezien de grootte van de voorspelfouten relatief t.o.v. de daadwerkelijke vraag een stuk kleiner.</p></div></div>"
+      },
+      {
+        "type": "heading",
+        "text": "Wat heb je geleerd?",
+        "level": 2
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "Je hebt in dit blok het volgende geleerd:"
+        ]
+      },
+      {
+        "type": "html",
+        "html": "<ul class=\"list-disc list-outside space-y-2 mb-4 ml-6 pl-4 text-gray-700 dark:text-gray-300\"><li class=\"mb-2\">Je kunt voorspelfouten berekenen en weet op basis van de waarde van een voorspelfout of er sprake is van onder- of overschatting</li><li class=\"mb-2\">Je kunt de kwaliteitsindicatoren CFE en AFE berekenen en je weet dat je deze kunt gebruiken om de systematische afwijking van een voorspelmethode te bepalen</li><li class=\"mb-2\">Je kunt de kwaliteitsindicatoren MAD en MAPE berekenen en je weet dat je deze kunt gebruiken om de grootte van de voorspelfouten van een voorspelmethode te bepalen</li></ul>"
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "In het volgende blok besteden we aandacht de voorspelmethoden kwantitatieve inschatting en lineaire regressie."
+        ]
       },
       {
         "type": "heading",

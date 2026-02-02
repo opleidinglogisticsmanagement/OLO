@@ -253,6 +253,56 @@ class LayoutRenderer {
     }
 
     /**
+     * Get icon and background color classes for a module
+     * - logistiek-onderzoek: per-week colors (green, blue, purple, orange, red, indigo, pink)
+     * - operations-management: green for all content modules (matches static HTML)
+     * - e-learning-demo, edubook-logistiek: gray (default)
+     * @param {Object} module - Module object with id
+     * @param {boolean} isCurrent - Whether this is the current page
+     * @returns {{ iconClass: string, bgClass: string }}
+     */
+    _getModuleIconColors(module, isCurrent) {
+        if (isCurrent) {
+            return { iconClass: 'text-blue-600 dark:text-blue-300', bgClass: 'bg-blue-100 dark:bg-blue-800' };
+        }
+        if (this.appId === 'logistiek-onderzoek') {
+            const colorMap = {
+                'week-1': { icon: 'text-green-600 dark:text-green-400', bg: 'bg-green-100 dark:bg-green-900/30' },
+                'week-2': { icon: 'text-blue-600 dark:text-blue-400', bg: 'bg-blue-100 dark:bg-blue-900/30' },
+                'week-3': { icon: 'text-purple-600 dark:text-purple-400', bg: 'bg-purple-100 dark:bg-purple-900/30' },
+                'week-4': { icon: 'text-orange-600 dark:text-orange-400', bg: 'bg-orange-100 dark:bg-orange-900/30' },
+                'week-5': { icon: 'text-red-600 dark:text-red-400', bg: 'bg-red-100 dark:bg-red-900/30' },
+                'week-6': { icon: 'text-indigo-600 dark:text-indigo-400', bg: 'bg-indigo-100 dark:bg-indigo-900/30' },
+                'week-7': { icon: 'text-pink-600 dark:text-pink-400', bg: 'bg-pink-100 dark:bg-pink-900/30' }
+            };
+            const colors = colorMap[module.id];
+            if (colors) {
+                return { iconClass: colors.icon, bgClass: colors.bg };
+            }
+        }
+        if (this.appId === 'operations-management') {
+            const colorMap = {
+                'start': { icon: 'text-blue-600 dark:text-blue-400', bg: 'bg-blue-100 dark:bg-blue-900/30' },
+                'operations-processtrategie': { icon: 'text-teal-600 dark:text-teal-400', bg: 'bg-teal-100 dark:bg-teal-900/30' },
+                'vraagvoorspelling-deel1': { icon: 'text-green-600 dark:text-green-400', bg: 'bg-green-100 dark:bg-green-900/30' },
+                'vraagvoorspelling-deel2': { icon: 'text-green-600 dark:text-green-400', bg: 'bg-green-100 dark:bg-green-900/30' },
+                'productieplanning': { icon: 'text-purple-600 dark:text-purple-400', bg: 'bg-purple-100 dark:bg-purple-900/30' },
+                'voorraadbeheer-deel1': { icon: 'text-orange-600 dark:text-orange-400', bg: 'bg-orange-100 dark:bg-orange-900/30' },
+                'voorraadbeheer-deel2': { icon: 'text-orange-600 dark:text-orange-400', bg: 'bg-orange-100 dark:bg-orange-900/30' },
+                'voorraadbeheer-deel3': { icon: 'text-orange-600 dark:text-orange-400', bg: 'bg-orange-100 dark:bg-orange-900/30' },
+                'capaciteitsmanagement-deel1': { icon: 'text-red-600 dark:text-red-400', bg: 'bg-red-100 dark:bg-red-900/30' },
+                'capaciteitsmanagement-deel2': { icon: 'text-red-600 dark:text-red-400', bg: 'bg-red-100 dark:bg-red-900/30' },
+                'operations-planning-scheduling': { icon: 'text-indigo-600 dark:text-indigo-400', bg: 'bg-indigo-100 dark:bg-indigo-900/30' }
+            };
+            const colors = colorMap[module.id];
+            if (colors) {
+                return { iconClass: colors.icon, bgClass: colors.bg };
+            }
+        }
+        return { iconClass: 'text-gray-400 dark:text-gray-500', bgClass: 'bg-gray-100 dark:bg-gray-700' };
+    }
+
+    /**
      * Render module navigation items from a modules array
      * @param {Array} modules - Array of module objects with id, title, href, and optional subItems
      */
@@ -326,11 +376,12 @@ class LayoutRenderer {
                     subItemsId = 'fase3-subitems-index';
                 }
                 
+                const iconColors = this._getModuleIconColors(module, isCurrent);
                 return `
                     <div class="${navItemClass}">
                         <a href="${module.href}" class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 focus-ring transition-colors ${isCurrent ? 'bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300' : 'text-gray-600 dark:text-gray-300'}">
-                            <div class="w-8 h-8 ${isCurrent ? 'bg-blue-100 dark:bg-blue-800' : 'bg-gray-100 dark:bg-gray-700'} rounded-lg flex items-center justify-center">
-                                <i class="fas fa-book text-sm ${isCurrent ? 'text-blue-600 dark:text-blue-300' : 'text-gray-400 dark:text-gray-500'}"></i>
+                            <div class="w-8 h-8 ${iconColors.bgClass} rounded-lg flex items-center justify-center" data-bg-inactive="${iconColors.bgClass}" data-icon-inactive="${iconColors.iconClass}">
+                                <i class="fas fa-book text-sm ${iconColors.iconClass}"></i>
                             </div>
                             <span class="font-medium flex-1">${module.title}</span>
                             <i class="fas fa-chevron-down text-xs text-gray-400 dark:text-gray-500 transition-transform duration-200 ${isCurrent ? 'rotate-180' : ''}" id="${chevronId}"></i>
@@ -343,10 +394,11 @@ class LayoutRenderer {
             }
             
             // Regular module item without sub-items
+            const iconColors = this._getModuleIconColors(module, isCurrent);
             return `
                 <a href="${module.href}" class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 focus-ring transition-colors ${isCurrent ? 'bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300' : 'text-gray-600 dark:text-gray-300'}">
-                    <div class="w-8 h-8 ${isCurrent ? 'bg-blue-100 dark:bg-blue-800' : 'bg-gray-100 dark:bg-gray-700'} rounded-lg flex items-center justify-center">
-                        <i class="fas fa-book text-sm ${isCurrent ? 'text-blue-600 dark:text-blue-300' : 'text-gray-400 dark:text-gray-500'}"></i>
+                    <div class="w-8 h-8 ${iconColors.bgClass} rounded-lg flex items-center justify-center" data-bg-inactive="${iconColors.bgClass}" data-icon-inactive="${iconColors.iconClass}">
+                        <i class="fas fa-book text-sm ${iconColors.iconClass}"></i>
                     </div>
                     <span class="font-medium">${module.title}</span>
                 </a>

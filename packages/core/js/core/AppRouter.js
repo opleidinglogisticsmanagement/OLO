@@ -896,24 +896,47 @@ class AppRouter {
      * Update active state in sidebar
      */
     updateSidebarActiveState(fileName) {
-        // Remove all active states
+        let fileBase = fileName.split('/').pop() || fileName;
+        if (!fileBase || fileBase === '/') fileBase = 'index.html';
+        // Remove all active states and restore inactive colors
         document.querySelectorAll('#sidebar a').forEach(link => {
             link.classList.remove('bg-blue-50', 'dark:bg-blue-900/30', 'text-blue-700', 'dark:text-blue-300');
-            const icon = link.querySelector('.w-8, .w-10');
-            if (icon) {
-                icon.classList.remove('bg-blue-100', 'dark:bg-blue-800');
-                icon.classList.add('bg-gray-100', 'dark:bg-gray-700');
+            const iconContainer = link.querySelector('.w-8, .w-10');
+            if (iconContainer) {
+                iconContainer.classList.remove('bg-blue-100', 'dark:bg-blue-800');
+                const bgInactive = iconContainer.dataset.bgInactive;
+                if (bgInactive) {
+                    iconContainer.classList.remove('bg-gray-100', 'dark:bg-gray-700');
+                    iconContainer.classList.add(...bgInactive.split(' '));
+                } else {
+                    iconContainer.classList.add('bg-gray-100', 'dark:bg-gray-700');
+                }
+                const iconEl = iconContainer.querySelector('i');
+                if (iconEl && iconContainer.dataset.iconInactive) {
+                    iconEl.classList.remove('text-blue-600', 'dark:text-blue-300');
+                    iconEl.classList.add(...iconContainer.dataset.iconInactive.split(' '));
+                } else if (iconEl) {
+                    iconEl.classList.remove('text-blue-600', 'dark:text-blue-300');
+                    iconEl.classList.add('text-gray-400', 'dark:text-gray-500');
+                }
             }
         });
-        
-        // Find and activate current link
-        const currentLink = document.querySelector(`#sidebar a[href="${fileName}"]`);
+        // Find and activate current link (match by href ending with fileName)
+        const currentLink = Array.from(document.querySelectorAll('#sidebar a[href]')).find(a => {
+            const href = a.getAttribute('href') || '';
+            return href === fileBase || href.startsWith(fileBase + '#');
+        });
         if (currentLink) {
             currentLink.classList.add('bg-blue-50', 'dark:bg-blue-900/30', 'text-blue-700', 'dark:text-blue-300');
-            const icon = currentLink.querySelector('.w-8, .w-10');
-            if (icon) {
-                icon.classList.remove('bg-gray-100', 'dark:bg-gray-700');
-                icon.classList.add('bg-blue-100', 'dark:bg-blue-800');
+            const iconContainer = currentLink.querySelector('.w-8, .w-10');
+            if (iconContainer) {
+                iconContainer.classList.remove(...(iconContainer.dataset.bgInactive || 'bg-gray-100 dark:bg-gray-700').split(' '));
+                iconContainer.classList.add('bg-blue-100', 'dark:bg-blue-800');
+                const iconEl = iconContainer.querySelector('i');
+                if (iconEl) {
+                    iconEl.classList.remove(...(iconContainer.dataset.iconInactive || 'text-gray-400 dark:text-gray-500').split(' '));
+                    iconEl.classList.add('text-blue-600', 'dark:text-blue-300');
+                }
             }
         }
     }

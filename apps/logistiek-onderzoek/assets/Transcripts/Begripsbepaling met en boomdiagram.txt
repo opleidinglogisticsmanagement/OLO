@@ -1,0 +1,44 @@
+Begripsbepaling met een boomdiagram
+Welkom bij deze kennisclip over logistiek onderzoek. In deze clip gaan we het hebben over het boomdiagram. Wat je als onderzoeker eigenlijk wilt doen, is 'de knoop ontwarren'. Je hebt namelijk te maken met verschillende stakeholders, die allemaal hun eigen zienswijze en belangen hebben bij het probleem.
++1
+
+Het is van groot belang dat je helder krijgt waar je precies onderzoek naar doet. Stel je voor dat het praktijkprobleem een complexe knoop is waarbij elke stakeholder aan een eigen touwtje trekt vanuit zijn eigen perspectief. Het is aan jou als onderzoeker om daar één helder en eenduidig beeld van te krijgen.
++1
+
+Wanneer je uit de doelstelling en de hoofdvraag de kernbegrippen hebt geselecteerd, ga je deze 'ontrafelen'. Dit ontrafelen betekent dat je door middel van brainstormen en overleg het begrip steeds verder uitdiept. Dit doe je in een schema van links naar rechts (zoals te zien in de presentatie).
+
+De structuur van het boomdiagram: Het kernbegrip staat helemaal links. Vanuit dit kernbegrip leid je achtereenvolgens af:
+
+
+Dimensies: De eerste grove onderverdeling van het begrip.
++1
+
+
+Aspecten: Een verdere verfijning van de dimensies.
++1
+
+
+Deelaspecten: De meest gedetailleerde uitwerking, indien nodig voor de scope.
++1
+
+Een logistiek voorbeeld: Stel dat je het begrip vrachtvervoer hebt geselecteerd uit je doelstelling. Dit kun je ontrafelen:
+
+
+Dimensies: Bijvoorbeeld containertransport en bulktransport.
+
+
+Aspecten: Binnen containertransport kun je focussen op de hardtop container, de reguliere container of de geconditioneerde container.
+
+
+Deelaspecten: Bijvoorbeeld het type lading binnen de reguliere container, zoals machines.
+
+Dit ontrafelen doe je door te brainstormen, interviews af te nemen met je opdrachtgever en andere stakeholders, maar ook door desk research uit te voeren.
++1
+
+Definiëren en afbakenen (Scoping): Na overleg met je opdrachtgever maak je een selectie. Je kunt bijvoorbeeld besluiten je onderzoek af te bakenen tot containervervoer, specifiek de hardtop en reguliere containers waarin machines worden vervoerd. Door je keuzes in het boomdiagram een kleur te geven (de 'boxen' kleuren), maak je de scope van je onderzoek visueel duidelijk.
+
+Het kan ook voorkomen dat je er tijdens dit proces achter komt dat 'vrachtvervoer' een te breed kernbegrip is en dat het onderzoek zich eigenlijk alleen richt op 'containertransport'. In dat geval kun je de kernbegrippen in je doelstelling of hoofdvraag nog aanpassen voor een betere aansluiting.
++1
+
+Waarom is dit zo belangrijk? Het definiëren van kernbegrippen helpt je vast te stellen wat je precies gaat onderzoeken. Het is essentieel voor de communicatie: je zorgt ervoor dat alle stakeholders over hetzelfde praten en dezelfde definities hanteren.
++1

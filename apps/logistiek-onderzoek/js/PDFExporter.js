@@ -330,13 +330,53 @@ class PDFExporter {
                 }
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
-            return await response.json();
+            const content = await response.json();
+
+            // Preload transcripts voor video's (zelfde base URL als content)
+            const baseUrl = new URL('..', new URL(jsonFile, window.location.href).href).href;
+            await this.preloadTranscripts(content, baseUrl);
+
+            return content;
         } catch (error) {
             // Alleen loggen als het geen 404 is (404s worden stil genegeerd)
             if (error.message && !error.message.includes('404')) {
                 console.warn(`Kon ${jsonFile} niet laden:`, error.message);
             }
             return null;
+        }
+    }
+
+    /**
+     * Preload transcript bestanden voor video's in de content
+     */
+    async preloadTranscripts(obj, baseUrl) {
+        if (!obj) return;
+
+        if (Array.isArray(obj)) {
+            for (const item of obj) {
+                await this.preloadTranscripts(item, baseUrl);
+            }
+            return;
+        }
+
+        if (typeof obj === 'object') {
+            if (obj.type === 'video' && obj.transcript) {
+                try {
+                    const transcriptUrl = new URL(obj.transcript, baseUrl).href;
+                    const response = await fetch(transcriptUrl);
+                    if (response.ok) {
+                        const text = await response.text();
+                        obj._transcriptContent = text;
+                    }
+                } catch (e) {
+                    console.warn('[PDFExporter] Kon transcript niet laden:', obj.transcript, e);
+                }
+            }
+            for (const key of Object.keys(obj)) {
+                if (key !== '_transcriptContent' && typeof obj[key] === 'object') {
+                    await this.preloadTranscripts(obj[key], baseUrl);
+                }
+            }
         }
     }
 
@@ -607,6 +647,22 @@ class PDFExporter {
                         }
                         addText(`Link: ${item.url}`, 10, false, [0, 0, 255]);
                         setYPosition(getYPosition() + 5);
+
+                        // Transcript toevoegen (preloaded in loadWeekContent)
+                        const transcriptText = item._transcriptContent || item.transcriptContent;
+                        if (transcriptText) {
+                            const cleanedTranscript = transcriptText
+                                .split('\n')
+                                .filter(line => !/^\+\d+$/.test(line.trim()))
+                                .join('\n')
+                                .trim();
+                            if (cleanedTranscript) {
+                                addText('Transcript:', 10, true);
+                                setYPosition(getYPosition() + 2);
+                                addText(cleanedTranscript, 9);
+                                setYPosition(getYPosition() + 5);
+                            }
+                        }
                     }
                     break;
 

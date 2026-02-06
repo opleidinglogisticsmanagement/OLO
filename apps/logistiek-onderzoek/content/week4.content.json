@@ -104,7 +104,8 @@
               "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Bij het vaststellen van alle mogelijke onderdelen van een begrip kun je een opsomming maken van alle mogelijke onderdelen van een begrip, maar is het verstandiger om dit gestructureerd aan te pakken. Een goed hulpmiddel bij het uiteenrafelen van begrippen is een boomdiagram. Een boomdiagram helpt om de verschillende onderdelen van een begrip te structureren.</p>",
               {
                 "type": "video",
-                "url": "https://media.windesheim.nl/Mediasite/Play/4599a393a4ff42388faf49ba25476fc71d"
+                "url": "https://media.windesheim.nl/Mediasite/Play/4599a393a4ff42388faf49ba25476fc71d",
+                "transcript": "assets/Transcripts/Begripsbepaling met en boomdiagram.txt"
               },
               "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Het begrip dat een omschrijving moet krijgen bestaat uit verschillende onderdelen. Ten eerste bestaat een begrip uit dimensies. De dimensies van het begrip bestaan uit verschillende aspecten. En de aspecten kunnen weer uit deelaspecten bestaan. Zo ontstaan er verschillende vertakkingen.</p>",
               {

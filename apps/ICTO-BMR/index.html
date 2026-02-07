@@ -1,0 +1,1467 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="view-transition" content="same-origin" />
+    <title>ICTO-BMR - E-Learning</title>
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://oloelearning.vercel.app/">
+    <meta property="og:title" content="ICTO-BMR - E-Learning">
+    <meta property="og:description" content="E-learning platform voor ICTO-BMR.">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary">
+    <meta property="twitter:url" content="https://oloelearning.vercel.app/">
+    <meta property="twitter:title" content="ICTO-BMR - E-Learning">
+    <meta property="twitter:description" content="E-learning platform voor ICTO-BMR.">
+
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+      }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- KaTeX for mathematical formulas -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" 
+          integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" 
+          crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"
+            integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8"
+            crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+            integrity="sha384-+VBxd3r6XgURyc+Z4YmKz3F8K5q3q5q5q5q5q5q5q5q5q5q5q5q5q5q5q5q5q5q5q"
+            crossorigin="anonymous"
+            onload="if(typeof renderMathInElement !== 'undefined') { renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}, {left: '\\\\[', right: '\\\\]', display: true}, {left: '\\\\(', right: '\\\\)', display: false}], throwOnError: false}); }"></script>
+    <!-- PDF Export Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" 
+            onerror="console.error('Fout bij laden jspdf bibliotheek')"
+            onload="console.log('jsPDF bibliotheek geladen')"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"
+            onerror="console.error('Fout bij laden html2canvas bibliotheek')"
+            onload="console.log('html2canvas bibliotheek geladen')"></script>
+    <style>
+        :root {
+            --primary-blue: #0077b6;
+            --success-green: #90be6d;
+            --neutral-bg: #f8f9fa;
+            --text-dark: #212529;
+            --text-light: #6c757d;
+        }
+        
+        /* Dark mode custom properties */
+        .dark {
+            --primary-blue: #4a9eff;
+            --success-green: #a8d977;
+            --neutral-bg: #1a1a1a;
+            --text-dark: #f5f5f5;
+            --text-light: #a0a0a0;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--neutral-bg);
+            color: var(--text-dark);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        
+        .dark .custom-scrollbar::-webkit-scrollbar-track {
+            background: #2a2a2a;
+        }
+        
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #c1c1c1;
+            border-radius: 3px;
+        }
+        
+        .dark .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #4a4a4a;
+        }
+        
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #a8a8a8;
+        }
+        
+        .dark .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #5a5a5a;
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.5s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .slide-in {
+            animation: slideIn 0.3s ease-out;
+        }
+        
+        @keyframes slideIn {
+            from { transform: translateX(-100%); }
+            to { transform: translateX(0); }
+        }
+        
+        .progress-animation {
+            transition: width 0.5s ease-in-out;
+        }
+        
+        .hover-lift:hover {
+            transform: translateY(-2px);
+            transition: transform 0.2s ease;
+        }
+        
+        .focus-ring:focus {
+            outline: 2px solid var(--primary-blue);
+            outline-offset: 2px;
+        }
+        
+        /* Globale inspringing voor alle lijsten */
+        .prose ul,
+        .prose ol {
+            margin-left: 1rem;
+            padding-left: 0;
+        }
+        
+        /* Zorg dat lijsten in content ook inspringing hebben */
+        ul.list-disc,
+        ol.list-decimal {
+            margin-left: 1rem;
+        }
+        
+        /* Lijsten met list-inside: zorg voor correcte inspringing tweede regel */
+        ul.list-disc.list-inside,
+        ol.list-decimal.list-inside {
+            padding-left: 1.5rem;
+        }
+        
+        /* Lijstitems met list-inside: zorg dat tweede regel correct inspringt */
+        ul.list-disc.list-inside li,
+        ol.list-decimal.list-inside li {
+            padding-left: 1.5em;
+            text-indent: -1.5em;
+        }
+        
+        /* Genummerde lijsten zonder list-inside: nummer buiten, tekst uitgelijnd */
+        ol.list-decimal:not(.list-inside) {
+            list-style-position: outside;
+            padding-left: 1.5rem;
+        }
+        
+        /* Bullet lijsten zonder list-inside: bullet buiten voor betere inspringing */
+        ul.list-disc:not(.list-inside) {
+            list-style-position: outside;
+            padding-left: 1.5rem;
+        }
+        
+        /* Lijstitems hebben dezelfde grijze kleur als paragrafen */
+        ol.list-decimal li,
+        ul.list-disc li {
+            color: rgb(55, 65, 81); /* text-gray-700 */
+        }
+        
+        /* Dark mode support voor lijstitems */
+        .dark ol.list-decimal li,
+        .dark ul.list-disc li {
+            color: rgb(209, 213, 219); /* dark:text-gray-300 */
+        }
+
+        /* KaTeX dark mode support */
+        .dark .katex {
+            color: #e5e7eb;
+        }
+
+        .dark .katex .base {
+            color: #e5e7eb;
+        }
+
+        .dark .katex .mord {
+            color: #e5e7eb;
+        }
+
+        .dark .katex .mrel {
+            color: #9ca3af;
+        }
+
+        .dark .katex .mop {
+            color: #60a5fa;
+        }
+
+        .dark .katex .mbin {
+            color: #34d399;
+        }
+
+        .dark .katex .mopen,
+        .dark .katex .mclose {
+            color: #e5e7eb;
+        }
+
+        .dark .katex .mfrac {
+            color: #e5e7eb;
+        }
+
+        /* KaTeX inline spacing */
+        .katex-inline {
+            margin: 0 0.2em;
+            vertical-align: baseline;
+        }
+
+        /* KaTeX display formula styling */
+        .katex-display {
+            margin: 1em 0;
+            overflow-x: hidden;
+            overflow-y: hidden;
+        }
+        
+        /* Prevent scrollbar on formula wrapper */
+        .katex-display-wrapper {
+            overflow-x: hidden !important;
+        }
+
+        /* Responsive formula wrapping */
+        @media (max-width: 640px) {
+            .katex-display {
+                font-size: 0.9em;
+            }
+        }
+        
+        /* Tabellen dark mode support */
+        .dark table {
+            background-color: rgb(31, 41, 55); /* dark:bg-gray-800 */
+            border-color: rgb(75, 85, 99); /* dark:border-gray-600 */
+        }
+        
+        .dark table th {
+            background-color: rgb(55, 65, 81); /* dark:bg-gray-700 */
+            color: rgb(255, 255, 255); /* dark:text-white */
+            border-color: rgb(75, 85, 99); /* dark:border-gray-600 */
+        }
+        
+        .dark table td {
+            background-color: rgb(31, 41, 55); /* dark:bg-gray-800 */
+            color: rgb(209, 213, 219); /* dark:text-gray-300 */
+            border-color: rgb(75, 85, 99); /* dark:border-gray-600 */
+        }
+        
+        table {
+            background-color: rgb(255, 255, 255);
+            border-collapse: collapse;
+            width: 100%;
+        }
+        
+        table th,
+        table td {
+            border: 1px solid rgb(209, 213, 219); /* border-gray-300 */
+        }
+        
+        /* Toekomstbestendigheid: Automatische dark mode support voor alle kopjes */
+        .dark h1, .dark h2, .dark h3, .dark h4, .dark h5, .dark h6 {
+            color: rgb(255, 255, 255); /* dark:text-white */
+        }
+        
+        /* Toekomstbestendigheid: Automatische dark mode support voor gekleurde containers */
+        .dark .bg-blue-50, .dark .bg-green-50, .dark .bg-yellow-50, 
+        .dark .bg-red-50, .dark .bg-purple-50, .dark .bg-gray-50 {
+            background-color: rgb(17, 24, 39); /* dark:bg-gray-900 */
+        }
+        
+        /* Toekomstbestendigheid: Automatische dark mode support voor tekst in gekleurde containers */
+        .dark .text-blue-900, .dark .text-green-900, .dark .text-yellow-900,
+        .dark .text-red-900, .dark .text-purple-900 {
+            color: rgb(209, 213, 219); /* dark:text-gray-300 */
+        }
+        
+        .dark .text-blue-800, .dark .text-green-800, .dark .text-yellow-800,
+        .dark .text-red-800, .dark .text-purple-800 {
+            color: rgb(209, 213, 219); /* dark:text-gray-300 */
+        }
+
+        /* Geen regelafstand tussen h2 en h3 kopjes en tekst eronder (standaard voor alle weken) */
+        .prose h2,
+        .prose h3 {
+            margin-bottom: 0;
+        }
+
+        /* Prevent horizontal scrolling globally */
+        html, body {
+            overflow-x: hidden;
+            max-width: 100%;
+        }
+        
+        #app {
+            overflow-x: hidden;
+            max-width: 100%;
+        }
+        
+        /* Sidebar width control - applies to all screen sizes */
+        /* Sidebar should never exceed 330px on any screen size */
+        #sidebar {
+            max-width: 330px !important;
+        }
+        
+        /* Prevent text breaking per character in sidebar */
+        #sidebar p, #sidebar span, #sidebar a, #sidebar li {
+            word-break: normal !important;
+            overflow-wrap: break-word !important;
+            word-wrap: break-word !important;
+        }
+        
+        /* Ensure sidebar flex containers don't cause text breaking */
+        #sidebar .min-w-0 {
+            min-width: 0;
+        }
+        
+        /* Sidebar width: full width on mobile (but max 330px), fixed 320px on larger screens */
+        @media (max-width: 640px) {
+            #sidebar {
+                width: 100% !important;
+                max-width: 330px !important;
+            }
+        }
+        
+        /* Ensure sidebar has fixed width on desktop/tablet (641px and above) */
+        @media (min-width: 641px) {
+            #sidebar {
+                width: 320px !important;
+                max-width: 330px !important;
+            }
+        }
+        
+        /* Mobile-specific improvements */
+        @media (max-width: 640px) {
+            /* Ensure content doesn't overflow */
+            body {
+                overflow-x: hidden;
+            }
+            
+            /* Prevent specific elements from causing horizontal scroll */
+            /* Only apply to block-level and media elements, not text/inline elements */
+            div, section, article, header, footer, nav, aside, main, 
+            img, video, iframe, canvas, svg, object, embed,
+            table, pre, blockquote {
+                max-width: 100%;
+                box-sizing: border-box;
+            }
+            
+            /* Ensure text elements wrap properly */
+            p, span, a, strong, em, b, i, u, code, small, mark, del, ins, 
+            sub, sup, abbr, kbd, samp, var, time, label, li, td, th {
+                word-wrap: break-word;
+                overflow-wrap: break-word;
+                word-break: normal;
+                hyphens: auto;
+            }
+            
+            /* Specific fixes for common offenders */
+            img, video, iframe {
+                max-width: 100% !important;
+                width: 100% !important;
+                height: auto !important;
+            }
+            
+            /* Exception for responsive video containers */
+            .video-responsive-container iframe,
+            .video-responsive-wrapper iframe {
+                height: 100% !important;
+                width: 100% !important;
+                position: absolute !important;
+            }
+            
+            /* Ensure all images are responsive */
+            .image-modal-container img,
+            img[style*="max-width"] {
+                max-width: 100% !important;
+                width: 100% !important;
+                height: auto !important;
+            }
+            
+            /* Responsive image containers */
+            .responsive-image-container {
+                max-width: 100% !important;
+                width: 100% !important;
+            }
+            
+            table {
+                display: block;
+                overflow-x: auto;
+                width: 100%;
+            }
+            
+            /* Better touch targets */
+            button, a {
+                min-height: 44px;
+                min-width: 44px;
+            }
+            
+            /* Reduce icon sizes on mobile */
+            .text-6xl {
+                font-size: 3rem;
+            }
+            
+            /* Better spacing for lists */
+            .prose ul, .prose ol {
+                margin-left: 0.75rem;
+                padding-left: 0.5rem;
+            }
+            
+            /* Scroll to top button */
+            #scroll-to-top-btn {
+                bottom: 1rem;
+                right: 1rem;
+                padding: 0.75rem;
+                width: 44px;
+                height: 44px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            
+            /* Prevent text from being too small */
+            .text-sm {
+                font-size: 0.875rem;
+            }
+            
+            /* Better spacing for sections */
+            .space-y-6 > * + * {
+                margin-top: 1.25rem;
+            }
+            
+            .space-y-8 > * + * {
+                margin-top: 1.5rem;
+            }
+            
+            /* Better padding for sections - removed to avoid conflicts with #main-content section rules */
+            
+            /* Ensure text wraps properly */
+            h1, h2, h3 {
+                word-wrap: break-word;
+                overflow-wrap: break-word;
+            }
+            
+            /* Better spacing for flex containers */
+            .flex.flex-col {
+                gap: 0.75rem;
+            }
+            
+            /* Ensure interactive elements are clickable on mobile */
+            button, [onclick], [role="tab"], [role="button"] {
+                cursor: pointer;
+                touch-action: manipulation;
+                -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
+            }
+            
+            /* Prevent text selection on buttons */
+            button {
+                -webkit-user-select: none;
+                user-select: none;
+            }
+            
+            /* Disable image modal clicks on mobile - use native pinch-to-zoom */
+            .image-modal-container {
+                cursor: default !important;
+                pointer-events: none;
+            }
+            
+            .image-modal-container img {
+                pointer-events: auto;
+            }
+            
+            /* Disable hover effects on mobile */
+            .desktop-only-hover {
+                transition: none !important;
+            }
+            
+            .image-modal-container .group-hover\:scale-110 {
+                transform: none !important;
+            }
+            
+            .image-modal-container .group-hover\:bg-opacity-10 {
+                background-color: transparent !important;
+            }
+            
+            .image-modal-container .group-hover\:opacity-100 {
+                opacity: 0 !important;
+            }
+        }
+        
+        /* Desktop: enable hover effects and clickable images */
+        @media (min-width: 768px) {
+            .desktop-only-hover {
+                transition: transform 0.3s ease, opacity 0.3s ease, background-color 0.3s ease;
+            }
+            
+            .image-modal-container {
+                cursor: pointer;
+                pointer-events: auto;
+            }
+        }
+        
+        /* Global: Ensure all images are responsive on all screen sizes */
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+        
+        .responsive-image-container {
+            max-width: 100%;
+        }
+        
+        /* Tablet improvements */
+        @media (min-width: 641px) and (max-width: 1023px) {
+            .space-y-6 > * + * {
+                margin-top: 1.5rem;
+            }
+        }
+        
+        /* View Transitions API */
+        @view-transition {
+            navigation: auto;
+        }
+        
+        /* Ensure main-content always has background to prevent white flash */
+        #main-content {
+            background-color: rgb(249, 250, 251); /* bg-gray-50 */
+            min-height: 100vh;
+            transition: opacity 0.2s ease;
+            /* Ensure content stays above background during transitions */
+            position: relative;
+            z-index: 1;
+            /* Prevent overflow */
+            width: 100%;
+            max-width: 100%;
+            box-sizing: border-box;
+            overflow-x: hidden;
+        }
+        
+        /* Ensure all sections within main-content respect width constraints and have spacing */
+        #main-content section {
+            width: 100% !important;
+            max-width: 100% !important;
+            box-sizing: border-box !important;
+            margin-bottom: 1.5rem !important;
+        }
+        
+        @media (min-width: 640px) {
+            #main-content section {
+                margin-bottom: 2rem !important;
+            }
+        }
+        
+        /* Ensure sticky sections also have margin-bottom (sticky positioning can sometimes reset margins) */
+        /* Chrome-specific fix: sticky elements need explicit margin-bottom */
+        #main-content section.sticky {
+            margin-bottom: 1.5rem !important;
+        }
+        
+        @media (min-width: 640px) {
+            #main-content section.sticky {
+                margin-bottom: 2rem !important;
+            }
+        }
+        
+        /* Consistent spacing for all sections in article */
+        /* Override space-y-* to ensure consistent spacing between all sections */
+        #main-content article.space-y-6 > * + * {
+            margin-top: 1.5rem !important;
+        }
+        
+        #main-content article.space-y-8 > * + * {
+            margin-top: 2rem !important;
+        }
+        
+        /* Chrome fix: Ensure first sticky section wrapper in article has proper spacing */
+        /* The sticky section is wrapped in a div to work around Chrome's margin-bottom bug */
+        #main-content article .intro-section-wrapper {
+            margin-bottom: 0 !important;
+            margin-top: 0 !important;
+        }
+        
+        /* First section after intro wrapper should have consistent spacing */
+        #main-content article .intro-section-wrapper + section,
+        #main-content article .intro-section-wrapper + div > section {
+            margin-top: 1.5rem !important;
+        }
+        
+        @media (min-width: 640px) {
+            #main-content article .intro-section-wrapper + section,
+            #main-content article .intro-section-wrapper + div > section {
+                margin-top: 2rem !important;
+            }
+        }
+        
+        /* Ensure all sections have consistent bottom margin */
+        #main-content article section {
+            margin-bottom: 0 !important;
+        }
+        
+        /* Except for the last section */
+        #main-content article section:last-child {
+            margin-bottom: 0 !important;
+        }
+        
+        /* Ensure max-w-4xl containers respect width constraints but keep max-width limit */
+        #main-content .max-w-4xl {
+            max-width: 56rem !important; /* Keep Tailwind's max-w-4xl value (896px) */
+            box-sizing: border-box !important;
+        }
+        
+        /* Ensure article doesn't break out of max-w-4xl container */
+        #main-content article {
+            max-width: 100% !important;
+            box-sizing: border-box !important;
+        }
+        
+        .dark #main-content {
+            background-color: rgb(17, 24, 39); /* dark:bg-gray-900 */
+        }
+        
+        /* Ensure sidebar and header stay fixed and don't flicker */
+        #sidebar,
+        #main-header {
+            /* Prevent any visual changes during content transitions */
+            will-change: auto;
+            transform: translateZ(0); /* Force hardware acceleration */
+        }
+        
+        /* Prevent white flash during transitions - overlay background */
+        #main-content::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgb(249, 250, 251);
+            z-index: -1;
+            pointer-events: none;
+        }
+        
+        .dark #main-content::before {
+            background-color: rgb(17, 24, 39);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 transition-colors duration-200">
+    <!-- Dark Mode Utility - MOET EERST GELADEN WORDEN -->
+    <script src="/core/js/DarkMode.js"></script>
+    <!-- PDF Exporter -->
+    <script src="js/PDFExporter.js"></script>
+    <script src="js/SearchService.js"></script>
+    
+    <!-- SPA Router - Load early -->
+    <script src="/core/js/core/AppRouter.js"></script>
+    
+    <!-- Week Page Scripts - Load all for SPA router -->
+    <!-- Config (if exists) -->
+    <script src="config.js"></script>
+    <!-- Core dependencies -->
+    <script src="/core/js/components/LayoutRenderer.js"></script>
+    <script src="/core/js/components/NavigationInitializer.js"></script>
+    <script src="/core/js/ui/SidebarManager.js"></script>
+    <script src="/core/js/ui/HeaderManager.js"></script>
+    <script src="/core/js/ui/ScrollManager.js"></script>
+    <script src="/core/js/ui/ImageModalManager.js"></script>
+    <script src="/core/js/ui/InteractiveManager.js"></script>
+    <script src="/core/js/ui/VideoManager.js"></script>
+    <script src="/core/js/ui/TableCopyManager.js"></script>
+    <script src="/core/js/services/NavigationService.js"></script>
+    <script src="/core/js/components/NavigationRenderer.js"></script>
+    <script src="/core/js/components/ContentTemplateRenderer.js"></script>
+    <script src="/core/pages/BaseLessonPage.js"></script>
+    <script src="/core/pages/ContentRenderer.js"></script>
+    <script src="/core/js/utils/ContentValidator.js"></script>
+    <script src="/core/js/utils/KaTeXRenderer.js"></script>
+    
+    <!-- Interactive components -->
+    <script src="/core/js/components/interactive/utils/HtmlUtils.js"></script>
+    <script src="/core/js/components/interactive/TabRenderer.js"></script>
+    <script src="/core/js/components/interactive/AccordionRenderer.js"></script>
+    <script src="/core/js/components/interactive/ClickableStepsRenderer.js"></script>
+    <script src="/core/js/components/interactive/ChecklistRenderer.js"></script>
+    <script src="/core/js/components/interactive/ExerciseRenderer.js"></script>
+    <script src="/core/js/components/interactive/AIRenderer.js"></script>
+    <script src="/core/pages/InteractiveRenderer.js"></script>
+    <script src="/core/pages/AIGenerator.js"></script>
+    <script src="/core/pages/MCQuestionRenderer.js"></script>
+    
+    <!-- Week Page Classes - Load all for SPA router -->
+    <script src="pages/WatIsICTOLessonPage.js"></script>
+    <script src="pages/WatDoetICTOLessonPage.js"></script>
+    <script src="pages/WaaromICTOLessonPage.js"></script>
+    <script src="pages/RegisterPage.js"></script>
+    
+    <!-- Verify all classes are loaded with detailed logging -->
+    <script>
+        (function() {
+            // Wait a bit for all scripts to execute
+            setTimeout(() => {
+                console.log('[Script Loader] ⏰ Verification started at:', new Date().toISOString());
+                const expectedClasses = [
+                    'WatIsICTOLessonPage',
+                    'WatDoetICTOLessonPage',
+                    'WaaromICTOLessonPage',
+                    'RegisterPage'
+                ];
+                
+                console.log('[Script Loader] 🔍 Checking for page classes...');
+                console.log('[Script Loader] BaseLessonPage available:', !!window.BaseLessonPage);
+                
+                const availableClasses = expectedClasses.filter(cls => window[cls]);
+                const missingClasses = expectedClasses.filter(cls => !window[cls]);
+                
+                console.log('[Script Loader] ✅ Available classes (' + availableClasses.length + '/' + expectedClasses.length + '):', availableClasses);
+                
+                if (missingClasses.length > 0) {
+                    console.error('[Script Loader] ❌ Missing classes (' + missingClasses.length + '):', missingClasses);
+                    console.error('[Script Loader] ⚠️ Check browser console for JavaScript errors in these files');
+                    
+                    // Check if scripts failed to load
+                    missingClasses.forEach(cls => {
+                        const scriptTag = document.querySelector(`script[src*="${cls}.js"]`);
+                        if (scriptTag) {
+                            console.warn(`[Script Loader] Script tag found for ${cls}, but class not available. Possible syntax error or script crash.`);
+                        } else {
+                            console.error(`[Script Loader] Script tag NOT found for ${cls}!`);
+                        }
+                    });
+                } else {
+                    console.log('[Script Loader] ✅ All page classes are available!');
+                }
+            }, 100); // Wait 100ms for all scripts to execute
+        })();
+    </script>
+    
+    <!-- Skip to content link for accessibility -->
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-blue-600 text-white px-4 py-2 rounded-md z-50 focus-ring">
+        Spring naar hoofdinhoud
+    </a>
+
+    <div id="app" class="min-h-screen flex">
+        <!-- Sidebar -->
+        <aside id="sidebar" class="w-full lg:w-80 lg:max-w-[330px] bg-white dark:bg-gray-800 shadow-lg transform -translate-x-full lg:translate-x-0 transition-transform duration-300 ease-in-out fixed inset-y-0 z-40" aria-label="Navigatie menu" style="view-transition-name: sidebar;">
+            <div class="h-full flex flex-col">
+                <!-- Sidebar Header -->
+                <div class="px-4 sm:px-6 h-[56px] sm:h-[64px] border-b border-gray-200 dark:border-gray-700 flex items-center">
+                    <div class="flex items-center justify-between w-full">
+                        <div class="flex items-center space-x-3 flex-1 min-w-0">
+                            <div class="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0 bg-white p-1" aria-hidden="true">
+                                <img src="assets/images/ictologo.png" alt="ICTO Logo" class="w-10 h-10 object-contain" />
+                            </div>
+                            <div class="min-w-0 flex-1" style="min-width: 0;">
+                                <p class="text-xs sm:text-sm text-gray-500 dark:text-gray-400 break-words leading-tight m-0 font-bold" style="word-break: normal; overflow-wrap: break-word; word-wrap: break-word;">ICTO-BMR</p>
+                            </div>
+                        </div>
+                        <!-- Close button for mobile -->
+                        <button id="sidebar-close-button" class="lg:hidden p-2 rounded-md text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 focus-ring ml-2 flex-shrink-0" aria-label="Sluit navigatie menu">
+                            <i class="fas fa-times text-xl"></i>
+                        </button>
+                    </div>
+                </div>
+
+
+                <!-- Module Navigation -->
+                <nav class="flex-1 overflow-y-auto custom-scrollbar p-6" aria-label="Module navigatie">
+                    <div class="space-y-2">
+                        <div class="px-3 py-2 mb-2">
+                            <span class="text-sm font-semibold text-gray-700 dark:text-gray-300">E-Learning</span>
+                        </div>
+                        <a href="index.html" class="block p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 focus-ring transition-colors">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-8 h-8 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center">
+                                    <i class="fas fa-home text-blue-600 dark:text-blue-400 text-sm"></i>
+                                </div>
+                                <span class="font-medium text-gray-900 dark:text-white">Start</span>
+                            </div>
+                        </a>
+                        <a href="wat-is-icto.html" class="block p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 focus-ring transition-colors">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-8 h-8 bg-purple-100 dark:bg-purple-900/30 rounded-lg flex items-center justify-center">
+                                    <i class="fas fa-question-circle text-purple-600 dark:text-purple-400 text-sm"></i>
+                                </div>
+                                <span class="font-medium text-gray-900 dark:text-white">Wat is ICTO</span>
+                            </div>
+                        </a>
+                        <a href="wat-doet-icto.html" class="block p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 focus-ring transition-colors">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-8 h-8 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center">
+                                    <i class="fas fa-cogs text-green-600 dark:text-green-400 text-sm"></i>
+                                </div>
+                                <span class="font-medium text-gray-900 dark:text-white">Wat doet ICTO</span>
+                            </div>
+                        </a>
+                        <a href="waarom-icto.html" class="block p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 focus-ring transition-colors">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-8 h-8 bg-yellow-100 dark:bg-yellow-900/30 rounded-lg flex items-center justify-center">
+                                    <i class="fas fa-lightbulb text-yellow-600 dark:text-yellow-400 text-sm"></i>
+                                </div>
+                                <span class="font-medium text-gray-900 dark:text-white">Waarom ICTO</span>
+                            </div>
+                        </a>
+                        <a href="register.html" class="block p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 focus-ring transition-colors">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-8 h-8 bg-indigo-100 dark:bg-indigo-900/30 rounded-lg flex items-center justify-center">
+                                    <i class="fas fa-book text-indigo-600 dark:text-indigo-400 text-sm"></i>
+                                </div>
+                                <span class="font-medium text-gray-900 dark:text-white">Begrippenlijst</span>
+                            </div>
+                        </a>
+                    </div>
+                </nav>
+
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <div class="flex-1 flex flex-col lg:ml-80 relative">
+            <!-- Header -->
+            <header class="fixed top-0 z-40 bg-white dark:bg-gray-800 shadow-sm border-b border-gray-200 dark:border-gray-700 lg:left-80 left-0 right-0" id="main-header" style="view-transition-name: main-header;">
+                <div class="px-4 sm:px-6 h-[56px] sm:h-[64px] transition-colors duration-200 flex items-center">
+                <div class="flex items-center justify-between relative z-10 bg-white dark:bg-gray-800 transition-colors duration-200 w-full">
+                    <!-- Left section: Mobile menu & Breadcrumbs -->
+                    <div class="flex items-center flex-1 min-w-0">
+                        <!-- Mobile menu button -->
+                        <button id="mobile-menu-button" class="lg:hidden p-2 rounded-md text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 focus-ring transition-colors mr-2" aria-label="Open navigatie menu">
+                            <i class="fas fa-bars text-xl"></i>
+                        </button>
+
+                        <!-- Breadcrumbs -->
+                        <nav class="flex items-center space-x-2 text-sm flex-shrink-0" aria-label="Breadcrumb">
+                            <span class="text-gray-900 dark:text-white font-medium">Start</span>
+                        </nav>
+                    </div>
+
+                    <!-- Right section: Actions -->
+                    <div class="flex items-center space-x-2 sm:space-x-3 ml-4">
+                        <!-- Search Toggle Button -->
+                        <button 
+                            id="search-toggle-btn" 
+                            class="p-2 rounded-lg text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 transition-colors"
+                            aria-label="Zoeken">
+                            <i class="fas fa-search text-lg"></i>
+                        </button>
+                        
+                        <!-- Dark Mode Toggle -->
+                        <button 
+                            id="dark-mode-toggle" 
+                            class="relative p-2 rounded-lg bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-700 dark:to-gray-800 hover:from-gray-200 hover:to-gray-300 dark:hover:from-gray-600 dark:hover:to-gray-700 focus-ring transition-all duration-300 group shadow-sm hover:shadow-md" 
+                            aria-label="Toggle dark mode"
+                            title="Dark mode">
+                            <div class="relative w-6 h-6 flex items-center justify-center overflow-hidden">
+                                <i id="dark-mode-icon-sun" class="fas fa-sun text-yellow-500 absolute transform transition-all duration-500 rotate-0 scale-100 opacity-100 dark:rotate-90 dark:scale-0 dark:opacity-0"></i>
+                                <i id="dark-mode-icon-moon" class="fas fa-moon text-blue-400 absolute transform transition-all duration-500 rotate-0 scale-0 opacity-0 dark:rotate-0 dark:scale-100 dark:opacity-100"></i>
+                            </div>
+                            <span class="absolute inset-0 rounded-lg bg-gradient-to-r from-yellow-400/20 to-blue-400/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-sm"></span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Search Overlay (Hidden by default) -->
+                <div id="search-overlay" class="absolute inset-0 bg-white dark:bg-gray-800 z-20 px-6 flex items-center opacity-0 pointer-events-none transition-all duration-300 transform -translate-y-2">
+                    <div class="relative w-full max-w-3xl mx-auto flex items-center">
+                        <i class="fas fa-search text-gray-400 dark:text-gray-500 absolute left-3"></i>
+                        <input 
+                            type="text" 
+                            id="global-search-input" 
+                            class="block w-full pl-10 pr-10 py-2 border-b-2 border-gray-200 dark:border-gray-700 bg-transparent text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:border-blue-500 dark:focus:border-blue-400 sm:text-lg transition-colors duration-200" 
+                            placeholder="Waar ben je naar op zoek?"
+                            autocomplete="off"
+                        >
+                        <button id="close-search-btn" class="absolute right-0 p-2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors">
+                            <i class="fas fa-times text-lg"></i>
+                        </button>
+                        
+                        <!-- Results Dropdown -->
+                        <div id="search-results-dropdown" class="absolute top-full left-0 right-0 mt-2 bg-white dark:bg-gray-800 shadow-xl rounded-b-lg border-x border-b border-gray-200 dark:border-gray-700 max-h-[70vh] overflow-auto hidden z-50 custom-scrollbar">
+                            <!-- Results will be injected here -->
+                    </div>
+                </div>
+            </header>
+
+            <!-- Main Content -->
+            <div class="flex-1 overflow-y-auto custom-scrollbar pt-[56px] sm:pt-[64px]">
+                <main id="main-content" class="bg-gray-50 dark:bg-gray-900 transition-colors duration-200">
+                <div class="max-w-4xl mx-auto px-6 py-8">
+                    <!-- Lesson Content -->
+                    <article class="space-y-8 fade-in">
+                        <!-- Course Title Section -->
+                        <section class="bg-gradient-to-r from-blue-600 to-blue-700 rounded-xl shadow-lg p-8 text-white mb-8">
+                            <h1 class="text-4xl font-bold mb-4">ICTO-BMR</h1>
+                            <p class="text-blue-100 text-lg">E-learning platform voor ICTO-BMR</p>
+                        </section>
+
+                        <!-- Introduction Section -->
+                        <section class="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 hover-lift transition-colors duration-200">
+                            <div class="flex flex-col sm:flex-row items-start box-border" style="width: 100%; max-width: 100%; box-sizing: border-box;">
+                                <div class="w-10 h-10 sm:w-12 sm:h-12 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center flex-shrink-0 mb-3 sm:mb-0 sm:mr-4">
+                                    <i class="fas fa-info-circle text-blue-600 dark:text-blue-400 text-lg"></i>
+                                </div>
+                                <div class="flex-1 min-w-0 box-border sm:pr-[70px]" style="min-width: 0; max-width: 100%; box-sizing: border-box;">
+                                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-3">Over BMR ICTO</h3>
+                                    <div class="prose max-w-none">
+                                        <p class="text-gray-700 dark:text-gray-300 mb-4">
+                                            Bij BMR ICTO kun je terecht voor al je ICT en Onderwijs gerelateerde vragen. We zijn o.a. decentraal beheerder voor Brightspace (ELO) en ANS (toetssysteem) binnen het domein BMR. We zijn verantwoordelijk voor de professionalisering van ICT-vaardigheid van de collega's binnen BMR en je kunt bij ons terecht voor advies en ondersteuning inzet digitale tools in onderwijs.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                    </article>
+
+                    <!-- Action Buttons -->
+                    <div class="mt-12 flex justify-center items-center space-x-6">
+                        <!-- Action buttons worden hier getoond zodra modules beschikbaar zijn -->
+                    </div>
+                </div>
+                </main>
+            </div>
+        </div>
+    </div>
+
+    <!-- Overlay for mobile menu -->
+    <div id="overlay" class="fixed inset-0 bg-black bg-opacity-50 dark:bg-opacity-70 z-30 hidden lg:hidden transition-opacity"></div>
+
+    <!-- Scroll to top button -->
+    <button 
+        id="scroll-to-top-btn" 
+        class="fixed bottom-8 right-8 bg-blue-600 dark:bg-blue-700 text-white p-4 rounded-full shadow-lg hover:bg-blue-700 dark:hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition-all duration-300 z-50 opacity-0 pointer-events-none"
+        aria-label="Naar boven scrollen"
+        title="Naar boven">
+        <i class="fas fa-arrow-up text-xl"></i>
+    </button>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Mobile menu functionality - DISABLED: SidebarManager handles this now
+            // This code is kept for backward compatibility but should not run when SidebarManager is active
+            // SidebarManager will be initialized by AppRouter for SPA navigation
+            // Only initialize here if we're NOT in SPA mode (hard refresh on index.html)
+            if (!window.appRouter && window.SidebarManager) {
+                const mobileMenuButton = document.getElementById('mobile-menu-button');
+                const sidebar = document.getElementById('sidebar');
+                const overlay = document.getElementById('overlay');
+
+                if (mobileMenuButton && sidebar && overlay) {
+                    // Initialize SidebarManager for initial page load (hard refresh)
+                    const sidebarManager = new window.SidebarManager('start');
+                    sidebarManager.init();
+                }
+            }
+
+            // Word count for reflection (if element exists)
+            const reflectionText = document.getElementById('reflection-text');
+            const wordCount = document.getElementById('word-count');
+
+            if (reflectionText && wordCount) {
+                reflectionText.addEventListener('input', () => {
+                    const words = reflectionText.value.trim().split(/\s+/).filter(word => word.length > 0);
+                    wordCount.textContent = `${words.length} woorden`;
+                    
+                    if (words.length >= 200) {
+                        wordCount.classList.add('text-green-600');
+                        wordCount.classList.remove('text-gray-500');
+                    } else {
+                        wordCount.classList.add('text-gray-500');
+                        wordCount.classList.remove('text-green-600');
+                    }
+                });
+            }
+
+            // Keyboard navigation
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && sidebar && overlay) {
+                    sidebar.classList.add('-translate-x-full');
+                    overlay.classList.add('hidden');
+                }
+            });
+
+            // Accessibility: Skip to content
+            const skipLink = document.querySelector('a[href="#main-content"]');
+            if (skipLink) {
+                skipLink.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const mainContent = document.getElementById('main-content');
+                    if (mainContent) {
+                        mainContent.focus();
+                    }
+                });
+            }
+
+            // Scroll to top button functionality
+            const scrollToTopBtn = document.getElementById('scroll-to-top-btn');
+            const mainContent = document.getElementById('main-content');
+
+            if (scrollToTopBtn) {
+                scrollToTopBtn.addEventListener('click', () => {
+                    // Try scrolling main-content container first
+                    if (mainContent) {
+                        mainContent.scrollTo({
+                            top: 0,
+                            behavior: 'smooth'
+                        });
+                    }
+                    
+                    // Also scroll window/document to top (handles case where page itself scrolls)
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Fallback for older browsers
+                    document.documentElement.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                });
+
+                // Show/hide button based on scroll position
+                const handleScroll = () => {
+                    // Check both main-content scroll and window scroll, use the maximum
+                    let mainContentScroll = 0;
+                    let windowScroll = window.pageYOffset || document.documentElement.scrollTop || 0;
+                    
+                    if (mainContent) {
+                        mainContentScroll = mainContent.scrollTop || 0;
+                    }
+                    
+                    // Use the maximum scroll position (in case both are scrolling)
+                    const scrollTop = Math.max(mainContentScroll, windowScroll);
+                    
+                    if (scrollTop > 300) {
+                        // Show button when scrolled down more than 300px
+                        scrollToTopBtn.classList.remove('opacity-0', 'pointer-events-none');
+                        scrollToTopBtn.classList.add('opacity-100');
+                    } else {
+                        // Hide button when near the top
+                        scrollToTopBtn.classList.add('opacity-0', 'pointer-events-none');
+                        scrollToTopBtn.classList.remove('opacity-100');
+                    }
+                };
+
+                // Listen to both main-content scroll and window scroll
+                if (mainContent) {
+                    mainContent.addEventListener('scroll', handleScroll, { passive: true });
+                }
+                window.addEventListener('scroll', handleScroll, { passive: true });
+                
+                // Check initial scroll position on page load (with small delay to ensure DOM is ready)
+                setTimeout(() => {
+                    handleScroll();
+                }, 100);
+            }
+            
+            // Submenu functionality can be added here when modules are created
+        });
+        
+        // Dark Mode Toggle
+        const darkModeToggle = document.getElementById('dark-mode-toggle');
+        const sunIcon = document.getElementById('dark-mode-icon-sun');
+        const moonIcon = document.getElementById('dark-mode-icon-moon');
+        
+        if (darkModeToggle && window.DarkMode) {
+            // Update icons on initial load
+            const updateDarkModeIcons = () => {
+                if (!sunIcon || !moonIcon || !window.DarkMode) return;
+                
+                const isDark = window.DarkMode.isDark();
+                
+                if (isDark) {
+                    sunIcon.classList.add('rotate-90', 'scale-0', 'opacity-0');
+                    sunIcon.classList.remove('rotate-0', 'scale-100', 'opacity-100');
+                    moonIcon.classList.remove('rotate-0', 'scale-0', 'opacity-0');
+                    moonIcon.classList.add('rotate-0', 'scale-100', 'opacity-100');
+                } else {
+                    sunIcon.classList.remove('rotate-90', 'scale-0', 'opacity-0');
+                    sunIcon.classList.add('rotate-0', 'scale-100', 'opacity-100');
+                    moonIcon.classList.add('rotate-0', 'scale-0', 'opacity-0');
+                    moonIcon.classList.remove('rotate-0', 'scale-100', 'opacity-100');
+                }
+            };
+            
+            updateDarkModeIcons();
+            
+            darkModeToggle.addEventListener('click', () => {
+                window.DarkMode.toggle();
+                updateDarkModeIcons();
+            });
+            
+            window.addEventListener('darkModeChange', updateDarkModeIcons);
+        }
+
+        // Helper functie om te wachten tot PDF bibliotheken geladen zijn (globale functie)
+        window.waitForPDFLibraries = function(maxAttempts = 50, interval = 100) {
+            return new Promise((resolve, reject) => {
+                let attempts = 0;
+                const checkLibraries = () => {
+                    attempts++;
+                    // Check of beide bibliotheken geladen zijn
+                    const jspdfLoaded = typeof window.jspdf !== 'undefined';
+                    const html2canvasLoaded = typeof html2canvas !== 'undefined';
+                    
+                    if (jspdfLoaded && html2canvasLoaded) {
+                        console.log('[PDF Export] Bibliotheken geladen na', attempts, 'pogingen');
+                        resolve();
+                    } else if (attempts >= maxAttempts) {
+                        console.error('[PDF Export] Bibliotheken niet geladen na', attempts, 'pogingen');
+                        console.error('[PDF Export] jspdf:', jspdfLoaded, 'html2canvas:', html2canvasLoaded);
+                        reject(new Error('PDF bibliotheken konden niet worden geladen. Controleer je internetverbinding en herlaad de pagina.'));
+                    } else {
+                        setTimeout(checkLibraries, interval);
+                    }
+                };
+                checkLibraries();
+            });
+        };
+
+        // PDF Export functionality for Index Page
+        window.setupPDFExport = function(retries = 3) {
+            console.log('[setupPDFExport] Called, retries left:', retries);
+            console.log('[setupPDFExport] Document ready state:', document.readyState);
+            const exportPdfBtn = document.getElementById('export-pdf-btn');
+            console.log('[setupPDFExport] Button found:', !!exportPdfBtn);
+            
+            if (exportPdfBtn) {
+                // Remove existing event listener by cloning (prevents duplicates)
+                const newBtn = exportPdfBtn.cloneNode(true);
+                exportPdfBtn.parentNode.replaceChild(newBtn, exportPdfBtn);
+                
+                // #region agent log
+                fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'index.html:1563',message:'Adding click listener to PDF export button',data:{},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'})}).catch(()=>{});
+                // #endregion
+                newBtn.addEventListener('click', async () => {
+                    // #region agent log
+                    fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'index.html:1564',message:'PDF export button clicked',data:{},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'D'})}).catch(()=>{});
+                    // #endregion
+                    // Disable button tijdens export
+                    newBtn.disabled = true;
+                    newBtn.innerHTML = '<i class="fas fa-spinner fa-spin text-xl"></i><span class="font-semibold">Exporteren...</span>';
+                    
+                    try {
+                        // #region agent log
+                        fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'index.html:1570',message:'Waiting for PDF libraries',data:{jspdf:typeof window.jspdf,html2canvas:typeof html2canvas},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'C'})}).catch(()=>{});
+                        // #endregion
+                        // Wacht tot bibliotheken geladen zijn
+                        await window.waitForPDFLibraries();
+                        
+                        // Check nogmaals of bibliotheken beschikbaar zijn
+                        if (typeof window.jspdf === 'undefined' || typeof html2canvas === 'undefined') {
+                            throw new Error('PDF bibliotheken zijn niet beschikbaar. Herlaad de pagina en probeer het opnieuw.');
+                        }
+                        
+                        // #region agent log
+                        fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'index.html:1577',message:'Calling PDFExporter',data:{},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'C'})}).catch(()=>{});
+                        // #endregion
+                        const exporter = new PDFExporter();
+                        await exporter.exportAllContentToPDF();
+                    } catch (error) {
+                        // #region agent log
+                        fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'index.html:1579',message:'PDF export error',data:{errorMessage:error.message,errorName:error.name},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'C'})}).catch(()=>{});
+                        // #endregion
+                        console.error('PDF export error:', error);
+                        const errorMessage = error.message || 'Er is een fout opgetreden bij het exporteren. Probeer het opnieuw.';
+                        alert(errorMessage);
+                    } finally {
+                        // Re-enable button
+                        newBtn.disabled = false;
+                        newBtn.innerHTML = '<i class="fas fa-file-pdf text-xl"></i><span class="font-semibold">Exporteer alle content naar PDF</span>';
+                    }
+                });
+            } else if (retries > 0) {
+                console.warn('[setupPDFExport] ⚠️ PDF export button not found in DOM, retrying... (', retries, 'attempts left)');
+                console.warn('[setupPDFExport] Available buttons with IDs:', Array.from(document.querySelectorAll('button[id]')).map(btn => btn.id));
+                // Retry after a delay - button might not be rendered yet (especially in SPA mode)
+                setTimeout(() => {
+                    console.log('[setupPDFExport] Retrying...');
+                    window.setupPDFExport(retries - 1);
+                }, 500);
+            } else {
+                console.error('[setupPDFExport] ❌ PDF export button not found after all retries');
+                console.error('[setupPDFExport] Available buttons:', Array.from(document.querySelectorAll('button')).map(btn => ({
+                    id: btn.id,
+                    text: btn.textContent?.trim().substring(0, 50),
+                    classes: btn.className
+                })).filter(btn => btn.text?.toLowerCase().includes('pdf') || btn.text?.toLowerCase().includes('export')));
+            }
+        };
+
+        // Search Functionality for Index Page
+        const setupSearch = async () => {
+            const searchInput = document.getElementById('global-search-input');
+            const resultsDropdown = document.getElementById('search-results-dropdown');
+            const searchToggleBtn = document.getElementById('search-toggle-btn');
+            const searchOverlay = document.getElementById('search-overlay');
+            const closeSearchBtn = document.getElementById('close-search-btn');
+            
+            if (!searchInput || !resultsDropdown) return;
+            
+            // Initialize search service
+            if (window.SearchService && !window.SearchService.isInitialized) {
+                window.SearchService.init().catch(console.error);
+            }
+            
+            // Toggle Search Overlay Logic
+            if (searchToggleBtn && searchOverlay) {
+                const openSearch = () => {
+                    searchOverlay.classList.remove('opacity-0', 'pointer-events-none', '-translate-y-2');
+                    searchOverlay.classList.add('opacity-100', 'pointer-events-auto', 'translate-y-0');
+                    setTimeout(() => searchInput.focus(), 50);
+                };
+
+                const closeSearch = () => {
+                    searchOverlay.classList.add('opacity-0', 'pointer-events-none', '-translate-y-2');
+                    searchOverlay.classList.remove('opacity-100', 'pointer-events-auto', 'translate-y-0');
+                    resultsDropdown.classList.add('hidden');
+                };
+
+                searchToggleBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    openSearch();
+                });
+
+                if (closeSearchBtn) {
+                    closeSearchBtn.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        closeSearch();
+                    });
+                }
+                
+                // Close on Escape key
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'Escape' && !searchOverlay.classList.contains('opacity-0')) {
+                        closeSearch();
+                    }
+                });
+            }
+            
+            let debounceTimer;
+            
+            const performSearch = (query) => {
+                const results = window.SearchService.search(query);
+                
+                if (results.length === 0) {
+                    resultsDropdown.innerHTML = `
+                        <div class="px-4 py-3 text-sm text-gray-500 dark:text-gray-400">
+                            Geen resultaten gevonden voor "${query}"
+                        </div>
+                    `;
+                } else {
+                    resultsDropdown.innerHTML = results.map(result => `
+                        <a href="${result.url}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors border-b border-gray-100 dark:border-gray-700 last:border-0">
+                            <div class="flex items-center justify-between">
+                                <span class="text-sm font-medium text-blue-600 dark:text-blue-400">${result.context || result.week}</span>
+                                <span class="text-xs text-gray-400 bg-gray-100 dark:bg-gray-800 px-2 py-0.5 rounded-full uppercase tracking-wider">${result.type}</span>
+                            </div>
+                            <div class="text-sm font-semibold text-gray-900 dark:text-white mt-0.5">${result.title}</div>
+                            ${result.snippet ? `<div class="text-xs text-gray-500 dark:text-gray-400 mt-1 line-clamp-2">${result.snippet}</div>` : ''}
+                        </a>
+                    `).join('');
+                }
+                resultsDropdown.classList.remove('hidden');
+            };
+
+            searchInput.addEventListener('input', (e) => {
+                const query = e.target.value;
+                
+                clearTimeout(debounceTimer);
+                debounceTimer = setTimeout(() => {
+                    if (query.length < 2) {
+                        resultsDropdown.classList.add('hidden');
+                        resultsDropdown.innerHTML = '';
+                        return;
+                    }
+                    
+                    if (window.SearchService) {
+                        if (!window.SearchService.isInitialized) {
+                            window.SearchService.init().then(() => performSearch(query));
+                        } else {
+                            performSearch(query);
+                        }
+                    }
+                }, 300);
+            });
+            
+            // Close dropdown on click outside
+            document.addEventListener('click', (e) => {
+                // Check if click is outside search input and dropdown
+                const isOutsideSearch = !searchInput.contains(e.target) && !resultsDropdown.contains(e.target);
+                
+                // Also check if it's outside the toggle button
+                const isOutsideToggle = !searchToggleBtn || !searchToggleBtn.contains(e.target);
+                
+                // If we have an overlay, check if we clicked the overlay background
+                let isOutsideContainer = true;
+                if (searchOverlay && searchOverlay.contains(e.target)) {
+                    const container = searchOverlay.firstElementChild;
+                    if (container && container.contains(e.target)) {
+                        isOutsideContainer = false;
+                    }
+                }
+
+                if (isOutsideSearch && isOutsideToggle) {
+                    resultsDropdown.classList.add('hidden');
+                    
+                    // If we clicked on the overlay background, close the whole search
+                    if (searchOverlay && !searchOverlay.classList.contains('opacity-0') && e.target === searchOverlay) {
+                        searchOverlay.classList.add('opacity-0', 'pointer-events-none', '-translate-y-2');
+                        searchOverlay.classList.remove('opacity-100', 'pointer-events-auto', 'translate-y-0');
+                    }
+                }
+            });
+            
+            // Show results again on focus
+            searchInput.addEventListener('focus', () => {
+                if (searchInput.value.length >= 2 && resultsDropdown.children.length > 0) {
+                    resultsDropdown.classList.remove('hidden');
+                }
+            });
+        };
+        
+        setupSearch();
+        // Call setupPDFExport after libraries are loaded
+        const initializePDFExport = async () => {
+            console.log('[Index] 🔄 Initializing PDF export...');
+            console.log('[Index] Document ready state:', document.readyState);
+            console.log('[Index] PDF export button exists:', !!document.getElementById('export-pdf-btn'));
+            try {
+                // Wacht tot bibliotheken geladen zijn (max 10 seconden)
+                await window.waitForPDFLibraries(100, 100);
+                console.log('[Index] ✅ PDF bibliotheken geladen, initialiseren export functie');
+                window.setupPDFExport();
+            } catch (error) {
+                console.error('[Index] ❌ PDF bibliotheken konden niet worden geladen:', error);
+                console.error('[Index] Setting up PDF export anyway (user will see error on click)');
+                // Setup export functie toch, zodat gebruiker een error message krijgt bij klikken
+                window.setupPDFExport();
+            }
+        };
+        
+        if (document.readyState === 'loading') {
+            console.log('[Index] Document still loading, waiting for DOMContentLoaded...');
+            document.addEventListener('DOMContentLoaded', () => {
+                console.log('[Index] DOMContentLoaded fired, initializing PDF export...');
+                initializePDFExport();
+            });
+        } else {
+            console.log('[Index] Document already loaded, initializing PDF export immediately...');
+            initializePDFExport();
+        }
+        
+        // Initialize SPA Router - Wait for all scripts to load
+        const initializeRouter = () => {
+            console.log('[Index] Checking for AppRouter:', !!window.AppRouter);
+            console.log('[Index] ⏰ Router initialization started at:', new Date().toISOString());
+            
+            // Check which page classes are available
+            const availableClasses = Object.keys(window).filter(k => 
+                k.includes('LessonPage') || k === 'RegisterPage'
+            );
+            console.log('[Index] Available page classes:', availableClasses);
+            
+            // Expected classes
+            const expectedClasses = [
+                'WatIsICTOLessonPage',
+                'WatDoetICTOLessonPage',
+                'WaaromICTOLessonPage',
+                'RegisterPage'
+            ];
+            
+            const missingClasses = expectedClasses.filter(cls => !availableClasses.includes(cls));
+            if (missingClasses.length > 0) {
+                console.warn('[Index] ⚠️ Missing page classes:', missingClasses);
+                console.warn('[Index] This might cause navigation issues. Check if scripts are loaded correctly.');
+            } else {
+                console.log('[Index] ✅ All expected page classes are available');
+            }
+            
+            if (window.AppRouter) {
+                console.log('[Index] ✅ AppRouter found, initializing...');
+                const router = new AppRouter();
+                router.init();
+                window.appRouter = router; // Store globally for debugging
+                console.log('[Index] ✅ Router initialized and stored in window.appRouter');
+            } else {
+                console.error('[Index] ❌ AppRouter not found! Check if js/core/AppRouter.js is loaded.');
+            }
+        };
+        
+        // Wait for all scripts to load before initializing router
+        // Scripts are loaded synchronously, but we need to wait for all exports to complete
+        let checkAttempts = 0;
+        const maxAttempts = 40; // 40 * 50ms = 2 seconds max wait
+        const waitForAllScripts = () => {
+            checkAttempts++;
+            const expectedClasses = [
+                // Additional classes can be added here as modules are created
+            ];
+            
+            const allAvailable = expectedClasses.every(cls => window[cls]);
+            
+            if (allAvailable) {
+                console.log('[Index] ✅ All scripts loaded, initializing router');
+                initializeRouter();
+            } else if (checkAttempts < maxAttempts) {
+                const missing = expectedClasses.filter(cls => !window[cls]);
+                console.log(`[Index] ⏳ Waiting for scripts... (attempt ${checkAttempts}/${maxAttempts}) Missing:`, missing);
+                // Check again in 50ms
+                setTimeout(waitForAllScripts, 50);
+            } else {
+                // Timeout reached, initialize anyway with what we have
+                console.warn('[Index] ⚠️ Timeout waiting for all scripts, initializing router with available classes');
+                const missing = expectedClasses.filter(cls => !window[cls]);
+                console.warn('[Index] Missing classes:', missing);
+                initializeRouter();
+            }
+        };
+        
+        // Initialize navigation dynamically on page load (prevents hardcoded nav from getting out of sync)
+        const initializeNavigation = () => {
+            if (window.NavigationInitializer && window.LayoutRenderer) {
+                const navInitializer = new window.NavigationInitializer();
+                navInitializer.init();
+            } else {
+                // Retry if not ready yet
+                setTimeout(initializeNavigation, 50);
+            }
+        };
+        
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', () => {
+                // Initialize navigation first
+                initializeNavigation();
+                // Start checking for all scripts
+                setTimeout(waitForAllScripts, 100);
+            });
+        } else {
+            // DOM already loaded, initialize navigation first
+            initializeNavigation();
+            // Start checking
+            setTimeout(waitForAllScripts, 100);
+        }
+        
+        // Debug: Log all link clicks for ICTO pages
+        document.addEventListener('click', (e) => {
+            const link = e.target.closest('a[href]');
+            if (link && (link.href.includes('wat-is-icto') || link.href.includes('wat-doet-icto') || link.href.includes('waarom-icto'))) {
+                console.log('[DEBUG] 🔗 Link clicked:', link.href);
+                console.log('[DEBUG] Router active:', !!window.appRouter);
+                console.log('[DEBUG] Will navigate normally:', !window.appRouter);
+                console.log('[DEBUG] Link element:', link);
+            }
+        }, true);
+    </script>
+</body>
+</html>

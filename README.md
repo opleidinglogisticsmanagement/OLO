@@ -167,9 +167,14 @@ Het monorepo ondersteunt twee manieren om apps te ontwikkelen:
 Maak een `.env` bestand in de root directory met deze inhoud:
 
 ```env
-# Google Gemini API Key
+# DeepSeek API Key (Aanbevolen - gebruikt voor alle apps)
+# Verkrijg een API key op: https://platform.deepseek.com/api_keys
+DEEPSEEK_API_KEY=your_deepseek_api_key_here
+AI_PROVIDER=deepseek
+
+# Google Gemini API Key (Alternatief - alleen gebruiken als DeepSeek niet beschikbaar is)
 # Verkrijg een API key op: https://makersuite.google.com/app/apikey
-GEMINI_API_KEY=your_api_key_here
+# GEMINI_API_KEY=your_gemini_api_key_here
 
 # Server Port (standaard: 3000)
 PORT=3000
@@ -184,9 +189,12 @@ NODE_ENV=development
 ```
 
 **BELANGRIJK:** 
-- Vervang `your_api_key_here` met je eigen Google Gemini API key
+- **DeepSeek is nu de standaard API** voor alle apps wanneer `DEEPSEEK_API_KEY` en `AI_PROVIDER=deepseek` zijn ingesteld
+- Vervang `your_deepseek_api_key_here` met je eigen DeepSeek API key
+- Als je Gemini wilt gebruiken, verwijder of commenteer de DeepSeek regels en gebruik `GEMINI_API_KEY` in plaats daarvan
 - Het `.env` bestand staat in `.gitignore` en wordt niet gecommit naar Git
 - Voor productie: pas `ALLOWED_ORIGINS` aan naar je eigen domein
+- **App-specifieke configuratie:** Je kunt ook een `.env` bestand in `apps/[app-naam]/.env` plaatsen om per app een andere API te gebruiken
 
 **Stap 4: Server starten**
 
@@ -307,10 +315,13 @@ Health check endpoint om te controleren of de server draait.
 
 2. **Voeg API Key toe:**
    - Klik op **Add New**
-   - **Name:** `GEMINI_API_KEY`
-   - **Value:** Je Google Gemini API key (bijv. `AIzaSy...`)
+   - **Name:** `DEEPSEEK_API_KEY` (aanbevolen) of `GEMINI_API_KEY` (alternatief)
+   - **Value:** Je DeepSeek API key (bijv. `sk-...`) of Gemini API key (bijv. `AIzaSy...`)
+   - **Voor DeepSeek:** Voeg ook `AI_PROVIDER` toe met waarde `deepseek`
    - Selecteer alle environments (Production, Preview, Development)
    - Klik op **Save**
+   
+   **Opmerking:** DeepSeek is nu de standaard API. Als je DeepSeek gebruikt, zorg ervoor dat je ook `AI_PROVIDER=deepseek` toevoegt als environment variable.
 
 ##### 🚀 Stap 3: Deploy
 

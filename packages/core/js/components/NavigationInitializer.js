@@ -23,6 +23,9 @@ class NavigationInitializer {
         } else if (hostname.includes('edubook-logistiek') || href.includes('edubook-logistiek') || pathname.includes('edubook-logistiek')) {
             this.appId = 'edubook-logistiek';
             this.appTitle = 'Edubook-Logistiek';
+        } else if (hostname.includes('ICTO-BMR') || href.includes('ICTO-BMR') || pathname.includes('ICTO-BMR') || hostname.includes('icto-bmr') || href.includes('icto-bmr') || pathname.includes('icto-bmr')) {
+            this.appId = 'icto-bmr';
+            this.appTitle = 'ICTO-BMR';
         } else if (hostname.includes('logistiek-onderzoek') || href.includes('logistiek-onderzoek') || pathname.includes('logistiek-onderzoek')) {
             this.appId = 'logistiek-onderzoek';
             this.appTitle = 'Opzetten van Logistieke Onderzoeken (OLO)';

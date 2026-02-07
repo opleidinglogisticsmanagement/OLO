@@ -1,7 +1,7 @@
 /**
- * Server-side Proxy voor Google Gemini API
+ * Server-side Proxy voor DeepSeek API
  * 
- * Deze server handelt Gemini API calls af om CORS-problemen te voorkomen
+ * Deze server handelt DeepSeek API calls af om CORS-problemen te voorkomen
  * en API keys veilig te beheren.
  */
 
@@ -24,7 +24,15 @@ const cors = require('cors');
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
 const { body, validationResult } = require('express-validator');
-const { GoogleGenerativeAI } = require('@google/generative-ai');
+// OpenAI SDK for DeepSeek (OpenAI-compatible API)
+let OpenAI;
+try {
+    OpenAI = require('openai');
+} catch (e) {
+    console.error('[Server] ❌ OpenAI SDK not installed. DeepSeek support requires the "openai" package.');
+    console.error('[Server] Run: npm install openai');
+    process.exit(1);
+}
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -43,7 +51,13 @@ app.use(helmet({
         styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com", "https://cdnjs.cloudflare.com", "https://cdn.jsdelivr.net"],
         fontSrc: ["'self'", "https://fonts.gstatic.com", "https://cdnjs.cloudflare.com", "https://cdn.jsdelivr.net"],
             imgSrc: ["'self'", "data:", "https:"],
-            connectSrc: ["'self'", "https://*.vercel.app", "https://generativelanguage.googleapis.com"],
+            connectSrc: [
+                "'self'", 
+                "https://*.vercel.app", 
+                "https://generativelanguage.googleapis.com",
+                "http://127.0.0.1:7242", // Debug logging endpoint (development only)
+                "http://localhost:7242"  // Alternative debug logging endpoint
+            ],
             frameSrc: ["'self'", "https://www.youtube.com", "https://media.windesheim.nl", "https://sts.windesheim.nl"]
         }
     },
@@ -130,107 +144,23 @@ const apiLimiter = rateLimit({
 
 app.use('/api/', apiLimiter);
 
-// API Key validation
-const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
+// API Key validation (DeepSeek only)
+const DEEPSEEK_API_KEY = process.env.DEEPSEEK_API_KEY;
+const AI_PROVIDER = process.env.AI_PROVIDER || 'deepseek'; // Always use DeepSeek
 
-if (!GEMINI_API_KEY) {
-    console.error('⚠️  WARNING: GEMINI_API_KEY is not set in .env file');
-    console.error('   Please create a .env file with: GEMINI_API_KEY=your_api_key_here');
+// Log global API configuration
+if (DEEPSEEK_API_KEY) {
+    console.log('[API Config] ✅ Global DeepSeek API configured');
+} else {
+    console.error('⚠️  WARNING: DEEPSEEK_API_KEY is not set in .env file');
+    console.error('   Please set: DEEPSEEK_API_KEY=your_deepseek_key');
+    console.error('   Get your API key at: https://platform.deepseek.com/api_keys');
 }
 
-// Cache voor beschikbare Gemini modellen
-let cachedAvailableModels = [];
-let modelCacheTimestamp = null;
-const MODEL_CACHE_TTL = 24 * 60 * 60 * 1000; // 24 uur cache (Free Tier rechten veranderen niet per uur)
+// Functions will be defined after availableApps is initialized
+let detectAppFromPath, getAppAPIConfig, parseEnvFile;
 
-/**
- * Haal beschikbare Gemini modellen op en cache ze
- * @returns {Promise<Array>} Array van beschikbare model namen
- */
-async function fetchAndCacheAvailableModels() {
-    if (!GEMINI_API_KEY) {
-        console.warn('[Gemini Proxy] No API key, cannot fetch models');
-        return [];
-    }
-
-    try {
-        const fetch = globalThis.fetch || require('node-fetch');
-        const listModelsUrl = `https://generativelanguage.googleapis.com/v1beta/models?key=${GEMINI_API_KEY}`;
-        console.log('[Gemini Proxy] Fetching available models (cache miss)...');
-        
-        const listResponse = await fetch(listModelsUrl);
-        if (listResponse.ok) {
-            const modelsData = await listResponse.json();
-            const models = modelsData.models
-                ?.filter(m => {
-                    // Only include models that support generateContent
-                    if (!m.supportedGenerationMethods?.includes('generateContent')) {
-                        return false;
-                    }
-                    // Exclude image-specific models (they have -image suffix or contain 'image' in name)
-                    if (m.name.includes('-image') || m.name.includes('image')) {
-                        return false;
-                    }
-                    // Exclude embedding models
-                    if (m.name.includes('embedding') || m.name.includes('embed')) {
-                        return false;
-                    }
-                    return true;
-                })
-                ?.map(m => m.name.replace('models/', '')) || [];
-            
-            // Sort models: flash first (fastest), then pro, then others
-            const sorted = models.sort((a, b) => {
-                if (a.includes('flash')) return -1;
-                if (b.includes('flash')) return 1;
-                if (a.includes('pro') && !b.includes('pro')) return -1;
-                if (b.includes('pro') && !a.includes('pro')) return 1;
-                return 0;
-            });
-            
-            cachedAvailableModels = sorted;
-            modelCacheTimestamp = Date.now();
-            
-            console.log(`[Gemini Proxy] ✅ Cached ${sorted.length} available models with generateContent (text-only)`);
-            console.log('[Gemini Proxy] Available models (sorted, flash first):', sorted.slice(0, 5));
-            
-            return sorted;
-        } else {
-            console.warn('[Gemini Proxy] Could not list models, using defaults');
-            return [];
-        }
-    } catch (listError) {
-        console.warn('[Gemini Proxy] Could not list models:', listError.message);
-        return [];
-    }
-}
-
-/**
- * Get cached available models, or fetch if cache is empty/expired
- * Returns models sorted by speed preference (flash first)
- * @returns {Promise<Array>} Array van beschikbare model namen (flash first)
- */
-async function getAvailableModels() {
-    // Check if cache is valid
-    const now = Date.now();
-    if (cachedAvailableModels.length > 0 && modelCacheTimestamp && (now - modelCacheTimestamp) < MODEL_CACHE_TTL) {
-        console.log(`[Gemini Proxy] Using cached models (${cachedAvailableModels.length} models)`);
-        
-        // Sort models: flash first (fastest), then pro, then others
-        const sorted = [...cachedAvailableModels].sort((a, b) => {
-            if (a.includes('flash')) return -1;
-            if (b.includes('flash')) return 1;
-            if (a.includes('pro') && !b.includes('pro')) return -1;
-            if (b.includes('pro') && !a.includes('pro')) return 1;
-            return 0;
-        });
-        
-        return sorted;
-    }
-    
-    // Cache is empty or expired, fetch new
-    return await fetchAndCacheAvailableModels();
-}
+// DeepSeek uses fixed model: deepseek-chat (no model caching needed)
 
 /**
  * Input validatie middleware voor generate-questions
@@ -252,7 +182,7 @@ const validateGenerateQuestions = [
 ];
 
 /**
- * Proxy endpoint voor Gemini API generateContent
+ * Proxy endpoint voor DeepSeek API generateContent
  * POST /api/generate-questions
  * Body: { theoryContent: string, numberOfQuestions: number }
  */
@@ -268,11 +198,23 @@ app.post('/api/generate-questions', validateGenerateQuestions, async (req, res) 
             });
         }
 
+        // Detect app from request path, referer header, or origin header
+        let appName = detectAppFromPath(req.path);
+        if (!appName && req.headers.referer) {
+            appName = detectAppFromPath(req.headers.referer);
+        }
+        if (!appName && req.headers.origin) {
+            appName = detectAppFromPath(req.headers.origin);
+        }
+        
+        // Get app-specific API configuration
+        const apiConfig = getAppAPIConfig(appName);
+        
         // Check if API key is set
-        if (!GEMINI_API_KEY) {
+        if (!apiConfig.apiKey) {
             return res.status(500).json({
                 error: 'API key not configured',
-                message: 'GEMINI_API_KEY is not set in server environment'
+                message: `DEEPSEEK_API_KEY is not set${appName ? ` for app: ${appName}` : ''}`
             });
         }
 
@@ -336,70 +278,52 @@ Geef het antwoord terug in JSON format met deze structuur:
 Theorie tekst:
 ${theoryContent.substring(0, 8000)}`; // Limit to 8000 chars
 
-        // Use Google Generative AI SDK
-        const genAI = new GoogleGenerativeAI(GEMINI_API_KEY);
-        
-        // Use Free Tier compatible models: gemini-2.5-flash and gemini-2.5-flash-lite
-        // Get cached available models (sorted with flash first)
-        let availableModels = await getAvailableModels();
-        
-        // Filter for Free Tier compatible models: gemini-2.5-flash and gemini-2.5-flash-lite
-        const freeTierModels = availableModels.filter(m => {
-            const modelLower = m.toLowerCase();
-            // Only allow 2.5-flash models (Free Tier compatible)
-            if (modelLower.includes('2.5-flash')) {
-                // Exclude preview variants
-                if (modelLower.includes('-preview') || 
-                    modelLower.includes('-experimental')) {
-                    return false;
-                }
-                return true;
-            }
-            return false;
-        });
-        
-        // If no free tier models in cache, use default Free Tier models
-        let models;
-        if (freeTierModels.length > 0) {
-            // Sort: flash first, then flash-lite
-            models = freeTierModels.sort((a, b) => {
-                if (a.includes('flash-lite') && !b.includes('flash-lite')) return 1;
-                if (b.includes('flash-lite') && !a.includes('flash-lite')) return -1;
-                return 0;
-            }).slice(0, 2);
-        } else {
-            // Default Free Tier models
-            models = [
-                'gemini-2.5-flash',      // Primary Free Tier model
-                'gemini-2.5-flash-lite'  // Fallback Free Tier model
-            ];
-        }
-        
-        console.log(`[Gemini Proxy] Will try models in order:`, models);
-        
         let responseText;
         let lastError;
-        let modelCacheInvalid = false;
         
-        for (const modelName of models) {
+        // Use DeepSeek API if configured
+        if (apiConfig.provider === 'deepseek') {
+            if (!OpenAI) {
+                return res.status(500).json({
+                    error: 'OpenAI SDK not installed',
+                    message: 'DeepSeek support requires the "openai" package. Run: npm install openai'
+                });
+            }
+            
             try {
-                console.log(`[Gemini Proxy] Trying model: ${modelName}`);
-                const model = genAI.getGenerativeModel({ model: modelName });
-                const result = await model.generateContent(prompt);
-                const response = await result.response;
-                responseText = response.text();
-                console.log(`[Gemini Proxy] ✅ Success with model: ${modelName}`);
-                console.log(`[Gemini Proxy] Response length: ${responseText.length} characters`);
-                break;
+                console.log(`[DeepSeek Proxy] Using DeepSeek API for app: ${appName || 'default'}`);
+                const openai = new OpenAI({
+                    apiKey: apiConfig.apiKey,
+                    baseURL: 'https://api.deepseek.com'
+                });
+                
+                const completion = await openai.chat.completions.create({
+                    model: 'deepseek-chat',
+                    messages: [
+                        {
+                            role: 'user',
+                            content: prompt
+                        }
+                    ],
+                    temperature: 0.7,
+                    max_tokens: 2000
+                });
+                
+                responseText = completion.choices[0]?.message?.content;
+                
+                if (!responseText) {
+                    throw new Error('Empty response from DeepSeek API');
+                }
+                
+                console.log(`[DeepSeek Proxy] ✅ Success`);
+                console.log(`[DeepSeek Proxy] Response length: ${responseText.length} characters`);
             } catch (error) {
                 const errorMsg = error.message || error.toString();
                 const statusCode = error.status || error.statusCode || (error.response ? error.response.status : null);
-                console.error(`[Gemini Proxy] ❌ Model ${modelName} failed:`, errorMsg);
+                console.error(`[DeepSeek Proxy] ❌ API call failed:`, errorMsg);
                 
                 // Check for 429 Rate Limit error
                 if (statusCode === 429 || errorMsg.includes('429') || errorMsg.includes('quota') || errorMsg.includes('Quota') || errorMsg.includes('rate limit')) {
-                    console.error(`[Gemini Proxy] ⚠️ Rate limit (429) exceeded for model ${modelName}`);
-                    // Return QUOTA_EXCEEDED error immediately
                     return res.status(429).json({
                         success: false,
                         error: 'QUOTA_EXCEEDED',
@@ -407,106 +331,19 @@ ${theoryContent.substring(0, 8000)}`; // Limit to 8000 chars
                     });
                 }
                 
-                // If model not found (404), mark cache as potentially invalid
-                if (errorMsg.includes('404') || errorMsg.includes('not found') || errorMsg.includes('not supported')) {
-                    console.warn(`[Gemini Proxy] Model ${modelName} not found - cache may be invalid`);
-                    modelCacheInvalid = true;
-                }
-                
-                lastError = {
-                    model: modelName,
+                return res.status(502).json({
+                    error: 'DeepSeek API failed',
                     message: errorMsg,
-                    error: error,
-                    statusCode: statusCode
-                };
-            }
-        }
-        
-        // If all models failed and cache might be invalid, clear cache and retry with fresh fetch
-        if (!responseText && modelCacheInvalid) {
-            console.log('[Gemini Proxy] Cache appears invalid, clearing and fetching fresh models...');
-            cachedAvailableModels = [];
-            modelCacheTimestamp = null;
-            const freshModels = await fetchAndCacheAvailableModels();
-            
-            // Try Free Tier models first
-            const freeTierFallback = [
-                'gemini-2.5-flash',
-                'gemini-2.5-flash-lite'
-            ];
-            
-            // Also try fresh models that are Free Tier compatible
-            const freshFreeTierModels = freshModels.filter(m => {
-                const modelLower = m.toLowerCase();
-                return modelLower.includes('2.5-flash') && 
-                       !modelLower.includes('-preview') &&
-                       !modelLower.includes('-experimental');
-            });
-            
-            // Combine Free Tier fallback with fresh Free Tier models
-            const retryModels = [...freeTierFallback, ...freshFreeTierModels.slice(0, 2)];
-            
-            console.log(`[Gemini Proxy] Retrying with models:`, retryModels);
-            for (const modelName of retryModels) {
-                try {
-                    console.log(`[Gemini Proxy] Retrying with model: ${modelName}`);
-                    const model = genAI.getGenerativeModel({ model: modelName });
-                    const result = await model.generateContent(prompt);
-                    const response = await result.response;
-                    responseText = response.text();
-                    console.log(`[Gemini Proxy] ✅ Success with model: ${modelName}`);
-                    break;
-                } catch (retryError) {
-                    const retryStatus = retryError.status || retryError.statusCode || (retryError.response ? retryError.response.status : null);
-                    const retryMsg = retryError.message || retryError.toString();
-                    
-                    // Check for 429 in retry
-                    if (retryStatus === 429 || retryMsg.includes('429') || retryMsg.includes('quota') || retryMsg.includes('Quota') || retryMsg.includes('rate limit')) {
-                        console.error(`[Gemini Proxy] ⚠️ Rate limit (429) exceeded during retry`);
-                        return res.status(429).json({
-                            success: false,
-                            error: 'QUOTA_EXCEEDED',
-                            message: 'API quota exceeded. Please try again tomorrow or continue working with the theory content.'
-                        });
-                    }
-                    console.error(`[Gemini Proxy] ❌ Model ${modelName} also failed:`, retryMsg);
-                }
-            }
-        }
-        
-        if (!responseText) {
-            console.error('[Gemini Proxy] All models failed');
-            
-            // Check if last error was a 429
-            if (lastError?.statusCode === 429 || 
-                lastError?.message?.includes('429') || 
-                lastError?.message?.includes('quota') || 
-                lastError?.message?.includes('Quota') ||
-                lastError?.message?.includes('rate limit')) {
-                return res.status(429).json({
-                    success: false,
-                    error: 'QUOTA_EXCEEDED',
-                    message: 'API quota exceeded. Please try again tomorrow or continue working with the theory content.'
+                    details: error
                 });
             }
-            
-            // Provide more helpful error messages for common issues
-            let errorMessage = lastError?.message || 'Could not generate content';
-            if (lastError?.message) {
-                if (lastError.message.includes('404') || lastError.message.includes('not found')) {
-                    errorMessage = 'Model not found. The selected AI model is not available. Please try again later.';
-                }
-            }
-            
-            return res.status(502).json({
-                error: 'All Gemini models failed',
-                message: errorMessage,
-                details: lastError
-            });
+        } else {
+            // This should never happen - only DeepSeek is supported
+            throw new Error('Only DeepSeek API is supported. Please configure DEEPSEEK_API_KEY.');
         }
-        console.log('[Gemini Proxy] Received response text length:', responseText?.length || 0);
+        console.log(`[DeepSeek] Received response text length:`, responseText?.length || 0);
 
-        // Parse JSON from response (Gemini might wrap it in markdown code blocks)
+        // Parse JSON from response (DeepSeek might wrap it in markdown code blocks)
         let jsonText = responseText.trim();
 
         // Remove markdown code blocks if present
@@ -527,10 +364,10 @@ ${theoryContent.substring(0, 8000)}`; // Limit to 8000 chars
         try {
             parsed = JSON.parse(jsonText);
         } catch (parseError) {
-            console.error('[Gemini Proxy] JSON parse error:', parseError);
-            console.error('[Gemini Proxy] Text to parse:', jsonText.substring(0, 1000));
+            console.error(`[DeepSeek] JSON parse error:`, parseError);
+            console.error(`[DeepSeek] Text to parse:`, jsonText.substring(0, 1000));
             return res.status(502).json({
-                error: 'Failed to parse Gemini response',
+                error: 'Failed to parse DeepSeek response',
                 message: 'Response is not valid JSON',
                 parseError: parseError.message,
                 responseText: jsonText.substring(0, 500)
@@ -539,7 +376,7 @@ ${theoryContent.substring(0, 8000)}`; // Limit to 8000 chars
 
         // Validate response structure
         if (!parsed.vragen || !Array.isArray(parsed.vragen) || parsed.vragen.length === 0) {
-            console.error('[Gemini Proxy] Invalid questions structure:', parsed);
+            console.error(`[DeepSeek] Invalid questions structure:`, parsed);
             return res.status(502).json({
                 error: 'Invalid questions structure',
                 message: 'Response does not contain valid vragen array',
@@ -560,7 +397,7 @@ ${theoryContent.substring(0, 8000)}`; // Limit to 8000 chars
             feedbackFout: vraag.feedbackFout || 'Niet helemaal juist. Bekijk de theorie nog eens.'
         }));
 
-        console.log(`[Gemini Proxy] Successfully generated ${questions.length} questions`);
+        console.log(`[DeepSeek] Successfully generated ${questions.length} questions`);
 
         // Return questions
         return res.json({
@@ -569,7 +406,7 @@ ${theoryContent.substring(0, 8000)}`; // Limit to 8000 chars
         });
 
     } catch (error) {
-        console.error('[Gemini Proxy] Error:', error);
+        console.error('[DeepSeek] Error:', error);
         return res.status(500).json({
             error: 'Internal server error',
             message: error.message,
@@ -644,11 +481,18 @@ app.post('/api/generate-query-scenario', validateGenerateQueryScenario, async (r
             console.warn('[generate-query-scenario] Using default theory content as fallback');
         }
 
-        if (!GEMINI_API_KEY) {
+        if (!DEEPSEEK_API_KEY) {
             console.error('[generate-query-scenario] API key not configured');
             return res.status(500).json({
                 error: 'API key not configured',
-                message: 'GEMINI_API_KEY is not set in environment variables'
+                message: 'DEEPSEEK_API_KEY is not set in environment variables'
+            });
+        }
+        
+        if (!OpenAI) {
+            return res.status(500).json({
+                error: 'OpenAI SDK not installed',
+                message: 'DeepSeek support requires the "openai" package. Run: npm install openai'
             });
         }
 
@@ -718,115 +562,76 @@ Geef je antwoord terug in JSON format:
 
 Antwoord alleen met de JSON, geen extra tekst.`;
 
-        const genAI = new GoogleGenerativeAI(GEMINI_API_KEY);
+        // Use DeepSeek API
+        const openai = new OpenAI({
+            apiKey: DEEPSEEK_API_KEY,
+            baseURL: 'https://api.deepseek.com'
+        });
         
-        let availableModels = [];
         try {
-            availableModels = await getAvailableModels();
-            console.log('[generate-query-scenario] Available models count:', availableModels.length);
-            console.log('[generate-query-scenario] Available models:', availableModels.slice(0, 10));
-        } catch (modelError) {
-            console.warn('[generate-query-scenario] Error getting models, using defaults:', modelError.message);
-        }
-        
-        // Use models from the available models list (they're already filtered to support generateContent)
-        // Prefer flash models (faster), then pro models
-        let models = [];
-        
-        if (availableModels.length > 0) {
-            // Filter to prefer stable models, exclude preview/experimental
-            const preferred = availableModels.filter(m => {
-                if (m.includes('-preview-') || m.includes('-experimental-')) return false;
-                if (m.includes('lite-preview')) return false;
-                // Exclude models that might not work with v1 API
-                if (m.includes('-latest') && !m.includes('flash-latest') && !m.includes('pro-latest')) return false;
-                return true;
+            console.log('[generate-query-scenario] Using DeepSeek API');
+            
+            const completion = await openai.chat.completions.create({
+                model: 'deepseek-chat',
+                messages: [
+                    {
+                        role: 'user',
+                        content: prompt
+                    }
+                ],
+                temperature: 0.7,
+                max_tokens: 1000
             });
             
-            // Sort: flash first, then pro, then others
-            preferred.sort((a, b) => {
-                if (a.includes('flash') && !b.includes('flash')) return -1;
-                if (b.includes('flash') && !a.includes('flash')) return 1;
-                if (a.includes('pro') && !b.includes('pro')) return -1;
-                if (b.includes('pro') && !a.includes('pro')) return 1;
-                return 0;
-            });
+            const text = completion.choices[0]?.message?.content || '';
+            console.log(`[generate-query-scenario] Response from DeepSeek (first 500 chars):`, text.substring(0, 500));
             
-            models = preferred.length > 0 ? preferred.slice(0, 3) : availableModels.slice(0, 3);
-            console.log('[generate-query-scenario] Filtered preferred models:', preferred.slice(0, 5));
-        } else {
-            // Fallback: use only gemini-1.5-flash (most reliable)
-            models = ['gemini-1.5-flash'];
-            console.log('[generate-query-scenario] No available models, using fallback');
-        }
-        
-        console.log('[generate-query-scenario] Will try models in order:', models);
-        
-        let lastError = null;
-        for (const modelName of models) {
-            try {
-                console.log(`[generate-query-scenario] Trying model: ${modelName}`);
-                const model = genAI.getGenerativeModel({ model: modelName });
-                const result = await model.generateContent(prompt);
-                const response = await result.response;
-                const text = response.text();
-                
-                console.log(`[generate-query-scenario] Response from ${modelName} (first 500 chars):`, text.substring(0, 500));
-                
-                // Try to extract JSON from response
-                // First, try to find JSON object (most common case)
-                let jsonMatch = text.match(/\{[\s\S]*\}/);
-                
-                // If no match, try to find JSON wrapped in markdown code blocks
-                if (!jsonMatch) {
-                    const codeBlockMatch = text.match(/```(?:json)?\s*(\{[\s\S]*?\})\s*```/);
-                    if (codeBlockMatch) {
-                        jsonMatch = codeBlockMatch;
-                    }
+            // Try to extract JSON from response
+            let jsonMatch = text.match(/\{[\s\S]*\}/);
+            
+            // If no match, try to find JSON wrapped in markdown code blocks
+            if (!jsonMatch) {
+                const codeBlockMatch = text.match(/```(?:json)?\s*(\{[\s\S]*?\})\s*```/);
+                if (codeBlockMatch) {
+                    jsonMatch = codeBlockMatch;
                 }
-                
-                if (jsonMatch) {
-                    try {
-                        const jsonStr = jsonMatch[0].replace(/```json\s*/g, '').replace(/```/g, '').trim();
-                        const parsed = JSON.parse(jsonStr);
-                        console.log('[generate-query-scenario] Successfully parsed JSON');
-                        // Always use the selected subset of terms for this scenario
-                        // This ensures each scenario has different available terms (variety)
-                        const scenarioTerms = termsForScenario;
-                        
-                        return res.json({
-                            success: true,
-                            description: parsed.description || 'Geen beschrijving beschikbaar',
-                            correctQuery: parsed.correctQuery || '',
-                            difficulty: parsed.difficulty || 'medium',
-                            explanation: parsed.explanation || 'Geen uitleg beschikbaar',
-                            availableTerms: scenarioTerms // Terms to display for this scenario
-                        });
-                    } catch (parseError) {
-                        console.error('[generate-query-scenario] JSON parse error:', parseError.message);
-                        console.error('[generate-query-scenario] JSON string:', jsonMatch[0].substring(0, 200));
-                        throw new Error(`Failed to parse JSON: ${parseError.message}`);
-                    }
-                } else {
-                    console.error('[generate-query-scenario] No JSON found in response');
-                    console.error('[generate-query-scenario] Full response:', text);
-                    throw new Error('No JSON found in AI response');
-                }
-            } catch (error) {
-                console.error(`[generate-query-scenario] Error with model ${modelName}:`, error.message);
-                console.error(`[generate-query-scenario] Error stack:`, error.stack);
-                lastError = error;
-                continue;
             }
+            
+            if (jsonMatch) {
+                try {
+                    const jsonStr = jsonMatch[0].replace(/```json\s*/g, '').replace(/```/g, '').trim();
+                    const parsed = JSON.parse(jsonStr);
+                    console.log('[generate-query-scenario] Successfully parsed JSON');
+                    // Always use the selected subset of terms for this scenario
+                    const scenarioTerms = termsForScenario;
+                    
+                    return res.json({
+                        success: true,
+                        description: parsed.description || 'Geen beschrijving beschikbaar',
+                        correctQuery: parsed.correctQuery || '',
+                        difficulty: parsed.difficulty || 'medium',
+                        explanation: parsed.explanation || 'Geen uitleg beschikbaar',
+                        availableTerms: scenarioTerms
+                    });
+                } catch (parseError) {
+                    console.error('[generate-query-scenario] JSON parse error:', parseError.message);
+                    console.error('[generate-query-scenario] JSON string:', jsonMatch[0].substring(0, 200));
+                    throw new Error(`Failed to parse JSON: ${parseError.message}`);
+                }
+            } else {
+                console.error('[generate-query-scenario] No JSON found in response');
+                console.error('[generate-query-scenario] Full response:', text);
+                throw new Error('No JSON found in AI response');
+            }
+        } catch (error) {
+            console.error('[generate-query-scenario] Error:', error.message);
+            throw error;
         }
-
-        console.error('[generate-query-scenario] All models failed');
-        throw lastError || new Error('All models failed');
 
     } catch (error) {
-        console.error('[Gemini Proxy] Error generating scenario:', error);
-        console.error('[Gemini Proxy] Error stack:', error.stack);
-        console.error('[Gemini Proxy] Error details:', {
+        console.error('[DeepSeek] Error generating scenario:', error);
+        console.error('[DeepSeek] Error stack:', error.stack);
+        console.error('[DeepSeek] Error details:', {
             message: error.message,
             name: error.name,
             code: error.code
@@ -885,10 +690,17 @@ app.post('/api/validate-query', validateQuery, async (req, res) => {
 
         const { description, userQuery, availableTerms, correctQuery } = req.body;
 
-        if (!GEMINI_API_KEY) {
+        if (!DEEPSEEK_API_KEY) {
             return res.status(500).json({
                 error: 'API key not configured',
-                message: 'GEMINI_API_KEY is not set in environment variables'
+                message: 'DEEPSEEK_API_KEY is not set in environment variables'
+            });
+        }
+        
+        if (!OpenAI) {
+            return res.status(500).json({
+                error: 'OpenAI SDK not installed',
+                message: 'DeepSeek support requires the "openai" package. Run: npm install openai'
             });
         }
 
@@ -945,81 +757,69 @@ Geef je antwoord terug in JSON format:
 
 Antwoord alleen met de JSON, geen extra tekst.`;
 
-        const genAI = new GoogleGenerativeAI(GEMINI_API_KEY);
-        let availableModels = await getAvailableModels();
+        // Use DeepSeek API
+        const openai = new OpenAI({
+            apiKey: DEEPSEEK_API_KEY,
+            baseURL: 'https://api.deepseek.com'
+        });
         
-        // Use models from the available models list (they're already filtered to support generateContent)
-        // Prefer flash models (faster), then pro models
-        let models = [];
-        
-        if (availableModels.length > 0) {
-            // Filter to prefer stable models, exclude preview/experimental
-            const preferred = availableModels.filter(m => {
-                if (m.includes('-preview-') || m.includes('-experimental-')) return false;
-                if (m.includes('lite-preview')) return false;
-                return true;
-            });
+        try {
+            console.log('[generate-query-feedback] Using DeepSeek API');
             
-            // Sort: flash first, then pro, then others
-            preferred.sort((a, b) => {
-                if (a.includes('flash') && !b.includes('flash')) return -1;
-                if (b.includes('flash') && !a.includes('flash')) return 1;
-                if (a.includes('pro') && !b.includes('pro')) return -1;
-                if (b.includes('pro') && !a.includes('pro')) return 1;
-                return 0;
-            });
-            
-            models = preferred.length > 0 ? preferred.slice(0, 3) : availableModels.slice(0, 3);
-        } else {
-            // Fallback: use only gemini-1.5-flash (most reliable)
-            models = ['gemini-1.5-flash'];
-        }
-        
-        let lastError = null;
-        for (const modelName of models) {
-            try {
-                const model = genAI.getGenerativeModel({ model: modelName });
-                const result = await model.generateContent(prompt);
-                const response = await result.response;
-                const text = response.text();
-                
-                const jsonMatch = text.match(/\{[\s\S]*\}/);
-                if (jsonMatch) {
-                    try {
-                        const jsonStr = jsonMatch[0].replace(/```json\s*/g, '').replace(/```/g, '').trim();
-                        const parsed = JSON.parse(jsonStr);
-                        
-                        // Use correct query as suggested query if provided and query is incorrect
-                        let suggestedQuery = parsed.suggestedQuery || null;
-                        if (!parsed.isCorrect && correctQuery) {
-                            suggestedQuery = correctQuery;
-                        }
-                        
-                        return res.json({
-                            success: true,
-                            isCorrect: parsed.isCorrect === true,
-                            feedback: parsed.feedback || 'Geen feedback beschikbaar',
-                            suggestedQuery: suggestedQuery,
-                            explanation: parsed.explanation || parsed.feedback
-                        });
-                    } catch (parseError) {
-                        console.error('[validate-query] JSON parse error:', parseError.message);
-                        throw new Error(`Failed to parse JSON: ${parseError.message}`);
+            const completion = await openai.chat.completions.create({
+                model: 'deepseek-chat',
+                messages: [
+                    {
+                        role: 'user',
+                        content: prompt
                     }
-                } else {
-                    throw new Error('No JSON found in response');
+                ],
+                temperature: 0.7,
+                max_tokens: 500
+            });
+            
+            const text = completion.choices[0]?.message?.content || '';
+            
+            // Try to extract JSON from response
+            let jsonMatch = text.match(/\{[\s\S]*\}/);
+            
+            // If no match, try to find JSON wrapped in markdown code blocks
+            if (!jsonMatch) {
+                const codeBlockMatch = text.match(/```(?:json)?\s*(\{[\s\S]*?\})\s*```/);
+                if (codeBlockMatch) {
+                    jsonMatch = codeBlockMatch;
                 }
-            } catch (error) {
-                console.error(`[Gemini Proxy] Error with model ${modelName}:`, error.message);
-                lastError = error;
-                continue;
             }
+            
+            if (jsonMatch) {
+                try {
+                    const jsonStr = jsonMatch[0].replace(/```json\s*/g, '').replace(/```/g, '').trim();
+                    const parsed = JSON.parse(jsonStr);
+                    
+                    return res.json({
+                        success: true,
+                        isCorrect: parsed.isCorrect || false,
+                        feedback: parsed.feedback || 'Geen feedback beschikbaar',
+                        suggestedQuery: parsed.suggestedQuery || '',
+                        explanation: parsed.explanation || 'Geen uitleg beschikbaar'
+                    });
+                } catch (parseError) {
+                    console.error('[generate-query-feedback] JSON parse error:', parseError.message);
+                    throw new Error(`Failed to parse JSON: ${parseError.message}`);
+                }
+            } else {
+                throw new Error('No JSON found in AI response');
+            }
+        } catch (error) {
+            console.error('[generate-query-feedback] Error:', error.message);
+            return res.status(502).json({
+                error: 'Failed to generate feedback',
+                message: error.message
+            });
         }
-
-        throw lastError || new Error('All models failed');
 
     } catch (error) {
-        console.error('[Gemini Proxy] Error validating query:', error);
+        console.error('[DeepSeek] Error validating query:', error);
         return res.status(500).json({
             error: 'Internal server error',
             message: error.message
@@ -1066,15 +866,22 @@ app.post('/api/generate-bouwsteen-tabel', validateBouwsteenTabel, async (req, re
         console.log('[generate-bouwsteen-tabel] keyword:', keyword);
         console.log('[generate-bouwsteen-tabel] context:', context || 'none');
 
-        if (!GEMINI_API_KEY) {
+        if (!DEEPSEEK_API_KEY) {
             console.error('[generate-bouwsteen-tabel] API key not configured');
             return res.status(500).json({
                 error: 'API key not configured',
-                message: 'GEMINI_API_KEY is not set in environment variables'
+                message: 'DEEPSEEK_API_KEY is not set in environment variables'
+            });
+        }
+        
+        if (!OpenAI) {
+            return res.status(500).json({
+                error: 'OpenAI SDK not installed',
+                message: 'DeepSeek support requires the "openai" package. Run: npm install openai'
             });
         }
 
-        // Build prompt for Gemini
+        // Build prompt for DeepSeek
         const contextInfo = context ? ` binnen de context: "${context}"` : '';
         const prompt = `Je bent een expert in informatievaardigheden en de bouwsteenmethode voor literatuuronderzoek.
 
@@ -1105,163 +912,86 @@ Zorg ervoor dat:
 - Geen duplicaten voorkomen
 - De suggesties in het Nederlands zijn, tenzij het vertalingen zijn`;
 
-        // Get available models - use Free Tier compatible models
-        let models = ['gemini-2.5-flash', 'gemini-2.5-flash-lite'];
+        // Use DeepSeek API
+        const openai = new OpenAI({
+            apiKey: DEEPSEEK_API_KEY,
+            baseURL: 'https://api.deepseek.com'
+        });
+        
         try {
-            const availableModels = await getAvailableModels();
-            if (availableModels && availableModels.length > 0) {
-                // Filter for Free Tier compatible models: gemini-2.5-flash and gemini-2.5-flash-lite
-                const freeTierModels = availableModels.filter(m => {
-                    const modelLower = m.toLowerCase();
-                    // Only allow 2.5-flash models (Free Tier compatible)
-                    if (modelLower.includes('2.5-flash')) {
-                        // Exclude preview variants
-                        if (modelLower.includes('-preview') || 
-                            modelLower.includes('-experimental') ||
-                            modelLower.includes('embedding')) {
-                            return false;
-                        }
-                        return true;
+            console.log('[generate-bouwsteen-tabel] Using DeepSeek API');
+            
+            const completion = await openai.chat.completions.create({
+                model: 'deepseek-chat',
+                messages: [
+                    {
+                        role: 'user',
+                        content: prompt
                     }
-                    return false;
-                });
-                
-                if (freeTierModels.length > 0) {
-                    // Sort: flash first, then flash-lite
-                    models = freeTierModels.sort((a, b) => {
-                        if (a.includes('flash-lite') && !b.includes('flash-lite')) return 1;
-                        if (b.includes('flash-lite') && !a.includes('flash-lite')) return -1;
-                        return 0;
-                    });
-                } else {
-                    // Fallback: use default Free Tier models
-                    models = ['gemini-2.5-flash', 'gemini-2.5-flash-lite'];
-                }
-            }
-        } catch (modelError) {
-            console.warn('[generate-bouwsteen-tabel] Error getting models, using defaults:', modelError.message);
-            // Use default Free Tier models as fallback
-            models = ['gemini-2.5-flash', 'gemini-2.5-flash-lite'];
-        }
-
-        // Remove any -latest suffix and normalize model names
-        models = models.map(m => {
-            // Remove -latest suffix if present
-            let normalized = m.replace(/-latest$/i, '');
-            // Ensure we're using the correct format
-            if (normalized.includes('models/')) {
-                normalized = normalized.replace('models/', '');
-            }
-            return normalized;
-        }).filter(m => m.length > 0); // Remove empty strings
-
-        console.log('[generate-bouwsteen-tabel] Will try models in order:', models);
-
-        if (models.length === 0) {
-            throw new Error('No available models found');
-        }
-
-        // Initialize Gemini AI
-        const genAI = new GoogleGenerativeAI(GEMINI_API_KEY);
-
-        // Try each model until one succeeds
-        let lastError = null;
-        for (const modelName of models) {
-            try {
-                console.log(`[generate-bouwsteen-tabel] Trying model: ${modelName}`);
-                // Normalize model name one more time before use - remove preview, experimental, latest suffixes
-                let normalizedModel = modelName.replace(/-latest$/i, '').replace('models/', '');
-                // Explicitly remove preview and experimental suffixes
-                normalizedModel = normalizedModel.replace(/-preview.*$/i, '').replace(/-experimental.*$/i, '');
-                
-                // Final check: only use 2.5-flash models (Free Tier compatible)
-                const modelLower = normalizedModel.toLowerCase();
-                if (!modelLower.includes('2.5-flash') || 
-                    modelLower.includes('-preview') || 
-                    modelLower.includes('-experimental')) {
-                    console.warn(`[generate-bouwsteen-tabel] Skipping non-Free-Tier or preview model: ${normalizedModel}`);
-                    continue;
-                }
-                
-                console.log(`[generate-bouwsteen-tabel] Using normalized model: ${normalizedModel}`);
-                const model = genAI.getGenerativeModel({ model: normalizedModel });
-                const result = await model.generateContent(prompt);
-                const response = await result.response;
-                const text = response.text();
-                
-                console.log(`[generate-bouwsteen-tabel] Response from ${modelName} (first 500 chars):`, text.substring(0, 500));
-
-                // Extract JSON from response
-                const jsonMatch = text.match(/\{[\s\S]*\}/);
-                if (jsonMatch) {
-                    try {
-                        const jsonStr = jsonMatch[0].replace(/```json\s*/g, '').replace(/```/g, '').trim();
-                        const parsed = JSON.parse(jsonStr);
-                        
-                        console.log('[generate-bouwsteen-tabel] Successfully parsed JSON');
-                        
-                        // Validate structure
-                        const requiredKeys = ['synoniemen', 'vertalingen', 'afkortingen', 'spellingsvormen', 'vaktermen', 'bredereTermen', 'nauwereTermen'];
-                        const hasAllKeys = requiredKeys.every(key => key in parsed);
-                        
-                        if (!hasAllKeys) {
-                            throw new Error('Missing required keys in response');
-                        }
-                        
-                        return res.json({
-                            success: true,
-                            table: parsed
-                        });
-                    } catch (parseError) {
-                        console.error('[generate-bouwsteen-tabel] JSON parse error:', parseError.message);
-                        console.error('[generate-bouwsteen-tabel] JSON string:', jsonMatch[0].substring(0, 200));
-                        throw new Error(`Failed to parse JSON: ${parseError.message}`);
-                    }
-                } else {
-                    throw new Error('No JSON found in response');
-                }
-            } catch (error) {
-                const errorMsg = error.message || error.toString();
-                const statusCode = error.status || error.statusCode || (error.response ? error.response.status : null);
-                console.error(`[generate-bouwsteen-tabel] Error with model ${modelName}:`, errorMsg);
-                
-                // Check for 429 Rate Limit error
-                if (statusCode === 429 || errorMsg.includes('429') || errorMsg.includes('quota') || errorMsg.includes('Quota') || errorMsg.includes('rate limit')) {
-                    console.error(`[generate-bouwsteen-tabel] ⚠️ Rate limit (429) exceeded for model ${modelName}`);
-                    // Return QUOTA_EXCEEDED error immediately
-                    return res.status(429).json({
-                        success: false,
-                        error: 'QUOTA_EXCEEDED',
-                        message: 'API quota exceeded. Please try again tomorrow or continue working with the theory content.'
-                    });
-                }
-                
-                lastError = {
-                    model: modelName,
-                    message: errorMsg,
-                    error: error,
-                    statusCode: statusCode
-                };
-                continue;
-            }
-        }
-
-        console.error('[generate-bouwsteen-tabel] All models failed');
-        
-        // Check if last error was a 429
-        if (lastError?.statusCode === 429 || 
-            lastError?.message?.includes('429') || 
-            lastError?.message?.includes('quota') || 
-            lastError?.message?.includes('Quota') ||
-            lastError?.message?.includes('rate limit')) {
-            return res.status(429).json({
-                success: false,
-                error: 'QUOTA_EXCEEDED',
-                message: 'API quota exceeded. Please try again tomorrow or continue working with the theory content.'
+                ],
+                temperature: 0.7,
+                max_tokens: 1500
             });
+            
+            const text = completion.choices[0]?.message?.content || '';
+            console.log(`[generate-bouwsteen-tabel] Response from DeepSeek (first 500 chars):`, text.substring(0, 500));
+            
+            // Try to extract JSON from response
+            let jsonMatch = text.match(/\{[\s\S]*\}/);
+            
+            // If no match, try to find JSON wrapped in markdown code blocks
+            if (!jsonMatch) {
+                const codeBlockMatch = text.match(/```(?:json)?\s*(\{[\s\S]*?\})\s*```/);
+                if (codeBlockMatch) {
+                    jsonMatch = codeBlockMatch;
+                }
+            }
+            
+            if (jsonMatch) {
+                try {
+                    const jsonStr = jsonMatch[0].replace(/```json\s*/g, '').replace(/```/g, '').trim();
+                    const parsed = JSON.parse(jsonStr);
+                    console.log('[generate-bouwsteen-tabel] Successfully parsed JSON');
+                    
+                    // Validate structure
+                    const requiredKeys = ['synoniemen', 'vertalingen', 'afkortingen', 'spellingsvormen', 'vaktermen', 'bredereTermen', 'nauwereTermen'];
+                    const hasAllKeys = requiredKeys.every(key => key in parsed);
+                    
+                    if (!hasAllKeys) {
+                        throw new Error('Missing required keys in response');
+                    }
+                    
+                    return res.json({
+                        success: true,
+                        table: parsed
+                    });
+                } catch (parseError) {
+                    console.error('[generate-bouwsteen-tabel] JSON parse error:', parseError.message);
+                    console.error('[generate-bouwsteen-tabel] JSON string:', jsonMatch[0].substring(0, 200));
+                    throw new Error(`Failed to parse JSON: ${parseError.message}`);
+                }
+            } else {
+                console.error('[generate-bouwsteen-tabel] No JSON found in response');
+                console.error('[generate-bouwsteen-tabel] Full response:', text);
+                throw new Error('No JSON found in AI response');
+            }
+        } catch (error) {
+            console.error('[generate-bouwsteen-tabel] Error:', error.message);
+            
+            // Check for 429 Rate Limit error
+            const errorMsg = error.message || error.toString();
+            const statusCode = error.status || error.statusCode || (error.response ? error.response.status : null);
+            
+            if (statusCode === 429 || errorMsg.includes('429') || errorMsg.includes('quota') || errorMsg.includes('Quota') || errorMsg.includes('rate limit')) {
+                return res.status(429).json({
+                    success: false,
+                    error: 'QUOTA_EXCEEDED',
+                    message: 'API quota exceeded. Please try again tomorrow or continue working with the theory content.'
+                });
+            }
+            
+            throw error;
         }
-        
-        throw lastError || new Error('All models failed');
 
     } catch (error) {
         console.error('[generate-bouwsteen-tabel] Error generating bouwsteen tabel:', error);
@@ -1289,7 +1019,8 @@ Zorg ervoor dat:
 app.get('/api/health', (req, res) => {
     res.json({
         status: 'ok',
-        apiKeyConfigured: !!GEMINI_API_KEY,
+        apiKeyConfigured: !!DEEPSEEK_API_KEY,
+        provider: 'deepseek',
         timestamp: new Date().toISOString()
     });
 });
@@ -1346,58 +1077,55 @@ app.get('/api/test-core-file', (req, res) => {
 });
 
 /**
- * Test Gemini API connection and list available models
- * GET /api/test-gemini
+ * Test DeepSeek API connection
+ * GET /api/test-deepseek
  */
-app.get('/api/test-gemini', async (req, res) => {
-    if (!GEMINI_API_KEY) {
+app.get('/api/test-deepseek', async (req, res) => {
+    if (!DEEPSEEK_API_KEY) {
         return res.status(500).json({
-            error: 'API key not configured'
+            error: 'API key not configured',
+            message: 'DEEPSEEK_API_KEY is not set in environment variables'
+        });
+    }
+    
+    if (!OpenAI) {
+        return res.status(500).json({
+            error: 'OpenAI SDK not installed',
+            message: 'DeepSeek support requires the "openai" package. Run: npm install openai'
         });
     }
 
     try {
-        // First, try to list available models via REST API
-        const listModelsUrl = `https://generativelanguage.googleapis.com/v1beta/models?key=${GEMINI_API_KEY}`;
-        console.log('[Test] Fetching available models from:', listModelsUrl.replace(GEMINI_API_KEY, 'API_KEY_HIDDEN'));
+        console.log('[Test] Testing DeepSeek API connection...');
         
-        const fetch = globalThis.fetch || require('node-fetch');
-        const listResponse = await fetch(listModelsUrl);
+        const openai = new OpenAI({
+            apiKey: DEEPSEEK_API_KEY,
+            baseURL: 'https://api.deepseek.com'
+        });
         
-        if (listResponse.ok) {
-            const modelsData = await listResponse.json();
-            const availableModels = modelsData.models?.map(m => m.name) || [];
-            console.log('[Test] Available models:', availableModels);
-            
-            // Try SDK with first available model
-            const genAI = new GoogleGenerativeAI(GEMINI_API_KEY);
-            const testModel = availableModels.find(m => m.includes('flash') || m.includes('gemini')) || 'gemini-1.5-flash';
-            const model = genAI.getGenerativeModel({ model: testModel.replace('models/', '') });
-            
-            const result = await model.generateContent('Say "Hello" in Dutch');
-            const response = await result.response;
-            const text = response.text();
-            
-            res.json({
-                success: true,
-                message: 'Gemini API connection successful',
-                response: text,
-                model: testModel,
-                availableModels: availableModels.slice(0, 10) // First 10 models
-            });
-        } else {
-            const errorText = await listResponse.text();
-            res.status(502).json({
-                error: 'Cannot list models',
-                status: listResponse.status,
-                message: errorText.substring(0, 500),
-                apiKeyLength: GEMINI_API_KEY.length,
-                apiKeyPrefix: GEMINI_API_KEY.substring(0, 10) + '...'
-            });
-        }
+        const completion = await openai.chat.completions.create({
+            model: 'deepseek-chat',
+            messages: [
+                {
+                    role: 'user',
+                    content: 'Say "Hello" in Dutch'
+                }
+            ],
+            max_tokens: 50
+        });
+        
+        const text = completion.choices[0]?.message?.content || 'No response';
+        
+        res.json({
+            success: true,
+            message: 'DeepSeek API connection successful',
+            response: text,
+            model: 'deepseek-chat',
+            provider: 'deepseek'
+        });
     } catch (error) {
         res.status(502).json({
-            error: 'Gemini API test failed',
+            error: 'DeepSeek API test failed',
             message: error.message,
             details: error.toString(),
             stack: process.env.NODE_ENV === 'development' ? error.stack : undefined
@@ -1429,6 +1157,90 @@ if (fs.existsSync(appsDir)) {
     console.log(`[Multi-App] Detected ${Object.keys(availableApps).length} apps: ${Object.keys(availableApps).join(', ')}`);
 }
 
+/**
+ * Detect app name from request path or URL
+ * @param {string} pathOrUrl - Request path or full URL
+ * @returns {string|null} App name or null
+ */
+detectAppFromPath = function(pathOrUrl) {
+    if (!pathOrUrl) return null;
+    
+    // Extract app name from path like /apps/ICTO-BMR/... or /ICTO-BMR/... or http://localhost:3000/ICTO-BMR/...
+    const appMatch = pathOrUrl.match(/\/(?:apps\/)?([^\/\?#]+)/);
+    if (appMatch && appMatch[1]) {
+        const appName = appMatch[1];
+        // Check if it's a known app directory
+        if (availableApps[appName]) {
+            return appName;
+        }
+        // Also check case-insensitive match
+        const lowerAppName = appName.toLowerCase();
+        for (const [key, value] of Object.entries(availableApps)) {
+            if (key.toLowerCase() === lowerAppName) {
+                return key;
+            }
+        }
+    }
+    return null;
+};
+
+/**
+ * Parse .env file manually (to avoid conflicts with dotenv.config())
+ * @param {string} envPath - Path to .env file
+ * @returns {Object} Parsed environment variables
+ */
+parseEnvFile = function(envPath) {
+    const env = {};
+    try {
+        const content = fs.readFileSync(envPath, 'utf8');
+        const lines = content.split('\n');
+        
+        for (const line of lines) {
+            const trimmed = line.trim();
+            // Skip empty lines and comments
+            if (!trimmed || trimmed.startsWith('#')) {
+                continue;
+            }
+            
+            // Parse KEY=VALUE format
+            const match = trimmed.match(/^([^=]+)=(.*)$/);
+            if (match) {
+                const key = match[1].trim();
+                let value = match[2].trim();
+                // Remove quotes if present
+                if ((value.startsWith('"') && value.endsWith('"')) || 
+                    (value.startsWith("'") && value.endsWith("'"))) {
+                    value = value.slice(1, -1);
+                }
+                env[key] = value;
+            }
+        }
+    } catch (error) {
+        console.error(`[API Config] Error reading .env file ${envPath}:`, error.message);
+    }
+    return env;
+}
+
+/**
+ * Get app-specific API configuration
+ * @param {string} appName - App name (e.g., 'ICTO-BMR')
+ * @returns {Object} API config with provider and apiKey
+ */
+getAppAPIConfig = function(appName) {
+    // Always use DeepSeek - no fallback to Gemini
+    if (!DEEPSEEK_API_KEY) {
+        throw new Error('DEEPSEEK_API_KEY is not configured. Please set DEEPSEEK_API_KEY in the global .env file.');
+    }
+
+    // All apps use global DeepSeek configuration
+    // App-specific .env files are no longer supported - all apps use the global config
+    console.log(`[API Config] Using global DeepSeek config for app: ${appName || 'default'}`);
+    return {
+        provider: 'deepseek',
+        apiKey: DEEPSEEK_API_KEY
+    };
+};
+
 // Multi-app mode: if MULTI_APP=true, enable routing for all apps
 const MULTI_APP_MODE = process.env.MULTI_APP === 'true' || process.env.MULTI_APP === '1';
 console.log(`[Multi-App] MULTI_APP_MODE: ${MULTI_APP_MODE}, MULTI_APP env: ${process.env.MULTI_APP}`);
@@ -1436,6 +1248,16 @@ console.log(`[Multi-App] MULTI_APP_MODE: ${MULTI_APP_MODE}, MULTI_APP env: ${pro
 console.log(`[Multi-App] Available apps count: ${Object.keys(availableApps).length}`);
 if (Object.keys(availableApps).length > 0) {
     console.log(`[Multi-App] Available apps: ${Object.keys(availableApps).join(', ')}`);
+}
+
+// Log API configuration for all apps
+console.log(`[API Config] All apps will use global DeepSeek configuration`);
+if (DEEPSEEK_API_KEY) {
+    console.log(`[API Config] ✅ DeepSeek API key configured: ${DEEPSEEK_API_KEY.substring(0, 10)}...`);
+    console.log(`[API Config] All ${Object.keys(availableApps).length} apps will use DeepSeek API`);
+} else {
+    console.error(`[API Config] ❌ ERROR: DEEPSEEK_API_KEY not configured!`);
+    console.error(`[API Config] Please set DEEPSEEK_API_KEY in the global .env file`);
 }
 
 // Fallback voor Vercel: probeer verschillende locaties
@@ -2088,24 +1910,20 @@ app.get(/\.html$/, (req, res, next) => {
 function generateDynamicConfig(res) {
     res.setHeader('Content-Type', 'application/javascript; charset=utf-8');
     
-    // Haal API key uit environment variables (Vercel) of process.env
-    const apiKey = process.env.GEMINI_API_KEY || '';
+    // API key is no longer exposed to client (server-side only for security)
+    // DeepSeek API calls are handled server-side only
     
-    console.log('Generating dynamic config.js, API key present:', !!apiKey);
+    console.log('Generating dynamic config.js (API key server-side only)');
     
-    // Genereer config.js content
+    // Genereer config.js content (no API key exposed to client)
     const configContent = `// Dynamically generated config.js
-// On Vercel, this is generated from environment variables
-// Locally, use config.js file if available
+// API keys are handled server-side only for security
+// All AI API calls go through /api/generate-questions endpoint
 
 window.AppConfig = {
-    geminiApiKey: ${apiKey ? `'${apiKey}'` : 'null'}
+    // API key is no longer exposed to client
+    // All API calls are handled server-side
 };
-
-// Log voor debugging
-if (typeof console !== 'undefined') {
-    console.log('Config loaded:', window.AppConfig.geminiApiKey ? 'API key present' : 'No API key');
-}
 `;
     
     res.send(configContent);
@@ -2425,11 +2243,12 @@ module.exports = app;
 if (require.main === module) {
     const server = app.listen(PORT, async () => {
         console.log(`🚀 Server running on http://localhost:${PORT}`);
-        console.log(`📝 API Key configured: ${!!GEMINI_API_KEY ? '✅ Yes' : '❌ No'}`);
+        console.log(`📝 DeepSeek API Key configured: ${!!DEEPSEEK_API_KEY ? '✅ Yes' : '❌ No'}`);
         console.log(`🔒 Security: Helmet, Rate Limiting, CORS, Input Validation enabled`);
         console.log(`🌐 Allowed origins: ${allowedOrigins.join(', ')}`);
-        if (!GEMINI_API_KEY) {
-            console.log(`⚠️  Please set GEMINI_API_KEY in .env file`);
+        if (!DEEPSEEK_API_KEY) {
+            console.log(`⚠️  Please set DEEPSEEK_API_KEY in .env file`);
+            console.log(`   Get your API key at: https://platform.deepseek.com/api_keys`);
         }
         
         if (MULTI_APP_MODE) {
@@ -2451,10 +2270,9 @@ if (require.main === module) {
         
         console.log(`🔧 API endpoint: http://localhost:${PORT}/api/generate-questions`);
         
-        // Pre-load available models cache on server start
-        if (GEMINI_API_KEY) {
-            console.log('[Gemini Proxy] Pre-loading available models cache...');
-            await fetchAndCacheAvailableModels();
+        // DeepSeek doesn't need model caching (uses fixed model: deepseek-chat)
+        if (DEEPSEEK_API_KEY) {
+            console.log('[DeepSeek] ✅ API ready - using model: deepseek-chat');
         }
     });
 

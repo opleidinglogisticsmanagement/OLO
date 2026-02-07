@@ -1,0 +1,77 @@
+{
+  "intro": {
+    "title": "Waarom ICTO",
+    "subtitle": "Waarom ICTO",
+    "description": "In dit hoofdstuk leer je waarom ICTO belangrijk is voor het onderwijs binnen BMR."
+  },
+  "theorie": {
+    "title": "Het belang van ICTO",
+    "content": [
+      {
+        "type": "heading",
+        "text": "Digitale transformatie in onderwijs",
+        "level": 2,
+        "id": "transformatie"
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Het onderwijs ondergaat een <strong>digitale transformatie</strong>. Studenten verwachten toegang tot digitaal lesmateriaal, flexibele leeromgevingen en moderne tools die aansluiten bij hun dagelijks leven. Docenten hebben behoefte aan efficiënte systemen die hen helpen om kwalitatief goed onderwijs te geven.</p>",
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">ICTO-BMR speelt een cruciale rol in deze transformatie door ervoor te zorgen dat docenten en medewerkers de juiste ondersteuning krijgen om succesvol te zijn in een digitaal onderwijslandschap.</p>"
+        ]
+      },
+      {
+        "type": "heading",
+        "text": "Efficiëntie en effectiviteit",
+        "level": 2,
+        "id": "efficiëntie"
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Door effectief gebruik van digitale tools kunnen docenten <strong>efficiënter werken</strong> en meer tijd besteden aan wat echt belangrijk is: het begeleiden van studenten. Systemen zoals Brightspace en ANS helpen bij het automatiseren van administratieve taken, het organiseren van lesmateriaal en het geven van snelle feedback.</p>",
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">ICTO-BMR zorgt ervoor dat deze systemen optimaal worden benut, waardoor docenten hun tijd kunnen besteden aan het ontwikkelen van kwalitatief hoogwaardig onderwijs.</p>"
+        ]
+      },
+      {
+        "type": "heading",
+        "text": "Toegankelijkheid en inclusie",
+        "level": 2,
+        "id": "toegankelijkheid"
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Digitale tools kunnen het onderwijs <strong>toegankelijker maken</strong> voor alle studenten. Door gebruik te maken van verschillende vormen van content (tekst, video, audio, interactieve elementen) kunnen docenten beter aansluiten bij verschillende leerstijlen en behoeften.</p>",
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">ICTO-BMR ondersteunt docenten bij het creëren van inclusief digitaal onderwijs dat voor iedereen toegankelijk is.</p>"
+        ]
+      },
+      {
+        "type": "heading",
+        "text": "Voorbereiding op de toekomst",
+        "level": 2,
+        "id": "toekomst"
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">De arbeidsmarkt vraagt steeds meer om <strong>digitale vaardigheden</strong>. Door studenten te leren werken met moderne digitale tools en systemen, bereiden we hen voor op hun toekomstige carrière. Docenten die zelf vertrouwd zijn met deze tools kunnen studenten beter begeleiden bij het ontwikkelen van deze vaardigheden.</p>",
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">ICTO-BMR helpt bij het creëren van een leeromgeving waarin zowel docenten als studenten kunnen groeien in hun digitale vaardigheden.</p>"
+        ]
+      },
+      {
+        "type": "heading",
+        "text": "Samenwerking en innovatie",
+        "level": 2,
+        "id": "innovatie"
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">ICTO-BMR fungeert als <strong>partner in innovatie</strong>. We werken samen met docenten om nieuwe mogelijkheden te verkennen en te experimenteren met innovatieve onderwijstechnologieën. Door samen te werken kunnen we het onderwijs binnen BMR continu verbeteren en vernieuwen.</p>",
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Of het nu gaat om het implementeren van nieuwe tools, het ontwikkelen van best practices, of het ondersteunen van experimenten met nieuwe technologieën: ICTO-BMR staat klaar om samen te werken aan beter digitaal onderwijs.</p>"
+        ]
+      }
+    ]
+  }
+}

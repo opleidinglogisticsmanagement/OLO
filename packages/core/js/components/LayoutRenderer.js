@@ -26,6 +26,9 @@ class LayoutRenderer {
         } else if (hostname.includes('edubook-logistiek') || href.includes('edubook-logistiek') || pathname.includes('edubook-logistiek')) {
             this.appId = 'edubook-logistiek';
             this.appTitle = 'Edubook-Logistiek';
+        } else if (hostname.includes('ICTO-BMR') || href.includes('ICTO-BMR') || pathname.includes('ICTO-BMR') || hostname.includes('icto-bmr') || href.includes('icto-bmr') || pathname.includes('icto-bmr')) {
+            this.appId = 'icto-bmr';
+            this.appTitle = 'ICTO-BMR';
         } else if (hostname.includes('logistiek-onderzoek') || href.includes('logistiek-onderzoek') || pathname.includes('logistiek-onderzoek')) {
             this.appId = 'logistiek-onderzoek';
             this.appTitle = 'Opzetten van Logistieke Onderzoeken (OLO)';
@@ -54,12 +57,23 @@ class LayoutRenderer {
      * Render sidebar header
      */
     renderSidebarHeader() {
+        // Use logo for ICTO-BMR app, otherwise use default icon
+        const isICTBMR = this.appId === 'icto-bmr';
+        
+        const iconHtml = isICTBMR 
+            ? `<img src="assets/images/ictologo.png" alt="ICTO Logo" class="w-10 h-10 object-contain" />`
+            : `<i class="fas fa-graduation-cap text-white text-lg"></i>`;
+        
+        const iconContainerClass = isICTBMR
+            ? 'w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0 bg-white p-1'
+            : 'w-10 h-10 bg-gradient-to-r from-blue-600 to-blue-700 rounded-lg flex items-center justify-center flex-shrink-0';
+        
         return `
             <div class="px-4 sm:px-6 h-[56px] sm:h-[64px] border-b border-gray-200 dark:border-gray-700 flex items-center">
                 <div class="flex items-center justify-between w-full">
                     <div class="flex items-center space-x-3 flex-1 min-w-0">
-                        <div class="w-10 h-10 bg-gradient-to-r from-blue-600 to-blue-700 rounded-lg flex items-center justify-center flex-shrink-0" aria-hidden="true">
-                            <i class="fas fa-graduation-cap text-white text-lg"></i>
+                        <div class="${iconContainerClass}" aria-hidden="true">
+                            ${iconHtml}
                         </div>
                         <div class="min-w-0 flex-1">
                             <p class="text-xs sm:text-sm text-gray-500 dark:text-gray-400 break-words leading-tight m-0 font-bold">${this.appTitle}</p>
@@ -85,6 +99,8 @@ class LayoutRenderer {
             return this.renderElearningDemoNavigation();
         } else if (this.appId === 'edubook-logistiek') {
             return this.renderEdubookLogistiekNavigation();
+        } else if (this.appId === 'icto-bmr') {
+            return this.renderICTONavigation();
         } else {
             return this.renderLogistiekOnderzoekNavigation();
         }
@@ -187,6 +203,21 @@ class LayoutRenderer {
     }
 
     /**
+     * Render navigation for ICTO-BMR app
+     */
+    renderICTONavigation() {
+        const modules = [
+            { id: 'start', title: 'Start', href: 'index.html' },
+            { id: 'wat-is-icto', title: 'Wat is ICTO', href: 'wat-is-icto.html' },
+            { id: 'wat-doet-icto', title: 'Wat doet ICTO', href: 'wat-doet-icto.html' },
+            { id: 'waarom-icto', title: 'Waarom ICTO', href: 'waarom-icto.html' },
+            { id: 'register', title: 'Begrippenlijst', href: 'register.html' }
+        ];
+
+        return this.renderModuleNavigationItems(modules);
+    }
+
+    /**
      * Render navigation for logistiek-onderzoek app
      */
     renderLogistiekOnderzoekNavigation() {
@@ -256,6 +287,7 @@ class LayoutRenderer {
      * Get icon and background color classes for a module
      * - logistiek-onderzoek: per-week colors (green, blue, purple, orange, red, indigo, pink)
      * - operations-management: green for all content modules (matches static HTML)
+     * - icto-bmr: purple, green, yellow for the three pages
      * - e-learning-demo, edubook-logistiek: gray (default)
      * @param {Object} module - Module object with id
      * @param {boolean} isCurrent - Whether this is the current page
@@ -293,6 +325,19 @@ class LayoutRenderer {
                 'capaciteitsmanagement-deel1': { icon: 'text-red-600 dark:text-red-400', bg: 'bg-red-100 dark:bg-red-900/30' },
                 'capaciteitsmanagement-deel2': { icon: 'text-red-600 dark:text-red-400', bg: 'bg-red-100 dark:bg-red-900/30' },
                 'operations-planning-scheduling': { icon: 'text-indigo-600 dark:text-indigo-400', bg: 'bg-indigo-100 dark:bg-indigo-900/30' }
+            };
+            const colors = colorMap[module.id];
+            if (colors) {
+                return { iconClass: colors.icon, bgClass: colors.bg };
+            }
+        }
+        if (this.appId === 'icto-bmr') {
+            const colorMap = {
+                'start': { icon: 'text-blue-600 dark:text-blue-400', bg: 'bg-blue-100 dark:bg-blue-900/30' },
+                'wat-is-icto': { icon: 'text-purple-600 dark:text-purple-400', bg: 'bg-purple-100 dark:bg-purple-900/30' },
+                'wat-doet-icto': { icon: 'text-green-600 dark:text-green-400', bg: 'bg-green-100 dark:bg-green-900/30' },
+                'waarom-icto': { icon: 'text-yellow-600 dark:text-yellow-400', bg: 'bg-yellow-100 dark:bg-yellow-900/30' },
+                'register': { icon: 'text-indigo-600 dark:text-indigo-400', bg: 'bg-indigo-100 dark:bg-indigo-900/30' }
             };
             const colors = colorMap[module.id];
             if (colors) {

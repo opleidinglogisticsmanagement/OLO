@@ -29,6 +29,8 @@ class NavigationService {
             return 'e-learning-demo';
         } else if (hostname.includes('edubook-logistiek') || href.includes('edubook-logistiek') || pathname.includes('edubook-logistiek')) {
             return 'edubook-logistiek';
+        } else if (hostname.includes('ICTO-BMR') || href.includes('ICTO-BMR') || pathname.includes('ICTO-BMR') || hostname.includes('icto-bmr') || href.includes('icto-bmr') || pathname.includes('icto-bmr')) {
+            return 'icto-bmr';
         } else if (hostname.includes('logistiek-onderzoek') || href.includes('logistiek-onderzoek') || pathname.includes('logistiek-onderzoek')) {
             return 'logistiek-onderzoek';
         }
@@ -45,6 +47,8 @@ class NavigationService {
     getModulesForApp(appId) {
         if (appId === 'operations-management') {
             return this.getOperationsManagementModules();
+        } else if (appId === 'icto-bmr') {
+            return this.getICTBMRModules();
         } else {
             // Default modules voor logistiek-onderzoek en andere apps
             return [
@@ -78,6 +82,20 @@ class NavigationService {
             { id: 'capaciteitsmanagement-deel1', title: 'Capaciteitsmanagement (deel 1)', href: 'capaciteitsmanagement-deel1.html' },
             { id: 'capaciteitsmanagement-deel2', title: 'Capaciteitsmanagement (deel 2)', href: 'capaciteitsmanagement-deel2.html' },
             { id: 'operations-planning-scheduling', title: 'Operations planning en scheduling', href: 'operations-planning-scheduling.html' }
+        ];
+    }
+
+    /**
+     * Get modules array for ICTO-BMR app
+     * @returns {Array} Modules array
+     */
+    getICTBMRModules() {
+        return [
+            { id: 'start', title: 'Start', href: 'index.html' },
+            { id: 'wat-is-icto', title: 'Wat is ICTO', href: 'wat-is-icto.html' },
+            { id: 'wat-doet-icto', title: 'Wat doet ICTO', href: 'wat-doet-icto.html' },
+            { id: 'waarom-icto', title: 'Waarom ICTO', href: 'waarom-icto.html' },
+            { id: 'register', title: 'Begrippenlijst', href: 'register.html' }
         ];
     }
 

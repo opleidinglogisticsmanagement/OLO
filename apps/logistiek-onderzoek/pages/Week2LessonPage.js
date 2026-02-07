@@ -113,7 +113,7 @@ class Week2LessonPage extends BaseLessonPage {
                 { headingSize: 'text-lg sm:text-xl' }
             );
         }
-
+        
         return `
             ${this.contentTemplateRenderer.renderSection(
                 this.content.leerdoelen.title,
@@ -179,6 +179,7 @@ class Week2LessonPage extends BaseLessonPage {
      */
     async generateMCQuestions() {
         if (!this.content || !this.content.mcVragen) {
+            console.warn('[Week2LessonPage] Cannot generate MC questions - missing content or mcVragen config');
             return;
         }
 
@@ -311,9 +312,11 @@ class Week2LessonPage extends BaseLessonPage {
                 isVercel: window.location.hostname.includes('vercel.app')
             });
             
-            // Check for QUOTA_EXCEEDED error
+            // Check for QUOTA_EXCEEDED or INSUFFICIENT_BALANCE errors
             if (error.quotaExceeded || error.message === 'QUOTA_EXCEEDED' || error.message.includes('QUOTA_EXCEEDED')) {
                 this.showQuotaExceededMessage();
+            } else if (error.insufficientBalance || error.message === 'INSUFFICIENT_BALANCE' || error.message.includes('Insufficient Balance') || error.message.includes('402')) {
+                this.showInsufficientBalanceMessage();
             } else {
                 const errorMessage = error.message || 'Er is een fout opgetreden bij het genereren van vragen. Probeer de pagina te verversen.';
                 this.showErrorInContainer(errorMessage);
@@ -669,6 +672,41 @@ class Week2LessonPage extends BaseLessonPage {
     }
 
     /**
+     * Show insufficient balance message
+     */
+    showInsufficientBalanceMessage() {
+        const container = document.getElementById('mc-questions-container');
+        if (container) {
+            container.innerHTML = `
+                <div class="border border-orange-200 dark:border-orange-800 rounded-lg p-5 bg-orange-50 dark:bg-orange-900/20">
+                    <div class="flex items-start space-x-3">
+                        <i class="fas fa-exclamation-triangle text-orange-600 dark:text-orange-400 mt-1"></i>
+                        <div class="flex-1">
+                            <h3 class="font-semibold text-orange-900 dark:text-orange-200 mb-1">Onvoldoende API credits</h3>
+                            <p class="text-orange-800 dark:text-orange-300 text-sm mb-3">
+                                De API key heeft onvoldoende credits om vragen te genereren. Neem contact op met de beheerder om de DeepSeek API key te vernieuwen of credits toe te voegen.
+                            </p>
+                            <div class="flex space-x-2">
+                                <button 
+                                    onclick="location.reload()" 
+                                    class="px-4 py-2 bg-gray-600 dark:bg-gray-700 text-white rounded-lg hover:bg-gray-700 dark:hover:bg-gray-600 transition-colors text-sm">
+                                    Pagina verversen
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        } else {
+            // Fallback: update entire section
+            const mcSection = document.querySelector('.mc-question')?.closest('section');
+            if (mcSection) {
+                mcSection.outerHTML = MCQuestionRenderer.renderErrorState('Onvoldoende API credits. Neem contact op met de beheerder.');
+            }
+        }
+    }
+
+    /**
      * Show error in container
      */
     showErrorInContainer(errorMessage) {
@@ -740,13 +778,7 @@ class Week2LessonPage extends BaseLessonPage {
      * Uses retry mechanism to handle async DOM updates in SPA mode
      */
     setupMCQuestionButton(retries = 5) {
-        // #region agent log
-        fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'Week2LessonPage.js:728',message:'setupMCQuestionButton called',data:{retries,hostname:window.location.hostname,isVercel:window.location.hostname.includes('vercel.app')},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'})}).catch(()=>{});
-        // #endregion
         const generateBtn = document.getElementById('generate-mc-question-btn');
-        // #region agent log
-        fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'Week2LessonPage.js:729',message:'Button lookup result',data:{buttonFound:!!generateBtn,buttonId:generateBtn?.id},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'})}).catch(()=>{});
-        // #endregion
         if (generateBtn) {
             // Check if button already has event listener (prevent duplicates)
             if (generateBtn.dataset.listenerAttached === 'true') {

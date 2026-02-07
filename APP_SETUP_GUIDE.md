@@ -2,12 +2,140 @@
 
 Deze guide legt uit hoe je een nieuwe e-learning app aanmaakt in dit monorepo.
 
+> ⚠️ **KRITISCH:** Bepaal eerst welke pagina's/modules je nodig hebt voordat je begint met het aanmaken van pagina's. Elke e-learning app heeft een andere structuur nodig. Kopieer NIET automatisch week 1-7, begrippen of afsluiting tenzij je deze daadwerkelijk nodig hebt. Zie **Stap 2** voor meer informatie.
+
+> 🚨 **MEEST VOORKOMENDE FOUT:** Als je app detectie vergeet toe te voegen (Stap 4), zal je sidebar automatisch week 1-7 tonen, zelfs als je die pagina's niet hebt aangemaakt! Dit gebeurt omdat de app niet wordt gedetecteerd en terugvalt op de standaard structuur. **Voeg ALTIJD app detectie toe aan beide core bestanden voordat je verder gaat!**
+
 ## Stap 1: App Structuur Aanmaken
 
 1. Maak een nieuwe folder aan in `/apps/` met de naam van je app (bijv. `mijn-app-naam`)
 2. Kopieer de basisstructuur van een bestaande app (bijv. `edubook-logistiek`)
 
-## Stap 2: Basis Bestanden
+## Stap 2: Bepaal je Pagina Structuur - BELANGRIJK! ⚠️
+
+### ⚠️ Voordat je begint met pagina's aanmaken
+
+**BELANGRIJK:** Elke e-learning app heeft een andere structuur nodig. Bepaal eerst welke pagina's/modules je nodig hebt voordat je begint met het aanmaken van pagina's.
+
+### Waarom dit belangrijk is
+
+Bij het kopiëren van een bestaande app (zoals `logistiek-onderzoek` of `operations-management`) kunnen er automatisch pagina's worden aangemaakt die je niet nodig hebt:
+- ❌ Week 1-7 structuur (alleen nodig voor week-gebaseerde cursussen)
+- ❌ Begrippenlijst pagina (alleen nodig als je een begrippenlijst hebt)
+- ❌ Afsluiting pagina (alleen nodig als je een afsluiting hebt)
+
+**Voorbeeld:** Bij ICTO-BMR zijn automatisch week 1-7, begrippen en afsluiting aangemaakt, maar dit was niet gewenst omdat ICTO-BMR een andere structuur nodig heeft.
+
+### Stappen om je pagina structuur te bepalen
+
+1. **Bedenk welke modules/hoofdstukken je nodig hebt**
+   - Bijvoorbeeld: "Hoofdstuk 1", "Hoofdstuk 2", "Module A", "Module B"
+   - Of: "Introductie", "Theorie", "Praktijk", "Afsluiting"
+   - **NIET** automatisch week 1-7 tenzij je een week-gebaseerde cursus hebt
+
+2. **Bepaal of je submenu's nodig hebt**
+   - Sommige modules hebben submenu's (zoals HD 09 in edubook-logistiek)
+   - Andere modules zijn eenvoudig zonder submenu's
+
+3. **Maak een lijst van benodigde pagina's**
+   ```
+   Voorbeeld voor ICTO-BMR:
+   - Start (index.html) ✅
+   - Module 1: Introductie
+   - Module 2: Theorie
+   - Module 3: Praktijk
+   (GEEN week 1-7, GEEN begrippen, GEEN afsluiting)
+   
+   Voorbeeld voor week-gebaseerde cursus:
+   - Start (index.html) ✅
+   - Week 1
+   - Week 2
+   - Week 3
+   - ...
+   - Week 7
+   - Begrippenlijst (optioneel)
+   - Afsluiting (optioneel)
+   ```
+
+4. **Documenteer je structuur**
+   - Schrijf op welke pagina's je nodig hebt
+   - Noteer welke pagina's submenu's hebben
+   - Dit helpt je later bij het aanmaken van de pagina's
+
+### Voorbeelden van verschillende structuren
+
+**Minimale app (zoals edubook-logistiek):**
+- Start
+- HD 09 (met submenu's)
+
+**Week-gebaseerde app (zoals logistiek-onderzoek):**
+- Start
+- Week 1-7
+- Begrippenlijst
+- Afsluiting
+
+**Module-gebaseerde app (zoals operations-management):**
+- Start
+- Operations Processtrategie
+- Vraagvoorspelling (deel 1)
+- Vraagvoorspelling (deel 2)
+- Productieplanning
+- Voorraadbeheer (deel 1-3)
+- Capaciteitsmanagement (deel 1-2)
+- Operations Planning & Scheduling
+
+**Custom app (zoals ICTO-BMR):**
+- Start
+- [Eigen modules zoals bepaald in stap 2.1]
+
+### Wat te doen als je per ongeluk verkeerde pagina's hebt aangemaakt
+
+Als je per ongeluk week 1-7, begrippen of afsluiting hebt aangemaakt maar deze niet nodig hebt:
+
+1. **Verwijder ongebruikte content JSON bestanden:**
+   ```bash
+   rm apps/mijn-app/content/week1.content.json
+   rm apps/mijn-app/content/week2.content.json
+   # ... etc voor alle ongebruikte weken
+   rm apps/mijn-app/content/register.json  # begrippenlijst
+   rm apps/mijn-app/content/afsluiting.content.json
+   ```
+
+2. **Verwijder ongebruikte HTML bestanden:**
+   ```bash
+   rm apps/mijn-app/week1.html
+   rm apps/mijn-app/week2.html
+   # ... etc
+   rm apps/mijn-app/register.html
+   rm apps/mijn-app/afsluiting.html
+   ```
+
+3. **Verwijder ongebruikte Page Classes:**
+   ```bash
+   rm apps/mijn-app/pages/Week1LessonPage.js
+   rm apps/mijn-app/pages/Week2LessonPage.js
+   # ... etc
+   rm apps/mijn-app/pages/RegisterPage.js
+   rm apps/mijn-app/pages/AfsluitingLessonPage.js
+   ```
+
+4. **Update index.html:**
+   - Verwijder script tags voor verwijderde Page Classes
+   - Verwijder verwijzingen uit `expectedClasses` arrays
+   - Verwijder verwijzingen uit sidebar navigatie (in LayoutRenderer.js)
+
+5. **Update SearchService.js en PDFExporter.js:**
+   - Verwijder verwijzingen naar verwijderde content bestanden uit de `files` array
+
+### Checklist voor Stap 2
+
+- [ ] Ik heb bepaald welke modules/hoofdstukken ik nodig heb
+- [ ] Ik heb bepaald welke pagina's submenu's hebben
+- [ ] Ik heb een lijst gemaakt van alle benodigde pagina's
+- [ ] Ik heb gecontroleerd of er geen onnodige pagina's zijn aangemaakt (week 1-7, begrippen, afsluiting)
+- [ ] Ik heb onnodige pagina's verwijderd (indien aanwezig)
+
+## Stap 3: Basis Bestanden
 
 ### Vereiste bestanden:
 
@@ -25,49 +153,177 @@ apps/mijn-app-naam/
 └── pages/                # JavaScript page classes
 ```
 
-## Stap 3: Sidebar Navigatie - BELANGRIJK!
+## Stap 4: Sidebar Navigatie - KRITISCH! ⚠️
 
-### ⚠️ Standaard Sidebar Structuur
+### ⚠️ Probleem: Sidebar valt terug op week 1-7 structuur
 
-**Bij het aanmaken van een nieuwe app moet de sidebar vrijwel leeg zijn:**
+**BELANGRIJK:** Als je een nieuwe app aanmaakt zonder app detectie toe te voegen, zal de sidebar automatisch de week 1-7 structuur van "logistiek-onderzoek" tonen, zelfs als je die pagina's niet hebt aangemaakt.
 
-- ✅ **Alleen "Start"** moet zichtbaar zijn in de sidebar
-- ❌ **GEEN** week 1-7 structuur
-- ❌ **GEEN** vooraf gedefinieerde modules
+**Symptomen:**
+- Je ziet eerst je nieuwe pagina's kort
+- Daarna verschijnen automatisch week 1-7, begrippen en afsluiting in de sidebar
+- Dit gebeurt omdat de app niet wordt gedetecteerd en terugvalt op de standaard structuur
 
-### Waarom?
+### Oplossing: App Detectie Toevoegen (VERPLICHT)
 
-De sidebar wordt automatisch gegenereerd door `LayoutRenderer` en `NavigationInitializer`. Als je app nog niet gedetecteerd wordt, valt het terug op de standaard "logistiek-onderzoek" structuur met week 1-7.
+**Je MOET app detectie toevoegen aan 2 core bestanden voordat je app correct werkt:**
 
-### Oplossing: App Detectie Toevoegen
+#### 1. App Detectie in `LayoutRenderer.js`
 
-Om je app correct te laten werken, moet je de app detectie toevoegen aan de core bestanden:
+**Bestand:** `packages/core/js/components/LayoutRenderer.js`
 
-1. **`packages/core/js/components/LayoutRenderer.js`**
-   - Voeg app detectie toe in de constructor (rond regel 13-28)
-   - Voeg een nieuwe `renderMijnAppNavigation()` methode toe
-   - Voeg de methode toe aan `renderModuleNavigation()` switch
+**Stap 1.1:** Voeg app detectie toe in de constructor (rond regel 13-45)
 
-2. **`packages/core/js/components/NavigationInitializer.js`**
-   - Voeg app detectie toe in de constructor (rond regel 11-25)
-
-3. **`packages/core/js/ui/SidebarManager.js`** (optioneel, alleen als je submenu's hebt)
-   - Voeg submenu setup toe als je expandable items nodig hebt
-
-### Voorbeeld: Minimale Sidebar Structuur
+Zoek naar de `if/else if` chain die apps detecteert en voeg je app toe:
 
 ```javascript
-// In LayoutRenderer.js
+// Voeg toe VOOR de laatste else (die terugvalt op logistiek-onderzoek)
+else if (hostname.includes('mijn-app-naam') || href.includes('mijn-app-naam') || pathname.includes('mijn-app-naam')) {
+    this.appId = 'mijn-app-naam';
+    this.appTitle = 'Mijn App Naam';
+}
+```
+
+**Stap 1.2:** Voeg een render methode toe (rond regel 220-300)
+
+Voeg een nieuwe methode toe na `renderEdubookLogistiekNavigation()`:
+
+```javascript
+/**
+ * Render navigation for mijn-app-naam app
+ */
 renderMijnAppNavigation() {
     const modules = [
         { id: 'start', title: 'Start', href: 'index.html' }
-        // Voeg hier later je eigen modules toe
+        // Voeg hier later je eigen modules toe wanneer je pagina's aanmaakt
     ];
     return this.renderModuleNavigationItems(modules);
 }
 ```
 
-## Stap 4: Eerste Pagina Toevoegen
+**Stap 1.3:** Voeg de methode toe aan de switch in `renderModuleNavigation()` (rond regel 80-90)
+
+```javascript
+renderModuleNavigation() {
+    if (this.appId === 'operations-management') {
+        return this.renderOperationsManagementNavigation();
+    } else if (this.appId === 'e-learning-demo') {
+        return this.renderElearningDemoNavigation();
+    } else if (this.appId === 'edubook-logistiek') {
+        return this.renderEdubookLogistiekNavigation();
+    } else if (this.appId === 'icto-bmr') {
+        return this.renderICTONavigation();
+    } else if (this.appId === 'mijn-app-naam') {
+        return this.renderMijnAppNavigation();  // ← Voeg deze regel toe
+    } else {
+        return this.renderLogistiekOnderzoekNavigation();
+    }
+}
+```
+
+**Stap 1.4:** (Optioneel) Voeg icon kleuren toe in `_getModuleIconColors()` (rond regel 310-350)
+
+Als je custom icon kleuren wilt voor je modules:
+
+```javascript
+if (this.appId === 'mijn-app-naam') {
+    const colorMap = {
+        'start': { icon: 'text-blue-600 dark:text-blue-400', bg: 'bg-blue-100 dark:bg-blue-900/30' },
+        'module-1': { icon: 'text-purple-600 dark:text-purple-400', bg: 'bg-purple-100 dark:bg-purple-900/30' },
+        'module-2': { icon: 'text-green-600 dark:text-green-400', bg: 'bg-green-100 dark:bg-green-900/30' }
+    };
+    const colors = colorMap[module.id];
+    if (colors) {
+        return { iconClass: colors.icon, bgClass: colors.bg };
+    }
+}
+```
+
+#### 2. App Detectie in `NavigationInitializer.js`
+
+**Bestand:** `packages/core/js/components/NavigationInitializer.js`
+
+**Stap 2.1:** Voeg app detectie toe in de constructor (rond regel 10-35)
+
+Zoek naar de `if/else if` chain en voeg je app toe op dezelfde manier als in LayoutRenderer:
+
+```javascript
+// Voeg toe VOOR de laatste else (die terugvalt op logistiek-onderzoek)
+else if (hostname.includes('mijn-app-naam') || href.includes('mijn-app-naam') || pathname.includes('mijn-app-naam')) {
+    this.appId = 'mijn-app-naam';
+    this.appTitle = 'Mijn App Naam';
+}
+```
+
+**Belangrijk:** De `appId` en `appTitle` moeten EXACT hetzelfde zijn als in `LayoutRenderer.js`!
+
+#### 3. (Optioneel) Submenu Setup in `SidebarManager.js`
+
+**Alleen nodig als je pagina's met submenu's hebt** (zoals HD 09 in edubook-logistiek)
+
+Zie Stap 6 voor details over submenu's.
+
+### Checklist voor App Detectie
+
+Voordat je verder gaat met het aanmaken van pagina's, controleer:
+
+- [ ] App detectie toegevoegd in `LayoutRenderer.js` constructor
+- [ ] `renderMijnAppNavigation()` methode aangemaakt met minimaal "Start" module
+- [ ] Methode toegevoegd aan `renderModuleNavigation()` switch statement
+- [ ] App detectie toegevoegd in `NavigationInitializer.js` constructor
+- [ ] `appId` en `appTitle` zijn identiek in beide bestanden
+- [ ] (Optioneel) Icon kleuren toegevoegd in `_getModuleIconColors()`
+- [ ] Getest: Sidebar toont alleen "Start" zonder week 1-7 structuur
+
+### Voorbeeld: Complete Implementatie voor "Mijn App"
+
+**In `LayoutRenderer.js`:**
+
+```javascript
+// Constructor (rond regel 33)
+else if (hostname.includes('mijn-app') || href.includes('mijn-app') || pathname.includes('mijn-app')) {
+    this.appId = 'mijn-app';
+    this.appTitle = 'Mijn App';
+}
+
+// Render methode (rond regel 220)
+renderMijnAppNavigation() {
+    const modules = [
+        { id: 'start', title: 'Start', href: 'index.html' }
+    ];
+    return this.renderModuleNavigationItems(modules);
+}
+
+// Switch statement (rond regel 88)
+else if (this.appId === 'mijn-app') {
+    return this.renderMijnAppNavigation();
+}
+```
+
+**In `NavigationInitializer.js`:**
+
+```javascript
+// Constructor (rond regel 30)
+else if (hostname.includes('mijn-app') || href.includes('mijn-app') || pathname.includes('mijn-app')) {
+    this.appId = 'mijn-app';
+    this.appTitle = 'Mijn App';
+}
+```
+
+### Testen
+
+Na het toevoegen van app detectie:
+
+1. Herstart de development server
+2. Open `http://localhost:3000/mijn-app-naam/`
+3. Controleer de sidebar - deze zou alleen "Start" moeten tonen
+4. Check de browser console - er zouden geen errors moeten zijn
+5. Als je nog steeds week 1-7 ziet, controleer:
+   - Zijn beide bestanden opgeslagen?
+   - Is de server herstart?
+   - Klopt de `appId` spelling in beide bestanden?
+
+## Stap 5: Eerste Pagina Toevoegen
 
 ### 1. Maak een HTML redirect bestand
 
@@ -193,7 +449,7 @@ renderMijnAppNavigation() {
 }
 ```
 
-## Stap 5: Submenu's Toevoegen (Optioneel)
+## Stap 6: Submenu's Toevoegen (Optioneel)
 
 Als je een pagina met submenu's wilt (zoals HD 09 in edubook-logistiek):
 
@@ -275,7 +531,7 @@ setupHoofdstuk1Submenu() {
 }
 ```
 
-## Stap 6: Testen
+## Stap 7: Testen
 
 1. Start de development server:
    ```bash
@@ -296,23 +552,28 @@ setupHoofdstuk1Submenu() {
 ## Checklist voor Nieuwe App
 
 - [ ] App folder aangemaakt in `/apps/`
+- [ ] **Pagina structuur bepaald** (welke modules/hoofdstukken nodig zijn)
+- [ ] **Onnodige pagina's verwijderd** (week 1-7, begrippen, afsluiting indien niet nodig)
 - [ ] Basis bestanden gekopieerd (index.html, package.json, etc.)
-- [ ] App detectie toegevoegd aan `LayoutRenderer.js`
-- [ ] App detectie toegevoegd aan `NavigationInitializer.js`
+- [ ] **KRITISCH: App detectie toegevoegd aan `LayoutRenderer.js`** (constructor + render methode + switch)
+- [ ] **KRITISCH: App detectie toegevoegd aan `NavigationInitializer.js`** (constructor)
 - [ ] `renderMijnAppNavigation()` methode toegevoegd met alleen "Start"
+- [ ] Getest: Sidebar toont alleen "Start" zonder week 1-7 structuur
 - [ ] Eerste pagina aangemaakt (HTML, Page Class, Content JSON)
-- [ ] Pagina toegevoegd aan sidebar navigatie
-- [ ] Getest in browser
+- [ ] Pagina toegevoegd aan sidebar navigatie in `renderMijnAppNavigation()`
+- [ ] Getest in browser - navigatie werkt correct
 
 ## Belangrijke Notities
 
-1. **Sidebar is dynamisch**: De sidebar wordt automatisch gegenereerd door `NavigationInitializer`. Je hoeft NIET handmatig HTML te schrijven in `index.html` voor de navigatie.
+1. **Bepaal eerst je pagina structuur**: Voordat je begint met het aanmaken van pagina's, bepaal eerst welke modules/hoofdstukken je nodig hebt. Elke e-learning app heeft een andere structuur nodig. Kopieer NIET automatisch week 1-7, begrippen of afsluiting tenzij je deze daadwerkelijk nodig hebt.
 
-2. **Core wijzigingen**: Het toevoegen van app detectie vereist wijzigingen in core bestanden. Maak een Pull Request aan als je geen beheerder bent.
+2. **Sidebar is dynamisch**: De sidebar wordt automatisch gegenereerd door `NavigationInitializer`. Je hoeft NIET handmatig HTML te schrijven in `index.html` voor de navigatie.
 
-3. **Content JSON**: Alle content staat in JSON bestanden in de `content/` folder. Zie `packages/core/pages/ContentRenderer.js` voor beschikbare content types.
+3. **Core wijzigingen**: Het toevoegen van app detectie vereist wijzigingen in core bestanden. Maak een Pull Request aan als je geen beheerder bent.
 
-4. **Page Classes**: Elke pagina heeft een JavaScript class die `BaseLessonPage` extend. Deze classes staan in de `pages/` folder.
+4. **Content JSON**: Alle content staat in JSON bestanden in de `content/` folder. Zie `packages/core/pages/ContentRenderer.js` voor beschikbare content types.
+
+5. **Page Classes**: Elke pagina heeft een JavaScript class die `BaseLessonPage` extend. Deze classes staan in de `pages/` folder.
 
 ## Voorbeelden
 
@@ -425,24 +686,51 @@ document.getElementById('9-2')
 
 ### 🎨 Sidebar Customization
 
-#### Sidebar Fallback naar Oude Structuur
+#### Sidebar Fallback naar Oude Structuur (Week 1-7)
 
-**Probleem:** Bij hard refresh zie je eerst de nieuwe sidebar, maar daarna verschijnt de oude week 1-7 structuur.
+**Probleem:** Bij hard refresh zie je eerst de nieuwe sidebar kort, maar daarna verschijnt automatisch de oude week 1-7 structuur.
 
-**Oorzaak:** App detectie werkt niet correct, waardoor de sidebar terugvalt op de standaard `logistiek-onderzoek` structuur.
+**Oorzaak:** App detectie ontbreekt of werkt niet correct, waardoor de sidebar terugvalt op de standaard `logistiek-onderzoek` structuur.
+
+**Dit is het MEEST VOORKOMENDE probleem bij nieuwe apps!**
 
 **Oplossing:**
-- Voeg app detectie toe aan **alle drie** bestanden:
-  1. `packages/core/js/components/LayoutRenderer.js` - App detectie + render methode
+- Voeg app detectie toe aan **beide** verplichte bestanden:
+  1. `packages/core/js/components/LayoutRenderer.js` - App detectie + render methode + switch
   2. `packages/core/js/components/NavigationInitializer.js` - App detectie
-  3. `packages/core/js/ui/SidebarManager.js` - Submenu setup (alleen als nodig)
+  3. `packages/core/js/ui/SidebarManager.js` - Alleen nodig als je submenu's hebt
+
+**Stap-voor-stap fix:**
+
+1. **Open `packages/core/js/components/LayoutRenderer.js`**
+   - Zoek naar de constructor (rond regel 13-45)
+   - Voeg je app detectie toe VOOR de laatste `else` statement
+   - Zoek naar `renderModuleNavigation()` (rond regel 80-90)
+   - Voeg je app toe aan de `if/else if` chain
+   - Voeg `renderMijnAppNavigation()` methode toe (rond regel 220)
+
+2. **Open `packages/core/js/components/NavigationInitializer.js`**
+   - Zoek naar de constructor (rond regel 10-35)
+   - Voeg dezelfde app detectie toe als in LayoutRenderer
+   - Zorg dat `appId` en `appTitle` EXACT hetzelfde zijn
+
+3. **Herstart de development server**
+
+4. **Test:**
+   - Hard refresh (Ctrl+F5)
+   - Controleer sidebar - zou alleen "Start" moeten tonen
+   - Check browser console voor errors
 
 **Checklist:**
-- [ ] App detectie toegevoegd in `LayoutRenderer.js` constructor
-- [ ] `renderMijnAppNavigation()` methode toegevoegd
+- [ ] App detectie toegevoegd in `LayoutRenderer.js` constructor (VOOR de laatste else)
+- [ ] `renderMijnAppNavigation()` methode aangemaakt met minimaal "Start"
 - [ ] Methode toegevoegd aan `renderModuleNavigation()` switch statement
 - [ ] App detectie toegevoegd in `NavigationInitializer.js` constructor
-- [ ] Submenu setup toegevoegd in `SidebarManager.js` (indien nodig)
+- [ ] `appId` en `appTitle` zijn identiek in beide bestanden
+- [ ] Server herstart na wijzigingen
+- [ ] Getest: Sidebar toont alleen "Start" zonder week 1-7
+
+**Belangrijk:** Als je dit niet doet, zal je app ALTIJD terugvallen op de week 1-7 structuur!
 
 #### Submenu's Werken Niet
 
@@ -491,24 +779,44 @@ document.getElementById('9-2')
 
 #### Ongebruikte Bestanden
 
-**Probleem:** Oude content JSON bestanden blijven bestaan maar worden niet gebruikt.
+**Probleem:** Oude content JSON bestanden blijven bestaan maar worden niet gebruikt. Dit gebeurt vaak wanneer je een app kopieert en automatisch week 1-7, begrippen of afsluiting pagina's worden aangemaakt die je niet nodig hebt.
 
 **Oplossing:**
 - Verwijder ongebruikte content JSON bestanden om verwarring te voorkomen
 - Verwijder ook bijbehorende HTML bestanden en Page Classes als ze niet meer nodig zijn
 - Update `index.html` om verwijzingen naar verwijderde pagina's te verwijderen
+- Update `SearchService.js` en `PDFExporter.js` om verwijzingen naar verwijderde content te verwijderen
 
-**Voorbeeld:**
+**Voorbeeld - Verwijderen van onnodige week structuur:**
 ```bash
-# Verwijder ongebruikt content bestand
+# Verwijder ongebruikte week content bestanden
 rm apps/mijn-app/content/week1.content.json
+rm apps/mijn-app/content/week2.content.json
+rm apps/mijn-app/content/week3.content.json
+# ... etc voor alle ongebruikte weken
 
-# Verwijder ongebruikte HTML pagina (optioneel)
+# Verwijder ongebruikte begrippenlijst (indien niet nodig)
+rm apps/mijn-app/content/register.json
+
+# Verwijder ongebruikte afsluiting (indien niet nodig)
+rm apps/mijn-app/content/afsluiting.content.json
+
+# Verwijder ongebruikte HTML pagina's
 rm apps/mijn-app/week1.html
+rm apps/mijn-app/week2.html
+# ... etc
+rm apps/mijn-app/register.html
+rm apps/mijn-app/afsluiting.html
 
-# Verwijder ongebruikte Page Class (optioneel)
+# Verwijder ongebruikte Page Classes
 rm apps/mijn-app/pages/Week1LessonPage.js
+rm apps/mijn-app/pages/Week2LessonPage.js
+# ... etc
+rm apps/mijn-app/pages/RegisterPage.js
+rm apps/mijn-app/pages/AfsluitingLessonPage.js
 ```
+
+**Belangrijk:** Bepaal eerst welke pagina's je nodig hebt (zie Stap 2) voordat je begint met verwijderen. Dit voorkomt dat je per ongeluk pagina's verwijdert die je later toch nodig hebt.
 
 #### Navigation Buttons Verbergen
 

@@ -1,0 +1,81 @@
+{
+  "intro": {
+    "title": "Wat doet ICTO",
+    "subtitle": "Wat doet ICTO",
+    "description": "In dit hoofdstuk leer je welke taken en verantwoordelijkheden ICTO-BMR heeft."
+  },
+  "theorie": {
+    "title": "Taken en verantwoordelijkheden",
+    "content": [
+      {
+        "type": "heading",
+        "text": "Decentraal beheerder",
+        "level": 2,
+        "id": "beheerder"
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">ICTO-BMR is <strong>decentraal beheerder</strong> voor belangrijke onderwijssystemen binnen het domein BMR. Dit betekent dat we verantwoordelijk zijn voor het beheer en onderhoud van systemen zoals:</p>",
+          "<ul class=\"list-disc list-inside space-y-2 text-gray-700 dark:text-gray-300 mb-4 ml-4\">",
+          "<li><strong>Brightspace (ELO):</strong> Het elektronische leeromgeving systeem waar docenten hun cursussen beheren en studenten toegang hebben tot lesmateriaal</li>",
+          "<li><strong>ANS (toetssysteem):</strong> Het systeem voor het maken, afnemen en beoordelen van digitale toetsen</li>",
+          "</ul>",
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Als decentraal beheerder zorgen we ervoor dat deze systemen goed functioneren, dat gebruikers ondersteuning krijgen en dat problemen snel worden opgelost.</p>"
+        ]
+      },
+      {
+        "type": "heading",
+        "text": "Professionalisering van ICT-vaardigheden",
+        "level": 2,
+        "id": "professionalisering"
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Een belangrijke taak van ICTO-BMR is het <strong>professionaliseren van ICT-vaardigheden</strong> van collega's binnen BMR. Dit doen we door:</p>",
+          "<ul class=\"list-disc list-inside space-y-2 text-gray-700 dark:text-gray-300 mb-4 ml-4\">",
+          "<li>Trainingen en workshops te organiseren over digitale tools en systemen</li>",
+          "<li>Individuele begeleiding te bieden bij het gebruik van onderwijstechnologie</li>",
+          "<li>Documentatie en handleidingen beschikbaar te stellen</li>",
+          "<li>Best practices te delen en te ondersteunen bij innovatieve toepassingen</li>",
+          "</ul>",
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Ons doel is om ervoor te zorgen dat alle docenten en medewerkers zelfverzekerd en effectief kunnen werken met de beschikbare digitale middelen.</p>"
+        ]
+      },
+      {
+        "type": "heading",
+        "text": "Advies en ondersteuning",
+        "level": 2,
+        "id": "advies"
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">ICTO-BMR biedt <strong>advies en ondersteuning</strong> bij de inzet van digitale tools in onderwijs. Dit betekent dat je bij ons terecht kunt voor:</p>",
+          "<ul class=\"list-disc list-inside space-y-2 text-gray-700 dark:text-gray-300 mb-4 ml-4\">",
+          "<li>Advies over welke digitale tools geschikt zijn voor jouw onderwijssituatie</li>",
+          "<li>Ondersteuning bij het opzetten en configureren van digitale leeromgevingen</li>",
+          "<li>Hulp bij het oplossen van technische problemen</li>",
+          "<li>Begeleiding bij het ontwikkelen van digitaal lesmateriaal</li>",
+          "<li>Consultatie over innovatieve onderwijstechnologieën</li>",
+          "</ul>",
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">We denken graag mee over hoe je technologie kunt inzetten om je onderwijs te verbeteren en je doelen te bereiken.</p>"
+        ]
+      },
+      {
+        "type": "heading",
+        "text": "Jouw vraag is welkom",
+        "level": 2,
+        "id": "vragen"
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Of je nu een technische vraag hebt over Brightspace, hulp nodig hebt bij het opzetten van een digitale toets, of advies zoekt over het gebruik van een nieuwe tool: <strong>bij BMR ICTO ben je welkom</strong> met al je ICT en onderwijs gerelateerde vragen.</p>",
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">We staan klaar om je te ondersteunen bij het optimaal benutten van digitale mogelijkheden in je onderwijs.</p>"
+        ]
+      }
+    ]
+  }
+}

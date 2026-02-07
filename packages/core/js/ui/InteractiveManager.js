@@ -22,6 +22,43 @@ class InteractiveManager {
         this.setupDragAndDropHandlers();
         this.setupSourceEvaluationHandlers();
         this.setupSequenceExerciseHandlers();
+        this.setupAIBouwsteenGenerators();
+    }
+    
+    /**
+     * Setup event listeners for all AI Bouwsteen Generators in the DOM
+     * This is needed for SPA mode where content is dynamically loaded
+     */
+    setupAIBouwsteenGenerators() {
+        if (typeof window.AIRenderer === 'undefined') {
+            console.warn('[InteractiveManager] AIRenderer not loaded, skipping AI Bouwsteen Generator setup');
+            return;
+        }
+        
+        // Find all AI Bouwsteen Generator containers
+        const generatorContainers = document.querySelectorAll('[id^="ai-bouwsteen-"]');
+        
+        generatorContainers.forEach(container => {
+            const generatorId = container.id;
+            
+            // Check if listeners are already attached (prevent duplicates)
+            const generateBtn = container.querySelector('.ai-bouwsteen-generate-btn');
+            if (generateBtn && generateBtn.dataset.listenersAttached === 'true') {
+                return;
+            }
+            
+            // Setup listeners using AIRenderer
+            try {
+                AIRenderer.setupAIBouwsteenGeneratorListeners(generatorId);
+                
+                // Mark as attached
+                if (generateBtn) {
+                    generateBtn.dataset.listenersAttached = 'true';
+                }
+            } catch (error) {
+                console.error('[InteractiveManager] Error setting up AI Bouwsteen Generator listeners:', error);
+            }
+        });
     }
 
     /**

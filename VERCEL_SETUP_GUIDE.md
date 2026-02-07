@@ -30,7 +30,8 @@
 
 5. **Environment Variables:**
    - Ga naar **Settings** → **Environment Variables**
-   - Voeg toe: `GEMINI_API_KEY` (dezelfde waarde als bij logistiek-onderzoek)
+   - Voeg toe: `DEEPSEEK_API_KEY` en `AI_PROVIDER=deepseek` (aanbevolen)
+   - Of voeg toe: `GEMINI_API_KEY` (alternatief, als je Gemini wilt gebruiken)
    - Selecteer alle environments (Production, Preview, Development)
 
 6. **Deploy:**

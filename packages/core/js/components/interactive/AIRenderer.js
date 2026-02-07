@@ -1209,9 +1209,16 @@ class AIRenderer {
         const generateBtn = generatorContainer.querySelector('.ai-bouwsteen-generate-btn');
         
         if (generateBtn) {
+            // Remove any existing listeners to prevent duplicates
+            const newBtn = generateBtn.cloneNode(true);
+            generateBtn.parentNode.replaceChild(newBtn, generateBtn);
             
-            generateBtn.addEventListener('click', () => {
-                
+            // Mark as having listener attached
+            newBtn.dataset.listenersAttached = 'true';
+            
+            newBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
                 AIRenderer.generateBouwsteenTabel(generatorId);
             });
         }

@@ -967,6 +967,12 @@ class AppRouter {
         }
         if (pageInstance.interactiveManager) {
             pageInstance.interactiveManager.init();
+            // Also setup AI Bouwsteen Generators after a short delay to ensure DOM is ready
+            setTimeout(() => {
+                if (pageInstance.interactiveManager && typeof pageInstance.interactiveManager.setupAIBouwsteenGenerators === 'function') {
+                    pageInstance.interactiveManager.setupAIBouwsteenGenerators();
+                }
+            }, 200);
         }
         if (pageInstance.videoManager) {
             pageInstance.videoManager.init();

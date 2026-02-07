@@ -1,0 +1,14 @@
+{
+  "name": "@e-learning/icto-bmr",
+  "version": "1.0.0",
+  "private": true,
+  "description": "E-Learning: ICTO-BMR",
+  "dependencies": {
+    "@e-learning/core": "*"
+  },
+  "scripts": {
+    "dev": "cd ../../packages/core && npm run dev:app ICTO-BMR",
+    "dev:multi": "cd ../../packages/core && npm run dev:multi",
+    "start": "cd ../../packages/core && npm run dev:app ICTO-BMR"
+  }
+}

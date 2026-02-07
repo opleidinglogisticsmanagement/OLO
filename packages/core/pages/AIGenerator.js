@@ -43,14 +43,12 @@ class AIGenerator {
         }
 
         try {
-            
             console.log('[AIGenerator] Generating questions via server-side proxy...');
             console.log('[AIGenerator] Theory content length:', theoryContent.length);
             console.log('[AIGenerator] Number of questions:', numberOfQuestions);
             console.log('[AIGenerator] Using segment index:', segmentIndex);
 
             // Call server-side proxy
-            
             const response = await fetch(this.proxyUrl, {
                 method: 'POST',
                 headers: {
@@ -83,11 +81,19 @@ class AIGenerator {
                 console.error('[AIGenerator] Request URL:', this.proxyUrl);
                 console.error('[AIGenerator] Hostname:', window.location.hostname);
                 
-                // Check for QUOTA_EXCEEDED error
+                // Check for QUOTA_EXCEEDED error (429) or INSUFFICIENT_BALANCE (402)
                 if (response.status === 429 || (errorData && errorData.error === 'QUOTA_EXCEEDED')) {
                     const quotaError = new Error('QUOTA_EXCEEDED');
                     quotaError.quotaExceeded = true;
                     throw quotaError;
+                }
+                
+                // Check for insufficient balance (402)
+                if (response.status === 402 || (errorData && (errorData.error === 'INSUFFICIENT_BALANCE' || errorData.message?.includes('Insufficient Balance') || errorData.message?.includes('402')))) {
+                    const balanceError = new Error('INSUFFICIENT_BALANCE');
+                    balanceError.insufficientBalance = true;
+                    balanceError.message = 'De API key heeft onvoldoende credits. Neem contact op met de beheerder om de API key te vernieuwen.';
+                    throw balanceError;
                 }
                 
                 throw new Error(`Server error: ${response.status} - ${errorData.message || errorData.error || 'Unknown error'}`);

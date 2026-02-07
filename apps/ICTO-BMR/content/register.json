@@ -1,0 +1,227 @@
+[
+  {
+    "term": "ANS",
+    "description": "ANS is het toetssysteem dat wordt gebruikt binnen BMR voor het maken, afnemen en beoordelen van digitale toetsen. ICTO-BMR is decentraal beheerder van dit systeem.",
+    "location": {
+      "page": "wat-doet-icto.html",
+      "anchor": "#beheerder",
+      "pageTitle": "Wat doet ICTO"
+    }
+  },
+  {
+    "term": "Best practices",
+    "description": "Bewezen methoden en aanpakken die effectief zijn gebleken bij het gebruik van digitale tools in onderwijs. ICTO-BMR deelt best practices met docenten om hen te helpen bij het optimaal benutten van technologie.",
+    "location": {
+      "page": "wat-doet-icto.html",
+      "anchor": "#professionalisering",
+      "pageTitle": "Wat doet ICTO"
+    }
+  },
+  {
+    "term": "Brightspace",
+    "description": "Brightspace is de elektronische leeromgeving (ELO) die wordt gebruikt binnen BMR. Docenten beheren hier hun cursussen en studenten hebben toegang tot lesmateriaal. ICTO-BMR is decentraal beheerder van dit systeem.",
+    "location": {
+      "page": "wat-doet-icto.html",
+      "anchor": "#beheerder",
+      "pageTitle": "Wat doet ICTO"
+    }
+  },
+  {
+    "term": "Decentraal beheerder",
+    "description": "Een rol waarbij ICTO-BMR verantwoordelijk is voor het beheer en onderhoud van onderwijssystemen zoals Brightspace en ANS binnen het domein BMR. Dit omvat technisch beheer, gebruikersondersteuning en het oplossen van problemen.",
+    "location": {
+      "page": "wat-doet-icto.html",
+      "anchor": "#beheerder",
+      "pageTitle": "Wat doet ICTO"
+    }
+  },
+  {
+    "term": "Digitale leeromgevingen",
+    "description": "Online platforms en systemen waarin onderwijs wordt gegeven en geleerd. Voorbeelden zijn Brightspace en andere digitale tools die docenten gebruiken om lesmateriaal te delen en interactie met studenten te faciliteren.",
+    "location": {
+      "page": "wat-doet-icto.html",
+      "anchor": "#advies",
+      "pageTitle": "Wat doet ICTO"
+    }
+  },
+  {
+    "term": "Digitale transformatie",
+    "description": "Het proces waarbij onderwijs steeds meer gebruik maakt van digitale technologie. Studenten verwachten toegang tot digitaal lesmateriaal en moderne tools, en docenten hebben behoefte aan efficiënte systemen.",
+    "location": {
+      "page": "waarom-icto.html",
+      "anchor": "#transformatie",
+      "pageTitle": "Waarom ICTO"
+    }
+  },
+  {
+    "term": "Digitale tools",
+    "description": "Technologische hulpmiddelen en software die worden gebruikt in het onderwijs, zoals Brightspace, ANS en andere applicaties die docenten helpen bij het geven van onderwijs en het beheren van cursussen.",
+    "location": {
+      "page": "wat-is-icto.html",
+      "anchor": "#definitie",
+      "pageTitle": "Wat is ICTO"
+    }
+  },
+  {
+    "term": "Digitale vaardigheden",
+    "description": "De kennis en vaardigheden die nodig zijn om effectief te werken met digitale technologie. De arbeidsmarkt vraagt steeds meer om deze vaardigheden, en ICTO-BMR helpt zowel docenten als studenten bij het ontwikkelen hiervan.",
+    "location": {
+      "page": "waarom-icto.html",
+      "anchor": "#toekomst",
+      "pageTitle": "Waarom ICTO"
+    }
+  },
+  {
+    "term": "Digitaal lesmateriaal",
+    "description": "Onderwijsmateriaal dat in digitale vorm wordt aangeboden, zoals teksten, video's, audio, interactieve elementen en andere content die studenten kunnen gebruiken voor hun leerproces.",
+    "location": {
+      "page": "wat-doet-icto.html",
+      "anchor": "#advies",
+      "pageTitle": "Wat doet ICTO"
+    }
+  },
+  {
+    "term": "Efficiëntie",
+    "description": "Het vermogen om taken sneller en met minder inspanning uit te voeren. Digitale tools helpen docenten efficiënter te werken door administratieve taken te automatiseren en lesmateriaal beter te organiseren.",
+    "location": {
+      "page": "waarom-icto.html",
+      "anchor": "#efficiëntie",
+      "pageTitle": "Waarom ICTO"
+    }
+  },
+  {
+    "term": "Effectiviteit",
+    "description": "De mate waarin doelen worden bereikt. Digitale tools kunnen het onderwijs effectiever maken door betere organisatie, snellere feedback en meer mogelijkheden voor interactie en differentiatie.",
+    "location": {
+      "page": "waarom-icto.html",
+      "anchor": "#efficiëntie",
+      "pageTitle": "Waarom ICTO"
+    }
+  },
+  {
+    "term": "ELO",
+    "description": "Elektronische Leeromgeving. Een digitaal platform waar docenten hun cursussen beheren en studenten toegang hebben tot lesmateriaal. Binnen BMR is Brightspace de ELO.",
+    "location": {
+      "page": "wat-doet-icto.html",
+      "anchor": "#beheerder",
+      "pageTitle": "Wat doet ICTO"
+    }
+  },
+  {
+    "term": "ICTO",
+    "description": "ICTO staat voor ICT en Onderwijs. Het is een afdeling binnen het domein BMR die zich richt op de integratie van informatie- en communicatietechnologie in het onderwijsproces.",
+    "location": {
+      "page": "wat-is-icto.html",
+      "anchor": "#definitie",
+      "pageTitle": "Wat is ICTO"
+    }
+  },
+  {
+    "term": "ICTO-BMR",
+    "description": "De afdeling ICT en Onderwijs binnen het domein BMR. ICTO-BMR is verantwoordelijk voor het ondersteunen van docenten en medewerkers bij het effectief gebruik van digitale tools en systemen in hun onderwijs.",
+    "location": {
+      "page": "wat-is-icto.html",
+      "anchor": "#definitie",
+      "pageTitle": "Wat is ICTO"
+    }
+  },
+  {
+    "term": "ICT-vaardigheden",
+    "description": "De kennis en vaardigheden die nodig zijn om effectief te werken met informatie- en communicatietechnologie. ICTO-BMR professionaliseert deze vaardigheden bij docenten en medewerkers binnen BMR.",
+    "location": {
+      "page": "wat-doet-icto.html",
+      "anchor": "#professionalisering",
+      "pageTitle": "Wat doet ICTO"
+    }
+  },
+  {
+    "term": "Inclusie",
+    "description": "Het creëren van onderwijs dat toegankelijk is voor alle studenten, ongeacht hun achtergrond, leerstijl of behoeften. Digitale tools kunnen helpen bij het creëren van inclusief onderwijs door verschillende vormen van content aan te bieden.",
+    "location": {
+      "page": "waarom-icto.html",
+      "anchor": "#toegankelijkheid",
+      "pageTitle": "Waarom ICTO"
+    }
+  },
+  {
+    "term": "Innovatie",
+    "description": "Het ontwikkelen en implementeren van nieuwe ideeën en technologieën. ICTO-BMR fungeert als partner in innovatie door samen te werken met docenten om nieuwe mogelijkheden te verkennen en te experimenteren met innovatieve onderwijstechnologieën.",
+    "location": {
+      "page": "waarom-icto.html",
+      "anchor": "#innovatie",
+      "pageTitle": "Waarom ICTO"
+    }
+  },
+  {
+    "term": "Onderwijssystemen",
+    "description": "Technische systemen en platforms die worden gebruikt voor het geven en beheren van onderwijs, zoals Brightspace (ELO) en ANS (toetssysteem). ICTO-BMR beheert deze systemen binnen BMR.",
+    "location": {
+      "page": "wat-is-icto.html",
+      "anchor": "#rol",
+      "pageTitle": "Wat is ICTO"
+    }
+  },
+  {
+    "term": "Onderwijstechnologie",
+    "description": "Technologie die specifiek wordt gebruikt voor onderwijsdoeleinden. Dit omvat systemen, tools en methoden die docenten helpen bij het geven van effectief onderwijs en studenten bij het leren.",
+    "location": {
+      "page": "wat-doet-icto.html",
+      "anchor": "#professionalisering",
+      "pageTitle": "Wat doet ICTO"
+    }
+  },
+  {
+    "term": "Onderwijstechnologieën",
+    "description": "Verschillende vormen van technologie die worden gebruikt in onderwijs, zoals digitale platforms, tools voor interactie, systemen voor beoordeling en andere innovatieve oplossingen.",
+    "location": {
+      "page": "waarom-icto.html",
+      "anchor": "#innovatie",
+      "pageTitle": "Waarom ICTO"
+    }
+  },
+  {
+    "term": "Professionalisering",
+    "description": "Het proces van het ontwikkelen en verbeteren van vaardigheden en kennis. ICTO-BMR professionaliseert ICT-vaardigheden van docenten en medewerkers door trainingen, workshops en begeleiding aan te bieden.",
+    "location": {
+      "page": "wat-doet-icto.html",
+      "anchor": "#professionalisering",
+      "pageTitle": "Wat doet ICTO"
+    }
+  },
+  {
+    "term": "Toegankelijkheid",
+    "description": "De mate waarin onderwijs en digitale tools beschikbaar en bruikbaar zijn voor alle gebruikers, inclusief mensen met verschillende behoeften en beperkingen. ICTO-BMR ondersteunt docenten bij het creëren van toegankelijk digitaal onderwijs.",
+    "location": {
+      "page": "waarom-icto.html",
+      "anchor": "#toegankelijkheid",
+      "pageTitle": "Waarom ICTO"
+    }
+  },
+  {
+    "term": "Toetssysteem",
+    "description": "Een digitaal systeem voor het maken, afnemen en beoordelen van toetsen. Binnen BMR is ANS het toetssysteem dat wordt gebruikt. ICTO-BMR is verantwoordelijk voor het beheer hiervan.",
+    "location": {
+      "page": "wat-doet-icto.html",
+      "anchor": "#beheerder",
+      "pageTitle": "Wat doet ICTO"
+    }
+  },
+  {
+    "term": "Trainingen",
+    "description": "Georganiseerde leeractiviteiten waarbij docenten en medewerkers leren werken met digitale tools en systemen. ICTO-BMR organiseert trainingen om ICT-vaardigheden te ontwikkelen.",
+    "location": {
+      "page": "wat-doet-icto.html",
+      "anchor": "#professionalisering",
+      "pageTitle": "Wat doet ICTO"
+    }
+  },
+  {
+    "term": "Workshops",
+    "description": "Interactieve sessies waarbij docenten praktisch leren werken met digitale tools en systemen. Workshops worden georganiseerd door ICTO-BMR om kennis en vaardigheden te delen.",
+    "location": {
+      "page": "wat-doet-icto.html",
+      "anchor": "#professionalisering",
+      "pageTitle": "Wat doet ICTO"
+    }
+  }
+]

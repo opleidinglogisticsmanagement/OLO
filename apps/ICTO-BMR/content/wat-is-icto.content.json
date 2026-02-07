@@ -1,0 +1,57 @@
+{
+  "intro": {
+    "title": "Wat is ICTO",
+    "subtitle": "Wat is ICTO",
+    "description": "In dit hoofdstuk leer je wat ICTO is en wat de rol van ICTO binnen BMR is."
+  },
+  "theorie": {
+    "title": "Wat is ICTO?",
+    "content": [
+      {
+        "type": "heading",
+        "text": "Definitie van ICTO",
+        "level": 2,
+        "id": "definitie"
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">ICTO staat voor <strong>ICT en Onderwijs</strong>. Het is een afdeling binnen het domein BMR die zich richt op de integratie van informatie- en communicatietechnologie in het onderwijsproces.</p>",
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">ICTO-BMR is verantwoordelijk voor het ondersteunen van docenten en medewerkers bij het effectief gebruik van digitale tools en systemen in hun onderwijs. We fungeren als de schakel tussen technische mogelijkheden en onderwijskundige behoeften.</p>"
+        ]
+      },
+      {
+        "type": "heading",
+        "text": "De rol van ICTO binnen BMR",
+        "level": 2,
+        "id": "rol"
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Binnen het domein BMR heeft ICTO een centrale rol in het faciliteren van digitaal onderwijs. We zijn niet alleen technisch beheerder van systemen zoals Brightspace en ANS, maar ook partner in het ontwikkelen van digitale vaardigheden en het optimaliseren van het onderwijsproces.</p>",
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Onze missie is om docenten en medewerkers te ondersteunen bij het creëren van effectief, toegankelijk en innovatief digitaal onderwijs dat aansluit bij de behoeften van studenten en de doelen van BMR.</p>"
+        ]
+      },
+      {
+        "type": "heading",
+        "text": "Waarom ICTO belangrijk is",
+        "level": 2,
+        "id": "belang"
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">In een tijd waarin technologie steeds meer onderdeel wordt van het onderwijs, is het essentieel dat docenten en medewerkers beschikken over de juiste kennis en vaardigheden. ICTO zorgt ervoor dat iedereen binnen BMR optimaal kan profiteren van de beschikbare digitale tools en systemen.</p>",
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Door samen te werken met ICTO kunnen docenten hun onderwijs versterken, efficiënter werken en beter aansluiten bij de digitale verwachtingen van studenten en de arbeidsmarkt.</p>"
+        ]
+      }
+    ]
+  },
+  "mcVragen": {
+    "title": "Test je kennis",
+    "description": "Je kunt hier oneindig veel vragen genereren op basis van de theorie die je zojuist hebt gelezen. Beantwoord de vragen om te oefenen en bepaal zelf wanneer je de stof voldoende beheerst.",
+    "generateFromTheory": true,
+    "numberOfQuestions": 3
+  }
+}

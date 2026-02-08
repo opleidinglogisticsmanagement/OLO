@@ -10,116 +10,13 @@
     "items": [
       "Leren hoe je met de @-functie context meegeeft aan de AI",
       "Het verschil begrijpen tussen de Chat-interface en Inline Editing",
-      "Begrijpen hoe de .cursorrules zorgen voor een veilige werkomgeving"
+      "Begrijpen hoe de .cursorrules en Husky zorgen voor een veilige werkomgeving"
     ],
     "interactive": false
   },
   "theorie": {
     "title": "Cursor als Bouwpartner",
-    "content": [
-      {
-        "type": "paragraph",
-        "text": [
-          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Cursor is meer dan een tekstverwerker; het begrijpt de volledige structuur van je app. Omdat we werken met <strong>.cursorrules</strong>, weet de AI precies welke componenten uit de core beschikbaar zijn en dat hij uitsluitend in jouw app-folder mag werken.</p>",
-          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">In deze fase ontdek je de drie belangrijkste manieren om met Cursor samen te werken: de Chat-interface, Inline Editing en de @-context functie. Elke methode heeft zijn eigen kracht en gebruik je in verschillende situaties.</p>"
-        ]
-      },
-      {
-        "type": "accordion",
-        "usePlusIcon": true,
-        "defaultOpen": false,
-        "items": [
-          {
-            "title": "De Chat (CMD+L)",
-            "defaultOpen": false,
-            "content": [
-              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">De Chat-interface is je startpunt voor grote vragen en complexe taken. Open deze met <code class=\"bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded\">CMD+L</code> (Mac) of <code class=\"bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded\">CTRL+L</code> (Windows/Linux).</p>",
-              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>Wanneer gebruik je de Chat?</strong></p>",
-              "<ul class=\"list-disc list-outside space-y-2 mb-4 ml-6 pl-4 text-gray-700 dark:text-gray-300\">",
-              "<li class=\"mb-2\">Voor grote vragen, zoals: <em>'Help me een nieuwe weekplanning te maken op basis van deze tekst'</em></li>",
-              "<li class=\"mb-2\">Voor het genereren van volledige content secties</li>",
-              "<li class=\"mb-2\">Voor het vragen van uitleg over hoe iets werkt</li>",
-              "<li class=\"mb-2\">Voor het plannen van meerdere gerelateerde wijzigingen</li>",
-              "</ul>",
-              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">De Chat houdt context bij van je hele conversatie, waardoor je kunt doorbouwen op eerdere antwoorden en vragen kunt verfijnen.</p>"
-            ]
-          },
-          {
-            "title": "Inline Edit (CMD+K)",
-            "defaultOpen": false,
-            "content": [
-              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Inline Editing is perfect voor snelle, gerichte wijzigingen. Selecteer een stuk code of tekst en druk op <code class=\"bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded\">CMD+K</code> (Mac) of <code class=\"bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded\">CTRL+K</code> (Windows/Linux).</p>",
-              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>Wanneer gebruik je Inline Edit?</strong></p>",
-              "<ul class=\"list-disc list-outside space-y-2 mb-4 ml-6 pl-4 text-gray-700 dark:text-gray-300\">",
-              "<li class=\"mb-2\">Voor specifieke wijzigingen, zoals: <em>'Verander dit Leerdoel in een interactieve checklist'</em></li>",
-              "<li class=\"mb-2\">Voor het corrigeren van kleine fouten</li>",
-              "<li class=\"mb-2\">Voor het herformuleren van tekst</li>",
-              "<li class=\"mb-2\">Voor het toevoegen van een extra paragraaf of item</li>",
-              "</ul>",
-              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Inline Edit werkt direct op de geselecteerde tekst, zonder dat je de hele context hoeft uit te leggen. Perfect voor snelle aanpassingen!</p>"
-            ]
-          },
-          {
-            "title": "De @-Context",
-            "defaultOpen": false,
-            "content": [
-              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">De @-functie is je geheime wapen voor context-aware AI-assistentie. Typ <code class=\"bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded\">@</code> in de Chat of Inline Edit om specifieke bestanden of mappen als context mee te geven.</p>",
-              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>Hoe gebruik je @-context?</strong></p>",
-              "<ul class=\"list-disc list-outside space-y-2 mb-4 ml-6 pl-4 text-gray-700 dark:text-gray-300\">",
-              "<li class=\"mb-2\"><code class=\"bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded\">@content</code> - Geef de hele content folder als context, zodat de AI weet over welke lesstof je het hebt</li>",
-              "<li class=\"mb-2\"><code class=\"bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded\">@week1.content.json</code> - Verwijs naar een specifiek bestand</li>",
-              "<li class=\"mb-2\"><code class=\"bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded\">@pages</code> - Geef alle pagina classes als context</li>",
-              "<li class=\"mb-2\"><code class=\"bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded\">@README.md</code> - Verwijs naar documentatie</li>",
-              "</ul>",
-              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>Voorbeeld:</strong> Typ in de Chat: <em>'@content Maak een nieuwe week 2 pagina gebaseerd op de structuur van week 1'</em>. De AI heeft nu toegang tot alle content bestanden en kan een consistente structuur maken.</p>",
-              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Door @ te typen kun je specifieke bestanden of zelfs hele mappen (zoals @content) als context meegeven, zodat de AI precies weet over welke lesstof je het hebt.</p>"
-            ]
-          }
-        ]
-      },
-      {
-        "type": "highlight",
-        "title": "De Onzichtbare Gids: .cursorrules",
-        "content": [
-          "<p class=\"text-gray-700 dark:text-gray-300 mb-3\">In de root van je app staat een <code class=\"bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded\">.cursorrules</code> bestand. Dit is de gebruiksaanwijzing voor de AI. Het zorgt ervoor dat Cursor altijd de juiste paden gebruikt (zoals <code class=\"bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded\">/core/js/...</code>) en nooit per ongeluk de gedeelde techniek van de beheerder wijzigt.</p>",
-          "<p class=\"text-gray-700 dark:text-gray-300 mb-3\">De <code class=\"bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded\">.cursorrules</code> vertellen de AI:</p>",
-          "<ul class=\"list-disc list-outside space-y-2 mb-3 ml-6 pl-4 text-gray-700 dark:text-gray-300\">",
-          "<li class=\"mb-2\">Welke bestanden wel en niet aangepast mogen worden</li>",
-          "<li class=\"mb-2\">Welke content types beschikbaar zijn en hoe deze gebruikt moeten worden</li>",
-          "<li class=\"mb-2\">De juiste mappenstructuur en paden</li>",
-          "<li class=\"mb-2\">Dat de core nooit aangepast mag worden</li>",
-          "</ul>",
-          "<p class=\"text-gray-700 dark:text-gray-300\">Dit betekent dat je met vertrouwen kunt werken, wetende dat de AI altijd binnen de veilige grenzen van je app blijft.</p>"
-        ],
-        "icon": "fa-shield-alt",
-        "bgColor": "bg-blue-50 dark:bg-blue-900/20",
-        "borderColor": "border-blue-500 dark:border-blue-400",
-        "titleColor": "text-blue-900 dark:text-blue-200",
-        "contentColor": "text-blue-800 dark:text-blue-300"
-      },
-      {
-        "type": "heading",
-        "text": "Klaar voor de start?",
-        "level": 3
-      },
-      {
-        "type": "learningObjectivesChecklist",
-        "title": "Klaar voor de start?",
-        "items": [
-          "Heb je de lokale server gestart via npm run dev in de core?",
-          "Heb je de chat-interface (CMD+L) al eens geopend?",
-          "Begrijp je dat de AI alleen in jouw eigen apps/ folder werkt?"
-        ],
-        "storageKey": "cursor-readiness"
-      },
-      {
-        "type": "paragraph",
-        "text": [
-          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Nu je weet hoe Cursor werkt, ben je klaar om te beginnen met het vullen van je eigen e-learning content. Onthoud: de AI is je copiloot, maar jij blijft de piloot. Jij bepaalt wat er gemaakt wordt, de AI helpt je met de technische implementatie.</p>",
-          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Gebruik de <strong>ContentValidator</strong> om te controleren of je JSON-structuur correct is. Deze validator controleert automatisch of alle content types correct gebruikt worden en of alle vereiste velden aanwezig zijn.</p>"
-        ]
-      }
-    ]
+    "content": []
   }
 }
 

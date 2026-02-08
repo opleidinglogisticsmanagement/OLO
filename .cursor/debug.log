@@ -11,3 +11,15 @@
 {"location":"Week4LessonPage.js:612","message":"setupMCQuestionButton called","data":{"retries":4,"hostname":"localhost","isVercel":false},"timestamp":1770446379562,"sessionId":"debug-session","runId":"run1","hypothesisId":"A"}
 {"location":"Week4LessonPage.js:617","message":"Listener already attached","data":{},"timestamp":1770446379563,"sessionId":"debug-session","runId":"run1","hypothesisId":"A"}
 {"location":"Week4LessonPage.js:614","message":"Button lookup result","data":{"buttonFound":true,"buttonId":"generate-mc-question-btn","buttonExists":true},"timestamp":1770446379562,"sessionId":"debug-session","runId":"run1","hypothesisId":"A"}
+{"location":"index.html:1563","message":"Adding click listener to PDF export button","data":{},"timestamp":1770465851472,"sessionId":"debug-session","runId":"run1","hypothesisId":"A"}
+{"location":"index.html:1563","message":"Adding click listener to PDF export button","data":{},"timestamp":1770465851926,"sessionId":"debug-session","runId":"run1","hypothesisId":"A"}
+{"location":"index.html:1563","message":"Adding click listener to PDF export button","data":{},"timestamp":1770577736922,"sessionId":"debug-session","runId":"run1","hypothesisId":"A"}
+{"location":"index.html:1563","message":"Adding click listener to PDF export button","data":{},"timestamp":1770577737388,"sessionId":"debug-session","runId":"run1","hypothesisId":"A"}
+{"location":"index.html:1563","message":"Adding click listener to PDF export button","data":{},"timestamp":1770577816435,"sessionId":"debug-session","runId":"run1","hypothesisId":"A"}
+{"location":"index.html:1563","message":"Adding click listener to PDF export button","data":{},"timestamp":1770577816930,"sessionId":"debug-session","runId":"run1","hypothesisId":"A"}
+{"location":"index.html:1563","message":"Adding click listener to PDF export button","data":{},"timestamp":1770577819552,"sessionId":"debug-session","runId":"run1","hypothesisId":"A"}
+{"location":"index.html:1563","message":"Adding click listener to PDF export button","data":{},"timestamp":1770577820165,"sessionId":"debug-session","runId":"run1","hypothesisId":"A"}
+{"location":"index.html:1563","message":"Adding click listener to PDF export button","data":{},"timestamp":1770577868044,"sessionId":"debug-session","runId":"run1","hypothesisId":"A"}
+{"location":"index.html:1563","message":"Adding click listener to PDF export button","data":{},"timestamp":1770577868598,"sessionId":"debug-session","runId":"run1","hypothesisId":"A"}
+{"location":"index.html:1563","message":"Adding click listener to PDF export button","data":{},"timestamp":1770577945314,"sessionId":"debug-session","runId":"run1","hypothesisId":"A"}
+{"location":"index.html:1563","message":"Adding click listener to PDF export button","data":{},"timestamp":1770577945884,"sessionId":"debug-session","runId":"run1","hypothesisId":"A"}

@@ -154,7 +154,7 @@ class LayoutRenderer {
         const modules = [
             { id: 'start', title: 'Start', href: 'index.html' },
             { id: 'module1', title: 'Het Fundament', href: 'module1.html' },
-            { id: 'cursor', title: 'Cursor', href: 'cursor.html' },
+            { id: 'cursor', title: 'Github en Cursor', href: 'cursor.html' },
             {
                 id: 'fase3',
                 title: 'De Catalogus',

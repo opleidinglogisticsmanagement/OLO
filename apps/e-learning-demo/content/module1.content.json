@@ -20,9 +20,27 @@
       {
         "type": "paragraph",
         "text": [
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Om op deze manier aan de e-learning te werken, heb je een aantal software tools nodig. Deze tools helpen je bij het maken, beheren en publiceren van je content:</p>",
+          "<ul class=\"list-disc list-outside space-y-2 mb-4 ml-6 pl-4 text-gray-700 dark:text-gray-300\">",
+          "<li class=\"mb-2\"><strong>Cursor</strong> - Een AI-aangedreven code editor die je helpt bij het vullen van content. Download Cursor via <a href=\"https://cursor.com/\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"text-blue-600 dark:text-blue-400 hover:underline\">cursor.com</a>. Je moet een account aanmaken om Cursor te gebruiken - dit hoeft niet hetzelfde mailadres te zijn als je andere accounts.</li>",
+          "<li class=\"mb-2\"><strong>GitHub Desktop</strong> - Een gebruiksvriendelijke Git client voor het beheren van je code en het pushen van wijzigingen. Download GitHub Desktop via <a href=\"https://desktop.github.com/\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"text-blue-600 dark:text-blue-400 hover:underline\">desktop.github.com</a></li>",
+          "<li class=\"mb-2\"><strong>Vercel</strong> - Voor deployment van je e-learning app (alleen nodig voor beheerders). Andere gebruikers ontvangen een publicatielink naar de Vercel deployment. Meer informatie op <a href=\"https://vercel.com/\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"text-blue-600 dark:text-blue-400 hover:underline\">vercel.com</a></li>",
+          "</ul>",
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Zorg ervoor dat je Cursor en GitHub Desktop hebt geïnstalleerd voordat je begint met het vullen van content. Vercel is alleen nodig voor beheerders die de deployment beheren - als gebruiker ontvang je gewoon een link naar je gepubliceerde e-learning.</p>"
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": [
           "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Het e-learning platform waar je nu mee werkt, is gebouwd op een <strong>gedeeld fundament</strong>: de <strong>Core</strong>. Deze Core bevat alle interactieve elementen, componenten en functionaliteiten die je nodig hebt om rijke, interactieve leerervaringen te creëren.</p>",
           "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Als docent werk je binnen je eigen <strong>App</strong> - een vakspecifieke omgeving die toegang heeft tot deze krachtige gereedschapskist. Je hoeft je geen zorgen te maken over de technische implementatie van accordions, tabs, oefeningen of andere interactieve elementen. Die zijn al voor je gebouwd en getest.</p>",
           "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Je rol? Focus op de <strong>didactiek</strong> en de <strong>inhoud</strong>. De techniek regelen wij voor je.</p>"
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Deze werkwijze is gebaseerd op een <strong>monorepo</strong> architectuur. Dit betekent dat alle apps en de gedeelde Core code samen in één centrale repository staan. Hierdoor profiteert iedereen direct van verbeteringen en nieuwe features die aan de Core worden toegevoegd, zonder dat je zelf technische updates hoeft door te voeren. In de onderstaande tabs lees je meer over wat een monorepo precies is en waarom we deze architectuur gebruiken.</p>"
         ]
       },
       {
@@ -72,22 +90,65 @@
       },
       {
         "type": "heading",
-        "text": "De .cursorrules: Je Veilige Gids",
+        "text": "Beveiliging: Je Veilige Gids",
         "level": 3
       },
       {
         "type": "paragraph",
         "text": [
-          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Om ervoor te zorgen dat Cursor altijd de juiste paden gebruikt en de juiste content types toepast, hebben we <strong>.cursorrules</strong> bestanden opgesteld. Deze bestanden fungeren als een gids voor de AI-assistent:</p>",
-          "<ul class=\"list-disc list-outside space-y-2 mb-4 ml-6 pl-4 text-gray-700 dark:text-gray-300\">",
-          "<li class=\"mb-2\">Ze vertellen Cursor welke bestanden wel en niet aangepast mogen worden</li>",
-          "<li class=\"mb-2\">Ze specificeren welke content types beschikbaar zijn en hoe deze gebruikt moeten worden</li>",
-          "<li class=\"mb-2\">Ze zorgen ervoor dat je altijd werkt binnen de juiste mappenstructuur</li>",
-          "<li class=\"mb-2\">Ze voorkomen dat je per ongeluk technische code wijzigt die je niet zou moeten aanraken</li>",
-          "</ul>",
-          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Met andere woorden: de <code class=\"bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded\">.cursorrules</code> zorgen ervoor dat je altijd op het juiste pad blijft. Je hoeft je geen zorgen te maken over het per ongeluk breken van technische functionaliteiten - de AI weet precies wat wel en niet mag.</p>",
-          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Dit betekent dat je met vertrouwen kunt werken aan je content, wetende dat Cursor je helpt binnen de grenzen van het framework te blijven. Geen technische kennis nodig - alleen didactische expertise en de wil om geweldig onderwijs te maken.</p>"
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Om ervoor te zorgen dat je altijd veilig kunt werken binnen het framework, hebben we een <strong>dubbele beveiligingslaag</strong> geïmplementeerd. Deze beveiliging werkt op twee momenten: tijdens het werken met Cursor en bij het pushen van je wijzigingen naar Git. Je hoeft je geen zorgen te maken over het per ongeluk breken van technische functionaliteiten - het systeem weet precies wat wel en niet mag.</p>",
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Dit betekent dat je met vertrouwen kunt werken aan je content, wetende dat zowel tijdens het werken als bij het pushen automatisch wordt gecontroleerd of je binnen de veilige grenzen van het framework blijft. Geen technische kennis nodig - alleen didactische expertise en de wil om geweldig onderwijs te maken.</p>"
         ]
+      },
+      {
+        "type": "tabs",
+        "defaultTab": 0,
+        "tabs": [
+          {
+            "title": ".cursorrules",
+            "content": [
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Om ervoor te zorgen dat Cursor altijd de juiste paden gebruikt en de juiste content types toepast, hebben we <strong>.cursorrules</strong> bestanden opgesteld. Deze bestanden fungeren als een gids voor de AI-assistent:</p>",
+              "<ul class=\"list-disc list-outside space-y-2 mb-4 ml-6 pl-4 text-gray-700 dark:text-gray-300\">",
+              "<li class=\"mb-2\">Ze vertellen Cursor welke bestanden wel en niet aangepast mogen worden</li>",
+              "<li class=\"mb-2\">Ze specificeren welke content types beschikbaar zijn en hoe deze gebruikt moeten worden</li>",
+              "<li class=\"mb-2\">Ze zorgen ervoor dat je altijd werkt binnen de juiste mappenstructuur</li>",
+              "<li class=\"mb-2\">Ze voorkomen dat je per ongeluk technische code wijzigt die je niet zou moeten aanraken</li>",
+              "</ul>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Met andere woorden: de <code class=\"bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded\">.cursorrules</code> zorgen ervoor dat je altijd op het juiste pad blijft tijdens het werken. De AI weet precies wat wel en niet mag, waardoor je met vertrouwen kunt werken aan je content zonder je zorgen te maken over technische fouten.</p>"
+            ]
+          },
+          {
+            "title": "Husky",
+            "content": [
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>Husky</strong> is een Git hook tool die automatisch controleert of je alleen wijzigingen pusht in toegestane paden. Dit is de tweede beveiligingslaag die actief wordt bij het pushen van je wijzigingen naar Git.</p>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Wanneer je probeert te pushen met wijzigingen in verboden gebieden, wordt je push automatisch geblokkeerd. Verboden gebieden zijn onder andere:</p>",
+              "<ul class=\"list-disc list-outside space-y-2 mb-4 ml-6 pl-4 text-gray-700 dark:text-gray-300\">",
+              "<li class=\"mb-2\"><code class=\"bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded\">packages/core</code> - De gedeelde framework code (alleen wijzigbaar via Pull Request)</li>",
+              "<li class=\"mb-2\">Andere apps dan je eigen app - Je mag alleen wijzigingen maken in je eigen app folder</li>",
+              "<li class=\"mb-2\">Gevoelige bestanden zoals <code class=\"bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded\">config.js</code> of <code class=\"bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded\">.env</code> bestanden</li>",
+              "<li class=\"mb-2\">Root bestanden zoals <code class=\"bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded\">package.json</code> of <code class=\"bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded\">README.md</code></li>",
+              "</ul>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Als je push wordt geblokkeerd, krijg je een duidelijke foutmelding die aangeeft welke bestanden problematisch zijn. Je kunt deze bestanden dan uit je commit halen en alleen de toegestane wijzigingen pushen.</p>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Deze dubbele beveiliging zorgt ervoor dat je zowel tijdens het werken (via .cursorrules) als bij het pushen (via Husky) binnen de veilige grenzen van het framework blijft.</p>"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "highlight",
+        "title": "Opdracht: Toegang tot de Repository",
+        "content": [
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-3\">Om toegang te krijgen tot de repository en te kunnen beginnen met het vullen van content, moet je je gegevens doorgeven aan de beheerder:</p>",
+          "<ul class=\"list-disc list-outside space-y-2 mb-3 ml-6 pl-4 text-gray-700 dark:text-gray-300\">",
+          "<li class=\"mb-2\">Je <strong>mailadres</strong> (dit moet het mailadres zijn dat je gebruikt voor GitHub)</li>",
+          "<li class=\"mb-2\">Je <strong>GitHub gebruikersnaam</strong> (de gebruikersnaam die je gebruikt in GitHub Desktop)</li>",
+          "</ul>",
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-3\">Zodra de beheerder je gegevens heeft ontvangen en je toegang heeft gegeven tot de repository, kun je beginnen met het clonen van de repository en het vullen van je content.</p>"
+        ],
+        "bgColor": "bg-yellow-50 dark:bg-yellow-900/20",
+        "borderColor": "border-yellow-500 dark:border-yellow-400",
+        "titleColor": "text-yellow-900 dark:text-yellow-200",
+        "contentColor": "text-yellow-800 dark:text-yellow-300"
       }
     ]
   }

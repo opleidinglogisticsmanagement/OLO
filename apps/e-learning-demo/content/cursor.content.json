@@ -1,8 +1,8 @@
 {
   "intro": {
-    "title": "Cursor",
+    "title": "Github en Cursor",
     "subtitle": "Je persoonlijke AI-copiloot",
-    "description": "Leer hoe je Cursor transformeert van een simpele editor naar een krachtige bouwpartner die de taal van ons framework spreekt."
+    "description": ""
   },
   "leerdoelen": {
     "title": "Leerdoelen",
@@ -15,8 +15,29 @@
     "interactive": false
   },
   "theorie": {
-    "title": "Cursor als Bouwpartner",
-    "content": []
+    "title": "Github goed instellen",
+    "content": [
+      {
+        "type": "heading",
+        "text": "Repository lokaal clonen",
+        "level": 3
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Om de repository lokaal te clonen in GitHub Desktop, kun je op twee manieren te werk gaan:</p>",
+          "<ul class=\"list-disc list-outside space-y-2 mb-4 ml-6 pl-4 text-gray-700 dark:text-gray-300\">",
+          "<li class=\"mb-2\">Klik op <strong>File</strong> in het menu en selecteer <strong>Clone repository...</strong> (zie afbeelding hieronder)</li>",
+          "<li class=\"mb-2\">Of gebruik de sneltoets <code class=\"bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded\">Ctrl+Shift+O</code> (Windows/Linux) of <code class=\"bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded\">Cmd+Shift+O</code> (Mac)</li>",
+          "</ul>"
+        ]
+      },
+      {
+        "type": "image",
+        "src": "assets/images/1.1.png",
+        "alt": "GitHub Desktop - Clone repository dialoog"
+      }
+    ]
   }
 }
 

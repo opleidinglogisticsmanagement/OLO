@@ -14,6 +14,13 @@
 let coreApp = null;
 
 function handler(req, res) {
+    // Intercept /api/progress - voortgangstracking (Vercel Postgres)
+    const path = (req.url || req.path || '').split('?')[0];
+    if (path === '/api/progress') {
+        const progressHandler = require('./progress-handler');
+        return progressHandler(req, res);
+    }
+
     // Log onmiddellijk om te bevestigen dat de functie wordt uitgevoerd
     console.log('=== [App API Handler] Handler function is being executed! ===');
     console.log('[App API Handler] Request:', req.method, req.path);

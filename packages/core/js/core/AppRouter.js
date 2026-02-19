@@ -17,6 +17,8 @@ class AppRouter {
         // Route mapping
         this.routes = {
             'index.html': () => this.loadIndexPage(),
+            'gepersonaliseerd.html': () => this.loadWeekPage('gepersonaliseerd', 'GepersonaliseerdLessonPage'),
+            'ai-leerpad.html': () => this.loadWeekPage('ai-leerpad', 'AILeerpadPage'),
             'week1.html': () => this.loadWeekPage('week-1', 'Week1LessonPage'),
             'week2.html': () => this.loadWeekPage('week-2', 'Week2LessonPage'),
             'week3.html': () => this.loadWeekPage('week-3', 'Week3LessonPage'),
@@ -51,8 +53,10 @@ class AppRouter {
         // Als het een hard refresh is en we niet al op index.html zijn, redirect
         const currentPath = window.location.pathname;
         const isIndexPage = currentPath.endsWith('index.html') || currentPath === '/' || currentPath.endsWith('/');
+        const isGepersonaliseerdPage = currentPath.endsWith('gepersonaliseerd.html');
+        const isAILeerpadPage = currentPath.endsWith('ai-leerpad.html');
         
-        if (isHardRefresh && !isIndexPage) {
+        if (isHardRefresh && !isIndexPage && !isGepersonaliseerdPage && !isAILeerpadPage) {
             console.log('[AppRouter] 🔄 Hard refresh detected, redirecting to index.html');
             window.location.href = 'index.html';
             return; // Stop verdere initialisatie

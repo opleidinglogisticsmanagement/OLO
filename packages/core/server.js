@@ -416,6 +416,477 @@ ${theoryContent.substring(0, 8000)}`; // Limit to 8000 chars
 });
 
 /**
+ * Validatie voor AI-leerpad endpoints
+ */
+const validateAILeerpad = [
+    body('goalId').optional().isString().trim(),
+    body('goalText').optional().isString().trim().isLength({ max: 500 }),
+    body('contentSnippets')
+        .isString()
+        .trim()
+        .isLength({ min: 50, max: 15000 })
+        .withMessage('contentSnippets must be between 50 and 15000 characters'),
+    body('numberOfQuestions')
+        .optional()
+        .isInt({ min: 2, max: 8 })
+        .withMessage('numberOfQuestions must be between 2 and 8')
+];
+
+/**
+ * POST /api/generate-entry-test
+ * Genereer instaptoets voor AI-leerpad (bepaal instapniveau)
+ */
+app.post('/api/generate-entry-test', validateAILeerpad, async (req, res) => {
+    const { contentSnippets, goalText, numberOfQuestions = 4 } = req.body;
+    const theoryContent = contentSnippets;
+    const prompt = `Genereer ${numberOfQuestions} korte meerkeuzevragen in het Nederlands om het INSTAPNIVEAU te bepalen van een student. De student heeft de stof mogelijk nog NIET bestudeerd.
+
+LEERDOEL (indien gegeven): ${goalText || 'Niet opgegeven'}
+
+THEORIE (waar de vragen over gaan):
+${theoryContent.substring(0, 6000)}
+
+Eisen:
+- Elke vraag moet 4 antwoordopties hebben (a, b, c, d)
+- Eén correct antwoord per vraag (correct: true)
+- Korte, duidelijke vragen
+- Mix van kennisvragen (wat is X?) en begripsvragen (waarom...?)
+- Geef feedbackGoed en feedbackFout per vraag
+
+JSON format:
+{
+  "vragen": [
+    {
+      "id": "vraag1",
+      "vraag": "Vraagtekst",
+      "antwoorden": [
+        { "id": "a", "tekst": "Optie A", "correct": false },
+        { "id": "b", "tekst": "Optie B", "correct": true }
+      ],
+      "feedbackGoed": "Korte uitleg",
+      "feedbackFout": "Korte uitleg"
+    }
+  ]
+}`;
+    return runAIQuestionGeneration(req, res, prompt, 'generate-entry-test');
+});
+
+/**
+ * POST /api/generate-final-test
+ * Genereer eindtoets voor AI-leerpad (toets behalen leerdoel)
+ */
+app.post('/api/generate-final-test', validateAILeerpad, async (req, res) => {
+    const { contentSnippets, goalText, numberOfQuestions = 5 } = req.body;
+    const theoryContent = contentSnippets;
+    const prompt = `Genereer ${numberOfQuestions} meerkeuzevragen in het Nederlands voor een EINDTEST. De student heeft de stof bestudeerd en moet nu aantonen dat het leerdoel behaald is.
+
+LEERDOEL: ${goalText || 'Zie theorie'}
+
+THEORIE:
+${theoryContent.substring(0, 6000)}
+
+Eisen:
+- Vragen moeten het leerdoel toetsen
+- 4 antwoordopties per vraag (a, b, c, d)
+- Varieer in cognitief niveau (kennen, begrijpen, toepassen)
+- Geef feedbackGoed en feedbackFout per vraag
+
+JSON format:
+{
+  "vragen": [
+    {
+      "id": "vraag1",
+      "vraag": "Vraagtekst",
+      "antwoorden": [
+        { "id": "a", "tekst": "Optie A", "correct": false },
+        { "id": "b", "tekst": "Optie B", "correct": true }
+      ],
+      "feedbackGoed": "Uitleg",
+      "feedbackFout": "Uitleg"
+    }
+  ]
+}`;
+    return runAIQuestionGeneration(req, res, prompt, 'generate-final-test');
+});
+
+/**
+ * Helper: voer AI-vraaggeneratie uit (hergebruik voor entry + final test)
+ */
+async function runAIQuestionGeneration(req, res, prompt, endpointName) {
+    try {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(400).json({ error: 'Invalid input', errors: errors.array() });
+        }
+        let appName = detectAppFromPath(req.path) || (req.headers.referer && detectAppFromPath(req.headers.referer));
+        const apiConfig = getAppAPIConfig(appName);
+        if (!apiConfig?.apiKey) {
+            return res.status(500).json({ error: 'API key not configured' });
+        }
+        if (!OpenAI) {
+            return res.status(500).json({ error: 'OpenAI SDK not installed' });
+        }
+        const openai = new OpenAI({ apiKey: apiConfig.apiKey, baseURL: 'https://api.deepseek.com' });
+        const completion = await openai.chat.completions.create({
+            model: 'deepseek-chat',
+            messages: [{ role: 'user', content: prompt }],
+            temperature: 0.7,
+            max_tokens: 2000
+        });
+        let responseText = completion.choices[0]?.message?.content || '';
+        let jsonText = responseText.trim();
+        if (jsonText.startsWith('```json')) jsonText = jsonText.replace(/^```json\s*/m, '').replace(/\s*```$/m, '');
+        else if (jsonText.startsWith('```')) jsonText = jsonText.replace(/^```\s*/m, '').replace(/\s*```$/m, '');
+        const jsonMatch = jsonText.match(/\{[\s\S]*\}/);
+        if (jsonMatch) jsonText = jsonMatch[0];
+        const parsed = JSON.parse(jsonText);
+        if (!parsed.vragen || !Array.isArray(parsed.vragen)) {
+            return res.status(502).json({ error: 'Invalid response structure' });
+        }
+        const questions = parsed.vragen.map((v, i) => ({
+            id: v.id || `vraag${i + 1}`,
+            vraag: v.vraag || `Vraag ${i + 1}`,
+            antwoorden: (v.antwoorden || []).map((a, ai) => ({
+                id: a.id || String.fromCharCode(97 + ai),
+                tekst: a.tekst || '',
+                correct: a.correct === true
+            })),
+            feedbackGoed: v.feedbackGoed || 'Goed!',
+            feedbackFout: v.feedbackFout || 'Niet correct.'
+        }));
+        return res.json({ success: true, vragen: questions });
+    } catch (error) {
+        console.error(`[${endpointName}] Error:`, error);
+        return res.status(500).json({ error: 'Internal server error', message: error.message });
+    }
+}
+
+/**
+ * Validatie voor reflectie-endpoints (open vragen + AI-analyse)
+ */
+const validateReflection = [
+    body('goalId').optional().isString().trim(),
+    body('goalText').optional().isString().trim().isLength({ max: 500 }),
+    body('contentSnippets')
+        .isString()
+        .trim()
+        .isLength({ min: 50, max: 15000 })
+        .withMessage('contentSnippets must be between 50 and 15000 characters'),
+    body('stepContext').optional().isString().trim().isLength({ max: 2000 }),
+    body('stepIndex').optional().isInt({ min: 0 }),
+    body('totalSteps').optional().isInt({ min: 1 }),
+    body('stepTitle').optional().isString().trim().isLength({ max: 200 })
+];
+
+const validateAnalyzeReflection = [
+    ...validateReflection,
+    body('question').isString().trim().isLength({ min: 5, max: 500 }),
+    body('userAnswer').isString().trim().isLength({ min: 10, max: 2000 }).withMessage('userAnswer must be between 10 and 2000 characters')
+];
+
+/**
+ * Validatie voor grade-entry-answer (AI beoordeelt open antwoord)
+ */
+const validateGradeEntryAnswer = [
+    body('questionId').isString().trim(),
+    body('question').isString().trim().isLength({ min: 5, max: 1000 }),
+    body('userAnswer').isString().trim().isLength({ min: 1, max: 2000 }),
+    body('goedAntwoord').isString().trim().isLength({ max: 1000 }),
+    body('feedbackGoed').optional().isString().trim().isLength({ max: 500 }),
+    body('feedbackFout').optional().isString().trim().isLength({ max: 500 }),
+    body('casus').optional().isString().trim().isLength({ max: 1000 })
+];
+
+/**
+ * POST /api/grade-entry-answer
+ * AI beoordeelt een open antwoord op een instaptoetsvraag
+ */
+app.post('/api/grade-entry-answer', validateGradeEntryAnswer, async (req, res) => {
+    try {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(400).json({ error: 'Invalid input', errors: errors.array() });
+        }
+        const { question, userAnswer, goedAntwoord, feedbackGoed, feedbackFout, casus } = req.body;
+        let appName = detectAppFromPath(req.path) || (req.headers.referer && detectAppFromPath(req.headers.referer));
+        const apiConfig = getAppAPIConfig(appName);
+        if (!apiConfig?.apiKey) {
+            return res.status(500).json({ error: 'API key not configured' });
+        }
+        if (!OpenAI) {
+            return res.status(500).json({ error: 'OpenAI SDK not installed' });
+        }
+
+        const prompt = `Je bent een didactische AI die open antwoorden van HBO-studenten beoordeelt.
+
+VRAAG: ${question}
+${casus ? `\nCASUS:\n${casus}\n` : ''}
+
+VERWACHT GOED ANTWOORD (kernpunten moeten aanwezig zijn): ${goedAntwoord}
+
+ANTWOORD STUDENT: ${userAnswer}
+
+Beoordeel of het antwoord van de student inhoudelijk correct is. Let op:
+- Synoniemen en andere formuleringen zijn toegestaan als de betekenis hetzelfde is
+- Het antwoord hoeft niet letterlijk overeen te komen
+- Bij meerdere vereiste elementen (bijv. "noem er minimaal drie"): controleer of er genoeg correcte elementen zijn
+
+Geef een JSON-object terug met EXACT deze velden:
+{
+  "correct": true of false,
+  "feedback": "De feedback die de student moet zien (gebruik feedbackFout als incorrect, anders bevestigend)"
+}
+
+Als correct: gebruik feedbackGoed indien gegeven. Als incorrect: gebruik feedbackFout indien gegeven. Geef ALLEEN geldige JSON terug.`;
+
+        const openai = new OpenAI({ apiKey: apiConfig.apiKey, baseURL: 'https://api.deepseek.com' });
+        const completion = await openai.chat.completions.create({
+            model: 'deepseek-chat',
+            messages: [{ role: 'user', content: prompt }],
+            temperature: 0.2,
+            max_tokens: 300
+        });
+        let jsonText = (completion.choices[0]?.message?.content || '').trim();
+        if (jsonText.startsWith('```json')) jsonText = jsonText.replace(/^```json\s*/m, '').replace(/\s*```$/m, '');
+        else if (jsonText.startsWith('```')) jsonText = jsonText.replace(/^```\s*/m, '').replace(/\s*```$/m, '');
+        const jsonMatch = jsonText.match(/\{[\s\S]*\}/);
+        if (jsonMatch) jsonText = jsonMatch[0];
+        const parsed = JSON.parse(jsonText);
+
+        const correct = parsed.correct === true;
+        const feedback = correct ? (feedbackGoed || 'Goed') : (feedbackFout || 'Niet correct.');
+
+        return res.json({
+            success: true,
+            correct,
+            feedback
+        });
+    } catch (error) {
+        console.error('[grade-entry-answer] Error:', error);
+        return res.status(500).json({ error: 'Internal server error', message: error.message });
+    }
+});
+
+/**
+ * Validatie voor analyze-entry-results (AI analyseert uitkomsten instaptoets)
+ */
+const validateAnalyzeEntryResults = [
+    body('goalId').isString().trim(),
+    body('goalText').optional().isString().trim().isLength({ max: 500 }),
+    body('contentSnippets').optional().isString().trim().isLength({ max: 15000 }),
+    body('answers').isArray({ min: 1 }).withMessage('answers must be a non-empty array'),
+    body('answers.*.questionId').isString().trim(),
+    body('answers.*.correct').isBoolean(),
+    body('answers.*.bloomLevel').optional().isInt({ min: 1, max: 3 }),
+    body('answers.*.questionText').optional().isString().trim().isLength({ max: 500 }),
+    body('totalScore').optional().isInt({ min: 0, max: 100 }),
+    body('bloomScores').optional().isObject()
+];
+
+/**
+ * POST /api/analyze-entry-results
+ * AI analyseert de uitkomsten van de instaptoets (geen vraaggeneratie)
+ */
+app.post('/api/analyze-entry-results', validateAnalyzeEntryResults, async (req, res) => {
+    try {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(400).json({ error: 'Invalid input', errors: errors.array() });
+        }
+        const { goalId, goalText, contentSnippets, answers, totalScore, bloomScores } = req.body;
+        let appName = detectAppFromPath(req.path) || (req.headers.referer && detectAppFromPath(req.headers.referer));
+        const apiConfig = getAppAPIConfig(appName);
+        if (!apiConfig?.apiKey) {
+            return res.status(500).json({ error: 'API key not configured' });
+        }
+        if (!OpenAI) {
+            return res.status(500).json({ error: 'OpenAI SDK not installed' });
+        }
+
+        const answersSummary = answers.map((a) =>
+            `- Vraag "${(a.questionText || a.questionId).substring(0, 80)}...": ${a.correct ? 'GOED' : 'FOUT'}${a.bloomLevel ? ` (Bloom ${a.bloomLevel})` : ''}`
+        ).join('\n');
+
+        const prompt = `Je bent een didactische AI. Analyseer de uitkomsten van een instaptoets om het voorkennisniveau te bepalen.
+
+LEERDOEL: ${goalText || goalId}
+
+TOTAALSCORE: ${totalScore ?? 'onbekend'}%
+
+UITKOMSTEN PER VRAAG:
+${answersSummary}
+
+${bloomScores && Object.keys(bloomScores).length > 0 ? `SCORE PER BLOOM-NIVEAU:\n${JSON.stringify(bloomScores, null, 2)}\n` : ''}
+
+Geef een JSON-object terug met EXACT deze velden:
+{
+  "summary": "Korte samenvatting van het niveau (2-3 zinnen)",
+  "strengths": ["sterke punt 1", "sterke punt 2"],
+  "gaps": ["aandachtspunt 1", "aandachtspunt 2"],
+  "recommendation": "Advies voor stap 2: welke theorie/oefeningen prioriteit geven (1-2 zinnen)"
+}
+
+Geef ALLEEN geldige JSON terug, geen andere tekst.`;
+
+        const openai = new OpenAI({ apiKey: apiConfig.apiKey, baseURL: 'https://api.deepseek.com' });
+        const completion = await openai.chat.completions.create({
+            model: 'deepseek-chat',
+            messages: [{ role: 'user', content: prompt }],
+            temperature: 0.5,
+            max_tokens: 500
+        });
+        let jsonText = (completion.choices[0]?.message?.content || '').trim();
+        if (jsonText.startsWith('```json')) jsonText = jsonText.replace(/^```json\s*/m, '').replace(/\s*```$/m, '');
+        else if (jsonText.startsWith('```')) jsonText = jsonText.replace(/^```\s*/m, '').replace(/\s*```$/m, '');
+        const jsonMatch = jsonText.match(/\{[\s\S]*\}/);
+        if (jsonMatch) jsonText = jsonMatch[0];
+        const parsed = JSON.parse(jsonText);
+
+        return res.json({
+            success: true,
+            analysis: {
+                summary: parsed.summary || '',
+                strengths: Array.isArray(parsed.strengths) ? parsed.strengths : [],
+                gaps: Array.isArray(parsed.gaps) ? parsed.gaps : [],
+                recommendation: parsed.recommendation || ''
+            }
+        });
+    } catch (error) {
+        console.error('[analyze-entry-results] Error:', error);
+        return res.status(500).json({ error: 'Internal server error', message: error.message });
+    }
+});
+
+/**
+ * POST /api/generate-reflection-question
+ * Genereer een slimme reflectievraag op basis van de huidige stap
+ */
+app.post('/api/generate-reflection-question', validateReflection, async (req, res) => {
+    try {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(400).json({ error: 'Invalid input', errors: errors.array() });
+        }
+        const { contentSnippets, goalText, stepContext, stepIndex = 0, totalSteps = 1, stepTitle } = req.body;
+        let appName = detectAppFromPath(req.path) || (req.headers.referer && detectAppFromPath(req.headers.referer));
+        const apiConfig = getAppAPIConfig(appName);
+        if (!apiConfig?.apiKey) {
+            return res.status(500).json({ error: 'API key not configured' });
+        }
+        if (!OpenAI) {
+            return res.status(500).json({ error: 'OpenAI SDK not installed' });
+        }
+
+        const prompt = `Je bent een didactische AI. Genereer EÉN open reflectievraag in het Nederlands die de student helpt de stof te verwerken.
+
+LEERDOEL: ${goalText || 'Zie context'}
+
+HUIDIGE STAP (${stepIndex + 1}/${totalSteps}): ${stepTitle || 'Stof verwerken'}
+${stepContext ? `CONTEXT VAN DEZE STAP:\n${stepContext.substring(0, 1500)}\n` : ''}
+
+RELEVANTE THEORIE (kort):
+${contentSnippets.substring(0, 3000)}
+
+Eisen voor de reflectievraag:
+- Open vraag (geen meerkeuze): de student moet een korte tekst (2-5 zinnen) typen
+- Vraag naar begrip, toepassing of reflectie (niet naar feitenkennis)
+- Stimuleer dieper nadenken: "Hoe zou je...?", "Leg uit waarom...", "Wat is het verschil tussen...?"
+- Maximaal 2 zinnen voor de vraag
+
+Geef ALLEEN de vraag terug als platte tekst, geen JSON. Geen aanhalingstekens of prefix.`;
+
+        const openai = new OpenAI({ apiKey: apiConfig.apiKey, baseURL: 'https://api.deepseek.com' });
+        const completion = await openai.chat.completions.create({
+            model: 'deepseek-chat',
+            messages: [{ role: 'user', content: prompt }],
+            temperature: 0.8,
+            max_tokens: 150
+        });
+        let question = (completion.choices[0]?.message?.content || '').trim();
+        if (question.startsWith('"') && question.endsWith('"')) question = question.slice(1, -1);
+        if (!question) question = 'Leg in je eigen woorden uit wat je in deze stap hebt geleerd.';
+
+        return res.json({ success: true, question });
+    } catch (error) {
+        console.error('[generate-reflection-question] Error:', error);
+        return res.status(500).json({ error: 'Internal server error', message: error.message });
+    }
+});
+
+/**
+ * POST /api/analyze-reflection
+ * Analyseer het antwoord van de student en bepaal de vervolgstap
+ */
+app.post('/api/analyze-reflection', validateAnalyzeReflection, async (req, res) => {
+    try {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(400).json({ error: 'Invalid input', errors: errors.array() });
+        }
+        const { contentSnippets, goalText, stepContext, stepIndex = 0, totalSteps = 1, stepTitle, question, userAnswer } = req.body;
+        let appName = detectAppFromPath(req.path) || (req.headers.referer && detectAppFromPath(req.headers.referer));
+        const apiConfig = getAppAPIConfig(appName);
+        if (!apiConfig?.apiKey) {
+            return res.status(500).json({ error: 'API key not configured' });
+        }
+        if (!OpenAI) {
+            return res.status(500).json({ error: 'OpenAI SDK not installed' });
+        }
+
+        const prompt = `Je bent een didactische AI. Analyseer het antwoord van een student op een reflectievraag en bepaal de vervolgstap.
+
+LEERDOEL: ${goalText || 'Zie context'}
+
+STAP (${stepIndex + 1}/${totalSteps}): ${stepTitle || 'Stof verwerken'}
+
+VRAAG AAN STUDENT: ${question}
+
+ANTWOORD STUDENT: ${userAnswer}
+
+${stepContext ? `CONTEXT STAP:\n${stepContext.substring(0, 1000)}\n` : ''}
+
+Beoordeel het antwoord en geef een JSON-object terug met EXACT deze velden:
+{
+  "feedback": "Persoonlijke, constructieve feedback (2-4 zinnen). Prijs wat goed is, geef tips waar nodig. Spreek de student direct aan.",
+  "nextStep": "continue",
+  "recommendation": "Korte motivatie waarom deze vervolgstap (1 zin)"
+}
+
+nextStep moet één van zijn:
+- "continue": student begrijpt het voldoende, ga door naar volgende stap
+- "repeat": student begrijpt het nog niet goed, adviseer de stof nog eens te bekijken
+- "extra": student heeft extra uitdaging nodig, geef een korte suggestie in recommendation
+
+Geef ALLEEN geldige JSON terug, geen andere tekst.`;
+
+        const openai = new OpenAI({ apiKey: apiConfig.apiKey, baseURL: 'https://api.deepseek.com' });
+        const completion = await openai.chat.completions.create({
+            model: 'deepseek-chat',
+            messages: [{ role: 'user', content: prompt }],
+            temperature: 0.5,
+            max_tokens: 400
+        });
+        let jsonText = (completion.choices[0]?.message?.content || '').trim();
+        if (jsonText.startsWith('```json')) jsonText = jsonText.replace(/^```json\s*/m, '').replace(/\s*```$/m, '');
+        else if (jsonText.startsWith('```')) jsonText = jsonText.replace(/^```\s*/m, '').replace(/\s*```$/m, '');
+        const jsonMatch = jsonText.match(/\{[\s\S]*\}/);
+        if (jsonMatch) jsonText = jsonMatch[0];
+        const parsed = JSON.parse(jsonText);
+
+        const nextStep = ['continue', 'repeat', 'extra'].includes(parsed.nextStep) ? parsed.nextStep : 'continue';
+        return res.json({
+            success: true,
+            feedback: parsed.feedback || 'Bedankt voor je antwoord. Ga door naar de volgende stap.',
+            nextStep,
+            recommendation: parsed.recommendation || ''
+        });
+    } catch (error) {
+        console.error('[analyze-reflection] Error:', error);
+        return res.status(500).json({ error: 'Internal server error', message: error.message });
+    }
+});
+
+/**
  * Input validatie middleware voor generate-query-scenario
  */
 const validateGenerateQueryScenario = [

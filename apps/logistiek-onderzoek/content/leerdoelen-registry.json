@@ -1,0 +1,64 @@
+{
+  "version": "1.0",
+  "description": "Registry van leerdoelen per onderwerp voor gepersonaliseerd leren",
+  "onderwerpen": [
+    {
+      "id": "van-probleem-naar-doelstelling",
+      "titel": "Van probleem naar doelstelling",
+      "beschrijving": "Je leert hoe je een praktijkprobleem verkent, een doelstelling formuleert met het a- en b-gedeelte, en hoe je een doelstelling SMART maakt.",
+      "contentFile": "week2.content.json",
+      "contentUrl": "week2.html",
+      "leerdoelen": [
+        {
+          "id": "van-probleem-naar-doelstelling-1",
+          "text": "Je kunt de zes onderdelen van een probleemverkenning beschrijven (waarom, waar, wanneer, stakeholders, oplossingsrichtingen, voorwaarden).",
+          "bloomLevel": "understand",
+          "contentRefs": [{ "anchor": "probleem-verkennen" }],
+          "prerequisites": []
+        },
+        {
+          "id": "van-probleem-naar-doelstelling-2",
+          "text": "Je kunt het onderscheid uitleggen tussen het probleem, de doelstelling en de hoofdvraag in een onderzoeksopzet.",
+          "bloomLevel": "understand",
+          "contentRefs": [{ "anchor": "probleem-verkennen" }, { "anchor": "doelstelling-opstellen" }],
+          "prerequisites": ["van-probleem-naar-doelstelling-1"]
+        },
+        {
+          "id": "van-probleem-naar-doelstelling-3",
+          "text": "Je kunt het A-gedeelte (extern) en het B-gedeelte (intern) van een doelstelling onderscheiden en toelichten.",
+          "bloomLevel": "understand",
+          "contentRefs": [{ "anchor": "doelstelling-opstellen" }],
+          "prerequisites": ["van-probleem-naar-doelstelling-2"]
+        },
+        {
+          "id": "van-probleem-naar-doelstelling-4",
+          "text": "Je kunt een doelstelling formuleren volgens het format \"Het doel is …(a)… door …(b)…\".",
+          "bloomLevel": "apply",
+          "contentRefs": [{ "anchor": "doelstelling-opstellen" }],
+          "prerequisites": ["van-probleem-naar-doelstelling-3"]
+        },
+        {
+          "id": "van-probleem-naar-doelstelling-5",
+          "text": "Je kunt een doelstelling beoordelen op de vijf SMART-criteria.",
+          "bloomLevel": "evaluate",
+          "contentRefs": [{ "anchor": "doelstelling-opstellen" }],
+          "prerequisites": ["van-probleem-naar-doelstelling-4"]
+        },
+        {
+          "id": "van-probleem-naar-doelstelling-6",
+          "text": "Je kunt de vijf vormen van praktijkgericht onderzoek classificeren aan de hand van een gegeven onderzoekssituatie.",
+          "bloomLevel": "analyze",
+          "contentRefs": [{ "anchor": "vormen-praktijkgericht" }],
+          "prerequisites": []
+        },
+        {
+          "id": "van-probleem-naar-doelstelling-7",
+          "text": "Je kunt aandachtspunten in de opdrachtgever-onderzoeker relatie identificeren en beschrijven.",
+          "bloomLevel": "analyze",
+          "contentRefs": [{ "anchor": "opdrachtgever-onderzoeker" }],
+          "prerequisites": []
+        }
+      ]
+    }
+  ]
+}

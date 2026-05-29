@@ -41,6 +41,9 @@
             this.entryAnalysis = null;
             this.entryLoading = true;
             this.entryUnavailable = false;
+            /** 'questions' | 'results' — na instaptoets eerst feedback tonen, daarna pas naar stof */
+            this.entryPhase = 'questions';
+            this.entryQuestionResults = [];
             this.level = 0;
             this.finalQuestions = [];
             this.finalAnswers = {};
@@ -155,6 +158,9 @@
                         </div>
                     </div>
                 `;
+            }
+            if (this.entryPhase === 'results') {
+                return this._renderEntryResults();
             }
             return this._renderEntryQuestions();
         }
@@ -403,6 +409,124 @@
             `;
         }
 
+        _escapeHtml(str) {
+            if (str == null || str === '') return '';
+            return String(str)
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;');
+        }
+
+        _renderEntryResults() {
+            const analysis = this.entryAnalysis || {};
+            const results = this.entryQuestionResults || [];
+            const firstStepTitle = this.steps?.[0]?.stepTitle || 'de eerste stap van het leerpad';
+            const levelLabel = this.level === 0 ? 'basis' : this.level === 1 ? 'midden' : 'vergevorderd';
+
+            const strengths = (analysis.strengths || [])
+                .map((s) => `<li class="text-gray-700 dark:text-gray-300">${this._escapeHtml(s)}</li>`)
+                .join('');
+            const gaps = (analysis.gaps || [])
+                .map((g) => `<li class="text-gray-700 dark:text-gray-300">${this._escapeHtml(g)}</li>`)
+                .join('');
+
+            const perQuestion = results
+                .map((r, i) => {
+                    const ok = r.correct === true;
+                    const badge = ok
+                        ? '<span class="text-xs font-medium px-2 py-0.5 rounded bg-green-100 dark:bg-green-900/40 text-green-800 dark:text-green-200">Goed</span>'
+                        : '<span class="text-xs font-medium px-2 py-0.5 rounded bg-amber-100 dark:bg-amber-900/40 text-amber-800 dark:text-amber-200">Niet goed</span>';
+                    let extra = '';
+                    if (r.type === 'open' && r.userAnswer) {
+                        extra = `<p class="text-xs text-gray-500 dark:text-gray-400 mt-2"><span class="font-medium">Jouw antwoord:</span> ${this._escapeHtml(r.userAnswer)}</p>`;
+                    } else if (r.type !== 'open' && r.selectedText) {
+                        extra = `<p class="text-xs text-gray-500 dark:text-gray-400 mt-2"><span class="font-medium">Jouw keuze:</span> ${this._escapeHtml(r.selectedText)}</p>`;
+                    }
+                    let kern = '';
+                    if (!ok && r.kernAntwoord) {
+                        kern = `<p class="text-sm text-gray-600 dark:text-gray-400 mt-2 p-3 bg-gray-50 dark:bg-gray-800/80 rounded-lg border border-gray-100 dark:border-gray-700"><span class="font-medium text-gray-800 dark:text-gray-200">Kern van het goede antwoord:</span> ${this._escapeHtml(r.kernAntwoord)}</p>`;
+                    }
+                    return `
+                        <div class="p-4 border border-gray-200 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-800/50">
+                            <div class="flex flex-wrap items-center gap-2 mb-2">
+                                <span class="text-sm font-medium text-gray-500 dark:text-gray-400">Vraag ${i + 1}</span>
+                                ${badge}
+                            </div>
+                            <p class="font-medium text-gray-900 dark:text-white mb-2">${this._escapeHtml(r.questionText)}</p>
+                            ${extra}
+                            <div class="mt-3 p-3 rounded-lg ${ok ? 'bg-green-50 dark:bg-green-900/20 border border-green-100 dark:border-green-900/40' : 'bg-amber-50 dark:bg-amber-900/20 border border-amber-100 dark:border-amber-900/40'}">
+                                <p class="text-sm text-gray-800 dark:text-gray-200 leading-relaxed">${this._escapeHtml(r.feedback || '')}</p>
+                            </div>
+                            ${kern}
+                        </div>
+                    `;
+                })
+                .join('');
+
+            return `
+                <div class="space-y-8 entry-results-review">
+                    <div class="p-5 bg-purple-50 dark:bg-purple-900/25 rounded-xl border border-purple-200 dark:border-purple-800">
+                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2 flex items-center gap-2">
+                            <i class="fas fa-clipboard-check text-purple-600"></i>
+                            Resultaat instaptoets
+                        </h3>
+                        <p class="text-gray-700 dark:text-gray-300">
+                            Score: <strong>${this.entryScore}%</strong> — startniveau: <strong>${levelLabel}</strong>.
+                        </p>
+                        <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">
+                            Neem de uitleg hieronder rustig door. Je gaat pas naar de leerstof wanneer je onderaan op de knop klikt.
+                        </p>
+                    </div>
+
+                    <div class="p-5 bg-amber-50 dark:bg-amber-900/20 rounded-xl border border-amber-200 dark:border-amber-800">
+                        <p class="font-medium text-amber-900 dark:text-amber-100 mb-2">
+                            <i class="fas fa-book-reader mr-2"></i>Hoe verder met de leerstof?
+                        </p>
+                        <p class="text-sm text-amber-900/90 dark:text-amber-100/90 leading-relaxed">
+                            Doorloop de theorie en oefeningen van dit leerdoel <strong>van begin tot eind</strong>. Alleen losse stukjes lezen is meestal onvoldoende:
+                            de onderdelen sluiten op elkaar aan en helpen je precies bij de onderwerpen waar de instaptoets op stuurt.
+                        </p>
+                    </div>
+
+                    <div class="p-5 border border-gray-200 dark:border-gray-600 rounded-xl bg-gray-50/80 dark:bg-gray-900/30">
+                        <h4 class="font-semibold text-gray-900 dark:text-white mb-2 flex items-center gap-2">
+                            <i class="fas fa-link text-purple-600"></i>
+                            Koppeling met deze leerstof
+                        </h4>
+                        <p class="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
+                            In het volgende scherm werk je het leerdoel <strong>${this._escapeHtml(this.goal?.text || '')}</strong> stap voor stap af.
+                            Je begint met: <strong>${this._escapeHtml(firstStepTitle)}</strong>. Wat je hierboven als fout zag, kun je recht trekken door de bijbehorende paragrafen en oefeningen in die stappen goed te doorlopen — niet alleen &ldquo;even zoeken&rdquo; naar één zinnetje.
+                        </p>
+                    </div>
+
+                    ${analysis.summary ? `
+                        <div class="p-5 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700">
+                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">Samenvatting</h4>
+                            <p class="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">${this._escapeHtml(analysis.summary)}</p>
+                            ${strengths ? `<p class="text-sm font-medium text-gray-800 dark:text-gray-200 mt-4 mb-1">Sterke punten</p><ul class="list-disc list-inside text-sm space-y-1">${strengths}</ul>` : ''}
+                            ${gaps ? `<p class="text-sm font-medium text-gray-800 dark:text-gray-200 mt-4 mb-1">Aandachtspunten</p><ul class="list-disc list-inside text-sm space-y-1">${gaps}</ul>` : ''}
+                            ${analysis.recommendation ? `<p class="text-sm text-gray-600 dark:text-gray-400 mt-4 italic border-t border-gray-200 dark:border-gray-600 pt-4">${this._escapeHtml(analysis.recommendation)}</p>` : ''}
+                        </div>
+                    ` : ''}
+
+                    <div class="space-y-4">
+                        <h4 class="font-semibold text-gray-900 dark:text-white text-lg">Feedback per vraag</h4>
+                        ${perQuestion || '<p class="text-gray-500 text-sm">Geen detailfeedback beschikbaar.</p>'}
+                    </div>
+
+                    <div class="pt-6 border-t border-gray-200 dark:border-gray-600">
+                        <button type="button" class="ai-leerpad-entry-go-to-stof px-8 py-4 bg-purple-600 hover:bg-purple-700 text-white rounded-lg font-medium text-base shadow-sm">
+                            Ga naar de leerstof <i class="fas fa-arrow-right ml-2"></i>
+                        </button>
+                        <p class="text-xs text-gray-500 dark:text-gray-400 mt-3 max-w-xl">
+                            Pas na deze stap zie je de theorie en oefeningen. Zo blijft de tijd om je fouten en de uitleg te lezen volledig bij jou.
+                        </p>
+                    </div>
+                </div>
+            `;
+        }
+
         _renderMCQuestions(questions, prefix, submitLabel) {
             const containerId = `mc-${prefix}-container`;
             const html = questions
@@ -434,9 +558,6 @@
         }
 
         async afterEventListeners() {
-            // #region agent log
-            fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'AILeerpadPage.js:afterEventListeners',message:'entry',data:{step:this.step,entryLoading:this.entryLoading,goalId:this.goalId,willLoad:this.step===1&&!!this.entryLoading},timestamp:Date.now(),hypothesisId:'H1'})}).catch(()=>{});
-            // #endregion
             this._attachLeerpadListeners();
             if (this.step === 1 && this.entryLoading) {
                 await this._loadEntryQuestions();
@@ -510,9 +631,23 @@
             document.querySelectorAll('.ai-leerpad-skip-entry').forEach((btn) => {
                 btn.onclick = () => {
                     this.entryAnalysis = null;
+                    this.entryPhase = 'questions';
+                    this.entryQuestionResults = [];
                     this.step = 2;
+                    this._resetStep2Phase();
                     this._refreshContent();
                     this._attachLeerpadListeners();
+                };
+            });
+            document.querySelectorAll('.ai-leerpad-entry-go-to-stof').forEach((btn) => {
+                btn.onclick = () => {
+                    this.entryPhase = 'questions';
+                    this.step = 2;
+                    this._resetStep2Phase();
+                    this._refreshContent();
+                    this._attachLeerpadListeners();
+                    const section = document.getElementById('ai-leerpad-content');
+                    section?.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 };
             });
             document.querySelectorAll('.ai-leerpad-retry').forEach((btn) => {
@@ -532,6 +667,7 @@
                         await this._handleEntrySubmit();
                         this._refreshContent();
                         this._attachLeerpadListeners();
+                        document.getElementById('ai-leerpad-content')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
                     } else {
                         this._handleSubmit(prefix);
                     }
@@ -544,17 +680,11 @@
         }
 
         async _loadEntryQuestions() {
-            // #region agent log
             const fetchUrl = `content/entry-questions/${this.goalId}.json`;
-            fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'AILeerpadPage.js:_loadEntryQuestions',message:'before fetch',data:{goalId:this.goalId,fetchUrl},timestamp:Date.now(),hypothesisId:'H2,H4'})}).catch(()=>{});
-            // #endregion
             this.entryLoading = true;
             this.entryUnavailable = false;
             try {
                 const res = await fetch(fetchUrl);
-                // #region agent log
-                fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'AILeerpadPage.js:_loadEntryQuestions',message:'after fetch',data:{status:res.status,ok:res.ok},timestamp:Date.now(),hypothesisId:'H2,H3'})}).catch(()=>{});
-                // #endregion
                 if (!res.ok) {
                     this.entryUnavailable = true;
                     this.entryQuestions = [];
@@ -569,16 +699,10 @@
                     }
                 }
             } catch (e) {
-                // #region agent log
-                fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'AILeerpadPage.js:_loadEntryQuestions',message:'catch',data:{errMsg:String(e?.message||e)},timestamp:Date.now(),hypothesisId:'H2,H3'})}).catch(()=>{});
-                // #endregion
                 console.error('[AILeerpadPage] Entry questions load failed:', e);
                 this.entryUnavailable = true;
                 this.entryQuestions = [];
             }
-            // #region agent log
-            fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'AILeerpadPage.js:_loadEntryQuestions',message:'done',data:{entryLoading:false,vragenLen:this.entryQuestions?.length,entryUnavailable:this.entryUnavailable},timestamp:Date.now(),hypothesisId:'H5'})}).catch(()=>{});
-            // #endregion
             this.entryLoading = false;
             this._refreshContent();
             this._attachLeerpadListeners();
@@ -634,9 +758,11 @@
             const answers = [];
             const bloomCounts = { 1: { correct: 0, total: 0 }, 2: { correct: 0, total: 0 }, 3: { correct: 0, total: 0 } };
             let correctCount = 0;
+            this.entryQuestionResults = [];
 
             for (const q of questions) {
                 let isCorrect = false;
+                let feedbackText = '';
                 if (q.type === 'open') {
                     const textarea = document.getElementById(`entry-open-${q.id}`);
                     const userAnswer = textarea?.value?.trim() || '';
@@ -656,19 +782,49 @@
                         });
                         const data = await res.json();
                         isCorrect = data.correct === true;
-                        const fbEl = document.querySelector(`.entry-feedback[data-question-id="${q.id}"]`);
-                        if (fbEl) {
-                            fbEl.classList.remove('hidden');
-                            fbEl.className = `mt-2 p-2 rounded entry-feedback ${isCorrect ? 'text-green-700 dark:text-green-300 bg-green-50 dark:bg-green-900/20' : 'text-amber-700 dark:text-amber-300 bg-amber-50 dark:bg-amber-900/20'}`;
-                            fbEl.textContent = data.feedback || (isCorrect ? 'Goed' : 'Niet correct');
-                        }
+                        feedbackText = data.feedback || (isCorrect ? 'Goed' : 'Niet correct');
                     } catch (e) {
                         console.error('[AILeerpadPage] Grade answer failed:', e);
                         isCorrect = false;
+                        feedbackText = 'Kon dit antwoord niet automatisch beoordelen. Bekijk de leerstof voor de kern van het goede antwoord.';
                     }
+                    this.entryQuestionResults.push({
+                        questionId: q.id,
+                        questionText: q.vraag || '',
+                        type: 'open',
+                        correct: isCorrect,
+                        feedback: feedbackText,
+                        userAnswer: userAnswer.length > 800 ? `${userAnswer.slice(0, 800)}…` : userAnswer,
+                        kernAntwoord: q.goedAntwoord || ''
+                    });
                 } else {
                     const sel = document.querySelector(`input[name="entry-${q.id}"]:checked`);
                     isCorrect = sel && sel.dataset.correct === 'true';
+                    const selectedLabel = sel?.closest('label')?.querySelector('span')?.textContent?.trim() || '';
+                    const correctOpt = (q.antwoorden || []).find((a) => a.correct);
+                    const correctAnswerText = correctOpt?.tekst || '';
+                    if (isCorrect) {
+                        feedbackText = q.feedbackGoed || 'Goed beantwoord.';
+                    } else if (!sel) {
+                        feedbackText = correctAnswerText
+                            ? `Je hebt geen antwoord gekozen. Het juiste antwoord is: ${correctAnswerText}.`
+                            : 'Geen antwoord gekozen.';
+                        if (q.feedbackFout) feedbackText += ` ${q.feedbackFout}`;
+                    } else {
+                        feedbackText = correctAnswerText
+                            ? `Het juiste antwoord is: ${correctAnswerText}.`
+                            : 'Niet correct.';
+                        if (q.feedbackFout) feedbackText += ` ${q.feedbackFout}`;
+                    }
+                    this.entryQuestionResults.push({
+                        questionId: q.id,
+                        questionText: q.vraag || '',
+                        type: q.type || 'mc',
+                        correct: isCorrect,
+                        feedback: feedbackText,
+                        selectedText: selectedLabel || (sel ? '(gekozen)' : ''),
+                        kernAntwoord: !isCorrect ? correctAnswerText || q.goedAntwoord || '' : ''
+                    });
                 }
                 if (isCorrect) correctCount++;
                 const bloomLevel = q.bloomLevel || 1;
@@ -714,7 +870,7 @@
                 console.error('[AILeerpadPage] Analyze entry results failed:', e);
                 this.entryAnalysis = { summary: '', strengths: [], gaps: [], recommendation: '' };
             }
-            this.step = 2;
+            this.entryPhase = 'results';
         }
 
         _handleSubmit(prefix) {

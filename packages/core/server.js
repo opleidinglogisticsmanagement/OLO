@@ -723,7 +723,7 @@ Geef een JSON-object terug met EXACT deze velden:
   "summary": "Korte samenvatting van het niveau (2-3 zinnen)",
   "strengths": ["sterke punt 1", "sterke punt 2"],
   "gaps": ["aandachtspunt 1", "aandachtspunt 2"],
-  "recommendation": "Advies voor stap 2: welke theorie/oefeningen prioriteit geven (1-2 zinnen)"
+  "recommendation": "Advies voor de volgende leerstap: verbind de fouten expliciet met welke onderdelen van de theorie de student nu grondig moet doorlopen (1-3 zinnen). Vermeld dat de volledige leerstof van het leerdoel doorlopen moet worden — niet alleen losse fragmenten — tenzij het niveau al hoog is."
 }
 
 Geef ALLEEN geldige JSON terug, geen andere tekst.`;

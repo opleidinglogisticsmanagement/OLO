@@ -438,7 +438,7 @@ class AppRouter {
         if (this.pageCache.has(cacheKey)) {
             console.log('[AppRouter] 💾 Using cached content');
             const cachedContent = this.pageCache.get(cacheKey);
-            this.updateContent(cachedContent);
+            await this.updateContent(cachedContent);
             
             // Still need to create page instance and attach listeners
             // Load page class dynamically
@@ -451,6 +451,12 @@ class AppRouter {
             // Create page instance for event listeners
             const pageInstance = new PageClass();
             console.log('[AppRouter] ✅ Page instance created for cached content');
+            
+            if (pageInstance.loadContent) {
+                console.log('[AppRouter] ⏳ Loading content (cached route — state moet opnieuw)');
+                await pageInstance.loadContent();
+                console.log('[AppRouter] ✅ Content loaded for cached route');
+            }
             
             // Attach event listeners even for cached content
             console.log('[AppRouter] 🔌 Attaching content listeners for cached content');
@@ -640,7 +646,7 @@ class AppRouter {
         console.log('[AppRouter] 📝 Content rendered, length:', content.length);
         
         // Update DOM - replace innerHTML of main-content, not the element itself
-        this.updateContent(content);
+        await this.updateContent(content);
         
         // Attach event listeners (but skip layout managers - they're already initialized)
         console.log('[AppRouter] 🔌 Attaching content listeners');
@@ -658,11 +664,14 @@ class AppRouter {
 
     /**
      * Update alleen het content gebied
+     * @returns {Promise<void>} Resolved nadat innerHTML is vervangen (nodig vóór lifecycle hooks die #main-content children nodig hebben)
      */
     updateContent(html) {
+        return new Promise((resolve, reject) => {
         const contentContainer = document.querySelector('#main-content');
         if (!contentContainer) {
             console.error('[AppRouter] ❌ Content container not found');
+            reject(new Error('Content container not found'));
             return;
         }
         
@@ -696,6 +705,7 @@ class AppRouter {
             
             // Replace content while invisible
             contentContainer.innerHTML = html;
+            resolve();
             
             // Render KaTeX formulas after content is in DOM
             this.renderKaTeXFormulas();
@@ -779,6 +789,7 @@ class AppRouter {
                 }, 200);
             }, 10);
         }, 200); // Wait for fade-out to complete
+        });
     }
 
     /**

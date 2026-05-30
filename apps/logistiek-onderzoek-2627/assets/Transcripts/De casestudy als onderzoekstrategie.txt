@@ -1,0 +1,29 @@
+De casestudy als onderzoeksstrategie.
+
+Welkom bij deze kennisclip over de casestudy. We staan stil bij wat een case precies is. We kijken naar de verschillende kenmerken, de varianten van een casestudy en de voor en nadelen.
+
+Als eerste de kenmerken van een case. Het eerste kenmerk is dat je een klein onderwerp onderzoekt met een klein aantal onderzoekseenheden. Daar zie je gelijk het grote verschil met een survey. Bij een survey heb je wel 1000 of 10.000 onderzoekseenheden. Bij een casestudy is dat niet het geval. Je hebt hier vaak te maken met een onderzoekseenheid of maximaal 10.
+
+Het tweede kenmerk is de arbeidsintensieve benadering van die onderzoekseenheden. Je houdt geen survey met gesloten vragen. Je kunt bijvoorbeeld goed werken met interviews met de personen die betrokken zijn bij het onderzoeksobject.
+
+Het volgende punt is dat het onderzoek meer diepte dan breedte heeft. Je kunt goed inzoomen op details van het onderzoeksobject. Je kunt interviews houden met individuen of groepen. Je kunt ook gaan observeren. Ook kun je literatuur of data bestuderen die stakeholders hebben aangeleverd. Als je deze resultaten en methoden met elkaar vergelijkt, spreken we van methodetriangulatie.
+
+Het vierde kenmerk is de selectieve of strategische steekproef. Je kunt van de 10 onderzoekseenheden misschien niet iedereen interviewen. Je kiest dan een selectie. Dat doe je door goed te kijken naar de probleemstelling en te overleggen met je opdrachtgever. Je selecteert de juiste personen die je gaat interviewen of observeren. Je moet in de gaten houden dat dit betrouwbaar en representatief blijft. Je kunt nu geen aselecte steekproef houden. Een willekeurige keuze kan leiden tot selectieve resultaten. Daarmee wordt de validiteit en betrouwbaarheid discutabel.
+
+Het vijfde kenmerk is een open waarneming op locatie. Dat zou een Gemba walk kunnen zijn. Misschien is het ook goed om een benchmark te houden. Je gaat dan ergens anders kijken en neemt dat onderzoek mee in je methodiek.
+
+Het laatste kenmerk is dat je veel kwalitatieve gegevens verzamelt. Je verwerkt deze kwalitatief en krijgt beschrijvende resultaten. Aan die resultaten verbind je conclusies. Je ziet al dat de survey het tegenovergestelde is van de casestudy.
+
+We kijken naar de varianten binnen de casestudy. We onderscheiden de enkelvoudige casestudy en de vergelijkende casestudy. Bij de vergelijkende variant onderscheiden we de hiërarchische casestudy en de sequentiële casestudy.
+
+Bij de enkelvoudige casestudy heb je te maken met een case. Hier komt de methodetriangulatie goed van pas. Je zet dit in als je een case bestudeert. Je kunt interviews houden met individuen of groepen. Je kunt ook observaties houden op de werkvloer of een benchmark doen. Je confronteert deze methoden en resultaten met elkaar. Op basis daarvan schrijf je aanbevelingen en trek je conclusies.
+
+Een andere variant is de hiërarchische casestudy. Je hebt hierbij meerdere cases die je met elkaar vergelijkt. Je hebt bijvoorbeeld case 1, case 2 en case 3. Je moet misschien een selectie maken als je 10 cases hebt. Je neemt een strategische steekproef. Je bepaalt zelf hoeveel cases je onderzoekt. Deze cases onderzoek je onafhankelijk van elkaar op dezelfde manier. De resultaten vergelijk je met elkaar. Het is belangrijk om cases onafhankelijk te onderzoeken. Je wilt niet dat mensen of processen elkaar beïnvloeden tijdens het onderzoek.
+
+De volgende variant is de sequentiële casestudy. Je onderzoekt verschillende cases. Je begint met een specifieke case die je strategisch selecteert. Op basis van de resultaten van de eerste case selecteer je de volgende case. De bevindingen en manier van onderzoek kun je dan herhalen. Je kunt het onderzoek ook verder verbeteren. Op basis van de resultaten van de tweede case onderzoek je een derde case.
+
+De voordelen van de casestudy zijn de flexibiliteit. Je kunt je onderzoek telkens aanpassen en verbeteren. De gekozen manier ligt niet vast. Als je een case onderzoekt kun je een interview later opnieuw houden met extra vragen. Een observatie kun je later ook aanpassen en opnieuw doen. De structuur ligt niet vast en is niet in beton gegoten. Je past de structuur aan veranderende omstandigheden aan.
+
+Er is ook een nadeel. Bij deze manier van onderzoeken kan de validiteit gauw discutabel worden. Je moet goed toelichten waarom jouw manier van onderzoek valide en betrouwbaar is.
+
+Kijk naar jouw onderzoek. Stel jezelf de vraag of jouw onderzoek een casestudy zou kunnen zijn. Waarom wel of waarom niet?

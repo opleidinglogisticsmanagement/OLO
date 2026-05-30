@@ -1,0 +1,47 @@
+{
+  "goalId": "van-probleem-naar-doelstelling-1",
+  "vragen": [
+    {
+      "id": "vraag1",
+      "vraag": "Noem de zes vaste onderdelen van een probleemverkenning binnen een logistiek onderzoek.",
+      "bloomLevel": 1,
+      "type": "open",
+      "goedAntwoord": "De onderdelen zijn waarom, waar, wanneer, stakeholders, oplossingsrichtingen en voorwaarden.",
+      "feedbackGoed": "Je hebt de basis van de probleemverkenning goed in kaart. Dit overzicht helpt je om van een onduidelijke vraag van een opdrachtgever naar een gestructureerd overzicht te gaan.",
+      "feedbackFout": "Je denkt aan de basisvragen uit het eerste jaar. Bij een logistiek onderzoek verdiepen we deze vragen echter met onderwerpen zoals oplossingsrichtingen en voorwaarden. Bekijk de theorie over de zes onderdelen nog eens goed.",
+      "foutAntwoordVoorbeelden": ["Het gaat om de vijf W vragen en een doelstelling."]
+    },
+    {
+      "id": "vraag2",
+      "vraag": "Een onderzoeker legt vast welke afdelingen wel en welke afdelingen niet worden meegenomen in het onderzoek. Bij welk onderdeel van de probleemverkenning hoort deze afbakening? Leg ook uit waarom.",
+      "bloomLevel": 2,
+      "type": "open",
+      "goedAntwoord": "Dit hoort bij het onderdeel voorwaarden. De voorwaarden bepalen namelijk de scope en de richting van het onderzoek. Het geeft aan wat je wel en niet meeneemt.",
+      "feedbackGoed": "Je begrijpt dat de voorwaarden de grenzen van je onderzoek trekken. Dit is essentieel voor een haalbaar hbo onderzoek.",
+      "feedbackFout": "Dat is niet juist. Stakeholders zijn de personen of groepen die een rol hebben in het probleem. Het bepalen van wat je wel en niet onderzoekt gaat over de scope. In dit model noemen we dat voorwaarden.",
+      "foutAntwoordVoorbeelden": ["Dit hoort bij de stakeholders omdat de afdelingen de betrokkenen zijn."]
+    },
+    {
+      "id": "vraag3a",
+      "vraag": "Wie zijn de stakeholders in deze situatie? Noem er minimaal drie op basis van de casus.",
+      "bloomLevel": 3,
+      "type": "open",
+      "casus": "Een distributiecentrum kampt met een hoog ziekteverzuim onder heftruckchauffeurs. De directie wil de kosten verlagen. De HR manager vermoedt dat de slechte ergonomie van de werkplekken de oorzaak is.",
+      "goedAntwoord": "De stakeholders zijn de heftruckchauffeurs, de directie en de HR manager.",
+      "feedbackGoed": "Je identificeert de direct betrokkenen correct. Vergeet in een echt onderzoek ook niet naar andere stakeholders zoals leveranciers of klanten te kijken als zij een rol hebben in het probleem.",
+      "feedbackFout": "Controleer of je de juiste personen of groepen hebt genoemd die een rol hebben in dit probleem.",
+      "foutAntwoordVoorbeelden": []
+    },
+    {
+      "id": "vraag3b",
+      "vraag": "Formuleer een specifieke vraag voor het onderdeel wanneer om dit probleem verder te verkennen.",
+      "bloomLevel": 3,
+      "type": "open",
+      "casus": "Een distributiecentrum kampt met een hoog ziekteverzuim onder heftruckchauffeurs. De directie wil de kosten verlagen. De HR manager vermoedt dat de slechte ergonomie van de werkplekken de oorzaak is.",
+      "goedAntwoord": "Ontstaat het ziekteverzuim op een specifiek dagdeel of gebeurt het de hele dag door?",
+      "feedbackGoed": "Dit is een sterke diagnostische vraag. Door te kijken naar patronen in de tijd kun je oorzaken zoals werkdruk bij specifieke diensten onderzoeken.",
+      "feedbackFout": "Je stelt nu een vraag over een mogelijke oplossing. Bij het onderdeel wanneer in de probleemverkenning onderzoek je echter wanneer het probleem zelf zich voordoet. Je wilt weten of het op een specifiek moment ontstaat of constant aanwezig is.",
+      "foutAntwoordVoorbeelden": ["Wanneer gaan we de ergonomie verbeteren?"]
+    }
+  ]
+}

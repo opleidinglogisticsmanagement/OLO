@@ -1,0 +1,33 @@
+### Het onderzoeksmodel (2)
+
+Welkom bij een nieuwe kennisclip van het opzetten van een logistiek onderzoek. In deze kennisclip zoomen we in op het **onderzoeksmodel**. We bekijken welke onderdelen erin zitten, hoe je die opstelt en aan welke eisen het model moet voldoen . In een onderzoeksmodel komen een aantal zaken bij elkaar waar je over hebt nagedacht. Die gaan we ook in het onderzoeksmodel plaatsen. Dat zijn onder andere de **doelstelling**, het **onderzoeksobject** en de **onderzoeksoptiek**. Daarbij komen ook nog bronnen kijken. Daar zoomen we straks even op in.
+
+---
+
+Neem nou deze doelstelling die je hebt opgesteld voor een onderzoek: het opstellen van drie verbeteradviezen voor 15 januari. Hierbij verhoogt de inzet van robots bij het pickproces de productiviteit en de werknemerstevredenheid. Dit doe je door een kwantitatieve beoordeling van de productiviteit van het proces met en zonder robots. Ook vergelijk je de belangen van werknemers met succesfactoren uit de literatuur bij de implementatie en inzet van pickrobots.
+
+Deze doelstelling wil je gaan behalen. De doelstelling komt helemaal achterin het onderzoeksmodel. Het vormt het belangrijkste uitgangspunt. Je moet met het onderzoeksmodel aantonen hoe je de doelstelling denkt te gaan behalen. Een verkorte versie van de doelstelling plaats je in een kader. Je kunt dit bijvoorbeeld zo samenvatten: drie verbeteradviezen ten aanzien van het gebruik van robots bij het picken waarbij productiviteit en werknemerstevredenheid verhoogd kunnen worden . Je mag het ook nog kort opschrijven door bijvoorbeeld gewoon **drie verbeteradviezen** op te schrijven. Je complete doelstelling staat toch wel in je onderzoeksopzet.
+
+---
+
+Vervolgens ga je bepalen wat je onderzoeksobjecten precies zijn. Die kun je namelijk direct uit je doelstelling halen. Onderzoeksobjecten zijn bijvoorbeeld personen, werkstromen, processen of fysieke stromen . In het geval van dit onderzoek dat je wilt gaan uitvoeren, ga je focussen op de **productiviteit van het pickproces**. Dat is hier het onderzoeksobject met en zonder robot . Uit de doelstelling konden we nog meer halen. Dat is namelijk ook de werknemerstevredenheid. We gaan ook de werknemers centraal zetten. De werknemers worden een onderzoeksobject. We zoomen in dit geval in op de belangen van werknemers.
+
+Vervolgens ga je nadenken over hoe je naar die twee onderzoeksobjecten gaat kijken. Wat weet je al over deze onderwerpen? Wat kun je vervolgens vinden in de literatuur? Wat vind je zelf ook interessant? Je bedenkt na enige overweging dat je dat gaat doen aan de hand van **beoordelingscriteria**. Je hebt deze nodig voor de productiviteit van het pickproces, maar ook om de werknemerstevredenheid te bepalen. Met beoordelingscriteria kun jij de productiviteit vaststellen met en zonder robot. Je kunt ook kijken naar de belangen van de werknemers en wat daarin een belangrijke rol speelt.
+
+---
+
+De pijlen geven aan dat die twee zaken met elkaar verbonden moeten worden. De verticale pijlen geven de **confrontatie** aan. De horizontale pijlen geven aan welk resultaat dat vervolgens gaat opleveren. Je kijkt naar het pickproces en wilt dat gaan beoordelen aan de hand van criteria. Je kijkt naar de huidige **current state** en de **future state**. Dan kom je uiteindelijk op de analyseresultaten uit. Met een goede set van beoordelingscriteria kun je heel goed het verschil gaan bepalen tussen de current state en de future state. Bij het andere onderzoeksobject, de belangen van de werknemers, kom je ook op resultaten uit. Dat zijn in dit geval succesfactoren bij het werken met robots. Je wilt stilstaan bij waar we allemaal rekening mee moeten houden en wat niet.
+
+Vervolgens ga je vaststellen welke bronnen en welke literatuur je nodig hebt voor deze onderzoeksoptiek . Je hebt theorie over de productiviteit van het pickproces nodig. Je wilt dit uiteindelijk meetbaar maken en operationaliseren. Je hebt theorie over de productiviteit met robots nodig. Dat maakt natuurlijk een wezenlijk verschil. Als je gaat werken met robots, kun je dan nog steeds werken met dezelfde **KPI's**? Je wilt theorie over de inzet van robots bij het pickproces . Je wilt ook gaan inzoomen op de belangen van werknemers.
+
+---
+
+Uiteindelijk heb je ook nog het vooronderzoek. Die kun je in het onderzoeksmodel ook gewoon laten staan . We hebben hem nu even gespecificeerd als werknemerstevredenheid. Hoe tevreden zijn de werknemers op dit moment? Je kunt gewoon een algemeen interview afnemen met werknemers. Je kunt ook een belangrijk interview afnemen voor de **define-fase** van je onderzoeksopzet. Dat valt allemaal onder de onderzoeksopzet waarbij je stil gaat staan bij de **5W's**.
+
+Als we al die blokjes bij elkaar plaatsen, dan komen we op het complete model uit . Je moet het lezen van rechts naar links. Dat betekent dat je begint bij de doelstelling: drie verbeteradviezen. Daarvoor heb je die analyseresultaten nodig. Die analyseresultaten kun je alleen krijgen door de beoordelingscriteria te gebruiken bij het pickproces met en zonder robot en bij de belangen van de werknemers. Om die beoordelingscriteria te vinden heb je de bronnen nodig en het vooronderzoek . De horizontale pijlen betekenen dat je de zaken die daar links van staan allemaal met elkaar gaat vergelijken, confronteren en bij elkaar gaat passen . Je komt met een horizontale pijl uit op de beoordelingscriteria, de analyseresultaten of het behalen van de doelstelling.
+
+---
+
+In het onderzoeksmodel kunnen we ook nog stappen aanbrengen. Je ziet hier stap een tot en met stap drie. Deze geven globaal de structuur van jouw onderzoek aan. In **stap een** ga je literatuuronderzoek doen en een vooronderzoek uitvoeren om uiteindelijk die beoordelingscriteria te vinden . In **stap twee** ga je dan daadwerkelijk het onderzoek uitvoeren en wil je tot analyseresultaten komen . In de laatste en **derde stap** behaal je de doelstelling .
+
+We hebben nu alle onderdelen van het onderzoeksmodel besproken. Je wilt robots inzetten bij het pickproces en tegelijkertijd de belangen van werknemers meenemen om succesfactoren te bepalen. Kun je nu gaan nadenken over hoe dat er bij jouw onderzoek uit zou kunnen zien? Begin rechts met je doelstelling. Werk van rechts naar links toe. Probeer vast te stellen wat jouw analyseresultaten en jouw onderzoeksoptiek zouden moeten zijn. Wat zijn jouw onderzoeksobjecten? Welke literatuur, theorie of welke bronnen heb jij nodig om jouw onderzoek uiteindelijk op te starten? Veel succes!

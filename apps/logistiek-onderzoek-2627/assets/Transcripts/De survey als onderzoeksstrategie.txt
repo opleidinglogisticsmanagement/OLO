@@ -1,0 +1,31 @@
+De survey als onderzoeksstrategie.
+
+Welkom bij de volgende kennisclip van logistieke onderzoeken. Bij deze kennisclip staan we stil bij één van de typen onderzoeken die je zou kunnen uitvoeren: de survey. Als je survey vertaalt vanuit het Engels, zou je het kunnen vertalen als overzien. Je wilt overzicht creëren over een bepaald onderwerp en dat is precies wat je kunt doen bij een survey. We staan stil bij de verschillende kenmerken, de verschillende varianten en de voor- en nadelen van de survey.
+
+Een survey heeft verschillende kenmerken. Het eerste kenmerk van een survey is dat je een groot onderwerp onderzoekt en te maken hebt met een groot aantal onderzoekseenheden. Als we het hebben over een groot aantal onderzoekseenheden, dan moeten dat er tenminste 40 of 50 zijn. Het kan ook gemakkelijk zijn dat je met 1.000 of misschien wel 10.000 onderzoekseenheden te maken hebt. Je moet dus denken aan grote aantallen waarbij je heel specifiek onderzoek gaat verrichten.
+
+Het volgende kenmerk van een survey is dat je te maken hebt met een arbeidsextensieve manier van data genereren. Als je te maken hebt met 1.000 of misschien wel 10.000 onderzoekseenheden, dan kun je ze nooit allemaal intensief onderzoeken. Je gaat een deel van die groep onderzoeken met behulp van de survey. Dit kun je vertalen als vragenlijst of enquête, meestal met gesloten vragen . Dat is de enige manier om een hele grote groep onderzoekseenheden te onderzoeken en er toch goede uitspraken over te doen. Zo kun je goede conclusies trekken uit de resultaten van je enquête.
+
+Omdat je werkt met een survey met gesloten vragen, werk je meer in de breedte dan in de diepte. Het wordt lastig om in te zoomen op details, maar je kunt wel kijken naar de breedte van het onderzoek en naar de samenhang. Het vierde kenmerk is dat je werkt met een relatief grote, aselecte steekproef. Als je te maken hebt met 1.000 of 10.000 onderzoekseenheden, kun je nooit iedereen een enquête opsturen en alle resultaten gaan verwerken. Je maakt dus een aselecte steekproef. Stel je voor dat je werkt met 5.000 onderzoekseenheden en dat je daarvan een aselecte steekproef trekt. Dat betekent dat elke onderzoekseenheid evenveel kans heeft om in die steekproef terecht te komen en de enquête in te vullen. Naar die aselecte steekproef stuur je de enquête op.
+
+Het vijfde punt is dat je de resultaten van de enquête op een kwantitatieve manier verwerkt. Je krijgt kwantitatieve gegevens omdat je werkt met gesloten vragen. Je kunt met een bepaalde beoordeling gaan werken waarbij je gemiddelden berekent. Je analyseert de data op een kwantitatieve manier waarbij je gebruik kunt maken van statistische berekeningen. Hiermee kun je een samenhang tussen twee verschillende aspecten duiden. We spreken dan bijvoorbeeld over een correlatie tussen twee aspecten.
+
+Een voorbeeld binnen het logistieke kader is onderzoek naar de invloed van gemeenten op distributiecentra in de provincie Overijssel. Na vooronderzoek kom je tot de conclusie dat er ongeveer 300 distributiecentra zijn. Je wilt weten welke invloed de gemeente of de provincie Overijssel heeft gehad op de duurzaamheid van het gebouw of andere duurzaamheidsaspecten. Omdat 300 te veel is om intensief te onderzoeken, maak je daaruit een aselecte steekproef. Je komt uit op 50 distributiecentra die je benadert in de hoop dat ze de enquête gaan invullen.
+
+Dan staan we nu stil bij de drie varianten binnen de survey:
+
+* 
+**Cross-sectioneel onderzoek**: Hierbij heb je meestal één meting die je uitvoert bij een steekproef. Dit type onderzoek wordt vaak uitgevoerd voor marktonderzoek of een opiniepeiling. Je kunt het ook gebruiken om de invloed van een gemeente op de duurzaamheid van distributiecentra te onderzoeken.
+
+
+* **Panelonderzoek**: Dit lijkt op het cross-sectionele onderzoek, maar is anders opgezet. Je hebt bij het panelonderzoek meerdere metingen bij dezelfde steekproef. De aselecte steekproef die je hebt genomen gebruik je telkens opnieuw. Dit type onderzoek zet je in als je veranderingen bij het onderwerp in kaart wilt brengen.
+
+
+* 
+**Tijdreeksonderzoek (longitudinaal onderzoek)**: Hierbij heb je te maken met verschillende metingen die je uitvoert bij verschillende steekproeven. Je maakt van al je onderzoekseenheden telkens weer een nieuwe aselecte steekproef. Dit gebruik je als je een trend wilt opsporen.
+
+De voordelen van survey-onderzoek zijn het grote bereik waardoor je de samenhang goed kunt bestuderen. Je kunt kwantitatieve analyses maken en berekeningen uitvoeren om een correlatie te ontdekken tussen aspecten. Een ander voordeel is dat survey-onderzoek gestandaardiseerd is. Er is veel informatie over te vinden in de literatuur die je kunt inzetten om je onderzoek te onderbouwen. Ook is er veel software beschikbaar om de gegevens te analyseren.
+
+Een survey-onderzoek heeft ook nadelen. Het vraagt veel structuur omdat je de vragen heel specifiek moet opstellen. Als er iets verandert in je onderzoek of de omgeving, kan het zijn dat de vragenlijst niet meer geldt. Soms heb je de vragenlijst net uitgezet en zijn er opeens nieuwe ontwikkelingen waardoor je de vragenlijst moet aanpassen. De structuur geeft een goede basis, maar het survey-onderzoek is veel minder wendbaar en flexibel dan een casestudy.
+
+

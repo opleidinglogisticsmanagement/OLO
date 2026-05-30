@@ -1,0 +1,15 @@
+{
+  "name": "@e-learning/logistiek-onderzoek-2627",
+  "version": "1.0.0",
+  "private": true,
+  "description": "E-Learning: Opzetten van een Logistiek Onderzoek (studiejaar 2026-2027, preview)",
+  "dependencies": {
+    "@e-learning/core": "*",
+    "@neondatabase/serverless": "^0.10.0"
+  },
+  "scripts": {
+    "dev": "cd ../../packages/core && npm run dev:app logistiek-onderzoek-2627",
+    "dev:multi": "cd ../../packages/core && npm run dev:multi",
+    "start": "cd ../../packages/core && npm run dev:app logistiek-onderzoek-2627"
+  }
+}

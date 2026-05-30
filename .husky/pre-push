@@ -1,1 +1,34 @@
+#!/usr/bin/env sh
+
+# GitHub Desktop / Git GUI often omit Node from PATH (common on Windows).
+find_node() {
+  if command -v node >/dev/null 2>&1; then
+    return 0
+  fi
+  for dir in \
+    "/c/Program Files/nodejs" \
+    "/c/Program Files (x86)/nodejs" \
+    "$LOCALAPPDATA/Programs/node" \
+    "$PROGRAMFILES/nodejs" \
+    "$PROGRAMFILES (x86)/nodejs"
+  do
+    if [ -f "$dir/node.exe" ]; then
+      PATH="$dir:$PATH"
+      export PATH
+      return 0
+    fi
+  done
+  return 1
+}
+
+if ! find_node; then
+  echo ""
+  echo "husky - pre-push: Node.js niet gevonden (nodig voor de pad-controle)."
+  echo ""
+  echo "  1) Installeer Node.js LTS: https://nodejs.org — herstart daarna GitHub Desktop"
+  echo "  2) Eenmalig omzeilen: git push --no-verify"
+  echo ""
+  exit 127
+fi
+
 node scripts/hooks/pre-push.js

@@ -341,82 +341,9 @@
                     </div>
                 </div>
 
-                <!-- Module Navigation -->
-                <nav class="flex-1 overflow-y-auto custom-scrollbar p-4 sm:p-6" aria-label="Module navigatie">
-                    <div class="space-y-2">
-                        <a href="index.html" class="block p-3 rounded-lg hover:bg-gray-50 focus-ring transition-colors">
-                            <div class="flex items-center space-x-3">
-                                <div class="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center">
-                                    <i class="fas fa-home text-blue-600 text-sm"></i>
-                                </div>
-                                <span class="font-medium text-gray-900">Start</span>
-                            </div>
-                        </a>
-                        
-                        <a href="week1.html" class="block p-3 rounded-lg hover:bg-gray-50 focus-ring transition-colors">
-                            <div class="flex items-center space-x-3">
-                                <div class="w-8 h-8 bg-green-100 rounded-lg flex items-center justify-center">
-                                    <i class="fas fa-play-circle text-green-600 text-sm"></i>
-                                </div>
-                                <span class="font-medium text-gray-900">Onderzoeksplan template</span>
-                            </div>
-                        </a>
-                        
-                        <a href="fase1.html#probleem-verkennen" class="block p-3 rounded-lg hover:bg-gray-50 focus-ring transition-colors">
-                            <div class="flex items-center space-x-3">
-                                <div class="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center">
-                                    <i class="fas fa-layer-group text-blue-600 text-sm"></i>
-                                </div>
-                                <span class="font-medium text-gray-900">Fase 01 – Eerste aanzet</span>
-                            </div>
-                        </a>
-                        
-                        <a href="fase2.html#definieren-begrippen" class="block p-3 rounded-lg hover:bg-gray-50 focus-ring transition-colors">
-                            <div class="flex items-center space-x-3">
-                                <div class="w-8 h-8 bg-orange-100 rounded-lg flex items-center justify-center">
-                                    <i class="fas fa-layer-group text-orange-600 text-sm"></i>
-                                </div>
-                                <span class="font-medium text-gray-900">Fase 02 – De verfijning</span>
-                            </div>
-                        </a>
-                        
-                        <a href="fase3.html" class="block p-3 rounded-lg hover:bg-gray-50 focus-ring transition-colors">
-                            <div class="flex items-center space-x-3">
-                                <div class="w-8 h-8 bg-red-100 rounded-lg flex items-center justify-center">
-                                    <i class="fas fa-layer-group text-red-600 text-sm"></i>
-                                </div>
-                                <span class="font-medium text-gray-900">Fase 03 – Literatuuronderzoek</span>
-                            </div>
-                        </a>
-                        
-                        <a href="fase4.html" class="block p-3 rounded-lg hover:bg-gray-50 focus-ring transition-colors">
-                            <div class="flex items-center space-x-3">
-                                <div class="w-8 h-8 bg-indigo-100 rounded-lg flex items-center justify-center">
-                                    <i class="fas fa-layer-group text-indigo-600 text-sm"></i>
-                                </div>
-                                <span class="font-medium text-gray-900">Fase 04 – Onderzoekstechnisch ontwerp</span>
-                            </div>
-                        </a>
-                        
-                        <a href="afronding.html" class="block p-3 rounded-lg hover:bg-gray-50 focus-ring transition-colors">
-                            <div class="flex items-center space-x-3">
-                                <div class="w-8 h-8 bg-pink-100 rounded-lg flex items-center justify-center">
-                                    <i class="fas fa-flag-checkered text-pink-600 text-sm"></i>
-                                </div>
-                                <span class="font-medium text-gray-900">Afronding</span>
-                            </div>
-                        </a>
-                        
-                        <a href="afsluiting.html" class="block p-3 rounded-lg hover:bg-gray-50 focus-ring transition-colors">
-                            <div class="flex items-center space-x-3">
-                                <div class="w-8 h-8 bg-gray-100 rounded-lg flex items-center justify-center">
-                                    <i class="fas fa-graduation-cap text-gray-600 dark:text-gray-400 text-sm"></i>
-                                </div>
-                                <span class="font-medium text-gray-900">Afsluiting</span>
-                            </div>
-                        </a>
-                    </div>
-                </nav>
+                                <!-- Module Navigation (dynamisch via phase-navigation-init.js) -->
+                <nav class="flex-1 overflow-y-auto custom-scrollbar p-6" aria-label="Module navigatie" data-phase-nav-root></nav>
+
             </div>
         </aside>
 
@@ -1294,5 +1221,8 @@
             }, 100);
         }
     </script>
+    <script src="js/phase-navigation-config.js"></script>
+    <script src="js/phase-sidebar.js"></script>
+    <script src="js/phase-navigation-init.js"></script>
 </body>
 </html>

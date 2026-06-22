@@ -13,7 +13,7 @@ class SearchService {
         
         // Configuratie van te indexeren bestanden
         this.files = [
-            { id: 'week-1', path: 'content/week1.content.json', url: 'week1.html', title: 'Onderzoeksplan template' },
+            { id: 'week-1', path: 'content/onderzoeksplan.content.json', url: 'onderzoeksplan.html', title: 'Onderzoeksplan template' },
             { id: 'casus', path: 'content/casus.content.json', url: 'casus.html', title: 'Casus magazijnoptimalisatie' },
             { id: 'fase-1', path: 'content/fase1.content.json', url: 'fase1.html', title: 'Fase 01 – Eerste aanzet' },
             { id: 'fase-2', path: 'content/fase2.content.json', url: 'fase2.html', title: 'Fase 02 – De verfijning' },

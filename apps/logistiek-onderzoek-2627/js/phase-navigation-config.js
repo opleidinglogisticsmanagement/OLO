@@ -6,11 +6,13 @@
     'use strict';
 
     const WEEK1_LABEL = 'Onderzoeksplan template';
+    const WEEK1_HREF = 'onderzoeksplan.html';
     const CASUS_LABEL = 'Casus magazijnoptimalisatie';
     const CASUS_HREF = 'casus.html';
 
     /** @type {Record<string, string>} Oude week-URL → nieuwe fase-URL */
     const WEEK_REDIRECTS = {
+        'week1.html': 'onderzoeksplan.html',
         'week6.html': 'fase4.html',
         'week7.html': 'afronding.html',
         'week5.html': 'fase3.html',
@@ -38,7 +40,7 @@
     function getPhaseModules() {
         return [
             { id: 'start', title: 'Start', href: 'index.html', icon: 'fa-home', colors: { icon: 'text-blue-600 dark:text-blue-400', bg: 'bg-blue-100 dark:bg-blue-900/30' } },
-            { id: 'week-1', title: WEEK1_LABEL, href: 'week1.html', icon: 'fa-play-circle', colors: { icon: 'text-green-600 dark:text-green-400', bg: 'bg-green-100 dark:bg-green-900/30' } },
+            { id: 'week-1', title: WEEK1_LABEL, href: WEEK1_HREF, icon: 'fa-play-circle', colors: { icon: 'text-green-600 dark:text-green-400', bg: 'bg-green-100 dark:bg-green-900/30' } },
             { id: 'casus', title: CASUS_LABEL, href: CASUS_HREF, icon: 'fa-warehouse', colors: { icon: 'text-teal-600 dark:text-teal-400', bg: 'bg-teal-100 dark:bg-teal-900/30' } },
             {
                 id: 'fase-1',

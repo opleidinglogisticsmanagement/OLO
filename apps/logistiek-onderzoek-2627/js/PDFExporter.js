@@ -172,7 +172,7 @@ class PDFExporter {
 
             // Exporteer alle weken
             const weeks = [
-                { number: 1, title: 'Geen onderwijs i.v.m. studiereis', file: 'week1.html', jsonFile: 'content/week1.content.json' },
+                { number: 1, title: 'Onderzoeksplan template', file: 'onderzoeksplan.html', jsonFile: 'content/onderzoeksplan.content.json' },
                 { number: 1, title: 'Van probleem naar doelstelling', file: 'fase1.html', jsonFile: 'content/fase1.content.json' },
                 { number: 2, title: 'Onderzoeksmodel + Onderzoeksvragen', file: 'fase1.html', jsonFile: 'content/fase1.content.json' },
                 { number: 2, title: 'Begripsbepaling + Voorbereiding literatuuronderzoek', file: 'fase2.html', jsonFile: 'content/fase2.content.json' },

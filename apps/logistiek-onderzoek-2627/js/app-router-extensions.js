@@ -20,6 +20,8 @@
      * @param {AppRouter} router
      */
     function registerPhaseRoutes(router) {
+        router.routes['onderzoeksplan.html'] = () => router.loadWeekPage('week-1', 'OnderzoeksplanLessonPage');
+        router.routes['week1.html'] = () => router.loadWeekPage('week-1', 'OnderzoeksplanLessonPage');
         router.routes['fase1.html'] = () => router.loadWeekPage('fase-1', 'Fase1LessonPage');
         router.routes['week2.html'] = () => router.loadWeekPage('fase-1', 'Fase1LessonPage');
         router.routes['week3.html'] = () => router.loadWeekPage('fase-1', 'Fase1LessonPage');

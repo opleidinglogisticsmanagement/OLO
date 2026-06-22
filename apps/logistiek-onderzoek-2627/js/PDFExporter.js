@@ -173,12 +173,12 @@ class PDFExporter {
             // Exporteer alle weken
             const weeks = [
                 { number: 1, title: 'Geen onderwijs i.v.m. studiereis', file: 'week1.html', jsonFile: 'content/week1.content.json' },
-                { number: 2, title: 'Van probleem naar doelstelling', file: 'week2.html', jsonFile: 'content/week2.content.json' },
-                { number: 3, title: 'Onderzoeksmodel + Onderzoeksvragen', file: 'week3.html', jsonFile: 'content/week3.content.json' },
-                { number: 4, title: 'Begripsbepaling + Voorbereiding literatuuronderzoek', file: 'week4.html', jsonFile: 'content/week4.content.json' },
-                { number: 5, title: 'Uitvoeren literatuuronderzoek + Theoretisch kader', file: 'week5.html', jsonFile: 'content/week5.content.json' },
-                { number: 6, title: 'Onderzoeksstrategie + dataverzamelingsplan', file: 'week6.html', jsonFile: 'content/week6.content.json' },
-                { number: 7, title: 'Rapportage 1', file: 'week7.html', jsonFile: 'content/week7.content.json' }
+                { number: 1, title: 'Van probleem naar doelstelling', file: 'fase1.html', jsonFile: 'content/fase1.content.json' },
+                { number: 2, title: 'Onderzoeksmodel + Onderzoeksvragen', file: 'fase1.html', jsonFile: 'content/fase1.content.json' },
+                { number: 2, title: 'Begripsbepaling + Voorbereiding literatuuronderzoek', file: 'fase2.html', jsonFile: 'content/fase2.content.json' },
+                { number: 3, title: 'Uitvoeren literatuuronderzoek + Theoretisch kader', file: 'fase3.html', jsonFile: 'content/fase3.content.json' },
+                { number: 4, title: 'Onderzoeksstrategie + dataverzamelingsplan', file: 'fase4.html', jsonFile: 'content/fase4.content.json' },
+                { number: 7, title: 'Rapportage 1', file: 'afronding.html', jsonFile: 'content/afronding.content.json' },
                 // Afsluiting wordt alleen toegevoegd als het bestand bestaat
             ];
             

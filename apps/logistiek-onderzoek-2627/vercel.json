@@ -1,6 +1,7 @@
 {
   "version": 2,
-  "buildCommand": "npm install",
+  "installCommand": "cd ../.. && npm install",
+  "buildCommand": "echo \"No build step required\"",
   "outputDirectory": ".",
   "functions": {
     "api/index.js": {

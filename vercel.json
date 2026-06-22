@@ -1,7 +1,7 @@
 {
   "version": 2,
-  "buildCommand": "npm install",
   "installCommand": "npm install",
+  "buildCommand": "echo \"No build step required\"",
   "functions": {
     "api/index.js": {
       "includeFiles": "**/*.{html,js,json,png,jpg,jpeg,gif,svg,ico,woff,woff2,ttf,eot,docx,pdf,xlsx,vsdx}",

@@ -74,7 +74,7 @@
             return this.renderErrorState();
         }
 
-        const contentUrl = onderwerp.contentUrl || 'week2.html';
+        const contentUrl = onderwerp.contentUrl || 'fase1.html';
         const leerdoelenHtml = onderwerp.leerdoelen
             .map((ld) => this._renderLeerdoel(ld, contentUrl))
             .join('');

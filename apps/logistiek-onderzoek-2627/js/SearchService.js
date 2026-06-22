@@ -15,12 +15,11 @@ class SearchService {
         this.files = [
             { id: 'week-1', path: 'content/week1.content.json', url: 'week1.html', title: 'Onderzoeksplan template' },
             { id: 'casus', path: 'content/casus.content.json', url: 'casus.html', title: 'Casus magazijnoptimalisatie' },
-            { id: 'week-2', path: 'content/week2.content.json', url: 'week2.html', title: 'Fase 01 – Eerste aanzet' },
-            { id: 'week-3', path: 'content/week3.content.json', url: 'week3.html', title: 'Fase 01 – Eerste aanzet' },
-            { id: 'week-4', path: 'content/week4.content.json', url: 'week4.html', title: 'Fase 02 – De verfijning' },
-            { id: 'week-5', path: 'content/week5.content.json', url: 'week5.html', title: 'Fase 03 – Literatuuronderzoek' },
-            { id: 'week-6', path: 'content/week6.content.json', url: 'week6.html', title: 'Fase 04 – Onderzoekstechnisch ontwerp' },
-            { id: 'week-7', path: 'content/week7.content.json', url: 'week7.html', title: 'Afronding' },
+            { id: 'fase-1', path: 'content/fase1.content.json', url: 'fase1.html', title: 'Fase 01 – Eerste aanzet' },
+            { id: 'fase-2', path: 'content/fase2.content.json', url: 'fase2.html', title: 'Fase 02 – De verfijning' },
+            { id: 'fase-3', path: 'content/fase3.content.json', url: 'fase3.html', title: 'Fase 03 – Literatuuronderzoek' },
+            { id: 'fase-4', path: 'content/fase4.content.json', url: 'fase4.html', title: 'Fase 04 – Onderzoekstechnisch ontwerp' },
+            { id: 'afronding', path: 'content/afronding.content.json', url: 'afronding.html', title: 'Afronding' },
             { id: 'register', path: 'content/register.json', url: 'register.html', title: 'Begrippenlijst' }
         ];
     }

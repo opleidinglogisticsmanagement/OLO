@@ -1,21 +1,21 @@
 {
   "intro": {
-  "title": "Fase 01",
-  "subtitle": "Eerste aanzet",
-  "description": "In Fase 01 leer je hoe je een praktijkgericht onderzoek voorbereidt. Je verkent het probleem, formuleert een duidelijke doelstelling en leert hoe je deze SMART maakt. Daarnaast ontdek je de rol van de opdrachtgever en hoe je als onderzoeker kritisch en professioneel kunt handelen binnen een logistieke context.<br><br>Voor het werkcollege van dit onderdeel ga jij je verdiepen in de manier waarop de probleemverkenning op een gestructureerde wijze wordt opgesteld. Jij bent onderzoeker en aan jou de taak om de vraag van de opdrachtgever te vertalen naar jouw onderzoek. Hiervoor is het belangrijk om helder te hebben welke onderwerpen er in een probleemverkenning worden besproken en hoe van daaruit een eerste doelstelling is te formuleren. Bestudeer voor aanvang van het college de theorie."
+    "title": "Fase 01",
+    "subtitle": "Eerste aanzet",
+    "description": "In dit onderdeel van Fase 01 leg je de basis voor je onderzoeksplan. Je leert het praktijkprobleem verkennen, een SMART doelstelling formuleren (A- en B-gedeelte), de relatie met je opdrachtgever verduidelijken en de vormen van praktijkgericht onderzoek kennen. Bestudeer de theorie hieronder en pas de stof toe in je eigen plan."
   },
   "leerdoelen": {
-  "title": "Leerdoelen",
-  "description": "",
-  "items": [
-    "Uitleggen wat het belang is van een goed geformuleerde doelstelling binnen praktijkgericht onderzoek.",
-    "Een onderscheid maken tussen het probleem, de doelstelling en de hoofdvraag in een onderzoeksopzet.",
-    "Een doelstelling formuleren aan de hand van het a- en b-gedeelte.",
-    "Een doelstelling SMART formuleren en beoordelen.",
-    "De relatie tussen opdrachtgever en onderzoeker toelichten en kritisch reflecteren op je eigen rol hierin.",
-    "De verschillende vormen van praktijkgericht onderzoek herkennen en toepassen binnen een logistieke context."
-  ],
-  "interactive": false
+    "title": "Leerdoelen",
+    "description": "",
+    "items": [
+      "Uitleggen wat het belang is van een goed geformuleerde doelstelling binnen praktijkgericht onderzoek.",
+      "Een onderscheid maken tussen het probleem, de doelstelling en de hoofdvraag in een onderzoeksopzet.",
+      "Een doelstelling formuleren aan de hand van het a- en b-gedeelte.",
+      "Een doelstelling SMART formuleren en beoordelen.",
+      "De relatie tussen opdrachtgever en onderzoeker toelichten en kritisch reflecteren op je eigen rol hierin.",
+      "De verschillende vormen van praktijkgericht onderzoek herkennen en toepassen binnen een logistieke context."
+    ],
+    "interactive": false
   },
   "theorie": {
     "title": "Introductie",
@@ -54,7 +54,7 @@
       },
       {
         "type": "image",
-        "src": "assets/images/Stappenplannen 1.0.png",
+        "src": "assets/images/Stappenplannen-1.0.png",
         "alt": "De vier fasen bij het opstellen van een logistiek onderzoek.",
         "enableModal": true
       },
@@ -88,9 +88,22 @@
         "alt": "De zes onderdelen van een praktijkprobleem."
       },
       {
+        "type": "heading",
+        "text": "Oefencasus: magazijnoptimalisatie bij Organisatie X",
+        "level": 2,
+        "id": "oefencasus-magazijnoptimalisatie"
+      },
+      {
         "type": "paragraph",
         "text": [
-          "Wanneer je aan de hand van deze inzichten het probleem verder hebt omschreven kun je gaan nadenken over het formuleren van je doelstelling. Let er wel op dat je doelstelling anders is dan je hoofdvraag van je onderzoek. In de doelstelling stel je jezelf ten doel om het praktijkprobleem (voor een specifieke organisatie) op te lossen. De hoofdvraag is de invulling van de doelstelling in dit onderzoek. Logischerwijs zit er een relatie tussen beiden. Hierop zullen we later nadrukkelijker stilstaan."
+          "Voor deze module werk je met de oefencasus <strong>magazijnoptimalisatie bij Organisatie X</strong>. De volledige casusbeschrijving staat op de aparte pagina <a href=\"casus.html\" class=\"text-blue-600 dark:text-blue-400 hover:underline font-medium\">Casus magazijnoptimalisatie</a> in het navigatiemenu. Lees die pagina goed door voordat je verdergaat met de opdrachten in Fase 01.",
+          "In de vervolgweken gebruik je steeds dezelfde casus om onderzoeksstappen te oefenen: van probleemverkenning en doelstelling tot literatuuronderzoek en onderzoeksontwerp."
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "Wanneer je aan de hand van de casus het probleem van Organisatie X verder hebt omschreven, kun je gaan nadenken over het formuleren van je doelstelling. Let er wel op dat je doelstelling anders is dan je hoofdvraag van je onderzoek. In de doelstelling stel je jezelf ten doel om het praktijkprobleem (voor een specifieke organisatie) op te lossen. De hoofdvraag is de invulling van de doelstelling in dit onderzoek. Logischerwijs zit er een relatie tussen beiden. Hierop zullen we later nadrukkelijker stilstaan."
         ]
       },
       {
@@ -338,7 +351,7 @@
                   "Ben jij nu ook in staat om aan de hand van het gegeven voorbeeld een doelstelling op te stellen?",
                   "<div style='margin-left: 20px; margin-bottom: 1rem;'><em>Als Logistics management student wil jij een onderzoek uitvoeren bij een logistieke dienstverlener in de regio Zwolle. Binnen deze logistieke dienstverlener bestaan spanningen tussen het management enerzijds en de chauffeurs anderzijds. De transportmanager vraagt of jij deze problematiek wilt bestuderen. De bestaande situatie bij de logistieke dienstverlener vormt dan het projectkader. Uit een eerste gesprek met de transportmanager blijkt dat het management veel overzicht wil bewaren door dagelijks diverse dashboards te raadplegen en hierop te acteren. Echter zij merken door het gebruik dat veel informatie niet consistent en goed wordt ingevuld door de chauffeurs. De chauffeurs benoemen echter dat zij langzaamaan meer dan 25% van hun werktijd bezig zijn met administratie wat zij niet leuk vinden. Daarvoor zijn ze geen chauffeur geworden. Zij vragen zich, met de huidige stand van technologie af waarom dit proces niet verder geautomatiseerd kan worden waardoor minder administratie van de chauffeurs nodig is. Hierdoor is langzaamaan een cultuur ontstaan waarin zowel de chauffeurs als het management elkaar nog nauwelijks informeren waardoor de winst onder druk is komen te staan, chauffeurs ontevreden zijn en het management zich afvraagt hoe dit probleem aan te pakken.</em></div>",
                   "<div style='margin-left: 20px; margin-bottom: 1rem;'><em>Jouw onderzoek vindt binnen dit projectkader plaats en levert als het goed is een bijdrage aan een verbetering van de ontstane cultuur en mogelijke handvatten hoe deze uitdaging op te lossen.</em></div>",
-                  "Schrijf een doelstelling op voor deze probleemstelling en neem deze mee naar het werkcollege."
+                  "Schrijf een doelstelling op voor deze probleemstelling en bewaar deze voor je eigen onderzoeksplan."
                 ]
               },
               {

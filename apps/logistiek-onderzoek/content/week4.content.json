@@ -2,7 +2,7 @@
   "intro": {
     "title": "Fase 02",
     "subtitle": "De verfijning",
-    "description": "Fase 02 bestaat uit een <strong>coachingscollege</strong> en een <strong>werkcollege</strong>.<br><br>Voor het <strong>coachingscollege</strong> zorg je dat je de theorie van het vorige werkcollege (Fase 01) hebt begrepen en heb je helder:<br><ul class=\"list-disc list-inside ml-4 mb-4\"><li>Welk probleem je wilt gaan onderzoeken. Dat betekent dat je de probleemverkenning hebt uitgewerkt in ongeveer 350 woorden.</li><li>Heb jij een concrete doelstelling bepaald die te relateren is aan de vraag van de opdrachtgever in ongeveer 50 woorden.</li><li>Werk je op basis van de theorie uit Fase 01 een onderzoeksmodel en hoofdvraag uit.</li></ul>De probleemverkenning, doelstelling en onderzoeksmodel ga je pitchen.<br><br>Voor het <strong>werkcollege</strong> van Fase 02 ga je je verdiepen hoe je begrippen kunt operationaliseren. Want je wilt uiteindelijk bepaalde zaken meetbaar maken om data te gaan verzamelen. Daarnaast wil je gedegen literatuuronderzoek verrichten naar belangrijke zoektermen uit bijvoorbeeld de doelstelling of de hoofdvraag.<br><br><div class=\"accordion-container mb-4\" id=\"intro-opdracht1-accordion\"><div class=\"border border-gray-200 dark:border-gray-700 rounded-lg mb-3 overflow-hidden transition-colors duration-200\"><button class=\"w-full px-6 py-4 bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 active:bg-gray-200 dark:active:bg-gray-600 transition-colors duration-200 flex items-center justify-between text-left cursor-pointer touch-manipulation\" onclick=\"InteractiveRenderer.toggleAccordion('intro-opdracht1-content','intro-opdracht1-item',true)\" aria-expanded=\"false\" aria-controls=\"intro-opdracht1-content\" id=\"intro-opdracht1-item\"><span class=\"font-semibold text-gray-900 dark:text-white text-lg\">Opdracht 1: Voorbereiding werkcollege — Fase 02</span><i class=\"fas fa-plus transform transition-transform duration-200 text-gray-600 dark:text-gray-300\" id=\"intro-opdracht1-item-icon\"></i></button><div id=\"intro-opdracht1-content\" class=\"accordion-content overflow-hidden transition-all duration-300 ease-in-out max-h-0 opacity-0 bg-white dark:bg-gray-800\" aria-hidden=\"true\" style=\"display: none;\"><div class=\"px-6 py-4\"><p class=\"text-gray-700 dark:text-gray-300 mb-4\">Bestudeer voor aanvang van het <strong>werkcollege</strong> de volledige theorie van Fase 02 in deze e-learning. Zorg dat je de uitleg over definiëren van begrippen, de bouwsteenmethode en het gebruik van Windesearch hebt doorgenomen, zodat je tijdens het werkcollege direct met begrippen en literatuuronderzoek aan de slag kunt.</p></div></div></div></div>"
+    "description": "In Fase 02 verfijn je je onderzoeksopzet. Je operationaliseert begrippen, formuleert deelvragen en maakt een start met literatuuronderzoek op basis van je zoektermen. Je hebt een uitgewerkte probleemverkenning, doelstelling, onderzoeksmodel en hoofdvraag nodig."
   },
   "leerdoelen": {
     "title": "Leerdoelen",
@@ -393,8 +393,23 @@
                             "id": "scenario1",
                             "title": "Scenario 1: AND-operator",
                             "description": "Je zoekt naar artikelen die zowel over transport als over optimalisatie gaan.",
-                            "availableTerms": ["transport", "optimalisatie", "logistiek", "warehouse", "supply chain", "luchtvaart", "magazijnbeheer", "automatisering", "robotica", "e-commerce"],
-                            "availableOperators": ["AND", "OR", "NOT"],
+                            "availableTerms": [
+                              "transport",
+                              "optimalisatie",
+                              "logistiek",
+                              "warehouse",
+                              "supply chain",
+                              "luchtvaart",
+                              "magazijnbeheer",
+                              "automatisering",
+                              "robotica",
+                              "e-commerce"
+                            ],
+                            "availableOperators": [
+                              "AND",
+                              "OR",
+                              "NOT"
+                            ],
                             "correctQuery": "transport AND optimalisatie",
                             "explanation": "De AND-operator zorgt ervoor dat beide termen (transport én optimalisatie) in de resultaten moeten voorkomen. Dit beperkt het aantal resultaten tot artikelen die beide onderwerpen behandelen."
                           },
@@ -402,8 +417,23 @@
                             "id": "scenario2",
                             "title": "Scenario 2: OR-operator",
                             "description": "Je zoekt naar artikelen die over logistiek of warehouse gaan (of beide).",
-                            "availableTerms": ["transport", "optimalisatie", "logistiek", "warehouse", "supply chain", "luchtvaart", "magazijnbeheer", "automatisering", "robotica", "e-commerce"],
-                            "availableOperators": ["AND", "OR", "NOT"],
+                            "availableTerms": [
+                              "transport",
+                              "optimalisatie",
+                              "logistiek",
+                              "warehouse",
+                              "supply chain",
+                              "luchtvaart",
+                              "magazijnbeheer",
+                              "automatisering",
+                              "robotica",
+                              "e-commerce"
+                            ],
+                            "availableOperators": [
+                              "AND",
+                              "OR",
+                              "NOT"
+                            ],
                             "correctQuery": "logistiek OR warehouse",
                             "explanation": "De OR-operator zorgt ervoor dat minstens één van de termen (logistiek óf warehouse) in de resultaten voorkomt. Dit breidt het aantal resultaten uit tot artikelen die over een van beide onderwerpen gaan."
                           },
@@ -411,8 +441,23 @@
                             "id": "scenario3",
                             "title": "Scenario 3: NOT-operator",
                             "description": "Je zoekt naar artikelen over transport, maar niet over luchtvaart.",
-                            "availableTerms": ["transport", "optimalisatie", "logistiek", "warehouse", "supply chain", "luchtvaart", "magazijnbeheer", "automatisering", "robotica", "e-commerce"],
-                            "availableOperators": ["AND", "OR", "NOT"],
+                            "availableTerms": [
+                              "transport",
+                              "optimalisatie",
+                              "logistiek",
+                              "warehouse",
+                              "supply chain",
+                              "luchtvaart",
+                              "magazijnbeheer",
+                              "automatisering",
+                              "robotica",
+                              "e-commerce"
+                            ],
+                            "availableOperators": [
+                              "AND",
+                              "OR",
+                              "NOT"
+                            ],
                             "correctQuery": "transport NOT luchtvaart",
                             "explanation": "De NOT-operator sluit artikelen uit die de term 'luchtvaart' bevatten. Je krijgt dus alle artikelen over transport, behalve die over luchtvaart."
                           },
@@ -420,8 +465,23 @@
                             "id": "scenario4",
                             "title": "Scenario 4: Gecombineerde operatoren met haakjes",
                             "description": "Je zoekt naar artikelen die over optimalisatie gaan EN (logistiek of supply chain) bevatten.",
-                            "availableTerms": ["transport", "optimalisatie", "logistiek", "warehouse", "supply chain", "luchtvaart", "magazijnbeheer", "automatisering", "robotica", "e-commerce"],
-                            "availableOperators": ["AND", "OR", "NOT"],
+                            "availableTerms": [
+                              "transport",
+                              "optimalisatie",
+                              "logistiek",
+                              "warehouse",
+                              "supply chain",
+                              "luchtvaart",
+                              "magazijnbeheer",
+                              "automatisering",
+                              "robotica",
+                              "e-commerce"
+                            ],
+                            "availableOperators": [
+                              "AND",
+                              "OR",
+                              "NOT"
+                            ],
                             "correctQuery": "(logistiek OR supply chain) AND optimalisatie",
                             "explanation": "Haakjes bepalen de volgorde van bewerkingen. Eerst wordt (logistiek OR supply chain) geëvalueerd, daarna wordt het resultaat gecombineerd met optimalisatie via AND. Dit geeft artikelen die over optimalisatie gaan én over logistiek of supply chain."
                           },
@@ -429,8 +489,23 @@
                             "id": "scenario5",
                             "title": "Scenario 5: Complexe query",
                             "description": "Je zoekt naar artikelen over magazijnbeheer die (automatisering of robotica) bevatten, maar niet over e-commerce gaan.",
-                            "availableTerms": ["transport", "optimalisatie", "logistiek", "warehouse", "supply chain", "luchtvaart", "magazijnbeheer", "automatisering", "robotica", "e-commerce"],
-                            "availableOperators": ["AND", "OR", "NOT"],
+                            "availableTerms": [
+                              "transport",
+                              "optimalisatie",
+                              "logistiek",
+                              "warehouse",
+                              "supply chain",
+                              "luchtvaart",
+                              "magazijnbeheer",
+                              "automatisering",
+                              "robotica",
+                              "e-commerce"
+                            ],
+                            "availableOperators": [
+                              "AND",
+                              "OR",
+                              "NOT"
+                            ],
                             "correctQuery": "magazijnbeheer AND (automatisering OR robotica) NOT e-commerce",
                             "explanation": "Dit is een complexe query met meerdere operatoren. Eerst wordt (automatisering OR robotica) geëvalueerd, daarna wordt dit gecombineerd met magazijnbeheer via AND, en ten slotte worden artikelen over e-commerce uitgesloten met NOT."
                           }
@@ -454,7 +529,18 @@
                         "title": "Schrijf je eigen zoekquery",
                         "instruction": "Klik op 'Nieuw scenario' om een nieuwe oefening te krijgen. Schrijf de zoekquery die je denkt dat correct is en krijg AI-feedback.",
                         "generateFromTheory": true,
-                        "availableTerms": ["transport", "optimalisatie", "logistiek", "warehouse", "supply chain", "luchtvaart", "magazijnbeheer", "automatisering", "robotica", "e-commerce"]
+                        "availableTerms": [
+                          "transport",
+                          "optimalisatie",
+                          "logistiek",
+                          "warehouse",
+                          "supply chain",
+                          "luchtvaart",
+                          "magazijnbeheer",
+                          "automatisering",
+                          "robotica",
+                          "e-commerce"
+                        ]
                       }
                     ]
                   }
@@ -605,4 +691,3 @@
     "numberOfQuestions": 3
   }
 }
-

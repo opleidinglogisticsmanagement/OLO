@@ -682,6 +682,7 @@
     <script src="/core/js/ui/VideoManager.js"></script>
     <script src="/core/js/ui/TableCopyManager.js"></script>
     <script src="/core/js/services/NavigationService.js"></script>
+    <script src="js/LogistiekNavigation.js"></script>
     <script src="/core/js/components/NavigationRenderer.js"></script>
     <script src="/core/js/components/ContentTemplateRenderer.js"></script>
     <script src="/core/pages/BaseLessonPage.js"></script>
@@ -794,26 +795,17 @@
                             </div>
                         </a>
                         
-                        <a href="gepersonaliseerd.html" class="block p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 focus-ring transition-colors">
-                            <div class="flex items-center space-x-3">
-                                <div class="w-8 h-8 bg-purple-100 dark:bg-purple-900/30 rounded-lg flex items-center justify-center" data-bg-inactive="bg-purple-100 dark:bg-purple-900/30" data-icon-inactive="text-purple-600 dark:text-purple-400">
-                                    <i class="fas fa-bullseye text-purple-600 dark:text-purple-400 text-sm"></i>
-                                </div>
-                                <span class="font-medium text-gray-900 dark:text-white">Gepersonaliseerd leren</span>
-                            </div>
-                        </a>
-                        
                         <a href="week1.html" class="block p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 focus-ring transition-colors">
                             <div class="flex items-center space-x-3">
                                 <div class="w-8 h-8 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center">
                                     <i class="fas fa-play-circle text-green-600 dark:text-green-400 text-sm"></i>
                                 </div>
-                                <span class="font-medium text-gray-900 dark:text-white">Introductie</span>
+                                <span class="font-medium text-gray-900 dark:text-white">Onderzoeksplan template</span>
                             </div>
                         </a>
                         
                         <div class="fase-1-nav-item">
-                            <a href="week2.html#probleem-verkennen" class="block p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 focus-ring transition-colors">
+                            <a href="week2.html" class="block p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 focus-ring transition-colors">
                                 <div class="flex items-center space-x-3">
                                     <div class="w-8 h-8 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center">
                                         <i class="fas fa-layer-group text-blue-600 dark:text-blue-400 text-sm"></i>
@@ -875,7 +867,7 @@
                         </div>
                         
                         <div class="fase-2-nav-item">
-                            <a href="week4.html#definieren-begrippen" class="block p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 focus-ring transition-colors">
+                            <a href="week4.html" class="block p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 focus-ring transition-colors">
                                 <div class="flex items-center space-x-3">
                                     <div class="w-8 h-8 bg-orange-100 dark:bg-orange-900/30 rounded-lg flex items-center justify-center">
                                         <i class="fas fa-layer-group text-orange-600 dark:text-orange-400 text-sm"></i>
@@ -1128,48 +1120,6 @@
                             </div>
                         </section>
 
-                        <!-- Hoe wil je leren? -->
-                        <section class="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 hover-lift transition-colors duration-200">
-                            <div class="flex flex-col sm:flex-row items-start box-border" style="width: 100%; max-width: 100%; box-sizing: border-box;">
-                                <div class="w-10 h-10 sm:w-12 sm:h-12 bg-purple-100 dark:bg-purple-900/30 rounded-lg flex items-center justify-center flex-shrink-0 mb-3 sm:mb-0 sm:mr-4">
-                                    <i class="fas fa-route text-purple-600 dark:text-purple-400 text-lg"></i>
-                                </div>
-                                <div class="flex-1 min-w-0 box-border sm:pr-[70px]" style="min-width: 0; max-width: 100%; box-sizing: border-box;">
-                                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Hoe wil je leren?</h3>
-                                    <p class="text-gray-700 dark:text-gray-300 mb-4">
-                                        Kies de leervorm die bij je past. Beide opties leiden naar dezelfde leerstof.
-                                    </p>
-                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                        <a href="week1.html" class="block p-6 bg-gray-50 dark:bg-gray-900/50 rounded-xl border-2 border-gray-200 dark:border-gray-700 hover:border-blue-500 dark:hover:border-blue-400 transition-colors group">
-                                            <div class="flex items-center space-x-3 mb-3">
-                                                <div class="w-10 h-10 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
-                                                    <i class="fas fa-book-open text-blue-600 dark:text-blue-400"></i>
-                                                </div>
-                                                <span class="text-xs font-medium text-blue-600 dark:text-blue-400 uppercase tracking-wider">Aanbevolen</span>
-                                            </div>
-                                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">Door de weken heen</h4>
-                                            <p class="text-sm text-gray-600 dark:text-gray-300 mb-4">
-                                                Volg de module week voor week. Ideaal als je de volledige stof wilt doorlopen.
-                                            </p>
-                                            <span class="text-blue-600 dark:text-blue-400 font-medium text-sm group-hover:underline">Start lineair →</span>
-                                        </a>
-                                        <a href="gepersonaliseerd.html" class="block p-6 bg-gray-50 dark:bg-gray-900/50 rounded-xl border-2 border-gray-200 dark:border-gray-700 hover:border-purple-500 dark:hover:border-purple-400 transition-colors group">
-                                            <div class="flex items-center space-x-3 mb-3">
-                                                <div class="w-10 h-10 bg-purple-100 dark:bg-purple-900/30 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
-                                                    <i class="fas fa-bullseye text-purple-600 dark:text-purple-400"></i>
-                                                </div>
-                                            </div>
-                                            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">Gepersonaliseerd leren</h4>
-                                            <p class="text-sm text-gray-600 dark:text-gray-300 mb-4">
-                                                Kies je leerdoelen en leer in je eigen tempo. Nu beschikbaar: Van probleem naar doelstelling.
-                                            </p>
-                                            <span class="text-purple-600 dark:text-purple-400 font-medium text-sm group-hover:underline">Start gepersonaliseerd →</span>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </section>
-
                         <!-- Module Structure Section -->
                         <section class="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 hover-lift transition-colors duration-200">
                             <div class="flex flex-col sm:flex-row items-start box-border" style="width: 100%; max-width: 100%; box-sizing: border-box;">
@@ -1189,7 +1139,7 @@
                                             <a href="week1.html" class="bg-gray-50 dark:bg-gray-900/50 rounded-lg px-6 py-3 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-200 cursor-pointer focus-ring hover-lift block">
                                                 <div class="flex items-center justify-between">
                                                     <div class="flex-1">
-                                                        <h5 class="font-semibold text-gray-900 dark:text-white mb-1">Introductie</h5>
+                                                        <h5 class="font-semibold text-gray-900 dark:text-white mb-1">Onderzoeksplan template</h5>
                                                         <p class="text-gray-600 dark:text-gray-300 text-sm">Download het onderzoeksplan-template en lees hoe je de module doorloopt.</p>
                                                     </div>
                                                     <i class="fas fa-arrow-right text-sm text-gray-400 dark:text-gray-500 ml-4 flex-shrink-0"></i>

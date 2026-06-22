@@ -1,21 +1,21 @@
 {
   "intro": {
-  "title": "Fase 01",
-  "subtitle": "Eerste aanzet",
-  "description": "In Fase 01 leer je hoe je een praktijkgericht onderzoek voorbereidt. Je verkent het probleem, formuleert een duidelijke doelstelling en leert hoe je deze SMART maakt. Daarnaast ontdek je de rol van de opdrachtgever en hoe je als onderzoeker kritisch en professioneel kunt handelen binnen een logistieke context.<br><br>Voor het werkcollege van dit onderdeel ga jij je verdiepen in de manier waarop de probleemverkenning op een gestructureerde wijze wordt opgesteld. Jij bent onderzoeker en aan jou de taak om de vraag van de opdrachtgever te vertalen naar jouw onderzoek. Hiervoor is het belangrijk om helder te hebben welke onderwerpen er in een probleemverkenning worden besproken en hoe van daaruit een eerste doelstelling is te formuleren. Bestudeer voor aanvang van het college de theorie."
+    "title": "Fase 01",
+    "subtitle": "Eerste aanzet",
+    "description": "In dit onderdeel van Fase 01 leg je de basis voor je onderzoeksplan. Je leert het praktijkprobleem verkennen, een SMART doelstelling formuleren (A- en B-gedeelte), de relatie met je opdrachtgever verduidelijken en de vormen van praktijkgericht onderzoek kennen. Bestudeer de theorie hieronder en pas de stof toe in je eigen plan."
   },
   "leerdoelen": {
-  "title": "Leerdoelen",
-  "description": "",
-  "items": [
-    "Uitleggen wat het belang is van een goed geformuleerde doelstelling binnen praktijkgericht onderzoek.",
-    "Een onderscheid maken tussen het probleem, de doelstelling en de hoofdvraag in een onderzoeksopzet.",
-    "Een doelstelling formuleren aan de hand van het a- en b-gedeelte.",
-    "Een doelstelling SMART formuleren en beoordelen.",
-    "De relatie tussen opdrachtgever en onderzoeker toelichten en kritisch reflecteren op je eigen rol hierin.",
-    "De verschillende vormen van praktijkgericht onderzoek herkennen en toepassen binnen een logistieke context."
-  ],
-  "interactive": false
+    "title": "Leerdoelen",
+    "description": "",
+    "items": [
+      "Uitleggen wat het belang is van een goed geformuleerde doelstelling binnen praktijkgericht onderzoek.",
+      "Een onderscheid maken tussen het probleem, de doelstelling en de hoofdvraag in een onderzoeksopzet.",
+      "Een doelstelling formuleren aan de hand van het a- en b-gedeelte.",
+      "Een doelstelling SMART formuleren en beoordelen.",
+      "De relatie tussen opdrachtgever en onderzoeker toelichten en kritisch reflecteren op je eigen rol hierin.",
+      "De verschillende vormen van praktijkgericht onderzoek herkennen en toepassen binnen een logistieke context."
+    ],
+    "interactive": false
   },
   "theorie": {
     "title": "Introductie",
@@ -54,7 +54,7 @@
       },
       {
         "type": "image",
-        "src": "assets/images/Stappenplannen 1.0.png",
+        "src": "assets/images/Stappenplannen-1.0.png",
         "alt": "De vier fasen bij het opstellen van een logistiek onderzoek.",
         "enableModal": true
       },

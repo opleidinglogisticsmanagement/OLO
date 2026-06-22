@@ -1,0 +1,49 @@
+{
+  "intro": {
+    "title": "Casus magazijnoptimalisatie",
+    "subtitle": "Organisatie X",
+    "description": "In deze module werk je met één doorlopende oefencasus. Je leest hieronder de praktijksituatie van <strong>Organisatie X</strong>. In de vervolgweken gebruik je steeds dezelfde casus om onderzoeksstappen te oefenen: van probleemverkenning en doelstelling tot literatuuronderzoek en onderzoeksontwerp.<br><br>De casus is gebaseerd op een logistiek vraagstuk uit de praktijk. Namen en bedrijfsgegevens zijn geanonimiseerd."
+  },
+  "theorie": {
+    "title": "Casusbeschrijving",
+    "content": [
+      {
+        "type": "paragraph",
+        "text": [
+          "Organisatie X ervaart een hoge magazijnbezetting en mogelijk inefficiënte interne goederenbewegingen. Het management wil onderzoeken hoe het magazijn opnieuw kan worden ingericht, zodat opslaglocaties beter aansluiten op artikelbewegingen en interne rijafstanden worden verminderd.",
+          "Lees de casusbeschrijving hieronder. In de aanvullende context vind je achtergrondinformatie over magazijnindeling en goederenstromen die je later kunt gebruiken bij opdrachten in de module."
+        ]
+      },
+      {
+        "type": "accordion",
+        "usePlusIcon": true,
+        "defaultOpen": true,
+        "items": [
+          {
+            "title": "Casusbeschrijving Organisatie X",
+            "defaultOpen": true,
+            "content": [
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>Organisatie en magazijn</strong><br>Organisatie X is een productiebedrijf dat ventilatie- en binnenklimaatoplossingen maakt voor de Europese markt. Vanuit een logistiek centrum worden productiebanen bevoorraad en worden gereed product en onderdelen verwerkt voor verschillende markten. Het magazijn bestaat uit onder andere palletopslag, kleine stellingen met kratjes, flowrekken, een expeditie met meerdere dockdeuren en opslagzones voor fastmovers en slowmovers.</p>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">De organisatie verwerkt dagelijks grote aantallen inkomende en uitgaande goederen. Gemiddeld worden er dagelijks tientallen vrachtwagens geladen en gelost en ontvangt Organisatie X circa 200 pallets. Binnenkomende goederen mogen maximaal ongeveer één uur op de expeditie blijven staan, om te voorkomen dat de expeditieruimte volloopt. Daarna moeten de goederen het magazijn in.</p>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>Het probleem</strong><br>De beschikbare opslagcapaciteit staat onder druk. Het magazijn kent een hoge bezettingsgraad van ongeveer <strong>90%</strong>. Hierdoor worden goederen soms tijdelijk buiten de reguliere opslaglocaties geplaatst, onder andere op plekken die eigenlijk bedoeld zijn voor productieactiviteiten.</p>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Het management vermoedt dat de huidige magazijnindeling niet meer goed aansluit op de actuele goederenstromen. Artikelen met een hoge omloopsnelheid (fastmovers) liggen mogelijk niet altijd op de meest logische locaties, terwijl slowmovers en langlopende onderdelen relatief veel ruimte innemen. Hierdoor ontstaan mogelijk onnodige interne rijafstanden en inefficiënt gebruik van opslaglocaties.</p>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>Onderzoeksfocus: magazijnherinrichting</strong><br>Organisatie X wil inzicht krijgen in hoe het magazijn anders kan worden ingericht. Het onderzoek richt zich op het analyseren van artikelbewegingen, het onderscheiden van hardlopers en slowmovers, het beoordelen van de huidige locatie-indeling en het ontwerpen van mogelijke herinrichtingsscenario's. Het doel is om een magazijnindeling te adviseren die leidt tot een betere benutting van opslagruimte en kortere interne rijafstanden.</p>",
+              "<div class=\"bg-amber-50 dark:bg-amber-900/20 border-l-4 border-amber-500 dark:border-amber-400 p-4 rounded-r-lg mb-4\"><p class=\"text-gray-700 dark:text-gray-300 mb-0\"><strong>Afbakening:</strong> In deze casus gaat het <em>niet</em> om het bepalen hoeveel voorraad Organisatie X zou moeten hebben. Het onderzoek richt zich op de vraag <em>waar</em> artikelen het beste opgeslagen kunnen worden binnen de bestaande magazijnruimte.</p></div>"
+            ]
+          },
+          {
+            "title": "Aanvullende context (magazijn en goederenstromen)",
+            "defaultOpen": false,
+            "content": [
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>Magazijnindeling</strong><br>In het magazijn worden onder andere onderscheiden: fastmovers aan de voorkant, palletopslag, klein materiaal, slowmovers meer achterin, gereed product, producten voor de Nederlandse markt en producten voor het buitenland. Voor intern transport worden onder andere treintjes (onderwagens) en reachtrucks gebruikt om pallets naar de productie te brengen.</p>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>Productvariatie en spare parts</strong><br>Organisatie X produceert voor verschillende markten met uiteenlopende producteisen. Slowmovers en spare parts nemen relatief veel opslagruimte in: onderdelen moeten nog langdurig (bijvoorbeeld tot 10 jaar na uitfasering) beschikbaar blijven voor serviceverplichtingen.</p>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>Verschil Nederlandse markt en buitenland</strong><br>Producten voor het buitenland staan doorgaans kort in het magazijn voordat ze via hubs in andere landen worden verdeeld. Voor de Nederlandse markt wordt op artikelniveau gepickt, wat meer opslag-, pick- en handlingactiviteiten vraagt.</p>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>Bevoorrading productie</strong><br>Het productieaanvulproces werkt met een Kanban-systeem: wanneer een productiemedewerker een kratje of pallet leeg heeft, wordt dit gescand. Logistiek krijgt dan een signaal om opnieuw te bevoorraden, met een buffer van ongeveer twee uur productietijd.</p>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-0\"><strong>Overige stromen</strong><br>Gereed product krijgt een handling unit met informatie over ladingdrager, afmetingen en artikelen. Daarnaast is er een aparte stroom voor emballage: lege of retourverpakkingen worden gesorteerd, opgeslagen en periodiek door leveranciers opgehaald.</p>"
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

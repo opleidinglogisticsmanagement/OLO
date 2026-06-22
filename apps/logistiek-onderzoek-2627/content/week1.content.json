@@ -1,8 +1,8 @@
 {
   "intro": {
-    "title": "Introductie",
-    "subtitle": "Onderzoeksplan template",
-    "description": "Welkom bij de module! Hier vind je het onderzoeksplan template dat je gedurende de module zult gebruiken om je onderzoeksplan op te stellen. Download het template en begin met het invullen."
+    "title": "Onderzoeksplan template",
+    "subtitle": "Aan de slag",
+    "description": "Welkom bij de module! Hier lees je hoe je het onderzoeksplan template vindt in Brightspace en hoe je daarmee aan de slag gaat gedurende de module."
   },
   "theorie": {
     "title": "Onderzoeksplan Template",
@@ -16,21 +16,20 @@
       },
       {
         "type": "heading",
-        "text": "Download het Onderzoeksplan Template",
+        "text": "Onderzoeksplan Template ophalen in Brightspace",
         "level": 3
       },
       {
         "type": "paragraph",
         "text": [
-          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Klik op de onderstaande link om het onderzoeksplan template te downloaden:</p>"
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Het onderzoeksplan template download je in <strong>Brightspace</strong>, niet via deze e-learningomgeving. Volg onderstaande stappen:</p>",
+          "<ol class=\"list-decimal list-outside space-y-2 mb-4 ml-6 pl-4 text-gray-700 dark:text-gray-300\">",
+          "<li class=\"mb-2\">Log in op <strong>Brightspace</strong>.</li>",
+          "<li class=\"mb-2\">Ga naar de cursuspagina van <strong>Opzetten van een Logistiek Onderzoek</strong>.</li>",
+          "<li class=\"mb-2\">Open de map <strong>Templates</strong>.</li>",
+          "<li class=\"mb-2\">Download daar het bestand <strong>Onderzoeksplan (Template).docx</strong>.</li>",
+          "</ol>"
         ]
-      },
-      {
-        "type": "document",
-        "src": "assets/Documents/Onderzoeksplan (Template).docx",
-        "text": "Download Onderzoeksplan Template",
-        "icon": "fa-file-word",
-        "iconClass": "fas"
       },
       {
         "type": "heading",
@@ -58,27 +57,10 @@
         ]
       },
       {
-        "type": "heading",
-        "text": "Hoe gebruik je het template?",
-        "level": 3
-      },
-      {
-        "type": "paragraph",
-        "text": [
-          "<ol class=\"list-decimal list-outside space-y-2 mb-4 ml-6 pl-4\">",
-          "<li class=\"text-gray-700 dark:text-gray-300 mb-2\"><strong>Download het template</strong> - Klik op de download link hierboven</li>",
-          "<li class=\"text-gray-700 dark:text-gray-300 mb-2\"><strong>Sla een eigen kopie op</strong> - Maak een kopie van het template met je eigen naam (bijv. \"Onderzoeksplan_JouwNaam.docx\")</li>",
-          "<li class=\"text-gray-700 dark:text-gray-300 mb-2\"><strong>Werk per fase</strong> - Gedurende de module vul je per fase verschillende onderdelen in</li>",
-          "<li class=\"text-gray-700 dark:text-gray-300 mb-2\"><strong>Gebruik de instructies</strong> - In elke fase vind je specifieke instructies voor het invullen van de betreffende onderdelen</li>",
-          "<li class=\"text-gray-700 dark:text-gray-300 mb-2\"><strong>Bewaar regelmatig</strong> - Sla je werk regelmatig op om niets te verliezen</li>",
-          "</ol>"
-        ]
-      },
-      {
         "type": "highlight",
         "title": "Tip",
         "content": [
-          "Begin al bij de introductie met het downloaden en bekijken van het template. Zo weet je waar je aan gaat werken en kun je je voorbereiden op de komende fasen."
+          "Begin al bij de introductie met het ophalen en bekijken van het template in Brightspace. Zo weet je waar je aan gaat werken en kun je je voorbereiden op de komende fasen."
         ],
         "bgColor": "bg-blue-50 dark:bg-blue-900/20",
         "borderColor": "border-blue-500 dark:border-blue-400",

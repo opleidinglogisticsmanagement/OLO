@@ -7,13 +7,21 @@
 
 class Week1LessonPage extends BaseLessonPage {
     constructor() {
-        super('week-1', 'Introductie', 'Onderzoeksplan template');
+        super('week-1', 'Onderzoeksplan template', 'Aan de slag');
         // content and contentLoaded are now initialized in BaseLessonPage
     }
 
     // loadContent(), getFallbackContent(), and renderErrorState() are now in BaseLessonPage
 
     // renderModuleIntro() is now handled by BaseLessonPage using ContentTemplateRenderer
+
+    /**
+     * Geen aparte intro-sectie; de theorie bevat alle benodigde informatie.
+     * @returns {string} Lege HTML string
+     */
+    renderModuleIntro() {
+        return '';
+    }
 
     /**
      * Render content secties met content uit JSON

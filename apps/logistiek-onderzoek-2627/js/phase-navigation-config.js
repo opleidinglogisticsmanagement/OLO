@@ -23,14 +23,25 @@
     /** Anchors op week4 die naar fase3 horen */
     const WEEK4_FASE3_ANCHORS = ['#literatuuronderzoek'];
 
+    /** App-identiteit (dit bestand bestaat alleen in logistiek-onderzoek-2627) */
+    window.APP_ID = 'logistiek-onderzoek-2627';
+
     /**
      * Controleer of we in de 2627-app zitten
      * @returns {boolean}
      */
     function isApp2627() {
+        if (window.APP_ID === 'logistiek-onderzoek-2627') {
+            return true;
+        }
+
         const path = window.location.pathname || '';
         const href = window.location.href || '';
-        return path.includes('logistiek-onderzoek-2627') || href.includes('logistiek-onderzoek-2627');
+        const hostname = window.location.hostname || '';
+
+        return path.includes('logistiek-onderzoek-2627')
+            || href.includes('logistiek-onderzoek-2627')
+            || hostname.includes('olo-2627');
     }
 
     /**

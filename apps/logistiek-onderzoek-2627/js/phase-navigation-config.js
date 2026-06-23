@@ -50,6 +50,7 @@
                 colors: { icon: 'text-blue-600 dark:text-blue-400', bg: 'bg-blue-100 dark:bg-blue-900/30' },
                 subItems: [
                     { id: 'probleem-verkennen', title: 'Probleem verkennen', anchor: '#probleem-verkennen' },
+                    { id: 'interviewen', title: 'Interviewen', anchor: '#interviewen' },
                     { id: 'doelstelling-opstellen', title: 'Doelstelling opstellen', anchor: '#doelstelling-opstellen' },
                     { id: 'opdrachtgever-onderzoeker', title: 'Opdrachtgever-onderzoeker relatie', anchor: '#opdrachtgever-onderzoeker' },
                     { id: 'vormen-praktijkgericht', title: 'Vormen van praktijkgericht onderzoek', anchor: '#vormen-praktijkgericht' },

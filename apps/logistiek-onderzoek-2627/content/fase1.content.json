@@ -102,7 +102,7 @@
       {
         "type": "paragraph",
         "text": [
-          "Een interview doorloopt vier fasen: <strong>voorbereiding</strong>, <strong>opening</strong>, <strong>vragen stellen</strong> en <strong>afsluiting en verwerking</strong>. Hieronder werk je die fasen stap voor stap uit.",
+          "Een interview doorloopt vijf stappen: <strong>voorbereiding</strong>, <strong>opening</strong>, <strong>vragen voorbereiden</strong>, <strong>vragen stellen en luisteren</strong> en <strong>afsluiting en verwerking</strong>. Hieronder werk je die stappen stap voor stap uit.",
           "Daarnaast vind je per fase een <strong>voorbeeld</strong> uit de casus <strong>magazijnoptimalisatie bij Organisatie X</strong>, waarin je de teamleider magazijn interviewt. Lees de volledige casusbeschrijving op <a href=\"casus.html\" class=\"text-blue-600 dark:text-blue-400 hover:underline font-medium\">Casus magazijnoptimalisatie</a>."
         ]
       },
@@ -149,7 +149,8 @@
                       "<li class=\"text-gray-700 dark:text-gray-300\">een mening wilt vormen over .....</li>",
                       "<li class=\"text-gray-700 dark:text-gray-300\">een beeld wilt vormen over .....</li>",
                       "<li class=\"text-gray-700 dark:text-gray-300\">een gevoel wilt krijgen bij ......</li>",
-                      "</ul>"
+                      "</ul>",
+                      "<div style=\"display:flex;justify-content:center;width:100%;margin-bottom:24px\"><div class=\"olo-flipcard\" style=\"width:350px;max-width:100%;box-sizing:border-box;border:2px solid #e5e7eb;border-radius:12px;padding:24px;background:#ffffff;box-shadow:0 4px 6px -1px rgba(0,0,0,0.1);cursor:pointer\" role=\"button\" tabindex=\"0\" aria-expanded=\"false\" onclick=\"toggleOloFlipcard(this)\" onkeydown=\"if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleOloFlipcard(this);}\"><div class=\"olo-flipcard-front\" style=\"display:block\"><p class=\"text-gray-700 dark:text-gray-300 text-center mb-4\">Is een vrije attitude interview geschikt als eerste echte interview met je opdrachtgever?</p><p class=\"text-sm text-gray-500 dark:text-gray-400 italic text-center mb-0\"><i class=\"fas fa-hand-pointer mr-2\"></i>Klik om het antwoord te zien</p></div><div class=\"olo-flipcard-back\" style=\"display:none\"><p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>Nee.</strong> Bij je eerste onderzoeksinterview met de opdrachtgever heb je gerichte antwoorden nodig over problematiek, doelstelling, stakeholders en randvoorwaarden.</p><p class=\"text-gray-700 dark:text-gray-300 mb-4\">Een vrije attitude interview geeft te weinig structuur om je <strong>5W's + V + O</strong> onderbouwd vast te leggen. Kies daarvoor liever een semi-gestructureerd interview met een topiclijst.</p><p class=\"text-sm text-gray-500 dark:text-gray-400 italic text-center mb-0\"><i class=\"fas fa-redo mr-2\"></i>Klik om terug te draaien</p></div></div></div>"
                     ]
                   },
                   {
@@ -161,8 +162,12 @@
                       "<li class=\"text-gray-700 dark:text-gray-300\">Er wordt gebruik gemaakt van een lijst van gesprekspunten ook wel topics genoemd.</li>",
                       "<li class=\"text-gray-700 dark:text-gray-300\">Soms worden er een aantal basis (open) vragen geformuleerd om het gesprek op gang te brengen.</li>",
                       "<li class=\"text-gray-700 dark:text-gray-300\">In ieder geval wordt de geïnterviewde gestimuleerd om vrijuit te praten.</li>",
-                      "<li class=\"text-gray-700 dark:text-gray-300\">Een diepte-interview wordt dus uitgevoerd om een diepgaand beeld te krijgen van de individuele opvattingen.</li>",
-                      "</ul>"
+                      "<li class=\"text-gray-700 dark:text-gray-300\">Een diepte-interview wordt dus uitgevoerd om een grondig beeld te krijgen van de individuele opvattingen.</li>",
+                      "</ul>",
+                      "<div class=\"bg-blue-50 dark:bg-blue-900/20 border-l-4 border-blue-500 dark:border-blue-400 p-4 rounded-r-lg mb-0 mt-4\">",
+                      "<p class=\"text-gray-700 dark:text-gray-300 mb-2\"><strong><em>Voorbeeld: semi-gestructureerd interview met de teamleider magazijn van Organisatie X</em></strong></p>",
+                      "<p class=\"text-gray-700 dark:text-gray-300 mb-0\">Je plant een gesprek van 45 minuten op locatie. Je neemt een <strong>topiclijst</strong> mee met gesprekspunten: bezettingsgraad (circa 90%), indeling fastmovers en slowmovers, expeditiedruk en herinrichtingsopties. Je opent met een paar vaste vragen, maar laat de teamleider ook vrij aanvullen waar zij knelpunten in het dagelijks werk ervaart.</p>",
+                      "</div>"
                     ]
                   },
                   {
@@ -170,8 +175,11 @@
                     "content": [
                       "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">In het gestructureerde interview wordt gebruik gemaakt van vragenlijsten waarin de keuzes voor de antwoorden van te voren vast zijn gelegd.</p>",
                       "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">De vragen zijn meer gesloten van aard en voor iedere geïnterviewde hetzelfde.</p>",
-                      "<p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>Voordeel</strong> van deze methode is dat de antwoorden vergelijkbaar zijn.</p>",
-                      "<p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>Nadeel</strong> is dat je de ander minder ruimte geeft om eigen informatie te geven.</p>"
+                      "<div style=\"display:flex;justify-content:center;width:100%;margin-bottom:24px\"><div class=\"olo-flipcard\" style=\"width:350px;max-width:100%;box-sizing:border-box;border:2px solid #e5e7eb;border-radius:12px;padding:24px;background:#ffffff;box-shadow:0 4px 6px -1px rgba(0,0,0,0.1);cursor:pointer\" role=\"button\" tabindex=\"0\" aria-expanded=\"false\" onclick=\"toggleOloFlipcard(this)\" onkeydown=\"if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleOloFlipcard(this);}\"><div class=\"olo-flipcard-front\" style=\"display:block\"><p class=\"text-gray-700 dark:text-gray-300 text-center mb-4\">Wat is een voor- en nadeel van het gestructureerde interview?</p><p class=\"text-sm text-gray-500 dark:text-gray-400 italic text-center mb-0\"><i class=\"fas fa-hand-pointer mr-2\"></i>Klik om het antwoord te zien</p></div><div class=\"olo-flipcard-back\" style=\"display:none\"><p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>Voordeel:</strong> de antwoorden zijn vergelijkbaar. Je kunt resultaten van verschillende geïnterviewden naast elkaar leggen.</p><p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>Nadeel:</strong> je geeft de ander minder ruimte om eigen informatie te geven. Onverwachte maar relevante inzichten komen minder snel naar voren.</p><p class=\"text-sm text-gray-500 dark:text-gray-400 italic text-center mb-0\"><i class=\"fas fa-redo mr-2\"></i>Klik om terug te draaien</p></div></div></div>",
+                      "<div class=\"bg-blue-50 dark:bg-blue-900/20 border-l-4 border-blue-500 dark:border-blue-400 p-4 rounded-r-lg mb-0 mt-4\">",
+                      "<p class=\"text-gray-700 dark:text-gray-300 mb-2\"><strong><em>Voorbeeld: gestructureerd interview bij Organisatie X</em></strong></p>",
+                      "<p class=\"text-gray-700 dark:text-gray-300 mb-0\">Je stelt aan vijf magazijnmedewerkers dezelfde gesloten vragen, bijvoorbeeld: \"Liggen fastmovers aan de voorkant van het magazijn? (ja/nee)\" en \"Ervaart u de bezettingsgraad van circa 90% als problematisch? (schaal 1-5)\". Zo kun je antwoorden onderling vergelijken en patronen zien in de ervaringen op de werkvloer.</p>",
+                      "</div>"
                     ]
                   }
                 ]
@@ -213,14 +221,22 @@
               "<p class=\"text-gray-700 dark:text-gray-300 mb-2\"><strong>3. De middelen bepalen</strong></p>",
               "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Bepaal wat je meeneemt om het gesprek vast te leggen.<br><em>Voorbeeld:</em> Topiclijst, notitieblok en (met toestemming) een opname op je telefoon. Je maakt afspraken over anonimiteit in je scriptie.</p>",
               "<p class=\"text-gray-700 dark:text-gray-300 mb-2\"><strong>4. Inhoudelijke voorbereiding op het thema</strong></p>",
-              "<p class=\"text-gray-700 dark:text-gray-300 mb-0\">Verdiep je in het onderwerp vóór het gesprek.<br><em>Voorbeeld:</em> Je leest de casus magazijnoptimalisatie en bestudeert begrippen als fastmovers, slowmovers, palletopslag en de regel dat goederen op de expeditie maximaal ongeveer één uur mogen blijven staan.</p>"
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-3\">Verdiep je vóór het gesprek in:</p>",
+              "<ul class=\"list-disc list-outside space-y-2 mb-4 ml-6 pl-4\">",
+              "<li class=\"text-gray-700 dark:text-gray-300\">de <strong>organisatie</strong> (structuur, kernactiviteiten, actuele ontwikkelingen)</li>",
+              "<li class=\"text-gray-700 dark:text-gray-300\">de <strong>persoon</strong> die je interviewt (functie, verantwoordelijkheden, betrokkenheid bij het thema)</li>",
+              "<li class=\"text-gray-700 dark:text-gray-300\">het <strong>laatste nieuws</strong> over de organisatie of de sector</li>",
+              "<li class=\"text-gray-700 dark:text-gray-300\">de <strong>thematiek</strong> van je onderzoek (begrippen, knelpunten, relevante processen)</li>",
+              "<li class=\"text-gray-700 dark:text-gray-300\">tot slot: <strong>vakliteratuur en studieboeken</strong> van je opleiding die je helpen het gesprek te voeren en antwoorden te duiden</li>",
+              "</ul>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-0\"><em>Voorbeeld bij Organisatie X:</em> Je leest op de website en in nieuwsberichten over de organisatie, je zoekt uit wat een teamleider magazijn doet, en je bestudeert begrippen als fastmovers, slowmovers en palletopslag aan de hand van je studieboeken over magazijnbeheer. Zo stel je gerichte vragen over bezettingsgraad en expeditiedruk zonder het gesprek onvoorbereid in te gaan.</p>"
             ]
           },
           {
             "title": "Opening",
             "defaultOpen": false,
             "content": [
-              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>Functie:</strong> informeren en motiveren. De geïnterviewde krijgt een helder beeld van wie je bent, waarom je er bent en wat er met de informatie gebeurt.</p>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">De <strong>opening</strong> van het interview is <strong>cruciaal</strong>: hier zet je de toon voor het hele gesprek. <strong>Functie:</strong> informeren en motiveren. De geïnterviewde krijgt een helder beeld van wie je bent, waarom je er bent en wat er met de informatie gebeurt. Een goede opening wekt vertrouwen en maakt het makkelijker om daarna open en eerlijk antwoorden te krijgen.</p>",
               "<p class=\"text-gray-700 dark:text-gray-300 mb-2\">Informeer de geïnterviewde in de opening over:</p>",
               "<ul class=\"list-disc list-outside space-y-2 mb-4 ml-6 pl-4\">",
               "<li class=\"text-gray-700 dark:text-gray-300\"><strong>Het doel:</strong> welke informatie je uit dit gesprek nodig hebt voor je onderzoek</li>",
@@ -237,56 +253,10 @@
             ]
           },
           {
-            "title": "Vragen stellen",
+            "title": "Vragen voorbereiden",
             "defaultOpen": false,
             "content": [
-              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>Functie:</strong> informatie verzamelen. Goede vragen zijn vooraf bedacht, logisch geordend en afgestemd op je gesprekspartner en je onderzoeksdoel. Tijdens deze fase stel je vragen én luister je actief.</p>",
-              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>Interviewvaardigheden: luisteren</strong></p>",
-              "<p class=\"text-gray-700 dark:text-gray-300 mb-2\"><strong>Niet-selectieve luistervaardigheden</strong></p>",
-              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Zorg dat je voldoende aandacht geeft aan de respondent, zowel verbaal als non-verbaal.</p>",
-              "<p class=\"text-gray-700 dark:text-gray-300 mb-2\"><strong>Non-verbaal gedrag</strong></p>",
-              "<ul class=\"list-disc list-outside space-y-3 mb-4 ml-6 pl-4\">",
-              "<li class=\"text-gray-700 dark:text-gray-300\"><strong>De gelaatsuitdrukking</strong><br>Zie je er geïnteresseerd uit? Ben je er met je gedachten bij? Je gelaatsuitdrukking is vaak direct gekoppeld aan je gevoelens, soms meer dan jezelf inziet.</li>",
-              "<li class=\"text-gray-700 dark:text-gray-300\"><strong>Oogcontact</strong><br>Stimulerend ooggedrag houdt in dat jouw ogen die van de ander zo nu en dan ontmoeten. Er moet dus geen sprake zijn van een strakke fixatie, maar ook niet van geheel en al vermijden.</li>",
-              "<li class=\"text-gray-700 dark:text-gray-300\"><strong>Lichaamshouding</strong><br>Dat je aandacht hebt voor de ander kun je ook overbrengen door een ontspannen, toegenegen lichaamshouding, door zo'n houding maak je het je ook voor jezelf gemakkelijk om te luisteren (effect de ander gaat zich ook ontspannen voelen en je straalt rust en stabiliteit uit).</li>",
-              "<li class=\"text-gray-700 dark:text-gray-300\"><strong>Aanmoedigende gebaren</strong><br>Met hoofdknikken en ondersteunend handgebaren kun je je aandacht laten blijken en de ander stimuleren verder te praten. Vooral niet: zenuwachtige, afleidende bewegingen.</li>",
-              "<li class=\"text-gray-700 dark:text-gray-300\"><strong>Stiltes laten vallen,</strong> hierdoor wordt de geïnterviewde gestimuleerd meer uit zichzelf te vertellen.</li>",
-              "</ul>",
-              "<p class=\"text-gray-700 dark:text-gray-300 mb-2\"><strong>Verbaal gedrag</strong></p>",
-              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Verbaal volgen, dit houdt in dat je met je opmerkingen zoveel mogelijk aansluit bij wat de ander gezegd heeft en geen nieuwe onderwerpen aansnijdt. Het heeft tot gevolg dat de ander zijn eigen 'gedachtenspoor' kan afmaken. Eventueel aangevuld met kleine verbale aanmoedigingen, zoals:</p>",
-              "<ul class=\"list-disc list-outside space-y-2 mb-6 ml-6 pl-4\">",
-              "<li class=\"text-gray-700 dark:text-gray-300\">hm</li>",
-              "<li class=\"text-gray-700 dark:text-gray-300\">ja, ja</li>",
-              "<li class=\"text-gray-700 dark:text-gray-300\">o?</li>",
-              "<li class=\"text-gray-700 dark:text-gray-300\">en toen?</li>",
-              "<li class=\"text-gray-700 dark:text-gray-300\">ga verder</li>",
-              "<li class=\"text-gray-700 dark:text-gray-300\">of de herhaling van één of enkele woorden op vragende toon</li>",
-              "</ul>",
-              "<p class=\"text-gray-700 dark:text-gray-300 mb-2\"><strong>Selectieve luistervaardigheden</strong></p>",
-              "<ol class=\"list-decimal list-outside space-y-2 mb-6 ml-6 pl-4\">",
-              "<li class=\"text-gray-700 dark:text-gray-300\">Vragen stellen</li>",
-              "<li class=\"text-gray-700 dark:text-gray-300\">Parafraseren van inhoud</li>",
-              "<li class=\"text-gray-700 dark:text-gray-300\">Reflecteren van gevoel</li>",
-              "<li class=\"text-gray-700 dark:text-gray-300\">Concretiseren</li>",
-              "<li class=\"text-gray-700 dark:text-gray-300\">Samenvatten</li>",
-              "</ol>",
-              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>Waarom is luisteren zo moeilijk?</strong></p>",
-              "<div class=\"space-y-4 mb-6 ml-6\">",
-              "<div class=\"flex items-start gap-3\"><div class=\"flex-shrink-0 w-8 h-8 rounded-full bg-green-500 text-white flex items-center justify-center font-semibold text-sm\">1</div><p class=\"text-gray-700 dark:text-gray-300 mb-0 pt-1\">Je hersenen kunnen veel sneller informatie verwerken dan het tempo waarin mensen spreken. Met andere woorden: je dwaalt af!</p></div>",
-              "<div class=\"flex items-start gap-3\"><div class=\"flex-shrink-0 w-8 h-8 rounded-full bg-green-500 text-white flex items-center justify-center font-semibold text-sm\">2</div><p class=\"text-gray-700 dark:text-gray-300 mb-0 pt-1\">Spreken heeft (ten onrechte?) een veel hogere status dan luisteren</p></div>",
-              "</div>",
-              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>Veelgemaakte fouten bij luisteren</strong></p>",
-              "<div class=\"space-y-4 mb-6 ml-6\">",
-              "<div class=\"flex items-start gap-3\"><div class=\"flex-shrink-0 w-8 h-8 rounded-full bg-green-500 text-white flex items-center justify-center font-semibold text-sm\">1</div><p class=\"text-gray-700 dark:text-gray-300 mb-0 pt-1\">Ongeïnteresseerde luisterhouding</p></div>",
-              "<div class=\"flex items-start gap-3\"><div class=\"flex-shrink-0 w-8 h-8 rounded-full bg-green-500 text-white flex items-center justify-center font-semibold text-sm\">2</div><p class=\"text-gray-700 dark:text-gray-300 mb-0 pt-1\">De ander niet laten uitspreken</p></div>",
-              "<div class=\"flex items-start gap-3\"><div class=\"flex-shrink-0 w-8 h-8 rounded-full bg-green-500 text-white flex items-center justify-center font-semibold text-sm\">3</div><p class=\"text-gray-700 dark:text-gray-300 mb-0 pt-1\">Je eigen verhaal vertellen ('Dat heb ik ook meegemaakt')</p></div>",
-              "<div class=\"flex items-start gap-3\"><div class=\"flex-shrink-0 w-8 h-8 rounded-full bg-green-500 text-white flex items-center justify-center font-semibold text-sm\">4</div><p class=\"text-gray-700 dark:text-gray-300 mb-0 pt-1\">Met je gedachten ergens ander zijn</p></div>",
-              "<div class=\"flex items-start gap-3\"><div class=\"flex-shrink-0 w-8 h-8 rounded-full bg-green-500 text-white flex items-center justify-center font-semibold text-sm\">5</div><p class=\"text-gray-700 dark:text-gray-300 mb-0 pt-1\">Impulsief reageren</p></div>",
-              "<div class=\"flex items-start gap-3\"><div class=\"flex-shrink-0 w-8 h-8 rounded-full bg-green-500 text-white flex items-center justify-center font-semibold text-sm\">6</div><p class=\"text-gray-700 dark:text-gray-300 mb-0 pt-1\">Te snel adviseren</p></div>",
-              "<div class=\"flex items-start gap-3\"><div class=\"flex-shrink-0 w-8 h-8 rounded-full bg-green-500 text-white flex items-center justify-center font-semibold text-sm\">7</div><p class=\"text-gray-700 dark:text-gray-300 mb-0 pt-1\">Suggestieve vragen stellen</p></div>",
-              "<div class=\"flex items-start gap-3\"><div class=\"flex-shrink-0 w-8 h-8 rounded-full bg-green-500 text-white flex items-center justify-center font-semibold text-sm\">8</div><p class=\"text-gray-700 dark:text-gray-300 mb-0 pt-1\">Relativeren</p></div>",
-              "</div>",
-              "<p class=\"text-gray-700 dark:text-gray-300 mb-2\"><strong>Vragen voorbereiden en stellen</strong></p>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>Functie:</strong> je vragen en aandachtspunten vooraf bedenken, zodat je tijdens het gesprek gericht en logisch kunt doorvragen.</p>",
               "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Bedenk de vragen of aandachtspunten vóór het gesprek. Denk na over de <strong>volgorde</strong> waarin je vragen stelt en het <strong>soort</strong> vraag dat je gebruikt.</p>",
               "<p class=\"text-gray-700 dark:text-gray-300 mb-2\"><strong>Opbouw</strong></p>",
               "<p class=\"text-gray-700 dark:text-gray-300 mb-3\">De volgorde van je vragen beïnvloedt de antwoorden. Een vraag op het verkeerde moment kan frustratie geven. Begin makkelijk en eindig moeilijk: eerst kennisvragen, dan meningen, daarna gedrag of oplossingsrichtingen.</p>",
@@ -328,6 +298,59 @@
             ]
           },
           {
+            "title": "Vragen stellen en luisteren",
+            "defaultOpen": false,
+            "content": [
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>Functie:</strong> informatie verzamelen. Tijdens het gesprek stel je je voorbereide vragen en luister je actief naar de antwoorden.</p>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>Interviewvaardigheden: luisteren</strong></p>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-2\"><strong>Niet-selectieve luistervaardigheden</strong></p>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Zorg dat je voldoende aandacht geeft aan de respondent, zowel verbaal als non-verbaal.</p>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-2\"><strong>Non-verbaal gedrag</strong></p>",
+              "<ul class=\"list-disc list-outside space-y-3 mb-4 ml-6 pl-4\">",
+              "<li class=\"text-gray-700 dark:text-gray-300\"><strong>De gelaatsuitdrukking</strong><br>Zie je er geïnteresseerd uit? Ben je er met je gedachten bij? Je gelaatsuitdrukking is vaak direct gekoppeld aan je gevoelens, soms meer dan jezelf inziet.</li>",
+              "<li class=\"text-gray-700 dark:text-gray-300\"><strong>Oogcontact</strong><br>Stimulerend ooggedrag houdt in dat jouw ogen die van de ander zo nu en dan ontmoeten. Er moet dus geen sprake zijn van een strakke fixatie, maar ook niet van geheel en al vermijden.</li>",
+              "<li class=\"text-gray-700 dark:text-gray-300\"><strong>Lichaamshouding</strong><br>Dat je aandacht hebt voor de ander kun je ook overbrengen door een ontspannen, toegenegen lichaamshouding, door zo'n houding maak je het je ook voor jezelf gemakkelijk om te luisteren (effect de ander gaat zich ook ontspannen voelen en je straalt rust en stabiliteit uit).</li>",
+              "<li class=\"text-gray-700 dark:text-gray-300\"><strong>Aanmoedigende gebaren</strong><br>Met hoofdknikken en ondersteunend handgebaren kun je je aandacht laten blijken en de ander stimuleren verder te praten. Vooral niet: zenuwachtige, afleidende bewegingen.</li>",
+              "<li class=\"text-gray-700 dark:text-gray-300\"><strong>Stiltes laten vallen,</strong> hierdoor wordt de geïnterviewde gestimuleerd meer uit zichzelf te vertellen.</li>",
+              "</ul>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-2\"><strong>Verbaal gedrag</strong></p>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Verbaal volgen, dit houdt in dat je met je opmerkingen zoveel mogelijk aansluit bij wat de ander gezegd heeft en geen nieuwe onderwerpen aansnijdt. Het heeft tot gevolg dat de ander zijn eigen 'gedachtenspoor' kan afmaken. Eventueel aangevuld met kleine verbale aanmoedigingen, zoals:</p>",
+              "<ul class=\"list-disc list-outside space-y-2 mb-6 ml-6 pl-4\">",
+              "<li class=\"text-gray-700 dark:text-gray-300\">hm</li>",
+              "<li class=\"text-gray-700 dark:text-gray-300\">ja, ja</li>",
+              "<li class=\"text-gray-700 dark:text-gray-300\">o?</li>",
+              "<li class=\"text-gray-700 dark:text-gray-300\">en toen?</li>",
+              "<li class=\"text-gray-700 dark:text-gray-300\">ga verder</li>",
+              "<li class=\"text-gray-700 dark:text-gray-300\">of de herhaling van één of enkele woorden op vragende toon</li>",
+              "</ul>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-2\"><strong>Selectieve luistervaardigheden</strong></p>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-3\">Met selectieve luistervaardigheden reageer je gericht op wat je hoort en haal je de informatie op die je voor je onderzoek nodig hebt. Gebruik daarvoor onder meer:</p>",
+              "<ol class=\"list-decimal list-outside space-y-2 mb-6 ml-6 pl-4\">",
+              "<li class=\"text-gray-700 dark:text-gray-300\">Vragen stellen</li>",
+              "<li class=\"text-gray-700 dark:text-gray-300\">Parafraseren van inhoud</li>",
+              "<li class=\"text-gray-700 dark:text-gray-300\">Reflecteren van gevoel</li>",
+              "<li class=\"text-gray-700 dark:text-gray-300\">Concretiseren</li>",
+              "<li class=\"text-gray-700 dark:text-gray-300\">Samenvatten</li>",
+              "</ol>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>Waarom is luisteren zo moeilijk?</strong></p>",
+              "<div class=\"space-y-4 mb-6 ml-6\">",
+              "<div class=\"flex items-start gap-3\"><div class=\"flex-shrink-0 w-8 h-8 rounded-full bg-green-500 text-white flex items-center justify-center font-semibold text-sm\">1</div><p class=\"text-gray-700 dark:text-gray-300 mb-0 pt-1\">Je hersenen kunnen veel sneller informatie verwerken dan het tempo waarin mensen spreken. Met andere woorden: je dwaalt af!</p></div>",
+              "<div class=\"flex items-start gap-3\"><div class=\"flex-shrink-0 w-8 h-8 rounded-full bg-green-500 text-white flex items-center justify-center font-semibold text-sm\">2</div><p class=\"text-gray-700 dark:text-gray-300 mb-0 pt-1\">Spreken heeft (ten onrechte?) een veel hogere status dan luisteren</p></div>",
+              "</div>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>Veelgemaakte fouten bij luisteren</strong></p>",
+              "<div class=\"space-y-4 mb-6 ml-6\">",
+              "<div class=\"flex items-start gap-3\"><div class=\"flex-shrink-0 w-8 h-8 rounded-full bg-green-500 text-white flex items-center justify-center font-semibold text-sm\">1</div><p class=\"text-gray-700 dark:text-gray-300 mb-0 pt-1\">Ongeïnteresseerde luisterhouding</p></div>",
+              "<div class=\"flex items-start gap-3\"><div class=\"flex-shrink-0 w-8 h-8 rounded-full bg-green-500 text-white flex items-center justify-center font-semibold text-sm\">2</div><p class=\"text-gray-700 dark:text-gray-300 mb-0 pt-1\">De ander niet laten uitspreken</p></div>",
+              "<div class=\"flex items-start gap-3\"><div class=\"flex-shrink-0 w-8 h-8 rounded-full bg-green-500 text-white flex items-center justify-center font-semibold text-sm\">3</div><p class=\"text-gray-700 dark:text-gray-300 mb-0 pt-1\">Je eigen verhaal vertellen ('Dat heb ik ook meegemaakt')</p></div>",
+              "<div class=\"flex items-start gap-3\"><div class=\"flex-shrink-0 w-8 h-8 rounded-full bg-green-500 text-white flex items-center justify-center font-semibold text-sm\">4</div><p class=\"text-gray-700 dark:text-gray-300 mb-0 pt-1\">Met je gedachten ergens ander zijn</p></div>",
+              "<div class=\"flex items-start gap-3\"><div class=\"flex-shrink-0 w-8 h-8 rounded-full bg-green-500 text-white flex items-center justify-center font-semibold text-sm\">5</div><p class=\"text-gray-700 dark:text-gray-300 mb-0 pt-1\">Impulsief reageren</p></div>",
+              "<div class=\"flex items-start gap-3\"><div class=\"flex-shrink-0 w-8 h-8 rounded-full bg-green-500 text-white flex items-center justify-center font-semibold text-sm\">6</div><p class=\"text-gray-700 dark:text-gray-300 mb-0 pt-1\">Te snel adviseren</p></div>",
+              "<div class=\"flex items-start gap-3\"><div class=\"flex-shrink-0 w-8 h-8 rounded-full bg-green-500 text-white flex items-center justify-center font-semibold text-sm\">7</div><p class=\"text-gray-700 dark:text-gray-300 mb-0 pt-1\">Suggestieve vragen stellen</p></div>",
+              "<div class=\"flex items-start gap-3\"><div class=\"flex-shrink-0 w-8 h-8 rounded-full bg-green-500 text-white flex items-center justify-center font-semibold text-sm\">8</div><p class=\"text-gray-700 dark:text-gray-300 mb-0 pt-1\">Relativeren</p></div>",
+              "</div>"
+            ]
+          },
+          {
             "title": "Afsluiting en verwerking",
             "defaultOpen": false,
             "content": [
@@ -352,7 +375,7 @@
               "<li class=\"text-gray-700 dark:text-gray-300\"><strong>Samenvatting:</strong> korter en overzichtelijk; je selecteert wat relevant is voor je onderzoek. Handig als bijlage bij je probleemverkenning of 5W's + V + O.</li>",
               "<li class=\"text-gray-700 dark:text-gray-300\"><strong>Transcriptie:</strong> een (nagenoeg) letterlijk verslag van wat er is gezegd. Voordeel: je mist geen details, je kunt letterlijk citeren en anderen kunnen controleren of je samenvatting klopt met de opname. Nadeel: het kost meer tijd en is langer om te lezen.</li>",
               "</ul>",
-              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Een transcriptie kun je ook zonder internetverbinding maken met bijvoorbeeld <strong>aTrain</strong>. Wil je een opname op die manier laten omzetten naar tekst, vraag dan <strong>vooraf toestemming</strong> in je opening. Leg uit dat de transcriptie alleen voor je eigen verslag is en niet wordt gedeeld.</p>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Een transcriptie kun je ook zonder internetverbinding maken met bijvoorbeeld <a href=\"https://www.ru.nl/studenten/onderwijs-volgen/hulpmiddelen/hulp-bij-onderzoek/transcriberen-met-atrain\" class=\"text-blue-600 dark:text-blue-400 hover:underline font-medium\" target=\"_blank\" rel=\"noopener noreferrer\"><strong>aTrain</strong></a>. Wil je een opname op die manier laten omzetten naar tekst, vraag dan <strong>vooraf toestemming</strong> in je opening. Leg uit dat de transcriptie alleen voor je eigen verslag is en niet wordt gedeeld.</p>",
               "<p class=\"text-gray-700 dark:text-gray-300 mb-2\"><strong><em>Voorbeeld verwerking: casus magazijnoptimalisatie</em></strong></p>",
               "<p class=\"text-gray-700 dark:text-gray-300 mb-2\">Na het interview met de teamleider magazijn maak je een bijlage met:</p>",
               "<ul class=\"list-disc list-outside space-y-2 mb-4 ml-6 pl-4\">",
@@ -375,9 +398,9 @@
       {
         "type": "paragraph",
         "text": [
-          "Heb je je opdrachtgever al ontmoet in een kennismakingsgesprek? Dan denken veel studenten: <em>\"Interviewen hoeft niet meer — ik weet al wat het probleem is.\"</em>",
+          "Heb je je opdrachtgever al ontmoet in een kennismakingsgesprek? Dan denken veel studenten: <em>\"Interviewen hoeft niet meer, ik weet al wat het probleem is.\"</em>",
           "Dat is een misverstand. Een kennismakingsgesprek gaat vooral over contact leggen, verwachtingen en planning. Een <strong>onderzoeksinterview</strong> is bewuster en gerichter: je gaat er echt voor zitten en stelt gerichte vragen over de problematiek, doelstelling, klantwens, stakeholders, randvoorwaarden en mogelijke oplossingsrichtingen.",
-          "Dat helpt enorm om de <strong>5W's + V + O</strong> goed en onderbouwd te beschrijven in je onderzoek. En: als je dit interview zorgvuldig uitwerkt in een <strong>bijlage</strong> (wie, wanneer, kernvragen, samenvatting), is het meteen een sterke onderbouwing van je probleemverkenning — niet \"nog een gesprek\", maar onderdeel van je onderzoek."
+          "Dat helpt enorm om de <strong>5W's + V + O</strong> goed en onderbouwd te beschrijven in je onderzoek. Werk het interview uit in een <strong>bijlage</strong> (wie, wanneer, kernvragen, samenvatting). Zo onderbouw je je probleemverkenning."
         ]
       },
       {
@@ -393,7 +416,7 @@
           "<li class=\"text-gray-700 dark:text-gray-300\"><strong>Mogelijke oplossingsrichtingen:</strong> welke richtingen ziet de opdrachtgever al (zonder dat jij te snel een oplossing kiest)?</li>",
           "</ul>",
           "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">De antwoorden vormen de basis voor je <strong>5W's + V + O</strong> <span class=\"text-gray-600 dark:text-gray-400\">(de vijf W-vragen plus <strong>v</strong>oorwaarden en <strong>o</strong>plossingsrichtingen)</span>.</p>",
-          "<div class=\"bg-amber-50 dark:bg-amber-900/20 border-l-4 border-amber-500 dark:border-amber-400 p-4 rounded-r-lg mb-4\"><p class=\"text-gray-700 dark:text-gray-300 mb-0\"><strong>Tip:</strong> een kennismakingsgesprek is geen verslagwaardig onderzoeksinterview. Plan een apart moment, bereid vragen voor en werk het gesprek uit in een bijlage — dat is direct bruikbare onderbouwing in je onderzoeksplan.</p></div>",
+          "<div class=\"bg-amber-50 dark:bg-amber-900/20 border-l-4 border-amber-500 dark:border-amber-400 p-4 rounded-r-lg mb-4\"><p class=\"text-gray-700 dark:text-gray-300 mb-0\"><strong>Tip:</strong> een kennismakingsgesprek gebruik je niet als onderzoeksinterview in je plan. Plan een apart moment, bereid vragen voor en werk het gesprek uit in een bijlage. Dat is direct bruikbare onderbouwing in je onderzoeksplan.</p></div>",
           "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Daarna kun je aanvullend interviews plannen met mensen op de werkvloer. Eerst je opdrachtgever goed interviewen geeft richting aan wie je daarna nog spreekt en wat je hen vraagt.</p>"
         ]
       },
@@ -417,6 +440,12 @@
               "</ul>"
             ]
           }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "In interviews vraag je naar het praktijkprobleem en naar de verwachtingen van je opdrachtgever. In je gesprekken heb je straks stilgestaan bij problematiek, stakeholders, randvoorwaarden en de vraag: wat moet dit onderzoek opleveren? Die antwoorden vormen de basis voor je <strong>5W's + V + O</strong>, maar ze zijn nog geen doelstelling. In de volgende stap vertaal je die verwachtingen naar een heldere, eigen formulering: wat jouw onderzoek concreet moet bereiken voor de organisatie (a-gedeelte) en hoe jij dat gaat aanpakken (b-gedeelte). Zo maak je van ruwe gespreksinformatie een doelstelling die je onderzoek afbakent en stuurbaar maakt. Daar gaat het over in het volgende gedeelte."
         ]
       },
       {
@@ -696,7 +725,7 @@
         "type": "paragraph",
         "text": [
           "Kijken naar praktijkgericht onderzoek is één onderdeel zeer belangrijk. Dat is namelijk jouw relatie met de opdrachtgever, ook wel de opdrachtgever-onderzoeker relatie genoemd. De opdrachtgever verwacht van jou een goed, gedegen en kritisch onderzoek. Dit terwijl jij nog (deels) met je studie bezig bent en voor je gevoel relatief kort in de logistieke wereld komt kijken. Toch word je gevraagd om een organisatie te helpen om een probleem op te lossen. Dit zelfs door een eigen pro-actieve een kritische houding. De organisatie(s) waar jij bij aan de slag gaat, of dit nu vanuit een project binnen het onderwijs gaat of vanuit je stage- en/of afstuderen zien graag dat je kritisch bent op de organisatie en de processen. Zij willen graag jouw frisse inzichten gebruiken om hun organisatie te verbeteren.",
-          "Belangrijk is om tijdens het gehele onderzoek stil te blijven staan wie je opdrachtgever is. De opdrachtgever zou je begeleider kunnen zijn, maar dit is niet noodzakelijk. Betrek hem dus goed in de aanpak en het opstellen van je onderzoek.",
+          "Belangrijk is om tijdens het gehele onderzoek stil te blijven staan wie je opdrachtgever is. De opdrachtgever zou je begeleider kunnen zijn, maar dit is niet noodzakelijk. Betrek hem dus goed in de aanpak en het opstellen van je onderzoek. Logischerwijs hoort je opdrachtgever ook in je stakeholderanalyse thuis. Denk daarnaast na over een communicatiestrategie: hoe vaak houd je de opdrachtgever op de hoogte, hoe vaak spreek je elkaar en wat is daarin wenselijk én noodzakelijk?",
           "Een tweede aandachtspunt is de 'tunnelvisie' die vanuit de opdrachtgever kan bestaan. De opdrachtgever werkt soms al meerdere jaren in de organisatie en denken ze te weten waar de oorzaak ligt, sterker nog soms noemen ze al direct de oplossing. Blijf kritisch als onderzoeker en zorg dat jij de onderzoek stappen doordacht doorloopt. Kom je daarmee alsnog op hetzelfde beeld, dan heb je het gevoel van de opdrachtgever goed kunnen onderbouwen. Je staat er versteld van hoevaak je nog nieuwe inzichten bovenwater weet te halen voor de organisatie.",
           "Een laatste aandachtspunten in dit kader is het de focus op de doelstelling van de opdracht. De organisatie verwacht van jou een oplossing van het probleem. Echter ben je er wel van bewust dat jij met de doelstelling van het onderzoek het probleem van de organisatie hebt ingekaderd. Dat wil zeggen, dat je bijvoorbeeld minder invloedsfactoren hebt meegenomen of de scope van het proces of de omgeving versimpeld hebt waardoor de probleemstelling ook realistisch binnen de gestelde termijn is op te lossen. Blijf je beseffen dat de meeste onderzoeken die wij vanuit de opleiding oppakken bestaan uit advies opdrachten. Soms zit er direct al een implementatie deel aan vast waardoor het direct in de praktijk wordt toegepast. Deze opdrachten zijn echter beperkt onder andere doordat onderzoek vaak al een forse tijdsinvestering vraagt en jij als (student) onderzoeker beperkte de tijd hebt."
         ]
@@ -741,12 +770,6 @@
         "type": "paragraph",
         "text": [
           "Je bent inmiddels bezig geweest met het opstellen van een doelstelling vanuit een praktijk gestuurd vraagstuk. Nu je weet wat het doel gaat worden van je onderzoek, komt de vraag naar voren hoe je het onderzoek verder gaat aanpakken, kortom hoe ga je je geformuleerde doelstelling bereiken. Deze structuur ga je opbouwen aan de hand van onderzoeksvragen die je gaat stellen. Echter, hoe bepaal je nu wanneer onderzoeksvragen nuttig zijn, wanneer ze goed zijn en welke inhoud deze onderzoeksvragen moeten bevatten. Om over deze vragen na te denken sta je stil bij het onderzoeksmodel."
-        ]
-      },
-      {
-        "type": "paragraph",
-        "text": [
-          "Voor de oefeningen in deze module gebruik je de casus <strong>magazijnoptimalisatie bij Organisatie X</strong> op de pagina <strong>Casus magazijnoptimalisatie</strong>. Lees de casusbeschrijving daar opnieuw door voordat je aan de slag gaat met je onderzoeksmodel en onderzoeksvragen."
         ]
       },
       {

@@ -178,22 +178,8 @@ class PDFExporter {
                 { number: 2, title: 'Begripsbepaling + Voorbereiding literatuuronderzoek', file: 'fase2.html', jsonFile: 'content/fase2.content.json' },
                 { number: 3, title: 'Uitvoeren literatuuronderzoek + Theoretisch kader', file: 'fase3.html', jsonFile: 'content/fase3.content.json' },
                 { number: 4, title: 'Onderzoeksstrategie + dataverzamelingsplan', file: 'fase4.html', jsonFile: 'content/fase4.content.json' },
-                { number: 7, title: 'Rapportage 1', file: 'afronding.html', jsonFile: 'content/afronding.content.json' },
-                // Afsluiting wordt alleen toegevoegd als het bestand bestaat
+                { number: 7, title: 'Rapportage 1', file: 'afronding.html', jsonFile: 'content/afronding.content.json' }
             ];
-            
-            // Probeer afsluiting toe te voegen als het bestand bestaat
-            // Let op: browsers loggen altijd 404s in de console, dit is normaal gedrag
-            try {
-                const afsluitingResponse = await fetch('content/afsluiting.content.json');
-                // Check expliciet op status 200, niet alleen op ok (om 404's stil te houden)
-                if (afsluitingResponse.status === 200) {
-                    weeks.push({ number: 8, title: 'Afsluiting', file: 'afsluiting.html', jsonFile: 'content/afsluiting.content.json' });
-                }
-                // Status 404 wordt stil genegeerd (dit is verwacht gedrag)
-            } catch (e) {
-                // Netwerk errors worden stil genegeerd
-            }
 
             for (const week of weeks) {
                 // Week header - extra ruimte voor nieuwe week

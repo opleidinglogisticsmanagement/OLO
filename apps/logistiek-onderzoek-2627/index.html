@@ -668,7 +668,6 @@
     
     <!-- SPA Router - Load early -->
     <script src="/core/js/core/AppRouter.js"></script>
-    <script src="js/app-router-extensions.js"></script>
     
     <!-- Week Page Scripts - Load all for SPA router -->
     <!-- Config (if exists) -->
@@ -688,6 +687,7 @@
     <script src="js/LogistiekNavigation.js"></script>
     <script src="js/phase-sidebar.js"></script>
     <script src="js/phase-navigation-init.js"></script>
+    <script src="js/app-router-extensions.js"></script>
     <script src="/core/js/components/NavigationRenderer.js"></script>
     <script src="/core/js/components/ContentTemplateRenderer.js"></script>
     <script src="/core/pages/BaseLessonPage.js"></script>
@@ -724,7 +724,6 @@
     <script src="pages/GepersonaliseerdLessonPage.js" onerror="console.error('[Script] Failed to load GepersonaliseerdLessonPage.js')"></script>
     <script src="pages/AILeerpadPage.js" onerror="console.error('[Script] Failed to load AILeerpadPage.js')"></script>
     <script src="pages/RegisterPage.js" onerror="console.error('[Script] Failed to load RegisterPage.js')"></script>
-    <script src="pages/AfsluitingLessonPage.js" onerror="fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'index.html:500',message:'AfsluitingLessonPage.js failed to load',data:{},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'C'})}).catch(()=>{});console.error('[Script] Failed to load AfsluitingLessonPage.js')"></script>
     
     <!-- Verify all classes are loaded with detailed logging -->
     <script>
@@ -735,7 +734,7 @@
             const expectedClasses = [
                 'Week1LessonPage', 'CasusLessonPage', 'Week2LessonPage', 'Fase1LessonPage', 'Week3LessonPage', 
                 'Week4LessonPage', 'Fase2LessonPage', 'Week5LessonPage', 'Fase3LessonPage', 'Week6LessonPage', 'Fase4LessonPage', 
-                'Week7LessonPage', 'AfrondingLessonPage', 'RegisterPage', 'AfsluitingLessonPage'
+                'Week7LessonPage', 'AfrondingLessonPage', 'RegisterPage'
             ];
                 
                 console.log('[Script Loader] 🔍 Checking for page classes...');
@@ -1034,11 +1033,6 @@
                         <a href="onderzoeksplan.html" class="flex items-center space-x-2 px-6 py-3 bg-blue-600 dark:bg-blue-700 text-white rounded-lg hover:bg-blue-700 dark:hover:bg-blue-600 focus-ring transition-colors">
                             <i class="fas fa-play"></i>
                             <span>Start Module</span>
-                        </a>
-                        
-                        <a href="afsluiting.html" class="flex items-center space-x-2 px-6 py-3 bg-green-600 dark:bg-green-700 text-white rounded-lg hover:bg-green-700 dark:hover:bg-green-600 focus-ring transition-colors">
-                            <i class="fas fa-graduation-cap"></i>
-                            <span>Naar Afsluiting</span>
                         </a>
                     </div>
                 </div>
@@ -1492,7 +1486,7 @@
                 const expectedClasses = [
                     'Week1LessonPage', 'CasusLessonPage', 'Week2LessonPage', 'Fase1LessonPage', 'Week3LessonPage', 
                     'Week4LessonPage', 'Fase2LessonPage', 'Week5LessonPage', 'Fase3LessonPage', 'Week6LessonPage', 'Fase4LessonPage', 
-                    'Week7LessonPage', 'AfrondingLessonPage', 'RegisterPage', 'AfsluitingLessonPage'
+                    'Week7LessonPage', 'AfrondingLessonPage', 'RegisterPage'
                 ];
                 
                 const missingClasses = expectedClasses.filter(cls => !availableClasses.includes(cls));
@@ -1523,7 +1517,7 @@
             const expectedClasses = [
                 'Week1LessonPage', 'CasusLessonPage', 'Week2LessonPage', 'Fase1LessonPage', 'Week3LessonPage', 
                 'Week4LessonPage', 'Fase2LessonPage', 'Week5LessonPage', 'Fase3LessonPage', 'Week6LessonPage', 'Fase4LessonPage', 
-                'Week7LessonPage', 'AfrondingLessonPage', 'RegisterPage', 'AfsluitingLessonPage'
+                'Week7LessonPage', 'AfrondingLessonPage', 'RegisterPage'
             ];
             
             const allAvailable = expectedClasses.every(cls => window[cls]);
@@ -1557,7 +1551,7 @@
         // Debug: Log all link clicks for week pages
         document.addEventListener('click', (e) => {
             const link = e.target.closest('a[href]');
-            if (link && (link.href.includes('week') || link.href.includes('register') || link.href.includes('afsluiting'))) {
+            if (link && (link.href.includes('week') || link.href.includes('register'))) {
                 console.log('[DEBUG] 🔗 Link clicked:', link.href);
                 console.log('[DEBUG] Router active:', !!window.appRouter);
                 console.log('[DEBUG] Will navigate normally:', !window.appRouter);

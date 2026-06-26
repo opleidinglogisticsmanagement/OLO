@@ -11,7 +11,8 @@
     "items": [
       "Je kunt de drie kernbeslissingen (breedte vs diepgang, kwantitatief vs kwalitatief, bureauonderzoek vs empirisch onderzoek) toepassen om je onderzoek vorm te geven.",
       "Je kunt een passende onderzoeksstrategie kiezen (survey-onderzoek, casestudy, experiment, gefundeerde theoriebenadering of bureauonderzoek) en deze onderbouwen op basis van je onderzoeksvragen en kernbeslissingen.",
-      "Je kunt een dataverzamelingsplan opstellen waarin je dataverzamelingsmethoden relateert aan je onderzoeksmodel, beschrijft wat, waarom en hoe je gaat meten, en kritisch reflecteert op de validiteit en betrouwbaarheid van je opzet."
+      "Je kunt een dataverzamelingsplan opstellen waarin je dataverzamelingsmethoden relateert aan je onderzoeksmodel, beschrijft wat, waarom en hoe je gaat meten, en kritisch reflecteert op de validiteit en betrouwbaarheid van je opzet.",
+      "Je kunt een globale onderzoeksplanning opstellen in een Gantt-grafiek, met activiteiten, looptijden, afhankelijkheden en mijlpalen, en de voortgang daarvan bijhouden."
     ],
     "interactive": false
   },
@@ -443,7 +444,7 @@
               "</ul>",
               "<div class=\"bg-blue-50 dark:bg-blue-900/20 border-l-4 border-blue-500 dark:border-blue-400 p-4 rounded-r-lg mt-4 mb-4\">",
               "<p class=\"text-blue-900 dark:text-blue-200 font-semibold mb-2\">Let op</p>",
-              "<p class=\"text-blue-800 dark:text-blue-300 text-sm\">Het gaat er niet om dat je onderzoek perfect is, maar dat je transparant bent over hoe je de risico's op fouten (ruis en bias) zo klein mogelijk hebt gemaakt binnen de tijd die je hebt.</p>",
+              "<p class=\"text-blue-800 dark:text-blue-300 text-sm\">Je hoeft niet te doen alsof je onderzoek foutloos is. Leg wel uit welke stappen je hebt genomen om meetfouten en vertekeningen zo klein mogelijk te houden binnen de tijd die je hebt.</p>",
               "</div>"
             ]
           }
@@ -480,9 +481,104 @@
         ]
       },
       {
+        "type": "heading",
+        "text": "Planning maken",
+        "level": 2,
+        "id": "planning-maken"
+      },
+      {
         "type": "paragraph",
         "text": [
-          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Succes met het bepalen van je onderzoeksstrategie en het opstellen van je dataverzamelingsplan!</p>"
+          "Je weet inmiddels welke methoden je gaat inzetten en hoe je data verzamelt. Nu volgt de vraag: wanneer doe je wat? Een Gantt-grafiek (ook wel Gantt chart genoemd) helpt je om je onderzoek in de tijd te plannen en de voortgang te volgen. Het is een visueel hulpmiddel waarmee je activiteiten, looptijden en onderlinge afhankelijkheden in één overzicht zet."
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "Een Gantt-grafiek bestaat uit rijen en een tijdas. Elke rij staat voor een activiteit of fase in je onderzoek, bijvoorbeeld literatuur verzamelen, interviews afnemen of data analyseren. Op de horizontale as zie je de tijd. Per activiteit tek je een balk van startdatum tot einddatum. Activiteiten die pas kunnen beginnen als een andere klaar is, verbind je met een pijl. Belangrijke momenten, zoals een tussentijdse bespreking met je opdrachtgever, markeer je als mijlpaal."
+        ]
+      },
+      {
+        "type": "heading",
+        "text": "Twee fasen: plan maken en plan volgen",
+        "level": 3
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "Werken met een Gantt-grafiek heeft twee kanten. Eerst maak je het plan: je deelt je onderzoek op in activiteiten en schat per activiteit in hoeveel tijd je nodig hebt. Daarna volg je het plan: je vergelijkt wat je gepland had met wat je daadwerkelijk hebt gedaan. Loopt een activiteit achter, dan zie je dat meteen en kun je bijsturen."
+        ]
+      },
+      {
+        "type": "heading",
+        "text": "Stap 1: activiteiten en tijd inschatten",
+        "level": 3
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "Begin met de grote onderdelen van je onderzoek. Denk aan: voorbereiding, dataverzameling, analyse, schrijven en afronding. Splits die verder op in concrete activiteiten. Voor een magazijnonderzoek kan dat zijn: toegang regelen tot WMS-data, interviews plannen met teamleider en orderpickers, observatie op de werkvloer, berekeningen uitvoeren en hoofdstukken schrijven.",
+          "Per activiteit schat je in hoeveel tijd je nodig hebt en wanneer je wilt starten en afronden. Wees realistisch: interviews plannen kost vaak meer tijd dan je denkt, zeker als je afhankelijk bent van de agenda van mensen in de organisatie. Noteer ook welke activiteiten tegelijk kunnen lopen en welke pas starten als een eerdere stap klaar is."
+        ]
+      },
+      {
+        "type": "heading",
+        "text": "Stap 2: volgorde en het kritische pad",
+        "level": 3
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "De volgorde van activiteiten bepaalt hoe lang je onderzoek in totaal duurt. Het kritische pad is de langste keten van activiteiten die direct op elkaar aansluiten. Vertraging op het kritische pad betekent dat je hele onderzoek later klaar is. Activiteiten die niet op het kritische pad liggen, hebben wat meer speelruimte.",
+          "Voorbeeld: je kunt literatuuronderzoek en het regelen van toegang tot bedrijfsdata deels parallel laten lopen. Je analyse en het schrijven van je theoretisch kader kunnen pas starten als je voldoende bronnen en data hebt verzameld. Teken die afhankelijkheden in je Gantt-grafiek, zodat je ziet welke stappen geen vertraging kunnen hebben."
+        ]
+      },
+      {
+        "type": "heading",
+        "text": "Stap 3: voortgang bijhouden",
+        "level": 3
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "Een planning is alleen nuttig als je hem bijhoudt. Noteer per activiteit hoe ver je bent, bijvoorbeeld 50% voltooid. Vergelijk dat met de resterende tijd. Is een activiteit halverwege de geplande periode nog maar voor een kwart klaar, dan loop je achter en moet je ingrijpen: extra tijd inplannen, hulp vragen of de scope verkleinen.",
+          "Bespreek je planning regelmatig met je opdrachtgever en begeleider. Zo voorkom je verrassingen aan het eind van je onderzoeksperiode."
+        ]
+      },
+      {
+        "type": "highlight",
+        "title": "Tip",
+        "content": [
+          "Je hebt geen dure projectsoftware nodig. Een Gantt-grafiek kun je opstellen in Excel of Google Sheets. Online vind je gratis templates die je direct kunt gebruiken of aanpassen aan je eigen onderzoek."
+        ],
+        "icon": "fa-info-circle"
+      },
+      {
+        "type": "accordion",
+        "usePlusIcon": true,
+        "defaultOpen": false,
+        "items": [
+          {
+            "title": "Opdracht: maak een globale onderzoeksplanning",
+            "defaultOpen": false,
+            "content": [
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Maak voor je eigen praktijkonderzoek een globale Gantt-planning. Gebruik minimaal de volgende activiteiten:</p>",
+              "<ul class=\"list-disc list-outside space-y-2 mb-4 ml-6 pl-4\">",
+              "<li class=\"text-gray-700 dark:text-gray-300\">Voorbereiding (toegang organisatie, afspraken)</li>",
+              "<li class=\"text-gray-700 dark:text-gray-300\">Dataverzameling (per methode uit je dataverzamelingsplan)</li>",
+              "<li class=\"text-gray-700 dark:text-gray-300\">Analyse</li>",
+              "<li class=\"text-gray-700 dark:text-gray-300\">Schrijven en afronden</li>",
+              "</ul>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Geef per activiteit een start- en einddatum. Geef aan welke activiteiten van elkaar afhankelijk zijn. Markeer ten minste één mijlpaal, bijvoorbeeld een voortgangsgesprek met je opdrachtgever.</p>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-0\">Voeg de planning toe als bijlage bij je onderzoeksplan of neem hem op in Brightspace, afhankelijk van wat je docent vraagt.</p>"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Succes met het bepalen van je onderzoeksstrategie, het opstellen van je dataverzamelingsplan en het maken van je onderzoeksplanning!</p>"
         ]
       }
     ]

@@ -104,7 +104,8 @@
                 subItems: [
                     { id: 'kernbeslissingen', title: 'Kernbeslissingen', anchor: '#kernbeslissingen' },
                     { id: 'onderzoekstrategie', title: 'Onderzoeksstrategie', anchor: '#onderzoekstrategie' },
-                    { id: 'dataverzamelingsplan', title: 'Het dataverzamelingsplan', anchor: '#dataverzamelingsplan' }
+                    { id: 'dataverzamelingsplan', title: 'Het dataverzamelingsplan', anchor: '#dataverzamelingsplan' },
+                    { id: 'planning-maken', title: 'Planning maken', anchor: '#planning-maken' }
                 ]
             },
             {
@@ -114,8 +115,7 @@
                 icon: 'fa-flag-checkered',
                 colors: { icon: 'text-pink-600 dark:text-pink-400', bg: 'bg-pink-100 dark:bg-pink-900/30' }
             },
-            { id: 'register', title: 'Begrippenlijst', href: 'register.html', icon: 'fa-list-ul', colors: { icon: 'text-blue-600 dark:text-blue-400', bg: 'bg-blue-100 dark:bg-blue-900/30' } },
-            { id: 'afsluiting', title: 'Afsluiting', href: 'afsluiting.html', icon: 'fa-graduation-cap', colors: { icon: 'text-gray-600 dark:text-gray-300', bg: 'bg-gray-100 dark:bg-gray-700' } }
+            { id: 'register', title: 'Begrippenlijst', href: 'register.html', icon: 'fa-list-ul', colors: { icon: 'text-blue-600 dark:text-blue-400', bg: 'bg-blue-100 dark:bg-blue-900/30' } }
         ];
     }
 

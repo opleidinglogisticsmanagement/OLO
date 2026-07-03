@@ -2,7 +2,8 @@
  * TabRenderer
  * 
  * Utility voor het renderen van tabs componenten
- * Ondersteunt: tabs met kleurcodering (groen, blauw, oranje) en responsive design
+ * Ondersteunt: tabs met kleurcodering (groen, blauw, oranje), responsive design,
+ * en mixed tab content (HTML strings en content items zoals flipCard)
  */
 
 class TabRenderer {
@@ -72,11 +73,20 @@ class TabRenderer {
             // Render content - can be string or array
             let contentHtml = '';
             if (Array.isArray(tab.content)) {
-                contentHtml = tab.content.map(text => {
-                    if (typeof text === 'string' && text.trim().startsWith('<')) {
-                        return text; // Already HTML
+                contentHtml = tab.content.map(contentItem => {
+                    if (typeof contentItem === 'object' && contentItem !== null && contentItem.type !== undefined) {
+                        if (typeof window.ContentRenderer !== 'undefined') {
+                            return ContentRenderer.renderContentItems([contentItem]);
+                        }
+                        return '';
                     }
-                    return `<p class="text-gray-700 dark:text-gray-300 mb-3">${text}</p>`;
+                    if (typeof contentItem === 'string' && contentItem.trim().startsWith('<')) {
+                        return contentItem;
+                    }
+                    if (typeof contentItem === 'string') {
+                        return `<p class="text-gray-700 dark:text-gray-300 mb-3">${contentItem}</p>`;
+                    }
+                    return '';
                 }).join('');
             } else if (typeof tab.content === 'string') {
                 contentHtml = `<p class="text-gray-700 dark:text-gray-300 mb-3">${tab.content}</p>`;
@@ -232,6 +242,13 @@ class TabRenderer {
                 content.classList.add('hidden');
             }
         });
+
+        // Herinitialiseer flipcards in zichtbare tab (verborgen panels hebben geen betrouwbare afmetingen)
+        if (typeof window.FlipCardRenderer !== 'undefined' && typeof FlipCardRenderer.initializeAllFlipCards === 'function') {
+            setTimeout(() => {
+                FlipCardRenderer.initializeAllFlipCards();
+            }, 150);
+        }
     }
 }
 

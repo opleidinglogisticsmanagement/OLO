@@ -1,0 +1,36 @@
+[
+  {
+    "type": "console.error",
+    "text": "Refused to display 'https://sts.windesheim.nl/' in a frame because it set 'X-Frame-Options' to 'deny'."
+  },
+  {
+    "type": "console.error",
+    "text": "Connecting to 'http://127.0.0.1:7668/ingest/b616dd5e-4759-4584-80b5-d76f7daf6cd5' violates the following Content Security Policy directive: \"connect-src 'self' https://*.vercel.app https://generativelanguage.googleapis.com http://127.0.0.1:7242 http://localhost:7242\". The action has been blocked."
+  },
+  {
+    "type": "console.error",
+    "text": "Fetch API cannot load http://127.0.0.1:7668/ingest/b616dd5e-4759-4584-80b5-d76f7daf6cd5. Refused to connect because it violates the document's Content Security Policy."
+  },
+  {
+    "type": "console.error",
+    "text": "Connecting to 'http://127.0.0.1:7668/ingest/b616dd5e-4759-4584-80b5-d76f7daf6cd5' violates the following Content Security Policy directive: \"connect-src 'self' https://*.vercel.app https://generativelanguage.googleapis.com http://127.0.0.1:7242 http://localhost:7242\". The action has been blocked."
+  },
+  {
+    "type": "console.error",
+    "text": "Fetch API cannot load http://127.0.0.1:7668/ingest/b616dd5e-4759-4584-80b5-d76f7daf6cd5. Refused to connect because it violates the document's Content Security Policy."
+  },
+  {
+    "step": "afterLoad",
+    "flipCount": 2,
+    "objectObject": 0,
+    "tabRendererHasFlipSupport": {}
+  },
+  {
+    "type": "console.error",
+    "text": "Refused to display 'https://sts.windesheim.nl/' in a frame because it set 'X-Frame-Options' to 'deny'."
+  },
+  {
+    "step": "tabsFound",
+    "tabCount": 0
+  }
+]

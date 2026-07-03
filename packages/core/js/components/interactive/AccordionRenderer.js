@@ -175,6 +175,13 @@ class AccordionRenderer {
                 content.classList.remove('max-h-0', 'opacity-0');
                 content.classList.add('max-h-[5000px]', 'opacity-100');
             });
+
+            // Herinitialiseer flipcards na openen (content was eerder verborgen)
+            if (typeof window.FlipCardRenderer !== 'undefined' && typeof FlipCardRenderer.initializeAllFlipCards === 'function') {
+                setTimeout(() => {
+                    FlipCardRenderer.initializeAllFlipCards();
+                }, 350);
+            }
         }
     }
 }

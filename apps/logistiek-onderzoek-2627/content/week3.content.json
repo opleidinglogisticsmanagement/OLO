@@ -32,25 +32,6 @@
         ]
       },
       {
-        "type": "accordion",
-        "usePlusIcon": true,
-        "defaultOpen": false,
-        "items": [
-          {
-            "title": "Oefen met het Research Architect Game",
-            "defaultOpen": false,
-            "content": [
-              "Aan het einde van deze theorie kun je je kennis testen door het <strong>Research Architect Game</strong> te spelen. In dit interactieve spel bouw je stap voor stap een onderzoeksmodel op en leer je werken van rechts naar links. <strong>Bestudeer eerst de onderstaande theorie goed</strong>, want je hebt deze kennis nodig om de missie succesvol te volbrengen.",
-              "Klik op onderstaande afbeelding om naar het game te gaan (na het bestuderen van de theorie).",
-              {
-                "type": "html",
-                "html": "<a href=\"/game/index.html\" target=\"_blank\" class=\"block mb-6 hover:opacity-90 transition-opacity inline-block\"><img src=\"assets/images/3.game.png\" alt=\"Research Architect Game - Klik om te spelen\" class=\"rounded-lg max-w-full h-auto cursor-pointer\" style=\"max-width: 600px;\" /></a>"
-              }
-            ]
-          }
-        ]
-      },
-      {
         "type": "heading",
         "text": "Onderzoeksmodel",
         "level": 2,

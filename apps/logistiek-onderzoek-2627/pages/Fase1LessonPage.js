@@ -831,6 +831,12 @@ class Fase1LessonPage extends BaseLessonPage {
      * Handles hash navigation and MC question setup
      */
     async afterEventListeners() {
+        if (window.ChecklistCopyManager) {
+            const checklistCopyManager = new ChecklistCopyManager();
+            window._checklistCopyManagerInstance = checklistCopyManager;
+            checklistCopyManager.init();
+        }
+
         // Ensure MC question button is setup (backup in case attachEventListeners was called too early)
         // This is especially important in SPA mode where DOM updates happen asynchronously
         setTimeout(() => {

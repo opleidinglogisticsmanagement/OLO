@@ -379,18 +379,11 @@
                 "defaultOpen": false,
                 "items": [
                   {
-                    "title": "Opdracht 2: Bouwsteenmethode voor magazijnoptimalisatie",
+                    "title": "Opdracht 3.3: Bouwsteenmethode voor magazijnoptimalisatie",
                     "defaultOpen": false,
                     "content": [
                       "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Gebruik de casus <strong>magazijnoptimalisatie bij Organisatie X</strong> op de pagina <strong>Casus magazijnoptimalisatie</strong>.. Bij deze casus komt het begrip magazijnoptimalisatie naar voren. Ga voor dit begrip alvast een start maken met de bouwsteenmethode.</p>",
                       "<p class=\"text-gray-700 dark:text-gray-300 mb-0\">Gebruik de tabel die je hierboven hebt gezien om het begrip magazijnoptimalisatie uit te werken volgens de bouwsteenmethode. Vul de tabel in met synoniemen, vertalingen, afkortingen, spellingsvormen, vaktermen, bredere termen en nauwere termen.</p>"
-                    ]
-                  },
-                  {
-                    "title": "Opdracht 3: Materiaal meenemen",
-                    "defaultOpen": false,
-                    "content": [
-                      "<p class=\"text-gray-700 dark:text-gray-300 mb-0\">Voor het uiteenrafelen van een begrip heb je een schaar nodig. Zorg dat je er één bij de hand hebt wanneer je deze opdracht uitvoert.</p>"
                     ]
                   }
                 ]
@@ -420,7 +413,7 @@
         "defaultOpen": false,
         "items": [
           {
-            "title": "Opdracht 2: Bouwsteenmethode voor magazijnoptimalisatie",
+            "title": "Opdracht 3.3: Bouwsteenmethode voor magazijnoptimalisatie",
             "defaultOpen": false,
             "content": [
               "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Gebruik de casus <strong>magazijnoptimalisatie bij Organisatie X</strong> op de pagina <strong>Casus magazijnoptimalisatie</strong>.. Bij deze casus komt het begrip magazijnoptimalisatie naar voren. Ga voor dit begrip een start maken met de bouwsteenmethode.</p>",
@@ -431,13 +424,6 @@
               "<li class=\"text-gray-700 dark:text-gray-300\"><strong>Mens:</strong> Beoordeel de output kritisch. Kloppen de termen? Zijn ze relevant voor jouw onderzoek? Vul de tabel aan, corrigeer fouten en selecteer alleen de bruikbare 'bouwstenen'.</li>",
               "</ul>",
               "<p class=\"text-gray-700 dark:text-gray-300 mb-0\">Vul uiteindelijk jouw eigen tabel in met de definitieve selectie van synoniemen, vertalingen, afkortingen, spellingsvormen, vaktermen, bredere termen en nauwere termen.</p>"
-            ]
-          },
-          {
-            "title": "Opdracht 3: Materiaal meenemen",
-            "defaultOpen": false,
-            "content": [
-              "<p class=\"text-gray-700 dark:text-gray-300 mb-0\">Voor het uiteenrafelen van een begrip heb je een schaar nodig. Zorg dat je er één bij de hand hebt wanneer je deze opdracht uitvoert.</p>"
             ]
           }
         ]
@@ -735,8 +721,8 @@
                 "title": "",
                 "instruction": "Gebruik de doelstelling en hoofdvraag hieronder om de bronnen te beoordelen. Kies eerst een bron, dan een beoordelingsmethode (1e check, 2e check of CRAP-test), en vul de criteria in. Klik daarna op 'Toon antwoordmodel' om de voorbeeldantwoorden te zien.",
                 "context": {
-                  "objective": "Het adviseren van het management van Organisatie X over de herinrichting van het magazijn vóór 1 juni 2026 met een terugverdientijd van < 5 jaar door een kwantitatieve analyse uit te voeren naar de optimale bezettingsgraad van alle artikelen in het magazijn en de effecten hiervan op de interne rijafstanden te berekenen.",
-                  "mainQuestion": "Welke mogelijke herinrichtingen van het magazijn van Organisatie X zorgen voor een geoptimaliseerde bezettingsgraad van 90% waarmee de interne rijafstanden geminimaliseerd worden?"
+                  "objective": "Het adviseren van het management van Organisatie X over de herinrichting van het magazijn vóór 1 juni 2027, waarbij interne rijafstanden met minimaal 20% gereduceerd kunnen worden ten opzichte van de situatie op 1 februari 2027 en de terugverdientijd minder dan 5 jaar bedraagt, door een kwantitatieve analyse van alle artikelen in het magazijn en de effecten van mogelijke herinrichtingsscenario's op de interne rijafstanden te berekenen.",
+                  "mainQuestion": "Welke herinrichtingsscenario's van het magazijn van Organisatie X leiden tot een reductie van de interne rijafstanden van minimaal 20% (t.o.v. 1 februari 2027) bij een haalbare bezettingsgraad binnen de bestaande magazijnruimte?"
                 },
                 "sources": [
                   {

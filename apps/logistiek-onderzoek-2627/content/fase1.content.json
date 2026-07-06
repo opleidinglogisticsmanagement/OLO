@@ -1079,12 +1079,13 @@
         "defaultOpen": false,
         "items": [
           {
-            "title": "Opdracht 2.1: Template Onderzoeksmodel klaarzetten",
+            "title": "Opdracht 2.1: template klaarzetten + 3 analyseresultaten formuleren",
             "defaultOpen": false,
             "content": [
-              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Open het bestand <strong>Onderzoeksmodel Template.vsdx</strong> (via de link hierboven of in Brightspace) in <strong>Microsoft Visio</strong> en sla een eigen kopie op waarin jij direct kunt werken.</p>",
-              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>Let op:</strong> dubbelklikken op het bestand werkt niet omdat je Visio in de browser gebruikt. Ga dus in de browser naar Visio en kies voor <strong>Bestand openen</strong>. Selecteer dan het gedownloade template.</p>",
-              "<p class=\"text-gray-700 dark:text-gray-300 mb-0\">Neem de <strong>instructies en werkwijze</strong> in het template zorgvuldig door, zodat je direct kunt beginnen met het invullen van je eigen onderzoeksmodel.</p>"
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Open het bestand Onderzoeksmodel Template.vsdx (via de link hierboven of in Brightspace) in Microsoft Visio en sla een eigen kopie op waarin jij direct kunt werken.</p>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>Let op:</strong> dubbelklikken op het bestand werkt niet omdat je Visio in de browser gebruikt. Ga in de browser naar Visio en kies voor Bestand openen. Selecteer dan het gedownloade template.</p>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Neem de instructies en werkwijze in het template zorgvuldig door, zodat je direct kunt beginnen met het invullen van je eigen onderzoeksmodel.</p>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Gebruik voor deze opdracht de casus magazijnoptimalisatie bij Organisatie X op de pagina <a href=\"casus.html\" class=\"text-blue-600 dark:text-blue-400 hover:underline font-medium\">Casus magazijnoptimalisatie</a>. Denk alvast na over welke analyseresultaten je nodig hebt om de doelstelling uit die casus te behalen. Schrijf minimaal drie analyseresultaten op die concreet bijdragen aan het behalen van die doelstelling. Noteer ze in je eigen kopie van het template of in een apart document.</p>"
             ]
           }
         ]
@@ -1173,41 +1174,35 @@
         "defaultOpen": false,
         "items": [
           {
-            "title": "Voorbeeld: Ultimo onderzoek",
+            "title": "Opdracht 2.2: Hoofdvraag formuleren (casus magazijnoptimalisatie)",
             "defaultOpen": false,
             "content": [
-              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Hieronder staat een voorbeeld van een probleemstelling, doelstelling en onderzoeksvragen. Dit voorbeeld helpt je om te begrijpen hoe je de functie- en vormeisen kunt toepassen bij het opstellen van onderzoeksvragen.</p>",
-              "<h4 class=\"text-md font-semibold text-gray-900 dark:text-white mb-2 mt-4\">Probleemstelling</h4>",
-              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Ultimo is een softwarepakket voor asset management en onderhoudsbeheer dat wordt gebruikt door organisaties om hun materieel, voertuigen en werkplaatsen te beheren. De afdeling wagenparkbeheer van een organisatie heeft moeite met het genereren van betrouwbare rapportages over werkplaats en materieel uit het Ultimo-systeem. De huidige rapportages zijn onvolledig en bevatten fouten, waardoor de afdeling niet goed kan sturen op basis van de beschikbare informatie. Dit leidt tot inefficiënties en verkeerde beslissingen.</p>",
-              "<h4 class=\"text-md font-semibold text-gray-900 dark:text-white mb-2 mt-4\">Doelstelling</h4>",
-              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">De doelstelling van dit onderzoek is om een plan op te leveren waarin beschreven wordt hoe Ultimo zodanig kan worden ingericht dat rapportages over werkplaats en materieel met minimaal 90% betrouwbaarheid (volledigheid en juistheid) kunnen worden gegenereerd ten behoeve van de afdeling wagenparkbeheer.</p>",
-              "<h4 class=\"text-md font-semibold text-gray-900 dark:text-white mb-2 mt-4\">Hoofdvraag (voorbeeld)</h4>",
-              "<p class=\"text-gray-700 dark:text-gray-300 mb-4 italic\">De onderstaande genummerde vragen zijn <strong>deelvragen</strong> — die werk je uit in <strong>Fase 02</strong> na de begripsbepaling.</p>",
-              "<ol class=\"list-decimal list-outside space-y-3 mb-4 ml-6 pl-4\">",
-              "<li class=\"text-gray-700 dark:text-gray-300\">Welke verwachtingen heeft de organisatie van Ultimo en wat is de informatiebehoefte uit het systeem?</li>",
-              "<li class=\"text-gray-700 dark:text-gray-300\">Welke functies worden op dit moment door Ultimo aangeboden en hoe hoog ligt het betrouwbaarheidspercentage hiervan?</li>",
-              "<li class=\"text-gray-700 dark:text-gray-300\">Op welke manier kan Ultimo worden verbeterd zodat de door Ultimo geleverde functionaliteiten aansluiten op de informatiebehoefte en wensen van de organisatie?</li>",
-              "<li class=\"text-gray-700 dark:text-gray-300\">Hoe kunnen de aanpassingen aan het systeem worden verwerkt in een haalbare business case?</li>",
-              "<li class=\"text-gray-700 dark:text-gray-300\">Hoe kan ervoor worden gezorgd dat Ultimo na de aanpassingen goed gebruikt blijft worden?</li>",
-              "</ol>",
-              "<div class=\"bg-blue-50 dark:bg-gray-800 border-l-4 border-blue-500 dark:border-blue-400 p-4 rounded-r-lg mb-4\">",
-              "<p class=\"text-gray-700 dark:text-gray-300 font-medium mb-2\"><strong>Vraag aan jou:</strong></p>",
-              "<p class=\"text-gray-700 dark:text-gray-300\">In welke mate voldoen de bovenstaande onderzoeksvragen aan de functie- en vormeisen (afbakening, efficiëntie en sturend vermogen)? Analyseer elke vraag en geef aan waar deze goed aan voldoet en waar eventuele verbeteringen mogelijk zijn.</p>",
-              "</div>"
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">De kennisclip hierboven sluit af met het Ultimo-onderzoek als voorbeeld. In deze opdracht wijken we daar even van af: jij werkt met de casus magazijnoptimalisatie bij Organisatie X op de pagina <a href=\"casus.html\" class=\"text-blue-600 dark:text-blue-400 hover:underline font-medium\">Casus magazijnoptimalisatie</a>.</p>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Gebruik de probleemverkenning en doelstelling uit die casus. Formuleer op basis daarvan een hoofdvraag voor het onderzoek naar magazijnoptimalisatie. Deelvragen stel je pas in Fase 02, na de begripsbepaling.</p>",
+              "<h4 class=\"text-md font-semibold text-gray-900 dark:text-white mb-2 mt-4\">Hoofdvraag</h4>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Schrijf je hoofdvraag op. Zorg dat deze aansluit op de doelstelling uit de casus.</p>",
+              "<h4 class=\"text-md font-semibold text-gray-900 dark:text-white mb-2 mt-4\">Reflectie op afbakening, efficiëntie en sturend vermogen</h4>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Beoordeel je eigen hoofdvraag aan de hand van de drie eisen uit de kennisclip. Schrijf per eis een korte reflectie (een paar zinnen):</p>",
+              "<ul class=\"list-disc list-outside space-y-2 mb-4 ml-6 pl-4\">",
+              "<li class=\"text-gray-700 dark:text-gray-300\"><strong>Afbakening:</strong> waarom is de afbakening van je hoofdvraag goed? Wat valt binnen scope en wat valt er bewust buiten?</li>",
+              "<li class=\"text-gray-700 dark:text-gray-300\"><strong>Efficiëntie:</strong> waarom sluit je hoofdvraag efficiënt aan op de doelstelling? Kun je helder uitleggen welk resultaat je ermee nastreeft?</li>",
+              "<li class=\"text-gray-700 dark:text-gray-300\"><strong>Sturend vermogen:</strong> in hoeverre stuurt je hoofdvraag je onderzoek? Welke richting geeft de vraag aan voor je aanpak (bijvoorbeeld beschrijvend of verklarend, en welke onderzoeksactiviteiten of inzichten je nodig hebt)?</li>",
+              "</ul>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-0\">Bewaar je hoofdvraag en reflectie voor je eigen onderzoeksplan of in een apart document.</p>"
             ]
           }
         ]
       },
       {
         "type": "heading",
-        "text": "AI-Onderzoeksassistent",
+        "text": "Opdracht 2.3: AI-Onderzoeksassistent",
         "level": 2,
         "id": "ai-onderzoeksassistent"
       },
       {
         "type": "paragraph",
         "text": [
-          "Nu je hebt gezien hoe onderzoeksvragen worden geformuleerd en welke eisen hieraan worden gesteld, kun je zelf aan de slag met het opstellen van je eigen onderzoeksvragen. Om je hierbij te helpen, kun je gebruik maken van een AI-assistent die specifiek is getraind op de theorie van dit vak."
+          "In Fase 01 heb je veel onderdelen van je onderzoeksplan behandeld: van probleemverkenning en doelstelling tot onderzoeksmodel en hoofdvraag. In de komende fasen werk je dit verder uit, bijvoorbeeld met begripsbepaling, deelvragen en literatuuronderzoek. Om je hierbij te helpen — ook buiten de lesuren — kun je een eigen AI-assistent bouwen die is ingericht op de theorie en werkwijze van dit vak."
         ]
       },
       {
@@ -1216,7 +1211,7 @@
         "defaultOpen": false,
         "items": [
           {
-            "title": "Opdracht 2.2: 🤖 Bouw je eigen AI-Onderzoeksassistent",
+            "title": "Opdracht 2.3: 🤖 Bouw je eigen AI-Onderzoeksassistent",
             "defaultOpen": false,
             "content": [
               "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Je gaat de komende weken aan de slag met het opzetten van je volledige onderzoeksplan: van de probleemstelling en doelstelling tot het onderzoeksmodel en de deelvragen. Omdat je hierbij vaak vragen zult hebben op momenten dat je docent niet direct beschikbaar is, ga je in deze opdracht je eigen digitale OLO-docent bouwen.</p>",
@@ -1287,7 +1282,7 @@
               "<p class=\"text-gray-700 dark:text-gray-300 mb-2\">Stel je vraag dan eerst aan je eigen <strong>AI-Onderzoeksassistent</strong>. Hij is 24/7 beschikbaar en kent – als je de theorie goed hebt toegevoegd – de OLO-werkwijze en begrippen.</p>",
               "<p class=\"text-gray-700 dark:text-gray-300 mb-0\">Blijf wel altijd het <strong>mens–machine–mens</strong>-principe gebruiken: jij beoordeelt zelf of de feedback klopt, past deze aan waar nodig en blijft eindverantwoordelijk voor de inhoud van je onderzoeksplan.</p>",
               "<p class=\"text-gray-700 dark:text-gray-300 mt-3 mb-0\"><strong>Succes met bouwen en gebruiken van je eigen AI-Onderzoeksassistent!</strong></p>",
-              "<p class=\"text-gray-700 dark:text-gray-300 mt-4 mb-0\">Ter voorbereiding op het college van <strong>week 2</strong>: lees alle stof tot hier. Voer ook <strong>Opdracht 2.1</strong> (template onderzoeksmodel klaarzetten) en <strong>Opdracht 2.2</strong> (bouw je eigen AI-Onderzoeksassistent) uit.</p>"
+              "<p class=\"text-gray-700 dark:text-gray-300 mt-4 mb-0\">Ter voorbereiding op het college van <strong>week 2</strong>: lees alle stof tot hier. Voer ook <strong>Opdracht 2.1</strong> (template klaarzetten + 3 analyseresultaten formuleren), <strong>Opdracht 2.2</strong> (hoofdvraag formuleren — casus magazijnoptimalisatie) en <strong>Opdracht 2.3</strong> (bouw je eigen AI-Onderzoeksassistent) uit.</p>"
             ]
           }
         ]
@@ -1296,7 +1291,7 @@
         "type": "highlight",
         "title": "Voorbereiding college week 2",
         "content": [
-          "Lees voor het college van week 2 alle stof tot hier. Voer ook Opdracht 2.1 (template onderzoeksmodel klaarzetten) en Opdracht 2.2 (bouw je eigen AI-Onderzoeksassistent) uit."
+          "Lees voor het college van week 2 alle stof tot hier. Voer ook de volgende opdrachten uit: Opdracht 2.1 (template klaarzetten + 3 analyseresultaten formuleren), Opdracht 2.2 (hoofdvraag formuleren — casus magazijnoptimalisatie) en Opdracht 2.3 (bouw je eigen AI-Onderzoeksassistent)."
         ],
         "icon": "fa-calendar-check",
         "iconClass": "fas",

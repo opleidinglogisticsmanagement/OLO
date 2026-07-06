@@ -7,7 +7,8 @@
   "leerdoelen": {
     "title": "Leerdoelen",
     "items": [
-      "Je kunt begrippen definiëren door ze vast te stellen, uiteen te rafelen in dimensies/aspecten/deelaspecten, een selectie te maken en de kwaliteit te beoordelen aan de hand van afbakening, operationalisatie en aansluiting."
+      "Je kunt begrippen definiëren door ze vast te stellen, uiteen te rafelen in dimensies/aspecten/deelaspecten, een selectie te maken en de kwaliteit te beoordelen aan de hand van afbakening, operationalisatie en aansluiting.",
+      "Je kunt deelvragen formuleren die je afleidt uit je hoofdvraag, het b-gedeelte van je doelstelling en je vastgestelde begrippen, en beoordelen of ze voldoen aan de functie- en vormeisen (afbakening, efficiëntie en sturend vermogen), aansluiten bij je hoofdvraag, haalbaar zijn binnen je onderzoekstijd en bijdragen aan het beantwoorden van de hoofdvraag."
     ],
     "interactive": false
   },
@@ -17,7 +18,7 @@
       {
         "type": "paragraph",
         "text": [
-          "In Fase 02 focussen we op het definiëren van begrippen: wat onderzoek je nu precies? Een term als vrachtvervoer lijkt simpel, totdat je in gesprek gaat met stakeholders en blijkt dat iedereen hier op een eigen manier naar kijkt. We leren je hoe je begrippen afbakent, uiteenrafelt en selecteert. Dit is essentieel om de scope en haalbaarheid van je onderzoek te bewaken en misverstanden te voorkomen."
+          "In Fase 02 verfijn je je onderzoeksopzet aan twee kanten. Ten eerste definieer je begrippen: wat onderzoek je nu precies? Een term als <em>vrachtvervoer</em> of <em>fastmover</em> lijkt simpel, totdat je in gesprek gaat met stakeholders en blijkt dat iedereen hier op een eigen manier naar kijkt. Ten tweede formuleer je deelvragen: welke ondersteunende vragen helpen je om je hoofdvraag te beantwoorden? Beide stappen zijn essentieel om de scope en haalbaarheid van je onderzoek te bewaken en misverstanden te voorkomen."
         ]
       },
       {
@@ -247,6 +248,39 @@
       },
       {
         "type": "heading",
+        "text": "Opdracht 3.1: Begrippen vaststellen",
+        "level": 2,
+        "id": "opdracht-3-1-begrippen"
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "Pas de theorie over het definiëren van begrippen toe op je eigen onderzoek. In deze opdracht bepaal je welke begrippen voor jouw onderzoek van belang zijn en waarom je die moet definiëren voordat je verder gaat met deelvragen en literatuuronderzoek."
+        ]
+      },
+      {
+        "type": "accordion",
+        "usePlusIcon": true,
+        "defaultOpen": false,
+        "items": [
+          {
+            "title": "Opdracht 3.1: Begrippen vaststellen",
+            "defaultOpen": false,
+            "content": [
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Werk met je eigen onderzoeksplan (stage, afstuderen of de oefencasus <a href=\"casus.html\" class=\"text-blue-600 dark:text-blue-400 hover:underline font-medium\">magazijnoptimalisatie bij Organisatie X</a>). Doorloop daarbij minimaal stap 1 uit de theorie hierboven: vaststellen welke begrippen je gaat definiëren.</p>",
+              "<ol class=\"list-decimal list-outside space-y-3 mb-4 ml-6 pl-4\">",
+              "<li class=\"text-gray-700 dark:text-gray-300\">Lees je hoofdvraag en het b-gedeelte van je doelstelling nog eens door.</li>",
+              "<li class=\"text-gray-700 dark:text-gray-300\">Selecteer de begrippen waarvan jij vindt dat ze gedefinieerd moeten worden. Kies alleen begrippen die essentieel zijn voor je onderzoek: begrippen die vaag zijn, verschillend worden uitgelegd door stakeholders, of bepalend zijn voor de scope van je analyse.</li>",
+              "<li class=\"text-gray-700 dark:text-gray-300\">Noteer per begrip kort waarom definiëren nodig is en waar het begrip in je hoofdvraag of doelstelling voorkomt.</li>",
+              "<li class=\"text-gray-700 dark:text-gray-300\">Leg je selectie vast in je onderzoeksplan (bijvoorbeeld als begrippenlijst of tabel met kolommen: begrip, bron in hoofdvraag/doelstelling, reden voor definiëren).</li>",
+              "</ol>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-0\">Optioneel: kies één begrip uit je selectie en begin alvast met uiteenrafelen (stap 2). Je hoeft de definitie nog niet af te ronden; het gaat er nu om dat je bewust keuzes maakt over welke begrippen je onderzoek sturen.</p>"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "heading",
         "text": "Deelvragen",
         "level": 2,
         "id": "deelvragen"
@@ -254,9 +288,143 @@
       {
         "type": "paragraph",
         "text": [
-          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Na de begripsbepaling bepaal je de <strong>deelvragen</strong>: ondersteunende vragen die helpen om je hoofdvraag te beantwoorden. Je leidt ze af uit je hoofdvraag, je doelstelling (vooral het b-gedeelte) en de begrippen die je hebt vastgesteld.</p>",
-          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Het vaststellen van deelvragen kun je (deels) al eerder hebben gedaan. Het definiëren van begrippen kan ook leiden tot een herziening van deelvragen, het onderzoeksmodel, de doelstelling en/of de hoofdvraag. Dat itereren hoort bij het opstellen van een onderzoeksopzet.</p>",
-          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Controleer of elke deelvraag aansluit bij je hoofdvraag, haalbaar is binnen je onderzoekstijd en bijdraagt aan het beantwoorden van de hoofdvraag.</p>"
+          "Na de begripsbepaling bepaal je de deelvragen: ondersteunende vragen die helpen om je hoofdvraag te beantwoorden. Je leidt ze af uit je hoofdvraag, je doelstelling (vooral het b-gedeelte) en de begrippen die je hebt vastgesteld.",
+          "Het vaststellen van deelvragen kun je (deels) al eerder hebben gedaan, bijvoorbeeld als schets in Fase 01. Het definiëren van begrippen kan ook leiden tot een herziening van deelvragen, het onderzoeksmodel, de doelstelling en/of de hoofdvraag. Dat itereren hoort bij het opstellen van een onderzoeksopzet.",
+          "Net als bij de hoofdvraag gelden ook voor deelvragen de functie- en vormeisen uit Fase 01: afbakening, efficiëntie en sturend vermogen. Daarnaast toets je elke deelvraag op aansluiting bij de hoofdvraag, haalbaarheid binnen je onderzoekstijd en bijdrage aan het beantwoorden van de hoofdvraag."
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "<h3 class=\"text-xl font-semibold text-gray-900 dark:text-white mb-4\">Hoe pak je dit aan?</h3>",
+          "Het formuleren van deelvragen gebeurt in een aantal stappen. Ten eerste inventariseer je waar je antwoorden op nodig hebt. Ten tweede formuleer je concept-deelvragen. Ten derde toets je die vragen op kwaliteit. Ten slotte stel je je definitieve set deelvragen vast en herzie je die indien nodig na begripsbepaling."
+        ]
+      },
+      {
+        "type": "clickableSteps",
+        "steps": [
+          {
+            "label": "1. Inventariseren",
+            "content": [
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Begin met drie bronnen die je al hebt opgesteld in eerdere fasen:</p>",
+              "<ol class=\"list-decimal list-outside space-y-2 mb-4 ml-6 pl-4\">",
+              "<li class=\"text-gray-700 dark:text-gray-300\">Hoofdvraag: wat is de centrale vraag die je onderzoek stuurt?</li>",
+              "<li class=\"text-gray-700 dark:text-gray-300\">b-gedeelte van de doelstelling: welke kennis, informatie of inzichten heb je nodig om je externe doel (a-gedeelte) te behalen?</li>",
+              "<li class=\"text-gray-700 dark:text-gray-300\">Vastgestelde begrippen: welke begrippen heb je gedefinieerd en geoperationaliseerd? Welke dimensies, aspecten of deelaspecten vallen binnen je scope?</li>",
+              "</ol>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Kijk ook naar je onderzoeksmodel. In Stap 2 staan je onderzoeksobjecten. Elke opgestelde deelvraag hoort bij precies één onderzoeksobject en levert één analyseresultaat op.</p>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-0\">Noteer per onderzoeksobject welke vraag je nog moet stellen. Dat zijn kandidaten voor deelvragen.</p>"
+            ]
+          },
+          {
+            "label": "2. Formuleren",
+            "content": [
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Formuleer op basis van je inventarisatie een eerste set concept-deelvragen. Elke deelvraag moet:</p>",
+              "<ul class=\"list-disc list-outside space-y-2 mb-4 ml-6 pl-4\">",
+              "<li class=\"text-gray-700 dark:text-gray-300\">één duidelijk onderdeel van je hoofdvraag adresseren;</li>",
+              "<li class=\"text-gray-700 dark:text-gray-300\">beantwoordbaar zijn met een concrete onderzoeksmethode (bijvoorbeeld literatuuronderzoek, interview, data-analyse).</li>",
+              "</ul>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-0\">Een praktische richtlijn: houd het aantal deelvragen beperkt, meestal 3 tot 6 vragen. Het aantal deelvragen moet overeenkomen met het aantal onderzoeksobjecten in Stap 2 van je onderzoeksmodel: één deelvraag per object. Te veel deelvragen maakt je onderzoek onhaalbaar; te weinig vragen betekent dat je hoofdvraag te grof blijft.</p>"
+            ]
+          },
+          {
+            "label": "3. Toetsen",
+            "content": [
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Toets elke concept-deelvraag aan twee sets criteria.</p>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">A. Functie- en vormeisen (zie ook Fase 01, hoofdvraag)</p>",
+              "<ul class=\"list-disc list-outside space-y-2 mb-4 ml-6 pl-4\">",
+              "<li class=\"text-gray-700 dark:text-gray-300\">Afbakening: is de vraag afgebakend genoeg binnen je scope, tijd en middelen? Sluit hij aan bij je vastgestelde begrippen?</li>",
+              "<li class=\"text-gray-700 dark:text-gray-300\">Efficiëntie: draagt de vraag direct bij aan je doelstelling? Kun je het antwoord eenvoudig koppelen aan je hoofdvraag?</li>",
+              "<li class=\"text-gray-700 dark:text-gray-300\">Sturend vermogen: geeft de vraag richting aan je onderzoek? Weet je welke methode, theorie of data je nodig hebt om hem te beantwoorden?</li>",
+              "</ul>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">B. Aansluiting, haalbaarheid en bijdrage</p>",
+              "<ul class=\"list-disc list-outside space-y-2 mb-4 ml-6 pl-4\">",
+              "<li class=\"text-gray-700 dark:text-gray-300\">Aansluiting: past de deelvraag logisch bij je hoofdvraag en je onderzoeksmodel?</li>",
+              "<li class=\"text-gray-700 dark:text-gray-300\">Haalbaarheid: kun je de vraag beantwoorden binnen je beschikbare onderzoekstijd, met de data en toegang die je hebt?</li>",
+              "<li class=\"text-gray-700 dark:text-gray-300\">Bijdrage: levert het antwoord concrete input op voor het beantwoorden van je hoofdvraag?</li>",
+              "</ul>",
+              {
+                "type": "accordion",
+                "usePlusIcon": true,
+                "defaultOpen": false,
+                "items": [
+                  {
+                    "title": "Checklist: toets je deelvragen",
+                    "defaultOpen": false,
+                    "content": [
+                      "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Loop per deelvraag deze checklist na:</p>",
+                      "<ul class=\"space-y-2 mb-4 list-none pl-0\">",
+                      "<li class=\"text-gray-700 dark:text-gray-300\">[ ] De vraag is afgebakend binnen mijn scope en vastgestelde begrippen</li>",
+                      "<li class=\"text-gray-700 dark:text-gray-300\">[ ] De vraag draagt direct bij aan mijn doelstelling (efficiëntie)</li>",
+                      "<li class=\"text-gray-700 dark:text-gray-300\">[ ] Ik weet welke methode of theorie ik inzet om de vraag te beantwoorden (sturend vermogen)</li>",
+                      "<li class=\"text-gray-700 dark:text-gray-300\">[ ] De vraag sluit aan bij mijn hoofdvraag en onderzoeksmodel</li>",
+                      "<li class=\"text-gray-700 dark:text-gray-300\">[ ] Ik kan de vraag beantwoorden binnen mijn onderzoekstijd</li>",
+                      "<li class=\"text-gray-700 dark:text-gray-300\">[ ] Het antwoord levert concrete input op voor mijn hoofdvraag</li>",
+                      "</ul>",
+                      "<p class=\"text-gray-700 dark:text-gray-300 mb-0\">Voldoet een deelvraag niet aan één of meer criteria? Herformuleer, splits de vraag op, of schrap hem.</p>"
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "label": "4. Vaststellen en herzien",
+            "content": [
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Stel je definitieve set deelvragen vast wanneer ze voldoen aan alle toetscriteria. Neem ze op in je onderzoeksplan, bij voorkeur in de volgorde waarin je ze in je onderzoek gaat beantwoorden.</p>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Houd rekening met iteratie: na het definiëren van begrippen kan blijken dat een deelvraag te breed of te smal is geformuleerd. Ook literatuuronderzoek (Fase 03) of je dataverzamelingsplan (Fase 04) kan aanleiding geven om deelvragen bij te stellen. Dat is normaal: een goed onderzoeksplan is geen eenmalig document, maar een levend plan dat je voortdurend toetst aan nieuwe inzichten.</p>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-0\">Controleer tot slot of je set deelvragen samen je hoofdvraag dekken: als je alle deelvragen beantwoordt, moet je in staat zijn om je hoofdvraag te beantwoorden.</p>"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "heading",
+        "text": "Opdracht 3.2: Deelvragen formuleren",
+        "level": 2,
+        "id": "opdracht-3-2-deelvragen"
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "Oefen met het formuleren van deelvragen aan de hand van het onderzoeksmodel van de casus magazijnoptimalisatie bij Organisatie X. In Stap 2 van dat model staan vier onderzoeksobjecten; bij elk object hoort één deelvraag die leidt tot één analyseresultaat. Het onderzoeksmodel zie je in de afbeelding hieronder."
+        ]
+      },
+      {
+        "type": "image",
+        "src": "assets/images/Onderzoeksmodel-casus-magazijnoptimalisatie.png",
+        "alt": "Onderzoeksmodel casus magazijnoptimalisatie bij Organisatie X: Stap 1 met theorie, vooronderzoek en onderzoeksoptiek; Stap 2 met vier onderzoeksobjecten en analyseresultaten; Stap 3 met verbeteradviezen.",
+        "align": "left",
+        "showAltText": true,
+        "enableModal": true,
+        "size": "full"
+      },
+      {
+        "type": "accordion",
+        "usePlusIcon": true,
+        "defaultOpen": false,
+        "items": [
+          {
+            "title": "Opdracht 3.2: Deelvragen formuleren (casus magazijnoptimalisatie)",
+            "defaultOpen": false,
+            "content": [
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Gebruik het onderzoeksmodel van de casus <a href=\"casus.html\" class=\"text-blue-600 dark:text-blue-400 hover:underline font-medium\">magazijnoptimalisatie bij Organisatie X</a>. Bekijk Stap 2: daar staan de vier onderzoeksobjecten met het bijbehorende analyseresultaat:</p>",
+              "<ol class=\"list-decimal list-outside space-y-2 mb-4 ml-6 pl-4\">",
+              "<li class=\"text-gray-700 dark:text-gray-300\">Huidige magazijnindeling en artikelstromen → AS-IS situatie</li>",
+              "<li class=\"text-gray-700 dark:text-gray-300\">Interne rijafstanden → Nulmeting rijafstanden</li>",
+              "<li class=\"text-gray-700 dark:text-gray-300\">Herinrichtingsscenario's → Scenariovergelijking</li>",
+              "<li class=\"text-gray-700 dark:text-gray-300\">Finance → Business case</li>",
+              "</ol>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Formuleer voor ten minste twee van deze vier onderzoeksobjecten een goede concept-deelvraag. Elke deelvraag hoort bij precies één object en levert één analyseresultaat op.</p>",
+              "<ol class=\"list-decimal list-outside space-y-3 mb-4 ml-6 pl-4\">",
+              "<li class=\"text-gray-700 dark:text-gray-300\">Kies minimaal twee onderzoeksobjecten uit Stap 2 waarvan je een deelvraag wilt formuleren.</li>",
+              "<li class=\"text-gray-700 dark:text-gray-300\">Formuleer per gekozen object één concept-deelvraag. Leid de vraag af uit de hoofdvraag en het b-gedeelte van de doelstelling uit de casus. De vraag moet passen bij het gekozen object en het analyseresultaat dat daarbij hoort.</li>",
+              "<li class=\"text-gray-700 dark:text-gray-300\">Toets elke concept-deelvraag kort aan de criteria uit stap 3 hierboven: afbakening, efficiëntie, sturend vermogen, aansluiting bij de hoofdvraag, haalbaarheid en bijdrage.</li>",
+              "<li class=\"text-gray-700 dark:text-gray-300\">Noteer per deelvraag: het onderzoeksobject, de formulering van de vraag, en één korte toelichting waarom de vraag voldoet (of wat je nog moet verbeteren).</li>",
+              "</ol>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-0\">Je hoeft nog geen volledige set van vier deelvragen af te ronden. Het gaat erom dat je oefent met de koppeling tussen onderzoeksobject, deelvraag en analyseresultaat. Werk je met je eigen onderzoek, pas dan dezelfde stappen toe op de onderzoeksobjecten in jouw onderzoeksmodel.</p>"
+            ]
+          }
         ]
       }
     ]

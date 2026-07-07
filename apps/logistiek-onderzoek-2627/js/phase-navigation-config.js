@@ -1,6 +1,7 @@
 /**
  * Centrale navigatieconfiguratie voor logistiek-onderzoek-2627 (fase-URL's).
  * Eén bron van waarheid voor sidebar, vorige/volgende en redirects.
+ * Productie-branch: 26-27.v1 (Vercel deployment-test).
  */
 (function () {
     'use strict';

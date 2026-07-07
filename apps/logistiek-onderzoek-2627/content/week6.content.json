@@ -414,7 +414,7 @@
           {
             "title": "1. Relatie onderzoeksmodel (Groen)",
             "content": [
-              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">In de eerste drie kolommen leg je de basis. Hier borg je de <strong>constructive alignment</strong>: je controleert of je dataverzamelingsmethode écht past bij je vraagstelling.</p>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">In de eerste drie kolommen leg je de basis: welke vraag beantwoord je, en met welke methode? Die twee moeten op elkaar aansluiten.</p>",
               "<ul class=\"list-disc list-outside space-y-2 mb-4 ml-6 pl-4\">",
               "<li class=\"text-gray-700 dark:text-gray-300 mb-2\">Hoofdvraag & Deelvraag: Aan welke vraag draagt deze meting bij?</li>",
               "<li class=\"text-gray-700 dark:text-gray-300 mb-2\">Type onderzoek: Welke methode kies je (bijv. interview, enquête, observatie, ...)?</li>",

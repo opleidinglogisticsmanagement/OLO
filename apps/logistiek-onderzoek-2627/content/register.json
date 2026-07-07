@@ -691,5 +691,86 @@
       "anchor": "#literatuuronderzoek",
       "week": "Fase 03"
     }
+  },
+  {
+    "term": "Gantt-grafiek",
+    "description": "Visueel planningsoverzicht waarin je onderzoeksactiviteiten op een tijdas zet. Elke activiteit krijgt een balk van start- tot einddatum. Afhankelijkheden en mijlpalen maak je zichtbaar zodat je ziet wat eerst moet en waar vertraging je hele planning raakt.",
+    "location": {
+      "page": "afronding.html",
+      "anchor": "#planning-maken",
+      "week": "Afronding"
+    }
+  },
+  {
+    "term": "Kernbegrippen",
+    "description": "De belangrijkste begrippen uit je doelstelling en hoofdvraag die je definieert voordat je verder gaat met literatuuronderzoek en deelvragen. Duidelijke kernbegrippen voorkomen misverstanden met stakeholders en helpen bij het zoeken naar theorie.",
+    "location": {
+      "page": "fase2.html",
+      "anchor": "#definieren-begrippen",
+      "week": "Fase 02"
+    }
+  },
+  {
+    "term": "Methodetriangulatie",
+    "description": "Het combineren en vergelijken van meerdere dataverzamelingsmethoden (bijvoorbeeld interview, observatie en documentanalyse) binnen één casestudy. Door resultaten uit verschillende methoden met elkaar te confronteren krijg je een betrouwbaarder beeld.",
+    "location": {
+      "page": "fase4.html",
+      "anchor": "#onderzoekstrategie",
+      "week": "Fase 04"
+    }
+  },
+  {
+    "term": "Onderzoekseenheid",
+    "description": "Het concrete object of de persoon waarop je data verzamelt in survey-onderzoek of casestudy. Bij een survey zijn dat vaak tientallen tot duizenden eenheden; bij een casestudy één tot enkele.",
+    "location": {
+      "page": "fase4.html",
+      "anchor": "#onderzoekstrategie",
+      "week": "Fase 04"
+    }
+  },
+  {
+    "term": "Onderzoeksplan",
+    "description": "Het document waarin je alle onderdelen van je onderzoeksopzet samenbrengt: probleemverkenning, doelstelling, onderzoeksmodel, vragen, begripsbepaling, theoretisch kader, onderzoeksstrategie en dataverzamelingsplan.",
+    "location": {
+      "page": "onderzoeksplan.html",
+      "anchor": "",
+      "week": "Fase 01"
+    }
+  },
+  {
+    "term": "Probleemstelling",
+    "description": "De beschrijving van het praktijkvraagstuk: wat speelt er, voor wie, en waarom is onderzoek nodig? De probleemstelling vormt de basis voor doelstelling en hoofdvraag.",
+    "location": {
+      "page": "fase1.html",
+      "anchor": "#probleem-verkennen",
+      "week": "Fase 01"
+    }
+  },
+  {
+    "term": "Scope",
+    "description": "De afbakening van je onderzoek: wat valt wél en wat valt níet binnen je onderzoek? Je bepaalt de scope onder andere via begripsbepaling en de keuze van dimensies, aspecten en deelaspecten.",
+    "location": {
+      "page": "fase2.html",
+      "anchor": "#definieren-begrippen",
+      "week": "Fase 02"
+    }
+  },
+  {
+    "term": "Stakeholder",
+    "description": "Een belanghebbende bij het onderzoeksprobleem, zoals opdrachtgever, medewerkers of klanten. Bij begripsbepaling stem je definities af met stakeholders zodat iedereen over hetzelfde praat.",
+    "location": {
+      "page": "fase2.html",
+      "anchor": "#definieren-begrippen",
+      "week": "Fase 02"
+    }
+  },
+  {
+    "term": "Steekproef",
+    "description": "Een selectie uit de totale groep onderzoekseenheden waarop je daadwerkelijk data verzamelt. Bij survey-onderzoek is dat vaak een aselecte steekproef; bij casestudies een strategische selectie.",
+    "location": {
+      "page": "fase4.html",
+      "anchor": "#onderzoekstrategie",
+      "week": "Fase 04"
+    }
   }
 ]

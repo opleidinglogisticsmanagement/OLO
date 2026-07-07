@@ -77,7 +77,7 @@
         "defaultOpen": false,
         "items": [
           {
-            "title": "Opdracht 2: Drie kernbeslissingen maken",
+            "title": "Opdracht 5.1: Drie kernbeslissingen maken",
             "defaultOpen": false,
             "content": [
               "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Maak voor de casus magazijnoptimalisatie bij Organisatie X de drie kernbeslissingen. Gebruik hiervoor de volgende context:</p>",
@@ -252,11 +252,11 @@
         "defaultOpen": false,
         "items": [
           {
-            "title": "Opdracht 3: Onderzoeksstrategie kiezen",
+            "title": "Opdracht 5.2: Onderzoeksstrategie kiezen",
             "defaultOpen": false,
             "content": [
               "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Kies voor de casus magazijnoptimalisatie bij Organisatie X een geschikte onderzoeksstrategie. Welke strategie past het beste volgens jou bij deze casus?</p>",
-              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Gebruik hiervoor de context uit Opdracht 2 (doelstelling en hoofdvraag) en de kernbeslissingen die je daar hebt gemaakt. Leg in maximaal één alinea uit waarom deze onderzoeksstrategie het beste past bij het onderzoek naar de magazijnoptimalisatie.</p>"
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Gebruik hiervoor de context uit Opdracht 5.1 (doelstelling en hoofdvraag) en de kernbeslissingen die je daar hebt gemaakt. Leg in maximaal één alinea uit waarom deze onderzoeksstrategie het beste past bij het onderzoek naar de magazijnoptimalisatie.</p>"
             ]
           }
         ]
@@ -377,7 +377,6 @@
         "type": "paragraph",
         "text": [
           "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Het dataverzamelingsplan is de brug tussen je onderzoeksmodel (wat wil ik weten?) en de uitvoering (wat ga ik doen?).</p>",
-          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Wanneer je de kernbeslissingen hebt genomen en hebt bepaald welke onderzoeksstrategie je gaat inzetten, ben je natuurlijk nog niet klaar. Je hebt wel fase 3 afgerond en gaat nu naar fase 4: Het onderzoekstechnisch ontwerp.</p>",
           "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Je weet nu wat je wilt gaan inzetten en hebt een grof idee wat je wilt gaan doen. Nu is het aan jouw om je onderzoeksplanning (oftewel je dataverzamelingsplan) compleet te gaan maken. Dit plan heb jij ook al gebruikt tijdens de EvE's Project Procesverbetering en Business Case Analysis. Waarom was het dataverzamelingsplan ook alweer zo belangrijk?</p>",
           "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Het dataverzamelingsplan kent eigenlijk 2 doelen:</p>",
           "<ol class=\"list-decimal list-outside space-y-2 mb-4 ml-6 pl-4\">",
@@ -395,15 +394,6 @@
       {
         "type": "paragraph",
         "text": [
-          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Vanuit het doen van goed onderzoek is het dataverzamelingsplan wat je in eerdere modules hebt geleerd aangepast. Het bijbehorende template download je in <strong>Brightspace</strong>, niet via deze e-learningomgeving.</p>",
-          "<h3 class=\"text-lg font-semibold text-gray-900 dark:text-white mb-4\">Template Dataverzamelingsplan ophalen in Brightspace</h3>",
-          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Volg onderstaande stappen:</p>",
-          "<ol class=\"list-decimal list-outside space-y-2 mb-4 ml-6 pl-4 text-gray-700 dark:text-gray-300\">",
-          "<li class=\"mb-2\">Log in op <strong>Brightspace</strong>.</li>",
-          "<li class=\"mb-2\">Ga naar de cursuspagina van <strong>Opzetten van een Logistiek Onderzoek</strong>.</li>",
-          "<li class=\"mb-2\">Open de map <strong>Templates</strong>.</li>",
-          "<li class=\"mb-2\">Download daar het bestand <strong>Dataverzamelingsplan 25-26 (Template).xlsx</strong>.</li>",
-          "</ol>",
           "<h3 class=\"text-lg font-semibold text-gray-900 dark:text-white mb-4\">Instructie Dataverzamelingsplan</h3>",
           "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">In dit plan werk je stap voor stap uit hoe je jouw onderzoek concreet gaat uitvoeren. Het plan bestaat uit 3 delen die hieronder elk in een tab zijn weergegeven. Deze drie gekleurde secties hangen logisch met elkaar samen. Wat zijn de belangrijkste aanpassingen die hierin zijn ten opzichte van eerdere dataverzamelingsplannen?</p>"
         ]
@@ -415,7 +405,7 @@
           {
             "title": "1. Relatie onderzoeksmodel (Groen)",
             "content": [
-              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">In de eerste drie kolommen leg je de basis. Hier borg je de <strong>constructive alignment</strong>: je controleert of je dataverzamelingsmethode écht past bij je vraagstelling.</p>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">In de eerste drie kolommen leg je de basis: welke vraag beantwoord je, en met welke methode? Die twee moeten op elkaar aansluiten.</p>",
               "<ul class=\"list-disc list-outside space-y-2 mb-4 ml-6 pl-4\">",
               "<li class=\"text-gray-700 dark:text-gray-300 mb-2\">Hoofdvraag & Deelvraag: Aan welke vraag draagt deze meting bij?</li>",
               "<li class=\"text-gray-700 dark:text-gray-300 mb-2\">Type onderzoek: Welke methode kies je (bijv. interview, enquête, observatie, ...)?</li>",
@@ -462,13 +452,13 @@
         "defaultOpen": false,
         "items": [
           {
-            "title": "Opdracht 4: Dataverzamelingsplan ophalen en globaal invullen",
+            "title": "Opdracht 5.3: Dataverzamelingsplan ophalen en globaal invullen",
             "defaultOpen": false,
             "content": [
               "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Haal het template dataverzamelingsplan op in Brightspace voor je eigen praktijkonderzoek.</p>",
               "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Voor de casus magazijnoptimalisatie bij Organisatie X kun je alvast oefenen met het globaal invullen van het dataverzamelingsplan. Vul voor de volgende deelvraag het dataverzamelingsplan globaal in:</p>",
               "<div class=\"bg-gray-50 dark:bg-gray-800 border-l-4 border-blue-500 dark:border-blue-400 p-4 rounded-r-lg mb-4\">",
-              "<p class=\"text-gray-700 dark:text-gray-300 mb-0\"><strong>Deelvraag:</strong> Welke artikelen zijn hardlopers en welke zijn slowmovers, en staan deze artikelen op de juiste plek in het magazijn?</p>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-0\"><strong>Deelvraag:</strong> Hoe zijn fastmovers, slowmovers en spare parts verdeeld over opslagzones en hoe verlopen de interne transportstromen?</p>",
               "</div>",
               "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Probeer eens te bedenken hoe je dit zou kunnen onderzoeken. Vul dit globaal in het template in. Je hoeft het nog niet volledig uit te werken, maar denk na over:</p>",
               "<ul class=\"list-disc list-outside space-y-2 mb-4 ml-6 pl-4\">",
@@ -481,104 +471,22 @@
         ]
       },
       {
-        "type": "heading",
-        "text": "Planning maken",
-        "level": 2,
-        "id": "planning-maken"
-      },
-      {
-        "type": "paragraph",
-        "text": [
-          "Je weet inmiddels welke methoden je gaat inzetten en hoe je data verzamelt. Nu volgt de vraag: wanneer doe je wat? Een Gantt-grafiek (ook wel Gantt chart genoemd) helpt je om je onderzoek in de tijd te plannen en de voortgang te volgen. Het is een visueel hulpmiddel waarmee je activiteiten, looptijden en onderlinge afhankelijkheden in één overzicht zet."
-        ]
-      },
-      {
-        "type": "paragraph",
-        "text": [
-          "Een Gantt-grafiek bestaat uit rijen en een tijdas. Elke rij staat voor een activiteit of fase in je onderzoek, bijvoorbeeld literatuur verzamelen, interviews afnemen of data analyseren. Op de horizontale as zie je de tijd. Per activiteit tek je een balk van startdatum tot einddatum. Activiteiten die pas kunnen beginnen als een andere klaar is, verbind je met een pijl. Belangrijke momenten, zoals een tussentijdse bespreking met je opdrachtgever, markeer je als mijlpaal."
-        ]
-      },
-      {
-        "type": "heading",
-        "text": "Twee fasen: plan maken en plan volgen",
-        "level": 3
-      },
-      {
-        "type": "paragraph",
-        "text": [
-          "Werken met een Gantt-grafiek heeft twee kanten. Eerst maak je het plan: je deelt je onderzoek op in activiteiten en schat per activiteit in hoeveel tijd je nodig hebt. Daarna volg je het plan: je vergelijkt wat je gepland had met wat je daadwerkelijk hebt gedaan. Loopt een activiteit achter, dan zie je dat meteen en kun je bijsturen."
-        ]
-      },
-      {
-        "type": "heading",
-        "text": "Stap 1: activiteiten en tijd inschatten",
-        "level": 3
-      },
-      {
-        "type": "paragraph",
-        "text": [
-          "Begin met de grote onderdelen van je onderzoek. Denk aan: voorbereiding, dataverzameling, analyse, schrijven en afronding. Splits die verder op in concrete activiteiten. Voor een magazijnonderzoek kan dat zijn: toegang regelen tot WMS-data, interviews plannen met teamleider en orderpickers, observatie op de werkvloer, berekeningen uitvoeren en hoofdstukken schrijven.",
-          "Per activiteit schat je in hoeveel tijd je nodig hebt en wanneer je wilt starten en afronden. Wees realistisch: interviews plannen kost vaak meer tijd dan je denkt, zeker als je afhankelijk bent van de agenda van mensen in de organisatie. Noteer ook welke activiteiten tegelijk kunnen lopen en welke pas starten als een eerdere stap klaar is."
-        ]
-      },
-      {
-        "type": "heading",
-        "text": "Stap 2: volgorde en het kritische pad",
-        "level": 3
-      },
-      {
-        "type": "paragraph",
-        "text": [
-          "De volgorde van activiteiten bepaalt hoe lang je onderzoek in totaal duurt. Het kritische pad is de langste keten van activiteiten die direct op elkaar aansluiten. Vertraging op het kritische pad betekent dat je hele onderzoek later klaar is. Activiteiten die niet op het kritische pad liggen, hebben wat meer speelruimte.",
-          "Voorbeeld: je kunt literatuuronderzoek en het regelen van toegang tot bedrijfsdata deels parallel laten lopen. Je analyse en het schrijven van je theoretisch kader kunnen pas starten als je voldoende bronnen en data hebt verzameld. Teken die afhankelijkheden in je Gantt-grafiek, zodat je ziet welke stappen geen vertraging kunnen hebben."
-        ]
-      },
-      {
-        "type": "heading",
-        "text": "Stap 3: voortgang bijhouden",
-        "level": 3
-      },
-      {
-        "type": "paragraph",
-        "text": [
-          "Een planning is alleen nuttig als je hem bijhoudt. Noteer per activiteit hoe ver je bent, bijvoorbeeld 50% voltooid. Vergelijk dat met de resterende tijd. Is een activiteit halverwege de geplande periode nog maar voor een kwart klaar, dan loop je achter en moet je ingrijpen: extra tijd inplannen, hulp vragen of de scope verkleinen.",
-          "Bespreek je planning regelmatig met je opdrachtgever en begeleider. Zo voorkom je verrassingen aan het eind van je onderzoeksperiode."
-        ]
-      },
-      {
         "type": "highlight",
-        "title": "Tip",
+        "title": "Voorbereiding college week 5",
         "content": [
-          "Je hebt geen dure projectsoftware nodig. Een Gantt-grafiek kun je opstellen in Excel of Google Sheets. Online vind je gratis templates die je direct kunt gebruiken of aanpassen aan je eigen onderzoek."
+          "Lees voor het college van week 5 alle stof tot en met hier."
         ],
-        "icon": "fa-info-circle"
-      },
-      {
-        "type": "accordion",
-        "usePlusIcon": true,
-        "defaultOpen": false,
-        "items": [
-          {
-            "title": "Opdracht: maak een globale onderzoeksplanning",
-            "defaultOpen": false,
-            "content": [
-              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Maak voor je eigen praktijkonderzoek een globale Gantt-planning. Gebruik minimaal de volgende activiteiten:</p>",
-              "<ul class=\"list-disc list-outside space-y-2 mb-4 ml-6 pl-4\">",
-              "<li class=\"text-gray-700 dark:text-gray-300\">Voorbereiding (toegang organisatie, afspraken)</li>",
-              "<li class=\"text-gray-700 dark:text-gray-300\">Dataverzameling (per methode uit je dataverzamelingsplan)</li>",
-              "<li class=\"text-gray-700 dark:text-gray-300\">Analyse</li>",
-              "<li class=\"text-gray-700 dark:text-gray-300\">Schrijven en afronden</li>",
-              "</ul>",
-              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Geef per activiteit een start- en einddatum. Geef aan welke activiteiten van elkaar afhankelijk zijn. Markeer ten minste één mijlpaal, bijvoorbeeld een voortgangsgesprek met je opdrachtgever.</p>",
-              "<p class=\"text-gray-700 dark:text-gray-300 mb-0\">Voeg de planning toe als bijlage bij je onderzoeksplan of neem hem op in Brightspace, afhankelijk van wat je docent vraagt.</p>"
-            ]
-          }
-        ]
+        "icon": "fa-calendar-check",
+        "iconClass": "fas",
+        "bgColor": "bg-blue-50 dark:bg-blue-900/20",
+        "borderColor": "border-blue-500 dark:border-blue-400",
+        "titleColor": "text-blue-900 dark:text-blue-200",
+        "contentColor": "text-blue-800 dark:text-blue-300"
       },
       {
         "type": "paragraph",
         "text": [
-          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Succes met het bepalen van je onderzoeksstrategie, het opstellen van je dataverzamelingsplan en het maken van je onderzoeksplanning!</p>"
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Succes met het bepalen van je onderzoeksstrategie en het opstellen van je dataverzamelingsplan!</p>"
         ]
       }
     ]

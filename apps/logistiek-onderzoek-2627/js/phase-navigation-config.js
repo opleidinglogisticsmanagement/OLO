@@ -90,7 +90,7 @@
                 colors: { icon: 'text-red-600 dark:text-red-400', bg: 'bg-red-100 dark:bg-red-900/30' },
                 subItems: [
                     { id: 'literatuuronderzoek', title: 'Het uitvoeren van literatuuronderzoek', anchor: '#literatuuronderzoek' },
-                    { id: 'selecteren-beoordelen', title: 'Selecteren en beoordelen', anchor: '#selecteren-beoordelen' },
+                    { id: 'selecteren-beoordelen', title: 'Selecteren en beoordelen', anchor: '#van-informatieberg-naar-theoretisch-kader' },
                     { id: 'slim-bronnen-beheren', title: 'Slim bronnen beheren', anchor: '#slim-bronnen-beheren' },
                     { id: 'theoretisch-kader-schrijven', title: 'Theoretisch kader schrijven', anchor: '#theoretisch-kader-schrijven' }
                 ]
@@ -104,8 +104,7 @@
                 subItems: [
                     { id: 'kernbeslissingen', title: 'Kernbeslissingen', anchor: '#kernbeslissingen' },
                     { id: 'onderzoekstrategie', title: 'Onderzoeksstrategie', anchor: '#onderzoekstrategie' },
-                    { id: 'dataverzamelingsplan', title: 'Het dataverzamelingsplan', anchor: '#dataverzamelingsplan' },
-                    { id: 'planning-maken', title: 'Planning maken', anchor: '#planning-maken' }
+                    { id: 'dataverzamelingsplan', title: 'Het dataverzamelingsplan', anchor: '#dataverzamelingsplan' }
                 ]
             },
             {
@@ -113,7 +112,13 @@
                 title: 'Afronding',
                 href: 'afronding.html',
                 icon: 'fa-flag-checkered',
-                colors: { icon: 'text-pink-600 dark:text-pink-400', bg: 'bg-pink-100 dark:bg-pink-900/30' }
+                colors: { icon: 'text-pink-600 dark:text-pink-400', bg: 'bg-pink-100 dark:bg-pink-900/30' },
+                subItems: [
+                    { id: 'schrijven-en-visualiseren', title: 'Schrijven en visualiseren', anchor: '#schrijven-en-visualiseren' },
+                    { id: 'de-rode-draad', title: 'De rode draad', anchor: '#de-rode-draad' },
+                    { id: 'schrijfvaardigheidseisen-en-rubric', title: 'Schrijfvaardigheidseisen en rubric', anchor: '#schrijfvaardigheidseisen-en-rubric' },
+                    { id: 'planning-maken', title: 'Planning maken', anchor: '#planning-maken' }
+                ]
             },
             { id: 'register', title: 'Begrippenlijst', href: 'register.html', icon: 'fa-list-ul', colors: { icon: 'text-blue-600 dark:text-blue-400', bg: 'bg-blue-100 dark:bg-blue-900/30' } }
         ];

@@ -379,11 +379,11 @@
                 "defaultOpen": false,
                 "items": [
                   {
-                    "title": "Opdracht 3.3: Bouwsteenmethode voor magazijnoptimalisatie",
+                    "title": "Opdracht 3.3: Bouwsteenmethode voor magazijn",
                     "defaultOpen": false,
                     "content": [
-                      "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Gebruik de casus <strong>magazijnoptimalisatie bij Organisatie X</strong> op de pagina <strong>Casus magazijnoptimalisatie</strong>.. Bij deze casus komt het begrip magazijnoptimalisatie naar voren. Ga voor dit begrip alvast een start maken met de bouwsteenmethode.</p>",
-                      "<p class=\"text-gray-700 dark:text-gray-300 mb-0\">Gebruik de tabel die je hierboven hebt gezien om het begrip magazijnoptimalisatie uit te werken volgens de bouwsteenmethode. Vul de tabel in met synoniemen, vertalingen, afkortingen, spellingsvormen, vaktermen, bredere termen en nauwere termen.</p>"
+                      "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Gebruik de casus <strong>magazijnoptimalisatie bij Organisatie X</strong> op de pagina <strong>Casus magazijnoptimalisatie</strong>.. Bij deze casus komt het begrip magazijn naar voren. Ga voor dit begrip alvast een start maken met de bouwsteenmethode.</p>",
+                      "<p class=\"text-gray-700 dark:text-gray-300 mb-0\">Gebruik de tabel die je hierboven hebt gezien om het begrip magazijn uit te werken volgens de bouwsteenmethode. Vul de tabel in met synoniemen, vertalingen, afkortingen, spellingsvormen, vaktermen, bredere termen en nauwere termen.</p>"
                     ]
                   }
                 ]
@@ -413,13 +413,13 @@
         "defaultOpen": false,
         "items": [
           {
-            "title": "Opdracht 3.3: Bouwsteenmethode voor magazijnoptimalisatie",
+            "title": "Opdracht 3.3: Bouwsteenmethode voor magazijn",
             "defaultOpen": false,
             "content": [
-              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Gebruik de casus <strong>magazijnoptimalisatie bij Organisatie X</strong> op de pagina <strong>Casus magazijnoptimalisatie</strong>.. Bij deze casus komt het begrip magazijnoptimalisatie naar voren. Ga voor dit begrip een start maken met de bouwsteenmethode.</p>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Gebruik de casus <strong>magazijnoptimalisatie bij Organisatie X</strong> op de pagina <strong>Casus magazijnoptimalisatie</strong>.. Bij deze casus komt het begrip magazijn naar voren. Ga voor dit begrip een start maken met de bouwsteenmethode.</p>",
               "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Je mag hierbij gebruikmaken van de AI Bouwsteen Generator hierboven. Pas hierbij wel strikt het mens-machine-mens principe toe:</p>",
               "<ul class=\"list-disc list-inside space-y-2 mb-4 ml-4\">",
-              "<li class=\"text-gray-700 dark:text-gray-300\"><strong>Mens:</strong> Bedenk eerst zelf wat de context is. Wat houdt magazijnoptimalisatie in voor dit specifieke bedrijf?</li>",
+              "<li class=\"text-gray-700 dark:text-gray-300\"><strong>Mens:</strong> Bedenk eerst zelf wat de context is. Wat houdt magazijn in voor dit specifieke bedrijf?</li>",
               "<li class=\"text-gray-700 dark:text-gray-300\"><strong>Machine:</strong> Gebruik de AI-tool om suggesties te genereren voor synoniemen, vertalingen en gerelateerde termen.</li>",
               "<li class=\"text-gray-700 dark:text-gray-300\"><strong>Mens:</strong> Beoordeel de output kritisch. Kloppen de termen? Zijn ze relevant voor jouw onderzoek? Vul de tabel aan, corrigeer fouten en selecteer alleen de bruikbare 'bouwstenen'.</li>",
               "</ul>",
@@ -429,16 +429,34 @@
         ]
       },
       {
+        "type": "highlight",
+        "title": "Voorbereiding college week 3",
+        "content": [
+          "Lees voor het college van week 3 alle stof tot en met hier."
+        ],
+        "icon": "fa-calendar-check",
+        "iconClass": "fas",
+        "bgColor": "bg-blue-50 dark:bg-blue-900/20",
+        "borderColor": "border-blue-500 dark:border-blue-400",
+        "titleColor": "text-blue-900 dark:text-blue-200",
+        "contentColor": "text-blue-800 dark:text-blue-300"
+      },
+      {
+        "type": "heading",
+        "text": "Van Informatieberg naar Theoretisch Kader",
+        "level": 2,
+        "id": "van-informatieberg-naar-theoretisch-kader"
+      },
+      {
         "type": "paragraph",
         "text": [
-          "Van Informatieberg naar Theoretisch Kader<br><br>In Fase 02 heb je geleerd hoe je moet zoeken. De kans is groot dat je nu een flinke lijst met zoekresultaten hebt. Maar let op: niet alles wat je vindt, is goud.<br><br>In Fase 03 maken we de vertaalslag van zoeken naar verwerken. We focussen op drie stappen om van zoekresultaten naar een goed theoretisch kader te komen.<br><br><div class=\"ml-6 pl-4\"><strong>Selecteren en beoordelen:</strong> Hoe scheid je het kaf van het koren? Je leert werken met een 1e en 2e check voor literatuur en de CRAP-test voor internetbronnen. Zo voorkom je dat je je onderzoek bouwt op onbetrouwbare funderingen.<br><br><strong>Slim bronnen beheren:</strong> Stop met het handmatig typen van bronvermeldingen. We introduceren tools zoals Zotero. De tijd die je nu investeert in het inrichten van zo'n reference organizer, verdien je later dubbel en dwars terug bij het maken van je literatuurlijst (volgens de laatste APA-richtlijnen).<br><br><strong>Theoretisch kader schrijven:</strong> Dit is vaak het lastigste stuk. Een theoretisch kader is geen opsomming van feitjes of een uitleg van standaardmodellen (zoals een Pareto-analyse). Het is een samenhangend geheel waarmee je aantoont waar de knowledge gap zit.</div><br><br>Deze drie onderwerpen worden hieronder één voor één behandeld."
+          "In Fase 02 heb je geleerd hoe je moet zoeken. De kans is groot dat je nu een flinke lijst met zoekresultaten hebt. Maar let op: niet alles wat je vindt, is goud.<br><br>In Fase 03 maken we de vertaalslag van zoeken naar verwerken. We focussen op drie stappen om van zoekresultaten naar een goed theoretisch kader te komen.<br><br><div class=\"ml-6 pl-4\"><strong>Selecteren en beoordelen:</strong> Hoe scheid je het kaf van het koren? Je leert werken met een 1e en 2e check voor literatuur en de CRAP-test voor internetbronnen. Zo voorkom je dat je je onderzoek bouwt op onbetrouwbare funderingen.<br><br><strong>Slim bronnen beheren:</strong> Stop met het handmatig typen van bronvermeldingen. We introduceren tools zoals Zotero. De tijd die je nu investeert in het inrichten van zo'n reference organizer, verdien je later dubbel en dwars terug bij het maken van je literatuurlijst (volgens de laatste APA-richtlijnen).<br><br><strong>Theoretisch kader schrijven:</strong> Dit is vaak het lastigste stuk. Een theoretisch kader is geen opsomming van feitjes of een uitleg van standaardmodellen (zoals een Pareto-analyse). Het is een samenhangend geheel waarmee je aantoont waar de knowledge gap zit.</div><br><br>Deze drie onderwerpen worden hieronder één voor één behandeld."
         ]
       },
       {
         "type": "heading",
         "text": "Selecteren en beoordelen",
-        "level": 2,
-        "id": "selecteren-beoordelen"
+        "level": 2
       },
       {
         "type": "paragraph",
@@ -1190,9 +1208,9 @@
                 ],
                 "feedback": {
                   "correct": "Goed gedaan! Je hebt de alinea's in de juiste logische volgorde gezet.",
-                  "incorrect": "Niet helemaal correct. Denk na over hoe de alinea's logisch op elkaar volgen."
+                  "incorrect": "Niet alle alinea's staan op de juiste plek. Groene randen geven aan welke alinea's al goed staan; verplaats de rode alinea's nog."
                 },
-                "explanation": "Uitstekend! De volgorde is correct. Alinea 1 gaat over het probleem (disbalans door gebrek aan data-gestuurd model). Alinea 2 beschrijft de oplossing (EOQ-model). Alinea 3 legt de methode uit (kwantitatieve analyse). Alinea 4 benoemt de knowledge gap (onbekende kostvariabelen en besparingspotentieel). Met een dergelijke opbouw van het theoretisch kader is er een mooie volgorde waarin ook wordt getrechterd van breed naar smal.",
+                "explanation": "Groene randen: deze alinea staat op de juiste plek. Rode randen: verplaats deze alinea nog. De bedoelde volgorde is: (1) het probleem — disbalans door gebrek aan een data-gestuurd model; (2) de oplossing — het EOQ-model; (3) de methode — kwantitatieve analyse; (4) de knowledge gap — onbekende kostvariabelen en besparingspotentieel. Zo trechter je van breed naar smal.",
                 "sources": [
                   "Van Weele, A. J. (2018). Purchasing and supply chain management. Cengage Learning.",
                   "Silver, E. A., Pyke, D. F., & Thomas, D. J. (2017). Inventory and production management in supply chains. CRC Press.",
@@ -1241,37 +1259,50 @@
         "defaultOpen": false,
         "items": [
           {
-            "title": "Opdracht 2: Literatuuronderzoek starten",
+            "title": "Opdracht 4.1: Literatuuronderzoek starten",
             "defaultOpen": false,
             "content": [
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Mogelijk heb je in het vorige college al een begin gemaakt met het literatuuronderzoek voor de casus magazijnoptimalisatie. Mocht je al goede bronnen hebben gevonden voor deze casus, dan kun je er ook voor kiezen om bronnen te gaan zoeken voor je eigen Praktijkvraagstuk.</p>",
               "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Ga voor enkele zoektermen bij de casus magazijnoptimalisatie alvast starten met het literatuuronderzoek. Gebruik hiervoor de zoektermen die je hebt geselecteerd uit de doelstelling, hoofdvraag en deelvragen en die je hebt uitgewerkt in de bouwsteenmethode (Fase 02).</p>",
-              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Voer je zoekopdrachten uit in Windesearch of Google Scholar en noteer de gegevens van de informatiebronnen waarvan je denkt dat die bruikbaar zijn voor je onderzoek. Let erop dat je (semi)wetenschappelijke literatuur zoekt.</p>",
-              "<p class=\"text-gray-700 dark:text-gray-300 mb-0\">Je hoeft de bronnen nog niet volledig te beoordelen met de 1e en 2e check - dat komt in opdracht 3 aan bod. Focus je nu op het vinden van relevante bronnen en het noteren van de basisgegevens (titel, auteur, jaar, bron).</p>"
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Voer je zoekopdrachten uit in Windesearch of Google Scholar en noteer de gegevens van de informatiebronnen waarvan je denkt dat die bruikbaar zijn voor je onderzoek. Let erop dat je (semi)wetenschappelijke literatuur zoekt.</p>"
             ]
           },
           {
-            "title": "Opdracht 3: Tabellen voorbereiden",
+            "title": "Opdracht 4.2: Tabellen voorbereiden",
             "defaultOpen": false,
             "content": [
               "<p class=\"text-gray-700 dark:text-gray-300 mb-0\">Plaats de tabellen voor de 2e check (voor (semi)wetenschappelijke literatuur) en de CRAP-test (voor internetbronnen) alvast in een bijlage van je onderzoeksplan. Je vindt deze tabellen in de theorie hierboven.</p>"
             ]
           },
           {
-            "title": "Opdracht 4: Artikel Careful with that warehouse",
+            "title": "Opdracht 4.3: Artikel Careful with that warehouse",
             "defaultOpen": false,
             "content": [
-              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Zorg dat je de kern van het artikel <a href=\"assets/Documents/Careful%20with%20that%20warehouse.pdf\" target=\"_blank\" class=\"text-blue-600 hover:text-blue-800 underline font-medium\">Careful with that warehouse</a> hebt begrepen.</p>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Zorg dat je de kern van het artikel <a href=\"assets/careful-with-that-warehouse.pdf\" target=\"_blank\" class=\"text-blue-600 hover:text-blue-800 underline font-medium\">Careful with that warehouse</a> hebt begrepen.</p>",
               "<p class=\"text-gray-700 dark:text-gray-300 mb-0\">Voer de 1e check uit op het artikel en beschrijf kort je bevinding.</p>"
             ]
           },
           {
-            "title": "Opdracht 5: Reference organizer downloaden (optioneel maar aanbevolen)",
+            "title": "Opdracht 4.4: Reference organizer downloaden (optioneel maar aanbevolen)",
             "defaultOpen": false,
             "content": [
               "<p class=\"text-gray-700 dark:text-gray-300 mb-0\">Download en installeer een reference organizer (bijvoorbeeld Zotero). Maak zelf een beschrijving van hoe je dit hebt gedaan en wat de voordelen zijn van het gebruik van een reference organizer.</p>"
             ]
           }
         ]
+      },
+      {
+        "type": "highlight",
+        "title": "Voorbereiding college week 4",
+        "content": [
+          "Lees voor het college van week 4 alle stof tot en met hier."
+        ],
+        "icon": "fa-calendar-check",
+        "iconClass": "fas",
+        "bgColor": "bg-blue-50 dark:bg-blue-900/20",
+        "borderColor": "border-blue-500 dark:border-blue-400",
+        "titleColor": "text-blue-900 dark:text-blue-200",
+        "contentColor": "text-blue-800 dark:text-blue-300"
       }
     ]
   },

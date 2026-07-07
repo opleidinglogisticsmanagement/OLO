@@ -6,6 +6,11 @@
     <meta name="view-transition" content="same-origin" />
     <title>Fase 04 - Opzetten van een Logistiek Onderzoek</title>
     <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+    <script>
+        if (window.location.hash === '#planning-maken') {
+            window.location.replace('afronding.html#planning-maken' + (window.location.search || ''));
+        }
+    </script>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
       tailwind.config = {

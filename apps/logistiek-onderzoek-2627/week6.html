@@ -10,6 +10,10 @@
         (function () {
             var hash = window.location.hash || '';
             var search = window.location.search || '';
+            if (hash === '#planning-maken') {
+                window.location.replace('afronding.html' + hash + search);
+                return;
+            }
             if (window.PhaseNavigationConfig && PhaseNavigationConfig.redirectWeekUrl('week6.html')) {
                 return;
             }

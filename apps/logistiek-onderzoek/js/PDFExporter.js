@@ -179,22 +179,7 @@ class PDFExporter {
                 { number: 5, title: 'Uitvoeren literatuuronderzoek + Theoretisch kader', file: 'week5.html', jsonFile: 'content/week5.content.json' },
                 { number: 6, title: 'Onderzoeksstrategie + dataverzamelingsplan', file: 'week6.html', jsonFile: 'content/week6.content.json' },
                 { number: 7, title: 'Rapportage 1', file: 'week7.html', jsonFile: 'content/week7.content.json' }
-                // Afsluiting wordt alleen toegevoegd als het bestand bestaat
             ];
-            
-            // Probeer afsluiting toe te voegen als het bestand bestaat
-            // Let op: browsers loggen altijd 404s in de console, dit is normaal gedrag
-            try {
-                const afsluitingResponse = await fetch('content/afsluiting.content.json');
-                // Check expliciet op status 200, niet alleen op ok (om 404's stil te houden)
-                if (afsluitingResponse.status === 200) {
-                    weeks.push({ number: 8, title: 'Afsluiting', file: 'afsluiting.html', jsonFile: 'content/afsluiting.content.json' });
-                }
-                // Status 404 wordt stil genegeerd (dit is verwacht gedrag)
-            } catch (e) {
-                // Netwerk errors worden stil genegeerd
-            }
-
             for (const week of weeks) {
                 // Week header - extra ruimte voor nieuwe week
                 if (yPosition > pageHeight - 40) {

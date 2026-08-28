@@ -82,6 +82,17 @@
         const originalInit = AppRouter.prototype.init;
         const originalLoadIndexPage = AppRouter.prototype.loadIndexPage;
         const originalShowLoadingState = AppRouter.prototype.showLoadingState;
+        const originalLoadWeekPage = AppRouter.prototype.loadWeekPage;
+
+        const LEGACY_PAGE_CLASS_MAP = {
+            Week1LessonPage: { moduleId: 'week-1', pageClassName: 'OnderzoeksplanLessonPage' },
+            Week2LessonPage: { moduleId: 'fase-1', pageClassName: 'Fase1LessonPage' },
+            Week3LessonPage: { moduleId: 'fase-1', pageClassName: 'Fase1LessonPage' },
+            Week4LessonPage: { moduleId: 'fase-2', pageClassName: 'Fase2LessonPage' },
+            Week5LessonPage: { moduleId: 'fase-3', pageClassName: 'Fase3LessonPage' },
+            Week6LessonPage: { moduleId: 'fase-4', pageClassName: 'Fase4LessonPage' },
+            Week7LessonPage: { moduleId: 'afronding', pageClassName: 'AfrondingLessonPage' }
+        };
 
         /**
          * Registreer fase-routes op de router
@@ -90,6 +101,7 @@
         function registerPhaseRoutes(router) {
             router.routes['onderzoeksplan.html'] = () => router.loadWeekPage('week-1', 'OnderzoeksplanLessonPage');
             router.routes['week1.html'] = () => router.loadWeekPage('week-1', 'OnderzoeksplanLessonPage');
+            router.routes['casus.html'] = () => router.loadWeekPage('casus', 'CasusLessonPage');
             router.routes['fase1.html'] = () => router.loadWeekPage('fase-1', 'Fase1LessonPage');
             router.routes['week2.html'] = () => router.loadWeekPage('fase-1', 'Fase1LessonPage');
             router.routes['week3.html'] = () => router.loadWeekPage('fase-1', 'Fase1LessonPage');
@@ -102,6 +114,33 @@
             router.routes['afronding.html'] = () => router.loadWeekPage('afronding', 'AfrondingLessonPage');
             router.routes['week7.html'] = () => router.loadWeekPage('afronding', 'AfrondingLessonPage');
         }
+
+        const originalNavigate = AppRouter.prototype.navigate;
+        const originalHandleRoute = AppRouter.prototype.handleRoute;
+
+        AppRouter.prototype.navigate = async function (path, hash = null) {
+            const mapped = PhaseNavigationConfig.mapLegacyHref(path || '');
+            let nextHash = hash;
+            if (!nextHash && mapped.includes('#')) {
+                nextHash = mapped.split('#')[1].split('?')[0];
+            }
+            const mappedPath = mapped.split('#')[0];
+            if (window.LogistiekNavigation && typeof window.LogistiekNavigation.aliasLegacyPageClasses === 'function') {
+                window.LogistiekNavigation.aliasLegacyPageClasses();
+            }
+            return originalNavigate.call(this, mappedPath, nextHash);
+        };
+
+        AppRouter.prototype.handleRoute = async function (path, hash = null) {
+            const fileName = ((path || '').split('/').pop() || 'index.html').split('?')[0].split('#')[0];
+            const mappedFile = PhaseNavigationConfig.mapLegacyHref(fileName);
+            if (mappedFile !== fileName) {
+                const mappedPath = (path || '').replace(fileName, mappedFile);
+                window.history.replaceState({}, '', mappedPath + (hash ? '#' + hash : ''));
+                return originalHandleRoute.call(this, mappedPath, hash);
+            }
+            return originalHandleRoute.call(this, path, hash);
+        };
 
         AppRouter.prototype.showLoadingState = function () {
             if (window.__indexMainContentCache && !window.__initialIndexLoadComplete && isIndexPath()) {
@@ -125,6 +164,13 @@
             }
 
             await originalLoadIndexPage.call(this);
+            PhaseNavigationConfig.refreshSidebarNavigation('start');
+        };
+
+        AppRouter.prototype.loadWeekPage = async function (moduleId, pageClassName) {
+            const mapped = LEGACY_PAGE_CLASS_MAP[pageClassName] || { moduleId, pageClassName };
+            await originalLoadWeekPage.call(this, mapped.moduleId, mapped.pageClassName);
+            PhaseNavigationConfig.refreshSidebarNavigation(mapped.moduleId);
         };
 
         if (typeof NavigationInitializer !== 'undefined') {
@@ -138,9 +184,10 @@
         }
 
         AppRouter.prototype.init = function () {
-            registerPhaseRoutes(this);
             cacheServerIndexContent();
-            return originalInit.call(this);
+            const result = originalInit.call(this);
+            registerPhaseRoutes(this);
+            return result;
         };
 
         installed = true;

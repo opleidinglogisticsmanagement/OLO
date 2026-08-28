@@ -64,7 +64,7 @@
         }
 
         const activePhaseId = PhaseNavigationConfig.resolveActivePhaseId(moduleId);
-        ['fase-1', 'fase-2', 'fase-3', 'fase-4'].forEach((phaseId) => {
+        ['fase-1', 'fase-2', 'fase-3', 'fase-4', 'afronding'].forEach((phaseId) => {
             setupPhaseSubmenu(phaseId, activePhaseId);
         });
     }
@@ -73,7 +73,13 @@
         const originalInit = SidebarManager.prototype.init;
         SidebarManager.prototype.init = function () {
             originalInit.call(this);
-            initPhaseSubmenus(this.moduleId);
+
+            const navConfig = window.PhaseNavigationConfig;
+            if (!navConfig) {
+                return;
+            }
+
+            navConfig.refreshSidebarNavigation(this.moduleId);
         };
     }
 

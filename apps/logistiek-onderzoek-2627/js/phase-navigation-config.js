@@ -28,21 +28,12 @@
     window.APP_ID = 'logistiek-onderzoek-2627';
 
     /**
-     * Controleer of we in de 2627-app zitten
+     * Controleer of we in de 2627-app zitten.
+     * Dit bestand bestaat alleen in logistiek-onderzoek-2627.
      * @returns {boolean}
      */
     function isApp2627() {
-        if (window.APP_ID === 'logistiek-onderzoek-2627') {
-            return true;
-        }
-
-        const path = window.location.pathname || '';
-        const href = window.location.href || '';
-        const hostname = window.location.hostname || '';
-
-        return path.includes('logistiek-onderzoek-2627')
-            || href.includes('logistiek-onderzoek-2627')
-            || hostname.includes('olo-2627');
+        return true;
     }
 
     /**
@@ -271,6 +262,130 @@
             </nav>`;
     }
 
+    /** Oude week-moduleId → huidige fase-moduleId */
+    const LEGACY_MODULE_IDS = {
+        'week-2': 'fase-1',
+        'week-3': 'fase-1',
+        'week-4': 'fase-2',
+        'week-5': 'fase-3',
+        'week-6': 'fase-4',
+        'week-7': 'afronding'
+    };
+
+    /**
+     * Vertaal oude week-moduleId naar huidige fase-moduleId
+     * @param {string} moduleId
+     * @returns {string}
+     */
+    function resolveSequentialModuleId(moduleId) {
+        return LEGACY_MODULE_IDS[moduleId] || moduleId;
+    }
+
+    /**
+     * Leerpad voor vorige/volgende knoppen (zonder begrippenlijst)
+     * @returns {Array<Object>}
+     */
+    function getSequentialModules() {
+        return getNavigationServiceModules().filter((module) => module.id !== 'register');
+    }
+
+    /**
+     * Vorige module in het leerpad
+     * @param {string} moduleId
+     * @returns {Object|null}
+     */
+    function getPreviousSequentialModule(moduleId) {
+        const modules = getSequentialModules();
+        const id = resolveSequentialModuleId(moduleId);
+        const currentIndex = modules.findIndex((module) => module.id === id);
+        return currentIndex > 0 ? modules[currentIndex - 1] : null;
+    }
+
+    /**
+     * Volgende module in het leerpad
+     * @param {string} moduleId
+     * @returns {Object|null}
+     */
+    function getNextSequentialModule(moduleId) {
+        const modules = getSequentialModules();
+        const id = resolveSequentialModuleId(moduleId);
+        const currentIndex = modules.findIndex((module) => module.id === id);
+        if (currentIndex < 0 || currentIndex >= modules.length - 1) {
+            return null;
+        }
+        return modules[currentIndex + 1];
+    }
+
+    /**
+     * Vertaal oude week-URL naar huidige fase-URL (behoud hash/query)
+     * @param {string} href
+     * @returns {string}
+     */
+    function mapLegacyHref(href) {
+        if (!href) {
+            return href;
+        }
+
+        const hashIndex = href.indexOf('#');
+        const queryIndex = href.indexOf('?');
+        const cutCandidates = [hashIndex, queryIndex].filter((index) => index >= 0);
+        const cutIndex = cutCandidates.length > 0 ? Math.min.apply(null, cutCandidates) : -1;
+        const filePart = cutIndex >= 0 ? href.slice(0, cutIndex) : href;
+        const rest = cutIndex >= 0 ? href.slice(cutIndex) : '';
+        const fileName = filePart.split('/').pop();
+
+        if (fileName === 'week4.html') {
+            const hashMatch = rest.match(/#[^?]*/);
+            const hash = hashMatch ? hashMatch[0] : '';
+            const target = WEEK4_FASE3_ANCHORS.some((anchor) => hash === anchor || hash.startsWith(anchor))
+                ? 'fase3.html'
+                : 'fase2.html';
+            return target + rest;
+        }
+
+        const target = WEEK_REDIRECTS[fileName];
+        return target ? target + rest : href;
+    }
+
+    /**
+     * Staat de oude week-2-tot-7-sidebar in de DOM?
+     * @returns {boolean}
+     */
+    function hasLegacyWeekSidebar() {
+        return !!(document.querySelector('.week-2-nav-item') || document.querySelector('.week-3-nav-item'));
+    }
+
+    /**
+     * Vervang de sidebar-nav door de fase-navigatie
+     * @param {string} [moduleId='']
+     * @returns {boolean}
+     */
+    function refreshSidebarNavigation(moduleId = '') {
+        const sidebar = document.getElementById('sidebar');
+        if (!sidebar) {
+            return false;
+        }
+
+        const html = renderSidebarNavigation(moduleId);
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(html, 'text/html');
+        const newNav = doc.querySelector('nav');
+        const oldNav = sidebar.querySelector('nav[aria-label="Module navigatie"]')
+            || sidebar.querySelector('nav');
+
+        if (!newNav || !oldNav) {
+            return false;
+        }
+
+        oldNav.replaceWith(newNav);
+
+        if (window.PhaseSidebar) {
+            window.PhaseSidebar.initPhaseSubmenus(moduleId);
+        }
+
+        return true;
+    }
+
     /**
      * Redirect oude week-URL naar fase-URL (behoud hash)
      * @param {string} weekFile - Bestandsnaam, bijv. week6.html
@@ -301,8 +416,15 @@
         isApp2627,
         getPhaseModules,
         getNavigationServiceModules,
+        getSequentialModules,
+        getPreviousSequentialModule,
+        getNextSequentialModule,
+        resolveSequentialModuleId,
         resolveActivePhaseId,
         renderSidebarNavigation,
+        refreshSidebarNavigation,
+        hasLegacyWeekSidebar,
+        mapLegacyHref,
         redirectWeekUrl
     };
 })();

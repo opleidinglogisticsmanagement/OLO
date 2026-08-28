@@ -1,7 +1,7 @@
 /**
- * Centrale navigatieconfiguratie voor logistiek-onderzoek-2627 (fase-URL's).
+ * Centrale navigatieconfiguratie voor het fasenleerpad (fase-URL's).
  * Eén bron van waarheid voor sidebar, vorige/volgende en redirects.
- * Preview: https://olo-2627v1.vercel.app/ — productie: https://logistiekonderzoek.vercel.app/
+ * Live: https://logistiekonderzoek.vercel.app/
  */
 (function () {
     'use strict';
@@ -24,12 +24,11 @@
     /** Anchors op week4 die naar fase3 horen */
     const WEEK4_FASE3_ANCHORS = ['#literatuuronderzoek'];
 
-    /** App-identiteit (dit bestand bestaat alleen in logistiek-onderzoek-2627) */
-    window.APP_ID = 'logistiek-onderzoek-2627';
+    /** App-identiteit */
+    window.APP_ID = 'logistiek-onderzoek';
 
     /**
-     * Controleer of we in de 2627-app zitten.
-     * Dit bestand bestaat alleen in logistiek-onderzoek-2627.
+     * Gebruik het fasenleerpad (dit bestand wordt alleen geladen in de gemigreerde app).
      * @returns {boolean}
      */
     function isApp2627() {

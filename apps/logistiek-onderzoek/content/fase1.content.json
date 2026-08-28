@@ -1,0 +1,1317 @@
+{
+  "intro": {
+    "title": "Fase 01",
+    "subtitle": "Eerste aanzet",
+    "description": "In Fase 01 leg je de basis voor je onderzoeksplan. Je leert het praktijkprobleem verkennen, een SMART doelstelling formuleren, een onderzoeksmodel opstellen, de hoofdvraag formuleren en de AI-Onderzoeksassistent inzetten."
+  },
+  "leerdoelen": {
+    "title": "Leerdoelen",
+    "description": "",
+    "items": [
+      "Uitleggen wat het belang is van een goed geformuleerde doelstelling binnen praktijkgericht onderzoek.",
+      "Een onderscheid maken tussen het probleem, de doelstelling en de hoofdvraag in een onderzoeksopzet.",
+      "Een doelstelling formuleren aan de hand van het a- en b-gedeelte.",
+      "Een doelstelling SMART formuleren en beoordelen.",
+      "De relatie tussen opdrachtgever en onderzoeker toelichten en kritisch reflecteren op je eigen rol hierin.",
+      "De verschillende vormen van praktijkgericht onderzoek herkennen en toepassen binnen een logistieke context.",
+      "Je kunt uitleggen wat een onderzoeksmodel is en waarom je het nodig hebt bij het opzetten van een onderzoek.",
+      "Je kunt de zes basishandelingen bij het maken van een onderzoeksmodel toepassen: werken van achteren naar voren, bepalen van onderzoeksobjecten, bepalen van de onderzoeksoptiek, kiezen van bronnen, confronteren, en schematische weergave en verwoording.",
+      "Je kunt onderscheid maken tussen een normatief en feitelijk perspectief bij het bepalen van de onderzoeksoptiek.",
+      "Je kunt uitleggen wat confronteren betekent in het kader van een onderzoeksmodel en hoe je verschillende bronnen met elkaar confronteert.",
+      "Je kunt een onderzoeksmodel schematisch weergeven en verwoorden volgens de drie stappen: opstellen van onderzoeksoptiek, analyseresultaten en succesfactoren, en verbeteradviezen.",
+      "Je kunt een adequate centrale onderzoeksvraag formuleren die voldoet aan de eisen van afbakening, efficiëntie en sturend vermogen."
+    ],
+    "interactive": false
+  },
+  "theorie": {
+    "title": "Introductie",
+    "content": [
+      {
+        "type": "paragraph",
+        "text": [
+          "Je gaat een onderzoek uitvoeren maar hoe weet je nu hoe je moet gaan starten? Je hebt je eerste gesprekken gehad en vraagt je nu af hoe je verder moet gaan. Je zou de eerste student niet zijn die aan de slag gaat met een onderzoek en er gedurende het project achter komt dat het onderzoek veel te ruim of groots is opgezet voor de hoeveelheid beschikbare tijd. Door middel van een doelstelling zorgen we ervoor dat je allereerst een probleem gaat verkennen om vervolgens een doelstelling te op te stellen. Belangrijk bij praktijkgericht onderzoek is dat je helder hebt wat je relatie is met de opdrachtgever en uiteindelijk ook de andere stakeholders. Wat vraagt dit van je houding en hoe verhoud jij je hiernaar.",
+          "In deze voorbereiding gaan we hierbij stil staan. We beginnen met een voorbeeld."
+        ]
+      },
+      {
+        "type": "accordion",
+        "usePlusIcon": true,
+        "defaultOpen": false,
+        "items": [
+          {
+            "title": "Voorbeeld",
+            "defaultOpen": false,
+            "content": [
+              "<div style='margin-left: 20px; margin-bottom: 1rem;'><em>Je studeert Logistics Management en bent op zoek naar een onderwerp voor je stage. Je hebt daarom het Logistics Lab benaderd met de vraag of het mogelijk is om binnen of vanuit deze organisatie een onderzoeksproject te doen. Het Logistics Lab ziet hier wel mogelijkheden in en wil je graag betrekken bij een lopen project bij een aantal van haar partners, Scania en Zehnder.</em></div>",
+              "<div style='margin-left: 20px; margin-bottom: 1rem;'><em>Zowel Scania als Zehnder zijn op zoek naar (innovatieve) oplossingen met betrekking tot horizontale verplaatsingen. In het verleden zijn binnen beide organisaties verschillende onderzoeken uitgevoerd naar met name verticale verplaatsingen waarmee met name de handling binnen de organisaties werd gereduceerd. Nu willen beide bedrijven graag (gezamenlijk) op zoek naar oplossingen op het vlak van horizontale verplaatsingen. Veel innovatieve systemen vragen om een bezettingsgraad van meer dan 20 uur, met als gevolg dat een 3 ploegenstructuur vaak wenselijk is. Tegelijkertijd kennen beide organisaties een 2-ploegen of zelfs een 1 ploegenstructuur. De onderzoeken naar verticale verplaatsingen zijn telkens vanuit cases opgepakt waarbij een specifieke technologie wordt opgepakt en onderzocht vanuit een specifiek (deel van een) proces. Deze aanpak is heel tijdrovend geweest en geresulteerd in vele onderzoeken waarbij relatief snel zichtbaar werd dat verder onderzoek niet nodig was. Echter was het al wel een (onderzoeks-) opdracht van een HBO student, maar waren de uitkomsten al snel niet meer bruikbaar.</em></div>",
+              "<div style='margin-left: 20px; margin-bottom: 1rem;'><em>Vanuit interne contacten vanuit beide organisaties is het Logistics Lab gevraagd hierin te faciliteren en samen met o.a. studenten deze ingewikkelde puzzel te gaan ontrafelen. Na onderling overleg is er een roadmap opgesteld waarin de organisaties willen toewerken naar een ingebedde (innovatieve) oplossing met betrekking tot horizontale verplaatsingen waarbij beide organisaties handvatten aangereikt krijgen waarmee zij zelf toekomstige beslissingen kunnen nemen met betrekking tot dit vraagstuk. Deze handreikingen hebben dan onder andere betrekking op:</em></div>",
+              "<div style='margin-left: 40px; margin-bottom: 1rem;'><em>- De keuze van (innovatieve) oplossing<br>- Welke voorwaarden worden er aan het proces gesteld<br>- Opleidingsbehoefte van (huidige en toekomstige) medewerkers<br>- Hoe om te gaan met het onderhoud en storingen.</em></div>",
+              "<p class='text-gray-700 dark:text-gray-300 mb-3'>Nu word jij geconfronteerd met deze opdracht en de vraag op welke wijze jij jouw onderzoeksopdracht zou kunnen inpassen in deze aanpak. Kortom, de vraag is wat is de bijdrage van jouw onderzoeksopdracht aan het grotere geheel?</p>"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "Binnen het HBO doen de meeste studenten een praktijkgericht onderzoek. Een theoretisch vraagstuk is ook mogelijk op het HBO, maar zien we minder vaak terug. Wij zullen ons in deze module met name focussen op het praktijkgericht onderzoek. Belangrijk te beseffen dat er een praktisch vraagstuk aan je onderzoek ten grondslag ligt. In een praktijkgericht onderzoek gaan we bestaande theorieën onderzoeken en vooral toepassen in verschillende situaties. Een onderdeel van een praktijkgericht onderzoek is het inzichtelijk maken van bestaande theorieën en inzichten. Hierover zullen we later meer toelichten.",
+          "Nu nemen we je mee in de reis om van een globaal vraagstuk toe te gaan werken naar een doordacht opgezet onderzoeksplan. Tijdens deze reis worden de volgende onderwerpen doorlopen, zoals weergegeven in het figuur hieronder 'De vier fasen bij het opstellen van een logistiek onderzoek'."
+        ]
+      },
+      {
+        "type": "image",
+        "src": "assets/images/Stappenplannen-1.0.png",
+        "alt": "De vier fasen bij het opstellen van een logistiek onderzoek.",
+        "enableModal": true
+      },
+      {
+        "type": "heading",
+        "text": "Probleem verkennen",
+        "level": 2,
+        "id": "probleem-verkennen"
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "Nu heb je al wel wat gelezen, maar wat is dat nu het probleem verkennen en waarom doe je dat?",
+          "Bekijk deze kennisclip voor uitleg over het verkennen van een probleem."
+        ]
+      },
+      {
+        "type": "video",
+        "url": "https://media.windesheim.nl/Mediasite/Play/04a2c55f2667467e967de63284f791551d",
+        "transcriptContent": "Het verkennen van een onderzoeksprobleem.\n\nWelkom bij deze kennisclip. We gaan het vandaag hebben over het verkennen van het probleem. Hoe pakken we dat aan? We gaan de vragen van het bedrijf en de opdrachtgever op een gestructureerde manier aanpakken. We creëren voor onszelf een overzicht.\n\nIn het eerste jaar heb je de vijf W's geleerd. Dit zijn de vragen: wat is het probleem? Waarom is het een probleem? Wie heeft het probleem? Waar is het probleem? Wanneer is het probleem ontstaan? Bij een logistiek onderzoek gaan we deze vragen verdiepen. We voegen meer toe. We gebruiken vraagstukken om het probleem te verkennen.\n\nWaar gaan we beginnen? De eerste vraag is waarom het een probleem is. We onderzoeken waarom het een probleem is voor de organisatie en voor jouw onderzoek. Waar is het een probleem? In welke omgeving of context gebeurt het? Wanneer is het een probleem? Ontstaat het op een specifiek dagdeel of de hele dag door?\n\nWe kijken ook naar de betrokken stakeholders. Wie heeft het probleem? Wie zijn er nog meer betrokken? Wie heeft een rol in het probleem? Denk aan deelnemers in het proces. Ook managers, klanten, relaties en leveranciers zijn stakeholders met een relatie tot het probleem.\n\nWe kijken ook naar oplossingsrichtingen. Het is belangrijk om niet te snel conclusies te trekken. Oplossingsrichtingen geven een beeld van waar het bedrijf naartoe wil. Hierdoor kunnen we het probleem beter verkennen.\n\nAls laatste spreken we over voorwaarden. Voorwaarden geven de scope aan. Ze bepalen de richting waaraan een oplossing moet voldoen. Het geeft aan wat we wel en niet meenemen in het onderzoek.\n\nAls je deze stappen en vragen doorloopt, kun je een gestructureerde probleemverkenning schrijven. Je maakt van alle onduidelijke vragen een duidelijk overzicht. Waar ga jij beginnen?"
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "In bovenstaande kennisclip heb je nu inzicht gekregen in een aantal onderwerpen waarbij je stil gaat staan bij het verkennen van je probleem. Hieronder worden deze nog even kort samengevat;"
+        ]
+      },
+      {
+        "type": "image",
+        "src": "assets/images/Praktijkprobleem.png",
+        "alt": "De zes onderdelen van een praktijkprobleem."
+      },
+      {
+        "type": "heading",
+        "text": "Interviewen",
+        "level": 2,
+        "id": "interviewen"
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "Een interview doorloopt vijf stappen: voorbereiding, opening, vragen voorbereiden, vragen stellen en luisteren en afsluiting en verwerking. Hieronder werk je die stappen stap voor stap uit.",
+          "Daarnaast vind je per fase een voorbeeld uit de casus magazijnoptimalisatie bij Organisatie X, waarin je de teamleider magazijn interviewt. Lees de volledige casusbeschrijving op <a href=\"casus.html\" class=\"text-blue-600 dark:text-blue-400 hover:underline font-medium\">Casus magazijnoptimalisatie</a>."
+        ]
+      },
+      {
+        "type": "accordion",
+        "usePlusIcon": true,
+        "defaultOpen": false,
+        "items": [
+          {
+            "title": "Voorbereiding van het interview",
+            "defaultOpen": false,
+            "content": [
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>Functie:</strong> interesse en verbinding opbouwen. Bereid het gesprek bewust voor voordat je de teamleider magazijn opzoekt.</p>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-2\"><strong>1. Het doel bepalen</strong></p>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Bepaal welke informatie je uit dit gesprek nodig hebt voor je onderzoek.<br><em>Voorbeeld:</em> Je wilt van de teamleider magazijn horen hoe zij de bezettingsgraad van circa 90% en de interne rijafstanden in het dagelijks werk ervaren.</p>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Als je weet <em>wat</em> je wilt weten en <em>bij wie</em> je dat het beste start, kun je bewuster kiezen <em>hoe</em> je het gesprek voert. Daarvoor is onderscheid te maken tussen de volgende soorten interviews:</p>",
+              "<div class=\"space-y-4 mb-6 ml-6\">",
+              "<div class=\"flex items-start gap-3\"><div class=\"flex-shrink-0 w-8 h-8 rounded-full bg-green-500 text-white flex items-center justify-center font-semibold text-sm\">1</div><p class=\"text-gray-700 dark:text-gray-300 mb-0 pt-1\">Het vrije attitude gesprek of het ongestructureerde interview</p></div>",
+              "<div class=\"flex items-start gap-3\"><div class=\"flex-shrink-0 w-8 h-8 rounded-full bg-green-500 text-white flex items-center justify-center font-semibold text-sm\">2</div><p class=\"text-gray-700 dark:text-gray-300 mb-0 pt-1\">Het semi-gestructureerde interview</p></div>",
+              "<div class=\"flex items-start gap-3\"><div class=\"flex-shrink-0 w-8 h-8 rounded-full bg-green-500 text-white flex items-center justify-center font-semibold text-sm\">3</div><p class=\"text-gray-700 dark:text-gray-300 mb-0 pt-1\">Het gestructureerde interview</p></div>",
+              "</div>",
+              {
+                "type": "tabs",
+                "defaultTab": 0,
+                "tabs": [
+                  {
+                    "title": "VRIJE ATTITUDE INTERVIEW",
+                    "content": [
+                      "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Bij dit interview ligt alleen het thema vast. De geïnterviewde is geheel vrij zijn eigen gedachtegang te volgen en datgene te vertellen wat hij belangrijk vindt. Het interviewschema bevat een klein aantal basisvragen die de geïnterviewde stimuleren om ruim te kunnen antwoorden.</p>",
+                      "<p class=\"text-gray-700 dark:text-gray-300 mb-2\"><strong>Doel:</strong> het verzamelen van informatie over:</p>",
+                      "<ul class=\"list-disc list-inside space-y-2 mb-4 ml-4\">",
+                      "<li class=\"text-gray-700 dark:text-gray-300\">Ervaringen van de gesprekspartner</li>",
+                      "<li class=\"text-gray-700 dark:text-gray-300\">Belevingen en gevoelens van de gesprekspartner</li>",
+                      "<li class=\"text-gray-700 dark:text-gray-300\">Meningen van de gesprekspartner</li>",
+                      "</ul>",
+                      "<p class=\"text-gray-700 dark:text-gray-300 mb-2\"><strong>Wanneer geschikt?</strong></p>",
+                      "<p class=\"text-gray-700 dark:text-gray-300 mb-2\">Bij het vrije attitude interview:</p>",
+                      "<ul class=\"list-disc list-inside space-y-2 mb-4 ml-4\">",
+                      "<li class=\"text-gray-700 dark:text-gray-300\">Worden aspecten verteld, die anders waarschijnlijk niet naar voren waren gekomen.</li>",
+                      "<li class=\"text-gray-700 dark:text-gray-300\">Kan de interviewer het gesprek enigszins sturen door in te gaan op relevante onderdelen.</li>",
+                      "</ul>",
+                      "<p class=\"text-gray-700 dark:text-gray-300 mb-2\">Je gebruikt het vrije attitude interview, als je je:</p>",
+                      "<ul class=\"list-disc list-inside space-y-2 mb-4 ml-4\">",
+                      "<li class=\"text-gray-700 dark:text-gray-300\">een mening wilt vormen over .....</li>",
+                      "<li class=\"text-gray-700 dark:text-gray-300\">een beeld wilt vormen over .....</li>",
+                      "<li class=\"text-gray-700 dark:text-gray-300\">een gevoel wilt krijgen bij ......</li>",
+                      "</ul>",
+                      "<div style=\"display:flex;justify-content:center;width:100%;margin-bottom:24px\"><div class=\"olo-flipcard\" style=\"width:350px;max-width:100%;box-sizing:border-box;border:2px solid #e5e7eb;border-radius:12px;padding:24px;background:#ffffff;box-shadow:0 4px 6px -1px rgba(0,0,0,0.1);cursor:pointer\" role=\"button\" tabindex=\"0\" aria-expanded=\"false\" onclick=\"toggleOloFlipcard(this)\" onkeydown=\"if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleOloFlipcard(this);}\"><div class=\"olo-flipcard-front\" style=\"display:block\"><p class=\"text-gray-700 dark:text-gray-300 text-center mb-4\">Is een vrije attitude interview geschikt als eerste echte interview met je opdrachtgever?</p><p class=\"text-sm text-gray-500 dark:text-gray-400 italic text-center mb-0\"><i class=\"fas fa-hand-pointer mr-2\"></i>Klik om het antwoord te zien</p></div><div class=\"olo-flipcard-back\" style=\"display:none\"><p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>Nee.</strong> Bij je eerste onderzoeksinterview met de opdrachtgever heb je gerichte antwoorden nodig over problematiek, doelstelling, stakeholders en randvoorwaarden.</p><p class=\"text-gray-700 dark:text-gray-300 mb-4\">Een vrije attitude interview geeft te weinig structuur om je <strong>5W's + V + O</strong> onderbouwd vast te leggen. Kies daarvoor liever een semi-gestructureerd interview met een topiclijst.</p><p class=\"text-sm text-gray-500 dark:text-gray-400 italic text-center mb-0\"><i class=\"fas fa-redo mr-2\"></i>Klik om terug te draaien</p></div></div></div>"
+                    ]
+                  },
+                  {
+                    "title": "SEMI GESTRUCTUREERDE INTERVIEW",
+                    "content": [
+                      "<p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>Het semi-gestructureerde interview:</strong></p>",
+                      "<ul class=\"list-disc list-inside space-y-2 mb-4 ml-4\">",
+                      "<li class=\"text-gray-700 dark:text-gray-300\">Is een vorm van een diepte interview waarbij geen gebruik gemaakt wordt van een standaard vragenlijst.</li>",
+                      "<li class=\"text-gray-700 dark:text-gray-300\">Er wordt gebruik gemaakt van een lijst van gesprekspunten ook wel topics genoemd.</li>",
+                      "<li class=\"text-gray-700 dark:text-gray-300\">Soms worden er een aantal basis (open) vragen geformuleerd om het gesprek op gang te brengen.</li>",
+                      "<li class=\"text-gray-700 dark:text-gray-300\">In ieder geval wordt de geïnterviewde gestimuleerd om vrijuit te praten.</li>",
+                      "<li class=\"text-gray-700 dark:text-gray-300\">Een diepte-interview wordt dus uitgevoerd om een grondig beeld te krijgen van de individuele opvattingen.</li>",
+                      "</ul>",
+                      "<div class=\"bg-blue-50 dark:bg-blue-900/20 border-l-4 border-blue-500 dark:border-blue-400 p-4 rounded-r-lg mb-0 mt-4\">",
+                      "<p class=\"text-gray-700 dark:text-gray-300 mb-2\"><strong><em>Voorbeeld: semi-gestructureerd interview met de teamleider magazijn van Organisatie X</em></strong></p>",
+                      "<p class=\"text-gray-700 dark:text-gray-300 mb-0\">Je plant een gesprek van 45 minuten op locatie. Je neemt een <strong>topiclijst</strong> mee met gesprekspunten: bezettingsgraad (circa 90%), indeling fastmovers en slowmovers, expeditiedruk en herinrichtingsopties. Je opent met een paar vaste vragen, maar laat de teamleider ook vrij aanvullen waar zij knelpunten in het dagelijks werk ervaart.</p>",
+                      "</div>"
+                    ]
+                  },
+                  {
+                    "title": "GESTRUCTUREERDE INTERVIEW",
+                    "content": [
+                      "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">In het gestructureerde interview wordt gebruik gemaakt van vragenlijsten waarin de keuzes voor de antwoorden van te voren vast zijn gelegd.</p>",
+                      "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">De vragen zijn meer gesloten van aard en voor iedere geïnterviewde hetzelfde.</p>",
+                      "<div style=\"display:flex;justify-content:center;width:100%;margin-bottom:24px\"><div class=\"olo-flipcard\" style=\"width:350px;max-width:100%;box-sizing:border-box;border:2px solid #e5e7eb;border-radius:12px;padding:24px;background:#ffffff;box-shadow:0 4px 6px -1px rgba(0,0,0,0.1);cursor:pointer\" role=\"button\" tabindex=\"0\" aria-expanded=\"false\" onclick=\"toggleOloFlipcard(this)\" onkeydown=\"if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleOloFlipcard(this);}\"><div class=\"olo-flipcard-front\" style=\"display:block\"><p class=\"text-gray-700 dark:text-gray-300 text-center mb-4\">Wat is een voor- en nadeel van het gestructureerde interview?</p><p class=\"text-sm text-gray-500 dark:text-gray-400 italic text-center mb-0\"><i class=\"fas fa-hand-pointer mr-2\"></i>Klik om het antwoord te zien</p></div><div class=\"olo-flipcard-back\" style=\"display:none\"><p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>Voordeel:</strong> de antwoorden zijn vergelijkbaar. Je kunt resultaten van verschillende geïnterviewden naast elkaar leggen.</p><p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>Nadeel:</strong> je geeft de ander minder ruimte om eigen informatie te geven. Onverwachte maar relevante inzichten komen minder snel naar voren.</p><p class=\"text-sm text-gray-500 dark:text-gray-400 italic text-center mb-0\"><i class=\"fas fa-redo mr-2\"></i>Klik om terug te draaien</p></div></div></div>",
+                      "<div class=\"bg-blue-50 dark:bg-blue-900/20 border-l-4 border-blue-500 dark:border-blue-400 p-4 rounded-r-lg mb-0 mt-4\">",
+                      "<p class=\"text-gray-700 dark:text-gray-300 mb-2\"><strong><em>Voorbeeld: gestructureerd interview bij Organisatie X</em></strong></p>",
+                      "<p class=\"text-gray-700 dark:text-gray-300 mb-0\">Je stelt aan vijf magazijnmedewerkers dezelfde gesloten vragen, bijvoorbeeld: \"Liggen fastmovers aan de voorkant van het magazijn? (ja/nee)\" en \"Ervaart u de bezettingsgraad van circa 90% als problematisch? (schaal 1-5)\". Zo kun je antwoorden onderling vergelijken en patronen zien in de ervaringen op de werkvloer.</p>",
+                      "</div>"
+                    ]
+                  }
+                ]
+              },
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4 mt-6\">Let op: de onderstaande oefening werkt mogelijk niet goed op mobiele apparaten. Gebruik bij voorkeur een desktop of tablet voor de beste ervaring.</p>",
+              {
+                "type": "matchingExercise",
+                "title": "Welke interviewvorm is het meest geschikt voor welke situatie?",
+                "instruction": "Sleep de juiste situatie naar de juiste interviewvorm.",
+                "hideBorder": true,
+                "categories": [
+                  {
+                    "name": "Semi-gestructureerd interview"
+                  },
+                  {
+                    "name": "Gestructureerd interview"
+                  },
+                  {
+                    "name": "Vrij interview"
+                  }
+                ],
+                "items": [
+                  {
+                    "text": "Er is een topiclijst, maar ook ruimte voor eigen inbreng van respondent",
+                    "correctCategory": 0
+                  },
+                  {
+                    "text": "Je wilt antwoorden van geïnterviewden met elkaar vergelijken",
+                    "correctCategory": 1
+                  },
+                  {
+                    "text": "Je wilt zoveel mogelijk over de geïnterviewde weten",
+                    "correctCategory": 2
+                  }
+                ]
+              },
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-2 mt-6\"><strong>2. De aanpak bepalen</strong></p>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Kies op basis van bovenstaande typen het interview, de duur en de setting dat past bij je doel.<br><em>Voorbeeld:</em> Je plant een semi-gestructureerd gesprek van 45 minuten op locatie, met een topiclijst over magazijnindeling, fastmovers en expeditiedruk.</p>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-2\"><strong>3. De middelen bepalen</strong></p>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Bepaal wat je meeneemt om het gesprek vast te leggen.<br><em>Voorbeeld:</em> Topiclijst, notitieblok en (met toestemming) een opname op je telefoon. Je maakt afspraken over anonimiteit in je scriptie.</p>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-2\"><strong>4. Inhoudelijke voorbereiding op het thema</strong></p>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-3\">Verdiep je vóór het gesprek in:</p>",
+              "<ul class=\"list-disc list-outside space-y-2 mb-4 ml-6 pl-4\">",
+              "<li class=\"text-gray-700 dark:text-gray-300\">de organisatie (structuur, kernactiviteiten, actuele ontwikkelingen)</li>",
+              "<li class=\"text-gray-700 dark:text-gray-300\">de persoon die je interviewt (functie, verantwoordelijkheden, betrokkenheid bij het thema)</li>",
+              "<li class=\"text-gray-700 dark:text-gray-300\">het laatste nieuws over de organisatie of de sector</li>",
+              "<li class=\"text-gray-700 dark:text-gray-300\">de thematiek van je onderzoek (begrippen, knelpunten, relevante processen)</li>",
+              "<li class=\"text-gray-700 dark:text-gray-300\">tot slot: vakliteratuur en studieboeken van je opleiding die je helpen het gesprek te voeren en antwoorden te duiden</li>",
+              "</ul>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-0\"><em>Voorbeeld bij Organisatie X:</em> Je leest op de website en in nieuwsberichten over de organisatie, je zoekt uit wat een teamleider magazijn doet, en je bestudeert begrippen als fastmovers, slowmovers en palletopslag aan de hand van je studieboeken over magazijnbeheer. Zo stel je gerichte vragen over bezettingsgraad en expeditiedruk zonder het gesprek onvoorbereid in te gaan.</p>"
+            ]
+          },
+          {
+            "title": "Opening",
+            "defaultOpen": false,
+            "content": [
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">De opening van het interview is cruciaal: hier zet je de toon voor het hele gesprek. Functie: informeren en motiveren. De geïnterviewde krijgt een helder beeld van wie je bent, waarom je er bent en wat er met de informatie gebeurt. Een goede opening wekt vertrouwen en maakt het makkelijker om daarna open en eerlijk antwoorden te krijgen.</p>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-2\">Informeer de geïnterviewde in de opening over:</p>",
+              "<ul class=\"list-disc list-outside space-y-2 mb-4 ml-6 pl-4\">",
+              "<li class=\"text-gray-700 dark:text-gray-300\"><strong>Het doel:</strong> welke informatie je uit dit gesprek nodig hebt voor je onderzoek</li>",
+              "<li class=\"text-gray-700 dark:text-gray-300\"><strong>De aanleiding:</strong> waarom je nu met juist deze persoon spreekt</li>",
+              "<li class=\"text-gray-700 dark:text-gray-300\"><strong>De aanpak:</strong> hoe je het gesprek voert (bijvoorbeeld semi-gestructureerd, met topiclijst, circa 45 minuten)</li>",
+              "<li class=\"text-gray-700 dark:text-gray-300\"><strong>Wat er met de informatie gebeurt:</strong> verwerking in je scriptie, anonimiteit, wie de resultaten mag inzien</li>",
+              "</ul>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-2\"><strong>Opname van het gesprek</strong></p>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Vraag expliciet of je het interview mag opnemen. Neem zelf het initiatief om uit te leggen wat je <em>wel</em> en <em>niet</em> met de opname doet. Bijvoorbeeld: de opname gebruik je om niets te missen, je deelt de opname niet met derden, en je citeert anoniem in je onderzoeksplan.</p>",
+              "<div class=\"bg-blue-50 dark:bg-blue-900/20 border-l-4 border-blue-500 dark:border-blue-400 p-4 rounded-r-lg mb-0\">",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-2\"><strong><em>Voorbeeld: opening met de teamleider magazijn van Organisatie X</em></strong></p>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-0\">\"Ik ben [naam], student Logistics Management. Voor mijn onderzoek naar magazijnoptimalisatie wil ik van u horen hoe u de huidige indeling en goederenstromen ervaart. Mijn opdrachtgever heeft aangegeven dat bezettingsdruk en interne rijafstanden speelpunten zijn. Het gesprek duurt ongeveer 45 minuten; ik werk uw antwoorden anoniem uit in een bijlage bij mijn scriptie. Mag ik dit gesprek opnemen? De opname gebruik ik alleen voor mijn eigen verslag, ik deel die niet met anderen en u kunt de samenvatting controleren voordat ik die opneem in mijn onderzoeksplan.\"</p>",
+              "</div>"
+            ]
+          },
+          {
+            "title": "Vragen voorbereiden",
+            "defaultOpen": false,
+            "content": [
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>Functie:</strong> je vragen en aandachtspunten vooraf bedenken, zodat je tijdens het gesprek gericht en logisch kunt doorvragen.</p>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Bedenk de vragen of aandachtspunten vóór het gesprek. Denk na over de <strong>volgorde</strong> waarin je vragen stelt en het <strong>soort</strong> vraag dat je gebruikt.</p>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-2\"><strong>Opbouw</strong></p>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-3\">De volgorde van je vragen beïnvloedt de antwoorden. Een vraag op het verkeerde moment kan frustratie geven. Begin makkelijk en eindig moeilijk: eerst kennisvragen, dan meningen, daarna gedrag of oplossingsrichtingen.</p>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-2\">Mogelijke structuren:</p>",
+              "<ul class=\"list-disc list-outside space-y-2 mb-4 ml-6 pl-4\">",
+              "<li class=\"text-gray-700 dark:text-gray-300\"><strong>Chronologisch:</strong> verleden &gt; heden &gt; toekomst</li>",
+              "<li class=\"text-gray-700 dark:text-gray-300\"><strong>Probleemstructuur:</strong> probleem &gt; oorzaken &gt; gevolgen &gt; oplossingen <em>(past goed bij de casus magazijnoptimalisatie)</em></li>",
+              "<li class=\"text-gray-700 dark:text-gray-300\"><strong>Onderzoeksstructuur:</strong> probleemstelling &gt; methode &gt; resultaten &gt; conclusies</li>",
+              "</ul>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\"><em>Voorbeeld probleemstructuur bij de teamleider magazijn:</em> eerst vragen naar de huidige bezettingsgraad (probleem), dan naar oorzaken van onlogische opslaglocaties, vervolgens gevolgen voor expeditie en productie, en tot slot mogelijke herinrichtingsopties.</p>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-2\"><strong>Open vragen</strong></p>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-2\">Met een open vraag geef je ruimte om in eigen woorden te antwoorden.</p>",
+              "<ul class=\"list-disc list-outside space-y-2 mb-3 ml-6 pl-4\">",
+              "<li class=\"text-gray-700 dark:text-gray-300\">\"Kunt u iets vertellen over hoe de goederenstroom van expeditie naar opslag verloopt?\"</li>",
+              "<li class=\"text-gray-700 dark:text-gray-300\">\"Hoe beoordeelt u de huidige indeling van fastmovers en slowmovers?\"</li>",
+              "</ul>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">De <strong>waarom-vraag</strong> is een speciaal type open vraag (\"Waarom liggen slowmovers volgens u achterin?\"). Gebruik die met beleid: het kan overkomen alsof iemand verantwoording moet afleggen.</p>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-2\"><strong>Gesloten vragen</strong></p>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-2\">Gesloten vragen leveren korte antwoorden op (ja/nee). Handig om iets te bevestigen, maar gebruik ze beperkt.</p>",
+              "<ul class=\"list-disc list-outside space-y-2 mb-3 ml-6 pl-4\">",
+              "<li class=\"text-gray-700 dark:text-gray-300\">\"Liggen fastmovers momenteel aan de voorkant van het magazijn?\"</li>",
+              "<li class=\"text-gray-700 dark:text-gray-300\">\"Worden slowmovers hoofdzakelijk in het achterste deel van het magazijn opgeslagen?\"</li>",
+              "</ul>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Nadelen: de gesprekspartner kan zich beperkt voelen, vragen kunnen suggestief zijn, en je moet steeds nieuwe vragen bedenken.</p>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-2\"><strong>Tips voor goede vragen</strong></p>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-3\"><em>Stel niet meer dan één vraag tegelijk</em></p>",
+              "<div class=\"overflow-x-auto mb-4\"><table class=\"min-w-full border border-gray-300 dark:border-gray-600 rounded-lg mb-4\"><tbody><tr><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-3 text-sm font-semibold text-gray-900 dark:text-white bg-gray-100 dark:bg-gray-700 align-top w-20\">Niet:</td><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-3 text-sm text-gray-700 dark:text-gray-300\">Wat vindt u van de magazijnindeling, welke knelpunten ziet u bij de expeditie en slowmovers, en welke herinrichting zou u adviseren?</td></tr><tr><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-3 text-sm font-semibold text-gray-900 dark:text-white bg-gray-100 dark:bg-gray-700 align-top\">Wel:</td><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-3 text-sm text-gray-700 dark:text-gray-300\">Opsplitsen, dus:<ol class=\"list-decimal list-outside space-y-1 mt-2 ml-5 pl-1\"><li>Hoe beoordeelt u de huidige magazijnindeling van fastmovers en slowmovers?</li><li>Welke knelpunten ziet u bij de expeditie?</li><li>Hoe ervaart u de opslag en het interne transport van slowmovers?</li><li>Welke herinrichtingsoptie zou u adviseren?</li></ol></td></tr></tbody></table></div>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-3\"><em>Stel neutrale vragen</em></p>",
+              "<div class=\"overflow-x-auto mb-4\"><table class=\"min-w-full border border-gray-300 dark:border-gray-600 rounded-lg mb-4\"><tbody><tr><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-3 text-sm font-semibold text-gray-900 dark:text-white bg-gray-100 dark:bg-gray-700 align-top w-20\">Niet:</td><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-3 text-sm text-gray-700 dark:text-gray-300\">Vindt u niet dat de magazijnindeling compleet chaotisch is?</td></tr><tr><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-3 text-sm font-semibold text-gray-900 dark:text-white bg-gray-100 dark:bg-gray-700 align-top\">Wel:</td><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-3 text-sm text-gray-700 dark:text-gray-300\">Hoe beoordeelt u de huidige indeling van fastmovers en slowmovers?</td></tr></tbody></table></div>",
+              "<div class=\"overflow-x-auto mb-4\"><table class=\"min-w-full border border-gray-300 dark:border-gray-600 rounded-lg mb-4\"><tbody><tr><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-3 text-sm font-semibold text-gray-900 dark:text-white bg-gray-100 dark:bg-gray-700 align-top w-20\">Niet:</td><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-3 text-sm text-gray-700 dark:text-gray-300\">Bent u tevreden over hoe het magazijn is georganiseerd?</td></tr><tr><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-3 text-sm font-semibold text-gray-900 dark:text-white bg-gray-100 dark:bg-gray-700 align-top\">Wel:</td><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-3 text-sm text-gray-700 dark:text-gray-300\">Welke aspecten van de huidige magazijnindeling zou u willen verbeteren?</td></tr></tbody></table></div>",
+              "<div class=\"overflow-x-auto mb-4\"><table class=\"min-w-full border border-gray-300 dark:border-gray-600 rounded-lg mb-4\"><tbody><tr><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-3 text-sm font-semibold text-gray-900 dark:text-white bg-gray-100 dark:bg-gray-700 align-top w-20\">Niet:</td><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-3 text-sm text-gray-700 dark:text-gray-300\">Gaat uw team niet veel te veel tijd kwijt aan intern transport?</td></tr><tr><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-3 text-sm font-semibold text-gray-900 dark:text-white bg-gray-100 dark:bg-gray-700 align-top\">Wel:</td><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-3 text-sm text-gray-700 dark:text-gray-300\">Wat vindt u van de stelling dat intern transport nu onnodig veel tijd kost?</td></tr></tbody></table></div>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-3\"><em>Stel begrijpelijke vragen</em></p>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-2\"><strong>Actieve vorm</strong></p>",
+              "<div class=\"overflow-x-auto mb-4\"><table class=\"min-w-full border border-gray-300 dark:border-gray-600 rounded-lg mb-4\"><tbody><tr><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-3 text-sm font-semibold text-gray-900 dark:text-white bg-gray-100 dark:bg-gray-700 align-top w-20\">Niet:</td><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-3 text-sm text-gray-700 dark:text-gray-300\">Hoeveel pallets worden dagelijks door uw team verwerkt?</td></tr><tr><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-3 text-sm font-semibold text-gray-900 dark:text-white bg-gray-100 dark:bg-gray-700 align-top\">Wel:</td><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-3 text-sm text-gray-700 dark:text-gray-300\">Hoeveel pallets verwerkt uw team gemiddeld per dag?</td></tr></tbody></table></div>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-2\"><strong>Enkelvoudige zinnen</strong></p>",
+              "<div class=\"overflow-x-auto mb-4\"><table class=\"min-w-full border border-gray-300 dark:border-gray-600 rounded-lg mb-4\"><tbody><tr><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-3 text-sm font-semibold text-gray-900 dark:text-white bg-gray-100 dark:bg-gray-700 align-top w-20\">Niet:</td><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-3 text-sm text-gray-700 dark:text-gray-300\">Welke herinrichting heeft nu, gezien de bezettingsgraad van 90% en de druk op de expeditie, uw voorkeur voor de komende jaren?</td></tr><tr><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-3 text-sm font-semibold text-gray-900 dark:text-white bg-gray-100 dark:bg-gray-700 align-top\">Wel:</td><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-3 text-sm text-gray-700 dark:text-gray-300\">Welke herinrichtingsoptie heeft nu uw voorkeur?</td></tr></tbody></table></div>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-2\"><strong>Concreet</strong></p>",
+              "<div class=\"overflow-x-auto mb-0\"><table class=\"min-w-full border border-gray-300 dark:border-gray-600 rounded-lg\"><tbody><tr><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-3 text-sm font-semibold text-gray-900 dark:text-white bg-gray-100 dark:bg-gray-700 align-top w-20\">Niet:</td><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-3 text-sm text-gray-700 dark:text-gray-300\">Wat vindt u van logistiek beleid in het algemeen?</td></tr><tr><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-3 text-sm font-semibold text-gray-900 dark:text-white bg-gray-100 dark:bg-gray-700 align-top\">Wel:</td><td class=\"border border-gray-300 dark:border-gray-600 px-4 py-3 text-sm text-gray-700 dark:text-gray-300\">Wat vindt u van de huidige opslagzones voor fastmovers bij Organisatie X?</td></tr></tbody></table></div>"
+            ]
+          },
+          {
+            "title": "Vragen stellen en luisteren",
+            "defaultOpen": false,
+            "content": [
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>Functie:</strong> informatie verzamelen. Tijdens het gesprek stel je je voorbereide vragen en luister je actief naar de antwoorden.</p>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>Interviewvaardigheden: luisteren</strong></p>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-2\"><strong>Niet-selectieve luistervaardigheden</strong></p>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Zorg dat je voldoende aandacht geeft aan de respondent, zowel verbaal als non-verbaal.</p>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-2\"><strong>Non-verbaal gedrag</strong></p>",
+              "<ul class=\"list-disc list-outside space-y-3 mb-4 ml-6 pl-4\">",
+              "<li class=\"text-gray-700 dark:text-gray-300\"><strong>De gelaatsuitdrukking</strong><br>Zie je er geïnteresseerd uit? Ben je er met je gedachten bij? Je gelaatsuitdrukking is vaak direct gekoppeld aan je gevoelens, soms meer dan jezelf inziet.</li>",
+              "<li class=\"text-gray-700 dark:text-gray-300\"><strong>Oogcontact</strong><br>Stimulerend ooggedrag houdt in dat jouw ogen die van de ander zo nu en dan ontmoeten. Er moet dus geen sprake zijn van een strakke fixatie, maar ook niet van geheel en al vermijden.</li>",
+              "<li class=\"text-gray-700 dark:text-gray-300\"><strong>Lichaamshouding</strong><br>Dat je aandacht hebt voor de ander kun je ook overbrengen door een ontspannen, toegenegen lichaamshouding, door zo'n houding maak je het je ook voor jezelf gemakkelijk om te luisteren (effect de ander gaat zich ook ontspannen voelen en je straalt rust en stabiliteit uit).</li>",
+              "<li class=\"text-gray-700 dark:text-gray-300\"><strong>Aanmoedigende gebaren</strong><br>Met hoofdknikken en ondersteunend handgebaren kun je je aandacht laten blijken en de ander stimuleren verder te praten. Vooral niet: zenuwachtige, afleidende bewegingen.</li>",
+              "<li class=\"text-gray-700 dark:text-gray-300\"><strong>Stiltes laten vallen,</strong> hierdoor wordt de geïnterviewde gestimuleerd meer uit zichzelf te vertellen.</li>",
+              "</ul>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-2\"><strong>Verbaal gedrag</strong></p>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Verbaal volgen, dit houdt in dat je met je opmerkingen zoveel mogelijk aansluit bij wat de ander gezegd heeft en geen nieuwe onderwerpen aansnijdt. Het heeft tot gevolg dat de ander zijn eigen 'gedachtenspoor' kan afmaken. Eventueel aangevuld met kleine verbale aanmoedigingen, zoals:</p>",
+              "<ul class=\"list-disc list-outside space-y-2 mb-6 ml-6 pl-4\">",
+              "<li class=\"text-gray-700 dark:text-gray-300\">hm</li>",
+              "<li class=\"text-gray-700 dark:text-gray-300\">ja, ja</li>",
+              "<li class=\"text-gray-700 dark:text-gray-300\">o?</li>",
+              "<li class=\"text-gray-700 dark:text-gray-300\">en toen?</li>",
+              "<li class=\"text-gray-700 dark:text-gray-300\">ga verder</li>",
+              "<li class=\"text-gray-700 dark:text-gray-300\">of de herhaling van één of enkele woorden op vragende toon</li>",
+              "</ul>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-2\"><strong>Selectieve luistervaardigheden</strong></p>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-3\">Met selectieve luistervaardigheden reageer je gericht op wat je hoort en haal je de informatie op die je voor je onderzoek nodig hebt. Gebruik daarvoor onder meer:</p>",
+              "<ol class=\"list-decimal list-outside space-y-2 mb-6 ml-6 pl-4\">",
+              "<li class=\"text-gray-700 dark:text-gray-300\">Vragen stellen</li>",
+              "<li class=\"text-gray-700 dark:text-gray-300\">Parafraseren van inhoud</li>",
+              "<li class=\"text-gray-700 dark:text-gray-300\">Reflecteren van gevoel</li>",
+              "<li class=\"text-gray-700 dark:text-gray-300\">Concretiseren</li>",
+              "<li class=\"text-gray-700 dark:text-gray-300\">Samenvatten</li>",
+              "</ol>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>Waarom is luisteren zo moeilijk?</strong></p>",
+              "<div class=\"space-y-4 mb-6 ml-6\">",
+              "<div class=\"flex items-start gap-3\"><div class=\"flex-shrink-0 w-8 h-8 rounded-full bg-green-500 text-white flex items-center justify-center font-semibold text-sm\">1</div><p class=\"text-gray-700 dark:text-gray-300 mb-0 pt-1\">Je hersenen kunnen veel sneller informatie verwerken dan het tempo waarin mensen spreken. Met andere woorden: je dwaalt af!</p></div>",
+              "<div class=\"flex items-start gap-3\"><div class=\"flex-shrink-0 w-8 h-8 rounded-full bg-green-500 text-white flex items-center justify-center font-semibold text-sm\">2</div><p class=\"text-gray-700 dark:text-gray-300 mb-0 pt-1\">Spreken heeft (ten onrechte?) een veel hogere status dan luisteren</p></div>",
+              "</div>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>Veelgemaakte fouten bij luisteren</strong></p>",
+              "<div class=\"space-y-4 mb-6 ml-6\">",
+              "<div class=\"flex items-start gap-3\"><div class=\"flex-shrink-0 w-8 h-8 rounded-full bg-green-500 text-white flex items-center justify-center font-semibold text-sm\">1</div><p class=\"text-gray-700 dark:text-gray-300 mb-0 pt-1\">Ongeïnteresseerde luisterhouding</p></div>",
+              "<div class=\"flex items-start gap-3\"><div class=\"flex-shrink-0 w-8 h-8 rounded-full bg-green-500 text-white flex items-center justify-center font-semibold text-sm\">2</div><p class=\"text-gray-700 dark:text-gray-300 mb-0 pt-1\">De ander niet laten uitspreken</p></div>",
+              "<div class=\"flex items-start gap-3\"><div class=\"flex-shrink-0 w-8 h-8 rounded-full bg-green-500 text-white flex items-center justify-center font-semibold text-sm\">3</div><p class=\"text-gray-700 dark:text-gray-300 mb-0 pt-1\">Je eigen verhaal vertellen ('Dat heb ik ook meegemaakt')</p></div>",
+              "<div class=\"flex items-start gap-3\"><div class=\"flex-shrink-0 w-8 h-8 rounded-full bg-green-500 text-white flex items-center justify-center font-semibold text-sm\">4</div><p class=\"text-gray-700 dark:text-gray-300 mb-0 pt-1\">Met je gedachten ergens ander zijn</p></div>",
+              "<div class=\"flex items-start gap-3\"><div class=\"flex-shrink-0 w-8 h-8 rounded-full bg-green-500 text-white flex items-center justify-center font-semibold text-sm\">5</div><p class=\"text-gray-700 dark:text-gray-300 mb-0 pt-1\">Impulsief reageren</p></div>",
+              "<div class=\"flex items-start gap-3\"><div class=\"flex-shrink-0 w-8 h-8 rounded-full bg-green-500 text-white flex items-center justify-center font-semibold text-sm\">6</div><p class=\"text-gray-700 dark:text-gray-300 mb-0 pt-1\">Te snel adviseren</p></div>",
+              "<div class=\"flex items-start gap-3\"><div class=\"flex-shrink-0 w-8 h-8 rounded-full bg-green-500 text-white flex items-center justify-center font-semibold text-sm\">7</div><p class=\"text-gray-700 dark:text-gray-300 mb-0 pt-1\">Suggestieve vragen stellen</p></div>",
+              "<div class=\"flex items-start gap-3\"><div class=\"flex-shrink-0 w-8 h-8 rounded-full bg-green-500 text-white flex items-center justify-center font-semibold text-sm\">8</div><p class=\"text-gray-700 dark:text-gray-300 mb-0 pt-1\">Relativeren</p></div>",
+              "</div>"
+            ]
+          },
+          {
+            "title": "Afsluiting en verwerking",
+            "defaultOpen": false,
+            "content": [
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>Functie:</strong> het gesprek ordentelijk beëindigen en de informatie zorgvuldig vastleggen voor je onderzoek.</p>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-2\"><strong>Tijdens het gesprek</strong></p>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Naast goed luisteren, tussendoor samenvatten en doorvragen, is het aan het einde van het interview verstandig om een <strong>afsluitende samenvatting</strong> te geven. Zo neem je de geïnterviewde mee in wat jij hebt begrepen en check je of jullie op één lijn zitten.</p>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-2\"><strong>Afsluiten van het gesprek</strong></p>",
+              "<ul class=\"list-disc list-outside space-y-2 mb-4 ml-6 pl-4\">",
+              "<li class=\"text-gray-700 dark:text-gray-300\">Vat de kernpunten in je eigen woorden samen</li>",
+              "<li class=\"text-gray-700 dark:text-gray-300\">Vraag expliciet: \"Heb ik het zo goed begrepen?\"</li>",
+              "<li class=\"text-gray-700 dark:text-gray-300\">Bedank de geïnterviewde voor tijd en openheid</li>",
+              "<li class=\"text-gray-700 dark:text-gray-300\">Spreek af of je bij onduidelijkheden nog contact mag opnemen</li>",
+              "</ul>",
+              "<div class=\"bg-blue-50 dark:bg-blue-900/20 border-l-4 border-blue-500 dark:border-blue-400 p-4 rounded-r-lg mb-4\">",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-2\"><strong><em>Voorbeeld afsluiting: teamleider magazijn Organisatie X</em></strong></p>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-0\">\"Als ik het goed begrijp, speelt de bezettingsgraad van circa 90% een grote rol, fastmovers liggen niet altijd op de meest logische plek en de expeditie staat onder druk doordat goederen snel het magazijn in moeten. U ziet kansen in herinrichting van opslagzones om interne rijafstanden te verkorten. Heb ik dat zo juist samengevat?\"</p>",
+              "</div>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-2\"><strong>Verwerking na het interview</strong></p>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Gebruik je verslag (notities) en de opname om een <strong>samenvatting</strong> of een <strong>transcriptie</strong> te maken. Doe dit bij voorkeur binnen een dag, zolang het gesprek nog vers in je geheugen ligt.</p>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-2\"><strong>Samenvatting of transcriptie?</strong></p>",
+              "<ul class=\"list-disc list-outside space-y-2 mb-4 ml-6 pl-4\">",
+              "<li class=\"text-gray-700 dark:text-gray-300\"><strong>Samenvatting:</strong> korter en overzichtelijk; je selecteert wat relevant is voor je onderzoek. Handig als bijlage bij je probleemverkenning of 5W's + V + O.</li>",
+              "<li class=\"text-gray-700 dark:text-gray-300\"><strong>Transcriptie:</strong> een (nagenoeg) letterlijk verslag van wat er is gezegd. Voordeel: je mist geen details, je kunt letterlijk citeren en anderen kunnen controleren of je samenvatting klopt met de opname. Nadeel: het kost meer tijd en is langer om te lezen.</li>",
+              "</ul>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Een transcriptie kun je ook zonder internetverbinding maken met bijvoorbeeld <a href=\"https://www.ru.nl/studenten/onderwijs-volgen/hulpmiddelen/hulp-bij-onderzoek/transcriberen-met-atrain\" class=\"text-blue-600 dark:text-blue-400 hover:underline font-medium\" target=\"_blank\" rel=\"noopener noreferrer\"><strong>aTrain</strong></a>. Wil je een opname op die manier laten omzetten naar tekst, vraag dan <strong>vooraf toestemming</strong> in je opening. Leg uit dat de transcriptie alleen voor je eigen verslag is en niet wordt gedeeld.</p>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-2\"><strong><em>Voorbeeld verwerking: casus magazijnoptimalisatie</em></strong></p>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-2\">Na het interview met de teamleider magazijn maak je een bijlage met:</p>",
+              "<ul class=\"list-disc list-outside space-y-2 mb-4 ml-6 pl-4\">",
+              "<li class=\"text-gray-700 dark:text-gray-300\">Datum, naam, functie en locatie van het gesprek</li>",
+              "<li class=\"text-gray-700 dark:text-gray-300\">Een <strong>samenvatting</strong> van de kern: bezettingsdruk, fastmovers/slowmovers, expeditiedruk en herinrichtingsopties</li>",
+              "<li class=\"text-gray-700 dark:text-gray-300\">Optioneel: een <strong>transcriptie</strong> (of uitgewerkte fragmenten) van antwoorden die je letterlijk wilt citeren in je onderzoeksplan</li>",
+              "<li class=\"text-gray-700 dark:text-gray-300\">Je eigen interpretatie: wat betekent dit voor je probleemverkenning en je vervolgvragen?</li>",
+              "</ul>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-0\">Zo heb je direct onderbouwing voor je onderzoeksplan. De geïnterviewde kan de samenvatting controleren voordat je die definitief opneemt in je scriptie.</p>"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "heading",
+        "text": "Waarom een interview met je opdrachtgever wél nodig is",
+        "level": 3,
+        "id": "interview-opdrachtgever"
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "Heb je je opdrachtgever al ontmoet in een kennismakingsgesprek? Dan denken veel studenten: <em>\"Interviewen hoeft niet meer, ik weet al wat het probleem is.\"</em>",
+          "Dat is een misverstand. Een kennismakingsgesprek gaat vooral over contact leggen, verwachtingen en planning. Een onderzoeksinterview is bewuster en gerichter: je gaat er echt voor zitten en stelt gerichte vragen over de problematiek, doelstelling, klantwens, stakeholders, randvoorwaarden en mogelijke oplossingsrichtingen.",
+          "Dat helpt enorm om de 5W's + V + O goed en onderbouwd te beschrijven in je onderzoek. Werk het interview uit in een bijlage (wie, wanneer, kernvragen, samenvatting). Zo onderbouw je je probleemverkenning."
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-2\"><strong>Stel je opdrachtgever in dit interview onder meer vragen over:</strong></p>",
+          "<ul class=\"list-disc list-outside space-y-2 mb-4 ml-6 pl-4\">",
+          "<li class=\"text-gray-700 dark:text-gray-300\"><strong>Problematiek:</strong> wat speelt er, waarom is het urgent, voor wie is het een probleem?</li>",
+          "<li class=\"text-gray-700 dark:text-gray-300\"><strong>Doelstelling:</strong> wat moet jouw onderzoek opleveren voor de organisatie?</li>",
+          "<li class=\"text-gray-700 dark:text-gray-300\"><strong>Klantwens:</strong> wat verwacht de opdrachtgever concreet van jou als onderzoeker?</li>",
+          "<li class=\"text-gray-700 dark:text-gray-300\"><strong>Stakeholders:</strong> wie zijn betrokken of geraakt door het vraagstuk?</li>",
+          "<li class=\"text-gray-700 dark:text-gray-300\"><strong>Randvoorwaarden:</strong> wat valt wel en niet binnen je onderzoek (tijd, budget, scope)?</li>",
+          "<li class=\"text-gray-700 dark:text-gray-300\"><strong>Mogelijke oplossingsrichtingen:</strong> welke richtingen ziet de opdrachtgever al (zonder dat jij te snel een oplossing kiest)?</li>",
+          "</ul>",
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">De antwoorden vormen de basis voor je 5W's + V + O <span class=\"text-gray-600 dark:text-gray-400\">(de vijf W-vragen plus voorwaarden en oplossingsrichtingen)</span>.</p>",
+          "<div class=\"bg-amber-50 dark:bg-amber-900/20 border-l-4 border-amber-500 dark:border-amber-400 p-4 rounded-r-lg mb-4\"><p class=\"text-gray-700 dark:text-gray-300 mb-0\"><strong>Tip:</strong> een kennismakingsgesprek gebruik je niet als onderzoeksinterview in je plan. Plan een apart moment, bereid vragen voor en werk het gesprek uit in een bijlage. Dat is direct bruikbare onderbouwing in je onderzoeksplan.</p></div>",
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Daarna kun je aanvullend interviews plannen met mensen op de werkvloer. Eerst je opdrachtgever goed interviewen geeft richting aan wie je daarna nog spreekt en wat je hen vraagt.</p>"
+        ]
+      },
+      {
+        "type": "accordion",
+        "usePlusIcon": true,
+        "defaultOpen": false,
+        "items": [
+          {
+            "title": "Voorbeeldvragen aan de opdrachtgever van Organisatie X",
+            "defaultOpen": false,
+            "content": [
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-3\">Voorbeeldvragen bij de casus <strong>magazijnoptimalisatie bij Organisatie X</strong>:</p>",
+              "<ul class=\"list-disc list-outside space-y-2 mb-4 ml-6 pl-4\">",
+              "<li class=\"text-gray-700 dark:text-gray-300\"><strong>Problematiek:</strong> \"Wat zijn de belangrijkste knelpunten van de huidige magazijnbezetting (circa 90%)?\"</li>",
+              "<li class=\"text-gray-700 dark:text-gray-300\"><strong>Doelstelling:</strong> \"Welk besluit of advies moet mijn onderzoek de organisatie opleveren over de magazijnindeling?\"</li>",
+              "<li class=\"text-gray-700 dark:text-gray-300\"><strong>Klantwens:</strong> \"Wanneer is het onderzoek voor u geslaagd?\"</li>",
+              "<li class=\"text-gray-700 dark:text-gray-300\"><strong>Stakeholders:</strong> \"Met wie moet ik nog spreken om het volledige plaatje te krijgen (magazijn, expeditie, planning)?\"</li>",
+              "<li class=\"text-gray-700 dark:text-gray-300\"><strong>Randvoorwaarden:</strong> \"Wat valt buiten scope — bijvoorbeeld het bepalen van voorraadomvang?\"</li>",
+              "<li class=\"text-gray-700 dark:text-gray-300\"><strong>Oplossingsrichtingen:</strong> \"Welke herinrichtingsopties worden intern al besproken?\"</li>",
+              "</ul>"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "heading",
+        "text": "Checklist interview praktijkvraagstuk",
+        "level": 3,
+        "id": "checklist-interview"
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "<div class=\"interview-checklist-wrapper mb-6\">",
+          "<div class=\"flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-4\">",
+          "<p class=\"text-gray-700 dark:text-gray-300 mb-0\">Loop deze punten na voordat je je interview plant of uitvoert. Gebruik de kopieerknop om de checklist naar je onderzoeksplan te plakken.</p>",
+          "<button type=\"button\" onclick=\"copyInterviewChecklist(this)\" class=\"copy-checklist-btn px-4 py-2 bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300 rounded-md text-sm font-medium transition-colors flex items-center space-x-2 flex-shrink-0 self-start sm:self-auto\" aria-label=\"Kopieer checklist\" title=\"Kopieer checklist naar klembord\"><i class=\"fas fa-copy\"></i><span class=\"hidden sm:inline\">Kopieer checklist</span></button>",
+          "</div>",
+          "<div class=\"interview-checklist-content\">",
+          "<p class=\"text-gray-900 dark:text-white mt-2 mb-2\">1. Doel en inhoudelijke voorbereiding</p>",
+          "<ul class=\"space-y-2 mb-4 list-none pl-0\">",
+          "<li class=\"text-gray-700 dark:text-gray-300\">[ ] Ik weet welke informatie ik nodig heb voor mijn onderzoek: problematiek, doelstelling, stakeholders en randvoorwaarden</li>",
+          "<li class=\"text-gray-700 dark:text-gray-300\">[ ] Ik kan met mijn vragen straks de probleemstelling en doelstelling formuleren</li>",
+          "<li class=\"text-gray-700 dark:text-gray-300\">[ ] Ik weet bij wie ik moet zijn en waarom: opdrachtgever, werkvloer of expert</li>",
+          "<li class=\"text-gray-700 dark:text-gray-300\">[ ] Ik heb de juiste interviewvorm gekozen en een topiclijst of vragenlijst voorbereid</li>",
+          "<li class=\"text-gray-700 dark:text-gray-300\">[ ] Ik heb me verdiept in de organisatie, de functie van mijn gesprekspartner en mijn onderzoeksthema</li>",
+          "</ul>",
+          "<p class=\"text-gray-900 dark:text-white mt-2 mb-2\">2. Praktische afspraken</p>",
+          "<ul class=\"space-y-2 mb-4 list-none pl-0\">",
+          "<li class=\"text-gray-700 dark:text-gray-300\">[ ] Datum, tijd, duur en locatie zijn afgesproken</li>",
+          "<li class=\"text-gray-700 dark:text-gray-300\">[ ] De geplande duur past bij het aantal onderwerpen op mijn topiclijst</li>",
+          "<li class=\"text-gray-700 dark:text-gray-300\">[ ] Ik heb mijn benodigdheden bij elkaar: topiclijst, notitieblok en eventueel opnameapparaat</li>",
+          "</ul>",
+          "<p class=\"text-gray-900 dark:text-white mt-2 mb-2\">3. Teamafspraken</p>",
+          "<ul class=\"space-y-2 mb-4 list-none pl-0\">",
+          "<li class=\"text-gray-700 dark:text-gray-300\">[ ] Er is iemand in de lead en iemand die de tijd bewaakt bij een interview in duo of groep</li>",
+          "<li class=\"text-gray-700 dark:text-gray-300\">[ ] We hebben afgesproken wie notities maakt en wie doorvraagt</li>",
+          "<li class=\"text-gray-700 dark:text-gray-300\">[ ] We weten wie wat zegt in de opening en afsluiting</li>",
+          "</ul>",
+          "<p class=\"text-gray-900 dark:text-white mt-2 mb-2\">4. Opname en vastlegging</p>",
+          "<ul class=\"space-y-2 mb-4 list-none pl-0\">",
+          "<li class=\"text-gray-700 dark:text-gray-300\">[ ] Ik heb nagedacht over het opnemen van het interview</li>",
+          "<li class=\"text-gray-700 dark:text-gray-300 ml-6\">[ ] Ik weet of ik de focus volledig op het gesprek leg of tussendoor aantekeningen maak</li>",
+          "<li class=\"text-gray-700 dark:text-gray-300\">[ ] Ik weet hoe ik toestemming vraag voor de opname en wat ik wel en niet met de opname doe</li>",
+          "<li class=\"text-gray-700 dark:text-gray-300\">[ ] Ik heb gevraagd of ik de opname mag gebruiken in GenAI of een transcriptietool</li>",
+          "<li class=\"text-gray-700 dark:text-gray-300\">[ ] Ik weet hoe ik het gesprek na afloop verwerk, bij voorkeur binnen een dag</li>",
+          "</ul>",
+          "<p class=\"text-gray-900 dark:text-white mt-2 mb-2\">5. Opening en afsluiting</p>",
+          "<ul class=\"space-y-2 mb-4 list-none pl-0\">",
+          "<li class=\"text-gray-700 dark:text-gray-300\">[ ] Ik kan in de opening uitleggen: doel, aanleiding, aanpak en wat er met de informatie gebeurt</li>",
+          "<li class=\"text-gray-700 dark:text-gray-300\">[ ] Ik heb afspraken over anonimiteit voorbereid</li>",
+          "<li class=\"text-gray-700 dark:text-gray-300\">[ ] Ik weet hoe ik afsluit met een samenvatting en een bedankje</li>",
+          "</ul>",
+          "<p class=\"text-gray-900 dark:text-white mt-2 mb-2\">6. Laatste check</p>",
+          "<ul class=\"space-y-2 mb-0 list-none pl-0\">",
+          "<li class=\"text-gray-700 dark:text-gray-300\">[ ] Dit is een onderzoeksinterview, niet alleen een kennismakingsgesprek</li>",
+          "<li class=\"text-gray-700 dark:text-gray-300\">[ ] Mijn vragen sluiten aan op de 5W's + V + O</li>",
+          "<li class=\"text-gray-700 dark:text-gray-300\">[ ] Ik ben er klaar voor om actief te luisteren en door te vragen</li>",
+          "</ul>",
+          "</div>",
+          "</div>"
+        ]
+      },
+      {
+        "type": "heading",
+        "text": "Doelstelling opstellen",
+        "level": 2,
+        "id": "doelstelling-opstellen"
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "Via interviews heb je informatie opgehaald over het praktijkprobleem en de verwachtingen van je opdrachtgever. Je hebt stilgestaan bij problematiek, stakeholders, randvoorwaarden en de vraag wat dit onderzoek moet opleveren. Die antwoorden vormen de basis voor je 5W's + V + O, maar ze zijn nog geen doelstelling.",
+          "In deze stap vertaal je die gespreksinformatie naar een heldere, eigen formulering: wat jouw onderzoek concreet moet bereiken voor de organisatie (a-gedeelte) en hoe jij dat gaat aanpakken (b-gedeelte). Het a-gedeelte omschrijft wat je wel en niet mag verwachten in het onderzoek. Het b-gedeelte omschrijft globaal wat er gaat gebeuren.",
+          "Een goede doelstelling kent dan ook een bepaalde format:",
+          "<p class='text-xl font-semibold text-gray-900 dark:text-white mb-4'><strong>'Het doel van dit onderzoek is ….(a)…. door ….. (b)…..</strong>'</p>",
+          "Hieronder worden beide onderdelen nader toegelicht:"
+        ]
+      },
+      {
+        "type": "tabs",
+        "defaultTab": 0,
+        "tabs": [
+          {
+            "title": "A-gedeelte van een doelstelling",
+            "content": [
+              "<strong>Het A-gedeelte (extern gedeelte)</strong>",
+              "<p class='text-gray-700 dark:text-gray-200 mb-3'>Bij het opstellen van het a-gedeelte is het doel om inzicht te geven in het doel van het onderzoek. Er wordt ook wel gesproken over het externe gedeelte van het onderzoek, immers je geeft inzicht in de reden waarom je gaat onderzoeken en welke resultaten je gaat opleveren. Een mooie controle hierin is: 'zouden mijn beoordelaar en opdrachtgever begrijpen welke bijdrage mijn onderzoek kan geven?'</p>",
+              "<strong>Voorbeelden van formuleren van het a-gedeelte kunnen zijn:</strong>",
+              "<div style='margin-left: 20px; margin-bottom: 1rem;'><em>…. Het helpen verbeteren van bestaand beleid X op het terrein van Z</em></div>",
+              "<div style='margin-left: 20px; margin-bottom: 1rem;'><em>…. Het leveren van een bijdrage aan de ontwikkeling van nieuw beleid X op het terrein van Z</em></div>",
+              "<div style='margin-left: 20px; margin-bottom: 1rem;'><em>…. Het doen van aanbevelingen aan de opdrachtgever Y voor het ontwerpen van een oplossing van probleem Z.</em></div>"
+            ]
+          },
+          {
+            "title": "B-gedeelte van een doelstelling",
+            "content": [
+              "<strong>Het B-gedeelte (intern gedeelte)</strong>",
+              "<p class='text-gray-700 dark:text-gray-300 mb-3'>Het b-gedeelte omschrijft de bijdrage die jij als onderzoek levert aan het onderzoek. Hierbij wordt ook wel gekeken naar het interne onderzoek, kortom hoe heb je het onderzoek opgezet of wat ga je hierin doen.</p>",
+              "<strong>Voorbeelden van formuleringen van het b-gedeelte kunnen zijn:</strong>",
+              "<div style='margin-left: 20px; margin-bottom: 1rem;'><em>…. door een overzicht te geven van de meningen van belanghebbenden….</em></div>",
+              "<div style='margin-left: 20px; margin-bottom: 1rem;'><em>…. door inzicht te geven in de knelpunten die optreden bij….</em></div>",
+              "<div style='margin-left: 20px; margin-bottom: 1rem;'><em>…. door te speuren naar de achtergronden en oorzaken van het probleem….</em></div>",
+              "<div style='margin-left: 20px; margin-bottom: 1rem;'><em>…. door een analyse te maken van het verschil tussen de gewenste en de aanwezige situatie….</em></div>",
+              "<div style='margin-left: 20px; margin-bottom: 1rem;'><em>…. door een vergelijking te maken tussen…</em></div>",
+              "<div style='margin-left: 20px; margin-bottom: 1rem;'><em>…. door een beoordeling te geven van….</em></div>"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "accordion",
+        "usePlusIcon": true,
+        "defaultOpen": false,
+        "items": [
+          {
+            "title": "Oefening 1",
+            "defaultOpen": false,
+            "content": [
+              {
+                "type": "trueFalseExercise",
+                "title": "Test je kennis: Het A-gedeelte en B-gedeelte",
+                "instruction": "Bepaal of de volgende stellingen waar of onwaar zijn:",
+                "statements": [
+                  {
+                    "text": "In de doelstelling 'Het doel is het verbeteren van communicatie tussen management en chauffeurs door interviews af te nemen' hoort 'het verbeteren van communicatie' bij het A-gedeelte.",
+                    "correctAnswer": true,
+                    "explanation": "Correct! 'Het verbeteren van communicatie' beschrijft wat je onderzoek oplevert voor de organisatie - dit is het externe gedeelte (A). Het A-gedeelte gaat over de bijdrage aan het oplossen van het praktijkprobleem."
+                  },
+                  {
+                    "text": "Het A-gedeelte beschrijft welke onderzoeksmethode je gebruikt, zoals 'door data te analyseren'.",
+                    "correctAnswer": false,
+                    "explanation": "Onjuist. Dat is het B-gedeelte. Het A-gedeelte beschrijft wat je oplevert. Voorbeeld: 'Het doel is het ontwikkelen van aanbevelingen (A-gedeelte: wat je oplevert) door data te analyseren (B-gedeelte: hoe je het doet)'. Het A-gedeelte beantwoordt: wat levert dit op voor de organisatie?"
+                  },
+                  {
+                    "text": "Het A-gedeelte geeft inzicht in de bijdrage die je onderzoek kan geven aan de organisatie.",
+                    "correctAnswer": true,
+                    "explanation": "Correct! Het A-gedeelte gaat over het externe gedeelte: welke bijdrage je onderzoek levert aan het oplossen van het praktijkprobleem. Een goede controle: 'zouden mijn beoordelaar en opdrachtgever begrijpen welke bijdrage mijn onderzoek kan geven?'"
+                  },
+                  {
+                    "text": "Het A-gedeelte beschrijft hoe je het onderzoek gaat opzetten of wat je gaat doen.",
+                    "correctAnswer": false,
+                    "explanation": "Onjuist. Dat is het B-gedeelte. Het A-gedeelte beschrijft wat je wel en niet mag verwachten in het onderzoek en welke resultaten je oplevert voor de opdrachtgever. Het B-gedeelte beschrijft de onderzoeksmethode."
+                  },
+                  {
+                    "text": "In de doelstelling 'Het doel is het verbeteren van communicatie door interviews af te nemen' hoort 'door interviews af te nemen' bij het B-gedeelte.",
+                    "correctAnswer": true,
+                    "explanation": "Correct! 'Door interviews af te nemen' beschrijft de onderzoeksmethode die je gebruikt - dit is typisch voor het B-gedeelte. Het B-gedeelte gaat over hoe je het onderzoek uitvoert (interne aanpak), niet over wat je oplevert (dat is A-gedeelte)."
+                  },
+                  {
+                    "text": "Het B-gedeelte beschrijft welke concrete resultaten de opdrachtgever krijgt, zoals 'aanbevelingen voor procesverbetering'.",
+                    "correctAnswer": false,
+                    "explanation": "Onjuist. Dat beschrijft het A-gedeelte (extern). Het B-gedeelte beschrijft de onderzoeksmethode. Voorbeeld: 'Het doel is het ontwikkelen van aanbevelingen (A-gedeelte) door interviews af te nemen en data te analyseren (B-gedeelte)'. Het B-gedeelte vertelt hoe je tot die aanbevelingen komt."
+                  },
+                  {
+                    "text": "Het B-gedeelte kan formuleringen bevatten zoals 'door een overzicht te geven van meningen' of 'door knelpunten in kaart te brengen'.",
+                    "correctAnswer": true,
+                    "explanation": "Correct! Deze formuleringen beschrijven allemaal de onderzoeksactiviteiten die je uitvoert. Ze beginnen met 'door...' en vertellen welke stappen je neemt in je onderzoek. Dit is precies wat het B-gedeelte doet: het beschrijft je onderzoeksaanpak."
+                  },
+                  {
+                    "text": "Het B-gedeelte beantwoordt de vraag 'Wat levert mijn onderzoek op voor de organisatie?'",
+                    "correctAnswer": false,
+                    "explanation": "Onjuist. Die vraag hoort bij het A-gedeelte (extern). Het B-gedeelte beantwoordt de vraag 'Hoe ga ik het onderzoek uitvoeren?' of 'Welke methoden gebruik ik?'. Denk aan het verschil: A = wat je oplevert (extern), B = hoe je het doet (intern)."
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "accordion",
+        "usePlusIcon": true,
+        "defaultOpen": false,
+        "items": [
+          {
+            "title": "Oefening 2",
+            "defaultOpen": false,
+            "content": [
+              {
+                "type": "matchingExercise",
+                "title": "Onderscheid maken tussen Probleem, Doelstelling en Hoofdvraag",
+                "instruction": "Sleep de omschrijvingen naar de juiste categorie om te testen of je het onderscheid begrijpt:",
+                "categories": [
+                  {
+                    "name": "Probleem",
+                    "description": "Het praktijkvraagstuk dat opgelost moet worden"
+                  },
+                  {
+                    "name": "Doelstelling",
+                    "description": "Wat je jezelf ten doel stelt om te bereiken"
+                  },
+                  {
+                    "name": "Hoofdvraag",
+                    "description": "De invulling van de doelstelling in het onderzoek"
+                  }
+                ],
+                "items": [
+                  {
+                    "text": "Spanningen tussen management en chauffeurs bij een logistieke dienstverlener",
+                    "correctCategory": 0
+                  },
+                  {
+                    "text": "Het verbeteren van de communicatie tussen management en chauffeurs",
+                    "correctCategory": 1
+                  },
+                  {
+                    "text": "Welke administratieve processen kunnen geautomatiseerd worden om communicatieproblemen te verminderen?",
+                    "correctCategory": 2
+                  },
+                  {
+                    "text": "Onvoldoende informatie-uitwisseling tussen verschillende afdelingen",
+                    "correctCategory": 0
+                  },
+                  {
+                    "text": "Het ontwikkelen van aanbevelingen voor procesverbetering binnen de organisatie",
+                    "correctCategory": 1
+                  },
+                  {
+                    "text": "Welke factoren beïnvloeden de effectiviteit van de huidige communicatiestructuren?",
+                    "correctCategory": 2
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "Naast het formuleren van de doelstelling aan de hand van het a- en b-gedeelte, is het belangrijk om in je doelstelling ook SMART te herkennen. Bekijk deze kennisclip voor uitleg over het SMART principe bij het formuleren van doelstellingen."
+        ]
+      },
+      {
+        "type": "video",
+        "url": "https://media.windesheim.nl/Mediasite/Play/931fa76ea3324e73869c8141946fa1e91d",
+        "transcriptContent": "Welkom bij deze kennisclip. We gaan het vandaag hebben over het SMART-principe. We gaan vandaag proberen om het probleem dat je in eerste instantie hebt verkend uit te diepen. Je omschrijft dit naar een doelstelling. Deze doelstelling gaan we uiteraard schrijven aan de hand van het SMART-principe. Jullie kennen het SMART-principe waarschijnlijk al. Het is goed om dit nog een keer te herhalen. We leggen ook de link met de doelstelling en de overige theorie uit deze module.\n\nHet idee is dat we zoeken naar een manier om van de probleemverkenning een doelstelling te maken. Dit bepaalt wat we met ons logistieke onderzoek gaan onderzoeken. Daarvoor gebruiken we het SMART-principe. SMART staat voor specifiek, meetbaar, acceptabel, realistisch en tijdgebonden. We diepen deze begrippen verder uit.\n\nSpecifiek betekent dat je helder krijgt wat jouw probleem precies is. Wat ga je werkelijk onderzoeken? Wat wil je werkelijk aanpakken? De verschillende vragen uit de probleemverkenning komen weer naar boven. Gebruik deze vragen om het probleem zo specifiek mogelijk te omschrijven.\n\nDe doelstelling moet meetbaar zijn. We moeten het resultaat van ons onderzoek daadwerkelijk kunnen meten. Dit kan bijvoorbeeld door te zeggen dat we de omzet met 25% verhogen. Een verhoging van 25% is meetbaar. Je kunt ook denken aan het opstellen van drie verbeteradviezen. Dit is ook meetbaar. Maak de doelstelling zo specifiek en meetbaar mogelijk.\n\nIs de doelstelling acceptabel? Is het passend binnen de organisatie? Draagt het bij aan het oplossen van het praktijkprobleem?\n\nIs de doelstelling realistisch? Is het mogelijk om het doel te realiseren? Stel jezelf de vraag of het niet te simpel is. Als het te simpel is, is het vaak niet realistisch voor een hbo-onderzoek. Als het plan te complex is, moet je het versimpelen.\n\nZorg dat er altijd een tijdsbepaling in de doelstelling zit. Spreek af wanneer je het onderzoek hebt afgerond. Een voorbeeld is de omzet verhogen per 10 juli 2024.\n\nAls je al die vijf punten van het SMART-principe in je doelstelling hebt staan, kun je naar de volgende stap. Je hebt al gelezen over het a-gedeelte en het b-gedeelte van je doelstelling. Het a-gedeelte is het externe doel. Dit beschrijft wat je gaat opleveren voor de organisatie. Het b-gedeelte is het interne deel. Dit beschrijft hoe je dat gaat onderzoeken.\n\nIn deze kennisclip hebben we houvast gegeven om een goede doelstelling te definiëren. Wees kort en krachtig. Werk volgens het SMART-principe en houd rekening met de a plus b opzet. Nu ben jij aan de beurt."
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "Test je kennis door de onderstaande oefeningen te maken om te controleren of je de stof goed begrijpt en kunt toepassen. Let op: deze oefeningen werken mogelijk niet goed op mobiele apparaten. Gebruik bij voorkeur een desktop of tablet voor de beste ervaring."
+        ]
+      },
+      {
+        "type": "accordion",
+        "usePlusIcon": true,
+        "defaultOpen": false,
+        "items": [
+          {
+            "title": "Oefening 3",
+            "defaultOpen": false,
+            "content": [
+              {
+                "type": "smartChecklist",
+                "doelstelling": "Het doel van dit onderzoek is het verbeteren van de communicatie tussen management en chauffeurs bij een logistieke dienstverlener door middel van het analyseren van de huidige administratieve processen en het ontwikkelen van aanbevelingen voor automatisering binnen een periode van 3 maanden.",
+                "criteria": [
+                  {
+                    "letter": "S",
+                    "name": "Specifiek",
+                    "description": "De doelstelling is duidelijk en concreet geformuleerd",
+                    "question": "Wat precies wil je bereiken?"
+                  },
+                  {
+                    "letter": "M",
+                    "name": "Meetbaar",
+                    "description": "Je kunt vaststellen of de doelstelling is behaald",
+                    "question": "Hoe meet je succes?"
+                  },
+                  {
+                    "letter": "A",
+                    "name": "Acceptabel/Haalbaar",
+                    "description": "De doelstelling is realistisch en uitvoerbaar",
+                    "question": "Is dit haalbaar binnen de tijd en middelen?"
+                  },
+                  {
+                    "letter": "R",
+                    "name": "Relevant",
+                    "description": "De doelstelling draagt bij aan het oplossen van het probleem",
+                    "question": "Helpt dit het praktijkprobleem op te lossen?"
+                  },
+                  {
+                    "letter": "T",
+                    "name": "Tijdgebonden",
+                    "description": "Er is een duidelijk tijdsbestek voor de doelstelling",
+                    "question": "Wanneer moet dit zijn afgerond?"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "accordion",
+        "usePlusIcon": true,
+        "defaultOpen": false,
+        "items": [
+          {
+            "title": "Oefening 4",
+            "defaultOpen": false,
+            "content": [
+              {
+                "type": "paragraph",
+                "text": [
+                  "Ben jij nu ook in staat om aan de hand van het gegeven voorbeeld een doelstelling op te stellen?",
+                  "<div style='margin-left: 20px; margin-bottom: 1rem;'><em>Als Logistics management student wil jij een onderzoek uitvoeren bij een logistieke dienstverlener in de regio Zwolle. Binnen deze logistieke dienstverlener bestaan spanningen tussen het management enerzijds en de chauffeurs anderzijds. De transportmanager vraagt of jij deze problematiek wilt bestuderen. De bestaande situatie bij de logistieke dienstverlener vormt dan het projectkader. Uit een eerste gesprek met de transportmanager blijkt dat het management veel overzicht wil bewaren door dagelijks diverse dashboards te raadplegen en hierop te acteren. Echter zij merken door het gebruik dat veel informatie niet consistent en goed wordt ingevuld door de chauffeurs. De chauffeurs benoemen echter dat zij langzaamaan meer dan 25% van hun werktijd bezig zijn met administratie wat zij niet leuk vinden. Daarvoor zijn ze geen chauffeur geworden. Zij vragen zich, met de huidige stand van technologie af waarom dit proces niet verder geautomatiseerd kan worden waardoor minder administratie van de chauffeurs nodig is. Hierdoor is langzaamaan een cultuur ontstaan waarin zowel de chauffeurs als het management elkaar nog nauwelijks informeren waardoor de winst onder druk is komen te staan, chauffeurs ontevreden zijn en het management zich afvraagt hoe dit probleem aan te pakken.</em></div>",
+                  "<div style='margin-left: 20px; margin-bottom: 1rem;'><em>Jouw onderzoek vindt binnen dit projectkader plaats en levert als het goed is een bijdrage aan een verbetering van de ontstane cultuur en mogelijke handvatten hoe deze uitdaging op te lossen.</em></div>",
+                  "Schrijf een doelstelling op voor deze probleemstelling en bewaar deze voor je eigen onderzoeksplan."
+                ]
+              },
+              {
+                "type": "highlight",
+                "title": "GenAI Gebruik",
+                "content": [
+                  "Je mag bij het opstellen van een doelstelling GenAI gebruiken. De gebruikte prompt in het voorbeeld hieronder mag je gebruiken bij het ontwikkelen van een doelstelling bij deze probleemstelling. Je mag het prompt ook gebruiken bij je eigen probleemstelling. Wees je er wel altijd van bewust dat je het mens machine mens principe toepast. Jij blijft verantwoordelijke voor je werk en de inhoud van je onderzoeksplan."
+                ],
+                "icon": "fa-info-circle"
+              },
+              {
+                "type": "document",
+                "src": "assets/Documents/ChatGPT inzetten voor een doelstelling.docx",
+                "text": "Download het voorbeelddocument met de prompt: ChatGPT inzetten voor een doelstelling.docx",
+                "icon": "fa-file-word",
+                "iconClass": "fas"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "highlight",
+        "title": "Voorbereiding kick-off college",
+        "content": [
+          "Lees voor het eerste college (kick-off) alle stof tot en met hier. Het onderdeel Opdrachtgever-onderzoeker relatie hieronder hoort daar niet bij."
+        ],
+        "icon": "fa-calendar-check",
+        "iconClass": "fas",
+        "bgColor": "bg-blue-50 dark:bg-blue-900/20",
+        "borderColor": "border-blue-500 dark:border-blue-400",
+        "titleColor": "text-blue-900 dark:text-blue-200",
+        "contentColor": "text-blue-800 dark:text-blue-300"
+      },
+      {
+        "type": "heading",
+        "text": "Opdrachtgever-onderzoeker relatie",
+        "level": 2,
+        "id": "opdrachtgever-onderzoeker"
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "Kijken naar praktijkgericht onderzoek is één onderdeel zeer belangrijk. Dat is namelijk jouw relatie met de opdrachtgever, ook wel de opdrachtgever-onderzoeker relatie genoemd. De opdrachtgever verwacht van jou een goed, gedegen en kritisch onderzoek. Dit terwijl jij nog (deels) met je studie bezig bent en voor je gevoel relatief kort in de logistieke wereld komt kijken. Toch word je gevraagd om een organisatie te helpen om een probleem op te lossen. Dit zelfs door een eigen pro-actieve een kritische houding. De organisatie(s) waar jij bij aan de slag gaat, of dit nu vanuit een project binnen het onderwijs gaat of vanuit je stage- en/of afstuderen zien graag dat je kritisch bent op de organisatie en de processen. Zij willen graag jouw frisse inzichten gebruiken om hun organisatie te verbeteren.",
+          "Belangrijk is om tijdens het gehele onderzoek stil te blijven staan wie je opdrachtgever is. De opdrachtgever zou je begeleider kunnen zijn, maar dit is niet noodzakelijk. Betrek hem dus goed in de aanpak en het opstellen van je onderzoek. Logischerwijs hoort je opdrachtgever ook in je stakeholderanalyse thuis. Denk daarnaast na over een communicatiestrategie: hoe vaak houd je de opdrachtgever op de hoogte, hoe vaak spreek je elkaar en wat is daarin wenselijk én noodzakelijk?",
+          "Een tweede aandachtspunt is de 'tunnelvisie' die vanuit de opdrachtgever kan bestaan. De opdrachtgever werkt soms al meerdere jaren in de organisatie en denken ze te weten waar de oorzaak ligt, sterker nog soms noemen ze al direct de oplossing. Blijf kritisch als onderzoeker en zorg dat jij de onderzoek stappen doordacht doorloopt. Kom je daarmee alsnog op hetzelfde beeld, dan heb je het gevoel van de opdrachtgever goed kunnen onderbouwen. Je staat er versteld van hoevaak je nog nieuwe inzichten bovenwater weet te halen voor de organisatie.",
+          "Een laatste aandachtspunten in dit kader is het de focus op de doelstelling van de opdracht. De organisatie verwacht van jou een oplossing van het probleem. Echter ben je er wel van bewust dat jij met de doelstelling van het onderzoek het probleem van de organisatie hebt ingekaderd. Dat wil zeggen, dat je bijvoorbeeld minder invloedsfactoren hebt meegenomen of de scope van het proces of de omgeving versimpeld hebt waardoor de probleemstelling ook realistisch binnen de gestelde termijn is op te lossen. Blijf je beseffen dat de meeste onderzoeken die wij vanuit de opleiding oppakken bestaan uit advies opdrachten. Soms zit er direct al een implementatie deel aan vast waardoor het direct in de praktijk wordt toegepast. Deze opdrachten zijn echter beperkt onder andere doordat onderzoek vaak al een forse tijdsinvestering vraagt en jij als (student) onderzoeker beperkte de tijd hebt."
+        ]
+      },
+      {
+        "type": "heading",
+        "text": "Vormen van praktijkgericht onderzoek",
+        "level": 2,
+        "id": "vormen-praktijkgericht"
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "Nu benoemen we praktijkgericht onderzoek als één vorm van onderzoek. Enerzijds is dat ook zo, immers het onderzoek wordt uitgevoerd met betrekking tot een praktijkvraagstuk. Tegelijkertijd zijn er verschillende vormen van praktijkgericht onderzoek waarin ook verschillende taken en daarmee ook rollen van jouw als onderzoek gevraagd worden.",
+          "Bekijk deze kennisclip voor uitleg over de verschillende vormen van praktijkgericht onderzoek."
+        ]
+      },
+      {
+        "type": "video",
+        "url": "https://media.windesheim.nl/Mediasite/Play/91c2b4209bb8420181a7db38bd62d1cc1d",
+        "transcriptContent": "Vormen van praktijkgericht onderzoek\n\nWelkom bij deze kennisclip. Vandaag gaan we het hebben over de verschillende vormen van praktijkgericht onderzoek. Als student logistiek ga je heel vaak een praktijkgericht onderzoek doen. Er zijn verschillende vormen. Een van de onderwerpen waar vandaag veel over te doen is, is AI. Artificial Intelligence in de logistiek is een hot topic. Dit komt op veel verschillende manieren terug in de praktijkgerichte onderzoeken die we uitvoeren. Om dat te ontrafelen maken we gebruik van de interventiecyclus of de onderzoekscyclus.\n\nIn die cyclus beginnen we eerst met een probleemanalyse. Daarna volgt een diagnose. Vervolgens maken we een ontwerp. We hebben iets gediagnosticeerd en onderzocht. We maken een ontwerp en we gaan verbeteringen opstellen. We denken na over de realisatie van die verbeteringen. We bepalen hoe we dat ontwerp in de praktijk inbrengen. Uiteindelijk gaan we evalueren of borgen. Deze cyclus herken je wellicht als de DMAIC-cyclus. Er is overlap tussen deze modellen. Op elk van die facetten kun je een praktijkgericht onderzoek uitvoeren. Bij een probleemanalyse doen we een probleemanalyserend onderzoek. Bij een diagnose doen we een diagnostisch onderzoek. Zo kun je voor elke stap in de cyclus een praktijkgericht probleem bedenken.\n\nWe zoomen dieper in op het probleemanalyserend onderzoek. Je doet onderzoek naar het probleem. Tegenwoordig zijn er vaak vormen van chatbots. Je kunt een chatbot integreren maar je moet weten welk probleem je ermee oplost. Een chatbot is niet altijd de oplossing. Dit onderzoek je in dat probleemanalyserend onderzoek. Je onderzoekt wat het echte probleem van de organisatie is.\n\nDe tweede vorm van praktijkgericht onderzoek is het diagnostisch onderzoek. We gaan hierbij vooral diagnosticeren. Dit zien we bij veel verbeteronderzoeken binnen de opleiding. We kijken of we de acht verspillingen kunnen herkennen in een logistiek proces. We bekijken een bestaand logistiek proces. We onderzoeken waar we precies verspillingen realiseren. Dit is de eerste stap. We bepalen wat de grootste verspillingen zijn. Voor die verspillingen moeten we vervolgonderzoek doen of oplossingen aandragen.\n\nDe volgende stap is het ontwerpgericht onderzoek. Je gaat uit van een nieuw magazijn of een nieuwe fabriek. Je vult de lay-out van die fabriek verder in. Waar komen de productiemachines te staan? Op welke manier zetten we de stellingen neer? Hoeveel ruimte behouden we voor de heftruck in een magazijn? Gebruiken we smalle gangen of rijdende stellingen? Dit zijn vraagstukken die je in een ontwerpgericht onderzoek ziet.\n\nVerandergericht onderzoek vindt plaats nadat er iets geïmplementeerd is. Je kijkt welke veranderingen er nodig zijn voor een toekomstige situatie. Denk aan een schoonmaakrobot in een ziekenhuis die geïmplementeerd is. Wat betekent dat voor de mensen die in die ruimte aanwezig zijn? Worden er andere taken of vaardigheden van hen verwacht?\n\nDe laatste vorm is evaluatieonderzoek. We gaan na of de verbetervoorstellen de juiste resultaten opleveren. Denk aan een onderzoek waarin we een exoskelet hebben geïntroduceerd. Dit zijn pakken die je aan kunt doen. Hiermee gaat de arbeidsbelasting voor medewerkers naar beneden. Het doel is om het verzuim door een hoge arbeidsbelasting te verlagen. We onderzoeken of dit doel is gerealiseerd. We willen laten zien dat het verzuim is gedaald van vier naar drie procent door het werken met het exoskelet. Dat doe je in een evaluatieonderzoek. Evaluatieonderzoek is vaak lastig door de gewenste kwantitatieve onderbouwing. Ook kwalitatieve onderbouwingen zijn waardevol in deze fase. Welke vorm van opdracht vind jij interessant?"
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "Belangrijk is natuurlijk wel om te blijven beseffen dat ondanks dat je een specifiek type praktijkonderzoek uitvoert de gehele onderzoekscyclus vaak wel herkenbaar en zichtbaar is in je onderzoek."
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "Samenvattend kunnen we stappenplan schetsen wat een handvat kan zijn aan de hand van de besproken modellen en handvatten."
+        ]
+      },
+      {
+        "type": "image",
+        "src": "assets/images/Samenvattingweek2.png",
+        "alt": "Samenvatting in vier stappen.",
+        "enableModal": true
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "Je bent inmiddels bezig geweest met het opstellen van een doelstelling vanuit een praktijk gestuurd vraagstuk. Nu je weet wat het doel gaat worden van je onderzoek, komt de vraag naar voren hoe je het onderzoek verder gaat aanpakken, kortom hoe ga je je geformuleerde doelstelling bereiken. Deze structuur ga je opbouwen aan de hand van onderzoeksvragen die je gaat stellen. Echter, hoe bepaal je nu wanneer onderzoeksvragen nuttig zijn, wanneer ze goed zijn en welke inhoud deze onderzoeksvragen moeten bevatten. Om over deze vragen na te denken sta je stil bij het onderzoeksmodel."
+        ]
+      },
+      {
+        "type": "heading",
+        "text": "Onderzoeksmodel",
+        "level": 2,
+        "id": "onderzoeksmodel"
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "In het onderzoeksmodel maak je een schematische weergave van het onderzoek en de globale stappen die gezet moeten worden om het doel te bereiken. Deze stappen bestaan uit zowel procesmatige stappen (bijvoorbeeld bepalen in welke volgorde de vragen beantwoord worden) maar ook uit welke inhoud en/of theorieën geput kan worden ten einde een goed onderbouwd antwoord te formuleren."
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "Een onderzoeksmodel bestaat in essentie uit drie delen die in een kennisclip worden toegelicht.",
+          "Bekijk deze kennisclip voor uitleg over de drie delen van een onderzoeksmodel."
+        ]
+      },
+      {
+        "type": "video",
+        "url": "https://media.windesheim.nl/Mediasite/Play/3a0b3b8a6527464fb5373e80bba221251d",
+        "transcriptContent": "Welkom bij een nieuwe kennisclip van het opzetten van een logistiek onderzoek en in deze kennisclip zoemen we in op het onderzoeksmodel: welke onderdelen erin zitten, hoe je die opstelt en aan welke eisen het moet voldoen.\n\nIn een onderzoeksmodel komen er een aantal zaken bij elkaar waar je over hebt nagedacht, en die gaan we ook in het onderzoeksmodel plaatsen. Dat is onder andere de doelstelling, het onderzoeksobject en de onderzoeksoptiek. Daarbij komen ook nog bronnen kijken, maar daar zoemen we straks even op in.\n\nNeem nou deze doelstelling die je hebt opgesteld voor een onderzoek: het opstellen van drie verbeteradviezen voor vijftien januari, waarbij de inzet van robots bij het pickproces de productiviteit van het pikken en werknemerstevredenheid verhoogt, door een kwantitatieve beoordeling van de productiviteit van het proces met en zonder robots en de belangen van werknemers te vergelijken met succesfactoren uit de literatuur bij de implementatie en inzet van pickrobots.\n\nDeze doelstelling wil je gaan behalen. Dit is waar je op inzoomt: namelijk de doelstelling komt helemaal achterin het onderzoeksmodel, het vormt het belangrijkste uitgangspunt en je moet gaan aantonen door het onderzoeksmodel hoe je de doelstelling denkt te gaan behalen. Een verkorte versie van de doelstelling plaats je in een kader en kun je bijvoorbeeld zo samenvatten: drie verbeteradviezen ten aanzien van het gebruik van robots bij het pikken waarbij productiviteit en werknemerstevredenheid verhoogd kan worden.\n\nVervolgens ga je bepalen wat je onderzoeksobjecten precies zijn. Die kun je namelijk direct uit je doelstelling halen. Onderzoeksobjecten zijn bijvoorbeeld personen of werkstromen, processen of fysieke stromen. In het geval van dit onderzoek ga je focussen op de productiviteit van het pickproces met en zonder robot, maar uit de doelstelling konden we nog meer halen: namelijk ook de werknemerstevredenheid. De werknemers worden ook een onderzoeksobject en we zoemen in op de belangen van werknemers.\n\nVervolgens ga je nadenken over: hoe ga ik daar dan naar kijken, naar die twee onderzoeksobjecten? Wat weet ik al over deze onderwerpen, wat kan ik vervolgens vinden in de literatuur, en wat vind ik zelf ook interessant? Je bedenkt na enige overweging dat je dat gaat doen aan de hand van beoordelingscriteria: voor de productiviteit van het pickproces, maar ook om de werknemerstevredenheid te bepalen. Met beoordelingscriteria kun jij de productiviteit vaststellen met en zonder robot, en kun je ook kijken naar de belangen van de werknemers.\n\nDe verticale pijlen geven aan welke onderdelen met elkaar verbonden moeten worden. De horizontale pijlen geven aan welk resultaat dat vervolgens gaat opleveren. Als je kijkt naar het pickproces en als je dat wilt gaan beoordelen aan de hand van die criteria, en je gaat kijken naar de huidige en de future state, dan kom je uiteindelijk op die analyseresultaten uit. Met het andere onderzoeksobject, belangen van de werknemers, kom je ook op resultaten uit: in dit geval succesfactoren bij het werken met robots.\n\nVervolgens ga je vaststellen: als ik die beoordelingscriteria wil hebben, welke bronnen en welke literatuur ben ik dan nodig voor deze onderzoeksoptiek? Je hebt nodig: theorie over productiviteit van het pickproces, theorie over de productiviteit met robots, theorie over de inzet van robots bij het pickproces, en het vooronderzoek.\n\nAls we al die blokjes bij elkaar plaatsen, dan komen we hier op uit. Je moet het lezen van rechts naar links. Dat betekent dat je begint bij de doelstelling, drie verbeteradviezen. Daarvoor heb je nodig die analyseresultaten, en die analyseresultaten kun je alleen krijgen door de beoordelingscriteria te gebruiken. Om die beoordelingscriteria te vinden heb je die bronnen nodig en het vooronderzoek.\n\nDe horizontale pijlen betekenen dat je de zaken die daar links van staan allemaal met elkaar gaat vergelijken, confronteren en bij elkaar gaat passen om uiteindelijk uit te komen op de beoordelingscriteria, de analyseresultaten of het behalen van de doelstelling.\n\nIn het onderzoeksmodel kunnen we ook nog stappen aanbrengen: stap één tot en met stap drie. Deze geven globaal de structuur van jouw onderzoek aan. In stap één ga je literatuuronderzoek doen en vooronderzoek uitvoeren om uiteindelijk die beoordelingscriteria te vinden. In stap twee ga je daadwerkelijk het onderzoek uitvoeren en wil je tot analyseresultaten komen. In de laatste, derde stap behaal je de doelstelling.\n\nWe hebben nu alle onderdelen van het onderzoeksmodel besproken en laten zien aan de hand van dit voorbeeld. Kun je nu gaan nadenken over hoe dat bij jouw onderzoek eruit zou kunnen zien? Begin rechts met je doelstelling en werk van rechts naar links toe. Probeer vast te stellen wat jouw analyseresultaten zouden moeten zijn, wat jouw onderzoeksoptiek zou moeten zijn, wat jouw onderzoeksobjecten zijn, en welke literatuur of theorie of welke bronnen jij nodig hebt om jouw onderzoek uiteindelijk op te starten. Veel succes!"
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "Een onderzoeksmodel neemt je dus schematisch mee in de opzet van je onderzoek. Welke stappen ga je nemen, welke theorieën ga je onderzoeken en toepassen in je onderzoek."
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "Bij het maken van een onderzoeksmodel is het van belang te denken vanuit een zestal basishandelingen:"
+        ]
+      },
+      {
+        "type": "clickableSteps",
+        "steps": [
+          {
+            "label": "1. Werken van achteren naar voren",
+            "content": [
+              "We hebben leren 'lezen' van links naar rechts. Belangrijkste bij het onderzoeksmodel is werken van rechts naar links. Aan de rechterkant staat namelijk het doel van het onderzoek. Zie figuur 1. Dit vormt het uitgangspunt en van hieruit kun je gaan nadenken over de vraag hoe je dat wilt bereiken. Daarom is het van belang dat je precies weet wat je onderzoeksobject of onderzoeksobjecten zijn.",
+              "<div class=\"float-right w-48 h-auto mb-4 ml-4\"><img src=\"assets/images/3.1.1.png\" alt=\"Figuur 1\" class=\"w-full h-auto mb-2\" /><p class=\"text-xs text-gray-600 dark:text-gray-400 italic text-center\">Figuur 1: Het doel komt rechts in het onderzoeksmodel te staan. Dit hoeft niet de complete doelstelling te zijn.</p></div>"
+            ]
+          },
+          {
+            "label": "2. Bepalen van de onderzoeksobjecten",
+            "content": [
+              "Het onderzoeksobject is een concreet verschijnsel wat je gaat onderzoeken. Dit kan een persoon zijn (wat is de impact van de leiderschapsstijl van persoon A op persoon B), maar in ons geval gaat het hier grotendeels om een (deel van) een proces of een fysieke locatie. Andere mogelijkheden zijn er uiteraard ook. Je kunt het onderzoeksobject vergelijken met het onderwerp van een zin. Dit is de essentie waar het onderzoek betrekking op heeft. Als helder is welk object er onderzocht gaat worden dan kun je vaststellen welke onderzoeksoptiek er gebruikt kan worden.",
+              "In het voorbeeld van het gebruik van pickrobots zijn de onderzoeksobjecten het pickproces en de werknemers waarvan je de werknemerstevredenheid wilt vaststellen. Zie ook figuur 2.",
+              "<div class=\"float-left w-48 h-auto mb-4 mr-4 mt-4\"><img src=\"assets/images/3.1.2.png\" alt=\"Figuur 2\" class=\"w-full h-auto mb-2\" /><p class=\"text-xs text-gray-600 dark:text-gray-400 italic text-center\">Figuur 2: De onderzoeksobjecten</p></div>"
+            ]
+          },
+          {
+            "label": "3. Bepaald de aard van je onderzoeksoptiek",
+            "content": [
+              "In de onderzoeksoptiek kies je het perspectief waarmee je naar het onderzoeksobject gaat kijken. In andere woorden… Je kiest je eigen de bril (onderzoeksoptiek) waarmee je naar het onderwerp (onderzoeksobject) gaat kijken. De onderzoeksoptiek is een van de belangrijkste onderdelen van het onderzoeksmodel. Je kiest het perspectief dat het best past bij wat je zelf van het object afweet, je let op je eigen belangstelling en met welk perspectief je de meest zinvolle resultaten kunt verkrijgen. Er zijn hierbij verschillende perspectieven waarmee je kunt kijken:",
+              {
+                "type": "tabs",
+                "defaultTab": 0,
+                "tabs": [
+                  {
+                    "title": "Normatief",
+                    "content": [
+                      "<p class=\"text-gray-700 dark:text-gray-300 mb-3\">Je gaat kijken of de wereld in elkaar zit zoals deze in elkaar hoort te zitten. Veel logistieke verbeteropdrachten die jij als LM student gaat uitvoeren zitten in deze hoek. Je gaat immers kijken of je verbeteringen aan het huidige proces kunt signaleren en implementeren. Als je volgens een norm gaat kijken kun je criteria hanteren. Aan de hand van deze criteria moet het mogelijk zijn om te bepalen of het onderzoeksobject voldoet aan de norm.</p>"
+                    ]
+                  },
+                  {
+                    "title": "Feitelijk",
+                    "content": [
+                      "<p class=\"text-gray-700 dark:text-gray-300 mb-3\">Je gaat kijken of de wereld in elkaar zit zoals jij denkt dat deze in elkaar zit. Hierbij ga je verbanden onderzoeken die je vooraf nog niet weet. We spreken hierin dus een bepaalde verwachting uit. Dit wordt ook wel een hypothese stellen genoemd. In een hypothese worden dus verbanden gelegd.</p>"
+                    ]
+                  }
+                ]
+              },
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Let op: de onderstaande oefening werkt mogelijk niet goed op mobiele apparaten. Gebruik bij voorkeur een desktop of tablet voor de beste ervaring.</p>",
+              {
+                "type": "matchingExercise",
+                "title": "Onderscheid tussen Normatief en Feitelijk perspectief",
+                "instruction": "Sleep de omschrijvingen naar de juiste categorie om te testen of je het onderscheid begrijpt:",
+                "categories": [
+                  {
+                    "name": "Normatief",
+                    "description": "Je gaat kijken of de wereld in elkaar zit zoals deze in elkaar hoort te zitten. Veel logistieke verbeteropdrachten zitten in deze hoek. Je gaat kijken of je verbeteringen aan het huidige proces kunt signaleren en implementeren."
+                  },
+                  {
+                    "name": "Feitelijk",
+                    "description": "Je gaat kijken of de wereld in elkaar zit zoals jij denkt dat deze in elkaar zit. Hierbij ga je verbanden onderzoeken die je vooraf nog niet weet. Je spreekt een bepaalde verwachting uit (hypothese)."
+                  }
+                ],
+                "items": [
+                  {
+                    "text": "Het pickproces voldoet aan de norm voor efficiëntie",
+                    "correctCategory": 0
+                  },
+                  {
+                    "text": "Het implementeren van pickrobots heeft een positief effect op de productiviteit van de medewerkers",
+                    "correctCategory": 1
+                  },
+                  {
+                    "text": "De doorlooptijd van orders moet worden teruggebracht tot maximaal 24 uur",
+                    "correctCategory": 0
+                  },
+                  {
+                    "text": "Er is een verband tussen werknemerstevredenheid en productiviteit",
+                    "correctCategory": 1
+                  },
+                  {
+                    "text": "Het magazijn moet voldoen aan de veiligheidsnormen",
+                    "correctCategory": 0
+                  },
+                  {
+                    "text": "Het gebruik van RFID-technologie verbetert de voorraadnauwkeurigheid",
+                    "correctCategory": 1
+                  }
+                ]
+              },
+              "Hieronder een paar voorbeelden van hypotheses bij het feitelijk perspectief:",
+              "<ul class=\"list-disc list-inside space-y-2 mb-4 ml-4\">",
+              "<li>Het implementeren van pickrobots heeft een positief effect op de productiviteit van de medewerkers (orderpickers).</li>",
+              "<li>Het implementeren van pickrobots leidt tot minder tevredenheid onder de medewerkers.</li>",
+              "<li>Tevreden medewerkers verhogen de productiviteit.</li>",
+              "</ul>",
+              "De relaties tussen deze begrippen kunnen schematisch worden vastgelegd zoals in figuur 3 is weergegeven. Deze schematische weergave wordt een conceptueel model genoemd.",
+              "<div class=\"mb-4 clear-both\" style=\"width: 300px;\"><img src=\"assets/images/3.1.3.png\" alt=\"Figuur 3\" class=\"w-full h-auto mb-2\" style=\"max-width: 300px; max-height: 250px;\" /><p class=\"text-xs text-gray-600 dark:text-gray-400 italic\" style=\"width: 300px;\">Figuur 3: Visualisatie van de hypothese in een conceptueel model met een direct en een indirect verband tussen de mate van robotisering en productiviteit.</p></div>",
+              "Zo is te zien dat de mate van robotisering zowel een direct (mate van robotisering in relatie tot productiviteit) als een indirect verband heeft (mate van robotisering in relatie tot tevredenheid medewerkers welke een effect heeft op de productiviteit).",
+              "Het nadenken, opstellen en visualiseren van een hypothese helpt om de onderzoeksoptiek vast te stellen. De vraag is nu wat je nodig hebt om deze hypothese te bevestigen dan wel te weerleggen. Kun jij die vraag beantwoorden?",
+              "Om te werken aan deze hypothese is het nodig om (1) een set van beoordelingscriteria te hebben waarmee je de productiviteit van het pickproces met en zonder robots kunt vaststellen en (2) een set van beoordelingscriteria te hebben waarmee de werknemerstevredenheid gemeten kan worden. Dit is ook in figuur 4 te zien.",
+              "<div class=\"mb-4 clear-both\" style=\"width: 200px; margin: 0 auto;\"><img src=\"assets/images/3.1.4.png\" alt=\"Figuur 4\" class=\"w-full h-auto mb-2\" style=\"max-width: 200px; max-height: 160px;\" /><p class=\"text-xs text-gray-600 dark:text-gray-400 italic\" style=\"width: 200px;\">Figuur 4: De onderzoeksoptiek (in het midden van het onderzoeksmodel) bestaat dus uit beoordelingscriteria voor het bepalen van de productiviteit van het pickproces en de werknemerstevredenheid.</p></div>"
+            ]
+          },
+          {
+            "label": "4. Kies de bronnen (of theorieën) die je nodig denkt te hebben",
+            "content": [
+              "Nu je hebt stilgestaan bij enkele relaties van het onderzoeksobject (onderwerp) en de onderzoeksoptiek (de bril) is het tijd om na te gaan denken over de bronnen die je moet gaan gebruiken. Hierbij kun je denken aan bestaande notities of (nieuws)artikelen en al uitgevoerde (interne) onderzoeken. Tegelijkertijd is het ook noodzakelijk bestaande literatuur te raadplegen. Hierbij kun je denken aan vakliteratuur, wetenschappelijke theorieën en schoolboeken (tip: pak bijvoorbeeld Werken met Logistiek er weer eens bij).",
+              "Om op een goede wijze de bronnen te gaan vaststellen zou je allereerst eigenlijk de kernbegrippen moeten definiëren. Het formuleren van een omschrijving bij elk kernbegrip is belangrijk omdat: (1) al je stakeholders dezelfde omschrijving lezen van de belangrijkste begrippen en (2) de kernbegrippen als trefwoorden kunt gaan gebruiken bij het zoeken naar bronnen/theorie/literatuur.",
+              "Voor het opstellen van het onderzoeksmodel gaan we nu niet verder in op het vinden van de juiste bronnen. Je zou misschien denken dat het heel makkelijk is, maar je zult gaan merken dat het vinden van de juiste bronnen, artikelen en theorieën best lastig kan zijn. Op een later moment staan we nadrukkelijk stil bij het vaststellen van kernbegrippen en het vinden van geschikte bronnen. Probeer nu wel alvast op grote lijnen vast te stellen waar jij in je onderzoek theorie of literatuur over moet vinden.",
+              "In het voorbeeld van het inzetten van robots bij het pickproces bestaat de onderzoeksopzet uit beoordelingscriteria voor de productiviteit van het pickproces en werknemerstevredenheid. Daarom is het van belang om theorie te vinden die gaat over de productiviteit van het pickproces zonder en met robots. Daarnaast is het van belang om theorie te vinden over de inzet van robots bij het pickproces en wat het effect kan zijn op werknemers. Bij dit laatste ga je heel gericht zoeken naar wat van belang is bij de implementatie van robots en welke succesfactoren een rol in het algemeen spelen. Dit geef je verkort weer aan de linkerkant van het onderzoeksmodel. Zie ook figuur 5.",
+              {
+                "type": "image",
+                "src": "assets/images/3.1.5.png",
+                "alt": "Figuur 5: De benodigde bronnen staan links in het onderzoeksmodel.",
+                "align": "left",
+                "showAltText": true,
+                "enableModal": false,
+                "size": "small"
+              },
+              "Je ziet ook dat er nog een blokje vooronderzoek in staat. Hierin ga onder andere je de 5W's + V + O vaststellen of alvast een belangrijk interview afnemen."
+            ]
+          },
+          {
+            "label": "5. Confronteer het onderzoeksobject, onderzoeksoptiek en bronnen met elkaar en trek hieruit je (eerste) conclusies",
+            "content": [
+              "Met het onderzoeksmodel ga je ook laten zien hoe je verschillende bronnen met elkaar gaat vergelijken en conclusies gaat trekken. Dit vergelijken van verschillende bronnen wordt confronteren genoemd.",
+              "Zo kun je bijvoorbeeld een gemaakte analyse van artikelen die op voorraad gehouden moeten worden vergelijken/confronteren met een gemaakte analyse van de kosten die dat met zich meebrengt. Zo kun je een onderbouwd advies geven over welke en hoeveel artikelen er op voorraad gehouden zouden moeten worden. Je kunt ook literatuur zoeken over de impact van robotisering op productiviteit en die uitkomsten confronteren met literatuur over de impact van robotisering op de tevredenheid van werknemers.",
+              "In de confrontatie ga je dus telkens conclusies trekken. Dit kan op verschillende momenten tijdens het onderzoek gebeuren. De inzichten die jij verkrijgt door verschillende aspecten van het onderzoek te confronteren zijn belangrijk. Hierdoor kun je onderbouwd het onderzoek steeds verder vormgeven en uitwerken. In het onderzoeksmodel geef je ook aan welke onderdelen met elkaar geconfronteerd worden. Dit gebeurt door middel van verticale en horizontale palen. De verticale pijl geeft aan welke onderdelen met elkaar geconfronteerd worden. De horizontale pijl geeft aan welke uitkomst het confronteren gaat geven.",
+              "In het voorbeeld van de pickrobots worden de onderzoeksobjecten en de bronnen met elkaar geconfronteerd. Dit leidt tot de onderzoeksoptiek. De confrontatie wordt zichtbaar gemaakt door de verticale en horizontale pijl die te zien zijn in figuur 6.",
+              {
+                "type": "image",
+                "src": "assets/images/3.1.6.png",
+                "alt": "Figuur 6: De resultaten van de vier blokken links worden met elkaar geconfronteerd en leiden tot een onderbouwde conclusie. De resultaten van de conclusie vormen de onderzoeksoptiek.",
+                "align": "left",
+                "showAltText": true,
+                "enableModal": false,
+                "size": "small"
+              },
+              "De onderzoeksoptiek wordt ingezet om verder te analyseren. Met de beoordelingscriteria voor de productiviteit van het pickproces kan de current state en de future state worden bepaald. Dat ziet eruit zoals in figuur 7a is te zien.",
+              {
+                "type": "image",
+                "src": "assets/images/3.1.7.1.png",
+                "alt": "Figuur 7a: Met de gevonden beoordelingscriteria is het mogelijk om de productiviteit zonder (current state) en met (future state) robots in kaar te brengen.",
+                "align": "center",
+                "showAltText": true,
+                "enableModal": false,
+                "size": "medium"
+              },
+              "Daarnaast worden de beoordelingscriteria ingezet om de werknemerstevredenheid te meten en eventueel te verhogen. Deze resultaten worden geconfronteerd met de door jou in kaart gebrachte belangen van werknemers. Dit leidt tot een onderbouwde conclusie van succesfactoren bij het werken met robots gericht op de organisatie waar het onderzoek plaatsvindt. Zie ook figuur 7b.",
+              {
+                "type": "image",
+                "src": "assets/images/3.1.7.2.png",
+                "alt": "Figuur 7b: de belangen van de werknemers worden geconfronteerd met de beoordelingscriteria t.a.v. de werknemerstevredenheid. Dit leidt tot specifieke succesfactoren bij het implementeren van en werken met pickrobots.",
+                "align": "center",
+                "showAltText": true,
+                "enableModal": false,
+                "size": "medium"
+              },
+              "Het schematisch weergeven van het onderzoeksmodel bied houvast en eenduidige structuur voor jezelf, maar ook voor je opdrachtgever en/of begeleiders die je tijdens het onderzoek ondersteunen. Het is van belang om het onderzoeksmodel te presenteren zodat elke stakeholder ook inzicht krijgen in de wijze waarop jij het onderzoek gaat vormgeven. De stakeholders kijken er op hun eigen manier naar en kunnen je nog waardevolle feedback geven. Tegelijkertijd is het ook een wijze waarin jij omschrijft op welke wijze jij het onderzoek hebt uitgevoerd, zodat ook anderen een vergelijkbaar onderzoek (op bijvoorbeeld een later moment in de tijd) zouden kunnen overdoen om effecten te meten."
+            ]
+          },
+          {
+            "label": "6. Beschrijf de stappen vanuit de schematische weergave in eigen woorden",
+            "content": [
+              "Alle delen van het onderzoeksmodel zijn nu aan bod gekomen. Als dit wordt samengevoegd ziet dat eruit zoals in figuur 8 is weergegeven. De analyseresultaten van de current en future state worden geconfronteerd met de in kaart gebrachte succesfactoren bij het werken met robots. Deze confrontatie moet genoeg opleveren om tot drie goed onderbouwde en gefundeerde verbeteradviezen te komen die van toepassing zijn op de organisatie.",
+              {
+                "type": "image",
+                "src": "assets/images/3.1.8.png",
+                "alt": "Figuur 8: Het complete onderzoeksmodel.",
+                "align": "left",
+                "showAltText": true,
+                "enableModal": true,
+                "size": "auto"
+              },
+              "Nu het gehele model in kaart is gebracht is het ook van belang om het model te gaan verwoorden. Dat is hierboven zo nu en dan al gebeurd omdat het model in stappen is uitgelegd. In het onderzoeksplan ga je een uitleg van de onderdelen van het onderzoeksmodel hooguit opnemen in de bijlage. In de hoofdtekst presenteer je het gehele onderzoeksmodel. Dit model moet ook voorzien worden van een verwoording of een toelichting. Om die verwoording wat structuur te geven kan het onderzoeksplan ook worden opgedeeld in drie stappen die te zien zijn in figuur 9.",
+              {
+                "type": "image",
+                "src": "assets/images/3.1.9.png",
+                "alt": "Figuur 9: Het onderzoeksmodel is opgedeeld in drie stappen. In stap 1 wordt het onderzoeksobject en de bronnen gebruikt om de onderzoeksoptiek op te stellen. Met de onderzoeksoptiek kun je komen tot analyseresultaten en succesfactoren (stap 2) en daarmee kun je uiteindelijk verbeteradviezen opstellen (stap 3).",
+                "align": "left",
+                "showAltText": true,
+                "enableModal": true,
+                "size": "auto"
+              },
+              "Naast de schematische weergave (het aan elkaar verbinden van de verschillende onderdelen) is het ook van belang om de verschillende stappen die in het onderzoeksmodel naar voren komen te benoemen en kort te omschrijven. De verwoording zou er bijvoorbeeld als volgt uit kunnen zien:",
+              {
+                "type": "steps",
+                "steps": [
+                  "<strong>Stap 1</strong> is het in kaart brengen van de kennis t.a.v. de productiviteit van het pickproces met en zonder robots. Daarnaast wordt de belangrijkste theorie bijeengezocht ten aanzien van beoordelingscriteria van werknemerstevredenheid en succesfactoren bij de implementatie van robots bij het pickproces. Samen met het vooronderzoek leiden deze vier onderdelen tot een belangrijkste set van beoordelingscriteria voor het bepalen van de productiviteit van het pickproces maar ook voor de werknemerstevredenheid. Want hoe ga je werknemerstevredenheid eigenlijk bepalen? De uitkomsten van stap 1 worden ook gebruikt bij stap 2.",
+                  "Bij <strong>stap 2</strong> worden de beoordelingscriteria ingezet. Ten eerste voor de confrontatie met de (mogelijke) productiviteit van het pickproces met en zonder robots. Dit leidt tot de analyseresultaten van de current en future state. Ten tweede voor de confrontatie van de beoordelingscriteria van de werknemerstevredenheid met de belangen van werknemers. Het resultaat hiervan zijn in kaart gebrachte succesfactoren voor de huidige werknemers voor het werken met robots.",
+                  "<strong>Stap 3</strong> leidt uiteindelijk tot drie verbeteradviezen door de analyseresultaten en succesfactoren van stap 2 met elkaar te confronteren. Je kunt namelijk op basis van de analyseresultaten en succesfactoren specifieke op de organisatie gerichte adviezen schrijven."
+                ]
+              },
+              "<em>NB: Dit voorbeeld is bewust eenvoudig gehouden. Je kunt bijvoorbeeld ook nog de kosten meenemen. Met de resultaten van een kostenanalyse kun je nog gerichter adviezen schrijven.</em>"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "<h3 class=\"text-lg font-semibold text-gray-900 dark:text-white mb-0\">Template Onderzoeksmodel</h3>",
+          "Om je op weg te helpen is er een <a href=\"assets/Documents/Onderzoeksmodel Template.vsdx\" download class=\"text-blue-600 hover:text-blue-800 underline font-medium\">template</a> gemaakt voor het onderzoeksmodel dat voorzien is van een korte uitleg en enkele instructies. Zie ook Figuur 10. Je kunt dit template downloaden in Brightspace en uploaden in Microsoft Visio. Uiteraard mag je het template ook aanpassen en opslaan voor later gebruik bijvoorbeeld in je stage. Indien je zelf een onderzoeksmodel wilt maken in Draw.io dan is dat uiteraard goed. Daar is helaas geen template voor beschikbaar."
+        ]
+      },
+      {
+        "type": "accordion",
+        "usePlusIcon": true,
+        "defaultOpen": false,
+        "items": [
+          {
+            "title": "Opdracht 2.1: template klaarzetten + 3 analyseresultaten formuleren",
+            "defaultOpen": false,
+            "content": [
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Open het bestand Onderzoeksmodel Template.vsdx (via de link hierboven of in Brightspace) in Microsoft Visio en sla een eigen kopie op waarin jij direct kunt werken.</p>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>Let op:</strong> dubbelklikken op het bestand werkt niet omdat je Visio in de browser gebruikt. Ga in de browser naar Visio en kies voor Bestand openen. Selecteer dan het gedownloade template.</p>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Neem de instructies en werkwijze in het template zorgvuldig door, zodat je direct kunt beginnen met het invullen van je eigen onderzoeksmodel.</p>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Gebruik voor deze opdracht de casus magazijnoptimalisatie bij Organisatie X op de pagina <a href=\"casus.html\" class=\"text-blue-600 dark:text-blue-400 hover:underline font-medium\">Casus magazijnoptimalisatie</a>. Denk alvast na over welke analyseresultaten je nodig hebt om de doelstelling uit die casus te behalen. Schrijf minimaal drie analyseresultaten op die concreet bijdragen aan het behalen van die doelstelling. Noteer ze in je eigen kopie van het template of in een apart document.</p>"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "image",
+        "src": "assets/images/3.1.10.png",
+        "alt": "Figuur 10: Template van het onderzoeksmodel. Het template is nog voorzien van toelichting en een handige werkwijze.",
+        "align": "left",
+        "showAltText": true,
+        "enableModal": true,
+        "size": "auto"
+      },
+      {
+        "type": "heading",
+        "text": "Onderzoeksmodel, why?",
+        "level": 2,
+        "id": "onderzoeksmodel-why"
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "In het voorgaande heb je inzicht gekregen in de wijze waarop een onderzoeksmodel is opgezet en waar je rekening mee gaat houden. Je hebt daarbij inzicht gekregen dat het maken van een onderzoeksmodel erg handig kan zijn om verschillende redenen, zoals:"
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "<ol class=\"list-decimal list-outside space-y-2 mb-4 ml-6 pl-4\">",
+          "<li>Het geeft een helder beeld van de aard van het onderzoek en de te verwachten resultaten.</li>",
+          "<li>Alle betrokkenen kijken gezamenlijk naar een en dezelfde voorstelling van het onderzoek.</li>",
+          "<li>Het ondersteunt en vergemakkelijkt het proces van kiezen van relevante literatuur en maakt duidelijk vanuit welke optiek literatuur moet worden bestudeerd.</li>",
+          "<li>Het maakt het eenvoudiger en duidelijker op welke wijze je de doelstelling van je onderzoek wilt gaan behalen</li>",
+          "<li>Je kunt aan de hand van het onderzoeksmodel alvast een grove inhoudsopgave maken van je eindrapport.</li>",
+          "</ol>"
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "Nu je het onderzoeksmodel hebt kunnen vaststellen, gebruik je dit model om de hoofdvraag van je onderzoek te formuleren. In deze fase richt je je op die centrale vraag; deelvragen en begripsbepaling volgen in Fase 02."
+        ]
+      },
+      {
+        "type": "heading",
+        "text": "Hoofdvraag",
+        "level": 2,
+        "id": "hoofdvraag"
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "Aan de hand van de hoofdvraag geef je richting aan je onderzoek. De hoofdvraag is de invulling van je doelstelling in dit onderzoek. In dit deel leer je hoe je die centrale vraag formuleert en beoordeelt. <strong>Deelvragen</strong> stel je pas in <strong>Fase 02</strong>, nadat je de belangrijkste begrippen hebt bepaald."
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "Nu denk jij natuurlijk… Vragen stellen dat is toch niet moeilijk, dat kan iedereen. Inderdaad een vraag stellen kan iedereen. De taak is nu aan jou om een adequate vraag te stellen. Hierbij worden voornamelijk 3 eisen gesteld:"
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "<ul class=\"list-disc list-inside space-y-2 mb-4 ml-4\">",
+          "<li>Afbakening</li>",
+          "<li>Efficiëntie</li>",
+          "<li>Sturend vermogen</li>",
+          "</ul>"
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "Deze 3 eisen worden hieronder in een kennisclip kort uiteengezet. Bekijk deze kennisclip voor uitleg over de eisen aan onderzoeksvragen: afbakening, efficiëntie en sturend vermogen."
+        ]
+      },
+      {
+        "type": "video",
+        "url": "https://media.windesheim.nl/Mediasite/Play/2b19c1b3a5664942917aab81d23887971d",
+        "transcriptContent": "Welkom bij deze kennisclip. We gaan het vandaag hebben over functie- en vormeisen van onderzoeksvragen. We hebben al ons probleem verkend, een doelstelling gemaakt en een onderzoeksmodel opgesteld. Nu gaan we vanuit het onderzoeksmodel nadenken over hoe we de vervolgvragen opstellen en waarom we rekening moeten houden met functie- en vormeisen.\n\nDe functie- en vormeisen gaan we verkennen aan de hand van de doelstelling. We gebruiken deze als een soort mindset om te kijken naar de functie en de vorm. We gaan de centrale vraag uit de doelstelling vertalen naar een centrale vraag, aan de hand van drie facetten: afbakening, efficiëntie en sturend vermogen.\n\nAllereerst de afbakening. De afbakening is heel belangrijk want daarmee brengen we scope aan. We bepalen welk deel van het proces we wel gaan onderzoeken en welk deel niet. Het is mogelijk dat de doelstelling van de organisatie veel groter is dan de centrale vraag die jij gaat onderzoeken, omdat jij maar beperkte tijd en kennis hebt. We houden rekening met inhoud en met de factor tijd. Voor sommige onderzoeken heb je één of twee weken, voor andere 20 weken. Je wilt ervoor zorgen dat wat je gaat onderzoeken en opleveren aansluit bij de tijd die je hebt.\n\nTen tweede: efficiëntie. Houd er rekening mee dat wat je gaat onderzoeken rechtstreeks te relateren is aan je doelstelling. Kun je heel snel uitleggen welke theorieën je gaat gebruiken en kun je die makkelijk koppelen aan je doelstelling, dan heb je een efficiënte vraag. De vraag is: kan ik de vraag nog specifieker maken? Klopt de koppeling met het resultaat?\n\nTen derde: sturend vermogen. Dit gaat over wat en hoe je het wilt doen. Twee onderdelen komen naar voren: relaties en het materieel. Bij relaties: heb je te maken met een beschrijvende of verklarende relatie? In een verklarende relatie leg je uit waarom iets gebeurt. Bij beschrijvend zoek je meer naar wat er gebeurt zonder de verklaring. Vervolgens ga je nadenken over het materieel: welke theorieën, toolsets of modellen wil je inzetten? Denk aan de 5S-methode als voorbeeld van een toolset.\n\nDeze drie elementen – afbakening, efficiëntie en sturend vermogen – bepalen de centrale vraag. Succes ermee!"
+      },
+      {
+        "type": "accordion",
+        "usePlusIcon": true,
+        "defaultOpen": false,
+        "items": [
+          {
+            "title": "Opdracht 2.2: Hoofdvraag formuleren (casus magazijnoptimalisatie)",
+            "defaultOpen": false,
+            "content": [
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">De kennisclip hierboven sluit af met het Ultimo-onderzoek als voorbeeld. In deze opdracht wijken we daar even van af: jij werkt met de casus magazijnoptimalisatie bij Organisatie X op de pagina <a href=\"casus.html\" class=\"text-blue-600 dark:text-blue-400 hover:underline font-medium\">Casus magazijnoptimalisatie</a>.</p>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Gebruik de probleemverkenning en doelstelling uit die casus. Formuleer op basis daarvan een hoofdvraag voor het onderzoek naar magazijnoptimalisatie. Deelvragen stel je pas in Fase 02, na de begripsbepaling.</p>",
+              "<h4 class=\"text-md font-semibold text-gray-900 dark:text-white mb-2 mt-4\">Hoofdvraag</h4>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Schrijf je hoofdvraag op. Zorg dat deze aansluit op de doelstelling uit de casus.</p>",
+              "<h4 class=\"text-md font-semibold text-gray-900 dark:text-white mb-2 mt-4\">Reflectie op afbakening, efficiëntie en sturend vermogen</h4>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Beoordeel je eigen hoofdvraag aan de hand van de drie eisen uit de kennisclip. Schrijf per eis een korte reflectie (een paar zinnen):</p>",
+              "<ul class=\"list-disc list-outside space-y-2 mb-4 ml-6 pl-4\">",
+              "<li class=\"text-gray-700 dark:text-gray-300\"><strong>Afbakening:</strong> waarom is de afbakening van je hoofdvraag goed? Wat valt binnen scope en wat valt er bewust buiten?</li>",
+              "<li class=\"text-gray-700 dark:text-gray-300\"><strong>Efficiëntie:</strong> waarom sluit je hoofdvraag efficiënt aan op de doelstelling? Kun je helder uitleggen welk resultaat je ermee nastreeft?</li>",
+              "<li class=\"text-gray-700 dark:text-gray-300\"><strong>Sturend vermogen:</strong> in hoeverre stuurt je hoofdvraag je onderzoek? Welke richting geeft de vraag aan voor je aanpak (bijvoorbeeld beschrijvend of verklarend, en welke onderzoeksactiviteiten of inzichten je nodig hebt)?</li>",
+              "</ul>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-0\">Bewaar je hoofdvraag en reflectie voor je eigen onderzoeksplan of in een apart document.</p>"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "heading",
+        "text": "Opdracht 2.3: AI-Onderzoeksassistent",
+        "level": 2,
+        "id": "ai-onderzoeksassistent"
+      },
+      {
+        "type": "paragraph",
+        "text": [
+          "In Fase 01 heb je veel onderdelen van je onderzoeksplan behandeld: van probleemverkenning en doelstelling tot onderzoeksmodel en hoofdvraag. In de komende fasen werk je dit verder uit, bijvoorbeeld met begripsbepaling, deelvragen en literatuuronderzoek. Om je hierbij te helpen — ook buiten de lesuren — kun je een eigen AI-assistent bouwen die is ingericht op de theorie en werkwijze van dit vak."
+        ]
+      },
+      {
+        "type": "accordion",
+        "usePlusIcon": true,
+        "defaultOpen": false,
+        "items": [
+          {
+            "title": "Opdracht 2.3: 🤖 Bouw je eigen AI-Onderzoeksassistent",
+            "defaultOpen": false,
+            "content": [
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Je gaat de komende weken aan de slag met het opzetten van je volledige onderzoeksplan: van de probleemstelling en doelstelling tot het onderzoeksmodel en de deelvragen. Omdat je hierbij vaak vragen zult hebben op momenten dat je docent niet direct beschikbaar is, ga je in deze opdracht je eigen digitale OLO-docent bouwen.</p>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Dit doe je door een <strong>Custom GPT</strong> (in ChatGPT) of een <strong>Gem</strong> (in Google Gemini) te maken. Je voedt deze AI-assistent met de theorie van dit vak, zodat hij precies weet wat wij op het hbo verstaan onder een goed onderzoeksplan en jou kan coachen bij elke stap. Let op: een Custom GPT kun je alleen aanmaken met een betaald ChatGPT Plus-account; in Google Gemini kun je ook met een gratis account altijd een Gem bouwen. Op het moment van schrijven was bekend dat <strong>Copilot</strong> voor iedereen binnen Windesheim beschikbaar zou zijn. Wellicht kun je deze opdracht ook uitvoeren in Copilot. Maak zelf een afweging welke tool het beste bij jou past.</p>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>Let op:</strong> Dit is een opdracht voor jezelf om je studie makkelijker te maken. Je hoeft hiervoor niets in te leveren.</p>",
+              "<h4 class=\"text-md font-semibold text-gray-900 dark:text-white mt-4 mb-2\">Stap 1: Bekijk de instructievideo</h4>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-2\">Om je op weg te helpen is er een instructievideo beschikbaar die laat zien hoe je een <strong>Gem</strong> bouwt in Google Gemini. De stappen voor ChatGPT werken vergelijkbaar.</p>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-3\">📺 Bekijk de video hier: <a href=\"https://www.youtube.com/watch?v=yO01B8OoXfo\" target=\"_blank\" class=\"text-blue-600 hover:text-blue-800 underline font-medium\">Instructievideo: Gem bouwen in Google Gemini</a></p>",
+              "<p class=\"text-sm text-gray-600 dark:text-gray-400 mb-4\"><strong>Disclaimer:</strong> De interface van AI-tools verandert snel. Sommige knoppen kunnen net op een andere plek zitten dan in de video. De werkwijze en logica blijven echter hetzelfde, dus met een beetje puzzelen kom je er zeker uit.</p>",
+              "<h4 class=\"text-md font-semibold text-gray-900 dark:text-white mt-4 mb-2\">Stap 2: Configureer je AI-docent</h4>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Of je nu kiest voor een Gemini Gem of een ChatGPT Custom GPT, de kracht zit in de instructies die je geeft. Je wilt dat de AI zich gedraagt als een <strong>expert-docent</strong> die jouw hele onderzoeksplan kan reviewen.</p>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Hieronder kun je kiezen uit 2 soorten onderzoeksassistenten. De linker is passender bij het vak. De rechter is passender bij stage of afstuderen. In de tabs vind je een basis prompt dat je kunt gebruiken. Dit prompt kun je kopiëren en plakken in de GPT of de GEM in het instructieveld. Het prompt wordt hier gegeven als voorbeeld. Je zult dit zelf moeten aanpassen en aanvullen naar eigen wens.</p>",
+              {
+                "type": "accordion",
+                "usePlusIcon": true,
+                "defaultOpen": false,
+                "items": [
+                  {
+                    "title": "OLO Onderzoeksassistent",
+                    "defaultOpen": false,
+                    "content": [
+                      "<p class=\"text-gray-700 dark:text-gray-300 mb-2\"><strong>Naam:</strong> OLO Onderzoeksassistent</p>",
+                      "<ul class=\"list-disc list-inside ml-4 mb-4 space-y-2\">",
+                      "<li><strong>🧍‍♀️ Persona</strong><br>Beschrijf de rol die jouw assistent krijgt, zodat hij weet vanuit welk perspectief hij jou helpt. Bijvoorbeeld: <em>\"Jij bent mijn persoonlijke onderzoeksassistent en methodoloog in het vak 'Opzetten van een Logistiek Onderzoek' op hbo-niveau.\"</em></li>",
+                      "<li><strong>🧭 Taak</strong><br>Beschrijf wat jouw assistent precies moet doen. Bijvoorbeeld: <em>\"Jouw doel is om mij te coachen bij het schrijven van delen van mijn onderzoeksplan op basis van de context die ik meegeef. Geef nooit zomaar het volledige antwoord, maar stel kritische, didactische vragen zodat ik zelf blijf nadenken.\"</em></li>",
+                      "<li><strong>🌍 Context</strong><br>Leg uit in welke situatie jij je bevindt. Bijvoorbeeld: <em>\"Ik ben een 2ejaars student Logistics Management en werk aan een praktijkgericht onderzoek. Gebruik de theorie uit het vak OLO om mij goed te begeleiden en te coachen.\"</em></li>",
+                      "<li><strong>🧾 Format</strong><br>Geef aan in welke vorm je feedback wilt. Bijvoorbeeld: <em>\"Geef je feedback vooral in tekstvorm en gebruik waar dat helpt ook andere formats, zoals een tabel met verbeterpunten of een checklist.\"</em></li>",
+                      "</ul>"
+                    ]
+                  },
+                  {
+                    "title": "stage/afstuderen onderzoeksassistent",
+                    "defaultOpen": false,
+                    "content": [
+                      "<p class=\"text-gray-700 dark:text-gray-300 mb-4\"><strong>Naam:</strong> AI-onderzoeksassistent bij stage/afstuderen</p>",
+                      "<h4 class=\"text-lg font-semibold text-gray-900 dark:text-white mt-0 mb-2\">#Taak</h4>",
+                      "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Jouw doel is het coachen van de student bij het schrijven van een professioneel onderzoeksplan. Je begeleidt de student door de vier fasen van het onderzoeksproces: de eerste aanzet, de verfijning, het literatuuronderzoek en het onderzoekstechnisch ontwerp. Geef nooit direct het volledige antwoord. Stel kritische en didactische vragen zodat de student zelf blijft nadenken over de keuzes in de onderzoeksopzet. Review onderdelen zoals de probleemverkenning, de SMART doelstelling en het onderzoeksmodel.</p>",
+                      "<hr class=\"my-6 border-gray-200 dark:border-gray-600\">",
+                      "<h4 class=\"text-lg font-semibold text-gray-900 dark:text-white mt-4 mb-2\">#Context</h4>",
+                      "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">De gebruiker is een student Logistics Management die werkt aan een praktijkgericht onderzoek. Vraag de student of het een stagiaire is of een afstudeerder. Dit is van belang omdat bij een afstudeerder de lat hoger ligt. Een afstudeerder moet immers op bachelor (eind) niveau presteren. Gebruik de theorie uit de module OLO om de student te begeleiden. Focus op het vertalen van een breed praktijkvraagstuk naar een afgebakend probleem met een duidelijke doelstelling. Gebruik hierbij het A-gedeelte voor het externe organisatiedoel en het B-gedeelte voor het interne onderzoeksdoel. Help de student bij het opbouwen van een onderzoeksmodel van rechts naar links.</p>",
+                      "<hr class=\"my-6 border-gray-200 dark:border-gray-600\">",
+                      "<h4 class=\"text-lg font-semibold text-gray-900 dark:text-white mt-4 mb-2\">#Structuur/format</h4>",
+                      "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Geef jouw feedback hoofdzakelijk in tekstvorm. Gebruik waar nodig een tabel voor een overzicht van verbeterpunten. Maak een checklist om te controleren of alle verplichte onderdelen aanwezig zijn. Presenteer zoekqueries voor het literatuuronderzoek volgens de bouwsteenmethode met Booleaanse operatoren zoals AND en OR.</p>",
+                      "<hr class=\"my-6 border-gray-200 dark:border-gray-600\">",
+                      "<h4 class=\"text-lg font-semibold text-gray-900 dark:text-white mt-4 mb-2\">#Voorbeeld</h4>",
+                      "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Een goed voorbeeld van een onderzoek is de casus over leveranciersprestaties en een Service Level Agreement. Hierbij moet de student kernbeslissingen nemen over de breedte of diepgang van het onderzoek. Een ander voorbeeld is het onderzoek naar spanningen tussen management en chauffeurs door administratieve lasten. In beide gevallen leid je de student naar een passend dataverzamelingsplan.</p>",
+                      "<hr class=\"my-6 border-gray-200 dark:border-gray-600\">",
+                      "<h4 class=\"text-lg font-semibold text-gray-900 dark:text-white mt-4 mb-2\">#Randvoorwaarden</h4>",
+                      "<ul class=\"list-disc list-inside ml-4 mb-4 space-y-2 text-gray-700 dark:text-gray-300\">",
+                      "<li>Pas het mens machine mens principe strikt toe waarbij de student eindverantwoordelijk blijft voor de inhoud.</li>",
+                      "<li>Reflecteer altijd op de validiteit en betrouwbaarheid van de gekozen onderzoeksmethoden.</li>",
+                      "<li>Zorg dat het theoretisch kader toewerkt naar een duidelijke knowledge gap.</li>",
+                      "</ul>",
+                      "<hr class=\"my-6 border-gray-200 dark:border-gray-600\">",
+                      "<h4 class=\"text-lg font-semibold text-gray-900 dark:text-white mt-4 mb-2\">#Persona</h4>",
+                      "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Jij bent een deskundige persoonlijke onderzoeksassistent en methodoloog voor hbo-studenten. Je bent een expert in het vak Opzetten van een Logistiek Onderzoek. Je hebt een kritische maar proactieve houding en stimuleert een frisse blik op logistieke processen.</p>",
+                      "<hr class=\"my-6 border-gray-200 dark:border-gray-600\">",
+                      "<h4 class=\"text-lg font-semibold text-gray-900 dark:text-white mt-4 mb-2\">#Toon</h4>",
+                      "<p class=\"text-gray-700 dark:text-gray-300 mb-0\">Gebruik een nuchtere en praktische toon die past bij een hbo-student. Schrijf helder en logisch zonder onnodig academisch jargon. Wees ondersteunend maar wees ook direct in je feedback op inconsistenties in de rode draad van het plan.</p>"
+                    ]
+                  }
+                ]
+              },
+              "<h4 class=\"text-md font-semibold text-gray-900 dark:text-white mt-4 mb-2\">Stap 3: Kennis toevoegen</h4>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-4\">Het is van belang dat je de juiste context meegeeft aan je GPT of Gem, zodat de chatbot weet waar je over werkt. Je kunt bijvoorbeeld een leeruitkomst of rubric toevoegen, of de gehele theorie van OLO. Ga naar <strong>Start</strong> en scroll naar beneden – daar vind je een knop waarmee je de gehele e-learning als PDF kunt exporteren.</p>",
+              "<h4 class=\"text-md font-semibold text-gray-900 dark:text-white mt-4 mb-2\">Stap 4: Gebruik en test je assistent</h4>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-2\">Loop je vast bij een onderdeel van je onderzoeksplan (bijvoorbeeld bij het aanscherpen van je doelstelling, onderzoeksmodel of centrale vraag)?</p>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-2\">Stel je vraag dan eerst aan je eigen <strong>AI-Onderzoeksassistent</strong>. Hij is 24/7 beschikbaar en kent – als je de theorie goed hebt toegevoegd – de OLO-werkwijze en begrippen.</p>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mb-0\">Blijf wel altijd het <strong>mens–machine–mens</strong>-principe gebruiken: jij beoordeelt zelf of de feedback klopt, past deze aan waar nodig en blijft eindverantwoordelijk voor de inhoud van je onderzoeksplan.</p>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mt-3 mb-0\"><strong>Succes met bouwen en gebruiken van je eigen AI-Onderzoeksassistent!</strong></p>",
+              "<p class=\"text-gray-700 dark:text-gray-300 mt-4 mb-0\">Ter voorbereiding op het college van <strong>week 2</strong>: lees alle stof tot hier. Voer ook <strong>Opdracht 2.1</strong> (template klaarzetten + 3 analyseresultaten formuleren), <strong>Opdracht 2.2</strong> (hoofdvraag formuleren — casus magazijnoptimalisatie) en <strong>Opdracht 2.3</strong> (bouw je eigen AI-Onderzoeksassistent) uit.</p>"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "highlight",
+        "title": "Voorbereiding college week 2",
+        "content": [
+          "Lees voor het college van week 2 alle stof tot hier. Voer ook de volgende opdrachten uit: Opdracht 2.1 (template klaarzetten + 3 analyseresultaten formuleren), Opdracht 2.2 (hoofdvraag formuleren — casus magazijnoptimalisatie) en Opdracht 2.3 (bouw je eigen AI-Onderzoeksassistent)."
+        ],
+        "icon": "fa-calendar-check",
+        "iconClass": "fas",
+        "bgColor": "bg-blue-50 dark:bg-blue-900/20",
+        "borderColor": "border-blue-500 dark:border-blue-400",
+        "titleColor": "text-blue-900 dark:text-blue-200",
+        "contentColor": "text-blue-800 dark:text-blue-300"
+      }
+    ]
+  },
+  "mcVragen": {
+    "title": "Test je kennis",
+    "description": "Je kunt hier oneindig veel vragen genereren op basis van de theorie die je zojuist hebt gelezen. Beantwoord de vragen om te oefenen en bepaal zelf wanneer je de stof voldoende beheerst.",
+    "generateFromTheory": true,
+    "numberOfQuestions": 3
+  },
+  "video": {
+    "title": "Video",
+    "description": "",
+    "url": "",
+    "info": ""
+  }
+}

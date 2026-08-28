@@ -682,8 +682,13 @@
     <script src="/core/js/ui/InteractiveManager.js"></script>
     <script src="/core/js/ui/VideoManager.js"></script>
     <script src="/core/js/ui/TableCopyManager.js"></script>
+    <script src="js/ChecklistCopyManager.js"></script>
+    <script src="js/phase-navigation-config.js?v=20260828d"></script>
     <script src="/core/js/services/NavigationService.js"></script>
-    <script src="js/LogistiekNavigation.js"></script>
+    <script src="js/LogistiekNavigation.js?v=20260828d"></script>
+    <script src="js/phase-sidebar.js?v=20260828d"></script>
+    <script src="js/phase-navigation-init.js"></script>
+    <script src="js/app-router-extensions.js?v=20260828d"></script>
     <script src="/core/js/components/NavigationRenderer.js"></script>
     <script src="/core/js/components/ContentTemplateRenderer.js"></script>
     <script src="/core/pages/BaseLessonPage.js"></script>
@@ -704,17 +709,22 @@
     <script src="/core/pages/MCQuestionRenderer.js"></script>
     
     <!-- Week Page Classes - Load all for SPA router -->
-    <script src="pages/Week1LessonPage.js" onerror="fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'index.html:492',message:'Week1LessonPage.js failed to load',data:{},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'C'})}).catch(()=>{});console.error('[Script] Failed to load Week1LessonPage.js')"></script>
+    <script src="pages/OnderzoeksplanLessonPage.js"></script>
+    <script src="pages/CasusLessonPage.js" onerror="console.error('[Script] Failed to load CasusLessonPage.js')"></script>
     <script src="pages/Week2LessonPage.js" onerror="console.error('[Script] Failed to load Week2LessonPage.js')"></script>
-    <script src="pages/Week3LessonPage.js" onerror="fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'index.html:494',message:'Week3LessonPage.js failed to load',data:{},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'C'})}).catch(()=>{});console.error('[Script] Failed to load Week3LessonPage.js')"></script>
+    <script src="pages/Fase1LessonPage.js" onerror="console.error('[Script] Failed to load Fase1LessonPage.js')"></script>
+    <script src="pages/Week3LessonPage.js" onerror="console.error('[Script] Failed to load Week3LessonPage.js')"></script>
     <script src="pages/Week4LessonPage.js" onerror="console.error('[Script] Failed to load Week4LessonPage.js')"></script>
-    <script src="pages/Week5LessonPage.js" onerror="fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'index.html:496',message:'Week5LessonPage.js failed to load',data:{},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'C'})}).catch(()=>{});console.error('[Script] Failed to load Week5LessonPage.js')"></script>
-    <script src="pages/Week6LessonPage.js" onerror="fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'index.html:497',message:'Week6LessonPage.js failed to load',data:{},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'C'})}).catch(()=>{});console.error('[Script] Failed to load Week6LessonPage.js')"></script>
+    <script src="pages/Fase2LessonPage.js" onerror="console.error('[Script] Failed to load Fase2LessonPage.js')"></script>
+    <script src="pages/Week5LessonPage.js" onerror="console.error('[Script] Failed to load Week5LessonPage.js')"></script>
+    <script src="pages/Fase3LessonPage.js" onerror="console.error('[Script] Failed to load Fase3LessonPage.js')"></script>
+    <script src="pages/Week6LessonPage.js" onerror="console.error('[Script] Failed to load Week6LessonPage.js')"></script>
+    <script src="pages/Fase4LessonPage.js" onerror="console.error('[Script] Failed to load Fase4LessonPage.js')"></script>
     <script src="pages/Week7LessonPage.js" onerror="console.error('[Script] Failed to load Week7LessonPage.js')"></script>
+    <script src="pages/AfrondingLessonPage.js" onerror="console.error('[Script] Failed to load AfrondingLessonPage.js')"></script>
     <script src="pages/GepersonaliseerdLessonPage.js" onerror="console.error('[Script] Failed to load GepersonaliseerdLessonPage.js')"></script>
     <script src="pages/AILeerpadPage.js" onerror="console.error('[Script] Failed to load AILeerpadPage.js')"></script>
     <script src="pages/RegisterPage.js" onerror="console.error('[Script] Failed to load RegisterPage.js')"></script>
-    <script src="pages/AfsluitingLessonPage.js" onerror="fetch('http://127.0.0.1:7242/ingest/b3786c95-41b3-4b01-b09b-5015343364c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'index.html:500',message:'AfsluitingLessonPage.js failed to load',data:{},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'C'})}).catch(()=>{});console.error('[Script] Failed to load AfsluitingLessonPage.js')"></script>
     
     <!-- Verify all classes are loaded with detailed logging -->
     <script>
@@ -722,11 +732,11 @@
             // Wait a bit for all scripts to execute
             setTimeout(() => {
                 console.log('[Script Loader] ⏰ Verification started at:', new Date().toISOString());
-                const expectedClasses = [
-                    'Week1LessonPage', 'Week2LessonPage', 'Week3LessonPage', 
-                    'Week4LessonPage', 'Week5LessonPage', 'Week6LessonPage', 
-                    'Week7LessonPage', 'RegisterPage', 'AfsluitingLessonPage'
-                ];
+            const expectedClasses = [
+                'Week1LessonPage', 'CasusLessonPage', 'Week2LessonPage', 'Fase1LessonPage', 'Week3LessonPage', 
+                'Week4LessonPage', 'Fase2LessonPage', 'Week5LessonPage', 'Fase3LessonPage', 'Week6LessonPage', 'Fase4LessonPage', 
+                'Week7LessonPage', 'AfrondingLessonPage', 'RegisterPage'
+            ];
                 
                 console.log('[Script Loader] 🔍 Checking for page classes...');
                 console.log('[Script Loader] BaseLessonPage available:', !!window.BaseLessonPage);
@@ -782,207 +792,8 @@
                 </div>
 
 
-                <!-- Module Navigation -->
-                <nav class="flex-1 overflow-y-auto custom-scrollbar p-6" aria-label="Module navigatie" data-navigation-initialized="true">
-                    <div class="space-y-2">
-                        <div class="px-3 py-2 mb-2">
-                            <span class="text-sm font-semibold text-gray-700 dark:text-gray-300">E-Learning</span>
-                        </div>
-                        <a href="index.html" class="block p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 focus-ring transition-colors">
-                            <div class="flex items-center space-x-3">
-                                <div class="w-8 h-8 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center">
-                                    <i class="fas fa-home text-blue-600 dark:text-blue-400 text-sm"></i>
-                                </div>
-                                <span class="font-medium text-gray-900 dark:text-white">Start</span>
-                            </div>
-                        </a>
-                        
-                        <a href="week1.html" class="block p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 focus-ring transition-colors">
-                            <div class="flex items-center space-x-3">
-                                <div class="w-8 h-8 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center">
-                                    <i class="fas fa-play-circle text-green-600 dark:text-green-400 text-sm"></i>
-                                </div>
-                                <span class="font-medium text-gray-900 dark:text-white">Onderzoeksplan template</span>
-                            </div>
-                        </a>
-                        
-                        <div class="fase-1-nav-item">
-                            <a href="week2.html" class="block p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 focus-ring transition-colors">
-                                <div class="flex items-center space-x-3">
-                                    <div class="w-8 h-8 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center">
-                                        <i class="fas fa-layer-group text-blue-600 dark:text-blue-400 text-sm"></i>
-                                    </div>
-                                    <span class="font-medium text-gray-900 dark:text-white flex-1">Fase 01 – Eerste aanzet</span>
-                                    <i class="fas fa-chevron-down text-xs text-gray-400 dark:text-gray-500 transition-transform duration-200" id="fase-1-chevron-index"></i>
-                                </div>
-                            </a>
-                            <div class="fase-1-subitems hidden" id="fase-1-subitems-index">
-                                <a href="week2.html#probleem-verkennen" class="nav-sub-item flex items-center space-x-3 pl-11 pr-3 py-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 focus-ring transition-colors text-gray-600 dark:text-gray-300" data-anchor="#probleem-verkennen">
-                                    <div class="w-6 h-6 bg-gray-100 dark:bg-gray-700 rounded flex items-center justify-center flex-shrink-0">
-                                        <i class="fas fa-circle text-xs text-gray-400 dark:text-gray-500"></i>
-                                    </div>
-                                    <span class="text-sm font-medium">Probleem verkennen</span>
-                                </a>
-                                <a href="week2.html#doelstelling-opstellen" class="nav-sub-item flex items-center space-x-3 pl-11 pr-3 py-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 focus-ring transition-colors text-gray-600 dark:text-gray-300" data-anchor="#doelstelling-opstellen">
-                                    <div class="w-6 h-6 bg-gray-100 dark:bg-gray-700 rounded flex items-center justify-center flex-shrink-0">
-                                        <i class="fas fa-circle text-xs text-gray-400 dark:text-gray-500"></i>
-                                    </div>
-                                    <span class="text-sm font-medium">Doelstelling opstellen</span>
-                                </a>
-                                <a href="week2.html#opdrachtgever-onderzoeker" class="nav-sub-item flex items-center space-x-3 pl-11 pr-3 py-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 focus-ring transition-colors text-gray-600 dark:text-gray-300" data-anchor="#opdrachtgever-onderzoeker">
-                                    <div class="w-6 h-6 bg-gray-100 dark:bg-gray-700 rounded flex items-center justify-center flex-shrink-0">
-                                        <i class="fas fa-circle text-xs text-gray-400 dark:text-gray-500"></i>
-                                    </div>
-                                    <span class="text-sm font-medium">Opdrachtgever-onderzoeker relatie</span>
-                                </a>
-                                <a href="week2.html#vormen-praktijkgericht" class="nav-sub-item flex items-center space-x-3 pl-11 pr-3 py-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 focus-ring transition-colors text-gray-600 dark:text-gray-300" data-anchor="#vormen-praktijkgericht">
-                                    <div class="w-6 h-6 bg-gray-100 dark:bg-gray-700 rounded flex items-center justify-center flex-shrink-0">
-                                        <i class="fas fa-circle text-xs text-gray-400 dark:text-gray-500"></i>
-                                    </div>
-                                    <span class="text-sm font-medium">Vormen van praktijkgericht onderzoek</span>
-                                </a>
-                                <a href="week3.html#onderzoeksmodel" class="nav-sub-item flex items-center space-x-3 pl-11 pr-3 py-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 focus-ring transition-colors text-gray-600 dark:text-gray-300" data-anchor="#onderzoeksmodel">
-                                    <div class="w-6 h-6 bg-gray-100 dark:bg-gray-700 rounded flex items-center justify-center flex-shrink-0">
-                                        <i class="fas fa-circle text-xs text-gray-400 dark:text-gray-500"></i>
-                                    </div>
-                                    <span class="text-sm font-medium">Onderzoeksmodel</span>
-                                </a>
-                                <a href="week3.html#onderzoeksmodel-why" class="nav-sub-item flex items-center space-x-3 pl-11 pr-3 py-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 focus-ring transition-colors text-gray-600 dark:text-gray-300" data-anchor="#onderzoeksmodel-why">
-                                    <div class="w-6 h-6 bg-gray-100 dark:bg-gray-700 rounded flex items-center justify-center flex-shrink-0">
-                                        <i class="fas fa-circle text-xs text-gray-400 dark:text-gray-500"></i>
-                                    </div>
-                                    <span class="text-sm font-medium">Onderzoeksmodel, why?</span>
-                                </a>
-                                <a href="week3.html#hoofdvraag" class="nav-sub-item flex items-center space-x-3 pl-11 pr-3 py-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 focus-ring transition-colors text-gray-600 dark:text-gray-300" data-anchor="#hoofdvraag">
-                                    <div class="w-6 h-6 bg-gray-100 dark:bg-gray-700 rounded flex items-center justify-center flex-shrink-0">
-                                        <i class="fas fa-circle text-xs text-gray-400 dark:text-gray-500"></i>
-                                    </div>
-                                    <span class="text-sm font-medium">Hoofdvraag</span>
-                                </a>
-                                <a href="week3.html#ai-onderzoeksassistent" class="nav-sub-item flex items-center space-x-3 pl-11 pr-3 py-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 focus-ring transition-colors text-gray-600 dark:text-gray-300" data-anchor="#ai-onderzoeksassistent">
-                                    <div class="w-6 h-6 bg-gray-100 dark:bg-gray-700 rounded flex items-center justify-center flex-shrink-0">
-                                        <i class="fas fa-circle text-xs text-gray-400 dark:text-gray-500"></i>
-                                    </div>
-                                    <span class="text-sm font-medium">AI-Onderzoeksassistent</span>
-                                </a>
-                            </div>
-                        </div>
-                        
-                        <div class="fase-2-nav-item">
-                            <a href="week4.html" class="block p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 focus-ring transition-colors">
-                                <div class="flex items-center space-x-3">
-                                    <div class="w-8 h-8 bg-orange-100 dark:bg-orange-900/30 rounded-lg flex items-center justify-center">
-                                        <i class="fas fa-layer-group text-orange-600 dark:text-orange-400 text-sm"></i>
-                                    </div>
-                                    <span class="font-medium text-gray-900 dark:text-white flex-1">Fase 02 – De verfijning</span>
-                                    <i class="fas fa-chevron-down text-xs text-gray-400 dark:text-gray-500 transition-transform duration-200" id="fase-2-chevron-index"></i>
-                                </div>
-                            </a>
-                            <div class="fase-2-subitems hidden" id="fase-2-subitems-index">
-                                <a href="week4.html#definieren-begrippen" class="nav-sub-item flex items-center space-x-3 pl-11 pr-3 py-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 focus-ring transition-colors text-gray-600 dark:text-gray-300" data-anchor="#definieren-begrippen">
-                                    <div class="w-6 h-6 bg-gray-100 dark:bg-gray-700 rounded flex items-center justify-center flex-shrink-0">
-                                        <i class="fas fa-circle text-xs text-gray-400 dark:text-gray-500"></i>
-                                    </div>
-                                    <span class="text-sm font-medium">Definiëren van begrippen</span>
-                                </a>
-                                <a href="week4.html#deelvragen" class="nav-sub-item flex items-center space-x-3 pl-11 pr-3 py-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 focus-ring transition-colors text-gray-600 dark:text-gray-300" data-anchor="#deelvragen">
-                                    <div class="w-6 h-6 bg-gray-100 dark:bg-gray-700 rounded flex items-center justify-center flex-shrink-0">
-                                        <i class="fas fa-circle text-xs text-gray-400 dark:text-gray-500"></i>
-                                    </div>
-                                    <span class="text-sm font-medium">Deelvragen</span>
-                                </a>
-                            </div>
-                        </div>
-                        
-                        <div class="fase-3-nav-item">
-                            <a href="week5.html" class="block p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 focus-ring transition-colors">
-                                <div class="flex items-center space-x-3">
-                                    <div class="w-8 h-8 bg-red-100 dark:bg-red-900/30 rounded-lg flex items-center justify-center">
-                                        <i class="fas fa-layer-group text-red-600 dark:text-red-400 text-sm"></i>
-                                    </div>
-                                    <span class="font-medium text-gray-900 dark:text-white flex-1">Fase 03 – Literatuuronderzoek</span>
-                                    <i class="fas fa-chevron-down text-xs text-gray-400 dark:text-gray-500 transition-transform duration-200" id="fase-3-chevron-index"></i>
-                                </div>
-                            </a>
-                            <div class="fase-3-subitems hidden" id="fase-3-subitems-index">
-                                <a href="week4.html#literatuuronderzoek" class="nav-sub-item flex items-center space-x-3 pl-11 pr-3 py-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 focus-ring transition-colors text-gray-600 dark:text-gray-300" data-anchor="#literatuuronderzoek">
-                                    <div class="w-6 h-6 bg-gray-100 dark:bg-gray-700 rounded flex items-center justify-center flex-shrink-0">
-                                        <i class="fas fa-circle text-xs text-gray-400 dark:text-gray-500"></i>
-                                    </div>
-                                    <span class="text-sm font-medium">Het uitvoeren van literatuuronderzoek</span>
-                                </a>
-                                <a href="week5.html#selecteren-beoordelen" class="nav-sub-item flex items-center space-x-3 pl-11 pr-3 py-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 focus-ring transition-colors text-gray-600 dark:text-gray-300" data-anchor="#selecteren-beoordelen">
-                                    <div class="w-6 h-6 bg-gray-100 dark:bg-gray-700 rounded flex items-center justify-center flex-shrink-0">
-                                        <i class="fas fa-circle text-xs text-gray-400 dark:text-gray-500"></i>
-                                    </div>
-                                    <span class="text-sm font-medium">Selecteren en beoordelen</span>
-                                </a>
-                                <a href="week5.html#slim-bronnen-beheren" class="nav-sub-item flex items-center space-x-3 pl-11 pr-3 py-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 focus-ring transition-colors text-gray-600 dark:text-gray-300" data-anchor="#slim-bronnen-beheren">
-                                    <div class="w-6 h-6 bg-gray-100 dark:bg-gray-700 rounded flex items-center justify-center flex-shrink-0">
-                                        <i class="fas fa-circle text-xs text-gray-400 dark:text-gray-500"></i>
-                                    </div>
-                                    <span class="text-sm font-medium">Slim bronnen beheren</span>
-                                </a>
-                                <a href="week5.html#theoretisch-kader-schrijven" class="nav-sub-item flex items-center space-x-3 pl-11 pr-3 py-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 focus-ring transition-colors text-gray-600 dark:text-gray-300" data-anchor="#theoretisch-kader-schrijven">
-                                    <div class="w-6 h-6 bg-gray-100 dark:bg-gray-700 rounded flex items-center justify-center flex-shrink-0">
-                                        <i class="fas fa-circle text-xs text-gray-400 dark:text-gray-500"></i>
-                                    </div>
-                                    <span class="text-sm font-medium">Theoretisch kader schrijven</span>
-                                </a>
-                            </div>
-                        </div>
-                        
-                        <div class="fase-4-nav-item">
-                            <a href="week6.html" class="block p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 focus-ring transition-colors">
-                                <div class="flex items-center space-x-3">
-                                    <div class="w-8 h-8 bg-indigo-100 dark:bg-indigo-900/30 rounded-lg flex items-center justify-center">
-                                        <i class="fas fa-layer-group text-indigo-600 dark:text-indigo-400 text-sm"></i>
-                                    </div>
-                                    <span class="font-medium text-gray-900 dark:text-white flex-1">Fase 04 – Onderzoekstechnisch ontwerp</span>
-                                    <i class="fas fa-chevron-down text-xs text-gray-400 dark:text-gray-500 transition-transform duration-200" id="fase-4-chevron-index"></i>
-                                </div>
-                            </a>
-                            <div class="fase-4-subitems hidden" id="fase-4-subitems-index">
-                                <a href="week6.html#kernbeslissingen" class="nav-sub-item flex items-center space-x-3 pl-11 pr-3 py-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 focus-ring transition-colors text-gray-600 dark:text-gray-300" data-anchor="#kernbeslissingen">
-                                    <div class="w-6 h-6 bg-gray-100 dark:bg-gray-700 rounded flex items-center justify-center flex-shrink-0">
-                                        <i class="fas fa-circle text-xs text-gray-400 dark:text-gray-500"></i>
-                                    </div>
-                                    <span class="text-sm font-medium">Kernbeslissingen</span>
-                                </a>
-                                <a href="week6.html#onderzoekstrategie" class="nav-sub-item flex items-center space-x-3 pl-11 pr-3 py-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 focus-ring transition-colors text-gray-600 dark:text-gray-300" data-anchor="#onderzoekstrategie">
-                                    <div class="w-6 h-6 bg-gray-100 dark:bg-gray-700 rounded flex items-center justify-center flex-shrink-0">
-                                        <i class="fas fa-circle text-xs text-gray-400 dark:text-gray-500"></i>
-                                    </div>
-                                    <span class="text-sm font-medium">Onderzoeksstrategie</span>
-                                </a>
-                                <a href="week6.html#dataverzamelingsplan" class="nav-sub-item flex items-center space-x-3 pl-11 pr-3 py-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 focus-ring transition-colors text-gray-600 dark:text-gray-300" data-anchor="#dataverzamelingsplan">
-                                    <div class="w-6 h-6 bg-gray-100 dark:bg-gray-700 rounded flex items-center justify-center flex-shrink-0">
-                                        <i class="fas fa-circle text-xs text-gray-400 dark:text-gray-500"></i>
-                                    </div>
-                                    <span class="text-sm font-medium">Het dataverzamelingsplan</span>
-                                </a>
-                            </div>
-                        </div>
-                        
-                        <a href="week7.html" class="block p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 focus-ring transition-colors">
-                            <div class="flex items-center space-x-3">
-                                <div class="w-8 h-8 bg-pink-100 dark:bg-pink-900/30 rounded-lg flex items-center justify-center">
-                                    <i class="fas fa-flag-checkered text-pink-600 dark:text-pink-400 text-sm"></i>
-                                </div>
-                                <span class="font-medium text-gray-900 dark:text-white">Afronding</span>
-                            </div>
-                        </a>
-                        
-                        <a href="register.html" class="block p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 focus-ring transition-colors">
-                            <div class="flex items-center space-x-3">
-                                <div class="w-8 h-8 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center">
-                                    <i class="fas fa-list-ul text-blue-600 dark:text-blue-400 text-sm"></i>
-                                </div>
-                                <span class="font-medium text-gray-900 dark:text-white">Begrippenlijst</span>
-                            </div>
-                        </a>
-                    </div>
-                </nav>
+                                <!-- Module Navigation (dynamisch via phase-navigation-init.js) -->
+                <nav class="flex-1 overflow-y-auto custom-scrollbar p-6" aria-label="Module navigatie" data-phase-nav-root></nav>
 
             </div>
         </aside>
@@ -1132,7 +943,7 @@
                                         
                                         <h4 class="text-lg font-semibold text-gray-900 dark:text-white mb-3">Overzicht van de fasen</h4>
                                         <div class="flex flex-col gap-3 mb-6">
-                                            <a href="week1.html" class="bg-gray-50 dark:bg-gray-900/50 rounded-lg px-6 py-3 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-200 cursor-pointer focus-ring hover-lift block">
+                                            <a href="onderzoeksplan.html" class="bg-gray-50 dark:bg-gray-900/50 rounded-lg px-6 py-3 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-200 cursor-pointer focus-ring hover-lift block">
                                                 <div class="flex items-center justify-between">
                                                     <div class="flex-1">
                                                         <h5 class="font-semibold text-gray-900 dark:text-white mb-1">Onderzoeksplan template</h5>
@@ -1141,7 +952,7 @@
                                                     <i class="fas fa-arrow-right text-sm text-gray-400 dark:text-gray-500 ml-4 flex-shrink-0"></i>
                                                 </div>
                                             </a>
-                                            <a href="week2.html#probleem-verkennen" class="bg-gray-50 dark:bg-gray-900/50 rounded-lg px-6 py-3 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-200 cursor-pointer focus-ring hover-lift block">
+                                            <a href="fase1.html#probleem-verkennen" class="bg-gray-50 dark:bg-gray-900/50 rounded-lg px-6 py-3 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-200 cursor-pointer focus-ring hover-lift block">
                                                 <div class="flex items-center justify-between">
                                                     <div class="flex-1">
                                                         <h5 class="font-semibold text-gray-900 dark:text-white mb-1">Fase 01 – Eerste aanzet</h5>
@@ -1150,7 +961,7 @@
                                                     <i class="fas fa-arrow-right text-sm text-gray-400 dark:text-gray-500 ml-4 flex-shrink-0"></i>
                                                 </div>
                                             </a>
-                                            <a href="week4.html#definieren-begrippen" class="bg-gray-50 dark:bg-gray-900/50 rounded-lg px-6 py-3 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-200 cursor-pointer focus-ring hover-lift block">
+                                            <a href="fase2.html#definieren-begrippen" class="bg-gray-50 dark:bg-gray-900/50 rounded-lg px-6 py-3 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-200 cursor-pointer focus-ring hover-lift block">
                                                 <div class="flex items-center justify-between">
                                                     <div class="flex-1">
                                                         <h5 class="font-semibold text-gray-900 dark:text-white mb-1">Fase 02 – De verfijning</h5>
@@ -1159,7 +970,7 @@
                                                     <i class="fas fa-arrow-right text-sm text-gray-400 dark:text-gray-500 ml-4 flex-shrink-0"></i>
                                                 </div>
                                             </a>
-                                            <a href="week5.html" class="bg-gray-50 dark:bg-gray-900/50 rounded-lg px-6 py-3 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-200 cursor-pointer focus-ring hover-lift block">
+                                            <a href="fase3.html" class="bg-gray-50 dark:bg-gray-900/50 rounded-lg px-6 py-3 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-200 cursor-pointer focus-ring hover-lift block">
                                                 <div class="flex items-center justify-between">
                                                     <div class="flex-1">
                                                         <h5 class="font-semibold text-gray-900 dark:text-white mb-1">Fase 03 – Literatuuronderzoek</h5>
@@ -1168,7 +979,7 @@
                                                     <i class="fas fa-arrow-right text-sm text-gray-400 dark:text-gray-500 ml-4 flex-shrink-0"></i>
                                                 </div>
                                             </a>
-                                            <a href="week6.html" class="bg-gray-50 dark:bg-gray-900/50 rounded-lg px-6 py-3 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-200 cursor-pointer focus-ring hover-lift block">
+                                            <a href="fase4.html" class="bg-gray-50 dark:bg-gray-900/50 rounded-lg px-6 py-3 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-200 cursor-pointer focus-ring hover-lift block">
                                                 <div class="flex items-center justify-between">
                                                     <div class="flex-1">
                                                         <h5 class="font-semibold text-gray-900 dark:text-white mb-1">Fase 04 – Onderzoekstechnisch ontwerp</h5>
@@ -1177,7 +988,7 @@
                                                     <i class="fas fa-arrow-right text-sm text-gray-400 dark:text-gray-500 ml-4 flex-shrink-0"></i>
                                                 </div>
                                             </a>
-                                            <a href="week7.html" class="bg-gray-50 dark:bg-gray-900/50 rounded-lg px-6 py-3 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-200 cursor-pointer focus-ring hover-lift block">
+                                            <a href="afronding.html" class="bg-gray-50 dark:bg-gray-900/50 rounded-lg px-6 py-3 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-200 cursor-pointer focus-ring hover-lift block">
                                                 <div class="flex items-center justify-between">
                                                     <div class="flex-1">
                                                         <h5 class="font-semibold text-gray-900 dark:text-white mb-1">Afronding</h5>
@@ -1223,7 +1034,7 @@
 
                     <!-- Action Buttons -->
                     <div class="mt-12 flex justify-center items-center space-x-6">
-                        <a href="week1.html" class="flex items-center space-x-2 px-6 py-3 bg-blue-600 dark:bg-blue-700 text-white rounded-lg hover:bg-blue-700 dark:hover:bg-blue-600 focus-ring transition-colors">
+                        <a href="onderzoeksplan.html" class="flex items-center space-x-2 px-6 py-3 bg-blue-600 dark:bg-blue-700 text-white rounded-lg hover:bg-blue-700 dark:hover:bg-blue-600 focus-ring transition-colors">
                             <i class="fas fa-play"></i>
                             <span>Start Module</span>
                         </a>
@@ -1365,46 +1176,6 @@
                     handleScroll();
                 }, 100);
             }
-            
-            /**
-             * Fase-submenu: chevron klapt uit, link navigeert normaal.
-             * @param {string} navClass - CSS-class van het nav-item (bijv. fase-1-nav-item)
-             * @param {string} subItemsId - ID van het subitems-container element
-             * @param {string} chevronId - ID van het chevron-icoon
-             */
-            function setupFaseSubmenu(navClass, subItemsId, chevronId) {
-                const navItem = document.querySelector('.' + navClass);
-                if (!navItem) return;
-                const link = navItem.querySelector('a');
-                const subItemsContainer = document.getElementById(subItemsId);
-                const chevron = document.getElementById(chevronId);
-                if (!link || !subItemsContainer || !chevron) return;
-
-                chevron.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    const isHidden = subItemsContainer.classList.contains('hidden');
-                    if (isHidden) {
-                        subItemsContainer.classList.remove('hidden');
-                        chevron.classList.add('rotate-180');
-                    } else {
-                        subItemsContainer.classList.add('hidden');
-                        chevron.classList.remove('rotate-180');
-                    }
-                });
-
-                link.addEventListener('click', (e) => {
-                    if (e.target === chevron || chevron.contains(e.target)) {
-                        e.preventDefault();
-                        e.stopPropagation();
-                    }
-                });
-            }
-
-            setupFaseSubmenu('fase-1-nav-item', 'fase-1-subitems-index', 'fase-1-chevron-index');
-            setupFaseSubmenu('fase-2-nav-item', 'fase-2-subitems-index', 'fase-2-chevron-index');
-            setupFaseSubmenu('fase-3-nav-item', 'fase-3-subitems-index', 'fase-3-chevron-index');
-            setupFaseSubmenu('fase-4-nav-item', 'fase-4-subitems-index', 'fase-4-chevron-index');
         });
         
         // Dark Mode Toggle
@@ -1716,13 +1487,13 @@
             console.log('[Index] Week6LessonPage available:', !!window.Week6LessonPage);
             
             // Expected classes
-            const expectedClasses = [
-                'Week1LessonPage', 'Week2LessonPage', 'Week3LessonPage', 
-                'Week4LessonPage', 'Week5LessonPage', 'Week6LessonPage', 
-                'Week7LessonPage', 'RegisterPage', 'AfsluitingLessonPage'
-            ];
-            
-            const missingClasses = expectedClasses.filter(cls => !availableClasses.includes(cls));
+                const expectedClasses = [
+                    'Week1LessonPage', 'CasusLessonPage', 'Week2LessonPage', 'Fase1LessonPage', 'Week3LessonPage', 
+                    'Week4LessonPage', 'Fase2LessonPage', 'Week5LessonPage', 'Fase3LessonPage', 'Week6LessonPage', 'Fase4LessonPage', 
+                    'Week7LessonPage', 'AfrondingLessonPage', 'RegisterPage'
+                ];
+                
+                const missingClasses = expectedClasses.filter(cls => !availableClasses.includes(cls));
             if (missingClasses.length > 0) {
                 console.warn('[Index] ⚠️ Missing page classes:', missingClasses);
                 console.warn('[Index] This might cause navigation issues. Check if scripts are loaded correctly.');
@@ -1748,9 +1519,9 @@
         const waitForAllScripts = () => {
             checkAttempts++;
             const expectedClasses = [
-                'Week1LessonPage', 'Week2LessonPage', 'Week3LessonPage', 
-                'Week4LessonPage', 'Week5LessonPage', 'Week6LessonPage', 
-                'Week7LessonPage', 'RegisterPage', 'AfsluitingLessonPage'
+                'Week1LessonPage', 'CasusLessonPage', 'Week2LessonPage', 'Fase1LessonPage', 'Week3LessonPage', 
+                'Week4LessonPage', 'Fase2LessonPage', 'Week5LessonPage', 'Fase3LessonPage', 'Week6LessonPage', 'Fase4LessonPage', 
+                'Week7LessonPage', 'AfrondingLessonPage', 'RegisterPage'
             ];
             
             const allAvailable = expectedClasses.every(cls => window[cls]);
@@ -1772,6 +1543,7 @@
             }
         };
         
+        // Sidebar: fase-navigatie via phase-navigation-init.js (gedeelde renderer)
         if (document.readyState === 'loading') {
             document.addEventListener('DOMContentLoaded', () => {
                 setTimeout(waitForAllScripts, 100);
@@ -1783,7 +1555,7 @@
         // Debug: Log all link clicks for week pages
         document.addEventListener('click', (e) => {
             const link = e.target.closest('a[href]');
-            if (link && (link.href.includes('week') || link.href.includes('register') || link.href.includes('afsluiting'))) {
+            if (link && (link.href.includes('week') || link.href.includes('register'))) {
                 console.log('[DEBUG] 🔗 Link clicked:', link.href);
                 console.log('[DEBUG] Router active:', !!window.appRouter);
                 console.log('[DEBUG] Will navigate normally:', !window.appRouter);
